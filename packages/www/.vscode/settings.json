@@ -1,0 +1,9 @@
+{
+    "npm-scripts.showStartNotification": false,
+    "liveServer.settings.root": "/dist",
+    "liveServer.settings.proxy": {
+        "enable": true,
+        "baseUri": "/api",
+        "proxyUri": "http://localhost:7001/api/"
+    }
+}
