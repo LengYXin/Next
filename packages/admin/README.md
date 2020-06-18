@@ -1,4 +1,4 @@
-# antd-demo
+# admin
 
 ## Project setup
 ```
@@ -13,6 +13,11 @@ yarn serve
 ### Compiles and minifies for production
 ```
 yarn build
+```
+
+### Run your unit tests
+```
+yarn test:unit
 ```
 
 ### Customize configuration

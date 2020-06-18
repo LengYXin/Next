@@ -1,53 +1,32 @@
 <template>
-  <a-locale-provider :locale="locale">
-    <!-- 本地拥有用户信息 待验证 是否 合规 -->
-    <div v-if="UserStore.Id && UserStore.Loading" class="user-loading">
-      <a-spin>
-        <a-icon slot="indicator" type="loading" style="font-size: 50px" spin />
-      </a-spin>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
     </div>
-    <!-- 已经登录 -->
-    <w-layout v-else-if="UserStore.OnlineState" />
-    <!-- 未登录 -->
-    <Login v-else />
-  </a-locale-provider>
+    <router-view/>
+  </div>
 </template>
 
-<script lang="ts">
-import { message } from "ant-design-vue";
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { Basics } from "./views";
-import RootStore from "./rootStore";
-import locale from "./locale";
-import lodash from "lodash";
-@Component({
-  components: {
-    Login: Basics.login
-  }
-})
-export default class App extends Vue {
-  UserStore = RootStore.UserStore;
-  get locale() {
-    return lodash.get(
-      locale,
-      this.$GlobalConfig.settings.language,
-      locale["zh-CN"]
-    );
-  }
-  mounted() {}
-  destroyed() {}
+<style lang="less">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
-</script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="less">
-.user-loading {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s;
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>
