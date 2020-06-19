@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-  const routes: Array<RouteConfig> = [
+export const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'Home',
@@ -25,5 +25,4 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
 export default router
