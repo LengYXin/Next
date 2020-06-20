@@ -1,7 +1,6 @@
 import './public-path';
 import Vue from 'vue'
 import App from './App.vue'
-import './registerServiceWorker'
 import { routes } from './router'
 import VueRouter from 'vue-router';
 import 'ant-design-vue/dist/antd.css';
