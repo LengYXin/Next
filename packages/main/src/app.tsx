@@ -1,5 +1,6 @@
 import { Layout, Menu, Spin } from 'antd';
-import { BasicLayout, SettingDrawer } from '@ant-design/pro-layout';
+import BasicLayout from '@ant-design/pro-layout/es/BasicLayout';
+import SettingDrawer from '@ant-design/pro-layout/es/SettingDrawer';
 import lodash from 'lodash';
 import { Provider, observer } from 'mobx-react';
 import * as React from 'react';
