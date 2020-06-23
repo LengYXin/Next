@@ -5,6 +5,12 @@ import { routes } from './router'
 import VueRouter from 'vue-router';
 import 'ant-design-vue/dist/antd.css';
 import Antd from 'ant-design-vue';
+declare global {
+  interface Window {
+      __POWERED_BY_QIANKUN__?: boolean;
+      __INJECTED_PUBLIC_PATH_BY_QIANKUN__?: string;
+  }
+}
 Antd.install(Vue);
 Vue.config.productionTip = false
 let router: any = null;
@@ -13,10 +19,7 @@ let instance: any = null;
 //   router,
 //   render: h => h(App)
 // }).$mount('#app')
-const __POWERED_BY_QIANKUN__ = window['__POWERED_BY_QIANKUN__']
-console.log("__POWERED_BY_QIANKUN__", __POWERED_BY_QIANKUN__)
-
-
+const __POWERED_BY_QIANKUN__ = window.__POWERED_BY_QIANKUN__
 function render(props: any = {}) {
   const { container } = props;
   router = new VueRouter({

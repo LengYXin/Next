@@ -9,6 +9,13 @@ export default () => {
                 // loader,
                 activeRule: '/vue',
             },
+            {
+                name: 'test',
+                entry: '//localhost:3002',
+                container: '#subapp-viewport',
+                // loader,
+                activeRule: '/test',
+            },
         ],
         {
             //   beforeLoad: [

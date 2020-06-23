@@ -51,8 +51,8 @@ class AppLayout extends React.Component<any> {
                         },
                         {
                             key: '2',
-                            path: '/react',
-                            name: 'React',
+                            path: '/test',
+                            name: 'test',
                             icon: "",
                         }
                     ]}
