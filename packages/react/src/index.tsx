@@ -7,14 +7,13 @@ import * as serviceWorker from './serviceWorker';
 import './styles/base.less';
 declare global {
   interface Window {
-      __POWERED_BY_QIANKUN__?: boolean;
-      __INJECTED_PUBLIC_PATH_BY_QIANKUN__?: string;
+    __POWERED_BY_QIANKUN__?: boolean;
+    __INJECTED_PUBLIC_PATH_BY_QIANKUN__?: string;
   }
 }
-function render(props) { 
+function render(props) {
   const { container } = props;
-  console.log("render -> containeraaa", container)
-  ReactDOM.render(<App />, container ? container.querySelector('#root') : document.querySelector('#root'));
+  ReactDOM.render(<App {...props} />, container ? container.querySelector('#root') : document.querySelector('#root'));
 }
 
 function storeTest(props) {

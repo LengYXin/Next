@@ -1,11 +1,12 @@
 import { BasicLayout, SettingDrawer } from '@ant-design/pro-layout';
-import { Layout, Spin } from 'antd';
-import { observer, Provider } from 'mobx-react';
+import { Spin } from 'antd';
+import { inject, observer, Provider } from 'mobx-react';
 import * as React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import Register from './register';
-const { Header, Content, Footer, Sider } = Layout;
+import { EntitiesTimeStore } from './time';
 const RootStore = {
+    TestStore: new EntitiesTimeStore()
     // UserStore: new EntitiesUserStore(),
     // TimeStore: new EntitiesTimeStore(),
     // PageStore: new EntitiesPageStore({
@@ -25,7 +26,7 @@ export default class App extends React.Component<any> {
         loading: true
     }
     componentDidMount() {
-        Register(this.Content.current, (loading) => {
+        Register({ RootStore: { ...RootStore } }, this.Content.current, (loading) => {
             this.setState({ loading })
         })
     }
@@ -35,6 +36,7 @@ export default class App extends React.Component<any> {
                 <BrowserRouter>
                     <AppLayout >
                         <Spin spinning={this.state.loading}>
+                            <Test />
                             <div ref={this.Content} style={{ minHeight: 500 }}>
                             </div>
                         </Spin>
@@ -44,10 +46,22 @@ export default class App extends React.Component<any> {
         );
     }
 }
+@inject('TestStore')
+@observer
+class Test extends React.Component<{ TestStore?: EntitiesTimeStore }> {
+    componentDidMount() {
+       this.props.TestStore.onToggleTime()
+    }
+    public render() {
+        // const { MenuTrees } = RootStore.UserStore;
+        return (
+            <div>{this.props.TestStore.currentTime}</div>
+        )
+    }
+}
 @observer
 class AppLayout extends React.Component<any> {
     componentDidMount() {
-        console.log(this)
     }
     public render() {
         // const { MenuTrees } = RootStore.UserStore;
