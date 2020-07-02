@@ -13,7 +13,7 @@ declare global {
 }
 function render(props) { 
   const { container } = props;
-  console.log("render -> containeraaaa", container)
+  console.log("render -> containeraaa", container)
   ReactDOM.render(<App />, container ? container.querySelector('#root') : document.querySelector('#root'));
 }
 

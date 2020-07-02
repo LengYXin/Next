@@ -18,11 +18,8 @@ export default class index extends Component<Props, State> {
     render() {
         return (
             <div>
-                <Link to='/test'>Text</Link>
-                <Title>h1. Ant Design</Title>
-                <Title level={2}>h2. Ant Design</Title>
-                <Title level={3}>h3. Ant Design</Title>
-                <Title level={4}>h4. Ant Design</Title>
+                <Link to='/'>Home</Link>
+                <Title>Test </Title>
                 <Button type="primary" block onClick={this.ontest.bind(this)}>
                     Primary
     </Button>

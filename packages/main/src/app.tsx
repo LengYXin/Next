@@ -1,11 +1,9 @@
-import { Layout, Menu, Spin } from 'antd';
 import { BasicLayout, SettingDrawer } from '@ant-design/pro-layout';
-import lodash from 'lodash';
-import { Provider, observer } from 'mobx-react';
+import { Layout, Spin } from 'antd';
+import { observer, Provider } from 'mobx-react';
 import * as React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
-import RenderRoutes from './router';
-import { toJS } from 'mobx';
+import Register from './register';
 const { Header, Content, Footer, Sider } = Layout;
 const RootStore = {
     // UserStore: new EntitiesUserStore(),
@@ -22,11 +20,25 @@ const RootStore = {
 }
 // RootStore.UserStore.onCheckLogin()
 export default class App extends React.Component<any> {
+    Content = React.createRef<HTMLDivElement>();
+    state = {
+        loading: true
+    }
+    componentDidMount() {
+        Register(this.Content.current, (loading) => {
+            this.setState({ loading })
+        })
+    }
     public render() {
         return (
             <Provider {...RootStore}>
                 <BrowserRouter>
-                    <AppLayout />
+                    <AppLayout >
+                        <Spin spinning={this.state.loading}>
+                            <div ref={this.Content} style={{ minHeight: 500 }}>
+                            </div>
+                        </Spin>
+                    </AppLayout>
                 </BrowserRouter>
             </Provider>
         );
@@ -69,9 +81,7 @@ class AppLayout extends React.Component<any> {
                     }}><Spin size="large" tip="loading..." /></div>}>
                         {RenderRoutes}
                     </React.Suspense> */}
-                    <div id="subapp-viewport">
-
-                    </div>
+                    {this.props.children}
                 </BasicLayout>
                 <SettingDrawer settings={{}} />
             </>

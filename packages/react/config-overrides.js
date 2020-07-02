@@ -1,7 +1,7 @@
 const { override, fixBabelImports, addBundleVisualizer, addLessLoader, disableEsLint, babelInclude, addWebpackResolve } = require('customize-cra');
 const lodash = require('lodash');
 const path = require('path');
-const name = 'test'
+const name = 'react'
 module.exports = {
     webpack: (config) => {
         config = lodash.merge(override(
@@ -25,7 +25,7 @@ module.exports = {
             disableEsLint()
         )(config), {
             output: {
-                library: `${name}-[name]`,
+                library: `${name}`,
                 libraryTarget: `umd`,
                 jsonpFunction: `webpackJsonp_${name}`,
                 globalObject: `window`,

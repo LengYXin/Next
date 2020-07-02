@@ -1,19 +1,21 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { registerMicroApps, runAfterFirstMounted, setDefaultMountApp, start, initGlobalState } from 'qiankun';
-export default () => {
+export default (container: HTMLDivElement, onLoading: (loader: Boolean) => void) => {
     registerMicroApps(
         [
             {
                 name: 'vue',
                 entry: '//localhost:8080',
-                container: '#subapp-viewport',
-                // loader,
+                container: container,
+                loader: onLoading,
                 activeRule: '/vue',
             },
             {
-                name: 'test',
+                name: 'react',
                 entry: '//localhost:3002',
-                container: '#subapp-viewport',
-                // loader,
+                container: container,
+                loader: onLoading,
                 activeRule: '/test',
             },
         ],
@@ -35,5 +37,5 @@ export default () => {
             //   ],
         },
     );
-    start();
+    start({ prefetch: false });
 }

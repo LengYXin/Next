@@ -7,6 +7,12 @@ const routes = [
     exact: true,
     component: React.lazy(() => import('./views/home'))
   },
+  {
+    path: '/test',
+    name: 'home',
+    exact: true,
+    component: React.lazy(() => import('./views/test'))
+  },
 ]
 
 export default renderRoutes(routes)
