@@ -68,7 +68,7 @@ export class EntitiesTimeStore {
     private async onStartTime() {
         // this.onEndTime();
         this.onSetTime();
-
+        console.log("EntitiesTimeStore -> onStartTime -> this", this)
         if (this.startInterval) {
             await timer(1000).toPromise();
             this.onStartTime();

@@ -5,10 +5,12 @@ import { routes } from './router'
 import VueRouter from 'vue-router';
 import 'ant-design-vue/dist/antd.css';
 import Antd from 'ant-design-vue';
+import { Component, Prop, Provide, Inject } from "vue-property-decorator";
+
 declare global {
   interface Window {
-      __POWERED_BY_QIANKUN__?: boolean;
-      __INJECTED_PUBLIC_PATH_BY_QIANKUN__?: string;
+    __POWERED_BY_QIANKUN__?: boolean;
+    __INJECTED_PUBLIC_PATH_BY_QIANKUN__?: string;
   }
 }
 Antd.install(Vue);
@@ -19,23 +21,28 @@ let instance: any = null;
 //   router,
 //   render: h => h(App)
 // }).$mount('#app')
-const __POWERED_BY_QIANKUN__ = window.__POWERED_BY_QIANKUN__
 function render(props: any = {}) {
-  const { container } = props;
+  const { container, RootStore } = props;
   router = new VueRouter({
-    base: __POWERED_BY_QIANKUN__ ? '/vue' : '/',
+    base: window.__POWERED_BY_QIANKUN__ ? '/vue' : '/',
     mode: 'history',
     routes,
   });
-
-  instance = new Vue({
+  Vue.prototype.getRootStore = () => {
+    // return RootStore
+  }
+  @Component({
     router,
-    // store,
-    render: h => h(App),
-  }).$mount(container ? container.querySelector('#app') : '#app');
+    render: h => h(App)
+  })
+  class StartApp extends Vue {
+    // @Provide("RootStore")
+    // RootStore = props.RootStore;
+  }
+  instance = new StartApp().$mount(container ? container.querySelector('#app') : '#app');
 }
 
-if (!__POWERED_BY_QIANKUN__) {
+if (!window.__POWERED_BY_QIANKUN__) {
   render();
 }
 
@@ -60,7 +67,7 @@ export async function bootstrap() {
 
 export async function mount(props) {
   console.log('[vue] props from main framework', props);
-  storeTest(props);
+  // storeTest(props);
   render(props);
 }
 
@@ -71,3 +78,8 @@ export async function unmount() {
   router = null;
 }
 
+declare module 'vue/types/vue' {
+  interface Vue {
+    getRootStore: () => any;
+  }
+}

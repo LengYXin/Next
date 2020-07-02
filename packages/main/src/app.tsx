@@ -1,3 +1,4 @@
+import { UnorderedListOutlined } from '@ant-design/icons';
 import { BasicLayout, SettingDrawer } from '@ant-design/pro-layout';
 import { Spin } from 'antd';
 import { inject, observer, Provider } from 'mobx-react';
@@ -5,6 +6,7 @@ import * as React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import Register from './register';
 import { EntitiesTimeStore } from './time';
+
 const RootStore = {
     TestStore: new EntitiesTimeStore()
     // UserStore: new EntitiesUserStore(),
@@ -26,7 +28,8 @@ export default class App extends React.Component<any> {
         loading: true
     }
     componentDidMount() {
-        Register({ RootStore: { ...RootStore } }, this.Content.current, (loading) => {
+        RootStore.TestStore.onToggleTime(true)
+        Register({ RootStore: {} }, this.Content.current, (loading) => {
             this.setState({ loading })
         })
     }
@@ -36,7 +39,6 @@ export default class App extends React.Component<any> {
                 <BrowserRouter>
                     <AppLayout >
                         <Spin spinning={this.state.loading}>
-                            <Test />
                             <div ref={this.Content} style={{ minHeight: 500 }}>
                             </div>
                         </Spin>
@@ -49,9 +51,9 @@ export default class App extends React.Component<any> {
 @inject('TestStore')
 @observer
 class Test extends React.Component<{ TestStore?: EntitiesTimeStore }> {
-    componentDidMount() {
-       this.props.TestStore.onToggleTime()
-    }
+    // componentDidMount() {
+    //    this.props.TestStore.onToggleTime()
+    // }
     public render() {
         // const { MenuTrees } = RootStore.UserStore;
         return (
@@ -68,18 +70,19 @@ class AppLayout extends React.Component<any> {
         return (
             <>
                 <BasicLayout
+                    headerRender={() => <Test />}
                     menuDataRender={() => [
                         {
                             key: '1',
                             path: '/vue',
                             name: 'Vue',
-                            icon: "",
+                            icon: <UnorderedListOutlined />,
                         },
                         {
                             key: '2',
                             path: '/test',
                             name: 'test',
-                            icon: "",
+                            icon: <UnorderedListOutlined />,
                         }
                     ]}
                     menuItemRender={(item, node) => {
