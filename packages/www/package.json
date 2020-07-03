@@ -12,10 +12,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "@ant-design/icons": "^2.1.1",
+    "@ant-design/icons-vue": "^2.0.0",
     "ant-design-vue": "^1.6.2",
+    "core-js": "^2.6.11",
     "cross-env": "^7.0.2",
-    "koa": "^2.12.1",
-    "nuxt": "^2.12.2"
+    "koa": "^2.13.0",
+    "lodash": "^4.17.15",
+    "nuxt": "^2.13.3"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^1.0.3",
@@ -27,6 +31,7 @@
     "less-loader": "^5.0.0",
     "nodemon": "^2.0.4",
     "ts-jest": "^24.3.0",
-    "vue-jest": "^3.0.5"
+    "vue-jest": "^3.0.5",
+    "vue-loader": "^15.9.2"
   }
 }

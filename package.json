@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "dev": "cd packages/main && npm start",
-    "dev:www": "cd packages/www && npm start",
+    "dev:www": "cd packages/www && npm run dev",
     "dev:admin": "cd packages/admin && npm start",
     "dev:react": "cd packages/react && npm start",
     "build": "cd packages/admin && npm run build",

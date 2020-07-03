@@ -1,12 +1,14 @@
 
 const webpack = require('webpack');
+const lodash = require('lodash');
+const path = require('path');
 module.exports = {
   mode: 'universal',
   /*
   ** Headers of the page
-  */ 
+  */
   head: {
-    title: process.env.npm_package_name || '',
+    title: '暄桐教室',//process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -30,7 +32,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/antd-ui'
+    '@/plugins/use'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -51,6 +53,8 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
+      // 图库替换
+      lodash.set(config, `resolve.alias["@ant-design/icons/lib/dist$"]`, path.resolve(process.cwd(), 'plugins/icon.ts'))
     },
     loaders: {
       less: {
@@ -69,6 +73,24 @@ module.exports = {
       ]
     },
     extractCSS: true,
+    optimization: {
+      splitChunks: {
+        chunks: 'async',
+        // cacheGroups: {
+        //   commons: {
+        //     test: /[\\/]node_modules[\\/](vue|ant-.*|@ant-.*|vue-.*|babel-.*|core-js|moment|lodash)[\\/]/,
+        //     name: 'vendors',
+        //     chunks: 'all'
+        //   }
+        // }
+        //   pages: {
+        //     test: /[\\/]pages[\\/]/,
+        //     name: 'pages',
+        //     chunks: 'all'
+        //   }
+        // }
+      }
+    },
     analyze: {
       analyzerMode: 'static'
     }
