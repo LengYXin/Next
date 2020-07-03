@@ -29,7 +29,7 @@ export default class App extends React.Component<any> {
     }
     componentDidMount() {
         RootStore.TestStore.onToggleTime(true)
-        Register({ RootStore: {} }, this.Content.current, (loading) => {
+        Register({ RootStore }, this.Content.current, (loading) => {
             this.setState({ loading })
         })
     }
@@ -57,7 +57,9 @@ class Test extends React.Component<{ TestStore?: EntitiesTimeStore }> {
     public render() {
         // const { MenuTrees } = RootStore.UserStore;
         return (
-            <div>{this.props.TestStore.currentTime}</div>
+            <div>
+                <div>{this.props.TestStore.currentTime} {String(this.props.TestStore.startInterval)}</div>
+            </div>
         )
     }
 }

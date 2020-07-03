@@ -42,7 +42,7 @@ class Test extends React.Component<{ TestStore?: any }> {
                     <span>{this.props.TestStore.currentTime}</span>
                 </div>
                 <Button type="primary" block onClick={this.onToggleTime.bind(this)}>
-                    切换
+                    {this.props.TestStore.startInterval ? '关闭' : '开启'}
                 </Button>
             </div>
 

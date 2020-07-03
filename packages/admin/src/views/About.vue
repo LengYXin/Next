@@ -2,7 +2,7 @@
   <div class="about">
     <h1>This is an about page</h1>
     <h1 v-text="currentTime"></h1>
-    <a-button type="primary" block @click="onToggleTime">测试</a-button>
+    <a-button type="primary" block @click="onToggleTime" v-text="startInterval?'关闭':'开启'"></a-button>
   </div>
 </template>
 
@@ -15,12 +15,15 @@ import { Modal } from "ant-design-vue";
 })
 export default class PageView extends Vue {
   // @Inject("RootStore")
-  // RootStore = this.getRootStore();
+  RootStore = this.getRootStore();
   get currentTime() {
-    return //this.RootStore.TestStore.currentTime;
+    return this.RootStore.TestStore.currentTime;
+  }
+  get startInterval() {
+    return this.RootStore.TestStore.startInterval;
   }
   onToggleTime() {
-    // this.RootStore.TestStore.onToggleTime();
+    this.RootStore.TestStore.onToggleTime();
   }
   mounted() {
     console.log(this);

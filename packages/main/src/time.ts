@@ -22,6 +22,7 @@ export class EntitiesTimeStore {
      * 开启计时
      * @memberof EntitiesTimeStore
      */
+    @observable
     startInterval = false;
     /**
      * 设置当前时间
@@ -38,7 +39,7 @@ export class EntitiesTimeStore {
      * @type {(Subscription | undefined)}
      * @memberof EntitiesTimeStore
      */
-    // TimeSubscription: Subscription | undefined;
+    TimeSubscription: Subscription | undefined;
     /**
      * 切换 计时器状态
      *
@@ -46,6 +47,7 @@ export class EntitiesTimeStore {
      * @returns
      * @memberof EntitiesTimeStore
      */
+    @action
     onToggleTime(start = !this.startInterval) {
         if (start) {
             message.success('开始')
@@ -68,14 +70,16 @@ export class EntitiesTimeStore {
     private async onStartTime() {
         // this.onEndTime();
         this.onSetTime();
-        console.log("EntitiesTimeStore -> onStartTime -> this", this)
-        if (this.startInterval) {
-            await timer(1000).toPromise();
-            this.onStartTime();
-        }
-        // this.TimeSubscription = interval(1000).pipe(map(() => Date.now())).subscribe(obs => {
-        //     this.onSetTime(obs);
-        // });
+        // console.log("EntitiesTimeStore -> onStartTime -> this", this)
+        // if (this.startInterval) {
+        //     await timer(1000).toPromise();
+        //     this.onStartTime();
+        // }
+        this.TimeSubscription = interval(1000).pipe(map(() => Date.now())).subscribe(obs => {
+            // console.log("EntitiesTimeStore -> onStartTime -> this", this)
+            this.onSetTime(obs);
+
+        });
         // setInterval(()=>{
         //     this.onSetTime();
         // },1000)
@@ -87,8 +91,8 @@ export class EntitiesTimeStore {
      * @memberof EntitiesTimeStore
      */
     private onEndTime() {
-        // this.TimeSubscription && this.TimeSubscription.unsubscribe();
-        // this.TimeSubscription = undefined;
+        this.TimeSubscription && this.TimeSubscription.unsubscribe();
+        this.TimeSubscription = undefined;
         // this.startInterval = false;
     }
 }

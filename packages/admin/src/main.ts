@@ -29,7 +29,7 @@ function render(props: any = {}) {
     routes,
   });
   Vue.prototype.getRootStore = () => {
-    // return RootStore
+    return RootStore
   }
   @Component({
     router,
@@ -72,6 +72,7 @@ export async function mount(props) {
 }
 
 export async function unmount() {
+  console.log('[vue] props from main unmount');
   instance.$destroy();
   instance.$el.innerHTML = '';
   instance = null;
