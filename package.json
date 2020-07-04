@@ -3,7 +3,10 @@
   "version": "0.0.5",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/admin",
+    "packages/main",
+    "packages/react",
+    "packages/service"
   ],
   "scripts": {
     "dev": "cd packages/main && npm start",
