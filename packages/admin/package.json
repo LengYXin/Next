@@ -1,6 +1,6 @@
 {
   "name": "@xt/admin",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": true,
   "scripts": {
     "start": "vue-cli-service serve",
@@ -8,7 +8,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@xt/server": "^0.0.6",
+    "@xt/server": "^0.0.7",
     "ant-design-vue": "^1.6.3",
     "core-js": "^3.6.5",
     "qiankun": "^2.0.15",

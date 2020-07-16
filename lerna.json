@@ -1,16 +1,12 @@
 {
-  "version": "0.0.6",
+  "version": "0.0.7",
   "packages": [
     "packages/*"
   ],
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
-    "publish": {
-      
-    },
-    "bootstrap": {
-      
-    }
+    "publish": {},
+    "bootstrap": {}
   }
 }
