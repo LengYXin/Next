@@ -1,6 +1,6 @@
 {
   "name": "@xt/react",
-  "version": "0.1.0",
+  "version": "0.0.6",
   "private": true,
   "scripts": {
     "start": "react-app-rewired start",
@@ -45,10 +45,10 @@
     "@types/react-dom": "^16.9.8",
     "babel-plugin-import": "^1.13.0",
     "customize-cra": "^1.0.0",
-    "react-app-rewired": "^2.1.6",
-    "react-scripts": "^3.4.1",
     "less": "^3.11.3",
     "less-loader": "^5.0.0",
+    "react-app-rewired": "^2.1.6",
+    "react-scripts": "^3.4.1",
     "typescript": "~3.9.6"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
