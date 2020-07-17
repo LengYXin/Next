@@ -1,17 +1,17 @@
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const lodash = require('lodash');
 const path = require('path');
-export default {
+module.exports = {
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
   */
-  mode: 'universal',// spa universal,
+  mode: 'spa',// spa universal,
   /*
-  ** Nuxt target
+  ** Nuxt target  
   ** See https://nuxtjs.org/api/configuration-target
   */
-  target: 'server',
+  target: 'static',//static server
   /*
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
@@ -57,6 +57,13 @@ export default {
   */
   modules: [
   ],
+  router: {
+    extendRoutes(routes, resolve) {
+      // 删除 非 page 生成的路由
+      lodash.remove(routes, route => /[\\/](view|views)[\\/]|\.(ts)/.test(route.component))
+      // console.log("extendRoutes -> routes", routes)
+    }
+  },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
@@ -83,6 +90,11 @@ export default {
     plugins: [
       new MomentLocalesPlugin({ localesToKeep: ['es-us', 'zh-cn'] })
     ],
+    optimization: {
+      splitChunks: {
+        chunks: 'async',
+      }
+    },
     splitChunks: {
       layouts: false,
       pages: true,

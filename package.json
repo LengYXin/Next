@@ -3,7 +3,10 @@
   "version": "0.0.5",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/admin",
+    "packages/client",
+    "packages/main",
+    "packages/react"
   ],
   "scripts": {
     "dev": "cd packages/main && npm start",
@@ -24,6 +27,7 @@
   "devDependencies": {
     "lerna": "^3.22.1",
     "rimraf": "^3.0.2",
-    "webpack": "4.42.0"
+    "webpack": "4.42.0",
+    "webpack-bundle-analyzer": "^3.8.0"
   }
 }

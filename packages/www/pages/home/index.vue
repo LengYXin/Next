@@ -23,6 +23,7 @@ import { Modal } from "ant-design-vue";
   components: { Logo }
 })
 export default class PageView extends Vue {
+  // PageStore = new PageStore();
   mounted() {
     console.log(this);
   }
