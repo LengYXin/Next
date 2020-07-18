@@ -1,32 +1,39 @@
 {
   "name": "@xt/www",
-  "version": "0.0.5",
-  "description": "My rad Nuxt.js project",
-  "author": "LengYXin",
+  "version": "0.0.7",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
-    "build": "nuxt build --analyze",
-    "start": "cross-env NODE_ENV=production node server/index.js",
-    "generate": "nuxt generate --analyze",
+    "dev": "nuxt",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
+    "export": "nuxt-ts export",
+    "serve": "nuxt-ts serve",
     "test": "jest"
   },
   "dependencies": {
-    "ant-design-vue": "^1.6.2",
-    "cross-env": "^7.0.2",
-    "koa": "^2.12.1",
-    "nuxt": "^2.12.2"
+    "@ant-design/colors": "~3.2.2",
+    "@ant-design/icons": "~2.1.1",
+    "ant-design-vue": "^1.6.3",
+    "lodash": "^4.17.19",
+    "nuxt": "^2.13.3",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^9.0.0"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^1.0.3",
+    "@nuxt/typescript-runtime": "^0.4.10",
+    "@types/lodash": "^4.14.157",
     "@vue/test-utils": "^1.0.3",
-    "babel-jest": "^24.9.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^26.1.0",
     "babel-plugin-import": "^1.13.0",
-    "jest": "^24.9.0",
-    "less": "^3.11.3",
+    "jest": "^26.1.0",
+    "less": "^3.12.2",
     "less-loader": "^5.0.0",
-    "nodemon": "^2.0.4",
-    "ts-jest": "^24.3.0",
-    "vue-jest": "^3.0.5"
+    "moment-locales-webpack-plugin": "^1.2.0",
+    "ts-jest": "^26.1.1",
+    "vue-jest": "^3.0.6",
+    "typescript": "~3.9.7"
+
   }
 }

@@ -1,6 +1,4 @@
-# ts-test
-
-> My rad Nuxt.js project
+# test
 
 ## Build Setup
 

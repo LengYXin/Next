@@ -1,5 +1,5 @@
 {
-  "name": "@xt/main",
+  "name": "@xt/react",
   "version": "0.0.7",
   "private": true,
   "scripts": {
@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
-    "@ant-design/pro-layout": "^6.2.4",
     "antd": "^4.4.2",
     "core-js": "^3.6.5",
     "lodash": "^4.17.19",

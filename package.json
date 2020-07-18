@@ -3,12 +3,16 @@
   "version": "0.0.5",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/admin",
+    "packages/client",
+    "packages/main",
+    "packages/react"
   ],
   "scripts": {
     "dev": "cd packages/main && npm start",
-    "dev:www": "cd packages/www && npm start",
+    "dev:www": "cd packages/www && npm run dev",
     "dev:admin": "cd packages/admin && npm start",
+    "dev:react": "cd packages/react && npm start",
     "build": "cd packages/admin && npm run build",
     "build:www": "cd packages/www && npm run build",
     "build:admin": "cd packages/admin && npm run build",
@@ -17,11 +21,13 @@
     "docs": "docsify serve docs",
     "clean": "lerna clean",
     "clean-all": "npm run clean && rimraf node_modules",
+    "publish": "lerna publish --skip-npm",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "lerna": "^3.22.1",
     "rimraf": "^3.0.2",
-    "webpack": "4.42.0"
+    "webpack": "4.42.0",
+    "webpack-bundle-analyzer": "^3.8.0"
   }
 }
