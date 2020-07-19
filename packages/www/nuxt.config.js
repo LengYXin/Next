@@ -38,7 +38,7 @@ module.exports = {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@/plugins/use'
+    '@/plugins/index.ts'
   ],
   /*
   ** Auto import components

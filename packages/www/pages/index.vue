@@ -8,9 +8,27 @@
       </a-spin>
       <h2 class="subtitle">My rad Nuxt.js project</h2>
       <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
+        <a href="https://nuxtjs.org/" target="_blank" class="button--green"
+          >Documentation</a
+        >
+        <a
+          href="https://github.com/nuxt/nuxt.js"
+          target="_blank"
+          class="button--grey"
+          >GitHub</a
+        >
         <a-button type="primary" @click="onTest">Primary</a-button>
+      </div>
+      <div style="width:400px">
+        <swiper ref="mySwiper">
+          <swiper-slide> <logo /></swiper-slide>
+          <swiper-slide> <logo /></swiper-slide>
+          <swiper-slide> <logo /></swiper-slide>
+          <swiper-slide> <logo /></swiper-slide>
+          <swiper-slide> <logo /></swiper-slide>
+          <swiper-slide> <logo /></swiper-slide>
+          <!-- <div class="swiper-pagination" slot="pagination"></div> -->
+        </swiper>
       </div>
     </div>
   </div>
@@ -24,6 +42,9 @@ import { Modal } from "ant-design-vue";
 })
 export default class PageView extends Vue {
   // PageStore = new PageStore();
+  get swiper() {
+    return (this.$refs.mySwiper as any).$swiper;
+  }
   mounted() {
     console.log(this);
   }
