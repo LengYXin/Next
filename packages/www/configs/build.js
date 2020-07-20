@@ -18,7 +18,9 @@ module.exports = {
     extractCSS: true,
     loaders: {
         less: {
-            javascriptEnabled: true
+            lessOptions: {
+                javascriptEnabled: true
+            }
         }
     },
     analyze: {

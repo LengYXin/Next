@@ -8,9 +8,11 @@ module.exports = override(
         style: true,
     }),
     addLessLoader({
-        javascriptEnabled: true,
-        //    modifyVars: { '@primary-color': '#1DA57A' },
-        localIdentName: "leng-[local]-[hash:base64:5]"
+        lessOptions: {
+            javascriptEnabled: true
+            //    modifyVars: { '@primary-color': '#1DA57A' },
+            //localIdentName: "leng-[local]-[hash:base64:5]"
+        }
     }),
     // 依赖分布地图 --analyze
     addBundleVisualizer({

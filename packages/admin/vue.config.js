@@ -8,8 +8,10 @@ module.exports = {
     sourceMap: true,
     loaderOptions: {
       less: {
-        // modifyVars: modifyVars,
-        javascriptEnabled: true,
+        lessOptions: {
+          // modifyVars: modifyVars,
+          javascriptEnabled: true
+        }
       }
     }
   },
