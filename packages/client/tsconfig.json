@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "target": "es5",
     "lib": [
       "dom",
@@ -21,7 +21,14 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": [
-    
-  ]
+  "exclude": [
+    "__tests__",
+    "node_modules",
+    "dist",
+    "tests",
+    "jest",
+    "lib",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ],
 }
