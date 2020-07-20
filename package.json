@@ -6,7 +6,8 @@
     "packages/admin",
     "packages/client",
     "packages/main",
-    "packages/react"
+    "packages/react",
+    "packages/www"
   ],
   "scripts": {
     "dev": "cd packages/main && npm start",
