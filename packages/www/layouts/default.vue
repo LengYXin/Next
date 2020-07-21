@@ -1,62 +1,46 @@
 <template>
-  <div>
-    <Nuxt />
-  </div>
+  <a-layout class="xt-layout" :class="pageClass">
+    <a-layout-header>
+      <headerMenu />
+      <headerUser />
+    </a-layout-header>
+    <a-layout-content>
+      <!-- <keep-alive key="main"> -->
+        <Nuxt keep-alive/>
+      <!-- </keep-alive> -->
+      <a-back-top />
+    </a-layout-content>
+    <a-layout-footer>Footer</a-layout-footer>
+  </a-layout>
 </template>
-
-<style>
-html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+<script lang="ts">
+import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import headerMenu from "./views/headerMenu.vue";
+import headerUser from "./views/headerUser.vue";
+@Component({
+  components: { headerMenu, headerUser }
+})
+export default class extends Vue {
+  get pageClass() {
+    return "page-" + this.$route.fullPath;
+  }
+  mounted() {
+    // console.log(this);
+  }
+  updated() {}
+  destroyed() {}
 }
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+</script>
+<style lang="less">
+.xt-layout {
+  min-height: 100vh;
+  .ant-layout-header {
+    background: #fff;
+    position: relative;
+    .ant-menu-horizontal {
+      text-align: center;
+    }
+  }
 }
 </style>
+

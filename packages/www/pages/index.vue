@@ -1,36 +1,18 @@
 <template>
-  <div class="container">
-    <div>
-      <a-spin>
-        <a-icon slot="indicator" type="loading" style="font-size: 50px" spin />
-        <logo />
-        <h1 class="title">暄桐教室</h1>
-      </a-spin>
-      <h2 class="subtitle">My rad Nuxt.js project</h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green"
-          >Documentation</a
-        >
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-          >GitHub</a
-        >
-        <a-button type="primary" @click="onTest">Primary</a-button>
-      </div>
-      <div style="width:400px">
-        <swiper ref="mySwiper">
-          <swiper-slide> <logo /></swiper-slide>
-          <swiper-slide> <logo /></swiper-slide>
-          <swiper-slide> <logo /></swiper-slide>
-          <swiper-slide> <logo /></swiper-slide>
-          <swiper-slide> <logo /></swiper-slide>
-          <swiper-slide> <logo /></swiper-slide>
-          <!-- <div class="swiper-pagination" slot="pagination"></div> -->
-        </swiper>
-      </div>
+  <div>
+    <div class="swiper">
+      <swiper :options="swiperOptions" ref="mySwiper">
+        <swiper-slide v-for="img in imgs" :key="img.id">
+          <img v-lazy="img.pictureUri" style="width:100%;min-height:400px" />
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
     </div>
+    <a-spin>
+      <a-icon slot="indicator" type="loading" style="font-size: 50px" spin />
+      <logo />
+      <h1 class="title">暄桐教室</h1>
+    </a-spin>
   </div>
 </template>
 <script lang="ts">
@@ -45,46 +27,36 @@ export default class PageView extends Vue {
   get swiper() {
     return (this.$refs.mySwiper as any).$swiper;
   }
-  mounted() {
-    console.log(this);
+  swiperOptions = {
+    // loop: true,
+    autoplay: true,
+    // allowTouchMove: false,
+    // autoHeight: true,
+    pagination: {
+      el: ".swiper-pagination"
+    }
+  };
+  imgs = [];
+  async carouselimg() {
+    interface imgs {
+      id: string;
+      pictureJumpUrl: string;
+      pictureUri: string;
+    }
+    const res = await this.$ajax.post<Array<imgs>>("/api/carouselimg/list");
+    // console.log("LENG: PageView -> carouselimg -> res", res);
+    this.imgs = res;
   }
-  onTest() {
-    Modal.confirm({ title: "测试" });
-    this.$message.success("test");
+  mounted() {
+    this.carouselimg();
   }
   updated() {}
   destroyed() {}
 }
 </script>
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+<style lang="less" scoped>
+.swiper {
+  max-height: 900px;
+  overflow: hidden;
 }
 </style>

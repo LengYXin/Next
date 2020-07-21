@@ -1,14 +1,5 @@
 <template>
-  <div class="container">
-    <div>
-      <a-spin>
-        <a-icon slot="indicator" type="loading" style="font-size: 50px" spin />
-        <logo />
-        <h1 class="title">暄桐教室</h1>
-      </a-spin>
-      <dplayer />
-    </div>
-  </div>
+  <div>课程详情</div>
 </template>
 <script lang="ts">
 import Logo from "~/components/Logo.vue";
@@ -21,6 +12,20 @@ import PageStore from "./store";
 })
 export default class PageView extends Vue {
   PageStore = new PageStore();
+  data = [
+    {
+      title: "Ant Design Title 1"
+    },
+    {
+      title: "Ant Design Title 2"
+    },
+    {
+      title: "Ant Design Title 3"
+    },
+    {
+      title: "Ant Design Title 4"
+    }
+  ];
   mounted() {
     console.log(this);
     this.PageStore.onText();
@@ -34,5 +39,4 @@ export default class PageView extends Vue {
 }
 </script>
 <style>
-
 </style>

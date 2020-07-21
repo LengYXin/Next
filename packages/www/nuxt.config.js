@@ -55,12 +55,22 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/proxy'
   ],
   router: {
     extendRoutes(routes, resolve) {
       // 删除 非 page 生成的路由
       lodash.remove(routes, route => /[\\/](view|views)[\\/]|\.(ts)/.test(route.component))
-      // console.log("extendRoutes -> routes", routes)
+      console.log("extendRoutes -> routes", routes)
+    }
+  },
+  proxy: {
+    "/api": {
+      target: "https://cr-api-uat.xuantong.cn", // 代理地址
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": "/"
+      }
     }
   },
   /*

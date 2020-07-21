@@ -36,7 +36,7 @@ module.exports = {
     },
     splitChunks: {
         layouts: false,
-        pages: true,
+        pages: false,
         commons: false
     },
     // transpile: ['ant-design-vue'],

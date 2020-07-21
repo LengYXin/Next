@@ -44,23 +44,23 @@ export class AjaxBasics {
     options: IAjaxBasicsOptions = {};
     /** get */
     get<T>(url: string, body?: any, headers?: Object) {
-        return this.request<T>({ url, body, headers, method: 'get' })
+        return this.request<T>({ url, body, headers, method: 'get' }).toPromise()
     }
     /** post */
     post<T>(url: string, body?: any, headers?: Object) {
-        return this.request<T>({ url, body, headers, method: 'post' })
+        return this.request<T>({ url, body, headers, method: 'post' }).toPromise()
     }
     /** put */
     put<T>(url: string, body?: any, headers?: Object) {
-        return this.request<T>({ url, body, headers, method: 'put' })
+        return this.request<T>({ url, body, headers, method: 'put' }).toPromise()
     }
     /** patch */
     patch<T>(url: string, body?: any, headers?: Object) {
-        return this.request<T>({ url, body, headers, method: 'patch' })
+        return this.request<T>({ url, body, headers, method: 'patch' }).toPromise()
     }
     /** delete */
     delete<T>(url: string, body?: any, headers?: Object) {
-        return this.request<T>({ url, body, headers, method: 'delete' })
+        return this.request<T>({ url, body, headers, method: 'delete' }).toPromise()
     }
     /**
      * ajax
@@ -81,7 +81,7 @@ export class AjaxBasics {
     protected AjaxObservable<T>(Obs: Observable<AjaxResponse>) {
         return new Observable<T>(sub => {
             // 加载进度条
-            AjaxBasics.NProgress();
+            AjaxBasics.onNProgress();
             Obs.pipe(
                 // 超时时间
                 timeout(this.options.timeout),
@@ -90,7 +90,7 @@ export class AjaxBasics {
                 // 过滤请求
                 filter((ajax) => {
                     try {
-                        AjaxBasics.NProgress("done");
+                        AjaxBasics.onNProgress("done");
                         return AjaxBasics.onFilter(ajax);
                     } catch (error) {
                         AjaxBasics.onError(error);
@@ -172,7 +172,7 @@ export class AjaxBasics {
      *  加载进度条
      * @param type 
      */
-    static NProgress(type: 'start' | 'done' = 'start') {
+    static onNProgress(type: 'start' | 'done' = 'start') {
         if (type == "start") {
             // NProgress.start();
         } else {
@@ -270,15 +270,18 @@ export class AjaxBasics {
                     endStr = url;
                 }
             }
-            if (!Regulars.url.test(request.url)) {
+            if (Regulars.url.test(request.url)) {
+                request.url = request.url + endStr;
+            } else {
                 const isEnd = lodash.endsWith(options.target, "/")
                 const isStart = lodash.startsWith(request.url, "/")
                 // debugger
                 if (isEnd && isStart) {
                     request.url = lodash.trimStart(request.url, "/")
                 }
+                request.url = options.target + request.url + endStr;
             }
-            request.url = options.target + request.url + endStr;
+
         } catch (error) {
             console.warn(error)
         }

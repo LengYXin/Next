@@ -1,14 +1,22 @@
-// import Antd from 'ant-design-vue/lib'
-import { Button, Icon, message, Spin, Modal, notification } from 'ant-design-vue';
+import { Avatar, BackTop, Button, Divider, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Popconfirm, Spin, Tabs } from 'ant-design-vue';
 import Base from 'ant-design-vue/lib/base';
 import Vue from 'vue';
-// import { EntitiesTimeStore} from '@xt/main/src/time';
-console.log("Button", Button)
 Vue.use(Base)
-Vue.component(Button.name, Button)
-Vue.component(Modal.name, Modal)
-Vue.component(Icon.name, Icon)
-Vue.component(Spin.name, Spin)
+Vue.use(FormModel)
+Vue.use(Layout)
+Vue.use(Menu)
+Vue.use(Tabs)
+Vue.use(Button)
+Vue.use(Modal)
+Vue.use(Icon)
+Vue.use(Spin)
+Vue.use(BackTop)
+Vue.use(Divider)
+Vue.use(Popconfirm)
+Vue.use(Avatar)
+Vue.use(Input)
+Vue.use(List)
+
 // Vue.use(Antd)
 Vue.prototype.$message = message;
 Vue.prototype.$notification = notification;
