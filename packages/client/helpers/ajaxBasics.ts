@@ -6,14 +6,29 @@
  * @desc [description]
 */
 import lodash from 'lodash';
-import NProgress from 'nprogress';
+// import NProgress from 'nprogress';
 import { Observable, of, TimeoutError, interval } from "rxjs";
 import { ajax, AjaxError, AjaxResponse, AjaxRequest } from "rxjs/ajax";
 import { catchError, filter, map, timeout } from "rxjs/operators";
 import { Regulars } from "./regulars";
 export interface IAjaxBasicsOptions {
+    /**
+     * 路径
+     * @type {string}
+     * @memberof IAjaxBasicsOptions
+     */
     target?: string;
+    /**
+     * 超时 时间
+     * @type {number}
+     * @memberof IAjaxBasicsOptions
+     */
     timeout?: number;
+    /**
+     * 重写 XMLHttpRequest
+     * @memberof IAjaxBasicsOptions
+     */
+    createXHR?: () => XMLHttpRequest;
 }
 export class AjaxBasics {
     /**
@@ -27,21 +42,44 @@ export class AjaxBasics {
         }, options);
     }
     options: IAjaxBasicsOptions = {};
-
+    /** get */
+    get<T>(url: string, body?: any, headers?: Object) {
+        return this.request<T>({ url, body, headers, method: 'get' })
+    }
+    /** post */
+    post<T>(url: string, body?: any, headers?: Object) {
+        return this.request<T>({ url, body, headers, method: 'post' })
+    }
+    /** put */
+    put<T>(url: string, body?: any, headers?: Object) {
+        return this.request<T>({ url, body, headers, method: 'put' })
+    }
+    /** patch */
+    patch<T>(url: string, body?: any, headers?: Object) {
+        return this.request<T>({ url, body, headers, method: 'patch' })
+    }
+    /** delete */
+    delete<T>(url: string, body?: any, headers?: Object) {
+        return this.request<T>({ url, body, headers, method: 'delete' })
+    }
     /**
-     * 请求头
-     * @type {*}
-     * @memberof Request
+     * ajax
+     * @param request 
      */
-    static headers: any = {
-        'Content-Type': 'application/json'
-    };
+    request<T>(request: string | AjaxRequest) {
+        request = AjaxBasics.onCompatibleAjaxRequest(request, this.options);
+        // test
+        if (lodash.eq(process.env.NODE_ENV, 'test')) {
+            console.log(request)
+        }
+        return this.AjaxObservable<T>(ajax(request))
+    }
     /**
-     * ajax Observable 管道
-     * @param Observable 
-     */
-    protected AjaxObservable(Obs: Observable<AjaxResponse>) {
-        return new Observable<any>(sub => {
+    * ajax Observable 管道
+    * @param Observable 
+    */
+    protected AjaxObservable<T>(Obs: Observable<AjaxResponse>) {
+        return new Observable<T>(sub => {
             // 加载进度条
             AjaxBasics.NProgress();
             Obs.pipe(
@@ -61,33 +99,85 @@ export class AjaxBasics {
                     }
                 }),
                 // 数据过滤
-                map(this.responseMap.bind(this))
-            ).subscribe(obs => {
-                sub.next(obs)
+                map(res => AjaxBasics.onMap(res))
+            ).subscribe(res => {
+                // test
+                if (lodash.eq(process.env.NODE_ENV, 'test')) {
+                    console.log(JSON.stringify(res, null, 4))
+                }
+                sub.next(res)
                 sub.complete()
             })
         })
     }
     /**
+    * 请求头
+    * @type {*}
+    * @memberof Request
+    */
+    static headers: any = {
+        'Content-Type': 'application/json'
+    };
+    /**
      * 请求 map 转换
      * @param res 
      */
-    responseMap(res: AjaxResponse) {
-        // console.log(`TCL: Response ${res.request.url}`, res.response)
-        const defaultFn = lodash.get(AjaxBasics.responseStatus, 'default', () => res);
-        const statusFn = lodash.get(AjaxBasics.responseStatus, res.status, defaultFn);
-        return statusFn(res);
+    static onMap(res: AjaxResponse) {
+        switch (res.status) {
+            case 200:
+                // 流
+                if (lodash.toLower(res.responseType) === "blob") {
+                    return res;
+                }
+                return res.response
+        }
+        return res
     }
     /**
-     * ajax
-     * @param request 
+     * 请求过滤
+     *
+     * @static
+     * @param {(AjaxResponse | AjaxError | TimeoutError)} ajax
+     * @returns {boolean}
+     * @memberof AjaxBasics
      */
-    Request(request: string | AjaxRequest) {
-        request = AjaxBasics.onCompatibleAjaxRequest(request, this.options);
-        if (lodash.eq(process.env.NODE_ENV, 'test')) {
-            console.log("LENG: AjaxBasics -> Request -> request", request)
+    static onFilter(ajax: AjaxResponse | AjaxError | TimeoutError): boolean {
+        // 数据 Response 
+        if (ajax instanceof AjaxResponse) {
+            // 无 响应 数据
+            if (lodash.isNil(ajax.response)) {
+                console.error('ajax response undefined', lodash.merge(ajax, { message: 'ajax response undefined' }))
+                // throw lodash.merge(ajax, { message: 'ajax response undefined' })
+            }
+            // else if (!lodash.eq(lodash.get(ajax.response, 'Code', 200), 200)) {
+            //     throw lodash.merge(ajax, { message: lodash.get(ajax.response, 'Msg') })
+            // }
         }
-        return this.AjaxObservable(ajax(request))
+        // 错误 超时
+        if (ajax instanceof AjaxError || ajax instanceof TimeoutError) {
+            throw ajax
+        }
+        return true
+    }
+    /**
+     * 错误处理
+     * @static
+     * @param {*} error
+     * @memberof AjaxBasics
+     */
+    static onError(error) {
+        console.error("LENG: AjaxBasics -> onError -> error", error)
+    }
+    /**
+     *  加载进度条
+     * @param type 
+     */
+    static NProgress(type: 'start' | 'done' = 'start') {
+        if (type == "start") {
+            // NProgress.start();
+        } else {
+            // NProgress.done();
+        }
     }
     /**
      * 处理 AjaxRequest
@@ -108,6 +198,7 @@ export class AjaxBasics {
         request = AjaxBasics.onCompatibleHeaders(request);
         request = AjaxBasics.onCompatibleBody(request);
         request = AjaxBasics.onCompatibleUrl(request, options);
+        request = AjaxBasics.onCompatibleCreateXHR(request, options);
         return request
     }
     /**
@@ -119,7 +210,7 @@ export class AjaxBasics {
      * @memberof AjaxBasics
      */
     static onCompatibleHeaders(request: AjaxRequest) {
-        request.headers = lodash.merge(AjaxBasics.headers, request.headers);
+        request.headers = lodash.assign(AjaxBasics.headers, request.headers);
         return request
     }
     /**
@@ -194,65 +285,18 @@ export class AjaxBasics {
         return request;
     }
     /**
-     * 状态码 响应
+     * 重写 XHR
      * @static
+     * @param {AjaxRequest} request
+     * @param {IAjaxBasicsOptions} options
+     * @returns
      * @memberof AjaxBasics
      */
-    static responseStatus: { [key: string]: (res: AjaxResponse) => any } = {
-        'default': (res: AjaxResponse) => {
-            return res
-        },
-        '200': (res: AjaxResponse) => {
-            if (lodash.toLower(res.responseType) === "blob") {
-                return res;
-            }
-            return res.response
+    static onCompatibleCreateXHR(request: AjaxRequest, options: IAjaxBasicsOptions) {
+        if (lodash.hasIn(options, 'createXHR')) {
+            request.createXHR = options.createXHR;
         }
-    }
-    /**
-     * 请求过滤
-     *
-     * @static
-     * @param {(AjaxResponse | AjaxError | TimeoutError)} ajax
-     * @returns {boolean}
-     * @memberof AjaxBasics
-     */
-    static onFilter(ajax: AjaxResponse | AjaxError | TimeoutError): boolean {
-        // 数据 Response 
-        if (ajax instanceof AjaxResponse) {
-            // 无 响应 数据
-            if (lodash.isNil(ajax.response)) {
-                console.error('ajax response undefined', lodash.merge(ajax, { message: 'ajax response undefined' }))
-                // throw lodash.merge(ajax, { message: 'ajax response undefined' })
-            } else if (!lodash.eq(lodash.get(ajax.response, 'Code', 200), 200)) {
-                throw lodash.merge(ajax, { message: lodash.get(ajax.response, 'Msg') })
-            }
-        }
-        // 错误 超时
-        if (ajax instanceof AjaxError || ajax instanceof TimeoutError) {
-            throw ajax
-        }
-        return true
-    }
-    /**
-     * 错误处理
-     * @static
-     * @param {*} error
-     * @memberof AjaxBasics
-     */
-    static onError(error) {
-        console.error("TCL: Error -> error", error)
-    }
-    /**
-     *  加载进度条
-     * @param type 
-     */
-    static NProgress(type: 'start' | 'done' = 'start') {
-        if (type == "start") {
-            NProgress.start();
-        } else {
-            NProgress.done();
-        }
+        return request
     }
 }
 export default new AjaxBasics();

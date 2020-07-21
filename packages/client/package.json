@@ -3,7 +3,8 @@
   "version": "0.0.7",
   "private": true,
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "tsc": "tsc"
   },
   "dependencies": {
     "lodash": "^4.17.19",
