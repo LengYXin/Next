@@ -6,7 +6,7 @@
   >
     <a-menu-item v-for="item in menus" :key="item.key">
       <nuxt-link :to="item.key">
-        <span v-text="item.name"></span>
+        <span v-t="item.name"></span>
       </nuxt-link>
     </a-menu-item>
   </a-menu>
@@ -20,27 +20,27 @@ export default class extends Vue {
   menus = [
     {
       key: "/",
-      name: "首页"
+      name: "links_home"
     },
     {
       key: "/course",
-      name: "课程"
+      name: "links_course"
     },
     {
       key: "/video",
-      name: "视频分享"
+      name: "links_video"
     },
     {
       key: "/stationery",
-      name: "暄桐文房"
+      name: "links_stationery"
     },
     {
       key: "/about",
-      name: "关于暄桐"
+      name: "links_about"
     },
     {
       key: "/my",
-      name: "去上课"
+      name: "links_my"
     }
   ];
   mounted() {

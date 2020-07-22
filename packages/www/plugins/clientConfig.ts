@@ -1,25 +1,26 @@
 import * as EnumApi from '@xt/client/api';
 import '@xt/client/configure';
 import { AjaxBasics } from '@xt/client/helpers/ajaxBasics';
+import getlocales from '@xt/client/languages';
 import { notification } from 'ant-design-vue';
 import lodash from 'lodash';
 import NProgress from 'nprogress';
 import { TimeoutError } from "rxjs";
 import { AjaxError, AjaxResponse } from "rxjs/ajax";
 import Vue from 'vue';
-
 // 重置 Ajax 
 onResetAjaxBasics()
 // 扩展
 Vue.prototype.$ajax = new AjaxBasics({ target: 'https://cr-api-uat.xuantong.cn' });
 Vue.prototype.$EnumApi = EnumApi;
-console.log("LENG: EnumApi", EnumApi)
+// Vue.prototype.$locales = locales;
 declare module 'vue/types/vue' {
     interface Vue {
         /** Ajax */
         $ajax: AjaxBasics;
         /** APi 枚举 */
         $EnumApi: typeof EnumApi;
+        // $locales: typeof locales;
     }
 }
 function onResetAjaxBasics() {

@@ -12,6 +12,7 @@
       <a-icon slot="indicator" type="loading" style="font-size: 50px" spin />
       <logo />
       <h1 class="title">暄桐教室</h1>
+      <h1 class="title" v-t="'tips.test'"></h1>
     </a-spin>
   </div>
 </template>
@@ -27,6 +28,7 @@ import { ControllerHome } from "@xt/client/entities";
 export default class PageView extends Vue {
   PageStore = new ControllerHome(this.$ajax);
   get swiper() {
+    // this.$locales
     return (this.$refs.mySwiper as any).$swiper;
   }
   swiperOptions = {

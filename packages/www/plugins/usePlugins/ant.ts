@@ -1,4 +1,4 @@
-import { Avatar, BackTop, Button, Divider, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Popconfirm, Spin, Tabs } from 'ant-design-vue';
+import { Avatar, BackTop,Dropdown, Button, Divider, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Popconfirm, Spin, Tabs } from 'ant-design-vue';
 import Base from 'ant-design-vue/lib/base';
 import Vue from 'vue';
 Vue.use(Base)
@@ -16,6 +16,7 @@ Vue.use(Popconfirm)
 Vue.use(Avatar)
 Vue.use(Input)
 Vue.use(List)
+Vue.use(Dropdown)
 
 // Vue.use(Antd)
 Vue.prototype.$message = message;
