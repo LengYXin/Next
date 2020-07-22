@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react'
 import { AtButton, AtMessage } from 'taro-ui'
 import './index.scss'
 import { observable } from 'mobx'
+import { ControllerHome } from "@xt/client/entities";
 
 type PageStateProps = {
   store: {
@@ -27,17 +28,11 @@ interface imgs {
 @inject('store')
 @observer
 class Index extends Component {
-  @observable
-  imgs: Array<imgs> = [];
-  async carouselimg() {
-    const res = await this.$ajax.post<Array<imgs>>("/carouselimg/list");
-    console.log("LENG: PageView -> carouselimg -> res", res);
-    this.imgs = res;
-  }
+  PageStore = new ControllerHome(this.$ajax);
   componentWillMount() { }
 
   componentDidMount() {
-    this.carouselimg()
+    this.PageStore.onGetBanners()
   }
 
   componentWillUnmount() { }
@@ -46,12 +41,13 @@ class Index extends Component {
 
   componentDidHide() { }
   renderSwiper() {
-    if (this.imgs.length) {
+    const { Banners } = this.PageStore;
+    if (Banners.length) {
       return <Swiper
         circular
         indicatorDots
         autoplay>
-        {this.imgs.map(img => <SwiperItem key={img.id}>
+        {Banners.map(img => <SwiperItem key={img.id}>
           <Image
             style='width:100%'
             src={img.pictureUri}
@@ -66,7 +62,7 @@ class Index extends Component {
       <View className='index'>
         <AtMessage />
         {this.renderSwiper()}
-        <AtButton type='primary' onClick={this.carouselimg.bind(this)}>获取数据</AtButton>
+        <AtButton type='primary' >获取数据</AtButton>
       </View>
     )
   }

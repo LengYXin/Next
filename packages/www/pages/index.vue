@@ -2,7 +2,7 @@
   <div>
     <div class="swiper">
       <swiper :options="swiperOptions" ref="mySwiper">
-        <swiper-slide v-for="img in imgs" :key="img.id">
+        <swiper-slide v-for="img in PageStore.Banners" :key="img.id">
           <img v-lazy="img.pictureUri" style="width:100%;min-height:400px" />
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
@@ -19,11 +19,13 @@
 import Logo from "~/components/Logo.vue";
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Modal } from "ant-design-vue";
+import { ControllerHome } from "@xt/client/entities";
+
 @Component({
   components: { Logo }
 })
 export default class PageView extends Vue {
-  // PageStore = new PageStore();
+  PageStore = new ControllerHome(this.$ajax);
   get swiper() {
     return (this.$refs.mySwiper as any).$swiper;
   }
@@ -36,19 +38,11 @@ export default class PageView extends Vue {
       el: ".swiper-pagination"
     }
   };
-  imgs = [];
-  async carouselimg() {
-    interface imgs {
-      id: string;
-      pictureJumpUrl: string;
-      pictureUri: string;
-    }
-    const res = await this.$ajax.post<Array<imgs>>("/api/carouselimg/list");
-    // console.log("LENG: PageView -> carouselimg -> res", res);
-    this.imgs = res;
-  }
-  mounted() {
-    this.carouselimg();
+  async mounted() {
+    await this.PageStore.onGetBanners();
+    // this.PageStore.Banners = [
+    //   { id: "1", pictureJumpUrl: "1", pictureUri: "1" }
+    // ];
   }
   updated() {}
   destroyed() {}

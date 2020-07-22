@@ -62,29 +62,39 @@ export class AjaxBasics {
     delete<T>(url: string, body?: any, headers?: Object) {
         return this.request<T>({ url, body, headers, method: 'delete' }).toPromise()
     }
+    /** request */
+    request<T>(request: string | AjaxRequest) {
+        return AjaxBasics.onRequest<T>(request, this.options)
+    }
     /**
-     * ajax
+     * request
      * @param request 
      */
-    request<T>(request: string | AjaxRequest) {
-        request = AjaxBasics.onCompatibleAjaxRequest(request, this.options);
+    static onRequest<T>(request: string | AjaxRequest, options: IAjaxBasicsOptions) {
+        if (lodash.isString(request)) {
+            request = {
+                url: request,
+                method: 'get'
+            };
+        };
+        request = AjaxBasics.onCompatibleAjaxRequest(request, options);
         // test
         if (lodash.eq(process.env.NODE_ENV, 'test')) {
             console.log(request)
         }
-        return this.AjaxObservable<T>(ajax(request))
+        return AjaxBasics.AjaxObservable<T>(ajax(request), options)
     }
     /**
     * ajax Observable 管道
     * @param Observable 
     */
-    protected AjaxObservable<T>(Obs: Observable<AjaxResponse>) {
+    static AjaxObservable<T>(obs: Observable<AjaxResponse>, options: IAjaxBasicsOptions) {
         return new Observable<T>(sub => {
             // 加载进度条
             AjaxBasics.onNProgress();
-            Obs.pipe(
+            obs.pipe(
                 // 超时时间
-                timeout(this.options.timeout),
+                timeout(options.timeout),
                 // 错误处理
                 catchError((err) => of(err)),
                 // 过滤请求
@@ -187,13 +197,8 @@ export class AjaxBasics {
      * @returns
      * @memberof AjaxBasics
      */
-    static onCompatibleAjaxRequest(request: string | AjaxRequest, options: IAjaxBasicsOptions) {
-        if (lodash.isString(request)) {
-            request = {
-                url: request,
-                method: 'get'
-            };
-        };
+    static onCompatibleAjaxRequest(request: AjaxRequest, options: IAjaxBasicsOptions) {
+
         request = lodash.cloneDeep(request);
         request = AjaxBasics.onCompatibleHeaders(request);
         request = AjaxBasics.onCompatibleBody(request);
@@ -302,4 +307,4 @@ export class AjaxBasics {
         return request
     }
 }
-export default new AjaxBasics();
+// export default new AjaxBasics();
