@@ -152,11 +152,11 @@ export class AjaxBasics {
             // else if (!lodash.eq(lodash.get(ajax.response, 'Code', 200), 200)) {
             //     throw lodash.merge(ajax, { message: lodash.get(ajax.response, 'Msg') })
             // }
-        }
-        // 错误 超时
-        if (ajax instanceof AjaxError || ajax instanceof TimeoutError) {
-            throw ajax
-        }
+        } else
+            // 错误 超时
+            if (ajax instanceof AjaxError || ajax instanceof TimeoutError) {
+                throw ajax
+            }
         return true
     }
     /**

@@ -7,6 +7,7 @@
     "packages/client",
     "packages/main",
     "packages/react",
+    "packages/weapp",
     "packages/www"
   ],
   "scripts": {
