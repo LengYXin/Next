@@ -14,9 +14,9 @@
         </a-menu-item>
       </a-menu>
     </a-dropdown>
-    <span>搜索</span>
-    <span>消息</span>
-    <userModal text="登录" />
+    <!-- <span>搜索</span>
+    <span>消息</span> -->
+    <userModal />
   </div>
 </template>
 <script lang="ts">

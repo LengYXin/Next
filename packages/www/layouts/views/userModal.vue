@@ -1,7 +1,7 @@
 <template>
   <span>
-    <span @click="onVisible(true)">登录</span>
-    <span @click="onVisible(true)">注册</span>
+    <span @click="onVisible(true)" v-t="'links_signin'">登录</span>
+    <span @click="onVisible(true)" v-t="'links_register'">注册</span>
     <a-modal title="登录" :visible="visible"  @ok="onOk" @cancel="onCancel">
       <a-form-model
         layout="inline"

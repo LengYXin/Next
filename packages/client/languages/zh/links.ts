@@ -5,4 +5,6 @@ export default {
     "links_stationery": "暄桐文房",
     "links_about": "关于暄桐",
     "links_my": "去上课",
+    "links_register": "注册",
+    "links_signin": "登录",
 };
