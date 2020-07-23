@@ -1,6 +1,41 @@
 const lodash = require('lodash');
 const path = require('path');
 const build = require('./configs/build');
+const head = {
+  title: '暄桐教室',//process.env.npm_package_name || '',
+  meta: [
+    { charset: 'utf-8' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+    { hid: 'version', name: 'version', content: process.env.npm_package_version || '' }
+  ],
+  link: [
+    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+  ]
+}
+const router = {
+  middleware: 'auth',
+  extendRoutes(routes, resolve) {
+    // 删除 非 page 生成的路由
+    lodash.remove(routes, route => /[\\/](view|views)[\\/]|\.(ts)/.test(route.component))
+    // console.log("extendRoutes -> routes", routes)
+  }
+}
+const proxy = {
+  "/api": {
+    target: "https://cr-api-uat.xuantong.cn", // 代理地址
+    changeOrigin: true,
+    pathRewrite: {
+      "^/api": "/"
+    }
+  }
+};
+const vue = {
+  config: {
+    productionTip: false,
+    // devtools: false, 
+  }
+}
 module.exports = {
   /*
   ** Nuxt rendering mode
@@ -16,24 +51,8 @@ module.exports = {
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
   */
-  head: {
-    title: '暄桐教室',//process.env.npm_package_name || '',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
-      { hid: 'version', name: 'version', content: process.env.npm_package_version || '' }
-    ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
-  },
-  /*
-  ** Global CSS
-  */
-  css: [
-    'ant-design-vue/dist/antd.less'
-  ],
+  head,
+
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
@@ -44,11 +63,6 @@ module.exports = {
    */
   watch: ['@/plugins/icon.ts'],
   /*
-  ** Auto import components
-  ** See https://nuxtjs.org/api/configuration-components
-  */
-  components: true,
-  /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
@@ -56,34 +70,11 @@ module.exports = {
     '@nuxtjs/style-resources'
   ],
   /*
-  ** Nuxt.js modules
+  ** Global CSS
   */
-  modules: [
-    '@nuxtjs/proxy'
+  css: [
+    'ant-design-vue/dist/antd.less'
   ],
-  router: {
-    middleware: 'auth',
-    extendRoutes(routes, resolve) {
-      // 删除 非 page 生成的路由
-      lodash.remove(routes, route => /[\\/](view|views)[\\/]|\.(ts)/.test(route.component))
-      // console.log("extendRoutes -> routes", routes)
-    }
-  },
-  proxy: {
-    "/api": {
-      target: "https://cr-api-uat.xuantong.cn", // 代理地址
-      changeOrigin: true,
-      pathRewrite: {
-        "^/api": "/"
-      }
-    }
-  },
-  vue: {
-    config: {
-      productionTip: false,
-      // devtools: false, 
-    }
-  },
   styleResources: {
     // your settings here
     sass: [],
@@ -93,6 +84,21 @@ module.exports = {
     ],
     stylus: []
   },
+  /*
+  ** Nuxt.js modules
+  */
+  modules: [
+    '@nuxtjs/proxy'
+  ],
+  router,
+  /*
+  ** Auto import components
+  ** See https://nuxtjs.org/api/configuration-components
+  */
+  components: true,
+  proxy,
+  vue,
+
   // render: {
   //   bundleRenderer: {
   //     basedir: path.dirname(path.dirname(process.cwd()))
