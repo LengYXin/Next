@@ -1,4 +1,5 @@
 const lodash = require('lodash');
+const path = require('path');
 const build = require('./configs/build');
 module.exports = {
   /*
@@ -37,9 +38,11 @@ module.exports = {
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
-  plugins: [
-    '@/plugins/index.ts'
-  ],
+  plugins: ['@/plugins/index.ts'],
+  /**
+   * icon 替换
+   */
+  watch: ['@/plugins/icon.ts'],
   /*
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
@@ -50,6 +53,7 @@ module.exports = {
   */
   buildModules: [
     '@nuxt/typescript-build',
+    '@nuxtjs/style-resources'
   ],
   /*
   ** Nuxt.js modules
@@ -58,10 +62,11 @@ module.exports = {
     '@nuxtjs/proxy'
   ],
   router: {
+    middleware: 'auth',
     extendRoutes(routes, resolve) {
       // 删除 非 page 生成的路由
       lodash.remove(routes, route => /[\\/](view|views)[\\/]|\.(ts)/.test(route.component))
-      console.log("extendRoutes -> routes", routes)
+      // console.log("extendRoutes -> routes", routes)
     }
   },
   proxy: {
@@ -73,6 +78,26 @@ module.exports = {
       }
     }
   },
+  vue: {
+    config: {
+      productionTip: false,
+      // devtools: false, 
+    }
+  },
+  styleResources: {
+    // your settings here
+    sass: [],
+    scss: [],
+    less: [
+      '@/assets/themes/index.less'
+    ],
+    stylus: []
+  },
+  // render: {
+  //   bundleRenderer: {
+  //     basedir: path.dirname(path.dirname(process.cwd()))
+  //   }
+  // },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/

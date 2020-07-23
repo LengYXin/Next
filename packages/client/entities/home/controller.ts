@@ -5,7 +5,7 @@ import { AjaxRequest } from 'rxjs/ajax';
 import lodash from 'lodash';
 import Entities from './entities';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
-import { EnumApiHome } from '../../api/home';
+import { EnumApiHome } from '../../api';
 
 
 export class ControllerHome extends Entities {

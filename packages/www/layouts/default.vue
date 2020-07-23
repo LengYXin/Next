@@ -6,7 +6,7 @@
     </a-layout-header>
     <a-layout-content>
       <!-- <keep-alive key="main"> -->
-        <Nuxt keep-alive/>
+      <Nuxt keep-alive />
       <!-- </keep-alive> -->
       <a-back-top />
     </a-layout-content>
@@ -18,7 +18,7 @@ import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import headerMenu from "./views/headerMenu.vue";
 import headerUser from "./views/headerUser.vue";
 @Component({
-  components: { headerMenu, headerUser }
+  components: { headerMenu, headerUser },
 })
 export default class extends Vue {
   get pageClass() {
@@ -41,6 +41,11 @@ export default class extends Vue {
       text-align: center;
     }
   }
+  // .ant-layout-content {
+  //   max-width: 1000px;
+  //   min-width: 1000px;
+  //   margin: auto;
+  // }
 }
 </style>
 

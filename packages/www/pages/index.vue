@@ -8,25 +8,38 @@
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
+    <a-icon type="loading" style="font-size: 50px" />
+    <a-icon type="exclamation-circle" style="font-size: 50px" />
+    <a-icon type="check-circle" style="font-size: 50px" />
+    <a-icon type="close-circle" style="font-size: 50px" />
+
     <a-spin>
       <a-icon slot="indicator" type="loading" style="font-size: 50px" spin />
       <logo />
       <h1 class="title">暄桐教室</h1>
       <h1 class="title" v-t="'tips.test'"></h1>
     </a-spin>
+    <div style="height:999px">
+
+    </div>
   </div>
 </template>
 <script lang="ts">
 import Logo from "~/components/Logo.vue";
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
-import { Modal } from "ant-design-vue";
-import { ControllerHome } from "@xt/client/entities";
-
+import { Observer } from "mobx-vue";
+import { Context } from "@nuxt/types";
+@Observer
 @Component({
-  components: { Logo }
+  fetch(ctx: Context) {
+    ctx.store.$storeHome.onGetBanners();
+  },
+  components: { Logo },
 })
 export default class PageView extends Vue {
-  PageStore = new ControllerHome(this.$ajax);
+  get PageStore() {
+    return this.$store.$storeHome;
+  }
   get swiper() {
     // this.$locales
     return (this.$refs.mySwiper as any).$swiper;
@@ -37,14 +50,12 @@ export default class PageView extends Vue {
     // allowTouchMove: false,
     // autoHeight: true,
     pagination: {
-      el: ".swiper-pagination"
-    }
+      el: ".swiper-pagination",
+    },
   };
-  async mounted() {
-    await this.PageStore.onGetBanners();
-    // this.PageStore.Banners = [
-    //   { id: "1", pictureJumpUrl: "1", pictureUri: "1" }
-    // ];
+  created() {}
+  mounted() {
+    console.log(this);
   }
   updated() {}
   destroyed() {}

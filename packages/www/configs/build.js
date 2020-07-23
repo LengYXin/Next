@@ -11,8 +11,12 @@ module.exports = {
     */
     extend(config, ctx) {
         // 图库替换
-        lodash.set(config, `resolve.alias["@ant-design/icons/lib/dist$"]`, path.resolve(process.cwd(), 'plugins/icon.ts'));
-        // lodash.unset(config, 'resolve.alias.@');
+        lodash.update(config, 'resolve.alias', alias => {
+            return lodash.merge({
+                // '@xt/client': path.resolve(path.dirname(process.cwd()), 'client'),
+                "@ant-design/icons/lib/dist$": path.resolve(process.cwd(), 'plugins/icon.ts'),
+            }, alias)
+        });
         // console.log("extend -> config", config)
     },
     extractCSS: true,

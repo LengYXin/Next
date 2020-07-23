@@ -15,7 +15,7 @@
       </a-menu>
     </a-dropdown>
     <!-- <span>搜索</span>
-    <span>消息</span> -->
+    <span>消息</span>-->
     <userModal />
   </div>
 </template>
@@ -23,9 +23,12 @@
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import userModal from "./userModal.vue";
 @Component({
-  components: { userModal }
+  components: { userModal },
 })
 export default class extends Vue {
+  get $locale() {
+    return this.$store.$locale;
+  }
   onLocaleChange(locale) {
     if (this.$locale.locale === locale) {
       return;

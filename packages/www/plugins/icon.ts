@@ -18,9 +18,7 @@ export {
 export {
     default as LoadingOutline
 } from '@ant-design/icons/lib/outline/LoadingOutline';
-export {
-    default as InfoOutline
-} from '@ant-design/icons/lib/outline/InfoOutline';
+
 export {
     default as CloseOutline
 } from '@ant-design/icons/lib/outline/CloseOutline';
@@ -30,10 +28,22 @@ export {
 export {
     default as InfoCircleOutline
 } from '@ant-design/icons/lib/outline/InfoCircleOutline';
+export {
+    default as InfoOutline
+} from '@ant-design/icons/lib/outline/InfoOutline';
 
 export {
     default as ExclamationCircleOutline
 } from '@ant-design/icons/lib/outline/ExclamationCircleOutline';
+
+export {
+    default as ExclamationOutline
+} from '@ant-design/icons/lib/outline/ExclamationOutline';
+
 export {
     default as CheckCircleOutline
 } from '@ant-design/icons/lib/outline/CheckCircleOutline';
+
+export {
+    default as CheckOutline
+} from '@ant-design/icons/lib/outline/CheckOutline';

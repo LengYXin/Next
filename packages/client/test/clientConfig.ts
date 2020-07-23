@@ -1,19 +1,10 @@
-import * as EnumApi from '@xt/client/api';
-import '@xt/client/configure';
-import { AjaxBasics } from '@xt/client/helpers/ajaxBasics';
-import { notification } from 'ant-design-vue';
 import lodash from 'lodash';
-import NProgress from 'nprogress';
 import { TimeoutError } from "rxjs";
 import { AjaxError, AjaxResponse } from "rxjs/ajax";
-import Vue from 'vue';
+import { AjaxBasics } from '../helpers/ajaxBasics';
 // 重置  AjaxBasics  配置
 onResetAjaxBasics()
-// 扩展
-Vue.prototype.$ajax = new AjaxBasics({ target: 'https://cr-api-uat.xuantong.cn' });
-Vue.prototype.$EnumApi = EnumApi;
-
-
+export default new AjaxBasics({ target: 'https://cr-api-uat.xuantong.cn' });
 /**
  * 重置  AjaxBasics  配置
  */
@@ -37,26 +28,18 @@ function onResetAjaxBasics() {
         return true
     }
     AjaxBasics.onMap = function (res) {
+        // console.log("LENG: AjaxBasics.onMap -> res", res)
         return res.response.result
     }
     AjaxBasics.onError = function (error) {
-        notification.error({ key: "AjaxBasics", message: '提示', description: lodash.get(error, 'response.msg', error.message) })
+        // console.log(error)
+        // notification.error({ key: "AjaxBasics", message: '提示', description: lodash.get(error, 'response.msg', error.message) })
     }
     AjaxBasics.onNProgress = function (type: 'start' | 'done' = 'start') {
         if (type == "start") {
-            NProgress.start();
+            // NProgress.start();
         } else {
-            NProgress.done();
+            // NProgress.done();
         }
-    }
-}
-
-declare module 'vue/types/vue' {
-    interface Vue {
-        /** Ajax */
-        $ajax: AjaxBasics;
-        /** APi 枚举 */
-        $EnumApi: typeof EnumApi;
-        // $locales: typeof locales;
     }
 }

@@ -79,9 +79,9 @@ export class AjaxBasics {
         };
         request = AjaxBasics.onCompatibleAjaxRequest(request, options);
         // test
-        if (lodash.eq(process.env.NODE_ENV, 'test')) {
-            console.log(request)
-        }
+        // if (lodash.eq(process.env.NODE_ENV, 'test')) {
+        //     console.info(request)
+        // }
         return AjaxBasics.AjaxObservable<T>(ajax(request), options)
     }
     /**
@@ -112,9 +112,9 @@ export class AjaxBasics {
                 map(res => AjaxBasics.onMap(res))
             ).subscribe(res => {
                 // test
-                if (lodash.eq(process.env.NODE_ENV, 'test')) {
-                    console.log(JSON.stringify(res, null, 4))
-                }
+                // if (lodash.eq(process.env.NODE_ENV, 'test')) {
+                //     console.info(res)
+                // }
                 sub.next(res)
                 sub.complete()
             })
