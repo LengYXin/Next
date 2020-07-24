@@ -19,10 +19,11 @@ module.exports = {
         });
         // console.log("extend -> config", config)
     },
-    extractCSS: true,
+    extractCSS: process.env.NODE_ENV==='production',
     loaders: {
         less: {
             lessOptions: {
+                // modifyVars: modifyVars,
                 javascriptEnabled: true
             }
         }

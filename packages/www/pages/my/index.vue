@@ -22,8 +22,7 @@ import PageStore from "./store";
 export default class PageView extends Vue {
   PageStore = new PageStore();
   mounted() {
-    console.log(this);
-    this.PageStore.onText();
+    
   }
   onTest() {
     Modal.confirm({ title: "测试" });

@@ -1,6 +1,6 @@
 <template>
-  <a-menu mode="horizontal" :selected-keys="[$route.fullPath]" :style="{ lineHeight: '64px' }">
-    <a-menu-item v-for="item in menus" :key="item.key">
+  <a-menu mode="horizontal" :selected-keys="[$route.fullPath]" class="xt-header-menu">
+    <a-menu-item class="ant-menu-item" v-for="item in menus" :key="item.key">
       <nuxt-link :to="item.key">
         <span v-t="item.name"></span>
       </nuxt-link>
@@ -9,39 +9,27 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import menus from '../menus';
 @Component({
   components: {},
 })
 export default class extends Vue {
-  menus = [
-    {
-      key: "/",
-      name: "links_home",
-    },
-    {
-      key: "/course",
-      name: "links_course",
-    },
-    {
-      key: "/video",
-      name: "links_video",
-    },
-    {
-      key: "/stationery",
-      name: "links_stationery",
-    },
-    {
-      key: "/about",
-      name: "links_about",
-    },
-    {
-      key: "/my",
-      name: "links_my",
-    },
-  ];
+  menus = menus;
   mounted() {}
   updated() {}
   destroyed() {}
 }
 </script>
+<style lang="less" scoped>
+.xt-header-menu {
+  line-height: @layout-header-height;
+  text-align: center;
+  font-size: @font-size-base+4px;
+  margin: 0;
+  .ant-menu-item,
+  .ant-menu-item:hover {
+    border-color: transparent ;
+  }
+}
+</style>
 

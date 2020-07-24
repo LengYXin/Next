@@ -6,12 +6,10 @@ import Logo from "~/components/Logo.vue";
 import dplayer from "~/components/dplayer/index.vue";
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Modal } from "ant-design-vue";
-import PageStore from "./store";
 @Component({
   components: { Logo, dplayer }
 })
 export default class PageView extends Vue {
-  PageStore = new PageStore();
   data = [
     {
       title: "Ant Design Title 1"
@@ -27,8 +25,7 @@ export default class PageView extends Vue {
     }
   ];
   mounted() {
-    console.log(this);
-    this.PageStore.onText();
+   
   }
   onTest() {
     Modal.confirm({ title: "测试" });

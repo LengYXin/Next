@@ -4,11 +4,11 @@ import "./registerHooks";
 console.group('Start')
 console.info("LENG: middleware")
 export default function (context: Context) {
-    if (context.route.fullPath === '/') {
-        return
-    }
-    if (context.route.fullPath === '/my') {
-        message.success({ content: '请登录' })
-        return context.redirect('/')
-    }
+    // if (context.route.fullPath === '/') {
+    //     return
+    // }
+    // if (context.route.fullPath === '/my') {
+    //     message.success({ content: '请登录' })
+    //     return context.redirect('/')
+    // }
 }

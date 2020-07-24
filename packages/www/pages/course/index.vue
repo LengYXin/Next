@@ -1,5 +1,5 @@
 <template>
-  <a-list class="page-course" item-layout="horizontal" :data-source="PageStore.dataSource">
+  <a-list class="xt-content" item-layout="horizontal" :data-source="PageStore.dataSource">
     <nuxt-link slot="renderItem" slot-scope="item" :to="`/course/${item.courseId}`">
       <a-list-item>
         <img width="272" alt="logo" v-lazy="item.coursePictureUri" />
@@ -38,9 +38,4 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" scoped>
-.page-course {
-  max-width: 1000px;
-  margin: auto;
-  // background: @primary-color;
-}
 </style>

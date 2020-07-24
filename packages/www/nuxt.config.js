@@ -78,13 +78,15 @@ module.exports = {
   */
   css: [
     'ant-design-vue/dist/antd.less',
-    'nprogress/nprogress.css'
+    'nprogress/nprogress.css',
+    '@/assets/style/index.less'
   ],
   styleResources: {
     // your settings here
     sass: [],
     scss: [],
     less: [
+      '@/assets/themes/modifyVars.less',
       '@/assets/themes/index.less'
     ],
     stylus: []

@@ -1,24 +1,34 @@
 <template>
   <a-layout class="xt-layout" :class="pageClass">
-    <a-layout-header>
-      <headerMenu />
-      <headerUser />
+    <a-layout-header class="xt-layout-header">
+      <div class="xt-layout-header-content">
+        <headerMenu />
+        <headerUser />
+      </div>
     </a-layout-header>
-    <a-layout-content>
-      <!-- <keep-alive key="main"> -->
+    <a-layout-header></a-layout-header>
+    <a-layout-content class="xt-layout-content">
+      <!-- 面包屑 -->
+      <breadcrumb />
+      <!-- 页面 -->
       <Nuxt keep-alive />
-      <!-- </keep-alive> -->
+      <!-- 滚动 -->
       <a-back-top />
     </a-layout-content>
-    <a-layout-footer>Footer</a-layout-footer>
+    <!-- 底部 -->
+    <a-layout-footer>
+      <layoutFooter />
+    </a-layout-footer>
   </a-layout>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import headerMenu from "./views/headerMenu.vue";
 import headerUser from "./views/headerUser.vue";
+import layoutFooter from "./views/footer.vue";
+import breadcrumb from "./views/breadcrumb.vue";
 @Component({
-  components: { headerMenu, headerUser },
+  components: { headerMenu, headerUser, layoutFooter, breadcrumb },
 })
 export default class extends Vue {
   get pageClass() {
@@ -32,21 +42,6 @@ export default class extends Vue {
 }
 </script>
 <style lang="less">
-.xt-layout {
-  min-height: 100vh;
-  .ant-layout-header {
-    background: #fff;
-    position: relative;
-    .ant-menu-horizontal {
-      text-align: center;
-    }
-  }
-  // .ant-layout-content {
-  //   max-width: 1000px;
-  //   min-width: 1000px;
-  //   margin: auto;
-  // }
-}
 .page-enter-active,
 .page-leave-active {
   transition: opacity 0.2s;
@@ -54,6 +49,27 @@ export default class extends Vue {
 .page-enter,
 .page-leave-active {
   opacity: 0;
+}
+</style>
+<style lang="less" scoped>
+.xt-layout {
+  min-height: 100vh;
+}
+.xt-layout-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: @zindex-modal-mask + 1;
+  overflow: hidden;
+  box-shadow: @xt-header-box-shadow;
+}
+.xt-layout-header-content {
+  max-width: 1000px;
+  margin: auto;
+  position: relative;
+}
+.xt-layout-content {
+  min-height: 400px;
 }
 </style>
 

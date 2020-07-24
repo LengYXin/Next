@@ -1,8 +1,9 @@
-import { Avatar, BackTop,Dropdown, Button, Divider, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Popconfirm, Spin, Tabs } from 'ant-design-vue';
+import {Breadcrumb, Affix,Row,Col,Pagination, Avatar, BackTop, Button, Card, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Popconfirm, Skeleton, Spin, Tabs } from 'ant-design-vue';
 import Base from 'ant-design-vue/lib/base';
 import Vue from 'vue';
 Vue.use(Base)
 Vue.use(FormModel)
+Vue.use(Affix)
 Vue.use(Layout)
 Vue.use(Menu)
 Vue.use(Tabs)
@@ -17,6 +18,13 @@ Vue.use(Avatar)
 Vue.use(Input)
 Vue.use(List)
 Vue.use(Dropdown)
+Vue.use(Descriptions)
+Vue.use(Skeleton)
+Vue.use(Card)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Pagination)
+Vue.use(Breadcrumb)
 
 // Vue.use(Antd)
 Vue.prototype.$message = message;

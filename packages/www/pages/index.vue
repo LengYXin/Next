@@ -1,13 +1,34 @@
 <template>
   <div>
-    <div class="swiper">
+    <div class="xt-swiper">
       <swiper :options="swiperOptions" ref="mySwiper">
         <swiper-slide v-for="img in PageStore.Banners" :key="img.id">
           <img v-lazy="img.pictureUri" style="width:100%;min-height:400px" />
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
       </swiper>
     </div>
+    <div class="xt-content">
+      <a-card :bordered="false" :loading="true">
+        <h1 class="xt-card-title" slot="title"><a-skeleton active :paragraph="false"/></h1>
+        <div>课程</div>
+      </a-card>
+      <a-card :bordered="false" :loading="true">
+        <h1 class="xt-card-title" slot="title"><a-skeleton active :paragraph="false"/></h1>
+        <div>课程</div>
+      </a-card>
+      <a-card :bordered="false" :loading="true">
+        <h1 class="xt-card-title" slot="title"><a-skeleton active :paragraph="false"/></h1>
+        <div>课程</div>
+      </a-card>
+      <a-card :bordered="false" :loading="true">
+        <h1 class="xt-card-title" slot="title"><a-skeleton active :paragraph="false"/></h1>
+        <div>课程</div>
+      </a-card>
+    </div>
+
     <a-icon type="loading" style="font-size: 50px" />
     <a-icon type="exclamation-circle" style="font-size: 50px" />
     <a-icon type="check-circle" style="font-size: 50px" />
@@ -15,17 +36,11 @@
 
     <a-spin>
       <a-icon slot="indicator" type="loading" style="font-size: 50px" spin />
-      <logo />
-      <h1 class="title">暄桐教室</h1>
-      <h1 class="title" v-t="'tips.test'"></h1>
     </a-spin>
-    <div style="height:999px">
-
-    </div>
+    <div style="height:999px"></div>
   </div>
 </template>
 <script lang="ts">
-import Logo from "~/components/Logo.vue";
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
 import { Context } from "@nuxt/types";
@@ -34,7 +49,7 @@ import { Context } from "@nuxt/types";
   fetch(ctx: Context) {
     ctx.store.$storeHome.onGetBanners();
   },
-  components: { Logo },
+  components: {},
 })
 export default class PageView extends Vue {
   get PageStore() {
@@ -48,21 +63,28 @@ export default class PageView extends Vue {
     // loop: true,
     autoplay: true,
     // allowTouchMove: false,
-    // autoHeight: true,
+    autoHeight: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
     pagination: {
       el: ".swiper-pagination",
+      dynamicBullets: true,
     },
   };
   created() {}
-  mounted() {
-  }
+  mounted() {}
   updated() {}
   destroyed() {}
 }
 </script>
 <style lang="less" scoped>
-.swiper {
-  max-height: 900px;
+.xt-swiper {
+  position: relative;
   overflow: hidden;
+}
+.xt-card-title {
+  text-align: center;
 }
 </style>

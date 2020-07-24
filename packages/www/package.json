@@ -24,7 +24,7 @@
     "nprogress": "^0.2.0",
     "nuxt": "^2.13.3",
     "rxjs": "^6.6.0",
-    "swiper": "^6.0.4",
+    "swiper": "~5.4.5",
     "viewerjs": "^1.6.1",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
