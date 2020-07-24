@@ -1,6 +1,10 @@
 const lodash = require('lodash');
 const path = require('path');
 const build = require('./configs/build');
+// api 地址
+const env = {
+  target: 'https://cr-api-uat.xuantong.cn'
+};
 const head = {
   title: '暄桐教室',//process.env.npm_package_name || '',
   meta: [
@@ -23,7 +27,7 @@ const router = {
 }
 const proxy = {
   "/api": {
-    target: "https://cr-api-uat.xuantong.cn", // 代理地址
+    target: env.target, // 代理地址
     changeOrigin: true,
     pathRewrite: {
       "^/api": "/"
@@ -33,7 +37,7 @@ const proxy = {
 const vue = {
   config: {
     productionTip: false,
-    // devtools: false, 
+    devtools: false,
   }
 }
 module.exports = {
@@ -73,7 +77,8 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'ant-design-vue/dist/antd.less'
+    'ant-design-vue/dist/antd.less',
+    'nprogress/nprogress.css'
   ],
   styleResources: {
     // your settings here
@@ -96,6 +101,7 @@ module.exports = {
   ** See https://nuxtjs.org/api/configuration-components
   */
   components: true,
+  env,
   proxy,
   vue,
 

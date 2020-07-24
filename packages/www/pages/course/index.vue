@@ -41,6 +41,6 @@ export default class PageView extends Vue {
 .page-course {
   max-width: 1000px;
   margin: auto;
-  background: @primary-color;
+  // background: @primary-color;
 }
 </style>

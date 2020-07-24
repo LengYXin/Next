@@ -9,10 +9,10 @@ import { AjaxError, AjaxResponse } from "rxjs/ajax";
 import Vue from 'vue';
 // 重置  AjaxBasics  配置
 onResetAjaxBasics()
+export const ajax = new AjaxBasics({ target: process.env.target });
 // 扩展
-Vue.prototype.$ajax = new AjaxBasics({ target: 'https://cr-api-uat.xuantong.cn' });
+Vue.prototype.$ajax = ajax;
 Vue.prototype.$EnumApi = EnumApi;
-
 
 /**
  * 重置  AjaxBasics  配置

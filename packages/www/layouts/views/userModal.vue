@@ -1,49 +1,26 @@
 <template>
   <span>
-    <span @click="onVisible(true)" v-t="'links_signin'">登录</span>
-    <span @click="onVisible(true)" v-t="'links_register'">注册</span>
-    <a-modal title="登录" :visible="visible"  @ok="onOk" @cancel="onCancel">
-      <a-form-model
-        layout="inline"
-        :model="formInline"
-        @submit="onSubmit"
-        @submit.native.prevent
-      >
-        <a-form-model-item>
-          <a-input v-model="formInline.user" placeholder="Username">
-            <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-form-model-item>
-        <a-form-model-item>
-          <a-input v-model="formInline.password" type="password" placeholder="Password">
-            <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-form-model-item>
-        <a-form-model-item>
-          <a-button
-            type="primary"
-            html-type="submit"
-            :disabled="formInline.user === '' || formInline.password === ''"
-          >Log in</a-button>
-        </a-form-model-item>
-      </a-form-model>
+    <span @click="onVisible(true,'links_signin')" v-t="'links_signin'">登录</span>
+    <span @click="onVisible(true,'links_register')" v-t="'links_register'">注册</span>
+    <a-modal :title="$t(title)" :visible="visible" @ok="onOk" @cancel="onCancel">
+      <signin v-if="title==='links_signin'" />
+      <register v-else />
     </a-modal>
   </span>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import signin from "./signin.vue";
+import register from "./register.vue";
 @Component({
-  components: {}
+  components: { signin, register },
 })
 export default class extends Vue {
-  @Prop() text;
   visible = false;
-  formInline = {
-    user: "",
-    password: ""
-  };
-  onVisible(visible) {
+  title = "";
+  onVisible(visible, title?) {
     this.visible = visible;
+    this.title = title;
   }
   onOk() {
     this.onVisible(false);
@@ -51,9 +28,7 @@ export default class extends Vue {
   onCancel() {
     this.onVisible(false);
   }
-  onSubmit(){
-
-  }
+  onSubmit() {}
   mounted() {}
   updated() {}
   destroyed() {}

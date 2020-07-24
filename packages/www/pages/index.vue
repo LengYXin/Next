@@ -55,7 +55,6 @@ export default class PageView extends Vue {
   };
   created() {}
   mounted() {
-    console.log(this);
   }
   updated() {}
   destroyed() {}
