@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="xt-layout" :class="pageClass">
+  <a-layout class="xt-layout">
     <a-layout-header class="xt-layout-header">
       <div class="xt-layout-header-content">
         <headerMenu />
@@ -7,12 +7,15 @@
       </div>
     </a-layout-header>
     <a-layout-header></a-layout-header>
-    <a-layout-content class="xt-layout-content">
+    <a-layout-content
+      class="xt-layout-content"
+      v-auto-height="{ styleKey: 'minHeight', subtract: 190 }"
+    >
       <!-- 面包屑 -->
       <breadcrumb />
       <!-- 页面 -->
       <!-- <Nuxt keep-alive /> -->
-      <Nuxt :keep-alive="production" />
+      <Nuxt :class="pageClass" :keep-alive="production" />
       <!-- 滚动 -->
       <a-back-top />
     </a-layout-content>
@@ -29,11 +32,11 @@ import headerUser from "./views/headerUser.vue";
 import layoutFooter from "./views/footer.vue";
 import breadcrumb from "./views/breadcrumb.vue";
 @Component({
-  components: { headerMenu, headerUser, layoutFooter, breadcrumb },
+  components: { headerMenu, headerUser, layoutFooter, breadcrumb }
 })
 export default class extends Vue {
   get pageClass() {
-    return "page-" + this.$route.fullPath;
+    return "xt-page-" + this.$route.name;
   }
   get production() {
     return process.env.NODE_ENV === "production";
@@ -73,7 +76,6 @@ export default class extends Vue {
   position: relative;
 }
 .xt-layout-content {
-  min-height: 400px;
+  transition: all 0.2s;
 }
 </style>
-

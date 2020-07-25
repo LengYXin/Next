@@ -3731,7 +3731,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.9.41", "@types/react@^16.9.43":
+"@types/react@*", "@types/react@^16.9.43":
   version "16.9.43"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.43.tgz?cache=0&sync_timestamp=1594635052332&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.43.tgz#c287f23f6189666ee3bebc2eb8d0f84bcb6cdb6b"
   integrity sha1-wofyP2GJZm7jvrwuuND4S8ts22s=
@@ -4824,7 +4824,7 @@ ant-design-vue@^1.6.4:
     vue-ref "^2.0.0"
     warning "^4.0.0"
 
-antd@^4.2.0, antd@^4.4.2, antd@^4.4.3:
+antd@^4.2.0, antd@^4.4.3:
   version "4.4.3"
   resolved "https://registry.npm.taobao.org/antd/download/antd-4.4.3.tgz#338f724df733f5a9debb6f63ddfef2e2360d916c"
   integrity sha1-M49yTfcz9aneu29j3f7y4jYNkWw=
@@ -18344,7 +18344,7 @@ swiper@4.4.2:
     dom7 "^2.1.2"
     ssr-window "^1.0.1"
 
-swiper@5.4.5:
+swiper@~5.4.5:
   version "5.4.5"
   resolved "https://registry.npm.taobao.org/swiper/download/swiper-5.4.5.tgz#a350f654bf68426dbb651793824925512d223c0f"
   integrity sha1-o1D2VL9oQm27ZReTgkklUS0iPA8=
@@ -19483,11 +19483,6 @@ vue-awesome-swiper@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npm.taobao.org/vue-awesome-swiper/download/vue-awesome-swiper-4.1.1.tgz#8f7ab221ad003021d756b86aa618f429924900fe"
   integrity sha1-j3qyIa0AMCHXVrhqphj0KZJJAP4=
-
-vue-class-component@^7.2.4:
-  version "7.2.4"
-  resolved "https://registry.npm.taobao.org/vue-class-component/download/vue-class-component-7.2.4.tgz#5c15cef356d7ce793aefef3b23cb5ac0df7ff62d"
-  integrity sha1-XBXO81bXznk67+87I8tawN9/9i0=
 
 vue-class-component@^7.2.5:
   version "7.2.5"

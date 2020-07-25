@@ -1,5 +1,6 @@
 /// <reference types="@nuxt/types" />
 import { Context } from "@nuxt/types";
+import "./directives";
 import "./icon";
 import "./usePlugins/ant";
 import i18n from "./usePlugins/i18n";
