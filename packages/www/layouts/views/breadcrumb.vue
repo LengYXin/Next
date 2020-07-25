@@ -37,5 +37,8 @@ export default class extends Vue {
 }
 </script>
 <style lang="less" scoped>
+.xt-breadcrumb{
+    padding-top: @padding-lg;
+}
 </style>
 

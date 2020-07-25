@@ -11,7 +11,8 @@
       <!-- 面包屑 -->
       <breadcrumb />
       <!-- 页面 -->
-      <Nuxt keep-alive />
+      <!-- <Nuxt keep-alive /> -->
+      <Nuxt :keep-alive="production" />
       <!-- 滚动 -->
       <a-back-top />
     </a-layout-content>
@@ -33,6 +34,9 @@ import breadcrumb from "./views/breadcrumb.vue";
 export default class extends Vue {
   get pageClass() {
     return "page-" + this.$route.fullPath;
+  }
+  get production() {
+    return process.env.NODE_ENV === "production";
   }
   mounted() {
     // console.log(this);

@@ -1,37 +1,40 @@
 <template>
-  <div class="container">
-    <div>
-      <a-spin>
-        <a-icon slot="indicator" type="loading" style="font-size: 50px" spin />
-        <logo />
-        <h1 class="title">暄桐教室</h1>
-      </a-spin>
-      <dplayer />
-    </div>
+  <div class="xt-content">
+    <a-tabs default-active-key="1">
+      <a-tab-pane key="1">
+        <span slot="tab">
+          <a-icon type="loading" />
+          <span>邮箱</span>
+        </span>
+      </a-tab-pane>
+      <a-tab-pane key="2">
+        <span slot="tab">
+          <a-icon type="loading" />
+          <span>手机号</span>
+        </span>
+      </a-tab-pane>
+    </a-tabs>
+    <a-row :gutter="16">
+      <a-col v-for="item in 12" :key="item" :span="6">
+        <a-card :bordered="false">
+          <img v-lazy />
+        </a-card>
+      </a-col>
+    </a-row>
+    <a-pagination :default-current="6" :total="500" />
   </div>
 </template>
 <script lang="ts">
-import Logo from "~/components/Logo.vue";
-import dplayer from "~/components/dplayer/index.vue";
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Modal } from "ant-design-vue";
-import PageStore from "./store";
 @Component({
-  components: { Logo, dplayer }
+  components: {},
 })
 export default class PageView extends Vue {
-  PageStore = new PageStore();
-  mounted() {
-   
-  }
-  onTest() {
-    Modal.confirm({ title: "测试" });
-    this.$message.success("test");
-  }
+  mounted() {}
   updated() {}
   destroyed() {}
 }
 </script>
 <style>
-
 </style>

@@ -14,7 +14,7 @@
     "strict": false,
     "noEmit": true,
     "noImplicitAny": false,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
