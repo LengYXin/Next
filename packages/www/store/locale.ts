@@ -1,19 +1,8 @@
 import { observable, computed, action } from 'mobx';
 import { create, persist } from 'mobx-persist';
-
+import getlocales from '@xt/client/languages';
 class Locale {
-    // constructor() {
-    //     this.hydrate('xt_locale', this).then(() => {
-
-    //     });
-    // // }
-    // private hydrate = create({
-    //     // storage: window.localStorage,   // or AsyncStorage in react-native.
-    //     // default: localStorage
-    //     // jsonify: true  // if you use AsyncStorage, here shoud be true
-    //     // default: true
-    // });
-    // @persist
+    localeMessages = getlocales()
     @observable
     locale = 'zh';
     @action.bound

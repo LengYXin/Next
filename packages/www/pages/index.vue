@@ -37,7 +37,9 @@
     <a-spin>
       <a-icon slot="indicator" type="loading" style="font-size: 50px" spin />
     </a-spin>
-    <div style="height:999px"></div>
+    <div style="height:999px">
+      <xt-dplayer/>
+    </div>
   </div>
 </template>
 <script lang="ts">

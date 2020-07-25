@@ -1,7 +1,6 @@
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
-import getlocales from '@xt/client/languages';
 import { Context } from '@nuxt/types';
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 Vue.use(VueI18n)
 // Vue.prototype.$locale = locale;
 // declare module 'vue/types/vue' {
@@ -17,7 +16,7 @@ export default ({ app, store }: Context) => {
     app.i18n = new VueI18n({
         locale: store.$locale.locale,
         fallbackLocale: 'zh',
-        messages: getlocales({})
+        messages: store.$locale.localeMessages
     })
 
     //   app.i18n.path = (link) => {

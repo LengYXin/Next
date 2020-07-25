@@ -11,6 +11,6 @@ export const defaultLocales = {
 /**
  *  语音包扩展
  */
-export default (locales: { 'zh'?: any, 'en'?: any }) => {
-    return lodash.merge(defaultLocales, locales)
+export default (locales?: { 'zh'?: any, 'en'?: any }) => {
+    return lodash.merge(lodash.cloneDeep(defaultLocales), locales)
 }
