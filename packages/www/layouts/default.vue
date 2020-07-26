@@ -9,7 +9,7 @@
     <a-layout-header></a-layout-header>
     <a-layout-content
       class="xt-layout-content"
-      v-auto-height="{ styleKey: 'minHeight', subtract: 190 }"
+      v-auto-height="{ styleKey: 'minHeight', subtract: 240 }"
     >
       <!-- 面包屑 -->
       <breadcrumb />
@@ -42,7 +42,7 @@ export default class extends Vue {
     return process.env.NODE_ENV === "production";
   }
   mounted() {
-    // console.log(this);
+    console.log(this);
   }
   updated() {}
   destroyed() {}

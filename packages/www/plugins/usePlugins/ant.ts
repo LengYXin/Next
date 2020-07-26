@@ -1,4 +1,4 @@
-import {Breadcrumb, Affix,Row,Col,Pagination, Avatar, BackTop, Button, Card, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Popconfirm, Skeleton, Spin, Tabs } from 'ant-design-vue';
+import { Affix, Avatar, BackTop, Breadcrumb, Button, Card, Col, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Pagination, Popconfirm, Result, Row, Skeleton, Spin, Tabs } from 'ant-design-vue';
 import Base from 'ant-design-vue/lib/base';
 import Vue from 'vue';
 Vue.use(Base)
@@ -25,8 +25,7 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Pagination)
 Vue.use(Breadcrumb)
-
-// Vue.use(Antd)
+Vue.use(Result)
 Vue.prototype.$message = message;
 Vue.prototype.$notification = notification;
 Vue.prototype.$info = Modal.info;

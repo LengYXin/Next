@@ -5,19 +5,26 @@
         <span slot="tab">
           <span>邮箱</span>
         </span>
-        <a-tabs>
-          <a-tab-pane key="1">
-            <span slot="tab">
-              <span>邮箱</span>
-            </span>
-          </a-tab-pane>
-          <a-tab-pane key="2">
-            <span slot="tab">
-              <span>手机号</span>
-            </span>
-          </a-tab-pane>
-        </a-tabs>
-        <a-list class="xt-content" item-layout="horizontal" :data-source="[{},{},{},{}]">
+        <!-- <a-affix :offset-top="74"> -->
+          <a-tabs>
+            <a-tab-pane key="1">
+              <span slot="tab">
+                <span>邮箱</span>
+              </span>
+            </a-tab-pane>
+            <a-tab-pane key="2">
+              <span slot="tab">
+                <span>手机号</span>
+              </span>
+            </a-tab-pane>
+          </a-tabs>
+        <!-- </a-affix> -->
+
+        <a-list
+          class="xt-content"
+          item-layout="horizontal"
+          :data-source="[{},{},{},{},{},{},{},{}]"
+        >
           <nuxt-link slot="renderItem" slot-scope="item" :to="`/course/${item.courseId}`">
             <a-list-item>
               <a-list-item-meta :description="item.statusName">
@@ -29,6 +36,7 @@
           </nuxt-link>
         </a-list>
       </a-tab-pane>
+
       <a-tab-pane key="2">
         <span slot="tab">
           <span>手机号</span>

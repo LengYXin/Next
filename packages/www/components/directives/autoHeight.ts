@@ -6,9 +6,6 @@ import Vue from 'vue';
 Vue.directive('auto-height', {
     // 当被绑定的元素插入到 DOM 中时……
     bind(el, binding) {
-
-    },
-    inserted(el: any, binding) {
         let height = 400;
         let subtract = 50;
         let styleKey = 'height';
@@ -29,6 +26,9 @@ Vue.directive('auto-height', {
                 onSetHeight(el, styleKey, height, subtract);
             });
         onSetHeight(el, styleKey, height, subtract);
+    },
+    inserted(el: any, binding) {
+        
     },
     unbind(el: any) {
         el.ResizeEvent && el.ResizeEvent.unsubscribe()
