@@ -6,10 +6,11 @@
         <headerUser />
       </div>
     </a-layout-header>
+    <!-- 占位 -->
     <a-layout-header></a-layout-header>
     <a-layout-content
       class="xt-layout-content"
-      v-auto-height="{ styleKey: 'minHeight', subtract: 240 }"
+      v-auto-height="{ styleKey: 'minHeight', subtract: 400 }"
     >
       <!-- 面包屑 -->
       <breadcrumb />
@@ -20,7 +21,7 @@
       <a-back-top />
     </a-layout-content>
     <!-- 底部 -->
-    <a-layout-footer>
+    <a-layout-footer class="xt-layout-footer">
       <layoutFooter />
     </a-layout-footer>
   </a-layout>
@@ -32,7 +33,7 @@ import headerUser from "./views/headerUser.vue";
 import layoutFooter from "./views/footer.vue";
 import breadcrumb from "./views/breadcrumb.vue";
 @Component({
-  components: { headerMenu, headerUser, layoutFooter, breadcrumb }
+  components: { headerMenu, headerUser, layoutFooter, breadcrumb },
 })
 export default class extends Vue {
   get pageClass() {
@@ -71,11 +72,15 @@ export default class extends Vue {
   box-shadow: @xt-header-box-shadow;
 }
 .xt-layout-header-content {
-  max-width: 1000px;
+  max-width: @xt-content-width;
   margin: auto;
   position: relative;
 }
 .xt-layout-content {
   transition: all 0.2s;
+}
+.xt-layout-footer {
+  max-width: @xt-content-width;
+  margin: auto;
 }
 </style>

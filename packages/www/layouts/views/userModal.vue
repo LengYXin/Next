@@ -1,7 +1,7 @@
 <template>
   <span>
-    <span @click="onVisible(true,'links_signin')" v-t="'links_signin'">登录</span>
-    <span @click="onVisible(true,'links_register')" v-t="'links_register'">注册</span>
+    <span @click="onVisible(true,'links_signin')" v-t="locale.links_signin">登录</span>
+    <span @click="onVisible(true,'links_register')" v-t="locale.links_register">注册</span>
     <a-modal :title="$t(title)" :visible="visible" @ok="onOk" @cancel="onCancel" :footer="null">
       <signin v-if="title==='links_signin'" />
       <register v-else />
@@ -18,6 +18,9 @@ import register from "./register.vue";
 export default class extends Vue {
   visible = false;
   title = "";
+  get locale() {
+    return this.$EnumLocaleLinks;
+  }
   onVisible(visible, title?) {
     this.visible = visible;
     this.title = title;

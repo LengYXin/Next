@@ -1,6 +1,7 @@
 import lodash from 'lodash';
 import en from './en';
 import zh from './zh';
+export * from './enumLocale';
 /**
  * 默认语音包
  */

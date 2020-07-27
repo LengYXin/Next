@@ -34,14 +34,14 @@ declare module 'vuex/types/index' {
         /**
          * 本地语音全局状态
          */
-        $locale: typeof $locale
+        readonly $locale: typeof $locale
         /**
          * 首页状态控制器
          */
-        $storeHome: ControllerHome
+        readonly $storeHome: ControllerHome
         /**
          * 课程控制器
          */
-        $storeCourse: ControllerCourse
+        readonly $storeCourse: ControllerCourse
     }
 }

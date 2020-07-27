@@ -21,11 +21,11 @@ import lodash from "lodash";
 })
 export default class extends Vue {
   get show() {
-    return !lodash.includes(["/"], this.$route.fullPath);
+    return !lodash.includes(["index"], this.$route.name);
   }
   get pageName() {
     try {
-      return lodash.find(menus, ["key", this.$route.fullPath]).name;
+      return lodash.find(menus, ["key", this.$route.name]).name;
     } catch (error) {
       return undefined;
     }

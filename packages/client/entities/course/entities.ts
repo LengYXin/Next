@@ -19,4 +19,14 @@ export default class EntitiesCourse {
     protected setDataSource(dataSource) {
         this.dataSource = dataSource;
     }
+    /**
+     * 课程详情
+     * @memberof EntitiesCourse
+     */
+    @observable
+    details: any = {};
+    @action.bound
+    protected setDetails(details) {
+        this.details = details;
+    }
 }

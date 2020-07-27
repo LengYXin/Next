@@ -1,7 +1,27 @@
 @import './nprogress.less';
-
+@import './text.less';
+// 内容区域
 .xt-content {
     padding-top: @padding-lg;
-    width: @xt-content-width;
+    max-width: @xt-content-width;
     margin: auto;
+}
+
+// 角标 左边
+.xt-badge-left.ant-badge .ant-scroll-number-custom-component {
+    left: 0;
+    right: initial;
+    transform: translate(-50%, -50%);
+    &.xt-badge-text {
+        border-radius: 100%;
+        height: 50px;
+        width: 50px;
+        background: @orange-6;
+        line-height: 25px;
+        color: @white;
+
+        >div {
+            text-align: center;
+        }
+    }
 }

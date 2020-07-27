@@ -24,5 +24,15 @@ export class ControllerCourse extends Entities {
         })
         this.setDataSource(dataSource);
     }
+    /**
+     * 获取课程详情
+     * @param {*} [body]
+     * @param {Object} [headers]
+     * @memberof ControllerCourse
+     */
+    async onGetDetails(body?: any, headers?: Object) {
+        const res = await this.$ajax.post<any>(EnumApiCourse.CourseDetails, body, headers);
+        this.setDetails(res);
+    }
 }
 export default ControllerCourse

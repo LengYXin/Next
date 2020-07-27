@@ -1,7 +1,7 @@
 <template>
   <a-menu mode="horizontal" :selected-keys="[$route.fullPath]" class="xt-header-menu">
     <a-menu-item class="ant-menu-item" v-for="item in menus" :key="item.key">
-      <nuxt-link :to="item.key">
+      <nuxt-link :to="{name:item.key}">
         <span v-t="item.name"></span>
       </nuxt-link>
     </a-menu-item>
@@ -9,7 +9,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
-import menus from '../menus';
+import menus from "../menus";
 @Component({
   components: {},
 })
@@ -28,7 +28,7 @@ export default class extends Vue {
   margin: 0;
   .ant-menu-item,
   .ant-menu-item:hover {
-    border-color: transparent ;
+    border-color: transparent;
   }
 }
 </style>

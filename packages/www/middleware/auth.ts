@@ -2,9 +2,9 @@ import { Context } from "@nuxt/types";
 import { message } from "ant-design-vue";
 import "./registerHooks";
 console.group('Start')
-console.info("LENG: middleware")
+console.info("LENG: middleware", process.env.NODE_ENV)
 export default function (context: Context) {
-console.log("LENG: context", context)
+    // console.log("LENG: context", context)
     // if (context.route.fullPath === '/') {
     //     return
     // }

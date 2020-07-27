@@ -54,9 +54,9 @@ function onResetAjaxBasics() {
 declare module 'vue/types/vue' {
     interface Vue {
         /** Ajax */
-        $ajax: AjaxBasics;
+        readonly $ajax: AjaxBasics;
         /** APi 枚举 */
-        $EnumApi: typeof EnumApi;
+        readonly $EnumApi: typeof EnumApi;
         // $locales: typeof locales;
     }
 }

@@ -1,15 +1,40 @@
 @import 'ant-design-vue/lib/style/index.less';
 /**
  *  主题配置 
+    https://github.com/vueComponent/ant-design-vue/blob/master/components/style/color/colors.less
  *  https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less
 */
-@primary-color: #07767a;
+@blue-6: #1890ff;
+@purple-6: #722ed1;
+@cyan-6: #07767a;
+@green-6: #52c41a;
+@magenta-6: #eb2f96;
+@pink-6: #eb2f96;
+@red-6: #f5222d;
+@orange-6: #fa8c16;
+@yellow-6: #fadb14;
+@volcano-6: #fa541c;
+@geekblue-6: #2f54eb;
+@lime-6: #a0d911;
+@gold-6: #faad14;
+// @preset-colors: pink, magenta, red, volcano, orange, yellow, gold, cyan, lime, green, blue, geekblue,
+//     purple;
+@primary-color:@cyan-6;
+@info-color: @blue-6;
+@success-color: @green-6;
+@processing-color: @blue-6;
+@error-color: @red-6;
+@highlight-color: @red-6;
+@warning-color: @gold-6;
+@normal-color: #d9d9d9;
+@white: #fff;
+@black: #000;
 
 // layout
 @layout-body-background: #fffdf9;
 @layout-header-height: 72px;
 @layout-header-padding: 0;
-@layout-header-background: #fff;
+@layout-header-background: @white;
 // modal
 @modal-header-border-color-split: transparent;
 @modal-footer-border-color-split: transparent;
