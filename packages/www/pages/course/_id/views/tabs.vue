@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-tabs :activeKey="activeKey" @change="tabsChange" class="ant-tabs">
+    <a-tabs :activeKey="activeKey" @change="tabsChange" class="xt-tabs-center">
       <a-tab-pane v-for="tab in tabPane" :key="tab.key">
         <span slot="tab">
           <span v-t="tab.value"></span>
@@ -80,8 +80,3 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" scoped>
-.ant-tabs {
-  text-align: center;
-}
-</style>

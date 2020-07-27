@@ -1,16 +1,9 @@
 <template>
   <div class="xt-content">
-    <a-tabs default-active-key="1">
-      <a-tab-pane key="1">
+    <a-tabs :activeKey="activeKey" @change="tabsChange" class="xt-tabs-center">
+      <a-tab-pane v-for="tab in tabPane" :key="tab">
         <span slot="tab">
-          <a-icon type="loading" />
-          <span>邮箱</span>
-        </span>
-      </a-tab-pane>
-      <a-tab-pane key="2">
-        <span slot="tab">
-          <a-icon type="loading" />
-          <span>手机号</span>
+          <span v-t="tab"></span>
         </span>
       </a-tab-pane>
     </a-tabs>
@@ -21,20 +14,70 @@
         </a-card>
       </a-col>
     </a-row>
-    <a-pagination :default-current="6" :total="500" />
+    <a-pagination class="xt-pagination-center" :default-current="6" :total="500" />
   </div>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
-import { Modal } from "ant-design-vue";
+import { Component, Prop, Vue, Provide, Inject,Watch } from "vue-property-decorator";
+import lodash from "lodash";
 @Component({
   components: {},
 })
 export default class PageView extends Vue {
+  activeKey = lodash.get(this.$route.query, "active", "all");
+  tabPane = [
+    "all",
+    "studyRoom",
+    "book",
+    "tea",
+    "fragrant",
+    "qin",
+    "furniture",
+    "other",
+  ];
+  tabsChange(activeKey) {
+    // this.activeKey = activeKey;
+    this.$router.push({
+      query: lodash.merge({}, this.$route.query, {
+        active: activeKey,
+      }),
+    });
+  }
+  // 组件中 使用不了 生命周期 beforeRouteUpdate
+  @Watch("$route.query")
+  queryUpdate(to, from, next) {
+    const { active } = this.$route.query;
+    if (active && !lodash.eq(active, this.activeKey)) {
+      this.activeKey = active as any;
+    }
+    // next();
+  }
   mounted() {}
   updated() {}
   destroyed() {}
 }
 </script>
-<style>
-</style>
+<i18n>
+{
+  "en": {
+    "all": "All",
+    "studyRoom": "Study Room",
+    "book": "Book",
+    "tea": "Tea",
+    "fragrant": "Fragrant",
+    "qin": "Qin",
+    "furniture": "Furniture",
+    "other": "Other"
+  },
+  "zh": {
+    "all": "全部",
+    "studyRoom": "文房",
+    "book": "书",
+    "tea": "茶",
+    "fragrant": "香",
+    "qin": "琴",
+    "furniture": "家具",
+    "other": "其他"
+  }
+}
+</i18n>
