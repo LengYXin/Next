@@ -65,7 +65,7 @@ export default class extends Vue {
   queryUpdate(to, from, next) {
     if (this.toQuery) {
       const { current } = this.$route.query;
-      if (current && !lodash.eq(current, this.Pagination.current)) {
+      if (!lodash.eq(String(current), String(this.Pagination.current))) {
         this.onLoading();
       }
     }

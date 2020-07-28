@@ -34,16 +34,16 @@ import lodash from "lodash";
 function getActive(query) {
   return lodash.get(query, "active", "-1");
 }
-function getTypeId(query, types) {
-  const activeKey = getActive(query);
-  if (
-    activeKey &&
-    lodash.some(types, ["typeId", lodash.toInteger(activeKey)])
-  ) {
-    return activeKey;
-  }
-  return -1;
-}
+// function getTypeId(query, types) {
+//   const activeKey = getActive(query);
+//   if (
+//     activeKey &&
+//     lodash.some(types, ["typeId", lodash.toInteger(activeKey)])
+//   ) {
+//     return activeKey;
+//   }
+//   return -1;
+// }
 @Observer
 @Component({
   // 每次进入页面都会调用
@@ -82,27 +82,35 @@ export default class PageView extends Vue {
   //   "other",
   // ];
   tabsChange(activeKey) {
-    // this.activeKey = activeKey;
+    this.activeKey = activeKey;
+    const { current } = this.$route.query;
     this.$router.push({
       query: lodash.merge({}, this.$route.query, {
         active: activeKey,
-        current: 1,
+        current: "1",
       }),
     });
-  }
-  // 组件中 使用不了 生命周期 beforeRouteUpdate
-  @Watch("$route.query.active")
-  queryUpdate(to, from, next) {
-    const { active } = this.$route.query;
-    if (active && !lodash.eq(active, this.activeKey)) {
-      this.activeKey = active as any;
+    // 分页组件已经检测了 current 变更 但是 active 不会 触发
+    if (lodash.eq(String(current), "1") || lodash.isNil(current)) {
       this.Pagination.onReset().onLoading({
         typeId: this.activeKey,
         commodityName: "",
       });
     }
-    // next();
   }
+  // 组件中 使用不了 生命周期 beforeRouteUpdate
+  // @Watch("$route.query.active")
+  // queryUpdate(to, from, next) {
+  //   const { active } = this.$route.query;
+  //   if (active && !lodash.eq(active, this.activeKey)) {
+  //     this.activeKey = active as any;
+  //     this.Pagination.onReset().onLoading({
+  //       typeId: this.activeKey,
+  //       commodityName: "",
+  //     });
+  //   }
+  //   // next();
+  // }
   mounted() {}
   updated() {}
   destroyed() {}
