@@ -10,18 +10,19 @@
     <a-spin :spinning="Pagination.loading">
       <a-row :gutter="16">
         <a-col v-for="item in Pagination.dataSource" :key="item.commodityId" :span="6">
-          <a-card class="xt-stationery-card" :bordered="false">
-            <img class="xt-stationery-img" v-lazy="item.commodityCoverUrl" />
-          </a-card>
+          <nuxt-link :to="`/stationery/${item.commodityId}`">
+            <a-card class="xt-stationery-card" :bordered="false">
+              <img class="xt-stationery-img" v-lazy="item.commodityCoverUrl" />
+            </a-card>
+          </nuxt-link>
         </a-col>
       </a-row>
     </a-spin>
-    <a-pagination
-      class="xt-pagination-center"
-      :current="Pagination.current"
-      :total="Pagination.total"
-      :pageSize="Pagination.pageSize"
-      @change="Pagination.onCurrentChange"
+    <xt-pagination
+      v-if="PageStore.typelist.length"
+      :Pagination="Pagination"
+      :fetchBody="fetchBody"
+      :toQuery="true"
     />
   </div>
 </template>
@@ -33,8 +34,8 @@ import lodash from "lodash";
 function getActive(query) {
   return lodash.get(query, "active", "-1");
 }
-function getTypeId(ctx: Context, types) {
-  const activeKey = getActive(ctx.query);
+function getTypeId(query, types) {
+  const activeKey = getActive(query);
   if (
     activeKey &&
     lodash.some(types, ["typeId", lodash.toInteger(activeKey)])
@@ -48,12 +49,12 @@ function getTypeId(ctx: Context, types) {
   // 每次进入页面都会调用
   async fetch(ctx: Context) {
     const types = await ctx.store.$storeStationery.onGetTypelist();
-    const res = await ctx.store.$storeStationery.Pagination.onReset().onLoading(
-      {
-        typeId: getTypeId(ctx, types),
-        commodityName: "",
-      }
-    );
+    // const res = await ctx.store.$storeStationery.Pagination.onReset().onLoading(
+    //   {
+    //     typeId: getTypeId(ctx.query, types),
+    //     commodityName: "",
+    //   }
+    // );
   },
   components: {},
 })
@@ -63,6 +64,11 @@ export default class PageView extends Vue {
   }
   get Pagination() {
     return this.$store.$storeStationery.Pagination;
+  }
+  get fetchBody() {
+    return {
+      typeId: this.activeKey,
+    };
   }
   activeKey = getActive(this.$route.query);
   // tabPane = [
@@ -80,11 +86,12 @@ export default class PageView extends Vue {
     this.$router.push({
       query: lodash.merge({}, this.$route.query, {
         active: activeKey,
+        current: 1,
       }),
     });
   }
   // 组件中 使用不了 生命周期 beforeRouteUpdate
-  @Watch("$route.query")
+  @Watch("$route.query.active")
   queryUpdate(to, from, next) {
     const { active } = this.$route.query;
     if (active && !lodash.eq(active, this.activeKey)) {

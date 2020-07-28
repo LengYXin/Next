@@ -18,7 +18,7 @@ export interface PaginationResponse<T> {
 }
 export interface PaginationOptions {
     /** url */
-    url: string;
+    url?: string;
     /** 请求方式 */
     method?: string;
     /** 无限滚动 */
@@ -39,7 +39,7 @@ export interface PaginationOptions {
 @BindAll()
 export class Pagination<T> {
     constructor(protected $ajax: AjaxBasics, options: PaginationOptions) {
-        this.options = lodash.merge<any, PaginationOptions>({
+        this.onReset(lodash.merge({
             key: 'key',
             method: 'post',
             infinite: false,
@@ -47,8 +47,7 @@ export class Pagination<T> {
             defaultPageSize: 10,
             currentKey: 'current',
             pageSizeKey: 'pageSize',
-        }, options);
-        this.onReset()
+        }, options))
     }
     /**
      * 配置
@@ -118,6 +117,9 @@ export class Pagination<T> {
         if (this.isUndefined) {
             console.warn('分页 数据 没有更多数据')
             return []
+        }
+        if (this.loading) {
+            return console.warn('分页 数据 加载中')
         }
         this.onToggleLoading(true);
         this.oldBody = lodash.cloneDeep(body);
@@ -226,12 +228,14 @@ export class Pagination<T> {
      * @memberof Pagination
      */
     @action.bound
-    onReset() {
+    onReset(options: PaginationOptions = this.options) {
+        this.options = lodash.merge(this.options, options);
         this.current = this.options.defaultCurrent;
         this.pageSize = this.options.defaultPageSize;
         this.isUndefined = false;
         this.total = 0;
         this.dataSource = [];
+        this.loading = false;
         return this;
     }
 }

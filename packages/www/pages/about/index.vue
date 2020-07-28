@@ -16,7 +16,7 @@
       :data-source="Pagination.dataSource"
       :rowKey="Pagination.key"
     >
-      <nuxt-link slot="renderItem" slot-scope="item" :to="item.articleUrl">
+      <a slot="renderItem" slot-scope="item" target="_blank" :href="item.articleUrl">
         <a-list-item>
           <a-list-item-meta>
             <h1 slot="title" v-text="item.articleTitle">名称</h1>
@@ -31,7 +31,7 @@
             </a-badge>
           </a-list-item-meta>
         </a-list-item>
-      </nuxt-link>
+      </a>
     </a-list>
     <a-pagination
       class="xt-pagination-center"

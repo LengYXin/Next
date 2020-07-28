@@ -40,6 +40,10 @@ module.exports = {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head,
+  server: {
+    // port: 8000, // default: 3000
+    host: '0.0.0.0' // default: localhost,
+  },
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins

@@ -19512,6 +19512,11 @@ vue-i18n@^8.19.0:
   resolved "https://registry.npm.taobao.org/vue-i18n/download/vue-i18n-8.19.0.tgz#4326ade6cba7e18b22030ac1a14c59864b6dfc43"
   integrity sha1-Qyat5sun4YsiAwrBoUxZhktt/EM=
 
+vue-infinite-loading@^2.4.5:
+  version "2.4.5"
+  resolved "https://registry.npm.taobao.org/vue-infinite-loading/download/vue-infinite-loading-2.4.5.tgz#cc20fd40af7f20188006443c99b60470cf1de1b3"
+  integrity sha1-zCD9QK9/IBiABkQ8mbYEcM8d4bM=
+
 vue-jest@^3.0.5, vue-jest@^3.0.6:
   version "3.0.6"
   resolved "https://registry.npm.taobao.org/vue-jest/download/vue-jest-3.0.6.tgz?cache=0&sync_timestamp=1594214734071&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-jest%2Fdownload%2Fvue-jest-3.0.6.tgz#27f79d75dcddbe6b3d8327ca1450a107b9cd6f38"
