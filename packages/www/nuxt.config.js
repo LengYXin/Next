@@ -1,3 +1,4 @@
+const moment = require('moment');
 const build = require('./configs/build');
 const head = require('./configs/head');
 const router = require('./configs/router');
@@ -5,7 +6,8 @@ const router = require('./configs/router');
 const production = process.env.NODE_ENV === 'production';
 // api 地址
 const env = {
-  target: 'https://cr-api-uat.xuantong.cn'
+  target: 'https://cr-api-uat.xuantong.cn',
+  version: `${process.env.npm_package_version} ${moment().format("YYYY-MM-DD HH:mm")}`
 };
 const proxy = {
   "/api": {

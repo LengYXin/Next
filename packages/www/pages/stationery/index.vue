@@ -1,40 +1,80 @@
 <template>
-  <div class="xt-content">
+  <div class="xt-content xt-stationery">
     <a-tabs :activeKey="activeKey" @change="tabsChange" class="xt-tabs-center">
-      <a-tab-pane v-for="tab in tabPane" :key="tab">
+      <a-tab-pane v-for="tab in PageStore.typelist" :key="String(tab.typeId)">
         <span slot="tab">
-          <span v-t="tab"></span>
+          <span v-text="tab.typeName"></span>
         </span>
       </a-tab-pane>
     </a-tabs>
-    <a-row :gutter="16">
-      <a-col v-for="item in 12" :key="item" :span="6">
-        <a-card :bordered="false">
-          <img v-lazy />
-        </a-card>
-      </a-col>
-    </a-row>
-    <a-pagination class="xt-pagination-center" :default-current="6" :total="500" />
+    <a-spin :spinning="Pagination.loading">
+      <a-row :gutter="16">
+        <a-col v-for="item in Pagination.dataSource" :key="item.commodityId" :span="6">
+          <a-card class="xt-stationery-card" :bordered="false">
+            <img class="xt-stationery-img" v-lazy="item.commodityCoverUrl" />
+          </a-card>
+        </a-col>
+      </a-row>
+    </a-spin>
+    <a-pagination
+      class="xt-pagination-center"
+      :current="Pagination.current"
+      :total="Pagination.total"
+      :pageSize="Pagination.pageSize"
+      @change="Pagination.onCurrentChange"
+    />
   </div>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue, Provide, Inject,Watch } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { Context } from "@nuxt/types";
+import { Observer } from "mobx-vue";
 import lodash from "lodash";
+function getActive(query) {
+  return lodash.get(query, "active", "-1");
+}
+function getTypeId(ctx: Context, types) {
+  const activeKey = getActive(ctx.query);
+  if (
+    activeKey &&
+    lodash.some(types, ["typeId", lodash.toInteger(activeKey)])
+  ) {
+    return activeKey;
+  }
+  return -1;
+}
+@Observer
 @Component({
+  // 每次进入页面都会调用
+  async fetch(ctx: Context) {
+    const types = await ctx.store.$storeStationery.onGetTypelist();
+    const res = await ctx.store.$storeStationery.Pagination.onReset().onLoading(
+      {
+        typeId: getTypeId(ctx, types),
+        commodityName: "",
+      }
+    );
+  },
   components: {},
 })
 export default class PageView extends Vue {
-  activeKey = lodash.get(this.$route.query, "active", "all");
-  tabPane = [
-    "all",
-    "studyRoom",
-    "book",
-    "tea",
-    "fragrant",
-    "qin",
-    "furniture",
-    "other",
-  ];
+  get PageStore() {
+    return this.$store.$storeStationery;
+  }
+  get Pagination() {
+    return this.$store.$storeStationery.Pagination;
+  }
+  activeKey = getActive(this.$route.query);
+  // tabPane = [
+  //   "all",
+  //   "studyRoom",
+  //   "book",
+  //   "tea",
+  //   "fragrant",
+  //   "qin",
+  //   "furniture",
+  //   "other",
+  // ];
   tabsChange(activeKey) {
     // this.activeKey = activeKey;
     this.$router.push({
@@ -49,6 +89,10 @@ export default class PageView extends Vue {
     const { active } = this.$route.query;
     if (active && !lodash.eq(active, this.activeKey)) {
       this.activeKey = active as any;
+      this.Pagination.onReset().onLoading({
+        typeId: this.activeKey,
+        commodityName: "",
+      });
     }
     // next();
   }
@@ -57,6 +101,21 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
+<style lang="less" >
+.xt-stationery {
+  &-card {
+    .ant-card-body {
+      padding: 20px 0;
+    }
+  }
+  &-img {
+    width: 230px;
+    height: 230px;
+    display: block;
+    margin: auto;
+  }
+}
+</style>
 <i18n>
 {
   "en": {

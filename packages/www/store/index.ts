@@ -1,5 +1,5 @@
 
-import { ControllerCourse, ControllerHome } from "@xt/client/entities";
+import { ControllerCourse, ControllerHome, ControllerStationery, ControllerVideo,ControllerAbout } from "@xt/client/entities";
 import { create, persist } from 'mobx-persist';
 import { ajax } from "./clientConfig";
 import $locale from './locale';
@@ -9,6 +9,9 @@ const store = {
     $locale,
     $storeHome: new ControllerHome(ajax),
     $storeCourse: new ControllerCourse(ajax),
+    $storeStationery: new ControllerStationery(ajax),
+    $storeVideo: new ControllerVideo(ajax),
+    $storeAbout: new ControllerAbout(ajax),
 }
 console.log("LENG: store", store)
 // 配置缓存
@@ -43,5 +46,23 @@ declare module 'vuex/types/index' {
          * 课程控制器
          */
         readonly $storeCourse: ControllerCourse
+        /**
+         * 文房
+         * @type {ControllerStationery}
+         * @memberof Store
+         */
+        readonly $storeStationery: ControllerStationery
+        /**
+         * 视频
+         * @type {ControllerStationery}
+         * @memberof Store
+         */
+        readonly $storeVideo: ControllerVideo
+        /**
+         * 关于
+         * @type {ControllerAbout}
+         * @memberof Store
+         */
+        readonly $storeAbout: ControllerAbout
     }
 }

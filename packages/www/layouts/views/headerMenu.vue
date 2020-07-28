@@ -1,5 +1,5 @@
 <template>
-  <a-menu mode="horizontal" :selected-keys="[$route.fullPath]" class="xt-header-menu">
+  <a-menu mode="horizontal" :selected-keys="selectedkeys" class="xt-header-menu">
     <a-menu-item class="ant-menu-item" v-for="item in menus" :key="item.key">
       <nuxt-link :to="{name:item.key}">
         <span v-t="item.name"></span>
@@ -15,6 +15,9 @@ import menus from "../menus";
 })
 export default class extends Vue {
   menus = menus;
+  get selectedkeys() {
+    return [this.$route.name];
+  }
   mounted() {}
   updated() {}
   destroyed() {}

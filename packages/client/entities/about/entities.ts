@@ -5,23 +5,24 @@ import { AjaxRequest } from 'rxjs/ajax';
 import lodash from 'lodash';
 
 
-export default class EntitiesCourse {
+export default class EntitiesAbout {
     constructor() {
     }
-    // /**
-    //  * 课程列表
-    //  * @type {Array<{}>}
-    //  * @memberof EntitiesCourse
-    //  */
-    // @observable
-    // dataSource: Array<any> = null;
-    // @action.bound
-    // protected setDataSource(dataSource) {
-    //     this.dataSource = dataSource;
-    // }
+    /**
+     * 文房类型列表
+     * @type {Array<{}>}
+     * @memberof EntitiesAbout
+     */
+    @observable
+    typelist: Array<{ typeId: number, typeName: string }> = [];
+    @action.bound
+    protected setTypelist(typelist) {
+        this.typelist = typelist;
+        return typelist
+    }
     /**
      * 课程详情
-     * @memberof EntitiesCourse
+     * @memberof EntitiesAbout
      */
     @observable
     details: any = {};

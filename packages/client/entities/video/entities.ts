@@ -5,23 +5,12 @@ import { AjaxRequest } from 'rxjs/ajax';
 import lodash from 'lodash';
 
 
-export default class EntitiesCourse {
+export default class EntitiesVideo {
     constructor() {
     }
-    // /**
-    //  * 课程列表
-    //  * @type {Array<{}>}
-    //  * @memberof EntitiesCourse
-    //  */
-    // @observable
-    // dataSource: Array<any> = null;
-    // @action.bound
-    // protected setDataSource(dataSource) {
-    //     this.dataSource = dataSource;
-    // }
     /**
      * 课程详情
-     * @memberof EntitiesCourse
+     * @memberof EntitiesVideo
      */
     @observable
     details: any = {};

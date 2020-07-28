@@ -2,6 +2,15 @@
 @import './text.less';
 @import './tabs.less';
 @import './pagination.less';
+
+body {
+    user-select: none;
+}
+
+img {
+    object-fit: cover;
+}
+
 // 内容区域
 .xt-content {
     padding-top: @padding-lg;
@@ -14,6 +23,7 @@
     left: 0;
     right: initial;
     transform: translate(-50%, -50%);
+
     &.xt-badge-text {
         border-radius: 100%;
         height: 50px;

@@ -1,7 +1,8 @@
-import { Affix, Avatar, BackTop, Badge, Breadcrumb, Button, Card, Col, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Pagination, Popconfirm, Result, Row, Skeleton, Spin, Tabs } from 'ant-design-vue';
+import { ConfigProvider, Affix, Avatar, BackTop, Badge, Breadcrumb, Button, Card, Col, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Pagination, Popconfirm, Result, Row, Skeleton, Spin, Tabs } from 'ant-design-vue';
 import Base from 'ant-design-vue/lib/base';
 import Vue from 'vue';
 Vue.use(Base)
+Vue.use(ConfigProvider)
 Vue.use(Badge)
 Vue.use(FormModel)
 Vue.use(Affix)
@@ -35,3 +36,10 @@ Vue.prototype.$error = Modal.error;
 Vue.prototype.$warning = Modal.warning;
 Vue.prototype.$confirm = Modal.confirm;
 Vue.prototype.$destroyAll = Modal.destroyAll;
+
+Spin.setDefaultIndicator({
+    indicator: h => {
+        const NodeJsx: any = Icon;
+        return <NodeJsx type="loading" size="large" />;
+    },
+});
