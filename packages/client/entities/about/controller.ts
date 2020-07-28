@@ -33,7 +33,6 @@ export class ControllerAbout extends Entities {
     * @memberof ControllerCourse
     */
     async onGetTypelist() {
-        console.log()
         if (this.typelist.length > 0) {
             return this.typelist;
         }
