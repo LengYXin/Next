@@ -3,7 +3,7 @@ import { create } from 'mobx-persist';
 import { Subject, Subscription } from 'rxjs';
 import { AjaxRequest } from 'rxjs/ajax';
 import lodash from 'lodash';
-import { BindAll } from 'lodash-decorators';
+import { BindAll, Debounce } from 'lodash-decorators';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
 import { map } from 'rxjs/operators';
 export interface PaginationResponse<T> {
@@ -36,6 +36,12 @@ export interface PaginationOptions {
     /** 请求结果过滤 */
     onMapValues?: <T>(res: any) => PaginationResponse<T>;
 }
+export interface PaginationInfiniteEvent {
+    complete: Function;
+    error: Function;
+    loaded: Function;
+    reset: Function
+}
 @BindAll()
 export class Pagination<T> {
     constructor(protected $ajax: AjaxBasics, options: PaginationOptions) {
@@ -55,7 +61,7 @@ export class Pagination<T> {
      * @type {PaginationOptions}
      * @memberof Pagination
      */
-    protected options: PaginationOptions;
+    options: PaginationOptions;
     /**
      * 数据key
      * @readonly
@@ -105,48 +111,68 @@ export class Pagination<T> {
      * @memberof Pagination
      */
     oldBody = {};
+
     /**
      * 分页加载
-     * @param {*} body
-     * @param {AjaxRequest} [AjaxRequest]
+     *
+     * @param {*} [body] 参数
+     * @param {AjaxRequest} [AjaxRequest] 
+     * @param {PaginationInfiniteEvent} [infiniteEvent] 无限滚动 事件
      * @returns
      * @memberof Pagination
      */
-    async onLoading(body?, AjaxRequest?: AjaxRequest) {
-        // try {
-        if (this.isUndefined) {
-            console.warn('分页 数据 没有更多数据')
-            return []
+    async onLoading(body?, AjaxRequest?: AjaxRequest, infiniteEvent?: PaginationInfiniteEvent) {
+        try {
+            if (this.isUndefined) {
+                console.warn('分页 数据 没有更多数据')
+                return []
+            }
+            if (this.loading) {
+                return console.warn('分页 数据 加载中')
+            }
+            this.onToggleLoading(true);
+            this.oldBody = lodash.cloneDeep(body);
+            // if (this.current === 3) {
+            //     throw new Error('错误测试')
+            // }
+            body = lodash.merge({
+                // 转换 current pageSize 对应 的字段名
+                [this.options.currentKey]: this.current,
+                [this.options.pageSizeKey]: this.pageSize
+            }, body);
+            AjaxRequest = lodash.merge({
+                url: this.options.url,
+                method: this.options.method,
+                body
+            }, AjaxRequest);
+            const res = await this.$ajax.request<PaginationResponse<T>>(AjaxRequest)
+                .pipe(map(this.onMapValues))
+                .toPromise();
+            this.onToggleLoading(false);
+            const dataSource = this.onSetDataSource(res);
+            // 滚动 结束
+            if (infiniteEvent) {
+                if (this.isUndefined) {
+                    infiniteEvent.complete()
+                } else {
+                    infiniteEvent.loaded()
+                }
+            }
+            return dataSource
+        } catch (error) {
+            this.onToggleLoading(false);
+            infiniteEvent && infiniteEvent.error()
+            throw error
         }
-        if (this.loading) {
-            return console.warn('分页 数据 加载中')
-        }
-        this.onToggleLoading(true);
-        this.oldBody = lodash.cloneDeep(body);
-        // this.current++;
-        body = lodash.merge({
-            // 转换 current pageSize 对应 的字段名
-            [this.options.currentKey]: this.current,
-            [this.options.pageSizeKey]: this.pageSize
-        }, body);
-        AjaxRequest = lodash.merge({
-            url: this.options.url,
-            method: this.options.method,
-            body
-        }, AjaxRequest);
-        const res = await this.$ajax.request<PaginationResponse<T>>(AjaxRequest)
-            .pipe(map(this.onMapValues))
-            .toPromise();
-        this.onToggleLoading(false);
-        return this.onSetDataSource(res);
-        // } catch (error) {
-        //     console.error("LENG: Pagination -> error", error)
-        // }
     }
     @action.bound
-    onCurrentChange(current = this.current + 1) {
-        this.current = current;
-        this.onLoading(this.oldBody)
+    onCurrentChange(current?: number, body = this.oldBody) {
+        if (lodash.isNumber(current)) {
+            this.current = current;
+        } else {
+            this.current += 1;
+        }
+        return this.onLoading(body)
     }
     /**
      * 处理 过滤 res
@@ -154,7 +180,7 @@ export class Pagination<T> {
      * @returns
      * @memberof Pagination
      */
-    onMapValues(res): PaginationResponse<T> {
+    protected onMapValues(res): PaginationResponse<T> {
         if (lodash.isFunction(this.options.onMapValues)) {
             return this.options.onMapValues(res)
         }
@@ -168,7 +194,7 @@ export class Pagination<T> {
      * @memberof Pagination
      */
     @action.bound
-    onSetDataSource(res: PaginationResponse<T>) {
+    protected onSetDataSource(res: PaginationResponse<T>) {
         if (!lodash.isArray(res.dataSource)) {
             throw new Error('分页 数据 返回值 dataSource 不是数组')
         }
@@ -183,7 +209,10 @@ export class Pagination<T> {
         } else {
             this.dataSource = lodash.concat(this.dataSource, res.dataSource);
         }
-        // this.current += 1;
+        // 无限滚动
+        if (this.options.infinite) {
+            this.current += 1;
+        }
         this.total = res.total;
         return res.dataSource;
     }
@@ -194,7 +223,7 @@ export class Pagination<T> {
      * @memberof Pagination
      */
     @action.bound
-    onToggleLoading(loading: boolean = !this.loading) {
+    protected onToggleLoading(loading: boolean = !this.loading) {
         this.loading = loading;
     }
     /**

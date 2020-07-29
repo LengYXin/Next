@@ -16,7 +16,7 @@
         </a-col>
       </a-row>
     </a-spin>
-    <xt-pagination :Pagination="Pagination" :fetchBody="{}" :toQuery="true" />
+    <xt-pagination :Pagination="Pagination" :toQuery="true" @change="onCurrentChange" />
   </div>
 </template>
 <script lang="ts">
@@ -39,6 +39,12 @@ export default class PageView extends Vue {
   // @Provide("Pagination")
   get Pagination() {
     return this.$store.$storeVideo.Pagination;
+  }
+  /**
+   *  初始化 和 页码 更改调用
+   */
+  onCurrentChange(current, options) {
+    this.Pagination.onCurrentChange(current);
   }
   mounted() {}
   updated() {}

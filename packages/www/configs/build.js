@@ -50,14 +50,14 @@ module.exports = {
         new MomentLocalesPlugin({ localesToKeep: ['es-us', 'zh-cn'] })
     ],
     optimization: {
-        splitChunks: {
-            chunks: 'async',
-        }
+        // splitChunks: {
+        //     chunks: 'async',
+        // }
     },
     splitChunks: {
         layouts: false,
         pages: false,
-        commons: false
+        commons: true
     },
     // transpile: ['ant-design-vue'],
     babel: {

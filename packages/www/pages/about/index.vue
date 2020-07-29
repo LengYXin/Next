@@ -14,7 +14,6 @@
       class="xt-content"
       item-layout="horizontal"
       :data-source="Pagination.dataSource"
-      :rowKey="Pagination.key"
     >
       <a slot="renderItem" slot-scope="item" target="_blank" :href="item.articleUrl">
         <a-list-item>
@@ -33,13 +32,7 @@
         </a-list-item>
       </a>
     </a-list>
-    <a-pagination
-      class="xt-pagination-center"
-      :current="Pagination.current"
-      :total="Pagination.total"
-      :pageSize="Pagination.pageSize"
-      @change="Pagination.onCurrentChange"
-    />
+    <xt-infinite-loading @loading="onLoading" :key="activeKey" />
   </div>
 </template>
 <script lang="ts">
@@ -65,9 +58,6 @@ function getTypeId(ctx: Context, types) {
   // 每次进入页面都会调用
   async fetch(ctx: Context) {
     const types = await ctx.store.$storeAbout.onGetTypelist();
-    const res = await ctx.store.$storeAbout.Pagination.onReset().onLoading({
-      columnId: getTypeId(ctx, types),
-    });
   },
   components: {},
 })
@@ -79,33 +69,24 @@ export default class PageView extends Vue {
     return this.$store.$storeAbout.Pagination;
   }
   activeKey = getActive(this.$route.query);
-  // tabPane = [
-  //   "all",
-  //   "studyRoom",
-  //   "book",
-  //   "tea",
-  //   "fragrant",
-  //   "qin",
-  //   "furniture",
-  //   "other",
-  // ];
   tabsChange(activeKey) {
-    // this.activeKey = activeKey;
     this.$router.push({
       query: lodash.merge({}, this.$route.query, {
         active: activeKey,
       }),
     });
   }
+  async onLoading(event) {
+    this.Pagination.onLoading({ columnId: this.activeKey }, null, event);
+  }
   // 组件中 使用不了 生命周期 beforeRouteUpdate
-  @Watch("$route.query")
+  @Watch("$route.query.active")
   queryUpdate(to, from, next) {
     const { active } = this.$route.query;
     if (active && !lodash.eq(active, this.activeKey)) {
       this.activeKey = active as any;
-      this.Pagination.onReset().onLoading({
-        columnId: this.activeKey,
-      });
+      // this.onLoading(1);
+      this.Pagination.onReset();
     }
     // next();
   }

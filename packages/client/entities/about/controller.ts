@@ -18,6 +18,8 @@ export class ControllerAbout extends Entities {
         url: EnumApiAbout.AboutList,
         key: 'articleUrl',
         currentKey: 'pageIndex',
+        // 无线滚动
+        infinite: true,
         defaultPageSize: 10,
         onMapValues: this.onMapSource
     })

@@ -13,6 +13,7 @@
         </a-list-item-meta>
       </a-list-item>
     </a-list>
+    <xt-editor :editorOptions="editorSettings" />
   </div>
 </template>
 <script lang="ts">
@@ -30,6 +31,14 @@ export default class PageView extends Vue {
     "signup",
     ...lodash.keys(this.$store.$locale.localeMessages.zh),
   ];
+  editorSettings = {
+    modules: {
+      // imageDrop: true,
+      // clipboard: {
+      //   matchers: [[Node.ELEMENT_NODE, customMatcherA]],
+      // },
+    },
+  };
   created() {}
   mounted() {
     console.log(this.dataSource);
