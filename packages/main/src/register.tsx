@@ -18,7 +18,7 @@ export default (props: any, container: HTMLDivElement, onLoading: (loader: Boole
                 },
                 {
                     name: 'react',
-                    entry: '//localhost:3000',
+                    entry: '//localhost:3001',
                     activeRule: '/test',
                     container: container,
                     props: props,
