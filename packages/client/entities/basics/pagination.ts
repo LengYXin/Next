@@ -65,7 +65,7 @@ export class Pagination<T> {
      * @private
      * @memberof Pagination
      */
-    private onlyKey = lodash.uniqueId('Pagination')
+    private onlyKey: string;
     /**
      * 数据key
      * @readonly
@@ -155,6 +155,10 @@ export class Pagination<T> {
                     map(this.onMapValues)
                 )
                 .toPromise();
+            if (!lodash.eq(this.onlyKey, onlyKey)) {
+                console.warn(`onlyKey: ${onlyKey}  失效 当前：${this.onlyKey}`,)
+                return
+            }
             const dataSource = this.onSetDataSource(res, onlyKey);
             // 滚动 结束
             if (infiniteEvent) {
@@ -202,10 +206,7 @@ export class Pagination<T> {
      */
     @action.bound
     protected onSetDataSource(res: PaginationResponse<T>, onlyKey) {
-        if (!lodash.eq(this.onlyKey, onlyKey)) {
-            console.warn(`onlyKey: ${onlyKey}  失效 当前：${this.onlyKey}`,)
-            return []
-        }
+
         if (!lodash.isArray(res.dataSource)) {
             throw new Error('分页 数据 返回值 dataSource 不是数组')
         }
@@ -276,7 +277,7 @@ export class Pagination<T> {
         this.total = 0;
         this.dataSource = [];
         this.loading = false;
-        this.onlyKey = lodash.uniqueId('Pagination')
+        this.onlyKey = lodash.uniqueId('key_')
         return this;
     }
 }
