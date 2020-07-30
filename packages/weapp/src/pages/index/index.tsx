@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { AtButton, AtMessage } from 'taro-ui'
 import './index.scss'
+import { getCurrentInstance } from '@tarojs/taro'
 
 @inject('$storeHome')
 @observer
@@ -17,9 +18,14 @@ class Index extends Component<any> {
 
   componentWillUnmount() { }
 
-  componentDidShow() { }
+  componentDidShow() {
+    console.log('componentDidShow')
+  }
 
-  componentDidHide() { }
+  componentDidHide() {
+
+    console.log('componentDidHide', getCurrentInstance())
+  }
   renderSwiper() {
     const { Banners } = this.PageStore;
     if (Banners.length) {
@@ -38,6 +44,12 @@ class Index extends Component<any> {
     }
   }
   render() {
+    return (
+      <View className='index'>
+        <AtMessage />
+       首页
+      </View>
+    )
     return (
       <View className='index'>
         <AtMessage />
