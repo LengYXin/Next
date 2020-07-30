@@ -5,10 +5,11 @@ import { AjaxBasics, IAjaxBasicsOptions } from '@xt/client/helpers/ajaxBasics';
 import lodash from 'lodash';
 import { Component } from 'react';
 import { Observable } from "rxjs";
+export const ajax = new AjaxBasics({ target: 'https://cr-api-uat.xuantong.cn' });
 // 重置 Ajax
 onResetAjaxBasics()
 // 扩展 
-Component.prototype.$ajax = new AjaxBasics({ target: 'https://cr-api-uat.xuantong.cn' });
+Component.prototype.$ajax = ajax;
 Component.prototype.$EnumApi = EnumApi;
 declare module 'react' {
     interface Component {

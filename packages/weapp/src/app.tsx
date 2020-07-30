@@ -1,12 +1,7 @@
 import { Provider } from 'mobx-react';
 import React, { Component } from 'react';
 import './app.scss';
-import './clientConfig';
-import counterStore from './store/counter';
-const store = {
-  counterStore
-}
-
+import store from './store';
 class App extends Component {
   componentDidMount() { }
 
@@ -19,7 +14,7 @@ class App extends Component {
   // this.props.children 就是要渲染的页面
   render() {
     return (
-      <Provider store={store}>
+      <Provider {...store}>
         {this.props.children}
       </Provider>
     )

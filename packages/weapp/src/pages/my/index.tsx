@@ -12,7 +12,6 @@ class Index extends Component<any> {
     return this.props.$storeHome
   }
   componentDidMount() {
-    this.PageStore.onGetBanners()
   }
 
   componentWillUnmount() { }
@@ -20,29 +19,11 @@ class Index extends Component<any> {
   componentDidShow() { }
 
   componentDidHide() { }
-  renderSwiper() {
-    const { Banners } = this.PageStore;
-    if (Banners.length) {
-      return <Swiper
-        circular
-        indicatorDots
-        autoplay>
-        {Banners.map(img => <SwiperItem key={img.id}>
-          <Image
-            style='width:100%'
-            src={img.pictureUri}
-          />
-        </SwiperItem>)}
-
-      </Swiper>
-    }
-  }
   render() {
     return (
       <View className='index'>
         <AtMessage />
-        {this.renderSwiper()}
-        <AtButton type='primary' >获取数据</AtButton>
+       我的
       </View>
     )
   }
