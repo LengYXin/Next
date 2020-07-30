@@ -3,8 +3,8 @@ module.exports = (chain) => {
     // chain.output.chunkFilename('script/[name].[hash:8].js');
     // console.log(chain.resolve.alias.get())
     // throw 'a'
-    config.resolve.alias
-        .set('lodash', require.resolve('lodash'))
+    // config.resolve.alias
+    //     .set('lodash', require.resolve('lodash'))
     chain.optimization.splitChunks({
         chunks: 'async',
         minSize: 20000,
