@@ -13,7 +13,7 @@ declare namespace JSX {
     interface IntrinsicElements {
         'import': React.DetailedHTMLProps<React.EmbedHTMLAttributes<HTMLEmbedElement>, HTMLEmbedElement>
     }
-}
+} 
 
 // @ts-ignore
 declare const process: {
