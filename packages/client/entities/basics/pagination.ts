@@ -148,13 +148,14 @@ export class Pagination<T> {
                 method: this.options.method,
                 body
             }, AjaxRequest);
+            const onlyKey = this.onlyKey;
             const res = await this.$ajax.request<PaginationResponse<T>>(AjaxRequest)
                 .pipe(
                     // filter(() => lodash.eq(onlyKey, this.onlyKey)), 
                     map(this.onMapValues)
                 )
                 .toPromise();
-            const dataSource = this.onSetDataSource(res, this.onlyKey);
+            const dataSource = this.onSetDataSource(res, onlyKey);
             // 滚动 结束
             if (infiniteEvent) {
                 if (this.isUndefined) {
