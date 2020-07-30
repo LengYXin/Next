@@ -28,35 +28,36 @@ if (process.env.TARO_ENV === "h5") {
         hydrate('xt_home', store.$storeHome);
     }
 }
-// declare module 'react' {
-//     interface Component {
-//         /**
-//           * 首页状态控制器
-//           */
-//         readonly $storeHome: ControllerHome
-//         /**
-//          * 课程控制器
-//          */
-//         readonly $storeCourse: ControllerCourse
-//         /**
-//          * 文房
-//          * @type {ControllerStationery}
-//          * @memberof Store
-//          */
-//         readonly $storeStationery: ControllerStationery
-//         /**
-//          * 视频
-//          * @type {ControllerStationery}
-//          * @memberof Store
-//          */
-//         readonly $storeVideo: ControllerVideo
-//         /**
-//          * 关于
-//          * @type {ControllerAbout}
-//          * @memberof Store
-//          */
-//         readonly $storeAbout: ControllerAbout
-//     }
-// }
+declare module 'react' {
+    interface Component<P> {
+        // /**
+        //   * 首页状态控制器
+        //   */
+        // readonly $storeHome: ControllerHome
+        // /**
+        //  * 课程控制器
+        //  */
+        // readonly $storeCourse: ControllerCourse
+        // /**
+        //  * 文房
+        //  * @type {ControllerStationery}
+        //  * @memberof Store
+        //  */
+        // readonly $storeStationery: ControllerStationery
+        // /**
+        //  * 视频
+        //  * @type {ControllerStationery}
+        //  * @memberof Store
+        //  */
+        // readonly $storeVideo: ControllerVideo
+        // /**
+        //  * 关于
+        //  * @type {ControllerAbout}
+        //  * @memberof Store
+        //  */
+        // readonly $storeAbout: ControllerAbout
+        // readonly props: Readonly<P> & Readonly<{ children?: ReactNode }>&Readonly<{ $storeHome: ControllerHome }>;
+    }
+}
 // 状态 导出
 export default store
