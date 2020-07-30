@@ -1,3 +1,5 @@
+const webpackChain = require('./webpackChain');
+const path = require('path');
 module.exports = {
   env: {
     NODE_ENV: '"production"'
@@ -7,7 +9,10 @@ module.exports = {
   mini: {
     webpackChain(chain) {
       chain.plugin('analyzer')
-        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])
+        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [{
+          analyzerMode: 'static',
+          reportFilename: path.resolve(process.cwd(), 'report.html')
+        }])
     }
   },
   h5: {
@@ -15,12 +20,6 @@ module.exports = {
      * 如果h5端编译后体积过大，可以使用webpack-bundle-analyzer插件对打包体积进行分析。
      * 参考代码如下：
      */
-    webpackChain(chain) {
-      chain.plugin('analyzer')
-        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [{
-          // "analyzerMode": "static",
-          // "reportFilename": "report.html"
-        }])
-    }
+    webpackChain
   }
 }

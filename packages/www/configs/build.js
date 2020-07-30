@@ -44,7 +44,8 @@ module.exports = {
     },
     // 包分析 
     analyze: {
-        analyzerMode: 'static'
+        analyzerMode: 'static',
+        reportFilename: path.resolve(process.cwd(), 'report.html')
     },
     plugins: [
         new MomentLocalesPlugin({ localesToKeep: ['es-us', 'zh-cn'] })
