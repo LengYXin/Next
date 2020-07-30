@@ -44,17 +44,16 @@ class Index extends Component<any> {
     }
   }
   render() {
-    return (
-      <View className='index'>
-        <AtMessage />
-       首页
-      </View>
-    )
+    // return (
+    //   <View className='index'>
+    //     <AtMessage />
+    //    首页
+    //   </View>
+    // )
     return (
       <View className='index'>
         <AtMessage />
         {this.renderSwiper()}
-        <AtButton type='primary' >获取数据</AtButton>
       </View>
     )
   }

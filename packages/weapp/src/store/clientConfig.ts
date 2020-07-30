@@ -5,6 +5,7 @@ import { AjaxBasics, IAjaxBasicsOptions } from '@xt/client/helpers/ajaxBasics';
 import lodash from 'lodash';
 import { Component } from 'react';
 import { Observable } from "rxjs";
+import { AjaxRequest } from 'rxjs/ajax';
 export const ajax = new AjaxBasics({ target: 'https://cr-api-uat.xuantong.cn' });
 // 重置 Ajax
 onResetAjaxBasics()
@@ -41,9 +42,22 @@ function onResetAjaxBasics() {
             Taro.hideLoading()
         }
     }
+    AjaxBasics.onFilter = function (res) {
+        if (lodash.eq(lodash.get(res, 'status'), 200)) {
+            if (lodash.eq(lodash.get(res, 'response.code'), 0)) {
+                return true
+            }
+            throw { data: lodash.get(res, 'response') }
+        }
+        throw res
+    }
     // 微信 Observable 替换
     if (process.env.TARO_ENV === "weapp") {
-        AjaxBasics.onRequest = function (request: Taro.request.Option, options: IAjaxBasicsOptions) {
+        AjaxBasics.onRequest = function (request: Taro.request.Option & AjaxRequest, options: IAjaxBasicsOptions) {
+            // 先转换 为 body 解析
+            request.body = lodash.merge({}, request.body, request.data);
+            request = AjaxBasics.onCompatibleAjaxRequest(request, options) as Taro.request.Option;
+            request.data = lodash.merge({}, request.data, request.body);
             const obs = new Observable((sub) => {
                 onRequest()
                 async function onRequest() {
@@ -56,9 +70,9 @@ function onResetAjaxBasics() {
                     }
                 }
             })
-            request = AjaxBasics.onCompatibleAjaxRequest(request, options) as Taro.request.Option;
             return AjaxBasics.AjaxObservable(obs as any, options)
         }
+        // AjaxBasics.onCompatibleBody=function()
         // 过滤
         AjaxBasics.onFilter = function (res) {
             if (lodash.eq(lodash.get(res, 'statusCode'), 200) && lodash.eq(lodash.get(res, 'data.code'), 0)) {
