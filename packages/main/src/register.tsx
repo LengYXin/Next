@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { registerMicroApps, runAfterFirstMounted, setDefaultMountApp, start, initGlobalState } from 'qiankun';
+import { registerMicroApps, addGlobalUncaughtErrorHandler, runAfterFirstMounted, setDefaultMountApp, start, initGlobalState } from 'qiankun';
 export default (props: any, container: HTMLDivElement, onLoading: (loader: Boolean) => void) => {
+    addGlobalUncaughtErrorHandler(error => {
+        console.log("LENG: error", error)
+    })
     try {
         registerMicroApps(
             [
@@ -15,7 +18,7 @@ export default (props: any, container: HTMLDivElement, onLoading: (loader: Boole
                 },
                 {
                     name: 'react',
-                    entry: '//localhost:3001',
+                    entry: '//localhost:3000',
                     activeRule: '/test',
                     container: container,
                     props: props,

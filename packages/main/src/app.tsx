@@ -6,6 +6,7 @@ import * as React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import Register from './register';
 import { EntitiesTimeStore } from './time';
+import { divide } from 'lodash';
 
 const RootStore = {
     TestStore: new EntitiesTimeStore()
@@ -23,29 +24,58 @@ const RootStore = {
 }
 // RootStore.UserStore.onCheckLogin()
 export default class App extends React.Component<any> {
-    Content = React.createRef<HTMLDivElement>();
-    state = {
-        loading: true
-    }
-    componentDidMount() {
-        RootStore.TestStore.onToggleTime(true)
-        Register({ RootStore }, this.Content.current, (loading) => {
-            this.setState({ loading })
-        })
+    componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+        console.log("LENG: App -> componentDidCatch -> error", error, errorInfo)
+        this.setState({ error: true })
     }
     public render() {
         return (
             <Provider {...RootStore}>
                 <BrowserRouter>
                     <AppLayout >
-                        <Spin spinning={this.state.loading}>
-                            <div ref={this.Content} style={{ minHeight: 500 }}>
-                            </div>
-                        </Spin>
+                        <Content />
                     </AppLayout>
                 </BrowserRouter>
             </Provider>
         );
+    }
+}
+class Content extends React.Component<any> {
+    Content = React.createRef<HTMLDivElement>();
+    state = {
+        loading: true,
+        error: false
+    }
+    static getDerivedStateFromError(error) {
+        console.warn("LENG: Content -> getDerivedStateFromError -> error", error)
+        // 更新 state 使下一次渲染能够显示降级后的 UI
+        return { error: true };
+    }
+    componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+        console.log("LENG: App -> componentDidCatch -> error", error, errorInfo)
+        this.setState({ error: true })
+    }
+    componentDidMount() {
+        try {
+            RootStore.TestStore.onToggleTime(true)
+            Register({ RootStore }, this.Content.current, (loading) => {
+                this.setState({ loading })
+            })
+        } catch (error) {
+            console.log("LENG: Content -> componentDidMount -> error", error)
+        }
+    }
+    render() {
+        // throw 'aaaa'
+        if (this.state.error) {
+            return <div>出错</div>
+        }
+        return (
+            <Spin spinning={this.state.loading}>
+                <div ref={this.Content} style={{ minHeight: 500 }}>
+                </div>
+            </Spin>
+        )
     }
 }
 @inject('TestStore')

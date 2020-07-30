@@ -23,7 +23,7 @@
     "vue-router": "^3.3.4"
   },
   "devDependencies": {
-    "@types/jest": "^24.9.1",
+    "@types/jest": "^26.0.7",
     "@types/lodash": "^4.14.158",
     "@vue/cli-plugin-babel": "~4.4.6",
     "@vue/cli-plugin-router": "~4.4.6",
