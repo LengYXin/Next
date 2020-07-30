@@ -1,9 +1,11 @@
 import { View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import { ControllerStationery } from "@xt/client/entities"
-import { map, nth } from 'lodash'
+import lodash from 'lodash'
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { AtAvatar, AtMessage, AtSearchBar, AtTabs, AtTabsPane } from 'taro-ui'
+import { AtAvatar, AtMessage, AtSearchBar } from 'taro-ui'
+import Tabs from '../../components/tabs'
 import './index.scss'
 
 @inject('$storeStationery')
@@ -12,44 +14,59 @@ class Index extends Component<any> {
   get PageStore(): ControllerStationery {
     return this.props.$storeStationery
   }
+  get Pagination() {
+    return this.PageStore.Pagination
+  }
+  get typeId() {
+    return lodash.nth(this.PageStore.typelist, this.current)?.typeId
+  }
+  current = 0;
   state = {
-    current: 0,
-    value: ''
+    value: '',
+    height: '80vh',
   }
-  async componentDidMount() {
+  /**
+   * 分页数据加载
+   * @param body 参数
+   * @param reset 重置配置
+   */
+  onPagLoading(body: { typeId?, commodityName?}, reset = false) {
+    if (reset) {
+      this.Pagination.onReset({ infinite: true })
+    }
+    this.Pagination.onLoading({ typeId: this.typeId, ...body });
+  }
+  componentDidMount() {
     this.PageStore.onGetTypelist()
-    this.PageStore.Pagination.onCurrentChange(1, {
-      typeId: -1,
-      commodityName: "",
-    });
+    this.onPagLoading({ typeId: -1 }, true)
   }
-
+  /**
+   * 下拉刷新
+   */
+  async onPullDownRefresh() {
+    await this.onPagLoading({}, true)
+    Taro.stopPullDownRefresh()
+  }
+  /**
+   * 滚动底部加载
+   */
+  onScrollToLower() {
+    this.onPagLoading({})
+  }
   componentWillUnmount() { }
 
   componentDidShow() { }
 
   componentDidHide() { }
   onTabsChange(value) {
-    this.PageStore.Pagination.onCurrentChange(1, {
-      typeId: nth(this.PageStore.typelist, value)?.typeId,
-      commodityName: "",
-    });
-    this.setState({
-      current: value
-    })
+    this.current = value;
+    this.onPagLoading({}, true)
   }
   onChange() {
 
   }
-  renderPane(tabList) {
-    return tabList.map((item, index) => <AtTabsPane key={item.key} tabDirection='vertical' current={this.state.current} index={index}>
-      <View >
-        {this.renderItem()}
-      </View>
-    </AtTabsPane>)
-  }
   renderItem() {
-    const { dataSource } = this.PageStore.Pagination;
+    const { dataSource } = this.Pagination;
     return <View>
       <View className='at-row at-row--wrap'>
         {dataSource.map((item: any) => <View key={item.commodityId} className='at-col at-col-6'>
@@ -59,7 +76,7 @@ class Index extends Component<any> {
     </View>
   }
   render() {
-    const tabList = map(this.PageStore.typelist, item => {
+    const tabList = this.PageStore.typelist.map(item => {
       return { title: item.typeName, key: item.typeId }
     })
     return (
@@ -69,21 +86,13 @@ class Index extends Component<any> {
           value={this.state.value}
           onChange={this.onChange.bind(this)}
         />
-        <AtTabs
-          className='xt-stationery-tabs'
-          current={this.state.current}
-          scroll
-          animated={false}
-          height='100vh'
-          tabDirection='vertical'
+        <Tabs
+          surplusHeight={45}
           tabList={tabList}
-          onClick={this.onTabsChange.bind(this)}>
-          {/* {this.renderPane(tabList)} */}
-          <AtTabsPane current={this.state.current} index={this.state.current}>
-            {this.renderItem()}
-          </AtTabsPane>
-        </AtTabs>
-
+          onTabsChange={this.onTabsChange.bind(this)}
+          onScrollToLower={this.onScrollToLower.bind(this)}>
+          {this.renderItem()}
+        </Tabs>
       </View>
     )
   }

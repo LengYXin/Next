@@ -52,7 +52,7 @@ function onResetAjaxBasics() {
         throw res
     }
     // 微信 Observable 替换
-    if (process.env.TARO_ENV === "weapp") {
+    if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
         AjaxBasics.onRequest = function (request: Taro.request.Option & AjaxRequest, options: IAjaxBasicsOptions) {
             // 先转换 为 body 解析
             request.body = lodash.merge({}, request.body, request.data);

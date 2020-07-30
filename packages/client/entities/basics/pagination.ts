@@ -1,11 +1,9 @@
-import { observable, computed, action } from 'mobx';
-import { create } from 'mobx-persist';
-import { Subject, Subscription } from 'rxjs';
-import { AjaxRequest } from 'rxjs/ajax';
 import lodash from 'lodash';
-import { BindAll, Debounce } from 'lodash-decorators';
-import { AjaxBasics } from '../../helpers/ajaxBasics';
+import { BindAll } from 'lodash-decorators';
+import { action, observable } from 'mobx';
+import { AjaxRequest } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
+import { AjaxBasics } from '../../helpers/ajaxBasics';
 export interface PaginationResponse<T> {
     /** 数据集 */
     dataSource: Array<T>,
@@ -63,6 +61,12 @@ export class Pagination<T> {
      */
     options: PaginationOptions;
     /**
+     * 唯一标识 解决 重置 后 的请求重叠问题
+     * @private
+     * @memberof Pagination
+     */
+    private onlyKey = lodash.uniqueId('Pagination')
+    /**
      * 数据key
      * @readonly
      * @memberof Pagination
@@ -111,7 +115,6 @@ export class Pagination<T> {
      * @memberof Pagination
      */
     oldBody = {};
-
     /**
      * 分页加载
      *
@@ -146,10 +149,12 @@ export class Pagination<T> {
                 body
             }, AjaxRequest);
             const res = await this.$ajax.request<PaginationResponse<T>>(AjaxRequest)
-                .pipe(map(this.onMapValues))
+                .pipe(
+                    // filter(() => lodash.eq(onlyKey, this.onlyKey)), 
+                    map(this.onMapValues)
+                )
                 .toPromise();
-            this.onToggleLoading(false);
-            const dataSource = this.onSetDataSource(res);
+            const dataSource = this.onSetDataSource(res, this.onlyKey);
             // 滚动 结束
             if (infiniteEvent) {
                 if (this.isUndefined) {
@@ -158,6 +163,7 @@ export class Pagination<T> {
                     infiniteEvent.loaded()
                 }
             }
+            this.onToggleLoading(false);
             return dataSource
         } catch (error) {
             this.onToggleLoading(false);
@@ -194,7 +200,11 @@ export class Pagination<T> {
      * @memberof Pagination
      */
     @action.bound
-    protected onSetDataSource(res: PaginationResponse<T>) {
+    protected onSetDataSource(res: PaginationResponse<T>, onlyKey) {
+        if (!lodash.eq(this.onlyKey, onlyKey)) {
+            console.warn(`onlyKey: ${onlyKey}  失效 当前：${this.onlyKey}`,)
+            return []
+        }
         if (!lodash.isArray(res.dataSource)) {
             throw new Error('分页 数据 返回值 dataSource 不是数组')
         }
@@ -265,6 +275,7 @@ export class Pagination<T> {
         this.total = 0;
         this.dataSource = [];
         this.loading = false;
+        this.onlyKey = lodash.uniqueId('Pagination')
         return this;
     }
 }

@@ -1,3 +1,4 @@
+import { Config } from '@tarojs/taro';
 export default {
   pages: [
     'pages/index/index',
@@ -41,6 +42,7 @@ export default {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black'
+    navigationBarTextStyle: 'black',
+    // enablePullDownRefresh: true
   }
-}
+} as Config
