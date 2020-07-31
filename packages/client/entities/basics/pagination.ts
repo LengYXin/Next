@@ -126,7 +126,7 @@ export class Pagination<T> {
      */
     async onLoading(body?, AjaxRequest?: AjaxRequest, infiniteEvent?: PaginationInfiniteEvent) {
         try {
-            if (this.isUndefined) {
+            if (this.options.infinite && this.isUndefined) {
                 console.warn('分页 数据 没有更多数据')
                 return []
             }
@@ -134,10 +134,8 @@ export class Pagination<T> {
                 return console.warn('分页 数据 加载中')
             }
             this.onToggleLoading(true);
+            // 保存请求的参数
             this.oldBody = lodash.cloneDeep(body);
-            // if (this.current === 3) {
-            //     throw new Error('错误测试')
-            // }
             body = lodash.merge({
                 // 转换 current pageSize 对应 的字段名
                 [this.options.currentKey]: this.current,
@@ -176,14 +174,15 @@ export class Pagination<T> {
             throw error
         }
     }
-    @action.bound
-    onCurrentChange(current?: number, body = this.oldBody) {
-        if (lodash.isNumber(current)) {
+    @action
+    onCurrentChange(current?: number, body?) {
+        if (lodash.isNumber(current) || lodash.isString(current)) {
             this.current = current;
         } else {
             this.current += 1;
         }
-        return this.onLoading(body)
+        // console.log("LENG: Pagination<T> -> onCurrentChange -> current", this.current)
+        return this.onLoading(body || this.oldBody)
     }
     /**
      * 处理 过滤 res
@@ -206,14 +205,16 @@ export class Pagination<T> {
      */
     @action.bound
     protected onSetDataSource(res: PaginationResponse<T>, onlyKey) {
-
         if (!lodash.isArray(res.dataSource)) {
             throw new Error('分页 数据 返回值 dataSource 不是数组')
         }
-        if (lodash.isArray(res.dataSource) && res.dataSource.length <= 0) {
+        // 检查 是否是完全的一页数据 完全 可以继续加载
+        if (res.dataSource.length < this.options.defaultPageSize) {
             this.isUndefined = true;
             console.warn('分页 数据 没有更多数据')
-            return res.dataSource
+            if (res.dataSource.length <= 0) {
+                return []
+            }
         }
         // 第一页
         if (lodash.eq(this.current, this.options.defaultCurrent) || this.options.infinite === false) {
@@ -270,12 +271,13 @@ export class Pagination<T> {
      */
     @action.bound
     onReset(options: PaginationOptions = this.options) {
-        this.options = lodash.merge(this.options, options);
+        this.options = lodash.merge({}, this.options, options);
         this.current = this.options.defaultCurrent;
         this.pageSize = this.options.defaultPageSize;
         this.isUndefined = false;
         this.total = 0;
         this.dataSource = [];
+        this.oldBody = null;
         this.loading = false;
         this.onlyKey = lodash.uniqueId('key_')
         return this;

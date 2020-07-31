@@ -18,7 +18,13 @@
         </a-col>
       </a-row>
     </a-spin>
-    <xt-pagination :Pagination="Pagination" :toQuery="true" @change="onCurrentChange" />
+    <!-- 存在 更改地址栏 页签的时候 设置 key 用于触发初始化 change   -->
+    <xt-pagination
+      :key="activeKey"
+      :Pagination="Pagination"
+      :toQuery="true"
+      @change="onCurrentChange"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -53,7 +59,8 @@ export default class PageView extends Vue {
   /**
    *  初始化 和 页码 更改调用
    */
-  onCurrentChange(current) {
+  onCurrentChange(current, reset = false) {
+    // reset && this.Pagination.onReset();
     this.Pagination.onCurrentChange(current, {
       typeId: this.activeKey,
       commodityName: "",
@@ -65,7 +72,7 @@ export default class PageView extends Vue {
     const { active, current } = this.$route.query;
     if (active && !lodash.eq(active, this.activeKey)) {
       this.activeKey = active as any;
-      this.onCurrentChange(1);
+      // this.onCurrentChange(1);
     }
     // next();
   }

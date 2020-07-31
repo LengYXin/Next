@@ -60,6 +60,9 @@ export default class extends Vue {
    * 页码更新
    */
   onCurrentChange(current) {
+    if (this.Pagination.loading) {
+      return;
+    }
     // 需要更改地址栏
     if (this.toQuery) {
       this.$router.push({
