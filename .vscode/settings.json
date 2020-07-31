@@ -1,3 +1,5 @@
 {
-    "npm-scripts.showStartNotification": false
+    "npm-scripts.showStartNotification": false,
+    "liveServer.settings.root": "/packages/weapp/dist_h5",
+    "liveServer.settings.file": "/packages/weapp/dist_h5/inde.html",
 }
