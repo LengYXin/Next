@@ -10,17 +10,21 @@
 import InfiniteLoading from "vue-infinite-loading";
 import { Component, Prop, Vue, Provide } from "vue-property-decorator";
 import { Debounce, BindAll } from "lodash-decorators";
+import lodash from "lodash";
 @Component({
   components: {
     InfiniteLoading,
   },
 })
-// @BindAll()
 export default class infinite extends Vue {
-//   @Debounce(50)
-  onLoading(event) {
+  // @Debounce(50)
+  // onLoading(event) {
+  //   console.log("LENG: infinite -> onLoading -> this", this);
+  //   this.$emit("loading", event);
+  // }
+  onLoading = lodash.debounce((event) => {
     this.$emit("loading", event);
-  }
+  }, 100);
   created() {}
   mounted() {}
 }

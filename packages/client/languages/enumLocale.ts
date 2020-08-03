@@ -25,6 +25,10 @@ export enum EnumLocaleLinks {
     links_sunDrying = "links_sunDrying",
     /** 感想 */
     links_thoughts = "links_thoughts",
+    /** 作业 */
+    links_homework = "links_homework",
+    /** 订单 */
+    links_order = "links_order",
 };
 
 export enum EnumLocaleDescriptions {

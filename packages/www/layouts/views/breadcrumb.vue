@@ -20,12 +20,16 @@ import lodash from "lodash";
   components: {},
 })
 export default class extends Vue {
+  exclude = ["index", "my"];
+  get name() {
+    return lodash.head(lodash.split(this.$route.name, "-"));
+  }
   get show() {
-    return !lodash.includes(["index"], this.$route.name);
+    return !lodash.includes(this.exclude, this.name);
   }
   get pageName() {
     try {
-      return lodash.find(menus, ["key", this.$route.name]).name;
+      return lodash.find(menus, ["key", this.name]).name;
     } catch (error) {
       return undefined;
     }
@@ -37,8 +41,8 @@ export default class extends Vue {
 }
 </script>
 <style lang="less" scoped>
-.xt-breadcrumb{
-    padding-top: @padding-lg;
+.xt-breadcrumb {
+  padding-top: @padding-lg;
 }
 </style>
 
