@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:12:55
+ * @modify date 2020-08-05 14:12:55
+ * @desc [description]
+ */
 import * as EnumApi from '@xt/client/api';
 import '@xt/client/configure';
 import { AjaxBasics } from '@xt/client/helpers/ajaxBasics';

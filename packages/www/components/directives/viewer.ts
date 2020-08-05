@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:16:05
+ * @modify date 2020-08-05 14:16:05
+ * @desc [description]
+ */
 import Viewer from 'viewerjs'
 import 'viewerjs/dist/viewer.css'
 import { debounce } from 'lodash'

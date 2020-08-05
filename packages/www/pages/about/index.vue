@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:17:52
+ * @modify date 2020-08-05 14:17:52
+ * @desc [description]
+ */
 <template>
   <div class="xt-content xt-about">
     <a-affix :offset-top="72">

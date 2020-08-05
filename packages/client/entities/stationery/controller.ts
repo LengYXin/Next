@@ -19,15 +19,8 @@ export class ControllerStationery extends Entities {
         key: 'commodityId',
         currentKey: 'pageIndex',
         defaultPageSize: 12,
-        onMapValues: this.onMapSource
+        onMapValues: 'commodityResponseVos'
     })
-    /**
-     * 获取
-     * @memberof ControllerStationery
-     */
-    onMapSource(res) {
-        return { dataSource: res.commodityResponseVos, total: res.total }
-    }
     /*
     * 获取
     * @memberof ControllerCourse

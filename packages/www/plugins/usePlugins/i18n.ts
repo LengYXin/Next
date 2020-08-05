@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:12:31
+ * @modify date 2020-08-05 14:12:31
+ * @desc [description]
+ */
 import { Context } from '@nuxt/types';
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';

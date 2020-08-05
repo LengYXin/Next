@@ -1,4 +1,12 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:28:48
+ * @modify date 2020-08-05 14:28:48
+ * @desc 扩展 配置信息 请勿随便更改
+ */
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const webpack = require('webpack');
 const lodash = require('lodash');
 const path = require('path');
 const production = process.env.NODE_ENV === 'production';
@@ -30,7 +38,7 @@ module.exports = {
             })
             return rules
         })
-        // console.log("extend -> config", config.module.rules)
+        // console.log("extend -> config", config.plugins)
     },
     // 分离css
     extractCSS: production,
@@ -48,7 +56,9 @@ module.exports = {
         reportFilename: path.resolve(process.cwd(), 'report.html')
     },
     plugins: [
-        new MomentLocalesPlugin({ localesToKeep: ['es-us', 'zh-cn'] })
+        new MomentLocalesPlugin({ localesToKeep: ['es-us', 'zh-cn'] }),
+        new webpack.BannerPlugin({
+            banner: `@author 冷 (https://github.com/LengYXin)\n@email lengyingxin8966@gmail.com` })
     ],
     optimization: {
         // splitChunks: {

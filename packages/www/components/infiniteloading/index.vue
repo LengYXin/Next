@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:16:27
+ * @modify date 2020-08-05 14:16:27
+ * @desc [description]
+ */
 <template>
   <infinite-loading :distance="300" @infinite="onLoading">
     <div class="infinite-loading-text" slot="spinner">正在加载...</div>

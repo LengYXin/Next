@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:13:00
+ * @modify date 2020-08-05 14:13:00
+ * @desc [description]
+ */
 
 import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerVideo } from "@xt/client/entities";
 import { create, persist } from 'mobx-persist';

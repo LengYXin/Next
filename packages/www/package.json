@@ -3,9 +3,8 @@
   "version": "0.1.1-alpha.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt-ts",
+    "start": "nuxt-ts",
     "build": "nuxt-ts build",
-    "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
     "serve": "nuxt-ts serve",
     "test": "jest"

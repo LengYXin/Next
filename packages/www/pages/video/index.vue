@@ -2,17 +2,17 @@
   <div class="xt-content xt-video">
     <a-spin :spinning="Pagination.loading">
       <a-row :gutter="16">
-        <a-col v-for="item in Pagination.dataSource" :key="item.courseId" :span="8">
-          <nuxt-link :to="`/video/${item.courseId}`">
-            <a-card class="xt-video-card" :bordered="false">
-              <img class="xt-video-img" v-lazy="item.courseThumPictureUri" />
-              <div>
-                <span v-text="item.courseName"></span>
-                <span v-text="item.clickVolume"></span>
-                <span v-text="item.likeNum"></span>
-              </div>
-            </a-card>
-          </nuxt-link>
+        <a-col v-for="item in Pagination.dataSource" :key="item.id" :span="8">
+          <a-card class="xt-video-card" :bordered="false">
+            <nuxt-link :to="`/video/${item.id}`">
+              <img class="xt-video-img" v-lazy="item.videoCoverThumbUrl" />
+            </nuxt-link>
+            <div>
+              <span v-text="item.title"></span>
+              <span v-text="item.viewCount"></span>
+              <span @click.stop.prevent="PageStore.onLikes(item)" v-text="item.likeCount"></span>
+            </div>
+          </a-card>
         </a-col>
       </a-row>
     </a-spin>

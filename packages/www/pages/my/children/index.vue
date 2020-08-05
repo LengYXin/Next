@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:13:36
+ * @modify date 2020-08-05 14:13:36
+ * @desc 课程 去上课
+ */
 <template>
   <div class="xt-content">
     <a-affix :offset-top="72">

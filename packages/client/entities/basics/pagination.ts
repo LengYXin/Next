@@ -1,4 +1,11 @@
-import lodash from 'lodash';
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:16:43
+ * @modify date 2020-08-05 14:16:43
+ * @desc [description]
+ */
+import lodash, { ListIteratee } from 'lodash';
 import { BindAll } from 'lodash-decorators';
 import { action, observable } from 'mobx';
 import { AjaxRequest } from 'rxjs/ajax';
@@ -14,6 +21,7 @@ export interface PaginationResponse<T> {
     /** 总数 */
     total?: number
 }
+export type PaginationOnMapValues = (<T>(res: any) => PaginationResponse<T>) | String;
 export interface PaginationOptions {
     /** url */
     url?: string;
@@ -32,7 +40,7 @@ export interface PaginationOptions {
     /** 每页条数 接口使用key */
     pageSizeKey?: string;
     /** 请求结果过滤 */
-    onMapValues?: <T>(res: any) => PaginationResponse<T>;
+    onMapValues?: PaginationOnMapValues;
 }
 export interface PaginationInfiniteEvent {
     complete: Function;
@@ -191,8 +199,14 @@ export class Pagination<T> {
      * @memberof Pagination
      */
     protected onMapValues(res): PaginationResponse<T> {
-        if (lodash.isFunction(this.options.onMapValues)) {
-            return this.options.onMapValues(res)
+        const { onMapValues } = this.options;
+        if (lodash.isFunction(onMapValues)) {
+            return onMapValues(res);
+        }
+        if (lodash.isString(onMapValues)) {
+            const dataSource = lodash.get(res, onMapValues);
+            lodash.unset(res, onMapValues)
+            return { dataSource, ...res };
         }
         return res
     }
@@ -203,7 +217,7 @@ export class Pagination<T> {
      * @returns
      * @memberof Pagination
      */
-    @action.bound
+    @action
     protected onSetDataSource(res: PaginationResponse<T>, onlyKey) {
         if (!lodash.isArray(res.dataSource)) {
             throw new Error('分页 数据 返回值 dataSource 不是数组')
@@ -235,7 +249,7 @@ export class Pagination<T> {
      * @param {boolean} [loading=!this.loading]
      * @memberof Pagination
      */
-    @action.bound
+    @action
     protected onToggleLoading(loading: boolean = !this.loading) {
         this.loading = loading;
     }
@@ -245,12 +259,22 @@ export class Pagination<T> {
      * @returns {T}
      * @memberof Pagination
      */
-    onFind(key: string): T {
-        const data = lodash.find(this.dataSource, [this.key, key]);
+    onFind(key: string | T): T {
+        const data = lodash.find(this.dataSource, this.getPredicate(key));
         if (!lodash.hasIn(data, this.options.key)) {
             throw new Error(`没有找到 Key:${key} 数据`)
         }
         return data;
+    }
+    /**
+     * 修改更新
+     * @param key 
+     * @param value 
+     */
+    @action
+    onUpdate(key: string | T, value: T) {
+        const index = lodash.findIndex(this.dataSource, this.getPredicate(key));
+        return lodash.updateWith(this.dataSource, `[${index}]`, lodash.constant(value))
     }
     /**
      * 根据 key 删除数据
@@ -258,18 +282,29 @@ export class Pagination<T> {
      * @returns {T[]}
      * @memberof Pagination
      */
-    onRemove(key: string): T[] {
+    @action
+    onRemove(key: string | T): T[] {
         const dataSource = lodash.clone(this.dataSource);
-        const result = lodash.remove(dataSource, [this.key, key]);
+        const result = lodash.remove(dataSource, this.getPredicate(key));
         this.dataSource = dataSource;
         return result
+    }
+    /**
+     * 获取 lodash Predicate 参数
+     * @param key 
+     */
+    getPredicate(key: string | T): ListIteratee<any> {
+        if (lodash.isObject(key)) {
+            return [this.key, lodash.get(key, this.key)]
+        }
+        return [this.key, key]
     }
     /**
      * 重置
      * @returns
      * @memberof Pagination
      */
-    @action.bound
+    @action
     onReset(options: PaginationOptions = this.options) {
         this.options = lodash.merge({}, this.options, options);
         this.current = this.options.defaultCurrent;

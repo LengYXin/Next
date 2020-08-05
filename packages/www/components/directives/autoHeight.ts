@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:16:00
+ * @modify date 2020-08-05 14:16:00
+ * @desc [description]
+ */
 
 import lodash from "lodash";
 import { fromEvent } from "rxjs";

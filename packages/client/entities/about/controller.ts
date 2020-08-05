@@ -21,15 +21,8 @@ export class ControllerAbout extends Entities {
         // 无线滚动
         infinite: true,
         defaultPageSize: 10,
-        onMapValues: this.onMapSource
+        onMapValues: 'artivityResponseVos'
     })
-    /**
-     * 获取
-     * @memberof ControllerAbout
-     */
-    onMapSource(res) {
-        return { dataSource: res.artivityResponseVos, total: res.total }
-    }
     /*
     * 获取
     * @memberof ControllerCourse
