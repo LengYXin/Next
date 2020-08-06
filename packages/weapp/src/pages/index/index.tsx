@@ -54,6 +54,10 @@ class Index extends Component<any> {
       <View className='index'>
         <AtMessage />
         {this.renderSwiper()}
+        <Image
+          style='width:100%'
+          src={this.$imgs.test}
+        />
       </View>
     )
   }
