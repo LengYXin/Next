@@ -1,6 +1,13 @@
 
 <template>
   <div class="xt-content">
+    <xt-tabs
+      :affix="true"
+      align="right"
+      :tabPane="tabPane"
+      :defaultActiveKey="defaultActiveKey"
+      @tabsChange="tabsChange"
+    />
     <a-list
       :loading="Pagination.loading"
       item-layout="horizontal"
@@ -23,18 +30,20 @@
               <img width="480" height="270" alt="logo" v-lazy="item.coursePictureUri" />
             </a-badge>
           </a-list-item-meta>
-          <a-button slot="actions" type="primary" v-t="'give'">Primary</a-button>
-          <a-button slot="actions" type="primary" v-t="'signup'">Primary</a-button>
+          <Signup slot="actions" :give="true" :id="item.courseId" />
+          <Signup slot="actions" :id="item.courseId" />
         </a-list-item>
       </nuxt-link>
     </a-list>
-    <xt-infinite-loading @loading="onLoading" />
+    <!-- <xt-infinite-loading :key="activeKey" @loading="onLoading" /> -->
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import lodash from "lodash";
 import { Observer } from "mobx-vue";
 import { Context } from "@nuxt/types";
+import Signup from "./views/signup.vue";
 @Observer
 @Component({
   // 每次进入页面都会调用
@@ -47,7 +56,7 @@ import { Context } from "@nuxt/types";
   //     courseStyle: "1",
   //   });
   // },
-  components: {},
+  components: { Signup },
 })
 export default class PageView extends Vue {
   get Pagination() {
@@ -56,10 +65,23 @@ export default class PageView extends Vue {
   get PageStore() {
     return this.$store.$storeCourse;
   }
-  async onLoading(event) {
+  tabPane = [
+    { key: 1, name: "按时间排序" },
+    { key: 2, name: "按学费排序" },
+  ];
+  defaultActiveKey = "1";
+  activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
+  tabsChange(activeKey) {
+    this.Pagination.onReset();
+    this.activeKey = activeKey;
+    this.onLoading();
+  }
+  async onLoading(event?) {
     this.Pagination.onLoading({}, null, event);
   }
-  created() {}
+  created() {
+    this.onLoading();
+  }
   mounted() {
     // console.log(this);
   }

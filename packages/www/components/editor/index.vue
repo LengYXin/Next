@@ -220,7 +220,6 @@ export default {
 };
 </script>
 
-<style src="quill/dist/quill.snow.css"></style>
 <style lang="less">
 .ql-editor {
   min-height: 200px;
@@ -302,11 +301,11 @@ export default {
       cursor: pointer;
     }
   }
-}
-svg {
-  width: 24px !important;
-  height: 24px !important;
-  fill: rgba(65, 65, 65, 0.9);
+  svg {
+    width: 24px !important;
+    height: 24px !important;
+    fill: rgba(65, 65, 65, 0.9);
+  }
 }
 
 button.ql-active svg {

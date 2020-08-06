@@ -15,11 +15,16 @@ class Menu {
     constructor() {
 
     }
-    Menus = onCreate()
+    /** 头部菜单合集 */
+    Menus = onCreate();
+    /** 当前路由 */
+    route: Route;
+    /** 选择的菜单 */
     getSelectedkeys(route: Route) {
         const name = this.getRouteName(route);
         return [name]
     }
+    /** 路由名称 */
     getRouteName(route: Route) {
         return lodash.head(lodash.split(route.name, "-"));
     }
@@ -41,6 +46,10 @@ class Menu {
      */
     @action
     initBreadcrumb(route: Route) {
+        if (this.route?.name === route.name) {
+            return
+        }
+        this.route = route
         const exclude = ["index", "my"];
         const name = this.getRouteName(route);
         const menu = lodash.find(this.Menus, ["key", name]);
@@ -56,9 +65,7 @@ class Menu {
     }
     @action
     setBreadcrumb(breadcrumb) {
-
         this.breadcrumb.push(breadcrumb);
-        console.log("LENG: Menu -> setBreadcrumb -> this.breadcrumb", toJS(this.breadcrumb))
     }
 }
 function onCreate(development = process.env.NODE_ENV === 'development') {

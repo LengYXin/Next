@@ -63,3 +63,20 @@ export {
 export {
     default as RightOutline
 } from '@ant-design/icons/lib/outline/RightOutline';
+// 搜索
+export {
+    default as SearchOutline
+} from '@ant-design/icons/lib/outline/SearchOutline';
+// 通知
+export {
+    default as BellOutline
+} from '@ant-design/icons/lib/outline/BellOutline';
+export {
+    default as DashOutline
+} from '@ant-design/icons/lib/outline/DashOutline';
+// export {
+//     default as DashboardOutline
+// } from '@ant-design/icons/lib/outline/DashboardOutline';
+// export {
+//     default as SmallDashOutline
+// } from '@ant-design/icons/lib/outline/SmallDashOutline';

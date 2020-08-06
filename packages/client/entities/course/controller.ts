@@ -18,7 +18,7 @@ export class ControllerCourse extends Entities {
         url: EnumApiCourse.CourseList,
         key: 'courseFullId',
         currentKey: 'pageIndex',
-        infinite: true,
+        // infinite: true,
         onMapValues: this.onMapSource
     })
     /**

@@ -12,6 +12,7 @@ class XTGlobal {
     constructor() {
 
     }
+    version = process.env.version;
     /**
      *生产环境
      * @memberof XTGlobal

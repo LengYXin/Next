@@ -10,7 +10,7 @@
     <xt-tabs
       :affix="true"
       :tabPane="PageStore.typelist"
-      defaultActiveKey="1"
+      :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
     />
     <a-list

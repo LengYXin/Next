@@ -65,7 +65,7 @@ module.exports = {
   */
   css: [
     'ant-design-vue/dist/antd.less',
-    // 'nprogress/nprogress.css',
+    'quill/dist/quill.snow.css',
     '@/assets/style/index.less'
   ],
   styleResources: {
