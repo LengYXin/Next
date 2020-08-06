@@ -19,22 +19,48 @@ export class ControllerCourse extends Entities {
         key: 'courseFullId',
         currentKey: 'pageIndex',
         // infinite: true,
-        onMapValues: this.onMapSource
-    })
+        onMapValues: this.onFactory('courseFullResponseVos', 'courseSingleResponseVos')
+    });
+    /**
+     * 分页列表数据 H5
+     * @memberof ControllerCourse
+     */
+    PaginationWeApp = new Pagination(this.$ajax, {
+        url: EnumApiCourse.UsercourseList,
+        key: 'courseFullId',
+        currentKey: 'pageIndex',
+        infinite: true,
+        onMapValues: this.onFactory('userCourseFullResponseVos', 'userCourseSingleResponseVos')
+    });
+    /**
+     * onMapSource 工厂
+     */
+    onFactory(dataSourceKey, childrenKey) {
+        return (res) => {
+            let dataSource = [];
+            lodash.map(lodash.get(res, dataSourceKey), item => {
+                if (!lodash.isNil(item.courseFullId)) {
+                    dataSource = lodash.concat(dataSource, [item])
+                }
+                dataSource = lodash.concat(dataSource, lodash.get(item, childrenKey))
+            })
+            return { dataSource, total: res.total }
+        }
+    }
     /**
      * 获取
      * @memberof ControllerCourse
      */
-    onMapSource(res) {
-        let dataSource = [];
-        lodash.map(res.courseFullResponseVos, item => {
-            if (!lodash.isNil(item.courseFullId)) {
-                dataSource = lodash.concat(dataSource, [item])
-            }
-            dataSource = lodash.concat(dataSource, item.courseSingleResponseVos)
-        })
-        return { dataSource, total: res.total }
-    }
+    // onMapSource(res) {
+    //     let dataSource = [];
+    //     lodash.map(res.courseFullResponseVos, item => {
+    //         if (!lodash.isNil(item.courseFullId)) {
+    //             dataSource = lodash.concat(dataSource, [item])
+    //         }
+    //         dataSource = lodash.concat(dataSource, item.courseSingleResponseVos)
+    //     })
+    //     return { dataSource, total: res.total }
+    // }
     /**
      * 获取课程详情
      * @param {*} [body]

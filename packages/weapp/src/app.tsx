@@ -5,7 +5,9 @@ import './img.config';
 import store from './store';
 
 class App extends Component {
-  componentDidMount() { }
+  componentDidMount() { 
+    
+  }
 
   componentDidShow() { }
 

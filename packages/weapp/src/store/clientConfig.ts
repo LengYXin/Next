@@ -85,3 +85,12 @@ function onResetAjaxBasics() {
         }
     }
 }
+/**
+ * 合并 补充 body 信息 用于登录 token
+ * @param body 
+ */
+export function onMergeBody(body) {
+    AjaxBasics.onMergeBody = function () {
+        return body
+    }
+}
