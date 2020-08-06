@@ -57,8 +57,7 @@ module.exports = {
     },
     plugins: [
         new MomentLocalesPlugin({ localesToKeep: ['es-us', 'zh-cn'] }),
-        new webpack.BannerPlugin({
-            banner: `@author 冷 (https://github.com/LengYXin)\n@email lengyingxin8966@gmail.com` })
+        new webpack.BannerPlugin({ banner: `@author 冷 (https://github.com/LengYXin)\n@email lengyingxin8966@gmail.com` })
     ],
     optimization: {
         // splitChunks: {

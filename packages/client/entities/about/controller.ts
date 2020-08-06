@@ -32,7 +32,7 @@ export class ControllerAbout extends Entities {
             return this.typelist;
         }
         const res = await this.$ajax.post<Array<{ typeId: number, typeName: string }>>(EnumApiAbout.AboutTypelist);
-        return this.setTypelist(res);
+        return this.setTypelist(lodash.map(res, item => ({ key: item.typeId, name: item.typeName })));
     }
 }
 export default ControllerAbout

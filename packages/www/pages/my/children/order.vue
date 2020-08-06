@@ -1,21 +1,18 @@
 /**
  * @author 冷 (https://github.com/LengYXin)
  * @email lengyingxin8966@gmail.com
- * @create date 2020-08-05 14:14:13
- * @modify date 2020-08-05 14:14:13
+ * @create date 2020-08-05 14:17:52
+ * @modify date 2020-08-05 14:17:52
  * @desc 订单
  */
 <template>
-  <div class="xt-content xt-my-order">
-    <a-affix :offset-top="72">
-      <a-tabs :activeKey="activeKey" @change="tabsChange" class="xt-tabs-center">
-        <a-tab-pane v-for="tab in PageStore.typelist" :key="String(tab.typeId)">
-          <span slot="tab">
-            <span v-text="tab.typeName"></span>
-          </span>
-        </a-tab-pane>
-      </a-tabs>
-    </a-affix>
+  <div class="xt-content xt-about">
+    <xt-tabs
+      :affix="true"
+      :tabPane="PageStore.typelist"
+      defaultActiveKey="1"
+      @tabsChange="tabsChange"
+    />
     <a-list
       :loading="Pagination.loading"
       class="xt-content"
@@ -48,22 +45,9 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
 import lodash from "lodash";
-function getActive(query) {
-  return lodash.get(query, "active", "1");
-}
-function getTypeId(ctx: Context, types) {
-  const activeKey = getActive(ctx.query);
-  if (
-    activeKey &&
-    lodash.some(types, ["typeId", lodash.toInteger(activeKey)])
-  ) {
-    return activeKey;
-  }
-  return 1;
-}
 @Observer
 @Component({
-  scrollToTop:true,
+  scrollToTop: true,
   // 每次进入页面都会调用
   async fetch(ctx: Context) {
     const types = await ctx.store.$storeAbout.onGetTypelist();
@@ -77,27 +61,14 @@ export default class PageView extends Vue {
   get Pagination() {
     return this.$store.$storeAbout.Pagination;
   }
-  activeKey = getActive(this.$route.query);
+  defaultActiveKey = "1";
+  activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   tabsChange(activeKey) {
-    this.$router.push({
-      query: lodash.merge({}, this.$route.query, {
-        active: activeKey,
-      }),
-    });
+    this.Pagination.onReset();
+    this.activeKey = activeKey;
   }
   async onLoading(event) {
     this.Pagination.onLoading({ columnId: this.activeKey }, null, event);
-  }
-  // 组件中 使用不了 生命周期 beforeRouteUpdate
-  @Watch("$route.query.active")
-  queryUpdate(to, from, next) {
-    const { active } = this.$route.query;
-    if (active && !lodash.eq(active, this.activeKey)) {
-      this.activeKey = active as any;
-      // this.onLoading(1);
-      this.Pagination.onReset();
-    }
-    // next();
   }
   mounted() {}
   updated() {}
@@ -105,7 +76,7 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" >
-.xt-my-order {
+.xt-about {
   &-card {
     .ant-card-body {
       padding: 20px 0;

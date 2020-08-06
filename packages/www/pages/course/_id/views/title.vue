@@ -3,6 +3,9 @@
     <h1 v-text="PageStore.details.courseName"></h1>
     <a-button slot="actions" type="primary" v-t="'give'">Primary</a-button>
     <a-button slot="actions" type="primary" v-t="'signup'">Primary</a-button>
+    <nuxt-link to="/homework">
+      <span>交作业</span>
+    </nuxt-link>
   </div>
 </template>
 <script lang="ts">

@@ -9,9 +9,14 @@
 import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerVideo } from "@xt/client/entities";
 import { create, persist } from 'mobx-persist';
 import { ajax } from "./clientConfig";
+
 import $locale from './locale';
+import $global from './global';
+import $menu from './menu';
 const store = {
     $locale,
+    $menu,
+    $global,
     $storeHome: new ControllerHome(ajax),
     $storeCourse: new ControllerCourse(ajax),
     $storeStationery: new ControllerStationery(ajax),
@@ -39,8 +44,16 @@ function onCreatePersist() {
 declare module 'vuex/types/index' {
     interface Store<S> {
         /**
-         * 本地语音全局状态
+         * 全局公用
          */
+        readonly $global: typeof $global
+        /**
+         * 菜单
+         */
+        readonly $menu: typeof $menu
+        /**
+        * 本地语音全局状态
+        */
         readonly $locale: typeof $locale
         /**
          * 首页状态控制器

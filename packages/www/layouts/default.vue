@@ -11,13 +11,14 @@
       <a-layout-header></a-layout-header>
       <a-layout-content
         class="xt-layout-content"
+        :class="pageClass"
         v-auto-height="{ styleKey: 'minHeight', subtract: 400 }"
       >
         <!-- 面包屑 -->
         <breadcrumb />
         <!-- 页面 -->
         <!-- <Nuxt keep-alive /> -->
-        <Nuxt :class="pageClass" :keep-alive="production" />
+        <Nuxt :keep-alive="production" />
         <!-- 滚动 -->
         <a-back-top />
       </a-layout-content>
@@ -49,7 +50,7 @@ export default class extends Vue {
     return "xt-page-" + this.$route.name;
   }
   get production() {
-    return process.env.NODE_ENV === "production";
+    return this.$store.$global.production;
   }
   mounted() {
     // console.log(this);
