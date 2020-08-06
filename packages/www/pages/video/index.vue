@@ -1,26 +1,6 @@
 <template>
   <div class="xt-content xt-video">
-    <a-spin :spinning="Pagination.loading">
-      <a-row :gutter="16">
-        <a-col v-for="item in Pagination.dataSource" :key="item.id" :span="8">
-          <a-card class="xt-video-card" :bordered="false">
-            <xt-hover>
-              <img class="xt-video-img" v-lazy="item.videoCoverThumbUrl" />
-              <div>
-                <span v-text="item.title"></span>
-                <span v-text="item.viewCount"></span>
-                <span @click.stop.prevent="PageStore.onLikes(item)" v-text="item.likeCount"></span>
-              </div>
-              <template #hover>
-                <nuxt-link :to="`/video/${item.id}`">
-                  <div>GO</div>
-                </nuxt-link>
-              </template>
-            </xt-hover>
-          </a-card>
-        </a-col>
-      </a-row>
-    </a-spin>
+    <List :loading="Pagination.loading" :dataSource="Pagination.dataSource" />
     <xt-pagination :Pagination="Pagination" :toQuery="true" @change="onCurrentChange" />
   </div>
 </template>
@@ -28,6 +8,7 @@
 import { Component, Prop, Vue, Watch, Provide } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
+import List from "./views/list.vue";
 import lodash from "lodash";
 @Observer
 @Component({
@@ -35,7 +16,7 @@ import lodash from "lodash";
   fetch(ctx: Context) {
     // ctx.store.$storeVideo.Pagination.onReset().onLoading();
   },
-  components: {},
+  components: { List },
 })
 export default class PageView extends Vue {
   get PageStore() {

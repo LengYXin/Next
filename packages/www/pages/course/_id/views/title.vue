@@ -6,6 +6,9 @@
     <nuxt-link to="/homework">
       <span>交作业</span>
     </nuxt-link>
+    <nuxt-link to="/payment">
+      <span>支付</span>
+    </nuxt-link>
   </div>
 </template>
 <script lang="ts">

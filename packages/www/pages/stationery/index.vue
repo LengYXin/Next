@@ -14,24 +14,7 @@
         </span>
       </a-tab-pane>
     </a-tabs>
-    <a-spin :spinning="Pagination.loading">
-      <a-row :gutter="16" v-viewer>
-        <a-col v-for="item in Pagination.dataSource" :key="item.commodityId" :span="6">
-          <a-card class="xt-stationery-card" :bordered="false">
-            <xt-hover>
-              <img class="xt-stationery-img" v-lazy="item.commodityCoverUrl" />
-              <template #hover>
-                <span v-text="item.commodityName"></span>
-                <span v-money="item.commodityPrice"></span>
-                <a :href="item.commodityUrl" target="_blank">
-                  <a-button type="orange">购买</a-button>
-                </a>
-              </template>
-            </xt-hover>
-          </a-card>
-        </a-col>
-      </a-row>
-    </a-spin>
+    <List :loading="Pagination.loading" :dataSource="Pagination.dataSource" />
     <!-- 存在 更改地址栏 页签的时候 设置 key 用于触发初始化 change   -->
     <xt-pagination
       :key="activeKey"
@@ -45,6 +28,7 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
+import List from "./views/list.vue";
 import lodash from "lodash";
 @Observer
 @Component({
@@ -52,7 +36,7 @@ import lodash from "lodash";
   async fetch(ctx: Context) {
     await ctx.store.$storeStationery.onGetTypelist();
   },
-  components: {},
+  components: { List },
 })
 export default class PageView extends Vue {
   get PageStore() {
@@ -96,19 +80,6 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" >
-.xt-stationery {
-  &-card {
-    .ant-card-body {
-      padding: 20px 0;
-    }
-  }
-  &-img {
-    width: 230px;
-    height: 230px;
-    display: block;
-    margin: auto;
-  }
-}
 </style>
 <i18n>
 {

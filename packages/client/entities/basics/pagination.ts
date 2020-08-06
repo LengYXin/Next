@@ -305,8 +305,9 @@ export class Pagination<T> {
      * @memberof Pagination
      */
     @action
-    onReset(options: PaginationOptions = this.options) {
+    onReset(options?: PaginationOptions) {
         this.options = lodash.merge({}, this.options, options);
+        // console.log("LENG: Pagination<T> -> onReset -> this.options", this.options)
         this.current = this.options.defaultCurrent;
         this.pageSize = this.options.defaultPageSize;
         this.isUndefined = false;

@@ -14,68 +14,97 @@
         <xt-tabs :tabPane="tabPane" :defaultActiveKey="defaultActiveKey" @tabsChange="tabsChange" />
       </div>
     </a-affix>
-
-    <a-list
-      :loading="Pagination.loading"
-      item-layout="horizontal"
-      :data-source="Pagination.dataSource"
-      :rowKey="Pagination.key"
-    >
-      <nuxt-link slot="renderItem" slot-scope="item" :to="`/course/${item.courseId}`">
-        <a-list-item>
-          <a-list-item-meta>
-            <h1 slot="title" v-text="item.courseName">名称</h1>
-            <div slot="description">
-              <div v-text="item.statusName"></div>
-              <div>开课中</div>
-            </div>
-            <a-badge class="xt-badge-left" slot="avatar">
-              <div class="xt-badge-text" slot="count">
-                <div>直播</div>
-                <div>课程</div>
-              </div>
-              <img width="480" height="270" alt="logo" v-lazy="item.coursePictureUri" />
-            </a-badge>
-          </a-list-item-meta>
-        </a-list-item>
-      </nuxt-link>
-    </a-list>
-    <!-- <xt-infinite-loading :key="activeKey" @loading="onLoading" /> -->
+    <keep-alive>
+      <component
+        v-bind:is="activeKey"
+        :loading="false"
+        :dataSource="Pagination.dataSource"
+        :rowKey="Pagination.key"
+      ></component>
+    </keep-alive>
+    <xt-infinite-loading :key="activeKey" @loading="onLoading" />
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import {
+  ControllerAbout,
+  ControllerCourse,
+  ControllerHome,
+  ControllerStationery,
+  ControllerVideo,
+} from "@xt/client/entities";
 import lodash from "lodash";
 import { Observer } from "mobx-vue";
 import { Context } from "@nuxt/types";
+import about from "~/pages/about/views/list.vue";
+import course from "~/pages/course/views/list.vue";
+import stationery from "~/pages/stationery/views/list.vue";
+import videos from "~/pages/video/views/list.vue";
 @Observer
 @Component({
-  components: {},
+  components: { course, about, stationery, videos },
 })
 export default class PageView extends Vue {
+  storeCourse = new ControllerCourse(this.$ajax);
+  storeAbout = new ControllerAbout(this.$ajax);
+  storeStationery = new ControllerStationery(this.$ajax);
+  storeVideo = new ControllerVideo(this.$ajax);
   get Pagination() {
-    return this.$store.$storeCourse.Pagination;
+    switch (this.activeKey) {
+      case "course":
+        return this.storeCourse.Pagination;
+        break;
+      case "about":
+        return this.storeAbout.Pagination;
+        break;
+      case "stationery":
+        return this.storeStationery.Pagination;
+        break;
+      case "videos":
+        return this.storeVideo.Pagination;
+        break;
+    }
   }
-  get PageStore() {
-    return this.$store.$storeCourse;
-  }
+  // get PageStore() {
+  //   return this.$store.$storeCourse;
+  // }
   tabPane = [
-    { key: 1, name: "课程" },
-    { key: 2, name: "文章" },
-    { key: 3, name: "商品" },
-    { key: 4, name: "视频" },
+    { key: "course", name: "课程" },
+    { key: "about", name: "文章" },
+    { key: "stationery", name: "商品" },
+    { key: "videos", name: "视频" },
   ];
-  defaultActiveKey = "1";
+  defaultActiveKey = "course";
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   tabsChange(activeKey) {
-    this.Pagination.onReset();
     this.activeKey = activeKey;
-    this.onLoading();
+    this.Pagination.onReset({ infinite: true });
+    // this.onLoading();
   }
   async onLoading(event?) {
-    this.Pagination.onLoading({}, null, event);
+    let body = {};
+    switch (this.activeKey) {
+      case "course":
+        break;
+      case "about":
+        body = {
+          columnId: "1",
+        };
+        break;
+      case "stationery":
+        body = {
+          typeId: "-1",
+          commodityName: "",
+        };
+        break;
+      case "videos":
+        break;
+    }
+    this.Pagination.onLoading(body, null, event);
   }
   created() {
+    this.Pagination.onReset({ infinite: true });
     this.onLoading();
   }
   mounted() {
