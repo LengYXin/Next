@@ -74,7 +74,4 @@ export default class extends Vue {
   updated() {}
   destroyed() {}
 }
-function getActive(query) {
-  return lodash.get(query, "active", "1");
-}
 </script>

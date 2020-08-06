@@ -102,9 +102,11 @@ export default {
     },
     setModules() {
       let modules = {
-        toolbar: this.editorToolbar.length
-          ? this.editorToolbar
-          : defaultToolbar,
+        // LENG
+        // toolbar: this.editorToolbar.length
+        //   ? this.editorToolbar
+        //   : defaultToolbar,
+        toolbar: [],
         // 只能写文字
         clipboard: {
           matchers: [
@@ -232,8 +234,14 @@ export default {
 }
 
 .quillWrapper .ql-snow.ql-toolbar {
-  padding-top: 8px;
-  padding-bottom: 4px;
+  // padding-top: 8px;
+  // padding-bottom: 4px;
+  // LENG
+  // display: none;
+  padding: 0;
+  height: 1px;
+  overflow: hidden;
+  border-bottom: none;
 }
 /* .quillWrapper .ql-snow.ql-toolbar button {
   margin: 1px 4px;

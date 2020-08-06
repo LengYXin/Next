@@ -7,4 +7,6 @@ export enum EnumApiCourse {
     CourseList = '/course/list',
     /** 课程详情 */
     CourseDetails = '/course/singledetail',
+    /** 课程介绍 */ 
+    CourseIntroduce = '/usercourse/courseIntroduce',
 }

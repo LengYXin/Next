@@ -7,15 +7,12 @@
  */
 <template>
   <div class="xt-content">
-    <a-affix :offset-top="72">
-      <a-tabs class="xt-tabs-center">
-        <a-tab-pane v-for="tab in tabPane" :key="tab">
-          <span slot="tab">
-            <span v-text="tab"></span>
-          </span>
-        </a-tab-pane>
-      </a-tabs>
-    </a-affix>
+    <xt-tabs
+      :affix="true"
+      :tabPane="tabPane"
+      :defaultActiveKey="defaultActiveKey"
+      @tabsChange="tabsChange"
+    />
 
     <a-list class="xt-content" item-layout="horizontal" :data-source="[{},{},{},{},{},{},{},{}]">
       <!-- <nuxt-link slot="renderItem" slot-scope="item" :to="`/course/${item.courseId}`"> -->
@@ -32,13 +29,25 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import lodash from "lodash";
 import { Modal } from "ant-design-vue";
 @Component({
   scrollToTop: true,
   components: {},
 })
 export default class PageView extends Vue {
-  tabPane = ["全部", "开课中", "已结课"];
+  tabPane = [
+    { key: 1, name: "全部" },
+    { key: 2, name: "开课中" },
+    { key: 3, name: "已结课" },
+  ];
+  defaultActiveKey = "1";
+  activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
+  tabsChange(activeKey) {
+    // this.Pagination.onReset();
+    this.activeKey = activeKey;
+    // this.onLoading();
+  }
   mounted() {}
   updated() {}
   destroyed() {}

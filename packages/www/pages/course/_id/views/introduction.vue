@@ -6,19 +6,37 @@
  * @desc 介绍
  */
 <template>
-  <div>介绍</div>
+  <div>
+    <img v-for="img in imgs" :key="img" v-lazy="img" />
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Modal } from "ant-design-vue";
+import { Observer } from "mobx-vue";
+import lodash from "lodash";
 @Component({
   components: {},
 })
 export default class PageView extends Vue {
+  get PageStore() {
+    return this.$store.$storeCourse;
+  }
+  imgs = [];
+  async created() {
+    const res = await this.PageStore.onGetCourseIntroduce({
+      courseId: this.$route.params.id,
+      courseType: 1,
+    });
+    this.imgs = res;
+  }
   mounted() {}
   updated() {}
   destroyed() {}
 }
 </script>
-<style>
+<style lang="less" scoped>
+img {
+  width: 100%;
+}
 </style>

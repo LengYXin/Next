@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-06 17:14:10
+ * @modify date 2020-08-06 17:14:10
+ * @desc 课程
+ */
 
 <template>
   <div class="xt-content">
@@ -91,15 +98,3 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" scoped>
 </style>
-<i18n>
-{
-  "en": {
-    "give": "Give to others",
-    "signup": "Sign up now"
-  },
-  "zh": {
-    "give": "赠课给他人",
-    "signup": "立即报名"
-  }
-}
-</i18n>

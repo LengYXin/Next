@@ -17,11 +17,18 @@
     <a-spin :spinning="Pagination.loading">
       <a-row :gutter="16" v-viewer>
         <a-col v-for="item in Pagination.dataSource" :key="item.commodityId" :span="6">
-          <!-- <nuxt-link :to="`/stationery/${item.commodityId}`"> -->
           <a-card class="xt-stationery-card" :bordered="false">
-            <img class="xt-stationery-img" v-lazy="item.commodityCoverUrl" />
+            <xt-hover>
+              <img class="xt-stationery-img" v-lazy="item.commodityCoverUrl" />
+              <template #hover>
+                <span v-text="item.commodityName"></span>
+                <span v-money="item.commodityPrice"></span>
+                <a :href="item.commodityUrl" target="_blank">
+                  <a-button type="orange">购买</a-button>
+                </a>
+              </template>
+            </xt-hover>
           </a-card>
-          <!-- </nuxt-link> -->
         </a-col>
       </a-row>
     </a-spin>

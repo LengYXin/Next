@@ -45,5 +45,9 @@ export class ControllerCourse extends Entities {
         const res = await this.$ajax.post<any>(EnumApiCourse.CourseDetails, body, headers);
         this.setDetails(res);
     }
+    async onGetCourseIntroduce(body) {
+        const res = await this.$ajax.post<any>(EnumApiCourse.CourseIntroduce, body);
+        return res
+    }
 }
 export default ControllerCourse
