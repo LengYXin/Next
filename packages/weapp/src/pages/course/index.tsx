@@ -1,32 +1,35 @@
-import { Image, Swiper, SwiperItem, View } from '@tarojs/components'
-import { ControllerCourse } from "@xt/client/entities"
-import { inject, observer } from 'mobx-react'
-import React, { Component } from 'react'
-import { AtButton, AtMessage } from 'taro-ui'
-import './index.scss'
+import { Image, Swiper, SwiperItem, View } from "@tarojs/components";
+import { ControllerCourse } from "@xt/client/entities";
+import { inject, observer } from "mobx-react";
+import React, { Component } from "react";
+import { AtButton, AtMessage } from "taro-ui";
+import "./index.scss";
 
-@inject('$storeCourse')
+@inject("$storeCourse")
 @observer
 class Index extends Component<any> {
   get PageStore(): ControllerCourse {
-    return this.props.$storeCourse
+    return this.props.$storeCourse;
   }
   componentDidMount() {
+    console.log("Index -> componentDidMount -> this.PageStore", this.PageStore);
+
+    this.PageStore.onGetMyCourseList();
   }
 
-  componentWillUnmount() { }
+  componentWillUnmount() {}
 
-  componentDidShow() { }
+  componentDidShow() {}
 
-  componentDidHide() { }
+  componentDidHide() {}
   render() {
     return (
-      <View className='index'>
+      <View className="index">
         <AtMessage />
-       上课
+        上课
       </View>
-    )
+    );
   }
 }
 
-export default Index
+export default Index;

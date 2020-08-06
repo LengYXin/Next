@@ -1,0 +1,46 @@
+.index {
+  .index-header {
+    display: flex;
+    height: 112px;
+    line-height: 112px;
+    padding: 0 46px;
+    box-sizing: border-box;
+    font-size: 32px;
+    font-family: "FZLTHJ";
+    .left {
+      flex: 1;
+      color: #cccccc;
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+      padding-left: 30px;
+      background-color: #eeeeee;
+      border-radius: 36px;
+    }
+    .right {
+      color: #c4a57f;
+      padding-left: 32px;
+      white-space: nowrap;
+    }
+  }
+
+  .index-swiper {
+    height: 480px;
+    .hydrated {
+      height: 100%;
+    }
+    .swiper-pagination-bullet-active {
+      width: 50px;
+      border-radius: 10px;
+    }
+  }
+
+  .index-grid {
+    padding: 48px 40px 31px;
+    border: 1px solid red;
+    .content-inner__text {
+      font-size: 20px;
+      color: #c4a57f;
+    }
+  }
+}
