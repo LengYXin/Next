@@ -2,6 +2,7 @@
   <div class="xt-content">
     <titleView />
     <tabsView />
+   
   </div>
 </template>
 <script lang="ts">
@@ -11,15 +12,17 @@ import lodash from "lodash";
 import tabsView from "./views/tabs.vue";
 import titleView from "./views/title.vue";
 @Component({
-  fetch(ctx: Context) {
-    ctx.store.$storeCourse.onGetDetails({
+  async fetch(ctx: Context) {
+    const store = ctx.store.$storeCourse;
+    await store.onGetDetails({
       courseId: ctx.params.id,
+    });
+    ctx.store.$menu.setBreadcrumb({
+      linksName: store.details.courseName,
     });
   },
   validate({ params }) {
-    // 必须是number类型
     return /^\d+$/.test(params.id);
-    // return false;
   },
   components: {
     tabsView,
@@ -36,7 +39,4 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" scoped>
-.ant-tabs {
-  text-align: center;
-}
 </style>

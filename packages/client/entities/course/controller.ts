@@ -18,6 +18,7 @@ export class ControllerCourse extends Entities {
     url: EnumApiCourse.CourseList,
     key: "courseFullId",
     currentKey: "pageIndex",
+    // infinite: true,
     onMapValues: this.onMapSource,
   });
   /**
@@ -48,22 +49,9 @@ export class ControllerCourse extends Entities {
     );
     this.setDetails(res);
   }
-
-  /**
-   * 获取课程详情
-   * @param {*} [body]
-   * @param {Object} [headers]
-   * @memberof ControllerCourse
-   */
-  async onGetMyCourseList(body?: any, headers?: Object) {
-    const res = await this.$ajax.post<any>(
-      EnumApiCourse.MyCourseList,
-      body,
-      headers
-    );
-    console.log("ControllerCourse -> onGetMyCourseList -> res", res);
-    this.setMyCourseList(res);
-    // this.setDetails(res);
+  async onGetCourseIntroduce(body) {
+    const res = await this.$ajax.post<any>(EnumApiCourse.CourseIntroduce, body);
+    return res;
   }
 }
 export default ControllerCourse;

@@ -1,5 +1,5 @@
-import lodash from 'lodash';
 import { BindAll } from 'lodash-decorators';
+import { toJS } from 'mobx';
 import { EnumApiVideo } from '../../api';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
 import { Pagination } from '../basics/pagination';
@@ -16,18 +16,19 @@ export class ControllerVideo extends Entities {
      */
     Pagination = new Pagination(this.$ajax, {
         url: EnumApiVideo.VideoList,
-        key: 'courseId',
+        key: 'id',
         currentKey: 'pageIndex',
         defaultPageSize: 9,
-        onMapValues: this.onMapSource
-    })
+        onMapValues: 'courseFreeResponseVos'
+    });
     /**
-     * 获取
-     * @memberof ControllerVideo
+     * 点赞
+     * @param data 点赞的数据 
      */
-    onMapSource(res) {
-        return { dataSource: res.courseFreeResponseVos, total: res.total }
+    onLikes(data) {
+        data = toJS(data)
+        data.likeCount++;
+        this.Pagination.onUpdate(data, data)
     }
-
 }
 export default ControllerVideo

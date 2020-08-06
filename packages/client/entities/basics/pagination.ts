@@ -1,4 +1,11 @@
-import lodash from 'lodash';
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:16:43
+ * @modify date 2020-08-05 14:16:43
+ * @desc [description]
+ */
+import lodash, { ListIteratee } from 'lodash';
 import { BindAll } from 'lodash-decorators';
 import { action, observable } from 'mobx';
 import { AjaxRequest } from 'rxjs/ajax';
@@ -14,6 +21,7 @@ export interface PaginationResponse<T> {
     /** 总数 */
     total?: number
 }
+export type PaginationOnMapValues = (<T>(res: any) => PaginationResponse<T>) | String;
 export interface PaginationOptions {
     /** url */
     url?: string;
@@ -32,7 +40,7 @@ export interface PaginationOptions {
     /** 每页条数 接口使用key */
     pageSizeKey?: string;
     /** 请求结果过滤 */
-    onMapValues?: <T>(res: any) => PaginationResponse<T>;
+    onMapValues?: PaginationOnMapValues;
 }
 export interface PaginationInfiniteEvent {
     complete: Function;
@@ -126,7 +134,7 @@ export class Pagination<T> {
      */
     async onLoading(body?, AjaxRequest?: AjaxRequest, infiniteEvent?: PaginationInfiniteEvent) {
         try {
-            if (this.isUndefined) {
+            if (this.options.infinite && this.isUndefined) {
                 console.warn('分页 数据 没有更多数据')
                 return []
             }
@@ -134,10 +142,8 @@ export class Pagination<T> {
                 return console.warn('分页 数据 加载中')
             }
             this.onToggleLoading(true);
+            // 保存请求的参数
             this.oldBody = lodash.cloneDeep(body);
-            // if (this.current === 3) {
-            //     throw new Error('错误测试')
-            // }
             body = lodash.merge({
                 // 转换 current pageSize 对应 的字段名
                 [this.options.currentKey]: this.current,
@@ -176,14 +182,15 @@ export class Pagination<T> {
             throw error
         }
     }
-    @action.bound
-    onCurrentChange(current?: number, body = this.oldBody) {
-        if (lodash.isNumber(current)) {
+    @action
+    onCurrentChange(current?: number, body?) {
+        if (lodash.isNumber(current) || lodash.isString(current)) {
             this.current = current;
         } else {
             this.current += 1;
         }
-        return this.onLoading(body)
+        // console.log("LENG: Pagination<T> -> onCurrentChange -> current", this.current)
+        return this.onLoading(body || this.oldBody)
     }
     /**
      * 处理 过滤 res
@@ -192,8 +199,14 @@ export class Pagination<T> {
      * @memberof Pagination
      */
     protected onMapValues(res): PaginationResponse<T> {
-        if (lodash.isFunction(this.options.onMapValues)) {
-            return this.options.onMapValues(res)
+        const { onMapValues } = this.options;
+        if (lodash.isFunction(onMapValues)) {
+            return onMapValues(res);
+        }
+        if (lodash.isString(onMapValues)) {
+            const dataSource = lodash.get(res, onMapValues);
+            lodash.unset(res, onMapValues)
+            return { dataSource, ...res };
         }
         return res
     }
@@ -204,16 +217,18 @@ export class Pagination<T> {
      * @returns
      * @memberof Pagination
      */
-    @action.bound
+    @action
     protected onSetDataSource(res: PaginationResponse<T>, onlyKey) {
-
         if (!lodash.isArray(res.dataSource)) {
             throw new Error('分页 数据 返回值 dataSource 不是数组')
         }
-        if (lodash.isArray(res.dataSource) && res.dataSource.length <= 0) {
+        // 检查 是否是完全的一页数据 完全 可以继续加载
+        if (res.dataSource.length < this.options.defaultPageSize) {
             this.isUndefined = true;
             console.warn('分页 数据 没有更多数据')
-            return res.dataSource
+            if (res.dataSource.length <= 0) {
+                return []
+            }
         }
         // 第一页
         if (lodash.eq(this.current, this.options.defaultCurrent) || this.options.infinite === false) {
@@ -234,7 +249,7 @@ export class Pagination<T> {
      * @param {boolean} [loading=!this.loading]
      * @memberof Pagination
      */
-    @action.bound
+    @action
     protected onToggleLoading(loading: boolean = !this.loading) {
         this.loading = loading;
     }
@@ -244,12 +259,22 @@ export class Pagination<T> {
      * @returns {T}
      * @memberof Pagination
      */
-    onFind(key: string): T {
-        const data = lodash.find(this.dataSource, [this.key, key]);
+    onFind(key: string | T): T {
+        const data = lodash.find(this.dataSource, this.getPredicate(key));
         if (!lodash.hasIn(data, this.options.key)) {
             throw new Error(`没有找到 Key:${key} 数据`)
         }
         return data;
+    }
+    /**
+     * 修改更新
+     * @param key 
+     * @param value 
+     */
+    @action
+    onUpdate(key: string | T, value: T) {
+        const index = lodash.findIndex(this.dataSource, this.getPredicate(key));
+        return lodash.updateWith(this.dataSource, `[${index}]`, lodash.constant(value))
     }
     /**
      * 根据 key 删除数据
@@ -257,25 +282,38 @@ export class Pagination<T> {
      * @returns {T[]}
      * @memberof Pagination
      */
-    onRemove(key: string): T[] {
+    @action
+    onRemove(key: string | T): T[] {
         const dataSource = lodash.clone(this.dataSource);
-        const result = lodash.remove(dataSource, [this.key, key]);
+        const result = lodash.remove(dataSource, this.getPredicate(key));
         this.dataSource = dataSource;
         return result
+    }
+    /**
+     * 获取 lodash Predicate 参数
+     * @param key 
+     */
+    getPredicate(key: string | T): ListIteratee<any> {
+        if (lodash.isObject(key)) {
+            return [this.key, lodash.get(key, this.key)]
+        }
+        return [this.key, key]
     }
     /**
      * 重置
      * @returns
      * @memberof Pagination
      */
-    @action.bound
-    onReset(options: PaginationOptions = this.options) {
-        this.options = lodash.merge(this.options, options);
+    @action
+    onReset(options?: PaginationOptions) {
+        this.options = lodash.merge({}, this.options, options);
+        // console.log("LENG: Pagination<T> -> onReset -> this.options", this.options)
         this.current = this.options.defaultCurrent;
         this.pageSize = this.options.defaultPageSize;
         this.isUndefined = false;
         this.total = 0;
         this.dataSource = [];
+        this.oldBody = null;
         this.loading = false;
         this.onlyKey = lodash.uniqueId('key_')
         return this;

@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:17:47
+ * @modify date 2020-08-05 14:17:47
+ * @desc [description]
+ */
 <template>
   <div class="xt-content xt-stationery">
     <a-tabs :activeKey="activeKey" @change="tabsChange" class="xt-tabs-center">
@@ -7,24 +14,21 @@
         </span>
       </a-tab-pane>
     </a-tabs>
-    <a-spin :spinning="Pagination.loading">
-      <a-row :gutter="16" v-viewer>
-        <a-col v-for="item in Pagination.dataSource" :key="item.commodityId" :span="6">
-          <!-- <nuxt-link :to="`/stationery/${item.commodityId}`"> -->
-          <a-card class="xt-stationery-card" :bordered="false">
-            <img class="xt-stationery-img" v-lazy="item.commodityCoverUrl" />
-          </a-card>
-          <!-- </nuxt-link> -->
-        </a-col>
-      </a-row>
-    </a-spin>
-    <xt-pagination :Pagination="Pagination" :toQuery="true" @change="onCurrentChange" />
+    <List :loading="Pagination.loading" :dataSource="Pagination.dataSource" />
+    <!-- 存在 更改地址栏 页签的时候 设置 key 用于触发初始化 change   -->
+    <xt-pagination
+      :key="activeKey"
+      :Pagination="Pagination"
+      :toQuery="true"
+      @change="onCurrentChange"
+    />
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
+import List from "./views/list.vue";
 import lodash from "lodash";
 @Observer
 @Component({
@@ -32,7 +36,7 @@ import lodash from "lodash";
   async fetch(ctx: Context) {
     await ctx.store.$storeStationery.onGetTypelist();
   },
-  components: {},
+  components: { List },
 })
 export default class PageView extends Vue {
   get PageStore() {
@@ -53,7 +57,8 @@ export default class PageView extends Vue {
   /**
    *  初始化 和 页码 更改调用
    */
-  onCurrentChange(current) {
+  onCurrentChange(current, reset = false) {
+    // reset && this.Pagination.onReset();
     this.Pagination.onCurrentChange(current, {
       typeId: this.activeKey,
       commodityName: "",
@@ -65,7 +70,7 @@ export default class PageView extends Vue {
     const { active, current } = this.$route.query;
     if (active && !lodash.eq(active, this.activeKey)) {
       this.activeKey = active as any;
-      this.onCurrentChange(1);
+      // this.onCurrentChange(1);
     }
     // next();
   }
@@ -75,19 +80,6 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" >
-.xt-stationery {
-  &-card {
-    .ant-card-body {
-      padding: 20px 0;
-    }
-  }
-  &-img {
-    width: 230px;
-    height: 230px;
-    display: block;
-    margin: auto;
-  }
-}
 </style>
 <i18n>
 {

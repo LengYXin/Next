@@ -1,17 +1,24 @@
 <template>
   <div>
     <h1 v-text="PageStore.details.courseName"></h1>
-    <a-button slot="actions" type="primary" v-t="'give'">Primary</a-button>
-    <a-button slot="actions" type="primary" v-t="'signup'">Primary</a-button>
+    <Signup :give="true" :id="PageStore.details.courseId" />
+    <Signup :id="PageStore.details.courseId" />
+    <nuxt-link to="/homework">
+      <span>交作业</span>
+    </nuxt-link>
+    <nuxt-link to="/payment">
+      <span>支付</span>
+    </nuxt-link>
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
+import Signup from "../../views/signup.vue";
 import { computed } from "mobx";
 @Observer
 @Component({
-  components: {},
+  components: { Signup },
 })
 export default class PageView extends Vue {
   get PageStore() {
@@ -24,15 +31,3 @@ export default class PageView extends Vue {
 </script>
 <style>
 </style>
-<i18n>
-{
-  "en": {
-    "give": "Give to others",
-    "signup": "Sign up now"
-  },
-  "zh": {
-    "give": "赠课给他人",
-    "signup": "立即报名"
-  }
-}
-</i18n>

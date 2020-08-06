@@ -1,4 +1,11 @@
-import { ConfigProvider, Affix, Avatar, BackTop, Badge, Breadcrumb, Button, Card, Col, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Pagination, Popconfirm, Result, Row, Skeleton, Spin, Tabs } from 'ant-design-vue';
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:12:26
+ * @modify date 2020-08-05 14:12:26
+ * @desc [description]
+ */
+import { Affix, Avatar, BackTop, Badge, Breadcrumb, Button, Card, Col, Comment, ConfigProvider, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Pagination, Popconfirm, Result, Row, Skeleton, Spin, Tabs, Tooltip } from 'ant-design-vue';
 import Base from 'ant-design-vue/lib/base';
 import Vue from 'vue';
 Vue.use(Base)
@@ -27,6 +34,8 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Pagination)
 Vue.use(Breadcrumb)
+Vue.use(Comment)
+Vue.use(Tooltip)
 Vue.use(Result)
 Vue.prototype.$message = message;
 Vue.prototype.$notification = notification;

@@ -1,6 +1,6 @@
 <template>
   <a-menu mode="horizontal" :selected-keys="selectedkeys" class="xt-header-menu">
-    <a-menu-item class="ant-menu-item" v-for="item in menus" :key="item.key">
+    <a-menu-item class="ant-menu-item" v-for="item in PageStore.Menus" :key="item.key">
       <nuxt-link :to="{name:item.key}">
         <span v-t="item.name"></span>
       </nuxt-link>
@@ -9,14 +9,15 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
-import menus from "../menus";
 @Component({
   components: {},
 })
 export default class extends Vue {
-  menus = menus;
+  get PageStore() {
+    return this.$store.$menu;
+  }
   get selectedkeys() {
-    return [this.$route.name];
+    return [this.$route.name, ...this.PageStore.getSelectedkeys(this.$route)];
   }
   mounted() {}
   updated() {}

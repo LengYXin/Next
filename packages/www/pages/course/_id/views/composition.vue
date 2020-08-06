@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:02:15
+ * @modify date 2020-08-05 14:02:15
+ * @desc 课程组成
+ */
 <template>
   <div>课程组成</div>
 </template>

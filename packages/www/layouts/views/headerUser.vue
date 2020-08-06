@@ -1,6 +1,6 @@
 <template>
   <div class="xt-header-user">
-    <a-dropdown>
+    <a-dropdown v-if="!production">
       <a class="ant-dropdown-link">
         <span v-text="$locale.locale"></span>
         <a-icon type="down" />
@@ -14,8 +14,14 @@
         </a-menu-item>
       </a-menu>
     </a-dropdown>
-    <!-- <span>搜索</span>
-    <span>消息</span>-->
+    <nuxt-link to="/search">
+      <a-icon type="search" />
+    </nuxt-link>
+    <nuxt-link to="/my/letter">
+      <a-badge dot>
+        <a-icon type="bell" />
+      </a-badge>
+    </nuxt-link>
     <userModal />
   </div>
 </template>
@@ -28,6 +34,9 @@ import userModal from "./userModal.vue";
 export default class extends Vue {
   get $locale() {
     return this.$store.$locale;
+  }
+  get production() {
+    return this.$store.$global.production;
   }
   onLocaleChange(locale) {
     if (this.$locale.locale === locale) {

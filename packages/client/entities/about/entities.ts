@@ -4,7 +4,7 @@ import { Subject, Subscription } from 'rxjs';
 import { AjaxRequest } from 'rxjs/ajax';
 import lodash from 'lodash';
 
-
+interface tabs { key: any, name: string }
 export default class EntitiesAbout {
     constructor() {
     }
@@ -14,9 +14,9 @@ export default class EntitiesAbout {
      * @memberof EntitiesAbout
      */
     @observable
-    typelist: Array<{ typeId: number, typeName: string }> = [];
+    typelist: Array<tabs> = [];
     @action.bound
-    protected setTypelist(typelist) {
+    protected setTypelist(typelist: Array<tabs>) {
         this.typelist = typelist;
         return typelist
     }

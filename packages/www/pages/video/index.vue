@@ -1,21 +1,6 @@
 <template>
   <div class="xt-content xt-video">
-    <a-spin :spinning="Pagination.loading">
-      <a-row :gutter="16">
-        <a-col v-for="item in Pagination.dataSource" :key="item.courseId" :span="8">
-          <nuxt-link :to="`/video/${item.courseId}`">
-            <a-card class="xt-video-card" :bordered="false">
-              <img class="xt-video-img" v-lazy="item.courseThumPictureUri" />
-              <div>
-                <span v-text="item.courseName"></span>
-                <span v-text="item.clickVolume"></span>
-                <span v-text="item.likeNum"></span>
-              </div>
-            </a-card>
-          </nuxt-link>
-        </a-col>
-      </a-row>
-    </a-spin>
+    <List :loading="Pagination.loading" :dataSource="Pagination.dataSource" />
     <xt-pagination :Pagination="Pagination" :toQuery="true" @change="onCurrentChange" />
   </div>
 </template>
@@ -23,6 +8,7 @@
 import { Component, Prop, Vue, Watch, Provide } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
+import List from "./views/list.vue";
 import lodash from "lodash";
 @Observer
 @Component({
@@ -30,7 +16,7 @@ import lodash from "lodash";
   fetch(ctx: Context) {
     // ctx.store.$storeVideo.Pagination.onReset().onLoading();
   },
-  components: {},
+  components: { List },
 })
 export default class PageView extends Vue {
   get PageStore() {

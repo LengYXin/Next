@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:16:32
+ * @modify date 2020-08-05 14:16:32
+ * @desc [description]
+ */
 <template>
   <a-pagination
     class="xt-pagination-center"
@@ -60,6 +67,9 @@ export default class extends Vue {
    * 页码更新
    */
   onCurrentChange(current) {
+    if (this.Pagination.loading) {
+      return;
+    }
     // 需要更改地址栏
     if (this.toQuery) {
       this.$router.push({

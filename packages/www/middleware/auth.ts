@@ -21,4 +21,5 @@ function onLog(context: Context) {
         console.log("LENG: context", context);
         console.groupEnd();
     }
+    context.store.$menu.initBreadcrumb(context.route)
 }

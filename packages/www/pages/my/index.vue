@@ -1,84 +1,81 @@
 <template>
   <div class="xt-content">
-    <a-tabs tabPosition="left">
-      <a-tab-pane key="1">
-        <span slot="tab">
-          <span>邮箱</span>
-        </span>
-        <!-- <a-affix :offset-top="74"> -->
-          <a-tabs>
-            <a-tab-pane key="1">
+    <a-row type="flex">
+      <a-col :span="4" >
+        <div class="xt-text-align-center">
+          <a-avatar :size="64" icon="user" />
+        </div>
+        <a-affix :offset-top="72">
+          <a-tabs tabPosition="left" :activeKey="activeKey" @change="tabsChange">
+            <a-tab-pane v-for="tab in tabPane" :key="tab.path">
               <span slot="tab">
-                <span>邮箱</span>
-              </span>
-            </a-tab-pane>
-            <a-tab-pane key="2">
-              <span slot="tab">
-                <span>手机号</span>
+                <span v-t="tab.key"></span>
               </span>
             </a-tab-pane>
           </a-tabs>
-        <!-- </a-affix> -->
-
-        <a-list
-          class="xt-content"
-          item-layout="horizontal"
-          :data-source="[{},{},{},{},{},{},{},{}]"
-        >
-          <nuxt-link slot="renderItem" slot-scope="item" :to="`/course/${item.courseId}`">
-            <a-list-item>
-              <a-list-item-meta :description="item.statusName">
-                <a slot="title" href="https://www.antdv.com/">{{ item.courseName }}</a>
-                <img slot="avatar" width="272" alt="logo" v-lazy="item.coursePictureUri" />
-              </a-list-item-meta>
-              <!-- <a-button slot="actions" type="primary">Primary</a-button> -->
-            </a-list-item>
-          </nuxt-link>
-        </a-list>
-      </a-tab-pane>
-
-      <a-tab-pane key="2">
-        <span slot="tab">
-          <span>手机号</span>
-        </span>
-        <a-tabs>
-          <a-tab-pane key="1">
-            <span slot="tab">
-              <span>邮箱</span>
-            </span>
-          </a-tab-pane>
-          <a-tab-pane key="2">
-            <span slot="tab">
-              <span>手机号</span>
-            </span>
-          </a-tab-pane>
-        </a-tabs>
-        <a-list class="xt-content" item-layout="horizontal" :data-source="[{},{},{},{}]">
-          <nuxt-link slot="renderItem" slot-scope="item" :to="`/course/${item.courseId}`">
-            <a-list-item>
-              <a-list-item-meta :description="item.statusName">
-                <a slot="title" href="https://www.antdv.com/">{{ item.courseName }}</a>
-                <img slot="avatar" width="272" alt="logo" v-lazy="item.coursePictureUri" />
-              </a-list-item-meta>
-              <!-- <a-button slot="actions" type="primary">Primary</a-button> -->
-            </a-list-item>
-          </nuxt-link>
-        </a-list>
-      </a-tab-pane>
-    </a-tabs>
+        </a-affix>
+      </a-col>
+      <a-col :span="20">
+        <!-- <nuxt-child keep-alive /> -->
+        <nuxt-child  />
+      </a-col>
+    </a-row>
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Modal } from "ant-design-vue";
 @Component({
+  asyncData(ctx) {
+    return { defaultActiveKey: ctx.route.name };
+  },
   components: {},
 })
 export default class PageView extends Vue {
+  defaultActiveKey = "my";
+  get activeKey() {
+    return this.$route.name;
+  }
+  tabPane = [
+    { key: "course", path: "my" },
+    { key: "homework", path: "my-homework" },
+    { key: "showHomework", path: "my-showHomework" },
+    { key: "order", path: "my-order" },
+    { key: "letter", path: "my-letter" },
+    { key: "information", path: "my-information" },
+    { key: "security", path: "my-security" },
+  ];
+  tabsChange(activeKey) {
+    this.$router.push({
+      name: activeKey,
+    });
+  }
   mounted() {}
   updated() {}
   destroyed() {}
 }
 </script>
-<style>
+<style lang="less">
 </style>
+<i18n>
+{
+  "en": {
+    "course": "course",
+    "homework": "Homework",
+    "showHomework": "Show Homework",
+    "order": "My Order",
+    "letter": "Letter",
+    "information": "Information",
+    "security": "Security Set Up"
+  },
+  "zh": {
+    "course": "去上课",
+    "homework": "我的作业",
+    "showHomework": "我晒出的作业",
+    "order": "我的订单",
+    "letter": "站内信",
+    "information": "个人信息",
+    "security": "安全设置"
+  }
+}
+</i18n>

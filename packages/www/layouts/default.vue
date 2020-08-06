@@ -2,6 +2,9 @@
   <a-config-provider v-bind="config">
     <a-layout class="xt-layout">
       <a-layout-header class="xt-layout-header">
+        <dir class="xt-layout-header-version">
+          <span v-text="version"></span>
+        </dir>
         <div class="xt-layout-header-content">
           <headerMenu />
           <headerUser />
@@ -11,13 +14,14 @@
       <a-layout-header></a-layout-header>
       <a-layout-content
         class="xt-layout-content"
+        :class="pageClass"
         v-auto-height="{ styleKey: 'minHeight', subtract: 400 }"
       >
         <!-- 面包屑 -->
         <breadcrumb />
         <!-- 页面 -->
         <!-- <Nuxt keep-alive /> -->
-        <Nuxt :class="pageClass" :keep-alive="production" />
+        <Nuxt :keep-alive="production" />
         <!-- 滚动 -->
         <a-back-top />
       </a-layout-content>
@@ -49,7 +53,10 @@ export default class extends Vue {
     return "xt-page-" + this.$route.name;
   }
   get production() {
-    return process.env.NODE_ENV === "production";
+    return this.$store.$global.production;
+  }
+  get version() {
+    return this.$store.$global.version;
   }
   mounted() {
     // console.log(this);
@@ -79,6 +86,13 @@ export default class extends Vue {
   z-index: @zindex-modal-mask + 1;
   overflow: hidden;
   box-shadow: @xt-header-box-shadow;
+  .xt-layout-header-version {
+    position: absolute;
+    left: 0;
+    margin: 0;
+    color: @red-6;
+    font-size: @font-size-lg;
+  }
 }
 .xt-layout-header-content {
   max-width: @xt-content-width;

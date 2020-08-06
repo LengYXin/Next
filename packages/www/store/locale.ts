@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:13:07
+ * @modify date 2020-08-05 14:13:07
+ * @desc [description]
+ */
 import { observable, computed, action, intercept } from 'mobx';
 import { create, persist } from 'mobx-persist';
 import moment from 'moment';
