@@ -26,6 +26,14 @@ class Index extends Component<any> {
 
     console.log('componentDidHide', getCurrentInstance())
   }
+  renderSwiperItem(item) {
+    return <SwiperItem key={item.id}>
+      <Image
+        style='width:100%'
+        src={item.pictureUri}
+      />
+    </SwiperItem>
+  }
   renderSwiper() {
     const { Banners } = this.PageStore;
     if (Banners.length) {
@@ -33,13 +41,7 @@ class Index extends Component<any> {
         circular
         indicatorDots
         autoplay>
-        {Banners.map(img => <SwiperItem key={img.id}>
-          <Image
-            style='width:100%'
-            src={img.pictureUri}
-          />
-        </SwiperItem>)}
-
+        {Banners.map(this.renderSwiperItem.bind(this))}
       </Swiper>
     }
   }
