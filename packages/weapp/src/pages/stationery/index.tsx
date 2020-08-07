@@ -65,13 +65,16 @@ class Index extends Component<any> {
   onChange() {
 
   }
-  renderItem() {
+  renderItem(item) {
+    return <View key={item.commodityId} className='at-col at-col-6'>
+      <AtAvatar className='xt-stationery-img' image={item.commodityCoverUrl}></AtAvatar>
+    </View>
+  }
+  renderDataSource() {
     const { dataSource } = this.Pagination;
     return <View>
       <View className='at-row at-row--wrap'>
-        {dataSource.map((item: any) => <View key={item.commodityId} className='at-col at-col-6'>
-          <AtAvatar className='xt-stationery-img' image={item.commodityCoverUrl}></AtAvatar>
-        </View>)}
+        {dataSource.map(this.renderItem.bind(this))}
       </View>
     </View>
   }
@@ -91,7 +94,7 @@ class Index extends Component<any> {
           tabList={tabList}
           onTabsChange={this.onTabsChange.bind(this)}
           onScrollToLower={this.onScrollToLower.bind(this)}>
-          {this.renderItem()}
+          {this.renderDataSource()}
         </Tabs>
       </View>
     )
