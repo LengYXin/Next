@@ -64,8 +64,7 @@ class Index extends Component<{ onSuccess: () => void, [key: string]: any }> {
     // if (this.UserStore.visible) {
     return <AtModal closeOnClickOverlay={false} onClose={this.onClose.bind(this)} isOpened={this.UserStore.visible}>
       <AtModalContent>
-        <AtForm
-        >
+        <AtForm>
           <AtInput
             name='account'
             type='text'
