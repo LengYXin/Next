@@ -2,12 +2,12 @@ import { Image, Swiper, SwiperItem, View } from '@tarojs/components'
 import { ControllerHome } from "@xt/client/entities"
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { AtButton, AtMessage } from 'taro-ui'
+import { AtMessage } from 'taro-ui'
+import { PageDecorators } from "~/components/page"
 import './index.scss'
-import { getCurrentInstance } from '@tarojs/taro'
-
 @inject('$storeHome')
 @observer
+@PageDecorators()
 class Index extends Component<any> {
   get PageStore(): ControllerHome {
     return this.props.$storeHome
@@ -19,12 +19,8 @@ class Index extends Component<any> {
   componentWillUnmount() { }
 
   componentDidShow() {
-    console.log('componentDidShow')
   }
-
   componentDidHide() {
-
-    console.log('componentDidHide', getCurrentInstance())
   }
   renderSwiperItem(item) {
     return <SwiperItem key={item.id}>
@@ -46,12 +42,6 @@ class Index extends Component<any> {
     }
   }
   render() {
-    // return (
-    //   <View className='index'>
-    //     <AtMessage />
-    //    首页
-    //   </View>
-    // )
     return (
       <View className='index'>
         <AtMessage />

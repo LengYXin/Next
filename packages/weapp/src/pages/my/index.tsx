@@ -1,12 +1,13 @@
-import { Image, Swiper, SwiperItem, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { ControllerHome } from "@xt/client/entities"
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { AtButton, AtMessage } from 'taro-ui'
+import { PageDecorators } from '~/components/page'
 import './index.scss'
 
 @inject('$storeHome')
 @observer
+@PageDecorators()
 class Index extends Component<any> {
   get PageStore(): ControllerHome {
     return this.props.$storeHome
@@ -22,7 +23,6 @@ class Index extends Component<any> {
   render() {
     return (
       <View className='index'>
-        <AtMessage />
        我的
       </View>
     )

@@ -3,11 +3,13 @@ import Taro from '@tarojs/taro';
 import { ControllerCourse, ControllerUser } from "@xt/client/entities";
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
+import { PageDecorators } from '~/components/page';
 import { AtCard, AtMessage } from 'taro-ui';
 import './index.scss';
 
 @inject('$storeCourse', '$storeUser')
 @observer
+@PageDecorators()
 class Index extends Component<any> {
   get UserStore(): ControllerUser {
     return this.props.$storeUser
@@ -30,17 +32,13 @@ class Index extends Component<any> {
     this.Pagination.onLoading({ typeKey: 1 });
   }
   componentDidMount() {
-    if (!this.UserStore.loggedIn) {
-      return Taro.redirectTo({
-        url: '/pages/index/index'
-      })
-    }
     this.onPagLoading(true)
   }
 
   componentWillUnmount() { }
 
-  componentDidShow() { }
+  componentDidShow() { 
+  }
 
   componentDidHide() { }
   renderItem(item) {
@@ -55,7 +53,6 @@ class Index extends Component<any> {
   render() {
     return (
       <View className='index'>
-        <AtMessage />
         {this.Pagination.dataSource.map(this.renderItem.bind(this))}
       </View>
     )

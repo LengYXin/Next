@@ -35,6 +35,12 @@ export class ControllerUser extends Entities {
             console.error("LENG: ControllerUser -> onLogin -> error", error)
         }
     }
+    /**
+     * 退出登录状态
+     */
+    onOutLogin() {
+        this.setUserInfo({});
+    }
     onSignatureUser() {
         if (!this.loggedIn) {
             return

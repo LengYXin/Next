@@ -6,10 +6,10 @@ import lodash from 'lodash';
 import { Component } from 'react';
 import { Observable } from "rxjs";
 import { AjaxRequest } from 'rxjs/ajax';
-import store from './index';
+import { ControllerUser } from '@xt/client/entities';
 export const ajax = new AjaxBasics({ target: 'https://cr-api-uat.xuantong.cn' });
 // 重置 Ajax
-onResetAjaxBasics()
+// onResetAjaxBasics()
 // 扩展 
 Component.prototype.$ajax = ajax;
 Component.prototype.$EnumApi = EnumApi;
@@ -21,21 +21,31 @@ declare module 'react' {
         $EnumApi: typeof EnumApi;
     }
 }
-function onResetAjaxBasics() {
-   
-    AjaxBasics.onMap = function (res) {
-        return lodash.get(res, 'response.result')
-    }
+/**
+ * 重置 请求配置
+ * @param $storeUser 
+ */
+export function onResetAjaxBasics($storeUser: ControllerUser) {
     AjaxBasics.onError = function (error) {
         try {
-            const message = lodash.get(error, 'data.msg', lodash.get(error, 'data.message', error.statusText))
+            const message = lodash.get(error, 'data.msg', lodash.get(error, 'data.message', error.statusText || "Error"))
             Taro.atMessage({
                 'message': message,
                 'type': 'error',
             })
+            // 登录失效
+            if (lodash.includes([600002, 900004], lodash.get(error, 'data.code'))) {
+                $storeUser.onOutLogin()
+                $storeUser.onToggleVisible(true)
+            }
         } catch (error) {
-
         }
+    }
+    AjaxBasics.onMergeBody = function () {
+        return $storeUser.onSignatureUser()
+    }
+    AjaxBasics.onMap = function (res) {
+        return lodash.get(res, 'response.result')
     }
     AjaxBasics.onNProgress = function (type: 'start' | 'done' = 'start') {
         if (type == "start") {
@@ -85,14 +95,5 @@ function onResetAjaxBasics() {
         AjaxBasics.onMap = function (res) {
             return lodash.get(res, 'data.result')
         }
-    }
-}
-/**
- * 合并 补充 body 信息 用于登录 token
- * @param body 
- */
-export function onMergeBody(onCreate: Function) {
-    AjaxBasics.onMergeBody = function () {
-        return onCreate()
     }
 }

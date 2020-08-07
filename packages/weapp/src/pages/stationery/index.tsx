@@ -4,12 +4,14 @@ import { ControllerStationery } from "@xt/client/entities"
 import lodash from 'lodash'
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { AtAvatar, AtMessage, AtSearchBar } from 'taro-ui'
-import Tabs from '../../components/tabs'
+import { AtAvatar, AtSearchBar } from 'taro-ui'
+import { PageDecorators } from '~/components/page'
+import Tabs from '~/components/tabs'
 import './index.scss'
 
 @inject('$storeStationery')
 @observer
+@PageDecorators()
 class Index extends Component<any> {
   get PageStore(): ControllerStationery {
     return this.props.$storeStationery
@@ -84,7 +86,6 @@ class Index extends Component<any> {
     })
     return (
       <View className='index'>
-        <AtMessage />
         <AtSearchBar
           value={this.state.value}
           onChange={this.onChange.bind(this)}

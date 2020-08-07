@@ -1,3 +1,4 @@
+const webpackChain = require('./webpackChain');
 const config = {
   projectName: 'xt',
   date: '2020-7-22',
@@ -20,6 +21,7 @@ const config = {
   },
   framework: 'react',
   mini: {
+    webpackChain: webpackChain.alias,
     postcss: {
       pxtransform: {
         enable: true,

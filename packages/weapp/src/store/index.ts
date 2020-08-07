@@ -1,7 +1,7 @@
 
 import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo } from "@xt/client/entities";
 import { create, persist } from 'mobx-persist';
-import { ajax, onMergeBody } from "./clientConfig";
+import { ajax, onResetAjaxBasics } from "./clientConfig";
 import { toJS } from "mobx";
 const store = {
     $storeHome: new ControllerHome(ajax),
@@ -11,8 +11,9 @@ const store = {
     $storeAbout: new ControllerAbout(ajax),
     $storeUser: new ControllerUser(ajax),
 }
-store.$storeUser.onLogin('18611752863', 'leng147896325');
-onMergeBody(() => store.$storeUser.onSignatureUser())
+onResetAjaxBasics(store.$storeUser);
+console.log("LENG: store", store)
+// store.$storeUser.onLogin('18611752863', 'leng147896325');
 if (process.env.TARO_ENV === "h5") {
 
     // 配置缓存

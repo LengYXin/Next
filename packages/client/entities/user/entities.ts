@@ -16,6 +16,12 @@ export default class EntitiesUser {
     @observable
     loading = false;
     /**
+    * 显示登录框
+    * @memberof Pagination
+    */
+    @observable
+    visible = false;
+    /**
      * 用户信息
      * @memberof EntitiesStationery
      */
@@ -32,7 +38,7 @@ export default class EntitiesUser {
      */
     @computed
     get loggedIn() {
-        return this.UserInfo.token
+        return !!this.UserInfo.token
     }
     /**
      * 切换加载状态
@@ -43,5 +49,13 @@ export default class EntitiesUser {
     @action
     protected onToggleLoading(loading: boolean = !this.loading) {
         this.loading = loading;
+    }
+    /**
+     * 切换登录框显示
+     * @param visible 
+     */
+    @action
+    onToggleVisible(visible: boolean = !this.visible) {
+        this.visible = visible;
     }
 }

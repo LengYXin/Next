@@ -18,6 +18,8 @@ module.exports = {
         }
       },
     },
-    webpackChain
+    webpackChain: (chain) => {
+      webpackChain.alias(chain)
+    }
   }
 }

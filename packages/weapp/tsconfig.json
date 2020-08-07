@@ -15,6 +15,14 @@
     "sourceMap": true,
     "baseUrl": ".",
     "rootDir": ".",
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ],
+      // "@/*": [
+      //   "./*"
+      // ]
+    },
     "jsx": "react",
     "jsxFactory": "React.createElement",
     "allowJs": true,

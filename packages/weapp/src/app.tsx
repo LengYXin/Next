@@ -1,7 +1,7 @@
-import { View } from '@tarojs/components';
-import { observer, Provider } from 'mobx-react';
+import { Provider } from 'mobx-react';
 import React, { Component } from 'react';
 import './app.scss';
+import Login from './components/login';
 import './img.config';
 import store from './store';
 // @observer

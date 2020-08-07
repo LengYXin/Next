@@ -24,6 +24,7 @@ module.exports = {
     extend(config, ctx) {
         // 图库替换
         lodash.update(config, 'resolve.alias', alias => {
+        console.log("LENG: extend -> alias", alias)
             return lodash.merge({
                 // '@xt/client': path.resolve(path.dirname(process.cwd()), 'client'),
                 "@ant-design/icons/lib/dist$": path.resolve(process.cwd(), 'plugins/icon.ts'),

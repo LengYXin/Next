@@ -7,12 +7,9 @@ module.exports = {
   defineConstants: {
   },
   mini: {
-    webpackChain(chain) {
-      chain.plugin('analyzer')
-        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [{
-          analyzerMode: 'static',
-          reportFilename: path.resolve(process.cwd(), 'report.html')
-        }])
+    webpackChain: (chain) => {
+      webpackChain.analyzer(chain)
+      webpackChain.alias(chain)
     }
   },
   h5: {
@@ -20,6 +17,8 @@ module.exports = {
      * 如果h5端编译后体积过大，可以使用webpack-bundle-analyzer插件对打包体积进行分析。
      * 参考代码如下：
      */
-    webpackChain
+    webpackChain: (chain) => {
+      webpackChain.optimization(chain)
+    }
   }
 }
