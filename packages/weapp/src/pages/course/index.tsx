@@ -1,19 +1,16 @@
-import { View } from '@tarojs/components';
+import { Navigator, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
-import { ControllerCourse, ControllerUser } from "@xt/client/entities";
+import { ControllerCourse } from "@xt/client/entities";
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
+import { AtCard } from 'taro-ui';
 import { PageDecorators } from '~/components/page';
-import { AtCard, AtMessage } from 'taro-ui';
 import './index.scss';
 
-@inject('$storeCourse', '$storeUser')
+@inject('$storeCourse')
 @observer
-@PageDecorators()
+@PageDecorators({ logon: true })
 class Index extends Component<any> {
-  get UserStore(): ControllerUser {
-    return this.props.$storeUser
-  }
   get PageStore(): ControllerCourse {
     return this.props.$storeCourse
   }
@@ -31,24 +28,32 @@ class Index extends Component<any> {
     }
     this.Pagination.onLoading({ typeKey: 1 });
   }
+  /**
+   * 下拉刷新
+   */
+  async onPullDownRefresh() {
+    await this.onPagLoading(true)
+    Taro.stopPullDownRefresh()
+  }
   componentDidMount() {
     this.onPagLoading(true)
   }
 
   componentWillUnmount() { }
 
-  componentDidShow() { 
+  componentDidShow() {
   }
 
   componentDidHide() { }
   renderItem(item) {
-    return <AtCard
-      key={item.courseId}
-      title={item.courseName}
-      thumb={item.coursePictureUri}
-    >
-      {item.courseSubtitle}
-    </AtCard>
+    return <Navigator url={`/pages/course_details/index?id=${item.courseId}`} key={item.courseId}>
+      <AtCard
+        title={item.courseName}
+        thumb={item.coursePictureUri}
+      >
+        {item.courseSubtitle}
+      </AtCard>
+    </Navigator>
   }
   render() {
     return (

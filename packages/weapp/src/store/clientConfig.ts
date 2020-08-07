@@ -26,7 +26,7 @@ declare module 'react' {
  * @param $storeUser 
  */
 export function onResetAjaxBasics($storeUser: ControllerUser) {
-    AjaxBasics.onError = function (error) {
+    AjaxBasics.onError = async function (error) {
         try {
             const message = lodash.get(error, 'data.msg', lodash.get(error, 'data.message', error.statusText || "Error"))
             Taro.atMessage({
@@ -35,6 +35,11 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
             })
             // 登录失效
             if (lodash.includes([600002, 900004], lodash.get(error, 'data.code'))) {
+                // if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+                //     Taro.switchTab({ url: '/pages/index/index' })
+                // } else {
+                //     Taro.redirectTo({ url: '/pages/index/index' })
+                // }
                 $storeUser.onOutLogin()
                 $storeUser.onToggleVisible(true)
             }

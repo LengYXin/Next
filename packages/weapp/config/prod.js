@@ -19,6 +19,8 @@ module.exports = {
      */
     webpackChain: (chain) => {
       webpackChain.optimization(chain)
+      webpackChain.alias(chain)
+      webpackChain.analyzer(chain)
     }
   }
 }

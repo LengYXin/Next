@@ -30,10 +30,10 @@ if (process.env.TARO_ENV === "h5") {
         // persist({ locale: true })(store.$locale);
         persist({ Banners: { type: 'list' } })(store.$storeHome);
         // hydrate('xt_locale', store.$locale);
-        // persist({ UserInfo: { type: 'object' } })(store.$storeUser);
+        persist({ UserInfo: { type: 'object' } })(store.$storeUser);
         // hydrate('xt_locale', store.$locale);
         hydrate('xt_home', store.$storeHome);
-        // hydrate('xt_user', store.$storeUser);
+        hydrate('xt_user', store.$storeUser);
     }
 }
 

@@ -1,9 +1,16 @@
-import { ControllerUser } from '@xt/client/entities'
-import { inject, observer } from 'mobx-react'
-import Taro from '@tarojs/taro';
-import React, { Component } from 'react'
-import { AtModal, AtModalContent, AtInput, AtForm, AtButton } from 'taro-ui'
-import './index.scss'
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-07 18:04:33
+ * @modify date 2020-08-07 18:04:33
+ * @desc [description]
+ */
+import { ControllerUser } from '@xt/client/entities';
+import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
+import { AtButton, AtForm, AtInput, AtModal, AtModalContent } from 'taro-ui';
+import './index.scss';
+import { View } from '@tarojs/components';
 @inject('$storeUser')
 @observer
 class Index extends Component<{ onSuccess: () => void, [key: string]: any }> {
@@ -19,11 +26,11 @@ class Index extends Component<{ onSuccess: () => void, [key: string]: any }> {
   /**
    * 关闭弹框
    */
-  onCancel() {
+  onClose() {
     this.UserStore.onToggleVisible(false)
   }
-  UNSAFE_componentWillMount() {
-    this.onCancel()
+  componentWillUnmount() {
+    // this.onCancel()
   }
   /**
    * 提交表单登录
@@ -34,7 +41,7 @@ class Index extends Component<{ onSuccess: () => void, [key: string]: any }> {
       await this.UserStore.onLogin(this.state.account, this.state.password);
       // 校验是否成功
       if (this.UserStore.loggedIn) {
-        this.onCancel();
+        this.onClose();
         this.props.onSuccess()
         // if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
         //   return Taro.switchTab({ url: '/pages/index/index' })
@@ -48,31 +55,37 @@ class Index extends Component<{ onSuccess: () => void, [key: string]: any }> {
   onChange(key, value) {
     this.setState({ [key]: value })
   }
+  // renderMsg() {
+  //   if (!this.UserStore.loggedIn) {
+  //     return <View>请登录</View>
+  //   }
+  // }
   render() {
-    return (
-      <AtModal onCancel={this.onCancel.bind(this)} isOpened={this.UserStore.visible}>
-        <AtModalContent>
-          <AtForm
-          >
-            <AtInput
-              name='account'
-              type='text'
-              placeholder='账号'
-              value={this.state.account}
-              onChange={this.onChange.bind(this, 'account')}
-            />
-            <AtInput
-              name='password'
-              type='text'
-              placeholder='密码'
-              value={this.state.password}
-              onChange={this.onChange.bind(this, 'password')}
-            />
-            <AtButton onClick={this.onSubmit.bind(this)}>登录</AtButton>
-          </AtForm>
-        </AtModalContent>
-      </AtModal>
-    )
+    // if (this.UserStore.visible) {
+    return <AtModal closeOnClickOverlay={false} onClose={this.onClose.bind(this)} isOpened={this.UserStore.visible}>
+      <AtModalContent>
+        <AtForm
+        >
+          <AtInput
+            name='account'
+            type='text'
+            placeholder='账号'
+            value={this.state.account}
+            onChange={this.onChange.bind(this, 'account')}
+          />
+          <AtInput
+            name='password'
+            type='text'
+            placeholder='密码'
+            value={this.state.password}
+            onChange={this.onChange.bind(this, 'password')}
+          />
+          <AtButton onClick={this.onSubmit.bind(this)}>登录</AtButton>
+        </AtForm>
+      </AtModalContent>
+    </AtModal>
+    // }
+    // return null
   }
 }
 

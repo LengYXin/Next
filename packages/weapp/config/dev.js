@@ -5,7 +5,9 @@ module.exports = {
   },
   defineConstants: {
   },
-  mini: {},
+  mini: {
+    webpackChain: webpackChain.alias,
+  },
   h5: {
     devServer: {
       proxy: {
@@ -18,8 +20,6 @@ module.exports = {
         }
       },
     },
-    webpackChain: (chain) => {
-      webpackChain.alias(chain)
-    }
+    webpackChain: webpackChain.alias,
   }
 }
