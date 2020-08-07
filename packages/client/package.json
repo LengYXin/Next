@@ -8,6 +8,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
+    "crypto-js": "^4.0.0",
     "lodash": "^4.17.19",
     "lodash-decorators": "^6.0.1",
     "mobx": "^5.15.4",
@@ -16,6 +17,7 @@
     "rxjs": "^6.6.0"
   },
   "devDependencies": {
+    "@types/crypto-js": "^3.1.47",
     "@types/jest": "^26.0.7",
     "@types/lodash": "^4.14.158",
     "jest": "^26.2.1",

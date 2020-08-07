@@ -89,8 +89,8 @@ function onResetAjaxBasics() {
  * 合并 补充 body 信息 用于登录 token
  * @param body 
  */
-export function onMergeBody(body) {
+export function onMergeBody(onCreate: Function) {
     AjaxBasics.onMergeBody = function () {
-        return body
+        return onCreate()
     }
 }

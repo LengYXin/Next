@@ -1,12 +1,13 @@
-import { Provider } from 'mobx-react';
+import { View } from '@tarojs/components';
+import { observer, Provider } from 'mobx-react';
 import React, { Component } from 'react';
 import './app.scss';
 import './img.config';
 import store from './store';
-
+// @observer
 class App extends Component {
-  componentDidMount() { 
-    
+  componentDidMount() {
+
   }
 
   componentDidShow() { }

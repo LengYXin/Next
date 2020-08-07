@@ -10,6 +10,12 @@ export default class EntitiesUser {
 
     }
     /**
+    * 加载状态
+    * @memberof Pagination
+    */
+    @observable
+    loading = false;
+    /**
      * 用户信息
      * @memberof EntitiesStationery
      */
@@ -26,6 +32,16 @@ export default class EntitiesUser {
      */
     @computed
     get loggedIn() {
-        return true
+        return this.UserInfo.token
+    }
+    /**
+     * 切换加载状态
+     * @private
+     * @param {boolean} [loading=!this.loading]
+     * @memberof Pagination
+     */
+    @action
+    protected onToggleLoading(loading: boolean = !this.loading) {
+        this.loading = loading;
     }
 }

@@ -2,6 +2,7 @@
 import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo } from "@xt/client/entities";
 import { create, persist } from 'mobx-persist';
 import { ajax, onMergeBody } from "./clientConfig";
+import { toJS } from "mobx";
 const store = {
     $storeHome: new ControllerHome(ajax),
     $storeCourse: new ControllerCourse(ajax),
@@ -11,9 +12,14 @@ const store = {
     $storeUser: new ControllerUser(ajax),
 }
 console.log("LENG: store", store)
+// 模拟登录
+onLogin()
+async function onLogin() {
+    await store.$storeUser.onLogin('18611752863', 'leng147896325')
+    onMergeBody(() => store.$storeUser.onSignatureUser())
+}
 if (process.env.TARO_ENV === "h5") {
-    // 模拟登录
-    onLogin()
+
     // 配置缓存
     onCreatePersist();
     // 配置缓存
@@ -28,21 +34,13 @@ if (process.env.TARO_ENV === "h5") {
         // persist({ locale: true })(store.$locale);
         persist({ Banners: { type: 'list' } })(store.$storeHome);
         // hydrate('xt_locale', store.$locale);
-        persist({ UserInfo: { type: 'object' } })(store.$storeUser);
+        // persist({ UserInfo: { type: 'object' } })(store.$storeUser);
         // hydrate('xt_locale', store.$locale);
         hydrate('xt_home', store.$storeHome);
-        hydrate('xt_user', store.$storeUser);
-    }
-    async function onLogin() {
-        await store.$storeUser.onLogin('18611752863', 'leng147896325')
-        onMergeBody({
-            appid: '48832f76dc1411e898f900163e048dd6',
-            signature: '6556F212B90709A013411F7B4676E130',
-            timestamp: Date.now(),
-            token: store.$storeUser.UserInfo.token
-        })
+        // hydrate('xt_user', store.$storeUser);
     }
 }
+
 declare module 'react' {
     interface Component<P> {
         // /**
