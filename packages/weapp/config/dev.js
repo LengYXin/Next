@@ -20,6 +20,9 @@ module.exports = {
         }
       },
     },
-    webpackChain: webpackChain.alias,
+    webpackChain: (chain)=>{
+      webpackChain.alias(chain)
+      webpackChain.vConsolePlugin(chain)
+    },
   }
 }

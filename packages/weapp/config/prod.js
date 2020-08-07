@@ -21,6 +21,7 @@ module.exports = {
       webpackChain.optimization(chain)
       webpackChain.alias(chain)
       webpackChain.analyzer(chain)
+      webpackChain.vConsolePlugin(chain)
     }
   }
 }

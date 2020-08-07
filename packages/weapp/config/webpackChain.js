@@ -7,7 +7,7 @@ module.exports = {
         //     }])
         chain.resolve.alias
             .set('~', path.resolve(process.cwd(), 'src'))
-            // .set(key, value)
+        // .set(key, value)
     },
     optimization: (chain) => {
         // chain.output.filename('script/[name].[hash:8].js');
@@ -35,6 +35,13 @@ module.exports = {
             .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [{
                 analyzerMode: 'static',
                 reportFilename: path.resolve(process.cwd(), 'report.html')
+            }])
+    },
+    vConsolePlugin: (chain) => {
+        chain.plugin('vConsole')
+            .use(require('vconsole-webpack-plugin'), [{
+                filter: [],  // 需要过滤的入口文件
+                enable: true // 发布代码前记得改回 false
             }])
     }
 }
