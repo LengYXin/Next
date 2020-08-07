@@ -11,13 +11,8 @@ const store = {
     $storeAbout: new ControllerAbout(ajax),
     $storeUser: new ControllerUser(ajax),
 }
-console.log("LENG: store", store)
-// 模拟登录
-onLogin()
-async function onLogin() {
-    await store.$storeUser.onLogin('18611752863', 'leng147896325')
-    onMergeBody(() => store.$storeUser.onSignatureUser())
-}
+store.$storeUser.onLogin('18611752863', 'leng147896325');
+onMergeBody(() => store.$storeUser.onSignatureUser())
 if (process.env.TARO_ENV === "h5") {
 
     // 配置缓存

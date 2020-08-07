@@ -6,6 +6,7 @@ import lodash from 'lodash';
 import { Component } from 'react';
 import { Observable } from "rxjs";
 import { AjaxRequest } from 'rxjs/ajax';
+import store from './index';
 export const ajax = new AjaxBasics({ target: 'https://cr-api-uat.xuantong.cn' });
 // 重置 Ajax
 onResetAjaxBasics()
@@ -21,6 +22,7 @@ declare module 'react' {
     }
 }
 function onResetAjaxBasics() {
+   
     AjaxBasics.onMap = function (res) {
         return lodash.get(res, 'response.result')
     }

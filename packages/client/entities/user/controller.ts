@@ -36,6 +36,9 @@ export class ControllerUser extends Entities {
         }
     }
     onSignatureUser() {
+        if (!this.loggedIn) {
+            return
+        }
         const user = toJS(this.UserInfo);
         user.timestamp = Date.now();
         // const str='appid48832f76dc1411e898f900163e048dd6password6581a04d-dc14-11e8-98f9-00163e048dd6timestamp1596724426013token1e2a5c0b32b94434b66f2eefc864ecd4'
