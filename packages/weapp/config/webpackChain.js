@@ -41,7 +41,7 @@ module.exports = {
         chain.plugin('vConsole')
             .use(require('vconsole-webpack-plugin'), [{
                 filter: [],  // 需要过滤的入口文件
-                enable: true // 发布代码前记得改回 false
+                enable: false // 发布代码前记得改回 false
             }])
     }
 }

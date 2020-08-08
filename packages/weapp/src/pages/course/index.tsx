@@ -1,9 +1,9 @@
-import { Navigator, View } from '@tarojs/components';
+import { Navigator, View, Image } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { ControllerCourse } from "@xt/client/entities";
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
-import { AtCard } from 'taro-ui';
+import { AtCard, AtAvatar } from 'taro-ui';
 import { PageDecorators } from '~/components/page';
 import './index.scss';
 
@@ -47,12 +47,18 @@ class Index extends Component<any> {
   componentDidHide() { }
   renderItem(item) {
     return <Navigator url={`/pages/course_details/index?id=${item.courseId}`} key={item.courseId}>
-      <AtCard
+      {/* <AtCard
         title={item.courseName}
         thumb={item.coursePictureUri}
       >
         {item.courseSubtitle}
-      </AtCard>
+      </AtCard> */}
+      <View className='at-row'>
+        <View className='at-col'>
+          <Image src={item.coursePictureUri} style="width:150px;height:100px" />
+        </View>
+        <View className='at-col'>{item.courseName}</View>
+      </View>
     </Navigator>
   }
   render() {

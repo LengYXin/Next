@@ -6,7 +6,7 @@ import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { AtAvatar, AtSearchBar } from 'taro-ui'
 import { PageDecorators } from '~/components/page'
-import Tabs from '~/components/tabs'
+import TabsScrollView from '~/components/tabsScrollView'
 import './index.scss'
 
 @inject('$storeStationery')
@@ -90,13 +90,13 @@ class Index extends Component<any> {
           value={this.state.value}
           onChange={this.onChange.bind(this)}
         />
-        <Tabs
+        <TabsScrollView
           surplusHeight={45}
           tabList={tabList}
           onTabsChange={this.onTabsChange.bind(this)}
           onScrollToLower={this.onScrollToLower.bind(this)}>
           {this.renderDataSource()}
-        </Tabs>
+        </TabsScrollView>
       </View>
     )
   }
