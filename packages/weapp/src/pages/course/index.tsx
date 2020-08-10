@@ -32,6 +32,7 @@ class Index extends Component<any> {
    * 下拉刷新
    */
   async onPullDownRefresh() {
+    console.log("LENG: Index -> onPullDownRefresh -> onPullDownRefresh")
     await this.onPagLoading(true)
     Taro.stopPullDownRefresh()
   }

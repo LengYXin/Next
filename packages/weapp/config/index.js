@@ -1,4 +1,6 @@
 const webpackChain = require('./webpackChain');
+const lodash = require('lodash');
+const fs = require('fs');
 const config = {
   projectName: 'xt',
   date: '2020-7-22',
@@ -62,10 +64,28 @@ const config = {
     }
   }
 }
-
+magicChange()
 module.exports = function (merge) {
   if (process.env.NODE_ENV === 'development') {
     return merge({}, config, require('./dev'))
   }
   return merge({}, config, require('./prod'))
+}
+
+function magicChange() {
+  try {
+    const startPath = require.resolve('@tarojs/router').replace('index.js', 'router.esm.js');
+    // 文件存在
+    if (fs.existsSync(startPath)) {
+      const startjs = fs.readFileSync(startPath).toString();
+      if (lodash.includes(startjs, 'onLoad = false) {')) {
+        console.log('------------------------------------ modify default setting ------------------------------------')
+        // 替换 代码
+        const newStartjs = startjs.replace('onLoad = false) {', 'onLoad = true) {// LENG magicChange ');
+        fs.writeFileSync(startPath, newStartjs);
+      }
+    }
+  } catch (error) {
+    console.log("modify failed", error);
+  }
 }

@@ -7,14 +7,13 @@
  */
 
 import { View } from '@tarojs/components';
-import { getCurrentInstance } from '@tarojs/taro';
-import React from 'react';
-import Taro from '@tarojs/taro';
+import Taro, { getCurrentInstance } from '@tarojs/taro';
 import lodash from 'lodash';
+import React from 'react';
 import { AtMessage, AtNavBar } from 'taro-ui';
-import Login from '../login';
-import store from '~/store';
 import { AtNavBarProps } from 'taro-ui/types/nav-bar';
+import Login from '../login';
+import './index.scss';
 declare module 'react' {
     interface ComponentLifecycle<P, S, SS = any> extends NewLifecycle<P, S, SS>, DeprecatedLifecycle<P, S> {
         componentDidShow?(options: any): void;
@@ -57,6 +56,9 @@ export function PageDecorators(options?: PageDecoratorsOptions) {
                 // }
                 super.UNSAFE_componentWillMount && super.UNSAFE_componentWillMount()
             }
+            // onPullDownRefresh() {
+            //     console.log("LENG: Page -> onPullDownRefresh -> onPullDownRefresh")
+            // }
             componentDidMount() {
                 super.componentDidMount && super.componentDidMount()
             }
@@ -93,7 +95,7 @@ export function PageDecorators(options?: PageDecoratorsOptions) {
                 }
             }
             render() {
-                return <View>
+                return <View className="xt-page-view">
                     {this.renderNav()}
                     <AtMessage />
                     <Login onSuccess={this.onSuccess.bind(this)} />
