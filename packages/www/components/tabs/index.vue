@@ -66,10 +66,12 @@ export default class extends Vue {
   // 组件中 使用不了 生命周期 beforeRouteUpdate
   @Watch("$route.query.active")
   queryUpdate(to, from, next) {
-    const { active } = this.$route.query;
-    if (active && !lodash.eq(active, this.activeKey)) {
-      this.activeKey = active as any;
-      this.emitTabsChange();
+    if (this.$el.isConnected) {
+      const { active } = this.$route.query;
+      if (active && !lodash.eq(active, this.activeKey)) {
+        this.activeKey = active as any;
+        this.emitTabsChange();
+      }
     }
   }
   @Emit("tabsChange")
