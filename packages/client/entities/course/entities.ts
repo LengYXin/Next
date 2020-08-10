@@ -24,9 +24,9 @@ export default class EntitiesCourse {
      * @memberof EntitiesCourse
      */
     @observable
-    details: any = {};
+    details: CourseDetails = {};
     @action.bound
-    protected setDetails(details) {
+    protected setDetails(details: CourseDetails) {
         this.details = details;
     }
 }

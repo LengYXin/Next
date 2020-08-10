@@ -67,7 +67,8 @@ export class ControllerCourse extends Entities {
      * @param {Object} [headers]
      * @memberof ControllerCourse
      */
-    async onGetDetails(body?: any, headers?: Object) {
+    async onGetDetails(body: { courseId: any }, headers?: Object) {
+        this.setDetails({});
         const res = await this.$ajax.post<any>(EnumApiCourse.CourseDetails, body, headers);
         this.setDetails(res);
     }

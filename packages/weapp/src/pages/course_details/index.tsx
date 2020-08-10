@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
 import { PageDecorators } from '~/components/page';
 import './index.scss';
+import Taro from '@tarojs/taro';
 
 @inject('$storeCourse')
 @observer
@@ -14,6 +15,7 @@ class Index extends Component<any> {
   }
   componentDidMount() {
     // this.onPagLoading(true)
+    this.PageStore.onGetDetails({ courseId: Taro.getCurrentInstance().router?.params.id })
   }
 
   componentWillUnmount() { }
@@ -25,7 +27,7 @@ class Index extends Component<any> {
   render() {
     return (
       <View className='index'>
-        课程详情
+        {this.PageStore.details.courseName}
       </View>
     )
   }
