@@ -13,7 +13,8 @@
         </a-list-item-meta>
       </a-list-item>
     </a-list>
-    <xt-editor :editorOptions="editorSettings" />
+    <xt-editor v-model="editor" :editorOptions="editorSettings" />
+    <div v-html="formatFace(editor)"></div>
   </div>
 </template>
 <script lang="ts">
@@ -26,6 +27,7 @@ import { Context } from "@nuxt/types";
   components: {},
 })
 export default class PageView extends Vue {
+  editor = "";
   dataSource = [
     "give",
     "signup",

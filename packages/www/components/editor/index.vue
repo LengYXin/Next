@@ -11,6 +11,14 @@
       style="display:none;"
       @change="emitImageInfo($event)"
     />
+    <a-popover placement="rightTop" trigger="click">
+      <template slot="content">
+        <div style="width:384px">
+          <xt-face @select="onAddFace" />
+        </div>
+      </template>
+      <a-button type="primary">表情</a-button>
+    </a-popover>
   </div>
 </template>
 
@@ -82,6 +90,12 @@ export default {
     delete this.quill;
   },
   methods: {
+    onAddFace(face) {
+      this.quill.insertText(
+        this.quill.getSelection() || this.quill.getLength() - 1,
+        face.value
+      );
+    },
     initializeEditor() {
       this.setupQuillEditor();
       this.checkForCustomImageHandler();
