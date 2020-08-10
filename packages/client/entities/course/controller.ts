@@ -1,10 +1,10 @@
+/// <reference types="./types" />
 import lodash from 'lodash';
 import { BindAll } from 'lodash-decorators';
 import { EnumApiCourse } from '../../api';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
 import { Pagination } from '../basics/pagination';
 import Entities from './entities';
-
 @BindAll()
 export class ControllerCourse extends Entities {
     constructor(protected $ajax: AjaxBasics) {

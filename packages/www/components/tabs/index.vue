@@ -10,7 +10,7 @@
     <a-tabs :activeKey="activeKey" @change="tabsChange" :class="'xt-tabs-'+align">
       <a-tab-pane v-for="tab in tabPane" :key="String(tab.key)">
         <span slot="tab">
-          <span v-text="tab.name"></span>
+          <span v-text="tab.title"></span>
         </span>
       </a-tab-pane>
     </a-tabs>
@@ -19,7 +19,7 @@
   <a-tabs v-else :activeKey="activeKey" @change="tabsChange" :class="'xt-tabs-'+align">
     <a-tab-pane v-for="tab in tabPane" :key="String(tab.key)">
       <span slot="tab">
-        <span v-text="tab.name"></span>
+        <span v-text="tab.title"></span>
       </span>
     </a-tab-pane>
   </a-tabs>

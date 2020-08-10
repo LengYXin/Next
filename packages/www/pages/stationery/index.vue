@@ -7,13 +7,11 @@
  */
 <template>
   <div class="xt-content xt-stationery">
-    <a-tabs :activeKey="activeKey" @change="tabsChange" class="xt-tabs-center">
-      <a-tab-pane v-for="tab in PageStore.typelist" :key="String(tab.typeId)">
-        <span slot="tab">
-          <span v-text="tab.typeName"></span>
-        </span>
-      </a-tab-pane>
-    </a-tabs>
+    <xt-tabs
+      :tabPane="PageStore.typelist"
+      :defaultActiveKey="defaultActiveKey"
+      @tabsChange="tabsChange"
+    />
     <List :loading="Pagination.loading" :dataSource="Pagination.dataSource" />
     <!-- 存在 更改地址栏 页签的时候 设置 key 用于触发初始化 change   -->
     <xt-pagination
@@ -45,34 +43,20 @@ export default class PageView extends Vue {
   get Pagination() {
     return this.$store.$storeStationery.Pagination;
   }
-  activeKey = lodash.get(this.$route.query, "active", "-1");
-  tabsChange(activeKey) {
-    this.$router.push({
-      query: lodash.merge({}, this.$route.query, {
-        active: activeKey,
-        current: "1",
-      }),
-    });
+  defaultActiveKey = "-1";
+  activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
+  async tabsChange(activeKey) {
+    this.activeKey = activeKey;
+    this.Pagination.onReset();
   }
   /**
    *  初始化 和 页码 更改调用
    */
   onCurrentChange(current, reset = false) {
-    // reset && this.Pagination.onReset();
     this.Pagination.onCurrentChange(current, {
       typeId: this.activeKey,
       commodityName: "",
     });
-  }
-  // 组件中 使用不了 生命周期 beforeRouteUpdate
-  @Watch("$route.query.active")
-  queryUpdate(to, from, next) {
-    const { active, current } = this.$route.query;
-    if (active && !lodash.eq(active, this.activeKey)) {
-      this.activeKey = active as any;
-      // this.onCurrentChange(1);
-    }
-    // next();
   }
   mounted() {}
   updated() {}

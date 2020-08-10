@@ -91,13 +91,19 @@ export default class extends Vue {
   queryUpdate(to, from, next) {
     if (this.toQuery) {
       const { current } = this.$route.query;
-      // console.warn("LENG: queryUpdate -> current", current);
+      console.warn("LENG: queryUpdate -> current", current);
       if (!lodash.eq(String(current), String(this.Pagination.current))) {
         this.onLoading();
       }
     }
   }
   updated() {}
-  destroyed() {}
+  destroyed() {
+    // this.$router.replace({
+    //   query: lodash.merge({}, this.$route.query, {
+    //     current: 1,
+    //   }),
+    // });
+  }
 }
 </script>

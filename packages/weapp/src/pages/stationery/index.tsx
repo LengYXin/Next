@@ -20,7 +20,7 @@ class Index extends Component<any> {
     return this.PageStore.Pagination
   }
   get typeId() {
-    return lodash.nth(this.PageStore.typelist, this.current)?.typeId
+    return lodash.nth(this.PageStore.typelist, this.current)?.key
   }
   current = 0;
   state = {
@@ -81,9 +81,7 @@ class Index extends Component<any> {
     </View>
   }
   render() {
-    const tabList = this.PageStore.typelist.map(item => {
-      return { title: item.typeName, key: item.typeId }
-    })
+    const tabList = this.PageStore.typelist
     return (
       <View className='index'>
         <AtSearchBar

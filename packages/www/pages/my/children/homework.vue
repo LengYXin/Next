@@ -37,8 +37,8 @@ import lodash from "lodash";
 })
 export default class PageView extends Vue {
   tabPane = [
-    { key: 1, name: "已评阅" },
-    { key: 2, name: "未评阅" },
+    { key: 1, title: "已评阅" },
+    { key: 2, title: "未评阅" },
   ];
   defaultActiveKey = "1";
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
