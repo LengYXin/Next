@@ -52,10 +52,15 @@ export default class extends Vue {
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   // 更改
   tabsChange(activeKey) {
+    const query = lodash.merge({}, this.$route.query, {
+      active: activeKey,
+    });
+    // 存在分页页码
+    if (query.current) {
+      query.current = "1";
+    }
     this.$router.push({
-      query: lodash.merge({}, this.$route.query, {
-        active: activeKey,
-      }),
+      query,
     });
   }
   // 组件中 使用不了 生命周期 beforeRouteUpdate

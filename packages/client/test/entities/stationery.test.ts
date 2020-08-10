@@ -10,7 +10,7 @@ describe('ControllerCourse', () => {
     // });
     it('dataSource', async () => {
         await ctl.onGetTypelist();
-        await ctl.Pagination.onReset().onLoading({ typeId: lodash.head(ctl.typelist).typeId })
+        await ctl.Pagination.onReset().onLoading({ typeId: lodash.head(ctl.typelist).key })
         expect(ctl.Pagination.dataSource.length).toBeTruthy();
     })
 });

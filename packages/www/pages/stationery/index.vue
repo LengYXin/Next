@@ -46,8 +46,8 @@ export default class PageView extends Vue {
   defaultActiveKey = "-1";
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   async tabsChange(activeKey) {
-    this.activeKey = activeKey;
     this.Pagination.onReset();
+    this.activeKey = activeKey;
   }
   /**
    *  初始化 和 页码 更改调用
