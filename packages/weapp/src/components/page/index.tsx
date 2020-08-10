@@ -41,7 +41,9 @@ export function PageDecorators(options?: PageDecoratorsOptions) {
             get CurrentInstance() {
                 return getCurrentInstance()
             }
-
+            componentDidCatch(){
+                console.log('componentDidCatch')
+            }
             UNSAFE_componentWillMount() {
                 // 需要登录
                 // if (options?.logon) {
@@ -69,7 +71,7 @@ export function PageDecorators(options?: PageDecoratorsOptions) {
             }
             // 登录成功
             onSuccess() {
-                // this.componentDidMount()
+                this.componentDidMount()
             }
             // 返回
             onClickLeftIcon() {

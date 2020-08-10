@@ -19,7 +19,8 @@ export class ControllerVideo extends Entities {
         key: 'id',
         currentKey: 'pageIndex',
         defaultPageSize: 9,
-        onMapValues: 'courseFreeResponseVos'
+        onMapValues: 'videoShareDetialList'
+        // onMapValues: 'courseFreeResponseVos'
     });
     /**
      * 点赞

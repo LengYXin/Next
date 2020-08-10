@@ -14,17 +14,15 @@ import NProgress from 'nprogress';
 import { TimeoutError } from "rxjs";
 import { AjaxError, AjaxResponse } from "rxjs/ajax";
 import Vue from 'vue';
-// 重置  AjaxBasics  配置
-onResetAjaxBasics()
+import { ControllerUser } from '@xt/client/entities';
 export const ajax = new AjaxBasics({ target: process.env.target });
 // 扩展
 Vue.prototype.$ajax = ajax;
 Vue.prototype.$EnumApi = EnumApi;
-
 /**
  * 重置  AjaxBasics  配置
  */
-function onResetAjaxBasics() {
+export function onResetAjaxBasics($storeUser: ControllerUser) {
     // 过滤
     AjaxBasics.onFilter = function (res) {
         // 数据 Response 

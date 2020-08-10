@@ -6,9 +6,9 @@
  * @desc [description]
  */
 
-import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerVideo } from "@xt/client/entities";
+import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerVideo, ControllerUser } from "@xt/client/entities";
 import { create, persist } from 'mobx-persist';
-import { ajax } from "./clientConfig";
+import { ajax, onResetAjaxBasics } from "./clientConfig";
 
 import $locale from './locale';
 import $global from './global';
@@ -22,11 +22,14 @@ const store = {
     $storeStationery: new ControllerStationery(ajax),
     $storeVideo: new ControllerVideo(ajax),
     $storeAbout: new ControllerAbout(ajax),
+    $storeUser: new ControllerUser(ajax),
 }
-console.log("LENG: store", store)
-// 配置缓存
+onResetAjaxBasics(store.$storeUser);
 onCreatePersist();
-// 配置缓存
+console.log("LENG: store", store)
+/**
+ * 配置缓存数据
+ */
 function onCreatePersist() {
     // https://github.com/pinqy520/mobx-persist
     const hydrate = create({
@@ -37,8 +40,12 @@ function onCreatePersist() {
     });
     persist({ locale: true })(store.$locale);
     persist({ Banners: { type: 'list' } })(store.$storeHome);
-    hydrate('xt_locale', store.$locale);
-    hydrate('xt_home', store.$storeHome);
+    persist({ typelist: { type: 'list' } })(store.$storeStationery);
+    persist({ typelist: { type: 'list' } })(store.$storeAbout);
+    hydrate(`${$global.localStorageStartsWith}locale`, store.$locale);
+    hydrate(`${$global.localStorageStartsWith}Home`, store.$storeHome);
+    hydrate(`${$global.localStorageStartsWith}Stationery`, store.$storeStationery);
+    hydrate(`${$global.localStorageStartsWith}About`, store.$storeAbout);
 }
 // 扩展 ts
 declare module 'vuex/types/index' {
@@ -81,6 +88,12 @@ declare module 'vuex/types/index' {
          * @memberof Store
          */
         readonly $storeAbout: ControllerAbout
+        /**
+         * 用户
+         * @type {ControllerUser}
+         * @memberof Store
+         */
+        readonly $storeUser: ControllerUser
     }
 }
 // 状态 导出
