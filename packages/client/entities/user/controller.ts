@@ -31,8 +31,10 @@ export class ControllerUser extends Entities {
             this.onToggleLoading(false)
             this.setUserInfo(user);
         } catch (error) {
+            this.onOutLogin()
             this.onToggleLoading(false)
-            console.error("LENG: ControllerUser -> onLogin -> error", error)
+            // console.error("LENG: ControllerUser -> onLogin -> error", error)
+            throw error
         }
     }
     /**
@@ -41,6 +43,9 @@ export class ControllerUser extends Entities {
     onOutLogin() {
         this.setUserInfo({});
     }
+    /**
+     * 配置授权用户
+     */
     onSignatureUser() {
         if (!this.loggedIn) {
             return

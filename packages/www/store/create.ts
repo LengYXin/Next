@@ -42,10 +42,12 @@ function onCreatePersist() {
     persist({ Banners: { type: 'list' } })(store.$storeHome);
     persist({ typelist: { type: 'list' } })(store.$storeStationery);
     persist({ typelist: { type: 'list' } })(store.$storeAbout);
+    persist({ UserInfo: { type: 'object' } })(store.$storeUser);
     hydrate(`${$global.localStorageStartsWith}locale`, store.$locale);
     hydrate(`${$global.localStorageStartsWith}Home`, store.$storeHome);
     hydrate(`${$global.localStorageStartsWith}Stationery`, store.$storeStationery);
     hydrate(`${$global.localStorageStartsWith}About`, store.$storeAbout);
+    hydrate(`${$global.localStorageStartsWith}User`, store.$storeUser);
 }
 // 扩展 ts
 declare module 'vuex/types/index' {

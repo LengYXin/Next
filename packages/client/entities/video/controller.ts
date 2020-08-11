@@ -27,9 +27,18 @@ export class ControllerVideo extends Entities {
      * @param data 点赞的数据 
      */
     onLikes(data) {
-        data = toJS(data)
-        data.likeCount++;
-        this.Pagination.onUpdate(data, data)
+        try {
+            if (data.isLiked) {
+                throw '已点赞'
+            }
+            data = toJS(data)
+            data.likeCount++;
+            data.isLiked = true;
+            this.Pagination.onUpdate(data, data);
+            this.$ajax.post(EnumApiVideo.VideoPraise, { videoShareId: data.id })
+        } catch (error) {
+            throw error
+        }
     }
 }
 export default ControllerVideo

@@ -34,8 +34,8 @@
         </a-form-model-item>
       </a-tab-pane>
     </a-tabs>
-    <a-form-model-item >
-      <a-button type="primary" block>Submit</a-button>
+    <a-form-model-item>
+      <a-button type="primary" html-type="submit" block>Submit</a-button>
     </a-form-model-item>
   </a-form-model>
 </template>
@@ -45,11 +45,25 @@ import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
   components: {},
 })
 export default class extends Vue {
+  get PageStore() {
+    return this.$store.$storeUser;
+  }
   formInline = {
-    user: "",
-    password: "",
+    user: "18611752863",
+    password: "leng147896325",
   };
-  onSubmit() {}
+  async onSubmit() {
+    try {
+      await this.PageStore.onLogin(
+        this.formInline.user,
+        this.formInline.password
+      );
+      this.PageStore.onToggleVisible(false);
+      this.$message.success({ content: "欢迎", key: "login" });
+    } catch (error) {
+      // this.$message.error({ content: error, key: "login" });
+    }
+  }
   mounted() {}
   updated() {}
   destroyed() {}

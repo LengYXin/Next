@@ -19,6 +19,7 @@ import lodash from "lodash";
   components: { List },
 })
 export default class PageView extends Vue {
+  @Provide("VideoStore")
   get PageStore() {
     return this.$store.$storeVideo;
   }

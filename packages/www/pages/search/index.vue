@@ -49,6 +49,7 @@ export default class PageView extends Vue {
   storeCourse = new ControllerCourse(this.$ajax);
   storeAbout = new ControllerAbout(this.$ajax);
   storeStationery = new ControllerStationery(this.$ajax);
+  @Provide("VideoStore")
   storeVideo = new ControllerVideo(this.$ajax);
   get Pagination() {
     switch (this.activeKey) {
@@ -108,7 +109,7 @@ export default class PageView extends Vue {
     this.onLoading();
   }
   mounted() {
-    // console.log(this);
+    console.log("LENG: PageView -> mounted -> this", this);
   }
   updated() {}
   destroyed() {}

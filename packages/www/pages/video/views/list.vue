@@ -6,14 +6,20 @@
           <a-card class="xt-video-card" :bordered="false">
             <xt-hover>
               <img class="xt-video-img" v-lazy="item.videoCoverThumbUrl" />
-              <div slot="footer">
-                <span v-text="item.title"></span>
-                <span v-text="item.viewCount"></span>
-                <span v-text="item.likeCount"></span>
+              <div class="xt-video-card-footer" slot="footer">
+                <a-row type="flex">
+                  <a-col :span="16" class="xt-text-ellipsis">
+                    <span v-text="item.title"></span>
+                  </a-col>
+                  <a-col :span="8" class="xt-text-align-right">
+                    <Viewfooter :item="item" />
+                    <Likefooter :item="item" />
+                  </a-col>
+                </a-row>
               </div>
               <template #hover>
-                <nuxt-link :to="`/video/${item.id}`">
-                  <div>GO</div>
+                <nuxt-link class="xt-flex-center" :to="`/video/${item.id}`">
+                  <a-icon class="xt-video-play" type="play-circle" />
                 </nuxt-link>
               </template>
             </xt-hover>
@@ -28,8 +34,10 @@ import { Component, Prop, Vue, Watch, Provide } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
 import lodash from "lodash";
+import Likefooter from "./like.vue";
+import Viewfooter from "./view.vue";
 @Component({
-  components: {},
+  components: { Likefooter, Viewfooter },
 })
 export default class PageView extends Vue {
   @Prop({ default: true }) loading;
@@ -56,6 +64,12 @@ export default class PageView extends Vue {
     height: 180px;
     display: block;
     margin: auto;
+  }
+  &-card-footer {
+  }
+  &-play {
+    color: @white !important;
+    font-size: 50px;
   }
 }
 </style>

@@ -8,7 +8,7 @@
 import * as EnumApi from '@xt/client/api';
 import '@xt/client/configure';
 import { AjaxBasics } from '@xt/client/helpers/ajaxBasics';
-import { notification } from 'ant-design-vue';
+import { notification, message } from 'ant-design-vue';
 import lodash from 'lodash';
 import NProgress from 'nprogress';
 import { TimeoutError } from "rxjs";
@@ -23,6 +23,9 @@ Vue.prototype.$EnumApi = EnumApi;
  * 重置  AjaxBasics  配置
  */
 export function onResetAjaxBasics($storeUser: ControllerUser) {
+    AjaxBasics.onMergeBody = function () {
+        return $storeUser.onSignatureUser()
+    }
     // 过滤
     AjaxBasics.onFilter = function (res) {
         // 数据 Response 
@@ -45,7 +48,11 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
         return res.response.result
     }
     AjaxBasics.onError = function (error) {
-        notification.error({ key: "AjaxBasics", message: '提示', description: lodash.get(error, 'response.msg', error.message) })
+        // notification.error({ key: "AjaxBasics", message: '提示', description: lodash.get(error, 'response.msg', error.message) })
+        message.error(lodash.get(error, 'response.msg', error.message))
+        if (lodash.includes([600002], lodash.get(error, 'response.code'))) {
+            $storeUser.onToggleVisible(true)
+        }
     }
     AjaxBasics.onNProgress = function (type: 'start' | 'done' = 'start') {
         if (type == "start") {

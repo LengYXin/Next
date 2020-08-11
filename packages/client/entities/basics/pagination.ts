@@ -273,8 +273,11 @@ export class Pagination<T> {
      */
     @action
     onUpdate(key: string | T, value: T) {
-        const index = lodash.findIndex(this.dataSource, this.getPredicate(key));
-        return lodash.updateWith(this.dataSource, `[${index}]`, lodash.constant(value))
+        const dataSource = lodash.clone(this.dataSource);
+        const index = lodash.findIndex(dataSource, this.getPredicate(key));
+        lodash.updateWith(dataSource, `[${index}]`, lodash.constant(value))
+        this.dataSource = dataSource;
+        return dataSource
     }
     /**
      * 根据 key 删除数据
@@ -307,7 +310,6 @@ export class Pagination<T> {
     @action
     onReset(options?: PaginationOptions) {
         this.options = lodash.merge({}, this.options, options);
-        // console.log("LENG: Pagination<T> -> onReset -> this.options", this.options)
         this.current = this.options.defaultCurrent;
         this.pageSize = this.options.defaultPageSize;
         this.isUndefined = false;

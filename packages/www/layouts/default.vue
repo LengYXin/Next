@@ -81,7 +81,7 @@ export default class extends Vue {
 .xt-layout-header {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   z-index: @zindex-modal-mask + 1;
   overflow: hidden;
   box-shadow: @xt-header-box-shadow;
