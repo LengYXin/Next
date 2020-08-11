@@ -9,14 +9,10 @@
   <div class="xt-comment">
     <a-comment>
       <!-- 头像 -->
-      <a-avatar
-        slot="avatar"
-        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        alt="Han Solo"
-      />
+      <a-avatar slot="avatar" :src="avatar" :alt="author" />
       <!-- 作者 笔山 右侧菜单 -->
       <div class="xt-comment-author" slot="author">
-        <a>Han Solo</a>
+        <span v-text="author"></span>
         <span>笔山</span>
         <div class="xt-comment-dropdown" v-if="$slots.overlay">
           <a-dropdown>
@@ -28,8 +24,8 @@
         </div>
       </div>
       <!-- 时间 -->
-      <a-tooltip slot="datetime" :title="'aaaaaaa'">
-        <span>bbbbbb</span>
+      <a-tooltip slot="datetime" :title="datetime">
+        <span v-text="datetime"></span>
       </a-tooltip>
       <!-- 内容 -->
       <div class="xt-comment-content" slot="content">
@@ -53,6 +49,12 @@ import lodash from "lodash";
 })
 export default class extends Vue {
   @Prop({ default: "" }) content;
+  @Prop({ default: "" }) avatar;
+  @Prop({ default: "author" }) author;
+  @Prop({ default: "" }) time;
+  get datetime() {
+    return this.time;
+  }
   mounted() {
     // console.log(this);
   }
@@ -63,6 +65,11 @@ export default class extends Vue {
 <style lang="less" scoped>
 .xt-comment {
   &-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    text-align: justify;
+    word-break: break-all;
   }
   &-author {
     position: relative;
@@ -77,6 +84,11 @@ export default class extends Vue {
 </style>
 <style lang="less" >
 .xt-comment {
+  &-content {
+    p {
+      margin: auto;
+    }
+  }
   .ant-comment-content-author {
     flex-direction: column;
   }

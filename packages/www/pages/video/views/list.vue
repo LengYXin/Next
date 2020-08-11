@@ -12,8 +12,8 @@
                     <span v-text="item.title"></span>
                   </a-col>
                   <a-col :span="8" class="xt-text-align-right">
-                    <Viewfooter :item="item" />
-                    <Likefooter :item="item" />
+                    <VeView :item="item" />
+                    <VeLike :item="item" />
                   </a-col>
                 </a-row>
               </div>
@@ -34,10 +34,10 @@ import { Component, Prop, Vue, Watch, Provide } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
 import lodash from "lodash";
-import Likefooter from "./like.vue";
-import Viewfooter from "./view.vue";
+import VeLike from "./like.vue";
+import VeView from "./view.vue";
 @Component({
-  components: { Likefooter, Viewfooter },
+  components: { VeView, VeLike },
 })
 export default class PageView extends Vue {
   @Prop({ default: true }) loading;

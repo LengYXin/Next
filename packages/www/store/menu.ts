@@ -63,6 +63,10 @@ class Menu {
             // path: route.path,
         }]
     }
+    /**
+     * 设置面包屑
+     * @param breadcrumb 
+     */
     @action
     setBreadcrumb(breadcrumb) {
         this.breadcrumb.push(breadcrumb);

@@ -77,10 +77,12 @@ export default class extends Vue {
 <style lang="less" scoped>
 .xt-layout {
   min-height: 100vh;
+  // padding: 0 20px;
 }
 .xt-layout-header {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100vw;
   z-index: @zindex-modal-mask + 1;
   overflow: hidden;
