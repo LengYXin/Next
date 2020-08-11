@@ -12,9 +12,10 @@ import { getCurrentInstance } from "@tarojs/taro";
 class Index extends Component<any> {
   state = {
     value: "",
-    gridData: [
+    navList: [
       {
-        image: "../../assets/icon/navigation1.png",
+        image:
+          "https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png",
         value: "全部课程"
       },
       {
@@ -56,6 +57,17 @@ class Index extends Component<any> {
     console.log("componentDidHide", getCurrentInstance());
   }
 
+  navClick(item: object, index: number) {
+    console.log("Index -> navClick -> index", index);
+    console.log("Index -> navClick -> item", item);
+    let actions: Map<any, any> = new Map([[0, "/pages/course_list/index"]]);
+    let url = actions.get(index);
+    url &&
+      Taro.navigateTo({
+        url: url
+      });
+  }
+
   onChange(value: any) {
     this.setState({
       value: value
@@ -64,30 +76,33 @@ class Index extends Component<any> {
   onActionClick() {
     console.log("开始搜索");
   }
-
+  renderSwiperItem(item) {
+    return (
+      <SwiperItem key={item.id}>
+        <Image style="width:100%" src={item.pictureUri} />
+      </SwiperItem>
+    );
+  }
   renderSwiper() {
     const { Banners } = this.PageStore;
     if (Banners.length) {
       return (
         <Swiper
-          className="index-swiper"
-          indicatorColor="#FFFFFF"
-          indicatorActiveColor="#C4A57F"
+          indicatorColor="#FFF"
+          indicatorActiveColor="#c4a57f"
+          className="xt-index-swiper"
           circular
           indicatorDots
+          autoplay
         >
-          {Banners.map(img => (
-            <SwiperItem key={img.id}>
-              <Image style="width:100%" src={img.pictureUri} />
-            </SwiperItem>
-          ))}
+          {Banners.map(this.renderSwiperItem.bind(this))}
         </Swiper>
       );
     }
   }
   renderIndexHeader() {
     return (
-      <View className="index-header">
+      <View className="xt-index-header">
         <View className="left">
           <View className="at-icon at-icon-search"></View>
           <View>搜索你感兴趣的内容</View>
@@ -108,11 +123,13 @@ class Index extends Component<any> {
         <AtMessage />
         {this.renderIndexHeader()}
         {this.renderSwiper()}
+        {/* <Image style="width:100%" src={this.$imgs.test} /> */}
         <AtGrid
+          className="xt-index-grid"
           hasBorder={false}
-          className="index-grid"
           columnNum={5}
-          data={this.state.gridData}
+          data={this.state.navList}
+          onClick={this.navClick}
         />
       </View>
     );

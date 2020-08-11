@@ -1,8 +1,8 @@
-import { Image, Swiper, SwiperItem, View } from "@tarojs/components";
+import { Image, View } from "@tarojs/components";
 import { ControllerCourse } from "@xt/client/entities";
 import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
-import { AtButton, AtMessage } from "taro-ui";
+import { AtButton, AtMessage, AtNavBar } from "taro-ui";
 import "./index.scss";
 
 @inject("$storeCourse")
@@ -21,12 +21,19 @@ class Index extends Component<any> {
 
   componentDidShow() {}
 
+  handleClick() {}
+
   componentDidHide() {}
   render() {
     return (
-      <View className="index">
+      <View className="course-list">
         <AtMessage />
-        去上课
+        <AtNavBar
+          onClickLeftIcon={this.handleClick}
+          color="#000"
+          title="课程列表"
+          leftIconType="chevron-left"
+        />
       </View>
     );
   }

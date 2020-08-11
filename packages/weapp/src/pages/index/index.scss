@@ -1,5 +1,5 @@
-.index {
-  .index-header {
+.xt-index {
+  &-header {
     display: flex;
     height: 112px;
     line-height: 112px;
@@ -24,7 +24,7 @@
     }
   }
 
-  .index-swiper {
+  &-swiper {
     height: 480px;
     .hydrated {
       height: 100%;
@@ -35,9 +35,8 @@
     }
   }
 
-  .index-grid {
+  &-grid {
     padding: 48px 40px 31px;
-    border: 1px solid red;
     .content-inner__text {
       font-size: 20px;
       color: #c4a57f;

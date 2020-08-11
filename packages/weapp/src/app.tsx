@@ -1,9 +1,9 @@
 import { Provider } from 'mobx-react';
 import React, { Component } from 'react';
-import { getCurrentInstance } from '@tarojs/taro'
-
 import './app.scss';
+import './img.config';
 import store from './store';
+
 class App extends Component {
   componentDidMount() { }
 
