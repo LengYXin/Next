@@ -38,17 +38,4 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" >
-.xt-video {
-  &-card {
-    .ant-card-body {
-      padding: 20px 0;
-    }
-  }
-  &-img {
-    width: 320px;
-    height: 180px;
-    display: block;
-    margin: auto;
-  }
-}
 </style>

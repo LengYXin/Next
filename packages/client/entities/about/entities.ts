@@ -4,7 +4,7 @@ import { Subject, Subscription } from 'rxjs';
 import { AjaxRequest } from 'rxjs/ajax';
 import lodash from 'lodash';
 
-interface tabs { key: any, name: string }
+interface tabs { key: any, title: string }
 export default class EntitiesAbout {
     constructor() {
     }

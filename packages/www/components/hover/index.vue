@@ -7,14 +7,15 @@
  */
 <template>
   <div class="xt-hover">
-    <!-- 默认展示 -->
     <div class="xt-hover-content">
+      <!-- 默认展示 -->
       <slot></slot>
+      <!-- 悬浮展示 -->
+      <div class="xt-hover-suspension">
+        <slot name="hover"></slot>
+      </div>
     </div>
-    <!-- 悬浮展示 -->
-    <div class="xt-hover-suspension">
-      <slot name="hover"></slot>
-    </div>
+    <slot name="footer"></slot>
   </div>
 </template>
 <script lang="ts">
@@ -37,9 +38,9 @@ export default class extends Vue {
 </script>
 <style lang="less" scoped>
 .xt-hover {
-  position: relative;
-  overflow: hidden;
   &-content {
+    position: relative;
+    overflow: hidden;
   }
   &-suspension {
     position: absolute;

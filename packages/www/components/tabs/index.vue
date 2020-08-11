@@ -10,7 +10,7 @@
     <a-tabs :activeKey="activeKey" @change="tabsChange" :class="'xt-tabs-'+align">
       <a-tab-pane v-for="tab in tabPane" :key="String(tab.key)">
         <span slot="tab">
-          <span v-text="tab.name"></span>
+          <span v-text="tab.title"></span>
         </span>
       </a-tab-pane>
     </a-tabs>
@@ -19,7 +19,7 @@
   <a-tabs v-else :activeKey="activeKey" @change="tabsChange" :class="'xt-tabs-'+align">
     <a-tab-pane v-for="tab in tabPane" :key="String(tab.key)">
       <span slot="tab">
-        <span v-text="tab.name"></span>
+        <span v-text="tab.title"></span>
       </span>
     </a-tab-pane>
   </a-tabs>
@@ -52,19 +52,26 @@ export default class extends Vue {
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   // 更改
   tabsChange(activeKey) {
+    const query = lodash.merge({}, this.$route.query, {
+      active: activeKey,
+    });
+    // 存在分页页码
+    if (query.current) {
+      query.current = "1";
+    }
     this.$router.push({
-      query: lodash.merge({}, this.$route.query, {
-        active: activeKey,
-      }),
+      query,
     });
   }
   // 组件中 使用不了 生命周期 beforeRouteUpdate
   @Watch("$route.query.active")
   queryUpdate(to, from, next) {
-    const { active } = this.$route.query;
-    if (active && !lodash.eq(active, this.activeKey)) {
-      this.activeKey = active as any;
-      this.emitTabsChange();
+    if (this.$el.isConnected) {
+      const { active } = this.$route.query;
+      if (active && !lodash.eq(active, this.activeKey)) {
+        this.activeKey = active as any;
+        this.emitTabsChange();
+      }
     }
   }
   @Emit("tabsChange")

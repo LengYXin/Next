@@ -1,0 +1,66 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:16:12
+ * @modify date 2020-08-05 14:16:12
+ * @desc [description]
+ */
+<template>
+  <div>
+    <a-tooltip v-for="face in faces" :key="face.value">
+      <template slot="title">{{face.phrase}}</template>
+      <a-avatar :src="face.icon" @click="onFace(face)" />
+    </a-tooltip>
+  </div>
+</template>
+
+<script lang="ts">
+import dplayer from "dplayer";
+import lodash from "lodash";
+import faces from "./face.json";
+import { Component, Prop, Vue, Emit } from "vue-property-decorator";
+// Vue.filter("face", function (value) {
+//   console.log("LENG: value", value);
+//   if (!value) return "";
+//   return value;
+// });
+/**
+ * 转换 表情
+ */
+Vue.prototype.formatFace = function (html: string) {
+  if (html) {
+    const fas = lodash.uniq(html.match(/\[([\s\S]+?)\]/g));
+    fas.map((value) => {
+      const face = lodash.find(faces, ["value", value]);
+      if (face) {
+        const reg = new RegExp(`(\\${value})`, "g");
+        html = lodash.replace(
+          html,
+          reg,
+          `<span class="ant-avatar ant-avatar-circle ant-avatar-image xt-face"><img src="${face.icon}"></span>`
+        );
+      }
+    });
+  }
+  return html;
+};
+@Component({
+  components: {},
+})
+export default class extends Vue {
+  faces = faces;
+  @Emit("select")
+  onFace(face) {
+    return face;
+  }
+  mounted() {}
+  updated() {}
+  destroyed() {}
+}
+</script>
+
+<style>
+.xt-face{
+  margin: 0 3px;
+}
+</style>

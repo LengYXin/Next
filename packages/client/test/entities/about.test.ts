@@ -16,7 +16,7 @@ describe('ControllerCourse', () => {
     // });
     it('dataSource', async () => {
         await ctl.onGetTypelist();
-        const body = { columnId: lodash.head(ctl.typelist).typeId };
+        const body = { columnId: lodash.head(ctl.typelist).key };
         await onLoading();
         async function onLoading() {
             await ctl.Pagination.onLoading(body, null, infiniteEvent);

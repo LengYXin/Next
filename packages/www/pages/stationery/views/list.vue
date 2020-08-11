@@ -8,20 +8,22 @@
 <template>
   <a-spin :spinning="loading">
     <a-row :gutter="16">
-      <a-col v-for="item in dataSource" :key="item.commodityId" :span="6">
-        <a-card class="xt-stationery-card" :bordered="false">
-          <xt-hover>
-            <img class="xt-stationery-img" v-lazy="item.commodityCoverUrl" />
-            <template #hover>
-              <span v-text="item.commodityName"></span>
-              <span v-money="item.commodityPrice"></span>
-              <a :href="item.commodityUrl" target="_blank">
-                <a-button type="orange">购买</a-button>
-              </a>
-            </template>
-          </xt-hover>
-        </a-card>
-      </a-col>
+      <transition-group name="opacity">
+        <a-col v-for="item in dataSource" :key="item.commodityId" v-bind="bindCol">
+          <a-card class="xt-stationery-card" :bordered="false">
+            <xt-hover>
+              <img class="xt-stationery-img" v-lazy="item.commodityCoverUrl" />
+              <template #hover>
+                <span v-text="item.commodityName"></span>
+                <span v-money="item.commodityPrice"></span>
+                <a :href="item.commodityUrl" target="_blank">
+                  <a-button type="orange">购买</a-button>
+                </a>
+              </template>
+            </xt-hover>
+          </a-card>
+        </a-col>
+      </transition-group>
     </a-row>
   </a-spin>
 </template>
@@ -36,6 +38,12 @@ import lodash from "lodash";
 export default class PageView extends Vue {
   @Prop({ default: true }) loading;
   @Prop({ default: [] }) dataSource;
+  bindCol = {
+    lg: 6,
+    md: 8,
+    sm: 12,
+    xs: 24,
+  };
   mounted() {}
   updated() {}
   destroyed() {}

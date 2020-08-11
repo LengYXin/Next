@@ -37,7 +37,7 @@ export default class extends Vue {
     this.onLoading();
   }
   mounted() {
-    // console.log(this);
+    console.log(this.$route);
   }
   onGetOptions() {
     const { current } = this.$route.query;
@@ -89,15 +89,22 @@ export default class extends Vue {
    */
   @Watch("$route.query.current")
   queryUpdate(to, from, next) {
-    if (this.toQuery) {
-      const { current } = this.$route.query;
-      // console.warn("LENG: queryUpdate -> current", current);
-      if (!lodash.eq(String(current), String(this.Pagination.current))) {
-        this.onLoading();
+    if (this.$el.isConnected) {
+      if (this.toQuery) {
+        const { current } = this.$route.query;
+        if (!lodash.eq(String(current), String(this.Pagination.current))) {
+          this.onLoading();
+        }
       }
     }
   }
   updated() {}
-  destroyed() {}
+  destroyed() {
+    // this.$router.replace({
+    //   query: lodash.merge({}, this.$route.query, {
+    //     current: 1,
+    //   }),
+    // });
+  }
 }
 </script>

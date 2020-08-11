@@ -66,8 +66,7 @@ export default class extends Vue {
 }
 </script>
 <style lang="less">
-.page-enter-active,
-.page-leave-active {
+.page-enter-active {
   transition: opacity 0.2s;
 }
 .page-enter,

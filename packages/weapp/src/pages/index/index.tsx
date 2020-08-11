@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Image, Swiper, SwiperItem, View } from "@tarojs/components";
 import { ControllerHome } from "@xt/client/entities";
 import { inject, observer } from "mobx-react";
@@ -8,7 +9,18 @@ import "./index.scss";
 import { getCurrentInstance } from "@tarojs/taro";
 
 @inject("$storeHome")
+=======
+import { Image, Swiper, SwiperItem, View } from '@tarojs/components'
+import { ControllerHome } from "@xt/client/entities"
+import { inject, observer } from 'mobx-react'
+import React, { Component } from 'react'
+import { AtMessage } from 'taro-ui'
+import { PageDecorators } from "~/components/page"
+import './index.scss'
+@inject('$storeHome')
+>>>>>>> 7037dd1ac654ce153a01b45851c31859ddc12c6d
 @observer
+@PageDecorators()
 class Index extends Component<any> {
   state = {
     value: "",
@@ -52,7 +64,6 @@ class Index extends Component<any> {
   componentDidShow() {
     console.log("componentDidShow");
   }
-
   componentDidHide() {
     console.log("componentDidHide", getCurrentInstance());
   }
@@ -112,12 +123,6 @@ class Index extends Component<any> {
     );
   }
   render() {
-    // return (
-    //   <View className='index'>
-    //     <AtMessage />
-    //    首页
-    //   </View>
-    // )
     return (
       <View className="index">
         <AtMessage />

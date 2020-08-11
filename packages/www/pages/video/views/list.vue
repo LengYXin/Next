@@ -1,23 +1,25 @@
 <template>
   <a-spin :spinning="loading">
     <a-row :gutter="16">
-      <a-col v-for="item in dataSource" :key="item.id" :span="8">
-        <a-card class="xt-video-card" :bordered="false">
-          <xt-hover>
-            <img class="xt-video-img" v-lazy="item.videoCoverThumbUrl" />
-            <div>
-              <span v-text="item.title"></span>
-              <span v-text="item.viewCount"></span>
-              <span  v-text="item.likeCount"></span>
-            </div>
-            <template #hover>
-              <nuxt-link :to="`/video/${item.id}`">
-                <div>GO</div>
-              </nuxt-link>
-            </template>
-          </xt-hover>
-        </a-card>
-      </a-col>
+      <transition-group name="opacity">
+        <a-col v-for="item in dataSource" :key="item.id" v-bind="bindCol">
+          <a-card class="xt-video-card" :bordered="false">
+            <xt-hover>
+              <img class="xt-video-img" v-lazy="item.videoCoverThumbUrl" />
+              <div slot="footer">
+                <span v-text="item.title"></span>
+                <span v-text="item.viewCount"></span>
+                <span v-text="item.likeCount"></span>
+              </div>
+              <template #hover>
+                <nuxt-link :to="`/video/${item.id}`">
+                  <div>GO</div>
+                </nuxt-link>
+              </template>
+            </xt-hover>
+          </a-card>
+        </a-col>
+      </transition-group>
     </a-row>
   </a-spin>
 </template>
@@ -32,6 +34,11 @@ import lodash from "lodash";
 export default class PageView extends Vue {
   @Prop({ default: true }) loading;
   @Prop({ default: [] }) dataSource;
+  bindCol = {
+    lg: 8,
+    sm: 12,
+    xs: 24,
+  };
   mounted() {}
   updated() {}
   destroyed() {}

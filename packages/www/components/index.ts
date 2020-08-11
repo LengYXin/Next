@@ -9,6 +9,7 @@ import pagination from "./pagination/index.vue";
 import infiniteloading from "./infiniteloading/index.vue";
 import tabs from "./tabs/index.vue";
 import hover from "./hover/index.vue";
+import face from "./face/index.vue";
 // 视频
 Vue.component('xt-dplayer', () => import('./dplayer/index.vue'));
 // 富文本
@@ -21,3 +22,5 @@ Vue.component('xt-infinite-loading', infiniteloading);
 Vue.component('xt-tabs', tabs);
 // 悬浮
 Vue.component('xt-hover', hover);
+// 表情
+Vue.component('xt-face', face);

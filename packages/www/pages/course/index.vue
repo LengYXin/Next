@@ -50,8 +50,8 @@ export default class PageView extends Vue {
     return this.$store.$storeCourse;
   }
   tabPane = [
-    { key: 1, name: "按时间排序" },
-    { key: 2, name: "按学费排序" },
+    { key: 1, title: "按时间排序" },
+    { key: 2, title: "按学费排序" },
   ];
   defaultActiveKey = "1";
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);

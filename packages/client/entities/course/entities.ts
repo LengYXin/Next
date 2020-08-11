@@ -22,13 +22,9 @@ export default class EntitiesCourse {
    * @memberof EntitiesCourse
    */
   @observable
-  details: any = {};
-  myCourseList: any = {};
+  details: CourseDetails = {};
   @action.bound
-  protected setDetails(details) {
+  protected setDetails(details: CourseDetails) {
     this.details = details;
-  }
-  protected setMyCourseList(list) {
-    this.myCourseList = list;
   }
 }

@@ -1,11 +1,14 @@
 import { Provider } from 'mobx-react';
 import React, { Component } from 'react';
 import './app.scss';
+import Login from './components/login';
 import './img.config';
 import store from './store';
-
+// @observer
 class App extends Component {
-  componentDidMount() { }
+  componentDidMount() {
+
+  }
 
   componentDidShow() { }
 

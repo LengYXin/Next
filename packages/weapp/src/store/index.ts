@@ -1,16 +1,21 @@
 
-import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerVideo } from "@xt/client/entities";
+import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo } from "@xt/client/entities";
 import { create, persist } from 'mobx-persist';
-import { ajax } from "./clientConfig";
+import { ajax, onResetAjaxBasics } from "./clientConfig";
+import { toJS } from "mobx";
 const store = {
     $storeHome: new ControllerHome(ajax),
     $storeCourse: new ControllerCourse(ajax),
     $storeStationery: new ControllerStationery(ajax),
     $storeVideo: new ControllerVideo(ajax),
     $storeAbout: new ControllerAbout(ajax),
+    $storeUser: new ControllerUser(ajax),
 }
+onResetAjaxBasics(store.$storeUser);
 console.log("LENG: store", store)
+// store.$storeUser.onLogin('18611752863', 'leng147896325');
 if (process.env.TARO_ENV === "h5") {
+
     // 配置缓存
     onCreatePersist();
     // 配置缓存
@@ -25,9 +30,13 @@ if (process.env.TARO_ENV === "h5") {
         // persist({ locale: true })(store.$locale);
         persist({ Banners: { type: 'list' } })(store.$storeHome);
         // hydrate('xt_locale', store.$locale);
+        persist({ UserInfo: { type: 'object' } })(store.$storeUser);
+        // hydrate('xt_locale', store.$locale);
         hydrate('xt_home', store.$storeHome);
+        hydrate('xt_user', store.$storeUser);
     }
 }
+
 declare module 'react' {
     interface Component<P> {
         // /**

@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email [lengyingxin8966@gmail.com]
+ * @create date 2020-08-08 22:20:00
+ * @modify date 2020-08-08 22:20:00
+ * @desc tabs 滚动视图
+ */
 import { CommonEvent, CommonEventFunction, ScrollView } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import React, { Component } from 'react'
@@ -18,18 +25,26 @@ class Index extends Component<{
     height: '80vh',
     current: 0
   }
-  UNSAFE_componentWillMount() {
+  /**
+   * 计算高度
+   */
+  onComputeHeight() {
     const info = Taro.getSystemInfoSync();
     const { surplusHeight = 0 } = this.props;
     let height = info.windowHeight - surplusHeight;
     if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
-      height -= 55;
+      height -= 100;
     }
     this.setState({ height: height + 'px' })
   }
+  UNSAFE_componentWillMount() {
+    this.onComputeHeight()
+  }
+  // 滚动到底部/右边，会触发 scrolltolower 事件
   onScrollToLower(event) {
     this.props.onScrollToLower && this.props.onScrollToLower(event);
   }
+  // 点击或滑动时触发事件
   onTabsChange(index: number, event: CommonEvent) {
     this.setState({ current: index }, () => {
       this.props.onTabsChange && this.props.onTabsChange(index, event);
@@ -41,7 +56,7 @@ class Index extends Component<{
       <AtTabs
         tabList={this.props.tabList}
         scroll
-        className='xt-tabs'
+        className='xt-tabs-ScrollView'
         current={this.state.current}
         animated={false}
         height={this.state.height}

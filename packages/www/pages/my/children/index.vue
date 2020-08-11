@@ -37,9 +37,9 @@ import { Modal } from "ant-design-vue";
 })
 export default class PageView extends Vue {
   tabPane = [
-    { key: 1, name: "全部" },
-    { key: 2, name: "开课中" },
-    { key: 3, name: "已结课" },
+    { key: 1, title: "全部" },
+    { key: 2, title: "开课中" },
+    { key: 3, title: "已结课" },
   ];
   defaultActiveKey = "1";
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);

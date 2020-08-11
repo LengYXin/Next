@@ -241,8 +241,15 @@ export class AjaxBasics {
             default:
                 break;
         }
-        request.body = body;
+        request.body = lodash.merge(body, AjaxBasics.onMergeBody());
         return request;
+    }
+    /**
+     * 合并 body
+     * @param body 
+     */
+    static onMergeBody(body = {}) {
+        return body
     }
     /**
      * 处理 Url
