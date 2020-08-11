@@ -14,7 +14,29 @@
       </a-list-item>
     </a-list>
     <xt-editor v-model="editor" :editorOptions="editorSettings" />
-    <div v-html="formatFace(editor)"></div>
+    <div>
+      <h1>评论</h1>
+      <xt-comment :content="editor">
+        <template slot="actions">
+          <xt-action @click="onLike" />
+          <xt-action title="回复" />
+        </template>
+        <template slot="overlay">
+          <a-menu>
+            <a-menu-item>
+              <a href="javascript:;">1st menu item</a>
+            </a-menu-item>
+            <a-menu-item>
+              <a href="javascript:;">2nd menu item</a>
+            </a-menu-item>
+            <a-menu-item>
+              <a href="javascript:;">3rd menu item</a>
+            </a-menu-item>
+          </a-menu>
+        </template>
+        <!-- <xt-editor /> -->
+      </xt-comment>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -27,7 +49,7 @@ import { Context } from "@nuxt/types";
   components: {},
 })
 export default class PageView extends Vue {
-  editor = "";
+  editor = "[骷髅][右哼哼][抓狂][喵喵][doge][吃瓜]";
   dataSource = [
     "give",
     "signup",
@@ -41,9 +63,10 @@ export default class PageView extends Vue {
       // },
     },
   };
+  onLike(){}
   created() {}
   mounted() {
-    console.log(this.dataSource);
+    // console.log(this.dataSource);
   }
   updated() {}
   destroyed() {}
@@ -51,7 +74,7 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" scoped>
 .test-list {
-  max-height: 60vh;
+  max-height: 400px;
   overflow: auto;
 }
 </style>

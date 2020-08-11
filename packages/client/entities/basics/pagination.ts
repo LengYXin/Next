@@ -179,7 +179,7 @@ export class Pagination<T> {
         } catch (error) {
             this.onToggleLoading(false);
             infiniteEvent && infiniteEvent.error()
-            throw error
+            console.error("LENG: Pagination<T> -> onLoading -> error", error)
         }
     }
     @action

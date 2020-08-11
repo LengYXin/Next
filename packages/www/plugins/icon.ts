@@ -72,11 +72,25 @@ export {
     default as BellOutline
 } from '@ant-design/icons/lib/outline/BellOutline';
 export {
-    default as DashOutline
-} from '@ant-design/icons/lib/outline/DashOutline';
-// export {
-//     default as DashboardOutline
-// } from '@ant-design/icons/lib/outline/DashboardOutline';
-// export {
-//     default as SmallDashOutline
-// } from '@ant-design/icons/lib/outline/SmallDashOutline';
+    default as EllipsisOutline
+} from '@ant-design/icons/lib/outline/EllipsisOutline';
+
+export {
+    default as LikeOutline
+} from '@ant-design/icons/lib/outline/LikeOutline';
+
+export {
+    default as LikeFill
+} from '@ant-design/icons/lib/fill/LikeFill';
+
+export {
+    default as SmileOutline
+} from '@ant-design/icons/lib/outline/SmileOutline';
+
+export {
+    default as MessageOutline
+} from '@ant-design/icons/lib/outline/MessageOutline';
+
+export {
+    default as PictureOutline
+} from '@ant-design/icons/lib/outline/PictureOutline';
