@@ -9,10 +9,10 @@
   <div class="xt-comment">
     <a-comment>
       <!-- 头像 -->
-      <a-avatar slot="avatar" :src="avatar" :alt="author" />
+      <a-avatar slot="avatar" :src="comment.avatar" :alt="comment.author" />
       <!-- 作者 笔山 右侧菜单 -->
       <div class="xt-comment-author" slot="author">
-        <span v-text="author"></span>
+        <span v-text="comment.author"></span>
         <span>笔山</span>
         <div class="xt-comment-dropdown" v-if="$slots.overlay">
           <a-dropdown>
@@ -48,12 +48,21 @@ import lodash from "lodash";
   components: {},
 })
 export default class extends Vue {
-  @Prop({ default: "" }) content;
-  @Prop({ default: "" }) avatar;
-  @Prop({ default: "author" }) author;
-  @Prop({ default: "" }) time;
+  @Prop({ default: {} }) comment: {
+    // 内容
+    content: string;
+    // 头像
+    avatar: string;
+    // 作者
+    author: string;
+    // 时间
+    time: string;
+  };
   get datetime() {
-    return this.time;
+    return this.comment.time;
+  }
+  get content() {
+    return this.comment.content;
   }
   mounted() {
     // console.log(this);

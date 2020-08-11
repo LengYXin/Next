@@ -8,6 +8,7 @@
 <template>
   <a-pagination
     class="xt-pagination-center"
+    v-if="Pagination.total"
     :current="Pagination.current"
     :total="Pagination.total"
     :pageSize="Pagination.pageSize"

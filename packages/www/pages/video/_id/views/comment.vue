@@ -1,13 +1,6 @@
 <template>
   <div>
-    <xt-comment
-      v-for="item in Pagination.dataSource"
-      :key="item.id"
-      :content="item.content"
-      :avatar="item.userHeader"
-      :author="item.userNickname"
-      :time="item.createTime"
-    >
+    <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
       <template slot="actions">
         <xt-action />
         <xt-action title="回复" />
@@ -46,6 +39,14 @@ export default class PageView extends Vue {
   get Pagination() {
     return this.PageStore.PaginationComment;
   }
+  getComment(item) {
+    return {
+      content: item.content,
+      avatar: item.userHeader,
+      author: item.userNickname,
+      time: item.createTime,
+    };
+  }
   /**
    *  初始化 和 页码 更改调用
    */
@@ -53,6 +54,9 @@ export default class PageView extends Vue {
     this.Pagination.onCurrentChange(current, {
       videoShareId: this.$route.params.id,
     });
+  }
+  created() {
+    this.Pagination.onReset();
   }
   mounted() {}
   updated() {}
