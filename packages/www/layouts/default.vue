@@ -24,6 +24,7 @@
         <Nuxt :keep-alive="production" />
         <!-- 滚动 -->
         <a-back-top />
+        <!-- <xt-cat /> -->
       </a-layout-content>
       <!-- 底部 -->
       <a-layout-footer class="xt-layout-footer">

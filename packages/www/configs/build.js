@@ -11,7 +11,7 @@ const lodash = require('lodash');
 const path = require('path');
 const production = process.env.NODE_ENV === 'production';
 console.log();
-console.log("LENG: process.env.NODE_ENV", process.env.NODE_ENV);
+console.log("LENG: process.env", process.env.ES, process.env.NODE_ENV);
 console.log();
 /*
   ** Build configuration
@@ -72,12 +72,12 @@ module.exports = {
                 // },
                 min: {
                     name: 'min',
-                    test: /[\\/]node_modules[\\/](vue.*)[\\/]/,
+                    test: /[\\/]node_modules[\\/](vue.*|nuxt.*|.*nuxt.*)[\\/]/,
                     chunks: 'all',
                 },
                 lib: {
                     name: 'lib',
-                    test: /[\\/]node_modules[\\/](ant-.*|lodash.*|swiper.*|mobx.*|moment.*|core.*|viewerjs.*)[\\/]/,
+                    test: /[\\/]node_modules[\\/](ant-.*|@ant-.*|lodash.*|swiper.*|mobx.*|moment.*|core.*|viewerjs.*)[\\/]/,
                     chunks: 'all',
                 }
             }

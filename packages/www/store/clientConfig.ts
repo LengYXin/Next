@@ -36,7 +36,8 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
         }
         // 错误 超时
         if (res instanceof AjaxError || res instanceof TimeoutError) {
-            throw production ? { message: '服务器开小差了' } : res;
+            console.error("LENG: AjaxBasics.onFilter -> res", res)
+            throw { message: '服务器开小差了' };
         }
         return true
     }
