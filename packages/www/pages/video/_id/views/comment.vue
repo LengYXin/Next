@@ -2,7 +2,7 @@
   <div>
     <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
       <template slot="actions">
-        <xt-action />
+        <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
         <xt-action title="回复" />
       </template>
       <template slot="overlay">
@@ -54,6 +54,13 @@ export default class PageView extends Vue {
     this.Pagination.onCurrentChange(current, {
       videoShareId: this.$route.params.id,
     });
+  }
+  onLikes(data) {
+    try {
+      this.Pagination.onLikes(data);
+    } catch (error) {
+      this.$message.warning({ content: error, key: "onLikes" });
+    }
   }
   created() {
     this.Pagination.onReset();

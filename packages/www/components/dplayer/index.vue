@@ -6,7 +6,7 @@
  * @desc [description]
  */
 <template>
-  <div ref="dplayer">播放器</div>
+  <div class="xt-dplayer" ref="dplayer">播放器</div>
 </template>
 
 <script lang="ts">
@@ -62,5 +62,10 @@ export default class extends Vue {
 }
 </script>
 
-<style>
+<style lang="less">
+.xt-dplayer {
+  .dplayer-video {
+    object-fit: cover;
+  }
+}
 </style>

@@ -27,13 +27,7 @@ export class ControllerVideo extends Entities {
      * 评论列表
      * @memberof ControllerVideo
      */
-    PaginationComment = new Pagination(this.$ajax, {
-        url: EnumApiVideo.VideoComment,
-        key: 'id',
-        currentKey: 'pageIndex',
-        defaultPageSize: 10,
-        onMapValues: 'courseFreeCommentResultVoList'
-    });
+    PaginationComment = new CommentPagination(this.$ajax);
     /**
      * 视频详情
      * @param videoShareId 
@@ -77,6 +71,37 @@ export class ControllerVideo extends Entities {
                 this.setDetails(data)
             }
             this.$ajax.post(EnumApiVideo.VideoPraise, { videoShareId: data.id })
+        } catch (error) {
+            throw error
+        }
+    }
+}
+/**
+ * 评论
+ */
+class CommentPagination extends Pagination<any>{
+    constructor(protected $ajax: AjaxBasics) {
+        super($ajax, {
+            url: EnumApiVideo.VideoComment,
+            key: 'id',
+            currentKey: 'pageIndex',
+            defaultPageSize: 10,
+            onMapValues: 'courseFreeCommentResultVoList'
+        })
+    }
+    /**
+     * 点赞
+     */
+    onLikes(data) {
+        try {
+            if (data.likeRecord) {
+                throw '已点赞'
+            }
+            data = toJS(data)
+            data.likeCount++;
+            data.likeRecord = true;
+            this.onUpdate(data, data);
+            this.$ajax.post(EnumApiVideo.VideoCommentPraise, { videoShareCommentId: data.id })
         } catch (error) {
             throw error
         }

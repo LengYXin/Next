@@ -53,7 +53,7 @@ export default class extends Vue {
     return "xt-page-" + this.$route.name;
   }
   get production() {
-    return this.$store.$global.production;
+    return false; //this.$store.$global.production;
   }
   get version() {
     return this.$store.$global.version;
