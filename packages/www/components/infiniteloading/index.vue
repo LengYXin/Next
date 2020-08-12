@@ -8,8 +8,8 @@
 <template>
   <infinite-loading :distance="300" @infinite="onLoading">
     <div class="infinite-loading-text" slot="spinner">正在加载...</div>
-    <div class="infinite-loading-text" slot="no-more">暂时都在这里了...</div>
-    <div class="infinite-loading-text" slot="no-results">暂时都在这里了...</div>
+    <div class="infinite-loading-text" slot="no-more">暂时没有哦~</div>
+    <div class="infinite-loading-text" slot="no-results">暂时没有哦~</div>
   </infinite-loading>
 </template>
 

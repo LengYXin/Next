@@ -14,6 +14,7 @@
       </a-list-item>
     </a-list>
     <xt-editor v-model="editor" :editorOptions="editorSettings" />
+    <xt-editor class="xt-editor-single" v-model="editor" :editorOptions="editorSettings" />
     <div>
       <h1>评论</h1>
       <xt-comment :comment="{content:editor}">

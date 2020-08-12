@@ -10,8 +10,8 @@
       accept="image/*"
       style="display:none;"
       @change="emitImageInfo($event)"
-    /> -->
-    <toolbar :quill="quill" />
+    />-->
+    <toolbar class="xt-toolbar" :quill="quill" />
   </div>
 </template>
 
@@ -229,6 +229,8 @@ export default {
 .ql-editor {
   min-height: 200px;
   font-size: 16px;
+  text-align: justify;
+  word-break: break-all;
 }
 
 .ql-snow .ql-stroke.ql-thin,
@@ -353,5 +355,23 @@ button.ql-active svg {
   display: flex;
   align-items: center;
   flex-flow: row wrap;
+}
+</style>
+<style lang="less" >
+// 单行样式
+.xt-editor-single.quillWrapper {
+  position: relative;
+  .ql-editor {
+    min-height: 44px;
+    max-height: 66px;
+    padding-right: 44px;
+  }
+  .xt-toolbar {
+    position: absolute;
+    right: 16px;
+    bottom: 0;
+    // margin-bottom: 50%;
+    transform: translateY(-33.33%);
+  }
 }
 </style>

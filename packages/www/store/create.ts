@@ -6,21 +6,32 @@
  * @desc [description]
  */
 
-import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo } from "@xt/client/entities";
+import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo, ControllerOrder } from "@xt/client/entities";
 import { create, persist } from 'mobx-persist';
 import { ajax, onResetAjaxBasics } from "./clientConfig";
 import $global from './global';
 import $locale from './locale';
 import $menu from './menu';
 const store = {
+    // 语言
     $locale,
+    // 菜单
     $menu,
+    // 全局
     $global,
+    // 首页
     $storeHome: new ControllerHome(ajax),
+    // 课程
     $storeCourse: new ControllerCourse(ajax),
+    // 文房
     $storeStationery: new ControllerStationery(ajax),
+    // 视频
     $storeVideo: new ControllerVideo(ajax),
+    // 关于
     $storeAbout: new ControllerAbout(ajax),
+    // 订单
+    $storeOrder: new ControllerOrder(ajax),
+    // 用户
     $storeUser: new ControllerUser(ajax),
 }
 // 重置 AjaxBasics 配置
@@ -39,15 +50,19 @@ async function onCreatePersist() {
         // jsonify: true  // if you use AsyncStorage, here shoud be true
         // default: true
     });
+    // 配置缓存字段
     persist({ locale: true })(store.$locale);
     persist({ Banners: { type: 'list' } })(store.$storeHome);
     persist({ typelist: { type: 'list' } })(store.$storeStationery);
     persist({ typelist: { type: 'list' } })(store.$storeAbout);
+    persist({ typelist: { type: 'list' } })(store.$storeOrder);
     persist({ UserInfo: { type: 'object' } })(store.$storeUser);
+    // 设置类
     hydrate(`${$global.localStorageStartsWith}locale`, store.$locale);
     hydrate(`${$global.localStorageStartsWith}Home`, store.$storeHome);
     hydrate(`${$global.localStorageStartsWith}Stationery`, store.$storeStationery);
     hydrate(`${$global.localStorageStartsWith}About`, store.$storeAbout);
+    hydrate(`${$global.localStorageStartsWith}Order`, store.$storeOrder);
     await hydrate(`${$global.localStorageStartsWith}User`, store.$storeUser);
     store.$storeUser.onGetUserInfo()
 }
@@ -92,6 +107,12 @@ declare module 'vuex/types/index' {
          * @memberof Store
          */
         readonly $storeAbout: ControllerAbout
+        /**
+         * 订单
+         * @type {ControllerOrder}
+         * @memberof Store
+         */
+        readonly $storeOrder: ControllerOrder
         /**
          * 用户
          * @type {ControllerUser}

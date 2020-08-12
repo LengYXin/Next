@@ -10,11 +10,10 @@
     <xt-tabs
       :affix="true"
       :tabPane="PageStore.typelist"
-      defaultActiveKey="1"
+      :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
     />
     <a-list
-      :loading="Pagination.loading"
       class="xt-content"
       item-layout="horizontal"
       :data-source="Pagination.dataSource"
@@ -50,25 +49,25 @@ import lodash from "lodash";
   scrollToTop: true,
   // 每次进入页面都会调用
   async fetch(ctx: Context) {
-    const types = await ctx.store.$storeAbout.onGetTypelist();
+    const types = await ctx.store.$storeOrder.onGetTypelist();
   },
   components: {},
 })
 export default class PageView extends Vue {
   get PageStore() {
-    return this.$store.$storeAbout;
+    return this.$store.$storeOrder;
   }
   get Pagination() {
-    return this.$store.$storeAbout.Pagination;
+    return this.$store.$storeOrder.Pagination;
   }
-  defaultActiveKey = "1";
+  defaultActiveKey = "-1";
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   tabsChange(activeKey) {
     this.Pagination.onReset();
     this.activeKey = activeKey;
   }
   async onLoading(event) {
-    this.Pagination.onLoading({ columnId: this.activeKey }, null, event);
+    this.Pagination.onLoading({ orderStatus: this.activeKey }, null, event);
   }
   mounted() {}
   updated() {}

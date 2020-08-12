@@ -7,7 +7,6 @@
  */
 <template>
   <a-list
-    :loading="loading"
     class="xt-content"
     item-layout="horizontal"
     :data-source="dataSource"

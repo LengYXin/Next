@@ -5,4 +5,5 @@ export * from './home/controller'
 export * from './stationery/controller'
 export * from './video/controller'
 export * from './user/controller'
+export * from './order/controller'
 

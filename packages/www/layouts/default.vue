@@ -31,6 +31,9 @@
         <layoutFooter />
       </a-layout-footer>
     </a-layout>
+    <div slot="renderEmpty">
+      <!-- <span>暂时没有哦~</span> -->
+    </div>
   </a-config-provider>
 </template>
 <script lang="ts">
