@@ -1,4 +1,4 @@
-/// <reference types="./types" />
+/// <reference types="./course" />
 import lodash from "lodash";
 import { BindAll } from "lodash-decorators";
 import { EnumApiCourse } from "../../api";

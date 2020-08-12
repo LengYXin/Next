@@ -6,18 +6,22 @@
  * @desc [description]
  */
 <template>
-  <a-pagination
-    class="xt-pagination-center"
-    :current="Pagination.current"
-    :total="Pagination.total"
-    :pageSize="Pagination.pageSize"
-    @change="onCurrentChange"
-  />
+  <transition name="opacity">
+    <a-pagination
+      class="xt-pagination-center"
+      v-show="Pagination.total>Pagination.pageSize"
+      :current="Pagination.current"
+      :total="Pagination.total"
+      :pageSize="Pagination.pageSize"
+      @change="onCurrentChange"
+    />
+  </transition>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch, Inject } from "vue-property-decorator";
 import { Pagination, PaginationOptions } from "@xt/client/entities";
 import { Observer } from "mobx-vue";
+import { computed } from "mobx";
 import lodash from "lodash";
 import { config } from "@vue/test-utils";
 @Observer
@@ -33,11 +37,17 @@ export default class extends Vue {
   @Prop({ default: false }) toQuery;
   // 初始化 数据参数
   @Prop({ default: undefined }) fetchBody;
+  // 路由名称
+  key = this.$route.name;
+  // 当前页面显示
+  get isConnected() {
+    return this.$el.isConnected && this.key === this.$route.name;
+  }
   created() {
     this.onLoading();
   }
   mounted() {
-    console.log(this.$route);
+    // console.log(this.$route);
   }
   onGetOptions() {
     const { current } = this.$route.query;
@@ -89,7 +99,7 @@ export default class extends Vue {
    */
   @Watch("$route.query.current")
   queryUpdate(to, from, next) {
-    if (this.$el.isConnected) {
+    if (this.isConnected) {
       if (this.toQuery) {
         const { current } = this.$route.query;
         if (!lodash.eq(String(current), String(this.Pagination.current))) {

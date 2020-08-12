@@ -22,18 +22,31 @@ export class ControllerUser extends Entities {
         try {
             const res = await this.$ajax.post(EnumApiUser.Login, { account: itcode, password });
             const user = {
-                appid: '48832f76dc1411e898f900163e048dd6',
-                timestamp: Date.now(),
-                password: '6581a04d-dc14-11e8-98f9-00163e048dd6',
+                // appid: '48832f76dc1411e898f900163e048dd6',
+                // timestamp: Date.now(),
+                // password: '6581a04d-dc14-11e8-98f9-00163e048dd6',
                 token: res,
-                signature: ''
+                // signature: ''
             };
             this.onToggleLoading(false)
             this.setUserInfo(user);
+            this.onGetUserInfo()
         } catch (error) {
+            this.onOutLogin()
             this.onToggleLoading(false)
-            console.error("LENG: ControllerUser -> onLogin -> error", error)
+            // console.error("LENG: ControllerUser -> onLogin -> error", error)
+            throw error
         }
+    }
+    /**
+     * 获取用户信息
+     */
+    async onGetUserInfo() {
+        if (!this.loggedIn) {
+            return
+        }
+        const res = await this.$ajax.post(EnumApiUser.Userinfo);
+        this.setUserInfo(lodash.merge(toJS(this.UserInfo), res));
     }
     /**
      * 退出登录状态
@@ -41,12 +54,20 @@ export class ControllerUser extends Entities {
     onOutLogin() {
         this.setUserInfo({});
     }
+    /**
+     * 配置授权用户
+     */
     onSignatureUser() {
         if (!this.loggedIn) {
             return
         }
-        const user = toJS(this.UserInfo);
-        user.timestamp = Date.now();
+        const user = {
+            appid: '48832f76dc1411e898f900163e048dd6',
+            timestamp: Date.now(),
+            password: '6581a04d-dc14-11e8-98f9-00163e048dd6',
+            token: this.UserInfo.token,
+            signature: ''
+        };
         // const str='appid48832f76dc1411e898f900163e048dd6password6581a04d-dc14-11e8-98f9-00163e048dd6timestamp1596724426013token1e2a5c0b32b94434b66f2eefc864ecd4'
         const str = `appid${user.appid}password${user.password}timestamp${user.timestamp}token${user.token}`;
         user.signature = lodash.toUpper(cryptoMd5(str).toString())

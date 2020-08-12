@@ -15,7 +15,7 @@
       <a-layout-content
         class="xt-layout-content"
         :class="pageClass"
-        v-auto-height="{ styleKey: 'minHeight', subtract: 400 }"
+        v-auto-height="{ styleKey: 'minHeight', subtract: 370 }"
       >
         <!-- 面包屑 -->
         <breadcrumb />
@@ -53,7 +53,7 @@ export default class extends Vue {
     return "xt-page-" + this.$route.name;
   }
   get production() {
-    return this.$store.$global.production;
+    return false; //this.$store.$global.production;
   }
   get version() {
     return this.$store.$global.version;
@@ -77,11 +77,13 @@ export default class extends Vue {
 <style lang="less" scoped>
 .xt-layout {
   min-height: 100vh;
+  // padding: 0 20px;
 }
 .xt-layout-header {
   position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
+  width: 100vw;
   z-index: @zindex-modal-mask + 1;
   overflow: hidden;
   box-shadow: @xt-header-box-shadow;

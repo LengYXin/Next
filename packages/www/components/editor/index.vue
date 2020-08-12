@@ -2,7 +2,7 @@
   <div class="quillWrapper">
     <slot name="toolbar"></slot>
     <div :id="id" ref="quillContainer"></div>
-    <input
+    <!-- <input
       v-if="useCustomImageHandler"
       id="file-upload"
       ref="fileInput"
@@ -10,15 +10,8 @@
       accept="image/*"
       style="display:none;"
       @change="emitImageInfo($event)"
-    />
-    <a-popover placement="rightTop" trigger="click">
-      <template slot="content">
-        <div style="width:384px">
-          <xt-face @select="onAddFace" />
-        </div>
-      </template>
-      <a-button type="primary">表情</a-button>
-    </a-popover>
+    /> -->
+    <toolbar :quill="quill" />
   </div>
 </template>
 
@@ -30,7 +23,9 @@ import oldApi from "./helpers/old-api";
 import mergeDeep from "./helpers/merge-deep";
 import MarkdownShortcuts from "./helpers/markdown-shortcuts";
 import lodash from "lodash";
+import toolbar from "./toolbar.vue";
 export default {
+  components: { toolbar },
   name: "VueEditor",
   mixins: [oldApi],
   props: {
@@ -90,12 +85,6 @@ export default {
     delete this.quill;
   },
   methods: {
-    onAddFace(face) {
-      this.quill.insertText(
-        this.quill.getSelection() || this.quill.getLength() - 1,
-        face.value
-      );
-    },
     initializeEditor() {
       this.setupQuillEditor();
       this.checkForCustomImageHandler();

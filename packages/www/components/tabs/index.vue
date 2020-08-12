@@ -38,6 +38,8 @@ import lodash from "lodash";
   components: {},
 })
 export default class extends Vue {
+  // 注册当前页面 name 为 key
+  key = this.$route.name;
   // 固定模式
   @Prop({ default: false }) affix;
   // 固定距离
@@ -50,6 +52,10 @@ export default class extends Vue {
   @Prop({ default: [], required: true }) tabPane;
   // 选择
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
+  // 当前页面显示
+  get isConnected() {
+    return this.$el.isConnected && this.key === this.$route.name;
+  }
   // 更改
   tabsChange(activeKey) {
     const query = lodash.merge({}, this.$route.query, {
@@ -66,7 +72,7 @@ export default class extends Vue {
   // 组件中 使用不了 生命周期 beforeRouteUpdate
   @Watch("$route.query.active")
   queryUpdate(to, from, next) {
-    if (this.$el.isConnected) {
+    if (this.isConnected) {
       const { active } = this.$route.query;
       if (active && !lodash.eq(active, this.activeKey)) {
         this.activeKey = active as any;

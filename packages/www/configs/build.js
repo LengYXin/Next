@@ -22,6 +22,8 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
+        // lodash.set(config,'mode','development')
+        // lodash.set(config,'devtool','eval-source-map')
         // 图库替换
         lodash.update(config, 'resolve.alias', alias => {
             return lodash.merge({
@@ -38,7 +40,7 @@ module.exports = {
             })
             return rules
         })
-        // console.log("extend -> config", config.plugins)
+        // console.log("extend -> config", config)
     },
     // 分离css
     extractCSS: production,
@@ -60,14 +62,31 @@ module.exports = {
         new webpack.BannerPlugin({ banner: `@author 冷 (https://github.com/LengYXin)\n@email lengyingxin8966@gmail.com` })
     ],
     optimization: {
-        // splitChunks: {
-        //     chunks: 'async',
-        // }
+        splitChunks: {
+            chunks: 'async',
+            cacheGroups: {
+                // css: {
+                //     name: 'css',
+                //     test: /[\\/]node_modules[\\/](.*.css)[\\/]/,
+                //     chunks: 'all',
+                // },
+                min: {
+                    name: 'min',
+                    test: /[\\/]node_modules[\\/](vue.*)[\\/]/,
+                    chunks: 'all',
+                },
+                lib: {
+                    name: 'lib',
+                    test: /[\\/]node_modules[\\/](ant-.*|lodash.*|swiper.*|mobx.*|moment.*|core.*|viewerjs.*)[\\/]/,
+                    chunks: 'all',
+                }
+            }
+        }
     },
     splitChunks: {
         layouts: false,
         pages: false,
-        commons: true
+        commons: false
     },
     // transpile: ['ant-design-vue'],
     babel: {

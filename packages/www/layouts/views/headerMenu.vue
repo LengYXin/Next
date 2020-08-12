@@ -5,10 +5,17 @@
         <span v-t="item.name"></span>
       </nuxt-link>
     </a-menu-item>
+    <a-menu-item v-if="UserStore.loggedIn" class="ant-menu-item" key="my">
+      <nuxt-link :to="{name:'my'}">
+        <span v-t="locale.links_my"></span>
+      </nuxt-link>
+    </a-menu-item>
   </a-menu>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import { Observer } from "mobx-vue";
+@Observer
 @Component({
   components: {},
 })
@@ -16,8 +23,14 @@ export default class extends Vue {
   get PageStore() {
     return this.$store.$menu;
   }
+  get UserStore() {
+    return this.$store.$storeUser;
+  }
   get selectedkeys() {
     return [this.$route.name, ...this.PageStore.getSelectedkeys(this.$route)];
+  }
+  get locale() {
+    return this.$EnumLocaleLinks;
   }
   mounted() {}
   updated() {}

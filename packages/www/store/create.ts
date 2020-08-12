@@ -6,12 +6,11 @@
  * @desc [description]
  */
 
-import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerVideo, ControllerUser } from "@xt/client/entities";
+import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo } from "@xt/client/entities";
 import { create, persist } from 'mobx-persist';
 import { ajax, onResetAjaxBasics } from "./clientConfig";
-
-import $locale from './locale';
 import $global from './global';
+import $locale from './locale';
 import $menu from './menu';
 const store = {
     $locale,
@@ -24,13 +23,15 @@ const store = {
     $storeAbout: new ControllerAbout(ajax),
     $storeUser: new ControllerUser(ajax),
 }
+// 重置 AjaxBasics 配置
 onResetAjaxBasics(store.$storeUser);
+// 配置缓存数据
 onCreatePersist();
 console.log("LENG: store", store)
 /**
  * 配置缓存数据
  */
-function onCreatePersist() {
+async function onCreatePersist() {
     // https://github.com/pinqy520/mobx-persist
     const hydrate = create({
         // storage: window.localStorage,   // or AsyncStorage in react-native.
@@ -42,10 +43,13 @@ function onCreatePersist() {
     persist({ Banners: { type: 'list' } })(store.$storeHome);
     persist({ typelist: { type: 'list' } })(store.$storeStationery);
     persist({ typelist: { type: 'list' } })(store.$storeAbout);
+    persist({ UserInfo: { type: 'object' } })(store.$storeUser);
     hydrate(`${$global.localStorageStartsWith}locale`, store.$locale);
     hydrate(`${$global.localStorageStartsWith}Home`, store.$storeHome);
     hydrate(`${$global.localStorageStartsWith}Stationery`, store.$storeStationery);
     hydrate(`${$global.localStorageStartsWith}About`, store.$storeAbout);
+    await hydrate(`${$global.localStorageStartsWith}User`, store.$storeUser);
+    store.$storeUser.onGetUserInfo()
 }
 // 扩展 ts
 declare module 'vuex/types/index' {

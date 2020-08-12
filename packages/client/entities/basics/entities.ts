@@ -5,19 +5,15 @@ import { AjaxRequest } from 'rxjs/ajax';
 import lodash from 'lodash';
 
 
-export default class EntitiesVideo {
+export default class EntitiesBasics {
     constructor() {
     }
     /**
-     * 课程详情
-     * @memberof EntitiesVideo
+     * 详情
+     * @memberof EntitiesBasics
      */
     @observable
     details: any = {};
-    /**
-     * 设置详情
-     * @param details 
-     */
     @action.bound
     protected setDetails(details) {
         this.details = details;

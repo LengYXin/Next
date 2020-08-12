@@ -1,5 +1,6 @@
 import { Context } from "@nuxt/types";
 import { message } from "ant-design-vue";
+import lodash from "lodash";
 import "./registerHooks";
 console.group('Start')
 console.info("LENG: middleware", process.env.NODE_ENV, process.env.version)
@@ -8,10 +9,12 @@ export default function (context: Context) {
     // if (context.route.fullPath === '/') {
     //     return
     // }
-    // if (context.route.fullPath === '/my') {
-    //     message.success({ content: '请登录' })
-    //     return context.redirect('/')
-    // }
+    if (lodash.startsWith(context.route.name, 'my')) {
+        if (!context.store.$storeUser.loggedIn) {
+            // message.success({ content: '请登录' })
+            return context.redirect('/')
+        }
+    }
 }
 function onLog(context: Context) {
     if (context.from.name !== context.route.name) {

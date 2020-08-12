@@ -23,7 +23,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { Component, Provide, Vue, Watch } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
 import List from "./views/list.vue";
@@ -37,6 +37,7 @@ import lodash from "lodash";
   components: { List },
 })
 export default class PageView extends Vue {
+  @Provide("StationeryStore")
   get PageStore() {
     return this.$store.$storeStationery;
   }

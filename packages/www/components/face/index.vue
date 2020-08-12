@@ -6,10 +6,10 @@
  * @desc [description]
  */
 <template>
-  <div>
+  <div style="width:360px">
     <a-tooltip v-for="face in faces" :key="face.value">
       <template slot="title">{{face.phrase}}</template>
-      <a-avatar :src="face.icon" @click="onFace(face)" />
+      <a-avatar class="xt-face" :src="face.icon" @click="onFace(face)" size="small"/>
     </a-tooltip>
   </div>
 </template>
@@ -37,7 +37,7 @@ Vue.prototype.formatFace = function (html: string) {
         html = lodash.replace(
           html,
           reg,
-          `<span class="ant-avatar ant-avatar-circle ant-avatar-image xt-face"><img src="${face.icon}"></span>`
+          `<span class="ant-avatar ant-avatar-sm ant-avatar-circle ant-avatar-image xt-face"><img src="${face.icon}"></span>`
         );
       }
     });
