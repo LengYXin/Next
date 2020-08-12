@@ -8,9 +8,9 @@
 <template>
   <div>
     <div class="xt-swiper">
-      <swiper :options="swiperOptions" ref="mySwiper">
+      <swiper :options="swiperOptions" ref="mySwiper" :style="{minHeight:swiperOptions.minHeight}">
         <swiper-slide v-for="img in PageStore.Banners" :key="img.id">
-          <img v-lazy="img.pictureUri" style="width:100%;min-height:400px" />
+          <img :src="img.pictureUri" style="width:100%;" />
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
         <!-- <div class="swiper-button-prev" slot="button-prev"></div> -->
@@ -19,25 +19,33 @@
     </div>
     <div class="xt-content">
       <a-card :bordered="false" :loading="true">
-        <h1 class="xt-card-title" slot="title"><a-skeleton active :paragraph="false"/></h1>
+        <h1 class="xt-card-title" slot="title">
+          <a-skeleton active :paragraph="false" />
+        </h1>
         <div>课程</div>
       </a-card>
       <a-card :bordered="false" :loading="true">
-        <h1 class="xt-card-title" slot="title"><a-skeleton active :paragraph="false"/></h1>
+        <h1 class="xt-card-title" slot="title">
+          <a-skeleton active :paragraph="false" />
+        </h1>
         <div>课程</div>
       </a-card>
       <a-card :bordered="false" :loading="true">
-        <h1 class="xt-card-title" slot="title"><a-skeleton active :paragraph="false"/></h1>
+        <h1 class="xt-card-title" slot="title">
+          <a-skeleton active :paragraph="false" />
+        </h1>
         <div>课程</div>
       </a-card>
       <a-card :bordered="false" :loading="true">
-        <h1 class="xt-card-title" slot="title"><a-skeleton active :paragraph="false"/></h1>
+        <h1 class="xt-card-title" slot="title">
+          <a-skeleton active :paragraph="false" />
+        </h1>
         <div>课程</div>
       </a-card>
     </div>
     <!-- <div style="height:999px">
       <xt-dplayer/>
-    </div> -->
+    </div>-->
   </div>
 </template>
 <script lang="ts">
@@ -60,6 +68,7 @@ export default class PageView extends Vue {
     return (this.$refs.mySwiper as any).$swiper;
   }
   swiperOptions = {
+    minHeight: "400px",
     loop: true,
     autoplay: true,
     // allowTouchMove: false,
@@ -83,6 +92,8 @@ export default class PageView extends Vue {
 .xt-swiper {
   position: relative;
   overflow: hidden;
+  // max-width: 1920px;
+  margin: auto;
 }
 .xt-card-title {
   text-align: center;

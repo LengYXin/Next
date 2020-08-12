@@ -30,7 +30,7 @@ console.log("LENG: store", store)
 /**
  * 配置缓存数据
  */
-function onCreatePersist() {
+async function onCreatePersist() {
     // https://github.com/pinqy520/mobx-persist
     const hydrate = create({
         // storage: window.localStorage,   // or AsyncStorage in react-native.
@@ -47,7 +47,8 @@ function onCreatePersist() {
     hydrate(`${$global.localStorageStartsWith}Home`, store.$storeHome);
     hydrate(`${$global.localStorageStartsWith}Stationery`, store.$storeStationery);
     hydrate(`${$global.localStorageStartsWith}About`, store.$storeAbout);
-    hydrate(`${$global.localStorageStartsWith}User`, store.$storeUser);
+    await hydrate(`${$global.localStorageStartsWith}User`, store.$storeUser);
+    store.$storeUser.onGetUserInfo()
 }
 // 扩展 ts
 declare module 'vuex/types/index' {
