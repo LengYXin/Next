@@ -57,6 +57,7 @@ export default class PageView extends Vue {
   }
   onLikes(data) {
     try {
+      this.$InspectUser();
       this.Pagination.onLikes(data);
     } catch (error) {
       this.$message.warning({ content: error, key: "onLikes" });

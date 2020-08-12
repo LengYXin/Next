@@ -5,21 +5,16 @@
  * @modify date 2020-08-05 14:12:55
  * @desc [description]
  */
-import * as EnumApi from '@xt/client/api';
 import '@xt/client/configure';
+import { ControllerUser } from '@xt/client/entities';
 import { AjaxBasics } from '@xt/client/helpers/ajaxBasics';
-import { notification, message } from 'ant-design-vue';
+import { message } from 'ant-design-vue';
 import lodash from 'lodash';
 import NProgress from 'nprogress';
 import { TimeoutError } from "rxjs";
 import { AjaxError, AjaxResponse } from "rxjs/ajax";
-import Vue from 'vue';
-import { ControllerUser } from '@xt/client/entities';
 const production = process.env.NODE_ENV === "production";
 export const ajax = new AjaxBasics({ target: process.env.target });
-// 扩展
-Vue.prototype.$ajax = ajax;
-Vue.prototype.$EnumApi = EnumApi;
 /**
  * 重置  AjaxBasics  配置
  */
@@ -61,15 +56,5 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
         } else {
             NProgress.done();
         }
-    }
-}
-
-declare module 'vue/types/vue' {
-    interface Vue {
-        /** Ajax */
-        readonly $ajax: AjaxBasics;
-        /** APi 枚举 */
-        readonly $EnumApi: typeof EnumApi;
-        // $locales: typeof locales;
     }
 }

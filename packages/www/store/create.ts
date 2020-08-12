@@ -6,12 +6,11 @@
  * @desc [description]
  */
 
-import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerVideo, ControllerUser } from "@xt/client/entities";
+import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo } from "@xt/client/entities";
 import { create, persist } from 'mobx-persist';
 import { ajax, onResetAjaxBasics } from "./clientConfig";
-
-import $locale from './locale';
 import $global from './global';
+import $locale from './locale';
 import $menu from './menu';
 const store = {
     $locale,
@@ -24,7 +23,9 @@ const store = {
     $storeAbout: new ControllerAbout(ajax),
     $storeUser: new ControllerUser(ajax),
 }
+// 重置 AjaxBasics 配置
 onResetAjaxBasics(store.$storeUser);
+// 配置缓存数据
 onCreatePersist();
 console.log("LENG: store", store)
 /**

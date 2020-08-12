@@ -59,7 +59,8 @@ export default class extends Vue {
         this.formInline.password
       );
       this.PageStore.onToggleVisible(false);
-      this.$message.success({ content: "欢迎", key: "login" });
+      window.location.reload();
+      // this.$message.success({ content: "欢迎", key: "login" });
     } catch (error) {
       // this.$message.error({ content: error, key: "login" });
     }

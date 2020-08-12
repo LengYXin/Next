@@ -15,7 +15,7 @@
       <a-layout-content
         class="xt-layout-content"
         :class="pageClass"
-        v-auto-height="{ styleKey: 'minHeight', subtract: 400 }"
+        v-auto-height="{ styleKey: 'minHeight', subtract: 370 }"
       >
         <!-- 面包屑 -->
         <breadcrumb />

@@ -23,6 +23,7 @@ export default class PageView extends Vue {
   PageStore: ControllerVideo;
   onClick() {
     try {
+      this.$InspectUser();
       this.PageStore.onLikes(this.item);
     } catch (error) {
       this.$message.warn({ content: error, key: error });

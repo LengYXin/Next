@@ -5,11 +5,9 @@
  * @modify date 2020-08-05 14:13:07
  * @desc [description]
  */
-import { observable, computed, action, intercept } from 'mobx';
-import { create, persist } from 'mobx-persist';
+import getlocales, { EnumLocaleLinks } from '@xt/client/languages';
+import { action, intercept, observable } from 'mobx';
 import moment from 'moment';
-import getlocales, { EnumLocaleLinks, EnumLocaleDescriptions } from '@xt/client/languages';
-import Vue from 'vue';
 class Locale {
     constructor() {
         intercept(this, 'locale', locale => {
@@ -27,14 +25,3 @@ class Locale {
     }
 }
 export default new Locale();
-
-Vue.prototype.$EnumLocaleLinks = EnumLocaleLinks;
-Vue.prototype.$EnumLocaleDescriptions = EnumLocaleDescriptions;
-declare module 'vue/types/vue' {
-    interface Vue {
-        /** 链接枚举 */
-        readonly $EnumLocaleLinks: typeof EnumLocaleLinks;
-        /** 说明枚举 */
-        readonly $EnumLocaleDescriptions: typeof EnumLocaleDescriptions;
-    }
-}

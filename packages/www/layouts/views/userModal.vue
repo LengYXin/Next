@@ -30,13 +30,13 @@
     <span @click="onVisible(true,'links_signin')" v-t="locale.links_signin">登录</span>
     <span @click="onVisible(true,'links_register')" v-t="locale.links_register">注册</span>
     <a-modal
-      :title="$t(title)"
+      :title="$t(title||'links_signin')"
       :visible="PageStore.visible"
       @ok="onOk"
       @cancel="onCancel"
       :footer="null"
     >
-      <signin v-if="title==='links_signin'" />
+      <signin v-if="isSignin" />
       <register v-else />
     </a-modal>
   </span>
@@ -56,6 +56,9 @@ export default class extends Vue {
   }
   visible = false;
   title = "";
+  get isSignin() {
+    return this.title === "links_signin" || this.title == "";
+  }
   get locale() {
     return this.$EnumLocaleLinks;
   }
