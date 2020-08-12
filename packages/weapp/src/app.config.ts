@@ -5,7 +5,8 @@ export default {
     "pages/course/index",
     "pages/course_details/index",
     "pages/my/index",
-    "pages/stationery/index"
+    "pages/stationery/index",
+    "pages/course_list/index"
   ],
   tabBar: {
     list: [

@@ -1,24 +1,13 @@
-<<<<<<< HEAD
 import { Image, Swiper, SwiperItem, View } from "@tarojs/components";
 import { ControllerHome } from "@xt/client/entities";
 import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
-import { AtIcon, AtButton, AtMessage, AtGrid } from "taro-ui";
-
+import { AtMessage, AtGrid } from "taro-ui";
+import { PageDecorators } from "~/components/page";
+import Taro, { getCurrentInstance } from "@tarojs/taro";
 import "./index.scss";
-import { getCurrentInstance } from "@tarojs/taro";
 
 @inject("$storeHome")
-=======
-import { Image, Swiper, SwiperItem, View } from '@tarojs/components'
-import { ControllerHome } from "@xt/client/entities"
-import { inject, observer } from 'mobx-react'
-import React, { Component } from 'react'
-import { AtMessage } from 'taro-ui'
-import { PageDecorators } from "~/components/page"
-import './index.scss'
-@inject('$storeHome')
->>>>>>> 7037dd1ac654ce153a01b45851c31859ddc12c6d
 @observer
 @PageDecorators()
 class Index extends Component<any> {
@@ -64,13 +53,8 @@ class Index extends Component<any> {
   componentDidShow() {
     console.log("componentDidShow");
   }
-  componentDidHide() {
-    console.log("componentDidHide", getCurrentInstance());
-  }
 
   navClick(item: object, index: number) {
-    console.log("Index -> navClick -> index", index);
-    console.log("Index -> navClick -> item", item);
     let actions: Map<any, any> = new Map([[0, "/pages/course_list/index"]]);
     let url = actions.get(index);
     url &&
