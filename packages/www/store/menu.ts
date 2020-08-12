@@ -94,13 +94,13 @@ function onCreate(development = process.env.NODE_ENV === 'development') {
             key: "about",
             name: EnumLocaleLinks.links_about,
         },
-        {
-            key: "my",
-            name: EnumLocaleLinks.links_my,
-        },
+        // {
+        //     key: "my",
+        //     name: EnumLocaleLinks.links_my,
+        // },
         development && {
             key: "locale",
-            name: '多语言列表'
+            name: '测试'
         },
     ].filter(Boolean)
 }

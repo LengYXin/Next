@@ -78,6 +78,7 @@ export default class extends Vue {
     this.PageStore.onToggleVisible(visible);
   }
   onOutLogin() {
+    this.$router.replace("/");
     this.PageStore.onOutLogin();
   }
   onOk() {

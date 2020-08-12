@@ -16,7 +16,7 @@
     <xt-editor v-model="editor" :editorOptions="editorSettings" />
     <div>
       <h1>评论</h1>
-      <xt-comment :content="editor">
+      <xt-comment :comment="{content:editor}">
         <template slot="actions">
           <xt-action @click="onLike" />
           <xt-action title="回复" />
@@ -63,7 +63,7 @@ export default class PageView extends Vue {
       // },
     },
   };
-  onLike(){}
+  onLike() {}
   created() {}
   mounted() {
     // console.log(this.dataSource);

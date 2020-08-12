@@ -7,11 +7,11 @@
  */
 import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
-import loading from '~/assets/svg/loading.gif';
+// import loading from '~/assets/svg/loading.gif';
 
 Vue.use(VueLazyload, {
     // preLoad: 1.3,
     error: '/img.jpg',
-    loading: loading,
+    loading: '/loading.gif',
     // attempt: 1
 })
