@@ -1,6 +1,7 @@
 const webpackChain = require('./webpackChain');
 const lodash = require('lodash');
 const fs = require('fs');
+const path = require('path');
 const config = {
   projectName: 'xt',
   date: '2020-7-22',
@@ -20,6 +21,11 @@ const config = {
     ],
     options: {
     }
+  },
+  sass: {
+    resource: [
+      path.resolve(__dirname, '..', 'src/themes.scss'),
+    ]
   },
   framework: 'react',
   mini: {
