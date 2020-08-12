@@ -6,14 +6,16 @@
  * @desc [description]
  */
 <template>
-  <a-pagination
-    class="xt-pagination-center"
-    v-show="Pagination.total>Pagination.pageSize"
-    :current="Pagination.current"
-    :total="Pagination.total"
-    :pageSize="Pagination.pageSize"
-    @change="onCurrentChange"
-  />
+  <transition name="opacity">
+    <a-pagination
+      class="xt-pagination-center"
+      v-show="Pagination.total>Pagination.pageSize"
+      :current="Pagination.current"
+      :total="Pagination.total"
+      :pageSize="Pagination.pageSize"
+      @change="onCurrentChange"
+    />
+  </transition>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch, Inject } from "vue-property-decorator";

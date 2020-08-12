@@ -15,6 +15,7 @@ import { TimeoutError } from "rxjs";
 import { AjaxError, AjaxResponse } from "rxjs/ajax";
 import Vue from 'vue';
 import { ControllerUser } from '@xt/client/entities';
+const production = process.env.NODE_ENV === "production";
 export const ajax = new AjaxBasics({ target: process.env.target });
 // 扩展
 Vue.prototype.$ajax = ajax;
@@ -32,7 +33,7 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
         if (res instanceof AjaxResponse) {
             // 无 响应 数据
             if (lodash.isNil(res.response)) {
-                throw lodash.merge(res, { message: 'ajax response undefined' })
+                throw lodash.merge(res, production ? { message: '服务器开小差了' } : { message: '响应体不存在' })
             }
             else if (!lodash.eq(lodash.get(res.response, 'code', 0), 0)) {
                 throw lodash.merge(res, { message: lodash.get(res.response, 'msg') })
@@ -40,7 +41,7 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
         }
         // 错误 超时
         if (res instanceof AjaxError || res instanceof TimeoutError) {
-            throw res
+            throw production ? { message: '服务器开小差了' } : res;
         }
         return true
     }
@@ -49,7 +50,7 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
     }
     AjaxBasics.onError = function (error) {
         // notification.error({ key: "AjaxBasics", message: '提示', description: lodash.get(error, 'response.msg', error.message) })
-        message.error(lodash.get(error, 'response.msg', error.message))
+        message.error({ content: lodash.get(error, 'response.msg', error.message), key: 'message' })
         if (lodash.includes([600002], lodash.get(error, 'response.code'))) {
             $storeUser.onToggleVisible(true)
         }

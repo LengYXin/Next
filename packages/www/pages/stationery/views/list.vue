@@ -6,7 +6,7 @@
  * @desc [description]
  */
 <template>
-  <a-spin :spinning="loading">
+  <!-- <a-spin :spinning="loading"> -->
     <a-row :gutter="16">
       <transition-group name="opacity">
         <a-col v-for="item in dataSource" :key="item.commodityId" v-bind="bindCol">
@@ -25,7 +25,7 @@
         </a-col>
       </transition-group>
     </a-row>
-  </a-spin>
+  <!-- </a-spin> -->
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";

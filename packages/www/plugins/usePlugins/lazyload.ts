@@ -7,7 +7,7 @@
  */
 import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
-import loading from '~/assets/svg/loading.svg';
+import loading from '~/assets/svg/loading.gif';
 
 Vue.use(VueLazyload, {
     // preLoad: 1.3,
