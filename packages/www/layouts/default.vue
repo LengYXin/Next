@@ -2,7 +2,8 @@
   <a-config-provider v-bind="config">
     <a-layout class="xt-layout">
       <a-layout-header class="xt-layout-header">
-        <dir class="xt-layout-header-version">
+        <img class="xt-layout-header-logo" :src="$images.title" alt srcset />
+        <dir class="xt-layout-header-version" v-if="version">
           <span v-text="version"></span>
         </dir>
         <div class="xt-layout-header-content">
@@ -97,6 +98,12 @@ export default class extends Vue {
     margin: 0;
     color: @red-6;
     font-size: @font-size-lg;
+    background: #fff;
+  }
+  .xt-layout-header-logo {
+    position: absolute;
+    // left: 400px;
+    height: 100%;
   }
 }
 .xt-layout-header-content {

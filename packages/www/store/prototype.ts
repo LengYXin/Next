@@ -12,14 +12,13 @@ import { toJS } from 'mobx';
 import Vue from 'vue';
 import { ajax } from "./clientConfig";
 import store from './create';
+import images from './images';
 // 扩展
 Vue.prototype.$ajax = ajax;
 Vue.prototype.$EnumApi = EnumApi;
 Vue.prototype.$EnumLocaleLinks = EnumLocaleLinks;
 Vue.prototype.$EnumLocaleDescriptions = EnumLocaleDescriptions;
-Vue.prototype.$images = {
-    logo: '/images/logo.png'
-}
+Vue.prototype.$images = images;
 /**
  * 检查用户 状态 已登录返回用户信息
  */
@@ -45,5 +44,7 @@ declare module 'vue/types/vue' {
         readonly $EnumLocaleLinks: typeof EnumLocaleLinks;
         /** 说明枚举 */
         readonly $EnumLocaleDescriptions: typeof EnumLocaleDescriptions;
+        /** 图片资源 */
+        readonly $images: typeof images;
     }
 }

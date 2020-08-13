@@ -8,7 +8,7 @@
         @submit.native.prevent
       >
         <a-form-model-item>
-          <img :src="$images.logo" alt srcset />
+          <img class="xt-signin-logo" :src="$images.title" alt srcset />
         </a-form-model-item>
         <a-form-model-item>
           <a-input size="large" addon-before="+86" v-model="formInline.user" placeholder="Username"></a-input>
@@ -96,7 +96,9 @@ export default class extends Vue {
 @s-pd: 40px;
 .xt-signin {
   min-height: 480px;
-
+  .xt-signin-logo {
+    max-width: 100%;
+  }
   .xt-signin-qrcode {
     padding: @s-pd 0;
   }

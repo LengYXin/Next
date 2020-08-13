@@ -8,7 +8,7 @@
         @submit.native.prevent
       >
         <a-form-model-item>
-          <img :src="$images.logo" alt srcset />
+          <img class="xt-register-logo" :src="$images.title" alt srcset />
         </a-form-model-item>
         <a-form-model-item>
           <a-tabs>
@@ -76,6 +76,9 @@ export default class extends Vue {
 @s-pd: 40px;
 .xt-register {
   min-height: 480px;
+  .xt-register-logo {
+    max-width: 100%;
+  }
   .xt-register-qrcode {
     padding: @s-pd 0;
   }
