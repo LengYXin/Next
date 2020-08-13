@@ -7,7 +7,7 @@
  */
 <template>
   <a-affix v-if="affix" :offset-top="offsetTop">
-    <a-tabs :activeKey="activeKey" @change="tabsChange" :class="'xt-tabs-'+align">
+    <a-tabs :activeKey="String(activeKey)" @change="tabsChange" :class="'xt-tabs-'+align">
       <a-tab-pane v-for="tab in tabPane" :key="String(tab.key)">
         <span slot="tab">
           <span v-text="tab.title"></span>
@@ -84,6 +84,7 @@ export default class extends Vue {
   emitTabsChange() {
     return this.activeKey;
   }
+  mounted() {}
   updated() {}
   destroyed() {}
 }
