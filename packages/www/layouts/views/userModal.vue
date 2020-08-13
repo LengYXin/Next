@@ -29,15 +29,20 @@
   <span v-else>
     <span @click="onVisible(true,'links_signin')" v-t="locale.links_signin">登录</span>
     <span @click="onVisible(true,'links_register')" v-t="locale.links_register">注册</span>
+    <!-- :title="$t(title||'links_signin')" -->
     <a-modal
-      :title="$t(title||'links_signin')"
+      wrapClassName="xt-signin-modal"
       :visible="PageStore.visible"
       @ok="onOk"
       @cancel="onCancel"
       :footer="null"
+      width="700px"
     >
-      <signin v-if="isSignin" />
-      <register v-else />
+      <div v-show="PageStore.visible">
+        <signin v-if="isSignin" @toggle="onToggle" />
+        <register v-else-if="title==='links_register'" @toggle="onToggle" />
+        <retrieve v-else-if="title==='links_retrieve'" @toggle="onToggle" />
+      </div>
     </a-modal>
   </span>
 </template>
@@ -45,10 +50,11 @@
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import signin from "./signin.vue";
 import register from "./register.vue";
+import retrieve from "./retrieve.vue";
 import { Observer } from "mobx-vue";
 @Observer
 @Component({
-  components: { signin, register },
+  components: { signin, register, retrieve },
 })
 export default class extends Vue {
   get PageStore() {
@@ -76,6 +82,9 @@ export default class extends Vue {
       name: "我的晒出的作业",
     },
   ];
+  onToggle(title) {
+    this.title = title;
+  }
   onVisible(visible, title?) {
     this.title = title;
     this.PageStore.onToggleVisible(visible);
@@ -102,6 +111,13 @@ export default class extends Vue {
   top: 0;
   right: 0;
   height: 100%;
+}
+</style>
+<style lang="less" >
+.xt-signin-modal {
+  .ant-modal-body {
+    padding: 0;
+  }
 }
 </style>
 

@@ -17,6 +17,9 @@ Vue.prototype.$ajax = ajax;
 Vue.prototype.$EnumApi = EnumApi;
 Vue.prototype.$EnumLocaleLinks = EnumLocaleLinks;
 Vue.prototype.$EnumLocaleDescriptions = EnumLocaleDescriptions;
+Vue.prototype.$images = {
+    logo: '/images/logo.png'
+}
 /**
  * 检查用户 状态 已登录返回用户信息
  */

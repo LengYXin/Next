@@ -117,7 +117,7 @@ export default class PageView extends Vue {
     this.dataTime = Date.now();
   }
   cropper = {
-    img: "/img.jpg",
+    img: "/images/logo.png",
     size: 1,
     full: false,
     outputType: "png",
