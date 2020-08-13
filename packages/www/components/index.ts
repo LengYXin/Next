@@ -16,6 +16,8 @@ import action from "./comment/action.vue";
 Vue.component('xt-dplayer', () => import('./dplayer/index.vue'));
 // 富文本
 Vue.component('xt-editor', () => import('./editor/index.vue'));
+// 二维码
+Vue.component('xt-qrcode', () => import('./qrcode/index.vue'));
 // Vue.component('xt-cat', () => import('./cat/index.vue'));
 // 分页
 Vue.component('xt-pagination', pagination);

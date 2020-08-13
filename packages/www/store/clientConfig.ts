@@ -47,7 +47,8 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
     AjaxBasics.onError = function (error) {
         // notification.error({ key: "AjaxBasics", message: '提示', description: lodash.get(error, 'response.msg', error.message) })
         message.error({ content: lodash.get(error, 'response.msg', error.message), key: 'message' })
-        if (lodash.includes([600002], lodash.get(error, 'response.code'))) {
+        if (lodash.includes([600002, 900004], lodash.get(error, 'response.code'))) {
+            $storeUser.onOutLogin()
             $storeUser.onToggleVisible(true)
         }
     }

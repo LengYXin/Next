@@ -13,6 +13,7 @@
         </a-list-item-meta>
       </a-list-item>
     </a-list>
+    <xt-dplayer :options="dplayer" />
     <xt-editor v-model="editor" :editorOptions="editorSettings" />
     <xt-editor class="xt-editor-single" v-model="editor" :editorOptions="editorSettings" />
     <div>
@@ -38,6 +39,7 @@
         <!-- <xt-editor /> -->
       </xt-comment>
     </div>
+    <xt-qrcode options="https://www.baidu.com/?tn=64075107_1_dg" />
   </div>
 </template>
 <script lang="ts">
@@ -64,11 +66,17 @@ export default class PageView extends Vue {
       // },
     },
   };
+  dplayer = {
+    video: {
+      url:
+        "https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4",
+      pic: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
+      thumbnails: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
+    },
+  };
   onLike() {}
   created() {}
-  mounted() {
-    // console.log(this.dataSource);
-  }
+  mounted() {}
   updated() {}
   destroyed() {}
 }
