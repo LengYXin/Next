@@ -1,6 +1,7 @@
 
 <template>
   <div class="xt-content">
+    <a-divider>翻译列表</a-divider>
     <a-list class="test-list" item-layout="horizontal" :data-source="dataSource">
       <a-list-item slot="renderItem" slot-scope="item">
         <a-list-item-meta>
@@ -13,32 +14,32 @@
         </a-list-item-meta>
       </a-list-item>
     </a-list>
+    <a-divider>视频</a-divider>
     <xt-dplayer :options="dplayer" />
+    <a-divider>富文本</a-divider>
     <xt-editor v-model="editor" :editorOptions="editorSettings" />
     <xt-editor class="xt-editor-single" v-model="editor" :editorOptions="editorSettings" />
-    <div>
-      <h1>评论</h1>
-      <xt-comment :comment="{content:editor}">
-        <template slot="actions">
-          <xt-action @click="onLike" />
-          <xt-action title="回复" />
-        </template>
-        <template slot="overlay">
-          <a-menu>
-            <a-menu-item>
-              <a href="javascript:;">1st menu item</a>
-            </a-menu-item>
-            <a-menu-item>
-              <a href="javascript:;">2nd menu item</a>
-            </a-menu-item>
-            <a-menu-item>
-              <a href="javascript:;">3rd menu item</a>
-            </a-menu-item>
-          </a-menu>
-        </template>
-        <!-- <xt-editor /> -->
-      </xt-comment>
-    </div>
+    <xt-comment :comment="{content:editor}">
+      <template slot="actions">
+        <xt-action @click="onLike" />
+        <xt-action title="回复" />
+      </template>
+      <template slot="overlay">
+        <a-menu>
+          <a-menu-item>
+            <a href="javascript:;">1st menu item</a>
+          </a-menu-item>
+          <a-menu-item>
+            <a href="javascript:;">2nd menu item</a>
+          </a-menu-item>
+          <a-menu-item>
+            <a href="javascript:;">3rd menu item</a>
+          </a-menu-item>
+        </a-menu>
+      </template>
+      <!-- <xt-editor /> -->
+    </xt-comment>
+    <a-divider>时间显示</a-divider>
     <ul>
       <li>
         <h1>
@@ -48,7 +49,7 @@
         </h1>
       </li>
       <li>
-        <time v-dateFormat="dataTime" format="YYYY-MM-DD HH:mm:ss" fromNow interval/>
+        <time v-dateFormat="dataTime" format="YYYY-MM-DD HH:mm:ss" fromNow interval />
       </li>
       <li>
         <time v-dateFormat="dataTime" format="YYYY-MM-DD HH:mm:ss" />
@@ -59,7 +60,24 @@
       </li>
       <li></li>
     </ul>
+    <a-divider>二维码</a-divider>
+
     <xt-qrcode options="https://www.baidu.com/?tn=64075107_1_dg" />
+    <a-divider>图片验证</a-divider>
+    <xt-img-code />
+    <a-divider>图片裁剪</a-divider>
+    <xt-img-cropper v-bind="cropper" @realTime="realTime" />
+    <!-- <div v-html="cropperView.html"></div> -->
+    <!-- <img :src="cropperView.url" style="" alt width="200" height="200" /> -->
+    <div
+      class="show-preview"
+      :style="{'width': previews.w + 'px', 'height': previews.h + 'px',  'overflow': 'hidden',
+    'margin': '5px'}"
+    >
+      <div :style="previews.div">
+        <img :src="cropper.img" :style="previews.img" />
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -97,6 +115,31 @@ export default class PageView extends Vue {
   dataTime = Date.now();
   onUpdateTime() {
     this.dataTime = Date.now();
+  }
+  cropper = {
+    img: "/img.jpg",
+    size: 1,
+    full: false,
+    outputType: "png",
+    canMove: true,
+    fixedBox: false,
+    original: false,
+    canMoveBox: true,
+    autoCrop: true,
+    // 只有自动截图开启 宽度高度才生效
+    autoCropWidth: 200,
+    autoCropHeight: 200,
+    centerBox: false,
+    high: false,
+    cropData: {},
+    enlarge: 1,
+    mode: "contain",
+    maxImgSize: 3000,
+    limitMinSize: [100, 100],
+  };
+  previews = {};
+  realTime(data) {
+    this.previews = data;
   }
   onLike() {}
   created() {}

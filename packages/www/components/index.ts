@@ -22,6 +22,10 @@ Vue.component('xt-dplayer', () => import('./dplayer/index.vue'));
 Vue.component('xt-editor', () => import('./editor/index.vue'));
 // 二维码
 Vue.component('xt-qrcode', () => import('./qrcode/index.vue'));
+// 图片验证
+Vue.component('xt-img-code', () => import('./imgCode/index.vue'));
+// 图片裁剪
+Vue.component('xt-img-cropper', () => import('./imgCropper/index.vue'));
 // Vue.component('xt-cat', () => import('./cat/index.vue'));
 // 分页
 Vue.component('xt-pagination', pagination);
@@ -33,5 +37,8 @@ Vue.component('xt-tabs', tabs);
 Vue.component('xt-hover', hover);
 // 表情
 Vue.component('xt-face', face);
+// 评论
 Vue.component('xt-comment', comment);
+// 评论操作
 Vue.component('xt-action', action);
+
