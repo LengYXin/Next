@@ -72,12 +72,12 @@ module.exports = {
                 // },
                 min: {
                     name: 'min',
-                    test: /[\\/]node_modules[\\/](vue.*|nuxt.*|.*nuxt.*)[\\/]/,
+                    test: /[\\/]node_modules[\\/](vue.*|mobx.*|core.*|rxjs.*|nuxt.*|.*nuxt.*)[\\/]/,
                     chunks: 'all',
                 },
                 lib: {
                     name: 'lib',
-                    test: /[\\/]node_modules[\\/](ant-.*|@ant-.*|lodash.*|swiper.*|mobx.*|moment.*|core.*|viewerjs.*)[\\/]/,
+                    test: /[\\/]node_modules[\\/](ant-.*|@ant-.*|lodash.*|swiper.*|moment.*|viewerjs.*|bn.*|elliptic.*)[\\/]/,
                     chunks: 'all',
                 }
             }

@@ -3,23 +3,31 @@
  * @email lengyingxin8966@gmail.com
  * @create date 2020-08-05 14:16:00
  * @modify date 2020-08-05 14:16:00
- * @desc [description]
+ * @desc 钱显示格式化
  */
 
 import Vue from 'vue';
 import lodash from 'lodash';
 Vue.directive('money', {
-    // 当被绑定的元素插入到 DOM 中时……
-    bind(el: HTMLDivElement, binding) {
-        let value = binding.value;
-        if (!lodash.includes('.', value)) {
-            value += ".00"
-        }
-        el.innerHTML = value + '￥';
-    },
-    inserted(el: any, binding) {
-
-    },
+    inserted: onRender,
+    componentUpdated: onRender,
     unbind(el: any) {
     }
 });
+/**
+ * 时间格式化 渲染  interval 属性 表示倒计时
+ * @param el 
+ * @param binding 
+ * @param vnode 
+ * @param oldVnode 
+ */
+function onRender(el: HTMLDivElement, binding, vnode, oldVnode) {
+    let { value, oldValue } = binding;
+    if (lodash.eq(value, oldValue)) {
+        return
+    }
+    if (!lodash.includes('.', value)) {
+        value += ".00"
+    }
+    el.innerHTML = value + '￥';
+}

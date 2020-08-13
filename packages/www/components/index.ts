@@ -5,6 +5,10 @@ import "./directives/autoHeight";
 import "./directives/viewer";
 // 格式化钱
 import "./directives/money";
+// 时间处理
+import "./directives/dateFormat";
+// 时间处理
+// import "./filter/dateTime";
 import pagination from "./pagination/index.vue";
 import infiniteloading from "./infiniteloading/index.vue";
 import tabs from "./tabs/index.vue";

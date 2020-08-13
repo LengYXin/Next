@@ -39,6 +39,26 @@
         <!-- <xt-editor /> -->
       </xt-comment>
     </div>
+    <ul>
+      <li>
+        <h1>
+          时间
+          <time v-dateFormat="dataTime" format="YYYY年MM月DD日" />
+          <a-button @click="onUpdateTime">更改</a-button>
+        </h1>
+      </li>
+      <li>
+        <time v-dateFormat="dataTime" format="YYYY-MM-DD HH:mm:ss" fromNow interval/>
+      </li>
+      <li>
+        <time v-dateFormat="dataTime" format="YYYY-MM-DD HH:mm:ss" />
+      </li>
+      <li>
+        <!-- interval 表示 开启倒计时 -->
+        <time v-dateFormat="dataTime" format="YYYY-MM-DD HH:mm:ss" interval />
+      </li>
+      <li></li>
+    </ul>
     <xt-qrcode options="https://www.baidu.com/?tn=64075107_1_dg" />
   </div>
 </template>
@@ -74,6 +94,10 @@ export default class PageView extends Vue {
       thumbnails: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
     },
   };
+  dataTime = Date.now();
+  onUpdateTime() {
+    this.dataTime = Date.now();
+  }
   onLike() {}
   created() {}
   mounted() {}
