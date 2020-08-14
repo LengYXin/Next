@@ -3,12 +3,14 @@ const build = require('./configs/build');
 const head = require('./configs/head');
 const router = require('./configs/router');
 const lodash = require('lodash');
-// 生产环境
-const production = process.env.NODE_ENV === 'production';
 // api 地址
 const env = {
+  // api 地址
   target: 'https://cr-api-uat.xuantong.cn',
-  version: `${process.env.npm_package_version} ${moment().format("YYYY-MM-DD HH:mm")}`
+  // 版本号
+  version: `${process.env.npm_package_version} ${moment().format("YYYY-MM-DD HH:mm")}`,
+  // 环境 uat pro
+  DEPLOY_ENV: process.env.DEPLOY_ENV,
 };
 const proxy = {
   "/api": {
@@ -88,6 +90,7 @@ module.exports = {
   modules: [
     '@nuxtjs/proxy'
   ],
+  globalName:'xtwww',
   router,
   /*
   ** Auto import components

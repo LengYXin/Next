@@ -43,9 +43,11 @@ export default class extends Vue {
   text-align: center;
   font-size: @font-size-base+4px;
   margin: 0;
+  background: transparent;
   .ant-menu-item,
   .ant-menu-item:hover {
     border-color: transparent;
+    background: @white;
   }
 }
 </style>

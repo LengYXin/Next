@@ -8,7 +8,7 @@
 <template>
   <div class="xt-home">
     <div class="xt-swiper">
-      <swiper :options="swiperOptions" ref="mySwiper" :style="{minHeight:swiperOptions.minHeight}">
+      <swiper :options="swiperOptions" ref="mySwiper" >
         <swiper-slide v-for="img in PageStore.Banners" :key="img.id">
           <img :src="img.pictureUri" style="width:100%;" />
         </swiper-slide>

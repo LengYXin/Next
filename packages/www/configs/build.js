@@ -10,8 +10,10 @@ const webpack = require('webpack');
 const lodash = require('lodash');
 const path = require('path');
 const production = process.env.NODE_ENV === 'production';
+const deployUat = process.env.DEPLOY_ENV === 'uat';
+const deployPro = process.env.DEPLOY_ENV === 'pro';
 console.log();
-console.log("LENG: process.env", process.env.ES, process.env.NODE_ENV);
+console.log("LENG: process.env", process.env.DEPLOY_ENV, process.env.NODE_ENV);
 console.log();
 /*
   ** Build configuration
@@ -23,7 +25,10 @@ module.exports = {
     */
     extend(config, ctx) {
         // lodash.set(config,'mode','development')
-        // lodash.set(config,'devtool','eval-source-map')
+        // uat 环境 
+        if (deployUat) {
+            lodash.set(config, 'devtool', 'source-map')
+        }
         // 图库替换
         lodash.update(config, 'resolve.alias', alias => {
             return lodash.merge({
@@ -88,6 +93,14 @@ module.exports = {
         layouts: false,
         pages: false,
         commons: false
+    },
+    terser: {
+        terserOptions: {
+            compress: {
+                drop_console: deployPro,
+                // pure_funcs: ['console.log', 'console.warn']
+            },
+        }
     },
     // transpile: ['ant-design-vue'],
     babel: {

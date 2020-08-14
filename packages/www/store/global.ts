@@ -27,7 +27,7 @@ class XTGlobal {
      *生产环境
      * @memberof XTGlobal
      */
-    production = process.env.NODE_ENV === "production";
+    production = process.env.DEPLOY_ENV === 'pro' //&& process.env.NODE_ENV === "production";
     /**
      * 检查版本信息 
      */

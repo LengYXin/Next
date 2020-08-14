@@ -3,7 +3,7 @@
     <a-layout class="xt-layout">
       <a-layout-header class="xt-layout-header">
         <img class="xt-layout-header-logo" :src="$images.title" alt srcset />
-        <dir class="xt-layout-header-version" v-if="version">
+        <dir class="xt-layout-header-version" v-if="!production">
           <span v-text="version"></span>
         </dir>
         <div class="xt-layout-header-content">
@@ -22,7 +22,7 @@
         <breadcrumb />
         <!-- 页面 -->
         <!-- <Nuxt keep-alive /> -->
-        <Nuxt :keep-alive="production" />
+        <Nuxt :keep-alive="keepAlive" />
         <!-- 滚动 -->
         <a-back-top />
         <!-- <xt-cat /> -->
@@ -58,6 +58,9 @@ export default class extends Vue {
     return "xt-page-" + this.$route.name;
   }
   get production() {
+    return this.$store.$global.production;
+  }
+  get keepAlive() {
     return false; //this.$store.$global.production;
   }
   get version() {
@@ -94,6 +97,7 @@ export default class extends Vue {
   box-shadow: @xt-header-box-shadow;
   .xt-layout-header-version {
     position: absolute;
+    top: 0;
     left: 0;
     margin: 0;
     color: @red-6;
@@ -104,6 +108,7 @@ export default class extends Vue {
     position: absolute;
     // left: 400px;
     height: 100%;
+    top: 0;
   }
 }
 .xt-layout-header-content {
