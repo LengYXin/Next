@@ -42,6 +42,7 @@ module.exports = {
         })
         // console.log("extend -> config", config)
     },
+    publicPath: '/assets/',
     // 分离css
     extractCSS: production,
     loaders: {

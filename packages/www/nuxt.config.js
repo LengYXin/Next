@@ -2,6 +2,7 @@ const moment = require('moment');
 const build = require('./configs/build');
 const head = require('./configs/head');
 const router = require('./configs/router');
+const lodash = require('lodash');
 // 生产环境
 const production = process.env.NODE_ENV === 'production';
 // api 地址
@@ -23,6 +24,9 @@ const vue = {
     productionTip: false,
     devtools: false,
   }
+}
+const generate = {
+  dir: `build_${lodash.snakeCase(process.env.npm_package_version)}`
 }
 module.exports = {
   /*
@@ -93,6 +97,7 @@ module.exports = {
   env,
   proxy,
   vue,
+  generate,
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
