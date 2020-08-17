@@ -6,39 +6,31 @@
  * @desc 晒作业
  */
 <template>
-  <a-list class="xt-content" item-layout="horizontal" :data-source="data">
-    <a-list-item slot="renderItem" slot-scope="item">
-      <a-comment :author="item.author" :avatar="item.avatar">
-        <template slot="actions">
-          <span key="comment-basic-like">
-            <a-tooltip title="Like">
-              <a-icon
-                type="like"
-                :theme="action === 'liked' ? 'filled' : 'outlined'"
-                @click="like"
-              />
-            </a-tooltip>
-            <span style="padding-left: '8px';cursor: 'auto'">{{ likes }}</span>
-          </span>
-          <span key="comment-basic-dislike">
-            <a-tooltip title="Dislike">
-              <a-icon
-                type="dislike"
-                :theme="action === 'disliked' ? 'filled' : 'outlined'"
-                @click="dislike"
-              />
-            </a-tooltip>
-            <span style="padding-left: '8px';cursor: 'auto'">{{ dislikes }}</span>
-          </span>
-          <span key="comment-basic-reply-to">Reply to</span>
-        </template>
-        <p slot="content">{{ item.content }}</p>
-        <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
-          <span>{{ item.datetime.fromNow() }}</span>
-        </a-tooltip>
-      </a-comment>
-    </a-list-item>
-  </a-list>
+  <div class="xt-content-small">
+    <xt-editor @submit="onSubmit" buttonText="晒作业">
+    </xt-editor>
+    <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
+      <template slot="actions">
+        <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
+        <xt-action title="回复" />
+      </template>
+      <template slot="overlay">
+        <a-menu>
+          <a-menu-item>
+            <a href="javascript:;">1st menu item</a>
+          </a-menu-item>
+          <a-menu-item>
+            <a href="javascript:;">2nd menu item</a>
+          </a-menu-item>
+          <a-menu-item>
+            <a href="javascript:;">3rd menu item</a>
+          </a-menu-item>
+        </a-menu>
+      </template>
+      <!-- <xt-editor /> -->
+    </xt-comment>
+    <xt-infinite-loading @loading="onLoading" />
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
@@ -49,47 +41,25 @@ import moment from "moment";
   components: {},
 })
 export default class PageView extends Vue {
-  data = [
-    {
-      actions: ["Reply to"],
-      author: "Han Solo",
-      avatar:
-        "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-      content:
-        "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
-      datetime: moment().subtract(1, "days"),
-    },
-    {
-      actions: ["Reply to"],
-      author: "Han Solo",
-      avatar:
-        "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-      content:
-        "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
-      datetime: moment().subtract(2, "days"),
-    },
-    {
-      actions: ["Reply to"],
-      author: "Han Solo",
-      avatar:
-        "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-      content:
-        "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
-      datetime: moment().subtract(3, "days"),
-    },
-  ];
-  likes = 0;
-  dislikes = 0;
-  action = null;
-  like() {
-    this.likes = 1;
-    this.dislikes = 0;
-    this.action = "liked";
+  get PageStore() {
+    return this.$store.$storeCourse;
   }
-  dislike() {
-    this.likes = 0;
-    this.dislikes = 1;
-    this.action = "disliked";
+  get Pagination() {
+    return this.$store.$storeCourse.Pagination;
+  }
+  onLoading(event) {
+    // this.Pagination.onLoading({}, {}, event);
+  }
+  getComment(item) {
+    return {
+      content: item.content,
+      avatar: item.userHeader,
+      author: item.userNickname,
+      time: item.createTime,
+    };
+  }
+  onSubmit(event) {
+    console.log("LENG: PageView -> onSubmit -> event", event);
   }
   mounted() {}
   updated() {}

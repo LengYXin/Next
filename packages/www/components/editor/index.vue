@@ -1,6 +1,6 @@
 <template>
   <div class="quillWrapper">
-    <slot name="toolbar"></slot>
+    <!-- <slot name="toolbar"></slot> -->
     <div :id="id" ref="quillContainer"></div>
     <!-- <input
       v-if="useCustomImageHandler"
@@ -11,7 +11,12 @@
       style="display:none;"
       @change="emitImageInfo($event)"
     />-->
-    <toolbar class="xt-toolbar" :quill="quill" />
+    <toolbar @submit="onSubmit" :buttonText="buttonText" :quill="quill">
+      <slot></slot>
+      <template slot="submit">
+        <slot name="submit"></slot>
+      </template>
+    </toolbar>
   </div>
 </template>
 
@@ -29,6 +34,9 @@ export default {
   name: "VueEditor",
   mixins: [oldApi],
   props: {
+    buttonText: {
+      type: String,
+    },
     id: {
       type: String,
       default: "quill-container",
@@ -85,6 +93,9 @@ export default {
     delete this.quill;
   },
   methods: {
+    onSubmit(data) {
+      this.$emit("submit", data);
+    },
     initializeEditor() {
       this.setupQuillEditor();
       this.checkForCustomImageHandler();
@@ -227,7 +238,8 @@ export default {
 
 <style lang="less">
 .ql-editor {
-  min-height: 200px;
+  min-height: 100px;
+  max-height: 500px;
   font-size: 16px;
   text-align: justify;
   word-break: break-all;
@@ -355,23 +367,5 @@ button.ql-active svg {
   display: flex;
   align-items: center;
   flex-flow: row wrap;
-}
-</style>
-<style lang="less" >
-// 单行样式
-.xt-editor-single.quillWrapper {
-  position: relative;
-  .ql-editor {
-    min-height: 44px;
-    max-height: 66px;
-    padding-right: 44px;
-  }
-  .xt-toolbar {
-    position: absolute;
-    right: 16px;
-    bottom: 0;
-    // margin-bottom: 50%;
-    transform: translateY(-33.33%);
-  }
 }
 </style>

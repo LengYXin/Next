@@ -7,6 +7,8 @@ import "./directives/viewer";
 import "./directives/money";
 // 时间处理
 import "./directives/dateFormat";
+// 多行折叠
+import "./directives/ellipsis";
 // 时间处理
 // import "./filter/dateTime";
 import pagination from "./pagination/index.vue";

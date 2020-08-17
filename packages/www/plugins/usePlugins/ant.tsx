@@ -5,7 +5,7 @@
  * @modify date 2020-08-05 14:12:26
  * @desc [description]
  */
-import { Affix, Avatar, BackTop, Badge, Breadcrumb, Button, Card, Checkbox, Col, Comment, ConfigProvider, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Pagination, Popconfirm, Popover, Result, Row, Skeleton, Spin, Statistic, Steps, Tabs, Timeline, Tooltip } from 'ant-design-vue';
+import { Affix, Avatar, BackTop, Badge, Breadcrumb, Button, Card, Checkbox, Col, Comment, ConfigProvider, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Pagination, Popconfirm, Popover, Result, Row, Skeleton, Spin, Statistic, Steps, Tabs, Timeline, Tooltip, Upload } from 'ant-design-vue';
 import Base from 'ant-design-vue/lib/base';
 import Vue from 'vue';
 Vue.use(Base)
@@ -19,6 +19,7 @@ Vue.use(Tabs)
 Vue.use(Button)
 Vue.use(Modal)
 Vue.use(Icon)
+Vue.use(Upload)
 Vue.use(Spin)
 Vue.use(BackTop)
 Vue.use(Divider)

@@ -17,8 +17,13 @@
     <a-divider>视频</a-divider>
     <xt-dplayer :options="dplayer" />
     <a-divider>富文本</a-divider>
-    <xt-editor v-model="editor" :editorOptions="editorSettings" />
-    <xt-editor class="xt-editor-single" v-model="editor" :editorOptions="editorSettings" />
+    <xt-editor @submit="onSubmit"  v-model="editor" :editorOptions="editorSettings" />
+    <a-divider></a-divider>
+    <xt-editor @submit="onSubmit"  class="xt-editor-single" v-model="editor" :editorOptions="editorSettings" />
+    <a-divider></a-divider>
+    <xt-editor @submit="onSubmit" buttonText="晒作业">
+      <a-checkbox>分享朋友圈</a-checkbox>
+    </xt-editor>
     <xt-comment :comment="{content:editor}">
       <template slot="actions">
         <xt-action @click="onLike" />
@@ -153,6 +158,9 @@ export default class PageView extends Vue {
   onFinish() {
     console.log("onFinish");
     this.$message.success("倒计时结束");
+  }
+  onSubmit(event) {
+    console.log("LENG: PageView -> onSubmit -> event", event);
   }
   onLike() {}
   created() {}

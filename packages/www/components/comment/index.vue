@@ -30,7 +30,7 @@
       <!-- 内容 -->
       <div class="xt-comment-content" slot="content">
         <slot name="content">
-          <div v-html="formatFace(content)"></div>
+          <div v-ellipsis v-html="formatFace(content)"></div>
         </slot>
       </div>
       <!-- 操作按钮 -->
@@ -104,5 +104,24 @@ export default class extends Vue {
   .ant-comment-actions {
     text-align: right;
   }
+}
+
+.xt-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  text-align: justify;
+  word-break: break-all;
+  display: block;
+}
+
+.xt-ellipsis .xt-ellipsis-btn {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: @layout-body-background;
+  cursor: pointer;
+  color: @cyan-6;
 }
 </style>

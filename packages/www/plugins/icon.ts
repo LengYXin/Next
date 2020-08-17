@@ -124,3 +124,13 @@ export {
 export {
     default as PlayCircleOutline
 } from '@ant-design/icons/lib/outline/PlayCircleOutline';
+// 删除
+export {
+    default as DeleteOutline
+} from '@ant-design/icons/lib/outline/DeleteOutline';
+export {
+    default as EyeOutline
+} from '@ant-design/icons/lib/outline/EyeOutline';
+export {
+    default as PlusOutline
+} from '@ant-design/icons/lib/outline/PlusOutline';
