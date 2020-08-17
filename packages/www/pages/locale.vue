@@ -58,7 +58,14 @@
         <!-- interval 表示 开启倒计时 -->
         <time v-dateFormat="dataTime" format="YYYY-MM-DD HH:mm:ss" interval />
       </li>
-      <li></li>
+      <li>
+        <a-statistic-countdown
+          title="倒计时"
+          :value="deadline"
+          format="HH:mm:ss:SSS"
+          @finish="onFinish"
+        />
+      </li>
     </ul>
     <a-divider>二维码</a-divider>
 
@@ -113,9 +120,11 @@ export default class PageView extends Vue {
     },
   };
   dataTime = Date.now();
+  deadline = Date.now() + 1000 * 10;
   onUpdateTime() {
     this.dataTime = Date.now();
   }
+
   cropper = {
     img: "/images/logo.png",
     size: 1,
@@ -140,6 +149,10 @@ export default class PageView extends Vue {
   previews = {};
   realTime(data) {
     this.previews = data;
+  }
+  onFinish() {
+    console.log("onFinish");
+    this.$message.success("倒计时结束");
   }
   onLike() {}
   created() {}

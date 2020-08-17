@@ -3,7 +3,7 @@
     <a-row :gutter="16">
       <a-col v-bind="colProps" v-for="item in dataSource" :key="item.key">
         <a-card hoverable>
-          <img slot="cover" alt="example" v-lazy="item.url" />
+          <img slot="cover" alt="example" v-lazy="item.src" />
           <a-card-meta :title="item.title">
             <template slot="description">
               <span v-text="item.description"></span>
@@ -27,19 +27,19 @@ export default class PageView extends Vue {
   dataSource = [
     {
       key: 1,
-      src: "",
+      src: "https://cr-uat.xuantong.cn/_nuxt/img/25dff69.png",
       title: "暄桐教室",
       description: "description",
     },
     {
       key: 2,
-      src: "",
+      src: "https://cr-uat.xuantong.cn/_nuxt/img/49fb57f.png",
       title: "暄桐教室",
       description: "description",
     },
     {
       key: 3,
-      src: "",
+      src: "https://cr-uat.xuantong.cn/_nuxt/img/88a9e60.png",
       title: "暄桐教室",
       description: "description",
     },

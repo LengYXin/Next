@@ -16,7 +16,7 @@
             <div v-text="dataSource.statusName"></div>
             <div>开课中</div>
           </div>
-          <a-badge class="xt-badge-left" slot="avatar">
+          <a-badge :class="badgeClass" slot="avatar">
             <div class="xt-badge-text" slot="count">
               <div>直播</div>
               <div>课程</div>
@@ -49,6 +49,10 @@ export default class PageView extends Vue {
     default: () => ({}),
   })
   dataSource;
+  @Prop({ default: "left" }) badge;
+  get badgeClass() {
+    return "xt-badge xt-badge-" + this.badge;
+  }
   mounted() {}
   updated() {}
   destroyed() {}

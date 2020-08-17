@@ -19,7 +19,7 @@
           <div slot="description">
             <div v-text="item.articleIntroduction"></div>
           </div>
-          <a-badge class="xt-badge-left" slot="avatar">
+          <a-badge class="xt-badge xt-badge-left" slot="avatar">
             <div class="xt-badge-text" slot="count">
               <div v-text="item.publishTime">直播</div>
             </div>

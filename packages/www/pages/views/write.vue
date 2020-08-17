@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false" :loading="loading">
-    <Course />
+    <Course badge="right" />
   </a-card>
 </template>
 <script lang="ts">
