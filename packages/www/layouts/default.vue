@@ -22,7 +22,7 @@
         <breadcrumb />
         <!-- 页面 -->
         <!-- <Nuxt keep-alive /> -->
-        <Nuxt :keep-alive="keepAlive" />
+        <Nuxt :keep-alive="keepAlive" :keepAliveProps="keepAliveProps" />
         <!-- 滚动 -->
         <a-back-top />
         <!-- <xt-cat /> -->
@@ -61,11 +61,14 @@ export default class extends Vue {
     return this.$store.$global.production;
   }
   get keepAlive() {
-    return false; //this.$store.$global.production;
+    return true; //this.$store.$global.production;
   }
   get version() {
     return this.$store.$global.version;
   }
+  keepAliveProps = {
+    include: "PageIndex",
+  };
   mounted() {
     // console.log(this);
   }
@@ -85,6 +88,7 @@ export default class extends Vue {
 <style lang="less" scoped>
 .xt-layout {
   min-height: 100vh;
+  overflow: hidden;
   // padding: 0 20px;
 }
 .xt-layout-header {
@@ -118,6 +122,7 @@ export default class extends Vue {
 }
 .xt-layout-content {
   transition: all 0.2s;
+  width: 100vw;
 }
 .xt-layout-footer {
   max-width: @xt-content-width;

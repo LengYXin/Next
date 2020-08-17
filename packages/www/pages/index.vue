@@ -37,6 +37,7 @@ import theWriter from "./views/theWriter.vue";
 import stationery from "./views/stationery.vue";
 @Observer
 @Component({
+  name: "PageIndex",
   fetch(ctx: Context) {
     ctx.store.$storeHome.onGetBanners();
   },
@@ -52,7 +53,7 @@ import stationery from "./views/stationery.vue";
     stationery,
   },
 })
-export default class PageView extends Vue {
+export default class PageIndex extends Vue {
   get PageStore() {
     return this.$store.$storeHome;
   }
@@ -135,7 +136,9 @@ export default class PageView extends Vue {
     },
   ];
   created() {}
-  mounted() {}
+  mounted() {
+    console.log("LENG: PageView -> mounted -> this", this)
+  }
   updated() {}
   destroyed() {}
 }

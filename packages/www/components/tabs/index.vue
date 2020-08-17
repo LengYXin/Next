@@ -25,14 +25,7 @@
   </a-tabs>
 </template>
 <script lang="ts">
-import {
-  Component,
-  Prop,
-  Vue,
-  Watch,
-  Inject,
-  Emit,
-} from "vue-property-decorator";
+import { Component, Prop, Vue, Watch, Emit } from "vue-property-decorator";
 import lodash from "lodash";
 @Component({
   components: {},
@@ -74,8 +67,12 @@ export default class extends Vue {
   queryUpdate(to, from, next) {
     if (this.isConnected) {
       const { active } = this.$route.query;
-      if (active && !lodash.eq(active, this.activeKey)) {
-        this.activeKey = active as any;
+      if (!lodash.eq(active, this.activeKey)) {
+        if (lodash.isNil(active)) {
+          this.activeKey = this.defaultActiveKey;
+        } else {
+          this.activeKey = active;
+        }
         this.emitTabsChange();
       }
     }
