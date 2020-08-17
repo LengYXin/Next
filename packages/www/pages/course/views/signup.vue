@@ -2,7 +2,7 @@
 <template>
   <a-button @click.prevent.stop="onSignup" slot="actions" type="primary">
     <span v-t="text"></span>
-    <a-modal title="Title" :visible="visible" @ok="onOk" @cancel="onCancel">
+    <a-modal  :visible="visible" @ok="onOk" @cancel="onCancel">
       <div v-text="id"></div>
     </a-modal>
   </a-button>

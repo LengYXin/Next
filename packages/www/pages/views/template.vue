@@ -58,7 +58,7 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" scoped>
+<style lang="less" >
 .xt-template {
   padding: 50px 0;
   box-shadow: 0 1px 50px rgba(14, 5, 10, 0.05);
@@ -77,6 +77,9 @@ export default class PageView extends Vue {
   }
   .xt-template-footer {
     text-align: center;
+  }
+  .ant-card {
+    background: transparent;
   }
 }
 </style>
