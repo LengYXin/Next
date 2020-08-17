@@ -73,6 +73,9 @@ export default class PageView extends Vue {
   }
   &-card {
     height: 230px;
+    img{
+      height: 230px;
+    }
   }
 }
 </style>

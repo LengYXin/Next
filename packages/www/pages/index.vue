@@ -8,7 +8,7 @@
 <template>
   <div class="xt-home">
     <div class="xt-swiper">
-      <swiper :options="swiperOptions" ref="mySwiper" >
+      <swiper :options="swiperOptions" ref="mySwiper">
         <swiper-slide v-for="img in PageStore.Banners" :key="img.id">
           <img :src="img.pictureUri" style="width:100%;" />
         </swiper-slide>
@@ -115,6 +115,7 @@ export default class PageView extends Vue {
       footerText: "查看更多",
       footerTo: { name: "about" },
       template: "task",
+      isContent: false,
     },
     {
       title: "写字的人",

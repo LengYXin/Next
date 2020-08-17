@@ -8,7 +8,7 @@
         <h2 v-text="subTitle" :style="{color:options.subTitleColor}">副标题</h2>
       </slot>
     </div>
-    <div class="xt-template-content xt-content">
+    <div class="xt-template-content" :class="{'xt-content':isContent}">
       <slot></slot>
     </div>
     <div class="xt-template-footer" :style="{color:options.footerColor}">
@@ -37,6 +37,7 @@ export default class PageView extends Vue {
   @Prop({ default: "rgba(100,91,85,.6)" }) footerColor;
   @Prop({ default: "查看所有课程" }) footerText;
   @Prop({ default: () => ({ name: "course" }) }) footerTo;
+  @Prop({ default: true }) isContent;
   get options() {
     return {
       background: this.background,
@@ -80,6 +81,9 @@ export default class PageView extends Vue {
   }
   .ant-card {
     background: transparent;
+  }
+  .ant-card-body {
+    padding: 0;
   }
 }
 </style>
