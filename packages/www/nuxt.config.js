@@ -79,6 +79,7 @@ module.exports = {
     sass: [],
     scss: [],
     less: [
+      '@/assets/themes/colors.less',
       '@/assets/themes/modifyVars.less',
       '@/assets/themes/index.less'
     ],

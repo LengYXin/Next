@@ -9,11 +9,17 @@
   <div class="xt-content">
     <xt-tabs
       :affix="true"
+      theme="circle"
       :tabPane="PageStore.typelist"
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
     />
-    <a-list class="xt-content" item-layout="horizontal" :data-source="Pagination.dataSource" :rowKey="Pagination.key">
+    <a-list
+      class="xt-content"
+      item-layout="horizontal"
+      :data-source="Pagination.dataSource"
+      :rowKey="Pagination.key"
+    >
       <RenderItem slot="renderItem" slot-scope="item" :dataSource="item" />
     </a-list>
     <!-- 存在 更改地址栏 页签的时候 设置 key 用于触发初始化 change   -->

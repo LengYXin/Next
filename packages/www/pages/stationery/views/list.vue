@@ -17,7 +17,7 @@
                 <span v-text="item.commodityName"></span>
                 <span v-money="item.commodityPrice"></span>
                 <a :href="item.commodityUrl" target="_blank">
-                  <a-button type="orange">购买</a-button>
+                  <a-button type="yellow">购买</a-button>
                 </a>
               </template>
             </xt-hover>

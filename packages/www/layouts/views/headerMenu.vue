@@ -7,7 +7,7 @@
     </a-menu-item>
     <a-menu-item v-if="UserStore.loggedIn" class="ant-menu-item" key="my">
       <nuxt-link :to="{name:'my'}">
-        <span v-t="locale.links_my"></span>
+        <span class="xt-text-color-yellow" v-t="locale.links_my"></span>
       </nuxt-link>
     </a-menu-item>
   </a-menu>

@@ -7,7 +7,11 @@
  */
 <template>
   <a-affix v-if="affix" :offset-top="offsetTop">
-    <a-tabs :activeKey="String(activeKey)" @change="tabsChange" :class="'xt-tabs-'+align">
+    <a-tabs
+      :activeKey="String(activeKey)"
+      @change="tabsChange"
+      :class="themeClass"
+    >
       <a-tab-pane v-for="tab in tabPane" :key="String(tab.key)">
         <span slot="tab">
           <span v-text="tab.title"></span>
@@ -16,7 +20,12 @@
     </a-tabs>
   </a-affix>
   <!-- 非固定模式 -->
-  <a-tabs v-else :activeKey="activeKey" @change="tabsChange" :class="'xt-tabs-'+align">
+  <a-tabs
+    v-else
+    :activeKey="activeKey"
+    @change="tabsChange"
+    :class="themeClass"
+  >
     <a-tab-pane v-for="tab in tabPane" :key="String(tab.key)">
       <span slot="tab">
         <span v-text="tab.title"></span>
@@ -43,11 +52,16 @@ export default class extends Vue {
   @Prop({ default: 0 }) defaultActiveKey;
   // tabPane
   @Prop({ default: [], required: true }) tabPane;
+  // 主题色
+  @Prop({ default: "" }) theme;
   // 选择
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   // 当前页面显示
   get isConnected() {
     return this.$el.isConnected && this.key === this.$route.name;
+  }
+  get themeClass() {
+    return `xt-tabs-${this.theme} xt-tabs-${this.align}`;
   }
   // 更改
   tabsChange(activeKey) {

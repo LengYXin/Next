@@ -7,7 +7,7 @@
  */
 <template>
   <div class="xt-order-invoice">
-    <a-button class="ant-btn" type="orange" @click="onVisible(true)">申请发票</a-button>
+    <a-button class="ant-btn" type="yellow" @click="onVisible(true)">申请发票</a-button>
     <a-modal
       title="申请发票"
       :footer="null"

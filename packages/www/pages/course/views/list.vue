@@ -8,7 +8,10 @@
 
 <template>
   <a-list :loading="loading" item-layout="horizontal" :data-source="dataSource" :rowKey="rowKey">
-    <Course slot="renderItem" slot-scope="item" :dataSource="item" />
+    <div slot="renderItem" slot-scope="item">
+      <Course :dataSource="item" />
+      <SingleSwiper :dataSource="item.courseSingleResponseVos" />
+    </div>
   </a-list>
 </template>
 <script lang="ts">
@@ -17,8 +20,9 @@ import lodash from "lodash";
 import { Observer } from "mobx-vue";
 import { Context } from "@nuxt/types";
 import Course from "./course.vue";
+import SingleSwiper from "./singleSwiper.vue";
 @Component({
-  components: { Course },
+  components: { Course, SingleSwiper },
 })
 export default class PageView extends Vue {
   @Prop({ default: true }) loading;

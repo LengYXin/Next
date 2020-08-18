@@ -9,6 +9,7 @@
   <div class="xt-content">
     <xt-tabs
       :affix="true"
+      theme="circle"
       :tabPane="tabPane"
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"

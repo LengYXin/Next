@@ -9,6 +9,7 @@
   <div class="xt-content xt-about">
     <xt-tabs
       :affix="true"
+      theme="black"
       :tabPane="PageStore.typelist"
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"

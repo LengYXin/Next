@@ -5,20 +5,18 @@
         left: 0;
         right: initial;
         transform: translate(-50%, -50%) !important;
-
-
     }
 
     .xt-badge-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
         border-radius: 100%;
         height: 50px;
         width: 50px;
-        background: @orange-6;
-        line-height: 25px;
+        background: @xt-yellow-6;
+        line-height: 20px;
         color: @white;
-
-        >div {
-            text-align: center;
-        }
     }
 }

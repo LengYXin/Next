@@ -7,7 +7,7 @@
  */
 
 <template>
-  <swiper class="swiper" ref="swiper" :options="swiperOption">
+  <swiper v-if="dataSource" class="swiper" ref="swiper" :options="swiperOption">
     <swiper-slide v-for="item in dataSource" :key="item.courseId">
       <a-card>
         <div v-text="item.courseName"></div>
@@ -33,7 +33,7 @@ import Signup from "./signup.vue";
   components: { Signup },
 })
 export default class PageView extends Vue {
-  @Prop({ default: [] }) dataSource;
+  @Prop({}) dataSource;
   swiperOption = {
     slidesPerView: 3,
     spaceBetween: 30,
@@ -50,7 +50,8 @@ export default class PageView extends Vue {
       },
     },
   };
-  mounted() {}
+  mounted() {
+  }
   updated() {}
   destroyed() {}
 }

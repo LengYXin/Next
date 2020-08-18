@@ -8,6 +8,7 @@
 <template>
   <div class="xt-content xt-stationery">
     <xt-tabs
+      theme="circle"
       :tabPane="PageStore.typelist"
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
