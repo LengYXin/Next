@@ -9,7 +9,9 @@
 <template>
   <a-list :loading="loading" item-layout="horizontal" :data-source="dataSource" :rowKey="rowKey">
     <div slot="renderItem" slot-scope="item">
-      <Course :dataSource="item" />
+      <Course :dataSource="item">
+        <xt-shadow />
+      </Course>
       <SingleSwiper :dataSource="item.courseSingleResponseVos" />
     </div>
   </a-list>

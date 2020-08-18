@@ -50,6 +50,21 @@ module.exports = {
     publicPath: '/assets/',
     // 分离css
     extractCSS: production,
+    postcss: {
+        plugins: {
+            'postcss-pxtorem': require('postcss-pxtorem')({
+                rootValue: 16,
+                unitPrecision: 5,
+                // propList: ['font', 'font-size', 'line-height', 'letter-spacing', 'widht', 'height'],
+                propList: ['*'],
+                selectorBlackList: [],
+                replace: true,
+                mediaQuery: false,
+                minPixelValue: 0,
+                exclude: /node_modules/i
+            })
+        }
+    },
     loaders: {
         less: {
             lessOptions: {

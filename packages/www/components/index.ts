@@ -18,6 +18,7 @@ import hover from "./hover/index.vue";
 import face from "./face/index.vue";
 import comment from "./comment/index.vue";
 import action from "./comment/action.vue";
+import shadow from "./shadow/index.vue";
 // 视频
 Vue.component('xt-dplayer', () => import('./dplayer/index.vue'));
 // 富文本
@@ -43,4 +44,6 @@ Vue.component('xt-face', face);
 Vue.component('xt-comment', comment);
 // 评论操作
 Vue.component('xt-action', action);
+// 阴影
+Vue.component('xt-shadow', shadow);
 

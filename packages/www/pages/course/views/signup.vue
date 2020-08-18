@@ -1,9 +1,15 @@
 
 <template>
-  <a-button @click.prevent.stop="onSignup" slot="actions" type="primary">
+  <a-button
+    :disabled="disabled"
+    class="xt-signup"
+    @click.prevent.stop="onSignup"
+    slot="actions"
+    :type="type"
+  >
     <span v-t="text"></span>
-    <a-modal  :visible="visible" @ok="onOk" @cancel="onCancel">
-      <div v-text="id"></div>
+    <a-modal :visible="visible" @ok="onOk" @cancel="onCancel">
+      <div></div>
     </a-modal>
   </a-button>
 </template>
@@ -17,10 +23,17 @@ import { Context } from "@nuxt/types";
   components: {},
 })
 export default class PageView extends Vue {
+  @Prop({ default: () => ({}) })
+  dataSource;
+  /** 赠课 */
   @Prop({ default: false }) give;
-  @Prop({ required: true }) id;
+  // @Prop({ required: true }) id;
+  @Prop({}) title;
   visible = false;
   get text() {
+    if (this.title) {
+      return this.title;
+    }
     if (this.give) {
       return "give";
     }
@@ -31,6 +44,12 @@ export default class PageView extends Vue {
   }
   get PageStore() {
     return this.$store.$storeCourse;
+  }
+  get type() {
+    return this.give ? "yellow" : "primary";
+  }
+  get disabled() {
+    return !lodash.hasIn(this.dataSource, "courseId");
   }
   onSignup() {
     this.visible = true;
@@ -49,6 +68,22 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" scoped>
+.xt-signup {
+  color: @white;
+  width: 140px;
+  height: 40px;
+  font-size: @font-size-lg;
+  margin-left: 20px;
+  &[disabled] {
+    background: @xt-grey-6 !important;
+    color: @white !important;
+  }
+  &.ant-btn-yellow {
+    color: @xt-yellow-6;
+    border-style: solid;
+    background: transparent;
+  }
+}
 </style>
 <i18n>
 {

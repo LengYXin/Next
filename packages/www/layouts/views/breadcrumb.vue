@@ -2,15 +2,15 @@
   <div class="xt-content xt-breadcrumb" v-show="PageStore.breadcrumbShow">
     <a-breadcrumb separator=">">
       <a-breadcrumb-item>
-        <nuxt-link to="/" replace>
+        <nuxt-link to="/" replace class="xt-breadcrumb-link">
           <span v-t="'links_home'"></span>
         </nuxt-link>
       </a-breadcrumb-item>
       <a-breadcrumb-item v-for="item in PageStore.breadcrumb" :key="item.linksKey">
-        <nuxt-link v-if="item.links" :to="{name:item.linksKey}" replace>
+        <nuxt-link v-if="item.links" :to="{name:item.linksKey}" replace class="xt-breadcrumb-link">
           <span v-t="item.linksName"></span>
         </nuxt-link>
-        <span v-else v-t="item.linksName"></span>
+        <span v-else v-t="item.linksName" class="xt-breadcrumb-span"></span>
       </a-breadcrumb-item>
     </a-breadcrumb>
   </div>
@@ -36,6 +36,14 @@ export default class extends Vue {
 <style lang="less" scoped>
 .xt-breadcrumb {
   padding-top: @padding-lg;
+}
+.xt-breadcrumb-link,
+.xt-breadcrumb-span {
+  font-size: @font-size-lg;
+  color: #333;
+}
+.xt-breadcrumb-link {
+  color: @xt-grey-6;
 }
 </style>
 

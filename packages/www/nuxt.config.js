@@ -28,7 +28,9 @@ const vue = {
   }
 }
 const generate = {
-  dir: `build_${lodash.snakeCase(process.env.npm_package_version)}`
+  dir: `build_${lodash.snakeCase(process.env.npm_package_version)}`,
+  // 设置为false时，将根据路由路径生成 HTML 文件：
+  subFolders: false
 }
 module.exports = {
   /*
@@ -91,7 +93,7 @@ module.exports = {
   modules: [
     '@nuxtjs/proxy'
   ],
-  globalName:'xtwww',
+  globalName: 'xtwww',
   router,
   /*
   ** Auto import components

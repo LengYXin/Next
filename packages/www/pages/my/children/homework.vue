@@ -10,6 +10,7 @@
     <xt-tabs
       :affix="true"
       align="right"
+      theme="not"
       :tabPane="tabPane"
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"

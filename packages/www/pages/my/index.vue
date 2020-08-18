@@ -1,7 +1,7 @@
 <template>
-  <div class="xt-content">
+  <div class="xt-content xt-page-my">
     <a-row type="flex">
-      <a-col :span="4" >
+      <a-col :span="4">
         <div class="xt-text-align-center">
           <a-avatar :size="64" icon="user" />
         </div>
@@ -17,7 +17,7 @@
       </a-col>
       <a-col :span="20">
         <!-- <nuxt-child keep-alive /> -->
-        <nuxt-child  />
+        <nuxt-child />
       </a-col>
     </a-row>
   </div>
@@ -55,7 +55,10 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
+.xt-page-my {
+  padding-top: @padding-lg;
+}
 </style>
 <i18n>
 {

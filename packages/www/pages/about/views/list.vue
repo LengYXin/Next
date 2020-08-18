@@ -6,13 +6,14 @@
  * @desc [description]
  */
 <template>
-  <a-list
-    class="xt-content"
-    item-layout="horizontal"
-    :data-source="dataSource"
-    :rowKey="rowKey"
-  >
-    <a slot="renderItem" slot-scope="item" target="_blank" :href="item.articleUrl">
+  <a-list class="xt-content" item-layout="horizontal" :data-source="dataSource" :rowKey="rowKey">
+    <a
+      slot="renderItem"
+      class="xt-about-item"
+      slot-scope="item"
+      target="_blank"
+      :href="item.articleUrl"
+    >
       <a-list-item>
         <a-list-item-meta>
           <h1 slot="title" v-text="item.articleTitle">名称</h1>
@@ -49,10 +50,9 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" >
 .xt-about {
-  &-card {
-    .ant-card-body {
-      padding: 20px 0;
-    }
+  &-item {
+    animation: antFadeIn 1s;
+    display: block;
   }
   &-img {
     width: 230px;

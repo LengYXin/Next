@@ -6,7 +6,7 @@
  * @desc [description]
  */
 <template>
-  <a-affix v-if="affix" :offset-top="offsetTop">
+  <!-- <a-affix v-if="affix" :offset-top="offsetTop">
     <a-tabs
       :activeKey="String(activeKey)"
       @change="tabsChange"
@@ -18,14 +18,9 @@
         </span>
       </a-tab-pane>
     </a-tabs>
-  </a-affix>
+  </a-affix>-->
   <!-- 非固定模式 -->
-  <a-tabs
-    v-else
-    :activeKey="activeKey"
-    @change="tabsChange"
-    :class="themeClass"
-  >
+  <a-tabs :activeKey="activeKey" @change="tabsChange" :class="themeClass">
     <a-tab-pane v-for="tab in tabPane" :key="String(tab.key)">
       <span slot="tab">
         <span v-text="tab.title"></span>
@@ -52,7 +47,7 @@ export default class extends Vue {
   @Prop({ default: 0 }) defaultActiveKey;
   // tabPane
   @Prop({ default: [], required: true }) tabPane;
-  // 主题色
+  // 主题
   @Prop({ default: "" }) theme;
   // 选择
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
@@ -100,3 +95,104 @@ export default class extends Vue {
   destroyed() {}
 }
 </script>
+<style lang="less">
+@xt-tab-cls: ~"xt-tabs";
+@circle-padding: 20px;
+
+.@{xt-tab-cls} {
+  &-center,
+  .ant-tabs {
+    text-align: center;
+  }
+
+  &-left,
+  .ant-tabs {
+    text-align: left;
+  }
+
+  &-right,
+  .ant-tabs {
+    text-align: right;
+  }
+
+  // 无边框
+  &-not {
+    color: @xt-grey-6;
+    .ant-tabs-nav-container {
+      font-size: @font-size-md;
+    }
+    .ant-tabs-bar {
+      border: none;
+    }
+
+    .ant-tabs-ink-bar {
+      opacity: 0;
+    }
+
+    .ant-tabs-nav .ant-tabs-tab {
+      margin: 0;
+      padding-right: 0;
+    }
+  }
+
+  // 黑色
+  &-black {
+    .ant-tabs-nav-container {
+      font-size: @font-size-lg;
+    }
+    .ant-tabs-tab {
+      &:hover {
+        color: @black;
+      }
+
+      &:active {
+        color: @black;
+      }
+
+      &-active {
+        color: @black;
+        font-weight: 500;
+      }
+    }
+
+    .ant-tabs-ink-bar {
+      background-color: @black;
+    }
+  }
+
+  // 圆的
+  &-circle {
+    padding-bottom: @circle-padding;
+    overflow: hidden;
+
+    .ant-tabs-bar {
+      margin: 0px;
+      padding-bottom: @circle-padding / 2;
+    }
+
+    .ant-tabs-nav-wrap,
+    .ant-tabs-nav-container,
+    .ant-tabs-nav-scroll {
+      // overflow-y: visible;
+      overflow: initial;
+    }
+
+    .ant-tabs-ink-bar {
+      background-color: transparent;
+
+      &::after {
+        content: " ";
+        display: block;
+        border-radius: 100%;
+        height: @circle-padding;
+        width: @circle-padding !important;
+        border: 4px solid #fff;
+        box-shadow: 0 7px 7px 2px rgba(14, 5, 10, 0.05);
+        margin: auto;
+        background-color: @xt-yellow-6;
+        // transform: translateY(@circle-padding/2);
+      }
+    }
+  }
+}
+</style>

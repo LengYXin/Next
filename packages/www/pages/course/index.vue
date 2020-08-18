@@ -11,6 +11,7 @@
     <xt-tabs
       :affix="true"
       align="right"
+      theme="not"
       :tabPane="tabPane"
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
@@ -50,7 +51,7 @@ export default class PageView extends Vue {
   get Pagination() {
     return this.$store.$storeCourse.Pagination;
   }
-  
+
   tabPane = [
     { key: 1, title: "按时间排序" },
     { key: 2, title: "按学费排序" },

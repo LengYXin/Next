@@ -26,8 +26,8 @@ function onRender(el: HTMLDivElement, binding, vnode, oldVnode) {
     if (lodash.eq(value, oldValue)) {
         return
     }
-    if (!lodash.includes('.', value)) {
-        value += ".00"
-    }
-    el.innerHTML = value + '￥';
+    // if (!lodash.includes('.', value)) {
+    //     value += ".00"
+    // }
+    el.innerHTML = value + '元';
 }

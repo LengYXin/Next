@@ -137,7 +137,7 @@ export default class PageIndex extends Vue {
   ];
   created() {}
   mounted() {
-    console.log("LENG: PageView -> mounted -> this", this)
+    console.log("LENG: PageView -> mounted -> this", this);
   }
   updated() {}
   destroyed() {}

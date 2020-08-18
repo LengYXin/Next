@@ -7,25 +7,36 @@
  */
 
 <template>
-  <a-list-item>
-    <nuxt-link :to="`/course/${dataSource.courseId}`">
-      <a-list-item-meta>
-        <h1 slot="title" v-text="dataSource.courseName">名称</h1>
-        <div slot="description">
-          <div v-text="dataSource.statusName"></div>
-          <div>开课中</div>
+  <a-list-item class="xt-course-item">
+    <a-list-item-meta>
+      <nuxt-link slot="title" :to="`/course/${dataSource.courseId}`">
+        <h1 class="xt-course-item-title" v-text="dataSource.courseName">名称</h1>
+      </nuxt-link>
+      <div slot="description">
+        <div class="xt-flex-center">
+          <strong class="xt-course-item-money" v-money="dataSource.courseFullPrice"></strong>
+          <span class="xt-course-item-text">共{{dataSource.classHourCount}}课</span>
+          <span class="xt-course-item-text" v-text="dataSource.statusName"></span>
         </div>
-        <a-badge :class="badgeClass" slot="avatar">
+        <div class="xt-course-item-time">
+          <time v-dateFormat="dataSource.createTime" format="报名截至YYYY-MM-DD" />
+        </div>
+        <div class="xt-course-item-signup">
+          <Signup slot="actions" :give="true" :dataSource="dataSource" />
+          <Signup slot="actions" :dataSource="dataSource" />
+        </div>
+      </div>
+      <nuxt-link slot="avatar" :to="`/course/${dataSource.courseId}`">
+        <a-badge :class="badgeClass">
           <div class="xt-badge-text" slot="count">
             <div>直播</div>
             <div>课程</div>
           </div>
-          <img width="480" height="270" alt="logo" v-lazy="dataSource.coursePictureUri" />
+          <img class="xt-course-logo" alt="logo" v-lazy="dataSource.coursePictureUri" />
         </a-badge>
-      </a-list-item-meta>
-    </nuxt-link>
-    <Signup slot="actions" :give="true" :id="dataSource.courseId" />
-    <Signup slot="actions" :id="dataSource.courseId" />
+      </nuxt-link>
+    </a-list-item-meta>
+    <slot></slot>
   </a-list-item>
 </template>
 <script lang="ts">
@@ -52,4 +63,58 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" scoped>
+@top: 30px;
+.xt-course-item {
+  margin-top: @top;
+  padding: 0;
+  padding-bottom: @top;
+  width: 100%;
+  display: block;
+  // &:hover {
+  //   position: relative;
+  //   z-index: 1;
+  //   box-shadow: @box-shadow-base;
+  // }
+  &-title {
+    font-size: @xt-size-title;
+    line-height: @xt-size-title*2;
+    margin: 0;
+  }
+  &-money {
+    font-size: @xt-size-money;
+    color: @primary-color;
+    font-weight: 700;
+  }
+  &-text {
+    color: @xt-grey-6;
+    margin-left: 15px;
+  }
+  &-time {
+    margin-top: @top - 10px;
+    text-align: right;
+    color: @xt-yellow-6;
+  }
+  &-signup {
+    margin-top: @top - 10px;
+    text-align: right;
+  }
+  .xt-flex-center {
+    flex-direction: initial;
+    justify-content: flex-start;
+    margin-top: @top - 10px;
+  }
+}
+// 图片
+.xt-course-logo {
+  width: 487px;
+  height: 276px;
+}
+</style>
+<style lang="less" >
+.xt-course-item {
+  animation: antFadeIn 1s;
+  .ant-list-item-meta-avatar {
+    margin-right: @xt-margin-lg;
+  }
+}
 </style>

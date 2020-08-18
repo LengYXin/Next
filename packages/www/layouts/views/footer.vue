@@ -44,7 +44,7 @@ export default class extends Vue {
 </script>
 <style lang="less" scoped>
 .xt-footer {
-  height: 250px;
+  // height: 250px;
 }
 .xt-footer-orcode {
   width: 80px;

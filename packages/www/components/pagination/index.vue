@@ -9,7 +9,7 @@
   <transition name="opacity">
     <a-pagination
       class="xt-pagination-center"
-      v-show="Pagination.total>Pagination.pageSize"
+      v-show="isShow(Pagination.total,Pagination.pageSize)"
       :current="Pagination.current"
       :total="Pagination.total"
       :pageSize="Pagination.pageSize"
@@ -42,6 +42,9 @@ export default class extends Vue {
   // 当前页面显示
   get isConnected() {
     return this.$el.isConnected && this.key === this.$route.name;
+  }
+  isShow(total, pageSize) {
+    return total > pageSize;
   }
   created() {
     this.onLoading();

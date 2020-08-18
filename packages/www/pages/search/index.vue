@@ -8,12 +8,17 @@
 
 <template>
   <div class="xt-content">
-    <a-affix :offset-top="72">
-      <div>
-        <a-input-search placeholder="input search text" size="large" />
-        <xt-tabs :tabPane="tabPane" :defaultActiveKey="defaultActiveKey" @tabsChange="tabsChange" />
-      </div>
-    </a-affix>
+    <!-- <a-affix :offset-top="72"> -->
+    <div>
+      <a-input-search placeholder="input search text" size="large" />
+      <xt-tabs
+        theme="circle"
+        :tabPane="tabPane"
+        :defaultActiveKey="defaultActiveKey"
+        @tabsChange="tabsChange"
+      />
+    </div>
+    <!-- </a-affix> -->
     <keep-alive>
       <component
         v-bind:is="activeKey"
