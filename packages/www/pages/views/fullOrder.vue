@@ -16,12 +16,17 @@
         <a-timeline>
           <a-timeline-item v-for="item in timeline" :key="item.key" :color="item.color">
             <span slot="dot" v-text="item.key"></span>
-            <h1 v-text="item.title"></h1>
-            <span v-money="item.price"></span>
-            <span>
-              共
-              <span v-text="item.statistics"></span>课
-            </span>
+            <h1>
+              <span v-text="item.title"></span>
+              <span>立即报名</span>
+            </h1>
+            <h1>
+              <span v-money="item.price"></span>
+              <span>
+                共
+                <span v-text="item.statistics"></span>课
+              </span>
+            </h1>
           </a-timeline-item>
         </a-timeline>
       </a-col>

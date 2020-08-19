@@ -1,19 +1,19 @@
 <template>
   <div class="xt-template" :style="{background:options.background}">
-    <div class="xt-template-title">
+    <div class="xt-text-align-center">
       <slot name="title">
-        <h1 v-text="title" :style="{color:options.titleColor}">标题</h1>
+        <h1 class="xt-title-h1-large" v-text="title" :style="{color:options.titleColor}">标题</h1>
       </slot>
       <slot name="subTitle">
-        <h2 v-text="subTitle" :style="{color:options.subTitleColor}">副标题</h2>
+        <h3 v-text="subTitle" :style="{color:options.subTitleColor}">副标题</h3>
       </slot>
     </div>
     <div class="xt-template-content" :class="{'xt-content':isContent}">
       <slot></slot>
     </div>
-    <div class="xt-template-footer" >
+    <div class="xt-template-footer">
       <slot name="footer">
-        <nuxt-link :to="linkTo" :style="{color:options.footerColor}">
+        <nuxt-link :to="linkTo" class="xt-font-size-lg" :style="{color:options.footerColor}">
           <span v-text="footerText"></span>
         </nuxt-link>
       </slot>
@@ -67,23 +67,9 @@ export default class PageView extends Vue {
   &:nth-child(even) {
     background: @white;
   }
-  .xt-template-title {
-    text-align: center;
-    h1 {
-      font-size: 38px;
-      font-weight: 400;
-    }
-    h2 {
-      font-weight: 400;
-    }
-  }
   .xt-template-footer {
     text-align: center;
     padding-top: 60px;
-    a {
-      font-size: @font-size-lg;
-      // color: #ccc;
-    }
   }
   .ant-card {
     background: transparent;

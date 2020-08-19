@@ -10,17 +10,19 @@
   <a-list-item class="xt-course-item">
     <a-list-item-meta>
       <nuxt-link slot="title" :to="`/course/${dataSource.courseId}`">
-        <h1 class="xt-course-item-title" v-text="dataSource.courseName">名称</h1>
+        <h2 class="xt-title-h2" v-text="dataSource.courseName">名称</h2>
       </nuxt-link>
       <div slot="description">
-        <div class="xt-flex-center">
-          <strong class="xt-course-item-money" v-money="dataSource.courseFullPrice"></strong>
-          <span class="xt-course-item-text">共{{dataSource.classHourCount}}课</span>
-          <span class="xt-course-item-text" v-text="dataSource.statusName"></span>
-        </div>
-        <div class="xt-course-item-time">
-          <time v-dateFormat="dataSource.createTime" format="报名截至YYYY-MM-DD" />
-        </div>
+        <slot name="description">
+          <div class="xt-flex-center">
+            <strong class="xt-course-item-money" v-money="dataSource.courseFullPrice"></strong>
+            <span class="xt-course-item-text">共{{dataSource.classHourCount}}课</span>
+            <span class="xt-course-item-text" v-text="dataSource.statusName"></span>
+          </div>
+          <div class="xt-course-item-time">
+            <time v-dateFormat="dataSource.createTime" format="报名截至YYYY-MM-DD" />
+          </div>
+        </slot>
         <div class="xt-course-item-signup">
           <Signup slot="actions" :give="true" :dataSource="dataSource" />
           <Signup slot="actions" :dataSource="dataSource" />
@@ -76,11 +78,6 @@ export default class PageView extends Vue {
   //   box-shadow: @box-shadow-base;
   // }
   border-color: transparent !important;
-  &-title {
-    font-size: @xt-size-title;
-    line-height: @xt-size-title*2;
-    margin: 0;
-  }
   &-money {
     font-size: @xt-size-money;
     color: @primary-color;
