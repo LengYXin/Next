@@ -40,11 +40,11 @@ class Index extends Component<any> {
     this.onPagLoading(true);
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
   renderItem(item) {
     return (
       <Navigator

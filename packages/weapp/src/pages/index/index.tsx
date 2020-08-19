@@ -9,7 +9,7 @@ import "./index.scss";
 
 @inject("$storeHome")
 @observer
-@PageDecorators()
+@PageDecorators({ nav: false })
 class Index extends Component<any> {
   state = {
     value: "",
@@ -48,7 +48,7 @@ class Index extends Component<any> {
     this.PageStore.onGetH5Banners();
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
   componentDidShow() {
     console.log("componentDidShow");

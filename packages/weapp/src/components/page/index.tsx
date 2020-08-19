@@ -21,13 +21,16 @@ declare module 'react' {
 }
 interface PageDecoratorsOptions {
     /** 登录 */
-    logon?: boolean
+    logon?: boolean;
+    /** 导航栏 false 隐藏 */
+    nav?: boolean;
 }
 /**
  * 页面 装饰器
  * @param options 
  */
-export function PageDecorators(options?: PageDecoratorsOptions) {
+export function PageDecorators(options: PageDecoratorsOptions = {}) {
+    options = lodash.merge<PageDecoratorsOptions, PageDecoratorsOptions>({ nav: true }, options);
     return function <T extends { new(...args: any[]): React.Component<any, any> }>(constructor: T) {
         return class Page extends constructor {
             // 环境
@@ -41,7 +44,7 @@ export function PageDecorators(options?: PageDecoratorsOptions) {
             get CurrentInstance() {
                 return getCurrentInstance()
             }
-            componentDidCatch(){
+            componentDidCatch() {
                 console.log('componentDidCatch')
             }
             UNSAFE_componentWillMount() {
@@ -81,7 +84,7 @@ export function PageDecorators(options?: PageDecoratorsOptions) {
              * 导航栏 H5 显示
              */
             renderNav() {
-                if (this.WEB) {
+                if (options.nav && this.WEB) {
                     const { app, page } = this.CurrentInstance;
                     const tabBar = lodash.get(app, 'config.tabBar.list', []);
                     const props: AtNavBarProps = {
@@ -98,9 +101,9 @@ export function PageDecorators(options?: PageDecoratorsOptions) {
             }
             render() {
                 return <View className="xt-page-view">
+                    <Login onSuccess={this.onSuccess.bind(this)} />
                     {this.renderNav()}
                     <AtMessage />
-                    <Login onSuccess={this.onSuccess.bind(this)} />
                     {super.render()}
                 </View>
             }

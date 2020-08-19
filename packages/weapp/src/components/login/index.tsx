@@ -28,6 +28,7 @@ class Index extends Component<{ onSuccess: () => void, [key: string]: any }> {
    */
   onClose() {
     this.UserStore.onToggleVisible(false)
+    console.log("LENG: Index -> onClose -> onToggleVisible")
   }
   componentWillUnmount() {
     // this.onCancel()
@@ -37,6 +38,7 @@ class Index extends Component<{ onSuccess: () => void, [key: string]: any }> {
    * @param event 
    */
   async onSubmit(event) {
+    // console.log("LENG: Index -> onSubmit -> event", event)
     try {
       await this.UserStore.onLogin(this.state.account, this.state.password);
       // 校验是否成功
