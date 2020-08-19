@@ -15,7 +15,10 @@
       <div slot="description">
         <slot name="description">
           <div class="xt-flex-center">
-            <strong class="xt-course-item-money" v-money="dataSource.courseFullPrice"></strong>
+            <strong
+              class="xt-course-item-money xt-font-size-xx"
+              v-money="dataSource.courseFullPrice"
+            ></strong>
             <span class="xt-course-item-text">共{{dataSource.classHourCount}}课</span>
             <span class="xt-course-item-text" v-text="dataSource.statusName"></span>
           </div>
@@ -79,7 +82,6 @@ export default class PageView extends Vue {
   // }
   border-color: transparent !important;
   &-money {
-    font-size: @xt-size-money;
     color: @primary-color;
     font-weight: 700;
   }

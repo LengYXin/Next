@@ -5,7 +5,11 @@
         <h1 class="xt-title-h1-large" v-text="title" :style="{color:options.titleColor}">标题</h1>
       </slot>
       <slot name="subTitle">
-        <h3 v-text="subTitle" :style="{color:options.subTitleColor}">副标题</h3>
+        <h3
+          v-text="subTitle"
+          class="xt-template-sub-title"
+          :style="{color:options.subTitleColor}"
+        >副标题</h3>
       </slot>
     </div>
     <div class="xt-template-content" :class="{'xt-content':isContent}">
@@ -66,6 +70,9 @@ export default class PageView extends Vue {
   animation: antFadeIn 1s;
   &:nth-child(even) {
     background: @white;
+  }
+  &-sub-title {
+    margin: 18px 0;
   }
   .xt-template-footer {
     text-align: center;
