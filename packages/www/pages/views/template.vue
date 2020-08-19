@@ -11,9 +11,9 @@
     <div class="xt-template-content" :class="{'xt-content':isContent}">
       <slot></slot>
     </div>
-    <div class="xt-template-footer" :style="{color:options.footerColor}">
+    <div class="xt-template-footer" >
       <slot name="footer">
-        <nuxt-link :to="footerTo">
+        <nuxt-link :to="linkTo" :style="{color:options.footerColor}">
           <span v-text="footerText"></span>
         </nuxt-link>
       </slot>
@@ -34,9 +34,9 @@ export default class PageView extends Vue {
   @Prop({ default: "#b69271" }) titleColor;
   @Prop() subTitle;
   @Prop({ default: "rgba(100,91,85,.6)" }) subTitleColor;
-  @Prop({ default: "rgba(100,91,85,.6)" }) footerColor;
+  @Prop({ default: "rgba(135,124,117,.6)" }) footerColor;
   @Prop({ default: "查看所有课程" }) footerText;
-  @Prop({ default: () => ({ name: "course" }) }) footerTo;
+  @Prop({ default: () => ({ name: "course" }) }) linkTo;
   @Prop({ default: true }) isContent;
   get options() {
     return {
@@ -61,8 +61,8 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" >
 .xt-template {
-  padding: 50px 0;
-  box-shadow: 0 1px 50px rgba(14, 5, 10, 0.05);
+  padding: 60px;
+  box-shadow: 0 1px 20px rgba(14, 5, 10, 0.05);
   animation: antFadeIn 1s;
   &:nth-child(even) {
     background: @white;
@@ -79,6 +79,11 @@ export default class PageView extends Vue {
   }
   .xt-template-footer {
     text-align: center;
+    padding-top: 60px;
+    a {
+      font-size: @font-size-lg;
+      // color: #ccc;
+    }
   }
   .ant-card {
     background: transparent;

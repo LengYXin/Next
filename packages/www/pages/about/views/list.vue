@@ -51,7 +51,7 @@ export default class PageView extends Vue {
 <style lang="less" >
 .xt-about {
   &-item {
-    animation: antFadeIn 1s;
+    animation: antFadeIn .6s;
     display: block;
   }
   &-img {

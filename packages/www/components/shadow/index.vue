@@ -20,7 +20,7 @@ import qrcode from "qrcode";
 })
 export default class extends Vue {
   @Prop({ default: 30 }) height;
-  @Prop({ default: "#fffdf9" }) background;
+  @Prop({ default: "" }) background;
   get shadowStyle() {
     return { height: `${this.height}px` };
   }

@@ -112,7 +112,7 @@ export default class PageView extends Vue {
 </style>
 <style lang="less" >
 .xt-course-item {
-  animation: antFadeIn 1s;
+  animation: antFadeIn .6s;
   .ant-list-item-meta-avatar {
     margin-right: @xt-margin-lg;
   }

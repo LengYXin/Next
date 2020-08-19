@@ -45,6 +45,9 @@ export default class extends Vue {
 <style lang="less" scoped>
 .xt-footer {
   // height: 250px;
+  max-width: @xt-content-width;
+  margin: auto;
+  // padding-bottom: 180px;
 }
 .xt-footer-orcode {
   width: 80px;

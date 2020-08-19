@@ -35,7 +35,7 @@ export default class extends Vue {
 </script>
 <style lang="less" scoped>
 .xt-breadcrumb {
-  padding-top: @padding-lg;
+  padding-top: 40px;
 }
 .xt-breadcrumb-link,
 .xt-breadcrumb-span {

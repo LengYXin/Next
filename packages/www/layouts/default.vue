@@ -87,6 +87,7 @@ export default class extends Vue {
 </style>
 <style lang="less" scoped>
 .xt-layout {
+  background: #f1edeb;
   min-height: 100vh;
   overflow: hidden;
   // padding: 0 20px;
@@ -122,10 +123,12 @@ export default class extends Vue {
 }
 .xt-layout-content {
   transition: all 0.2s;
+  padding-bottom: 20px;
   width: 100vw;
+  background: #fff;
 }
 .xt-layout-footer {
-  max-width: @xt-content-width;
-  margin: auto;
+  width: 100vw;
+  background: #f1edeb;
 }
 </style>
