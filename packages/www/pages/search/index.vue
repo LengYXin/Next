@@ -129,7 +129,7 @@ export default class PageView extends Vue {
   created() {
     this.Pagination.onReset({ infinite: true });
     this.setBreadcrumb();
-    this.onLoading();
+    // this.onLoading();
   }
   /**
    * 设置 面包屑

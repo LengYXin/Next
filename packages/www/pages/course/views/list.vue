@@ -8,11 +8,10 @@
 
 <template>
   <a-list :loading="loading" item-layout="horizontal" :data-source="dataSource" :rowKey="rowKey">
-    <div slot="renderItem" slot-scope="item">
-      <Course :dataSource="item">
-        <xt-shadow />
-      </Course>
+    <div class="xt-course-renderItem" slot="renderItem" slot-scope="item">
+      <Course :dataSource="item"></Course>
       <SingleSwiper :dataSource="item.courseSingleResponseVos" />
+      <xt-shadow />
     </div>
   </a-list>
 </template>
@@ -36,4 +35,7 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" scoped>
+.xt-course-renderItem {
+  padding-bottom: 30px;
+}
 </style>
