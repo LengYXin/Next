@@ -5,6 +5,9 @@ import "./registerHooks";
 console.group('Start')
 console.info("LENG: middleware", process.env.NODE_ENV, process.env.version)
 export default function (context: Context) {
+    // 面包屑
+    context.store.$menu.initBreadcrumb(context.route);
+    context.store.$storeUser.onToggleVisible(false);
     onLog(context)
     // if (context.route.fullPath === '/') {
     //     return
@@ -24,5 +27,4 @@ function onLog(context: Context) {
         console.log("LENG: context", context);
         console.groupEnd();
     }
-    context.store.$menu.initBreadcrumb(context.route)
 }
