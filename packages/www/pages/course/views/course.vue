@@ -75,6 +75,7 @@ export default class PageView extends Vue {
   //   z-index: 1;
   //   box-shadow: @box-shadow-base;
   // }
+  border-color: transparent !important;
   &-title {
     font-size: @xt-size-title;
     line-height: @xt-size-title*2;

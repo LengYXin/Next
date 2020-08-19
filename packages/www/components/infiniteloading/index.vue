@@ -8,7 +8,7 @@
 <template>
   <infinite-loading :distance="300" @infinite="onLoading">
     <div class="infinite-loading-text" slot="spinner">正在加载...</div>
-    <div class="infinite-loading-text" slot="no-more">暂时没有哦~</div>
+    <div class="infinite-loading-text" slot="no-more">暂时都在这里了~</div>
     <div class="infinite-loading-text" slot="no-results">暂时没有哦~</div>
   </infinite-loading>
 </template>
@@ -36,3 +36,10 @@ export default class infinite extends Vue {
   mounted() {}
 }
 </script>
+<style lang="less" scoped>
+.infinite-loading-text {
+  font-size: @font-size-md;
+  padding: 40px 0 20px;
+  color: @xt-yellow-6;
+}
+</style>

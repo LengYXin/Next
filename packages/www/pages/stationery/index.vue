@@ -65,7 +65,10 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" >
+<style lang="less" scoped>
+.xt-stationery {
+  padding-bottom: 20px;
+}
 </style>
 <i18n>
 {

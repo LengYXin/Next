@@ -158,7 +158,7 @@ export default class PageIndex extends Vue {
 </script>
 <style lang="less" scoped>
 .xt-home {
-  padding-bottom: @padding-xs;
+  // padding-bottom: @padding-xs;
 }
 .xt-swiper {
   position: relative;

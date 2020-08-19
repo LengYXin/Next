@@ -1,5 +1,5 @@
 <template>
-  <div class="xt-content xt-breadcrumb" v-show="PageStore.breadcrumbShow">
+  <div class="xt-breadcrumb" v-show="PageStore.breadcrumbShow">
     <a-breadcrumb separator=">">
       <a-breadcrumb-item>
         <nuxt-link to="/" replace class="xt-breadcrumb-link">
@@ -35,7 +35,9 @@ export default class extends Vue {
 </script>
 <style lang="less" scoped>
 .xt-breadcrumb {
+  max-width: @xt-content-width+100px;
   padding-top: 40px;
+  margin: auto;
 }
 .xt-breadcrumb-link,
 .xt-breadcrumb-span {

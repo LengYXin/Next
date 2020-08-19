@@ -56,20 +56,28 @@ class Menu {
         const linksName = menu?.name;
         const linksKey = menu?.key;
         this.breadcrumbShow = linksKey && !lodash.includes(exclude, name);
-        this.breadcrumb = [{
-            linksKey,
-            linksName,
-            links: lodash.includes(route.name, '-id'),
-            // path: route.path,
-        }]
+        if (this.breadcrumbShow) {
+            this.breadcrumb = [{
+                linksKey,
+                linksName,
+                links: lodash.includes(route.name, '-id'),
+                // path: route.path,
+            }]
+        }
+
     }
     /**
      * 设置面包屑
      * @param breadcrumb 
      */
     @action
-    setBreadcrumb(breadcrumb) {
-        this.breadcrumb.push(breadcrumb);
+    setBreadcrumb(breadcrumb, reset = false) {
+        if (reset) {
+            this.breadcrumb = [breadcrumb];
+        } else {
+            this.breadcrumb.push(breadcrumb);
+        }
+        this.breadcrumbShow = true;
     }
 }
 function onCreate(development = process.env.NODE_ENV === 'development') {

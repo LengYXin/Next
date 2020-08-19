@@ -14,6 +14,7 @@
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
     />
+    <a-divider></a-divider>
     <List :loading="Pagination.loading" :data-source="Pagination.dataSource" />
     <!-- 存在 更改地址栏 页签的时候 设置 key 用于触发初始化 change   -->
     <xt-infinite-loading @loading="onLoading" :key="activeKey" />
@@ -57,16 +58,8 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" >
 .xt-about {
-  &-card {
-    .ant-card-body {
-      padding: 20px 0;
-    }
-  }
-  &-img {
-    width: 230px;
-    height: 230px;
-    display: block;
-    margin: auto;
+  .ant-divider {
+    background: transparent;
   }
 }
 </style>

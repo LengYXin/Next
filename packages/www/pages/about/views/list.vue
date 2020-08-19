@@ -6,29 +6,33 @@
  * @desc [description]
  */
 <template>
-  <a-list class="xt-content" item-layout="horizontal" :data-source="dataSource" :rowKey="rowKey">
-    <a
-      slot="renderItem"
-      class="xt-about-item"
-      slot-scope="item"
+  <a-list class="xt-about-list" item-layout="horizontal" :data-source="dataSource" :rowKey="rowKey">
+    <!-- <a
+    
       target="_blank"
       :href="item.articleUrl"
-    >
-      <a-list-item>
-        <a-list-item-meta>
-          <h1 slot="title" v-text="item.articleTitle">名称</h1>
-          <div slot="description">
-            <div v-text="item.articleIntroduction"></div>
+    >-->
+    <a-list-item slot="renderItem" class="xt-about-item" slot-scope="item">
+      <h1 class="xt-about-item-title" v-text="item.articleTitle">名称</h1>
+      <a-list-item-meta>
+        <div slot="description" class="xt-about-item-description">
+          <div v-text="item.articleIntroduction"></div>
+          <div class="xt-about-item-link">
+            <a target="_blank" :href="item.articleUrl">查看全文</a>
           </div>
-          <a-badge class="xt-badge xt-badge-left" slot="avatar">
-            <div class="xt-badge-text" slot="count">
-              <div v-text="item.publishTime">直播</div>
-            </div>
-            <img width="480" height="270" alt="logo" v-lazy="item.thumbUrl" />
-          </a-badge>
-        </a-list-item-meta>
-      </a-list-item>
-    </a>
+        </div>
+        <a-badge class="xt-badge xt-badge-left" slot="avatar">
+          <div class="xt-badge-text" slot="count">
+            <div v-dateFormat="item.publishTime" format="MM"></div>
+            <div v-dateFormat="item.publishTime" format="DD日"></div>
+          </div>
+          <div>
+            <img class="xt-about-item-logo" v-lazy="item.thumbUrl" />
+          </div>
+        </a-badge>
+      </a-list-item-meta>
+    </a-list-item>
+    <!-- </a> -->
   </a-list>
 </template>
 <script lang="ts">
@@ -49,16 +53,49 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" >
-.xt-about {
-  &-item {
-    animation: antFadeIn .6s;
+.xt-about-item {
+  &.ant-list-item {
+    animation: antFadeIn 0.6s;
+    border: none !important;
     display: block;
+    padding: 0;
+    padding-bottom: 55px;
   }
-  &-img {
-    width: 230px;
-    height: 230px;
+  &-title {
+    font-size: @font-size-lg;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+  .ant-list-item-meta-avatar {
+    margin-right: 68px;
+  }
+  &-description {
+    text-align: justify;
+    word-break: break-all;
+    line-height: 26px;
+  }
+  &-link {
+    margin-top: 20px;
+    a {
+      color: @xt-green-6;
+      &:hover {
+        color: @xt-green-5;
+      }
+    }
+  }
+  &-logo {
+    width: 410px;
+    height: 236px;
     display: block;
     margin: auto;
+  }
+  .xt-badge-left.ant-badge .ant-scroll-number-custom-component {
+    transform: translate(-120%, -110%) !important;
+  }
+  .xt-badge-text {
+    background: #f5f5f5 !important;
+    color: @xt-grey-6 !important;
+    font-size: @font-size-md;
   }
 }
 </style>

@@ -16,7 +16,7 @@
       <a-layout-content
         class="xt-layout-content"
         :class="pageClass"
-        v-auto-height="{ styleKey: 'minHeight', subtract: 350 }"
+        v-auto-height="{ styleKey: 'minHeight', subtract: 270 }"
       >
         <!-- 面包屑 -->
         <breadcrumb />
@@ -123,7 +123,7 @@ export default class extends Vue {
 }
 .xt-layout-content {
   transition: all 0.2s;
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
   width: 100vw;
   background: #fff;
 }

@@ -7,26 +7,36 @@
  */
 
 <template>
-  <div class="xt-content">
+  <div>
     <!-- <a-affix :offset-top="72"> -->
-    <div>
-      <a-input-search placeholder="input search text" size="large" />
+    <div class="xt-page-search-input">
+      <div class="xt-flex-center">
+        <a-input-search placeholder="搜索你感兴趣的内容" size="large">
+          <a-button slot="enterButton" type="primary" icon="search">搜索</a-button>
+        </a-input-search>
+      </div>
+    </div>
+    <div class="xt-content">
       <xt-tabs
         theme="circle"
         :tabPane="tabPane"
         :defaultActiveKey="defaultActiveKey"
         @tabsChange="tabsChange"
       />
+      <h1 class="xt-page-search-statistics">
+        为你搜索到
+        <span v-text="Pagination.dataSource.length" /> 个相关结果
+      </h1>
+      <!-- </a-affix> -->
+      <keep-alive>
+        <component
+          v-bind:is="activeKey"
+          :loading="false"
+          :dataSource="Pagination.dataSource"
+          :rowKey="Pagination.key"
+        ></component>
+      </keep-alive>
     </div>
-    <!-- </a-affix> -->
-    <keep-alive>
-      <component
-        v-bind:is="activeKey"
-        :loading="false"
-        :dataSource="Pagination.dataSource"
-        :rowKey="Pagination.key"
-      ></component>
-    </keep-alive>
     <xt-infinite-loading :key="activeKey" @loading="onLoading" />
   </div>
 </template>
@@ -48,6 +58,12 @@ import stationery from "~/pages/stationery/views/list.vue";
 import videos from "~/pages/video/views/list.vue";
 @Observer
 @Component({
+  // asyncData(ctx) {
+  //   ctx.store.$menu.setBreadcrumb({
+  //     linksName: "搜索课程",
+  //   });
+  //   return;
+  // },
   components: { course, about, stationery, videos },
 })
 export default class PageView extends Vue {
@@ -85,6 +101,7 @@ export default class PageView extends Vue {
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   tabsChange(activeKey) {
     this.activeKey = activeKey;
+    this.setBreadcrumb();
     this.Pagination.onReset({ infinite: true });
     // this.onLoading();
   }
@@ -111,7 +128,22 @@ export default class PageView extends Vue {
   }
   created() {
     this.Pagination.onReset({ infinite: true });
+    this.setBreadcrumb();
     this.onLoading();
+  }
+  /**
+   * 设置 面包屑
+   */
+  setBreadcrumb() {
+    const linksName = `搜索${
+      lodash.find(this.tabPane, ["key", this.activeKey]).title
+    }`;
+    this.$store.$menu.setBreadcrumb(
+      {
+        linksName,
+      },
+      true
+    );
   }
   mounted() {
     console.log("LENG: PageView -> mounted -> this", this);
@@ -120,5 +152,38 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
+@searchHeight: 340px;
+// layout 自动注入 类名
+.xt-page-search {
+  .xt-breadcrumb {
+    transform: translateY(@searchHeight);
+  }
+  &-input {
+    transform: translateY(-67px);
+    height: @searchHeight;
+    background: url(/images/search-bg.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    .xt-flex-center {
+      max-width: 700px;
+      margin: auto;
+    }
+    // .ant-input-search-button {
+    //   background: @xt-green-6;
+    //   color: @white;
+    // }
+  }
+  &-statistics {
+    font-size: @font-size-md;
+    font-weight: 400;
+    color: @xt-grey-6;
+    padding: 20px 0;
+    span {
+      color: @xt-green-6;
+    }
+  }
+}
 </style>

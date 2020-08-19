@@ -61,7 +61,7 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" >
 .xt-template {
-  padding: 60px;
+  padding: 60px 0;
   box-shadow: 0 1px 20px rgba(14, 5, 10, 0.05);
   animation: antFadeIn 1s;
   &:nth-child(even) {
