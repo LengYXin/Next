@@ -24,6 +24,7 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
+        // console.log("LENG: extend -> config", config.module.rules)
         // lodash.set(config,'mode','development')
         // uat 环境 
         if (deployUat) {
@@ -32,7 +33,7 @@ module.exports = {
         // 图库替换
         lodash.update(config, 'resolve.alias', alias => {
             return lodash.merge({
-                // '@xt/client': path.resolve(path.dirname(process.cwd()), 'client'),
+                // 'swiper': require.resolve('swiper'),
                 "@ant-design/icons/lib/dist$": path.resolve(process.cwd(), 'plugins/icon.ts'),
             }, alias)
         });
@@ -42,11 +43,13 @@ module.exports = {
                 resourceQuery: /blockType=i18n/,
                 type: 'javascript/auto',
                 loader: '@kazupon/vue-i18n-loader'
-            })
+            });
             return rules
         })
-        // console.log("extend -> config", config)
+        // console.log("extend -> config", config.resolve.alias)
+        // throw 'aaa'
     },
+    transpile: ['swiper','serializr','dom7'],
     publicPath: '/assets/',
     // 分离css
     extractCSS: production,
@@ -83,6 +86,7 @@ module.exports = {
         new webpack.BannerPlugin({ banner: `@author 冷 (https://github.com/LengYXin)\n@email lengyingxin8966@gmail.com` })
     ],
     optimization: {
+        minimize: deployPro,
         splitChunks: {
             chunks: 'async',
             cacheGroups: {

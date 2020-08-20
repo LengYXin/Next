@@ -72,6 +72,7 @@ module.exports = {
   css: [
     'ant-design-vue/dist/antd.less',
     'quill/dist/quill.snow.css',
+    'swiper/css/swiper.css',
     '@/assets/style/index.less'
   ],
   styleResources: {

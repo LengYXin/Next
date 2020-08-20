@@ -2,6 +2,8 @@ import { Context } from "@nuxt/types";
 import { message } from "ant-design-vue";
 import lodash from "lodash";
 import "./registerHooks";
+// import Bowser from "./bowser";
+// Bowser()
 console.group('Start')
 console.info("LENG: middleware", process.env.NODE_ENV, process.env.version)
 export default function (context: Context) {

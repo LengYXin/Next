@@ -7,12 +7,17 @@
  */
 import { BindAll } from 'lodash-decorators';
 import lodash from 'lodash';
-import { observable, action } from 'mobx';
+import Bowser from 'bowser';
 @BindAll()
 class XTGlobal {
     constructor() {
         this.onInspectVersion()
     }
+    /**
+     * 环境设备信息
+     * @memberof XTGlobal
+     */
+    userAgent = Bowser.parse(window.navigator.userAgent)
     /**
      *   localStorage  前缀 
      * @memberof XTGlobal
