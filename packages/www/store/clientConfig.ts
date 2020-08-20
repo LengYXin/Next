@@ -5,9 +5,9 @@
  * @modify date 2020-08-05 14:12:55
  * @desc [description]
  */
-import '@xt/client/configure';
-import { ControllerUser } from '@xt/client/entities';
-import { AjaxBasics } from '@xt/client/helpers/ajaxBasics';
+// import '@xt/client/configure';
+import { ControllerUser } from '@xt/client';
+import { AjaxBasics } from '@xt/client';
 import { message } from 'ant-design-vue';
 import lodash from 'lodash';
 import NProgress from 'nprogress';
@@ -42,7 +42,7 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
         return true
     }
     AjaxBasics.onMap = function (res) {
-        return res.response.result
+        return res?.response?.result
     }
     AjaxBasics.onError = function (error) {
         // notification.error({ key: "AjaxBasics", message: '提示', description: lodash.get(error, 'response.msg', error.message) })

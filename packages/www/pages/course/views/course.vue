@@ -26,10 +26,12 @@
             <time v-dateFormat="dataSource.createTime" format="报名截至YYYY-MM-DD" />
           </div>
         </slot>
-        <div class="xt-course-item-signup">
-          <Signup slot="actions" :give="true" :dataSource="dataSource" />
-          <Signup slot="actions" :dataSource="dataSource" />
-        </div>
+        <slot name="signup">
+          <div class="xt-course-item-signup">
+            <Signup :give="true" :dataSource="dataSource" />
+            <Signup :dataSource="dataSource" />
+          </div>
+        </slot>
       </div>
       <nuxt-link slot="avatar" :to="`/course/${dataSource.courseId}`">
         <a-badge :class="badgeClass">

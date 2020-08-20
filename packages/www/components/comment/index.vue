@@ -122,6 +122,6 @@ export default class extends Vue {
   left: 0;
   background: @layout-body-background;
   cursor: pointer;
-  color: @cyan-6;
+  color: @xt-green-6;
 }
 </style>

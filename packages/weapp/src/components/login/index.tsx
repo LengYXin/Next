@@ -5,7 +5,7 @@
  * @modify date 2020-08-07 18:04:33
  * @desc [description]
  */
-import { ControllerUser } from '@xt/client/entities';
+import { ControllerUser } from '@xt/client';
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
 import { AtButton, AtForm, AtInput, AtModal, AtModalContent } from 'taro-ui';

@@ -48,7 +48,7 @@ import {
   ControllerHome,
   ControllerStationery,
   ControllerVideo,
-} from "@xt/client/entities";
+} from "@xt/client";
 import lodash from "lodash";
 import { Observer } from "mobx-vue";
 import { Context } from "@nuxt/types";

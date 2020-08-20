@@ -1,6 +1,6 @@
 import { Navigator, View, Image, Text } from "@tarojs/components";
 import Taro from "@tarojs/taro";
-import { ControllerCourse } from "@xt/client/entities";
+import { ControllerCourse } from "@xt/client";
 import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
 import { AtCard, AtAvatar, AtBadge } from "taro-ui";

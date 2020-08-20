@@ -6,9 +6,28 @@
  * @desc 课程组成
  */
 <template>
-  <a-card>
-    <a-card-grid style="width:25%;text-align:center" v-for="item in dataSource" :key="item.key">
-      <img alt="example" style="width:100%;" v-lazy="item.src" />
+  <a-card class="xt-cid-composition-card">
+    <a-card-grid
+      class="xt-cid-composition"
+      :hoverable="false"
+      v-for="item in dataSource"
+      :key="item.key"
+    >
+      <div class="xt-cid-composition-info xt-hoverable">
+        <img class="xt-cid-composition-img" v-lazy="item.src" />
+        <div class="xt-cid-composition-pd">
+          <div class="xt-cid-composition-title">标题</div>
+          <a-row class="xt-cid-composition-static" type="flex">
+            <a-col :flex="1">
+              <strong class="xt-text-green" v-money="999"></strong>
+            </a-col>
+            <a-col :flex="1">
+              <span>共3课</span>
+              <span>已结课</span>
+            </a-col>
+          </a-row>
+        </div>
+      </div>
     </a-card-grid>
   </a-card>
 </template>
@@ -19,7 +38,7 @@ import { Modal } from "ant-design-vue";
   components: {},
 })
 export default class PageView extends Vue {
-   dataSource = [
+  dataSource = [
     {
       key: 1,
       src:
@@ -61,5 +80,27 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
-<style>
+<style lang="less" scoped>
+.xt-cid-composition {
+  width: 25%;
+  padding: 0 12px 20px 12px;
+  border: none;
+  box-shadow: 0 0 0 0 transparent;
+  &-card {
+    border: none;
+  }
+  &-info {
+    background: @white;
+  }
+  &-img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+  }
+  &-pd {
+    padding: 16px;
+  }
+  &-static {
+  }
+}
 </style>

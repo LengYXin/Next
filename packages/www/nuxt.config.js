@@ -10,7 +10,7 @@ const target = {
 // api 地址
 const env = {
   // api 地址
-  target: lodash.get(target, process.env.DEPLOY_ENV, 'https://dev-api.xuantong.cn'),
+  target: lodash.get(target, process.env.DEPLOY_ENV, 'https://dev-api.xuantong.cn'),// 'https://dev-api.xuantong.cn'),
   // 版本号
   version: `${process.env.npm_package_version} ${moment().format("YYYY-MM-DD HH:mm")}`,
   // 环境 uat pro

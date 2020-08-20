@@ -5,7 +5,7 @@
  * @modify date 2020-08-05 14:13:07
  * @desc [description]
  */
-import { EnumLocaleLinks } from '@xt/client/languages';
+import { EnumLocaleLinks } from '@xt/client';
 import { BindAll } from 'lodash-decorators';
 import lodash from 'lodash';
 import { action, observable, toJS } from 'mobx';
@@ -50,12 +50,12 @@ class Menu {
             return
         }
         this.route = route
-        const exclude = ["index", "my"];
+        const exclude = ["index", "my", "course-id"];
         const name = this.getRouteName(route);
         const menu = lodash.find(this.Menus, ["key", name]);
         const linksName = menu?.name;
         const linksKey = menu?.key;
-        this.breadcrumbShow = linksKey && !lodash.includes(exclude, name);
+        this.breadcrumbShow = linksKey && !lodash.includes(exclude, name) && !lodash.includes(exclude, route.name);
         if (this.breadcrumbShow) {
             this.breadcrumb = [{
                 linksKey,

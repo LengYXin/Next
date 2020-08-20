@@ -9,7 +9,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch, Inject } from "vue-property-decorator";
-import { ControllerVideo } from "@xt/client/entities";
+import { ControllerVideo } from "@xt/client";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
 import lodash from "lodash";

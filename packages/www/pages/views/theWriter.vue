@@ -9,7 +9,7 @@
         />
       </a-col>
       <a-col v-bind="colProps">
-        <a-card class="xt-view-theWriter-card">
+        <a-card v-viewer class="xt-view-theWriter-card">
           <a-card-grid
             style="width:33.33%;text-align:center"
             v-for="item in dataSource"

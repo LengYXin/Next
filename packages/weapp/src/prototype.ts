@@ -1,4 +1,4 @@
-import { AjaxBasics } from '@xt/client/helpers/ajaxBasics';
+import { AjaxBasics } from '@xt/client';
 import { Component } from 'react';
 import EnumPages from './pages.config';
 type IEnumPages = typeof EnumPages;

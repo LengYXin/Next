@@ -8,8 +8,10 @@
     :type="type"
   >
     <span v-t="text"></span>
-    <a-modal :visible="visible" @ok="onOk" @cancel="onCancel">
-      <div></div>
+    <a-modal :visible="visible" @cancel="onCancel" :footer="null" width="1000px">
+      <div>
+        <Agreement />
+      </div>
     </a-modal>
   </a-button>
 </template>
@@ -17,19 +19,22 @@
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import lodash from "lodash";
 import { Observer } from "mobx-vue";
-import { Context } from "@nuxt/types";
+import Agreement from "./agreement.vue";
 @Observer
 @Component({
-  components: {},
+  components: { Agreement },
 })
 export default class PageView extends Vue {
-  @Prop({ default: () => ({}) })
-  dataSource;
-  /** 赠课 */
+  /** 课程数据 */
+  @Prop({ default: () => ({}) }) dataSource;
+  /** true 为 赠课  */
   @Prop({ default: false }) give;
   // @Prop({ required: true }) id;
   @Prop({}) title;
+  /** 购买 不是 购买跳转 详情 */
+  @Prop({ default: false }) buy;
   visible = false;
+  /** 按钮显示文案 */
   get text() {
     if (this.title) {
       return this.title;
@@ -39,21 +44,26 @@ export default class PageView extends Vue {
     }
     return "signup";
   }
-  get Pagination() {
-    return this.$store.$storeCourse.Pagination;
-  }
   get PageStore() {
     return this.$store.$storeCourse;
   }
+  /** 按钮类型 */
   get type() {
     return this.give ? "yellow" : "primary";
   }
   get disabled() {
-    return !lodash.hasIn(this.dataSource, "courseId");
+    return  !lodash.hasIn(this.dataSource, "courseId");
   }
   onSignup() {
-    this.visible = true;
     console.log("LENG: PageView -> onSignup -> this", this);
+    if (this.buy) {
+      this.visible = true;
+    } else {
+      this.$router.push({
+        name: "course-id",
+        params: { id: this.dataSource.courseId },
+      });
+    }
   }
   onOk() {
     this.visible = false;

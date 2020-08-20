@@ -1,5 +1,5 @@
 
-import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo } from "@xt/client/entities";
+import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo } from "@xt/client";
 import { create, persist } from 'mobx-persist';
 import { ajax, onResetAjaxBasics } from "./clientConfig";
 import { toJS } from "mobx";

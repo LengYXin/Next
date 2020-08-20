@@ -55,3 +55,13 @@ img {
 .opacity-enter {
   opacity: 0;
 }
+// 悬浮阴影
+.xt-hoverable {
+  transition: all 0.3s;
+  cursor: pointer;
+  &:hover {
+    position: relative;
+    z-index: 1;
+    box-shadow: @box-shadow-base;
+  }
+}

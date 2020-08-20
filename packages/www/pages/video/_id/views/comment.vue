@@ -24,7 +24,7 @@
   </div>
 </template>
 <script lang="ts">
-import { ControllerVideo } from "@xt/client/entities";
+import { ControllerVideo } from "@xt/client";
 import { Component, Inject, Vue, Watch, Provide } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";

@@ -8,6 +8,7 @@
       </a-tab-pane>
     </a-tabs>-->
     <xt-tabs
+      class="xt-cid-tabs"
       theme="circle"
       :tabPane="tabPane"
       :defaultActiveKey="defaultActiveKey"
@@ -28,7 +29,7 @@ import {
   Watch,
 } from "vue-property-decorator";
 import lodash from "lodash";
-import { EnumLocaleLinks } from "@xt/client/languages";
+import { EnumLocaleLinks } from "@xt/client";
 import introduction from "./introduction.vue";
 import goToTheClass from "./class.vue";
 import composition from "./composition.vue";
@@ -73,3 +74,8 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
+<style lang="less" scoped>
+.xt-cid-tabs {
+  padding: 40px 0;
+}
+</style>

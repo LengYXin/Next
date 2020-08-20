@@ -37,6 +37,7 @@ export default class extends Vue {
 .xt-breadcrumb {
   max-width: @xt-content-width+100px;
   padding-top: 40px;
+  animation: antFadeIn 0.6s;
   margin: auto;
 }
 .xt-breadcrumb-link,

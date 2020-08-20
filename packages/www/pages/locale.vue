@@ -17,9 +17,14 @@
     <a-divider>视频</a-divider>
     <xt-dplayer :options="dplayer" />
     <a-divider>富文本</a-divider>
-    <xt-editor @submit="onSubmit"  v-model="editor" :editorOptions="editorSettings" />
+    <xt-editor @submit="onSubmit" v-model="editor" :editorOptions="editorSettings" />
     <a-divider></a-divider>
-    <xt-editor @submit="onSubmit"  class="xt-editor-single" v-model="editor" :editorOptions="editorSettings" />
+    <xt-editor
+      @submit="onSubmit"
+      class="xt-editor-single"
+      v-model="editor"
+      :editorOptions="editorSettings"
+    />
     <a-divider></a-divider>
     <xt-editor @submit="onSubmit" buttonText="晒作业">
       <a-checkbox>分享朋友圈</a-checkbox>
@@ -90,6 +95,16 @@
         <img :src="cropper.img" :style="previews.img" />
       </div>
     </div>
+    <a-divider>图片查看</a-divider>
+    <a-card v-viewer >
+      <a-card-grid
+        style="width:33.33%;text-align:center"
+        v-for="item in imgs"
+        :key="item.key"
+      >
+        <img alt="example" style="width:100%;" v-lazy="item.src" />
+      </a-card-grid>
+    </a-card>
   </div>
 </template>
 <script lang="ts">
@@ -107,6 +122,36 @@ export default class PageView extends Vue {
     "give",
     "signup",
     ...lodash.keys(this.$store.$locale.localeMessages.zh),
+  ];
+  imgs = [
+    {
+      key: 1,
+      src:
+        "https://oss-free.xuantong.cn/picturePath/dc4e7ca6ddf67eb508d791346290cc36.jpg",
+      title: "暄桐教室",
+      description: "description",
+    },
+    {
+      key: 2,
+      src:
+        "https://oss-free.xuantong.cn/picturePath/c1239a907d9a711e77cff133cd7d7a2b.jpg",
+      title: "暄桐教室",
+      description: "description",
+    },
+    {
+      key: 3,
+      src:
+        "https://oss-free.xuantong.cn/picturePath/2f6f1cf683b96e28abbbea443136bdde.jpg",
+      title: "暄桐教室",
+      description: "description",
+    },
+    {
+      key: 4,
+      src:
+        "https://oss-free.xuantong.cn/picturePath/2179e7d7362922244c5e99288a2465d7.jpg",
+      title: "暄桐教室",
+      description: "description",
+    },
   ];
   editorSettings = {
     modules: {
