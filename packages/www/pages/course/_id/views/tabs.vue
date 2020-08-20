@@ -8,6 +8,7 @@
       </a-tab-pane>
     </a-tabs>-->
     <xt-tabs
+      class="xt-cid-tabs"
       theme="circle"
       :tabPane="tabPane"
       :defaultActiveKey="defaultActiveKey"
@@ -73,3 +74,8 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
+<style lang="less" scoped>
+.xt-cid-tabs {
+  padding: 40px 0;
+}
+</style>
