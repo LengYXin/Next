@@ -73,6 +73,7 @@ class Index extends Component<any> {
     return (
       <View className="index">
         {this.Pagination.dataSource.map(this.renderItem.bind(this))}
+        {this.Pagination.dataSource.map(this.renderItem.bind(this))}
       </View>
     );
   }

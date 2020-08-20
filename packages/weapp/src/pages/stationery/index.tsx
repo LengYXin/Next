@@ -11,7 +11,7 @@ import './index.scss'
 
 @inject('$storeStationery')
 @observer
-@PageDecorators({ nav: false })
+@PageDecorators({})
 class Index extends Component<any> {
   get PageStore(): ControllerStationery {
     return this.props.$storeStationery

@@ -6,11 +6,11 @@
  * @desc [description]
  */
 
-import { View } from '@tarojs/components';
+import { View, Text } from '@tarojs/components';
 import Taro, { getCurrentInstance } from '@tarojs/taro';
 import lodash from 'lodash';
 import React from 'react';
-import { AtMessage, AtNavBar } from 'taro-ui';
+import { AtMessage, AtNavBar, AtFab } from 'taro-ui';
 import { AtNavBarProps } from 'taro-ui/types/nav-bar';
 import Login from '../login';
 import './index.scss';
@@ -96,7 +96,9 @@ export function PageDecorators(options: PageDecoratorsOptions = {}) {
                         props.leftIconType = "chevron-left";
                         props.onClickLeftIcon = this.onClickLeftIcon.bind(this)
                     }
-                    return <AtNavBar {...props} />
+                    return <View className="xt-page-bav-bar">
+                        <AtNavBar {...props} />
+                    </View>
                 }
             }
             render() {
@@ -105,6 +107,9 @@ export function PageDecorators(options: PageDecoratorsOptions = {}) {
                     {this.renderNav()}
                     <AtMessage />
                     {super.render()}
+                    {/* <AtFab>
+                        <Text className='at-fab__icon at-icon at-icon-menu'></Text>
+                    </AtFab> */}
                 </View>
             }
         }
