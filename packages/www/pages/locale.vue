@@ -90,6 +90,7 @@
         <img :src="cropper.img" :style="previews.img" />
       </div>
     </div>
+    <a-divider>图片查看</a-divider>
   </div>
 </template>
 <script lang="ts">
