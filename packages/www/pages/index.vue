@@ -157,16 +157,4 @@ export default class PageIndex extends Vue {
 }
 </script>
 <style lang="less" scoped>
-.xt-home {
-  // padding-bottom: @padding-xs;
-}
-.xt-swiper {
-  position: relative;
-  overflow: hidden;
-  // max-width: 1920px;
-  margin: auto;
-}
-.xt-card-title {
-  text-align: center;
-}
 </style>
