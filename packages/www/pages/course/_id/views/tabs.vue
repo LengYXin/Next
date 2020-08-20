@@ -29,7 +29,7 @@ import {
   Watch,
 } from "vue-property-decorator";
 import lodash from "lodash";
-import { EnumLocaleLinks } from "@xt/client/languages";
+import { EnumLocaleLinks } from "@xt/client";
 import introduction from "./introduction.vue";
 import goToTheClass from "./class.vue";
 import composition from "./composition.vue";

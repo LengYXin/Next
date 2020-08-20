@@ -52,7 +52,7 @@ export default class PageView extends Vue {
     return this.give ? "yellow" : "primary";
   }
   get disabled() {
-    return false; // !lodash.hasIn(this.dataSource, "courseId");
+    return  !lodash.hasIn(this.dataSource, "courseId");
   }
   onSignup() {
     console.log("LENG: PageView -> onSignup -> this", this);

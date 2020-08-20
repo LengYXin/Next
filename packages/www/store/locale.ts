@@ -5,7 +5,7 @@
  * @modify date 2020-08-05 14:13:07
  * @desc [description]
  */
-import getlocales, { EnumLocaleLinks } from '@xt/client/languages';
+import  { getlocales,EnumLocaleLinks } from '@xt/client';
 import { action, intercept, observable } from 'mobx';
 import moment from 'moment';
 class Locale {

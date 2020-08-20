@@ -32,19 +32,18 @@ class XTGlobal {
      * 检查版本信息 
      */
     onInspectVersion() {
-        if (!window.localStorage) {
-            return
+        if (window && window.localStorage) {
+            const version = window.localStorage.getItem('version');
+            // 清理 版本 不统一缓存
+            if (!lodash.eq(version, this.version)) {
+                lodash.mapKeys(window.localStorage, (value, key: any) => {
+                    if (lodash.startsWith(key, this.localStorageStartsWith)) {
+                        window.localStorage.removeItem(key)
+                    }
+                })
+            }
+            window.localStorage.setItem('version', this.version)
         }
-        const version = window.localStorage.getItem('version');
-        // 清理 版本 不统一缓存
-        if (!lodash.eq(version, this.version)) {
-            lodash.mapKeys(window.localStorage, (value, key: any) => {
-                if (lodash.startsWith(key, this.localStorageStartsWith)) {
-                    window.localStorage.removeItem(key)
-                }
-            })
-        }
-        window.localStorage.setItem('version', this.version)
     }
 }
 export default new XTGlobal();

@@ -1,5 +1,5 @@
 import { Image, Swiper, SwiperItem, View } from "@tarojs/components";
-import { ControllerHome } from "@xt/client/entities";
+import { ControllerHome } from "@xt/client";
 import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
 import { AtMessage, AtGrid } from "taro-ui";

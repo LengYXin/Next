@@ -28,8 +28,8 @@
         </slot>
         <slot name="signup">
           <div class="xt-course-item-signup">
-            <Signup slot="actions" :give="true" :dataSource="dataSource" />
-            <Signup slot="actions" :dataSource="dataSource" />
+            <Signup :give="true" :dataSource="dataSource" />
+            <Signup :dataSource="dataSource" />
           </div>
         </slot>
       </div>

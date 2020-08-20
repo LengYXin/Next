@@ -1,5 +1,5 @@
 import { View } from '@tarojs/components';
-import { ControllerCourse } from "@xt/client/entities";
+import { ControllerCourse } from "@xt/client";
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
 import { PageDecorators } from '~/components/page';

@@ -5,7 +5,7 @@
  * @modify date 2020-08-05 14:13:07
  * @desc [description]
  */
-import { EnumLocaleLinks } from '@xt/client/languages';
+import { EnumLocaleLinks } from '@xt/client';
 import { BindAll } from 'lodash-decorators';
 import lodash from 'lodash';
 import { action, observable, toJS } from 'mobx';

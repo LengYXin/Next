@@ -1,24 +1,24 @@
 import Taro from '@tarojs/taro';
-import * as EnumApi from '@xt/client/api';
-import '@xt/client/configure';
-import { AjaxBasics, IAjaxBasicsOptions } from '@xt/client/helpers/ajaxBasics';
+// import * as EnumApi from '@xt/client/api';
+// import '@xt/client/configure';
+import { AjaxBasics, IAjaxBasicsOptions } from '@xt/client';
 import lodash from 'lodash';
 import { Component } from 'react';
 import { Observable } from "rxjs";
 import { AjaxRequest } from 'rxjs/ajax';
-import { ControllerUser } from '@xt/client/entities';
+import { ControllerUser } from '@xt/client';
 export const ajax = new AjaxBasics({ target: 'https://cr-api-uat.xuantong.cn' });
 // 重置 Ajax
 // onResetAjaxBasics()
 // 扩展 
 Component.prototype.$ajax = ajax;
-Component.prototype.$EnumApi = EnumApi;
+// Component.prototype.$EnumApi = EnumApi;
 declare module 'react' {
     interface Component {
         /** Ajax */
         $ajax: AjaxBasics;
         /** API 枚举 */
-        $EnumApi: typeof EnumApi;
+        // $EnumApi: typeof EnumApi;
     }
 }
 /**

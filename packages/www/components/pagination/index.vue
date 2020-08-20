@@ -19,7 +19,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch, Inject } from "vue-property-decorator";
-import { Pagination, PaginationOptions } from "@xt/client/entities";
+import { Pagination, PaginationOptions } from "@xt/client";
 import { Observer } from "mobx-vue";
 import { computed } from "mobx";
 import lodash from "lodash";

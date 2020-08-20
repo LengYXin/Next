@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import { ControllerStationery } from "@xt/client/entities"
+import { ControllerStationery } from "@xt/client"
 import lodash from 'lodash'
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'

@@ -20,11 +20,14 @@ export default function (context: Context) {
     }
 }
 function onLog(context: Context) {
-    if (context.from.name !== context.route.name) {
-        console.clear();
-        console.group('Route', context.route);
-        console.info("LENG: middleware", process.env.NODE_ENV, process.env.version);
-        console.log("LENG: context", context);
-        console.groupEnd();
+    if (context.from) {
+        if (context.from.name !== context.route.name) {
+            console.clear();
+            console.group('Route', context.route);
+            console.info("LENG: middleware", process.env.NODE_ENV, process.env.version);
+            console.log("LENG: context", context);
+            console.groupEnd();
+        }
     }
+
 }
