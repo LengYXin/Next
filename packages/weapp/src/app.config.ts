@@ -1,13 +1,7 @@
 import { Config } from "@tarojs/taro";
+import EnumPages from "./pages.config";
 export default {
-  pages: [
-    "pages/index/index",
-    "pages/course/index",
-    "pages/course_details/index",
-    "pages/my/index",
-    "pages/stationery/index",
-    "pages/course_list/index"
-  ],
+  pages: Object.values(EnumPages),
   tabBar: {
     list: [
       {

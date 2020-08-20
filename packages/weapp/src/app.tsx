@@ -1,8 +1,8 @@
 import { Provider } from 'mobx-react';
 import React, { Component } from 'react';
 import './app.scss';
-import Login from './components/login';
 import './img.config';
+import './prototype';
 import store from './store';
 // @observer
 class App extends Component {
@@ -25,5 +25,4 @@ class App extends Component {
     )
   }
 }
-
 export default App

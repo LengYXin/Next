@@ -47,17 +47,17 @@ class Index extends Component<any> {
     this.onPagLoading(true);
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
   // 全阶课程
   renderFullItem(item) {
     return (
       <Navigator
-        url={`/pages/course_details/index?fullid=${item.courseFullId}`}
+        url={this.$Navigator(this.$pages.CourseDetails, { id: item.courseFullId })}
         key={item.courseFullId}
       >
         <View className="xt-single-item">

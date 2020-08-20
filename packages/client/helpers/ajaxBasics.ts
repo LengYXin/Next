@@ -248,7 +248,7 @@ export class AjaxBasics {
      * 合并 body
      * @param body 
      */
-    static onMergeBody(body = {}) {
+    static onMergeBody(body: any = {}) {
         return body
     }
     /**

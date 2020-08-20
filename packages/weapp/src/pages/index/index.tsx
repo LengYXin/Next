@@ -51,11 +51,11 @@ class Index extends Component<any> {
   componentWillUnmount() { }
 
   componentDidShow() {
-    console.log("componentDidShow");
+    console.log("componentDidShow", this.$pages);
   }
 
   navClick(item: object, index: number) {
-    let actions: Map<any, any> = new Map([[0, "/pages/course_list/index"]]);
+    let actions: Map<any, any> = new Map([[0, this.$Navigator(this.$pages.CourseList)]]);
     let url = actions.get(index);
     url &&
       Taro.navigateTo({
@@ -118,7 +118,7 @@ class Index extends Component<any> {
           hasBorder={false}
           columnNum={5}
           data={this.state.navList}
-          onClick={this.navClick}
+          onClick={this.navClick.bind(this)}
         />
       </View>
     );

@@ -9,7 +9,7 @@ class Index extends Component<{ item }> {
     let item = this.props.item;
     return (
       <Navigator
-        url={`/pages/course_details/index?id=${item.courseId}`}
+        url={this.$Navigator(this.$pages.CourseDetails, { id: item.courseId })}
         key={item.courseId}
       >
         <View className="xt-single-item">

@@ -48,7 +48,7 @@ class Index extends Component<any> {
   renderItem(item) {
     return (
       <Navigator
-        url={`/pages/course_details/index?id=${item.courseId}`}
+        url={this.$Navigator(this.$pages.CourseDetails, { id: item.courseId })}
         key={item.courseId}
       >
         {/* <AtCard
