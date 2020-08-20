@@ -1,6 +1,6 @@
 <template>
-  <a-card :bordered="false" :loading="loading" class="xt-write">
-    <Course badge="right" :dataSource="dataSource" class="xt-write-course">
+  <a-card :bordered="false" :loading="loading" class="xt-view-write">
+    <Course badge="right" :dataSource="dataSource" class="xt-view-write-course">
       <div slot="description">
         <h6 class="xt-title-h6 xt-text-yellow">从书法之美到生活之美——林曦老师的在线直播书法课</h6>
         <h4 class="xt-text-grey xt-font-size-base">共{{dataSource.classHourCount}}课</h4>
@@ -43,7 +43,7 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" >
-.xt-write {
+.xt-view-write {
   .ant-list-item-meta-description,
   .ant-list-item-meta-title {
     padding-left: 30px;
