@@ -88,7 +88,7 @@ function magicChange() {
       if (!lodash.includes(startjs, updateKey)) {
         console.log('------------------------------------ 修改 h5 下拉刷新无效 ------------------------------------')
         // 替换 代码
-        const newStartjs = startjs.replace(`onLoad = false) {', 'onLoad = true) { //${updateKey} `);
+        const newStartjs = startjs.replace('onLoad = false) {', `onLoad = true) { //${updateKey} `);
         fs.writeFileSync(startPath, newStartjs);
       }
     }
