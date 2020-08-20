@@ -5,7 +5,7 @@
         <a-row
           class="xt-calligraphy-warp"
           type="flex"
-          align="center"
+          align="middle"
           justify="space-between"
         >
           <div>
@@ -37,7 +37,7 @@
             <div>
               <a-icon class="xt-calligraphy-arrow-down" type="caret-down" />
             </div>
-            <a-row type="flex" align="center" justify="flex-end">
+            <a-row type="flex" align="middle" justify="end">
               <Signup class="xt-calligraphy-buy-btn" :id="1" />
               <Signup class="xt-calligraphy-give-btn" :give="true" :id="1" />
             </a-row>
