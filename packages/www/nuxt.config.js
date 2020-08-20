@@ -3,10 +3,14 @@ const build = require('./configs/build');
 const head = require('./configs/head');
 const router = require('./configs/router');
 const lodash = require('lodash');
+const target = {
+  pro: 'https://cr-api-uat.xuantong.cn',
+  uat: 'https://cr-api-uat.xuantong.cn',
+}
 // api 地址
 const env = {
   // api 地址
-  target: 'https://cr-api-uat.xuantong.cn',
+  target: lodash.get(target, process.env.DEPLOY_ENV, 'https://dev-api.xuantong.cn'),
   // 版本号
   version: `${process.env.npm_package_version} ${moment().format("YYYY-MM-DD HH:mm")}`,
   // 环境 uat pro
@@ -21,12 +25,6 @@ const proxy = {
     }
   }
 };
-const vue = {
-  config: {
-    productionTip: false,
-    devtools: false,
-  }
-}
 const generate = {
   dir: `build_${lodash.snakeCase(process.env.npm_package_version)}`,
   // 设置为false时，将根据路由路径生成 HTML 文件：
@@ -93,7 +91,13 @@ module.exports = {
   modules: [
     '@nuxtjs/proxy'
   ],
-  globalName: 'xtwww',
+  globalName: 'XT',
+  vue: {
+    config: {
+      productionTip: false,
+      devtools: false,
+    }
+  },
   router,
   /*
   ** Auto import components
@@ -102,7 +106,7 @@ module.exports = {
   components: false,
   env,
   proxy,
-  vue,
+
   generate,
   /*
   ** Build configuration

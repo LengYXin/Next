@@ -23,7 +23,7 @@
   <a-tabs :activeKey="activeKey" @change="tabsChange" :class="themeClass">
     <a-tab-pane v-for="tab in tabPane" :key="String(tab.key)">
       <span slot="tab">
-        <span v-text="tab.title"></span>
+        <span v-t="tab.title"></span>
       </span>
     </a-tab-pane>
   </a-tabs>

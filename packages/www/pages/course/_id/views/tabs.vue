@@ -1,12 +1,18 @@
 <template>
   <div>
-    <a-tabs :activeKey="activeKey" @change="tabsChange" class="xt-tabs-center">
+    <!-- <a-tabs :activeKey="activeKey" @change="tabsChange" class="xt-tabs-center">
       <a-tab-pane v-for="tab in tabPane" :key="tab.key">
         <span slot="tab">
           <span v-t="tab.value"></span>
         </span>
       </a-tab-pane>
-    </a-tabs>
+    </a-tabs>-->
+    <xt-tabs
+      theme="circle"
+      :tabPane="tabPane"
+      :defaultActiveKey="defaultActiveKey"
+      @tabsChange="tabsChange"
+    />
     <keep-alive>
       <component :is="activeValue"></component>
     </keep-alive>
@@ -38,39 +44,26 @@ import thoughts from "./thoughts.vue";
   },
 })
 export default class PageView extends Vue {
-  activeKey = lodash.get(this.$route.query, "active", "ci");
+  defaultActiveKey = "ci";
+  activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   get activeValue() {
     return lodash.get(
       lodash.find(this.tabPane, ["key", this.activeKey]),
-      "value",
+      "title",
       this.$EnumLocaleLinks.links_courseIntroduction
     );
   }
   get tabPane() {
     return [
-      { key: "ci", value: this.$EnumLocaleLinks.links_courseIntroduction },
-      { key: "cc", value: this.$EnumLocaleLinks.links_courseComposition },
-      { key: "to", value: this.$EnumLocaleLinks.links_goToTheClass },
-      { key: "sd", value: this.$EnumLocaleLinks.links_sunDrying },
-      { key: "th", value: this.$EnumLocaleLinks.links_thoughts },
+      { key: "ci", title: this.$EnumLocaleLinks.links_courseIntroduction },
+      { key: "cc", title: this.$EnumLocaleLinks.links_courseComposition },
+      { key: "to", title: this.$EnumLocaleLinks.links_goToTheClass },
+      { key: "sd", title: this.$EnumLocaleLinks.links_sunDrying },
+      { key: "th", title: this.$EnumLocaleLinks.links_thoughts },
     ];
   }
   tabsChange(activeKey) {
-    // this.activeKey = activeKey;
-    this.$router.push({
-      query: lodash.merge({}, this.$route.query, {
-        active: activeKey,
-      }),
-    });
-  }
-  // 组件中 使用不了 生命周期 beforeRouteUpdate
-  @Watch("$route.query")
-  queryUpdate(to, from, next) {
-    const { active } = this.$route.query;
-    if (active && !lodash.eq(active, this.activeKey)) {
-      this.activeKey = active as any;
-    }
-    // next();
+    this.activeKey = activeKey;
   }
   mounted() {
     // console.log(this.$route);
