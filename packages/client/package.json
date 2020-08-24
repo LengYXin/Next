@@ -21,7 +21,7 @@
     "@types/crypto-js": "^3.1.47",
     "@types/jest": "^26.0.10",
     "@types/lodash": "^4.14.159",
-    "jest": "^26.4.1",
+    "jest": "^26.4.2",
     "ts-jest": "^26.2.0",
     "typescript": "~3.9.7"
   },
