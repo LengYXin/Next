@@ -6,7 +6,7 @@
  * @desc [description]
  */
 
-import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo, ControllerOrder } from "@xt/client";
+import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo, ControllerOrder, ControllerHomework } from "@xt/client";
 import { create, persist } from 'mobx-persist';
 import { ajax, onResetAjaxBasics } from "./clientConfig";
 import $global from './global';
@@ -31,6 +31,8 @@ const store = {
     $storeAbout: new ControllerAbout(ajax),
     // 订单
     $storeOrder: new ControllerOrder(ajax),
+    // 作业
+    $storeHomework: new ControllerHomework(ajax),
     // 用户
     $storeUser: new ControllerUser(ajax),
 }
@@ -113,6 +115,8 @@ declare module 'vuex/types/index' {
          * @memberof Store
          */
         readonly $storeOrder: ControllerOrder
+
+        readonly $storeHomework: ControllerHomework
         /**
          * 用户
          * @type {ControllerUser}

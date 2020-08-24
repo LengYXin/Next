@@ -6,4 +6,5 @@ export * from './stationery'
 export * from './user'
 export * from './video'
 export * from './order'
+export * from './homework'
 

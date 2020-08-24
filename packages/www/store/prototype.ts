@@ -13,6 +13,7 @@ import Vue from 'vue';
 import { ajax } from "./clientConfig";
 import store from './create';
 import images from './images';
+import lodash from 'lodash';
 // 扩展
 Vue.prototype.$ajax = ajax;
 // Vue.prototype.$EnumApi = EnumApi;
@@ -29,6 +30,16 @@ Vue.prototype.$InspectUser = function () {
     store.$storeUser.onToggleVisible(true);
     throw 'Please log in'
 };
+/** 
+ * 检查code 是否 是当前用户
+*/
+Vue.prototype.$eqUser = function (code) {
+    if (store.$storeUser.loggedIn) {
+        const UserInfo = toJS(store.$storeUser.UserInfo);
+        return lodash.eq(UserInfo.studentId, code)
+    }
+    return false
+};
 
 declare module 'vue/types/vue' {
     interface Vue {
@@ -36,6 +47,8 @@ declare module 'vue/types/vue' {
          * 检查用户是否登录
          */
         readonly $InspectUser: () => Object;
+        /** 检查code 是否 是当前用户 */
+        readonly $eqUser: (code: any) => Boolean;
         /** Ajax */
         readonly $ajax: AjaxBasics;
         /** APi 枚举 */

@@ -13,7 +13,10 @@
       <!-- 作者 笔山 右侧菜单 -->
       <div class="xt-comment-author" slot="author">
         <span v-text="comment.author"></span>
-        <span>笔山</span>
+        <span v-show="comment.bishan">
+          笔山
+          <span v-text="comment.bishan"></span>
+        </span>
         <div class="xt-comment-dropdown" v-if="$slots.overlay">
           <a-dropdown>
             <a-icon type="ellipsis" />
@@ -57,6 +60,8 @@ export default class extends Vue {
     author: string;
     // 时间
     time: string;
+    // 笔山
+    bishan: number;
   };
   get datetime() {
     return this.comment.time;

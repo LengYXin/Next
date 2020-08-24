@@ -7,48 +7,52 @@
  */
 <template>
   <div class="xt-content-small">
-    <xt-editor @submit="onSubmit" buttonText="晒作业">
-    </xt-editor>
+    <xt-editor @submit="onSubmit" :rules="{required:true,max:2000}" buttonText="晒作业"></xt-editor>
     <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
       <template slot="actions">
         <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
-        <xt-action title="回复" />
+        <xt-action :statistics="item.commentCount" title="回复" />
       </template>
       <template slot="overlay">
         <a-menu>
-          <a-menu-item>
-            <a href="javascript:;">1st menu item</a>
+          <a-menu-item v-if="$eqUser(item.userId)">
+            <a-popconfirm title="确定删除作业?" ok-text="确定" cancel-text="取消" @confirm="onConfirm(item)">
+              <a href="javascript:;">删除</a>
+            </a-popconfirm>
           </a-menu-item>
-          <a-menu-item>
-            <a href="javascript:;">2nd menu item</a>
-          </a-menu-item>
-          <a-menu-item>
-            <a href="javascript:;">3rd menu item</a>
+          <a-menu-item v-else>
+            <nuxt-link to="/my/letter">
+              <span>私信</span>
+            </nuxt-link>
           </a-menu-item>
         </a-menu>
       </template>
       <!-- <xt-editor /> -->
     </xt-comment>
-    <xt-infinite-loading @loading="onLoading" />
+    <xt-infinite-loading :key="Pagination.onlyKey" @loading="onLoading" />
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Modal } from "ant-design-vue";
 import moment from "moment";
-
+import { Observer } from "mobx-vue";
+@Observer
 @Component({
   components: {},
 })
 export default class PageView extends Vue {
   get PageStore() {
-    return this.$store.$storeCourse;
+    return this.$store.$storeHomework;
   }
   get Pagination() {
-    return this.$store.$storeCourse.Pagination;
+    return this.PageStore.SunDrying;
   }
-  onLoading(event) {
-    // this.Pagination.onLoading({}, {}, event);
+  get id() {
+    return this.$route.params.id;
+  }
+  onLoading(event?) {
+    this.Pagination.onLoading({ singleCourseId: this.id }, {}, event);
   }
   getComment(item) {
     return {
@@ -56,10 +60,34 @@ export default class PageView extends Vue {
       avatar: item.userHeader,
       author: item.userNickname,
       time: item.createTime,
+      bishan: item.bishanNum,
     };
   }
-  onSubmit(event) {
-    console.log("LENG: PageView -> onSubmit -> event", event);
+  async onSubmit(event) {
+    try {
+      await this.Pagination.onInstall({
+        singleCourseId: this.id,
+        content: event.text,
+        contentLength: event.length,
+        userType: 1,
+      });
+      event.onReset();
+      this.Pagination.onReset();
+    } catch (error) {
+      console.log("LENG: PageView -> onSubmit -> error", error);
+      // this.$message.error(error);
+    }
+  }
+  onConfirm(item) {}
+  async onLikes(item) {
+    try {
+      await this.Pagination.onLikes(item);
+    } catch (error) {
+      this.$message.warning({ content: error, key: "likes" });
+    }
+  }
+  created() {
+    this.Pagination.onReset();
   }
   mounted() {}
   updated() {}

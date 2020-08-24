@@ -17,7 +17,7 @@
     <a-divider>视频</a-divider>
     <xt-dplayer :options="dplayer" />
     <a-divider>富文本</a-divider>
-    <xt-editor @submit="onSubmit" v-model="editor" :editorOptions="editorSettings" />
+    <xt-editor :rules="{requiredFile:true}"  @submit="onSubmit" v-model="editor" :editorOptions="editorSettings" />
     <a-divider></a-divider>
     <xt-editor
       @submit="onSubmit"

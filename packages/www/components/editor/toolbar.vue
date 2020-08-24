@@ -47,7 +47,7 @@
       <slot v-bind:quill="quill"></slot>
       <a-divider type="vertical"></a-divider>
       <slot name="submit" v-bind:quill="quill">
-        <a-button type="primary" v-text="buttonText" @click="onSubmit"></a-button>
+        <a-button type="primary" v-text="buttonText" @click="onSubmitRules"></a-button>
       </slot>
     </a-col>
   </a-row>
@@ -63,6 +63,8 @@ export default class extends Vue {
   @Prop() quill;
   // 按钮文案
   @Prop({ default: "发布" }) buttonText;
+  // 校验规则
+  @Prop({}) rules;
   // 最大文件数量
   @Prop({ default: 9 }) maxFile;
   // 显示 上传按钮
@@ -81,17 +83,54 @@ export default class extends Vue {
       face.value
     );
   }
+  onSubmitRules() {
+    try {
+      // 必填内容
+      const required = lodash.get(this.rules, "required", false);
+      //  必填文件
+      const requiredFile = lodash.get(this.rules, "requiredFile", false);
+      // 最大数
+      const max = lodash.get(this.rules, "max", Number.MAX_SAFE_INTEGER);
+      // 自定义校验 函数
+      const validator = lodash.get(this.rules, "validator", () => true);
+
+      const data = {
+        fileList: lodash.cloneDeep(this.fileList),
+        text: this.quill.getText(),
+        html: this.quill.getHTML(),
+        length: this.quill.getLength(),
+        quill: this.quill,
+        /** 重置内容 */
+        onReset: () => {
+          this.quill.root.innerHTML = "";
+          this.fileList = [];
+        },
+      };
+      if (required) {
+        if (!/^[\s\S]*.*[^\s][\s\S]*$/.test(data.text)) {
+          throw "内容必填";
+        }
+      }
+      if (requiredFile) {
+        if (data.fileList.length === 0) {
+          throw "文件必填";
+        }
+      }
+      if (max != Number.MAX_SAFE_INTEGER) {
+        if (data.length > max) {
+          throw "超过最大长度";
+        }
+      }
+      if (validator(data, this.rules)) {
+        this.onSubmit(data);
+      }
+    } catch (error) {
+      this.$message.warning({ content: error, key: "quill_rules" });
+    }
+  }
   @Emit("submit")
-  onSubmit() {
-    const data = {
-      fileList: lodash.cloneDeep(this.fileList),
-      text: this.quill.getText(),
-      html: this.quill.getHTML(),
-      length: this.quill.getLength(),
-      quill: this.quill,
-    };
-    // console.log("LENG: extends -> onSubmit -> data", data);
-    return data;
+  onSubmit(event) {
+    return event;
   }
   onUploadChange({ fileList }) {
     this.fileList = fileList;

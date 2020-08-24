@@ -29,6 +29,12 @@ import titleView from "./views/title.vue";
   },
 })
 export default class PageView extends Vue {
+  get PageStore() {
+    return this.$store.$storeCourse;
+  }
+  created() {
+   
+  }
   mounted() {
     // console.log(this.$route);
   }

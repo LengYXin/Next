@@ -5,7 +5,7 @@
  * @modify date 2020-08-05 14:12:26
  * @desc [description]
  */
-import { Affix,Tag, Avatar, BackTop, Badge, Breadcrumb, Button, Card, Checkbox, Col, Comment, ConfigProvider, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Pagination, Popconfirm, Popover, Result, Row, Skeleton, Spin, Statistic, Steps, Tabs, Timeline, Tooltip, Upload } from 'ant-design-vue';
+import { Affix, Tag, Avatar, BackTop, Badge, Breadcrumb, Button, Card, Checkbox, Col, Comment, ConfigProvider, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Pagination, Popconfirm, Popover, Result, Row, Skeleton, Spin, Statistic, Steps, Tabs, Timeline, Tooltip, Upload } from 'ant-design-vue';
 import Base from 'ant-design-vue/lib/base';
 import Vue from 'vue';
 Vue.use(Base)
@@ -52,7 +52,11 @@ Vue.prototype.$error = Modal.error;
 Vue.prototype.$warning = Modal.warning;
 Vue.prototype.$confirm = Modal.confirm;
 Vue.prototype.$destroyAll = Modal.destroyAll;
-
+message.config({
+    top: `80px`,
+    duration: 2,
+    maxCount: 3,
+});
 Spin.setDefaultIndicator({
     indicator: h => {
         const NodeJsx: any = Icon;

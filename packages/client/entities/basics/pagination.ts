@@ -73,7 +73,8 @@ export class Pagination<T> {
      * @private
      * @memberof Pagination
      */
-    private onlyKey: string;
+    @observable
+    onlyKey: string = lodash.uniqueId('key_');
     /**
      * 数据key
      * @readonly

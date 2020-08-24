@@ -11,7 +11,7 @@
       style="display:none;"
       @change="emitImageInfo($event)"
     />-->
-    <toolbar @submit="onSubmit" :buttonText="buttonText" :quill="quill">
+    <toolbar @submit="onSubmit" :rules="rules" :buttonText="buttonText" :quill="quill">
       <slot></slot>
       <template slot="submit">
         <slot name="submit"></slot>
@@ -36,6 +36,10 @@ export default {
   props: {
     buttonText: {
       type: String,
+    },
+    rules: {
+      type: Object,
+      default: () => ({}),
     },
     id: {
       type: String,

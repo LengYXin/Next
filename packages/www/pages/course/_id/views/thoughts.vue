@@ -28,7 +28,7 @@
       </template>
       <!-- <xt-editor /> -->
     </xt-comment>
-    <xt-infinite-loading @loading="onLoading" />
+    <xt-infinite-loading :key="Pagination.onlyKey" @loading="onLoading" />
   </div>
 </template>
 <script lang="ts">
