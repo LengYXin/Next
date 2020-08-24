@@ -66,3 +66,6 @@ export { default as EyeOutline } from "@ant-design/icons/lib/outline/EyeOutline"
 export { default as PlusOutline } from "@ant-design/icons/lib/outline/PlusOutline";
 // 下箭头
 export { default as CaretDownOutline } from "@ant-design/icons/lib/outline/CaretDownOutline";
+// 警告
+export { default as WarningOutline } from "@ant-design/icons/lib/outline/WarningOutline";
+export { default as WarningFill } from "@ant-design/icons/lib/fill/WarningFill";
