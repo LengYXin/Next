@@ -1,7 +1,9 @@
 import { Context } from "@nuxt/types";
 import { message } from "ant-design-vue";
 import lodash from "lodash";
+import "core-js/es";
 import "./registerHooks";
+import "./es6-proxy-polyfill.js";
 // import Bowser from "./bowser";
 // Bowser()
 console.group('Start')

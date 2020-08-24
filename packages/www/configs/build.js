@@ -49,8 +49,9 @@ module.exports = {
         // console.log("extend -> config", config.resolve.alias)
         // throw 'aaa'
     },
-    transpile: ['swiper','serializr','dom7'],
+    transpile: ['swiper', 'serializr', 'dom7'],
     publicPath: '/assets/',
+    corejs: 3,
     // 分离css
     extractCSS: production,
     postcss: {
