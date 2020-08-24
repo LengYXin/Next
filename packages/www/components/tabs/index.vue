@@ -53,7 +53,8 @@ export default class extends Vue {
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   // 当前页面显示
   get isConnected() {
-    return this.$el.isConnected && this.key === this.$route.name;
+    // return this.$el.isConnected && this.key === this.$route.name;
+    return this.key === this.$route.name;
   }
   get themeClass() {
     return `xt-tabs-${this.theme} xt-tabs-${this.align}`;

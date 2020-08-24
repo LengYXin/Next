@@ -8,12 +8,16 @@ import "./utils/registerHooks";
 console.group('Start')
 console.info("LENG: middleware", process.env.NODE_ENV, process.env.version)
 export default function (context: Context) {
-    isBowser(context)
-    // 面包屑
-    context.store.$menu.initBreadcrumb(context.route);
-    context.store.$storeUser.onToggleVisible(false);
-    onLog(context)
-    loggedIn(context)
+    try {
+        isBowser(context)
+        // 面包屑
+        context.store.$menu.initBreadcrumb(context.route);
+        context.store.$storeUser.onToggleVisible(false);
+        onLog(context)
+        loggedIn(context)
+    } catch (error) {
+        console.error("LENG: error", error)
+    }
 }
 /**
  * 日志
@@ -50,6 +54,7 @@ function loggedIn(context: Context) {
 function isBowser(context: Context) {
     // 不支持 浏览器
     if (Bowser() && !lodash.startsWith(context.route.name, 'bowser')) {
-        return context.redirect('/bowser')
+        context.redirect('/bowser')
+        throw '浏览器不支持'
     }
 }

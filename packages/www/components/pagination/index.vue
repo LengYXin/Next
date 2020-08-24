@@ -41,7 +41,8 @@ export default class extends Vue {
   key = this.$route.name;
   // 当前页面显示
   get isConnected() {
-    return this.$el.isConnected && this.key === this.$route.name;
+    // return this.$el.isConnected && this.key === this.$route.name;
+    return  this.key === this.$route.name;
   }
   isShow(total, pageSize) {
     return total > pageSize;

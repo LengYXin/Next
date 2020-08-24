@@ -60,5 +60,5 @@ function onSetHeight(el, styleKey, height = 400, subtract = 50) {
     }
 }
 function isConnected(el) {
-    return lodash.get(el, "isConnected", false);
+    return lodash.get(el, "isConnected", true);
 }

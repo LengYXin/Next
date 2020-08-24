@@ -81,5 +81,5 @@ function onInnerHTML(el: HTMLDivElement, value, format, fromNow) {
 
 }
 function isConnected(el) {
-    return lodash.get(el, "isConnected", false);
+    return lodash.get(el, "isConnected", true);
 }
