@@ -94,9 +94,9 @@ export class Pagination<T> {
     @computed
     get dataSource(): Array<T> {
         // console.time()
-        const dataSource = toJS(this._dataSource);
+        // const dataSource = toJS(this._dataSource);
         // console.timeEnd()
-        return dataSource
+        return [...this._dataSource]
     }
     /**
      * 当前页

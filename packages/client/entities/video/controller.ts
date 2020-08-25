@@ -5,6 +5,7 @@ import { AjaxBasics } from '../../helpers/ajaxBasics';
 import { Pagination } from '../basics/pagination';
 import { VideoCommentPagination } from './comment';
 import { VideoDetails } from './details';
+import { toJS } from 'mobx';
 
 @BindAll()
 export class ControllerVideo {
@@ -33,36 +34,13 @@ export class ControllerVideo {
      */
     Details = new VideoDetails(this.$ajax);
     /**
-     * 视频详情
-     * @param videoShareId 
-     */
-    // async onGetDetails(videoShareId) {
-    //     const res = await this.$ajax.post<VideoDetails>(EnumApiVideo.VideoDetail, { videoShareId });
-    //     const urls = await this.$ajax.post<any>(EnumApiCurrency.UtilityUrl, { key: res.videoUrl })
-    //     this.setDetails({
-    //         ...res, quality: [
-    //             {
-    //                 name: "高清",
-    //                 url: urls.highUrl
-    //             },
-    //             {
-    //                 name: "标清",
-    //                 url: urls.url
-    //             },
-    //             {
-    //                 name: "流畅",
-    //                 url: urls.lowUrl
-    //             }
-    //         ]
-    //     })
-    // }
-    /**
      * 点赞
      * @param data 点赞的数据
      * @param list 列表||详情
      */
     onLikes(data, list = true) {
         try {
+            data = toJS(data)
             if (data.isLiked) {
                 throw '已点赞'
             }
