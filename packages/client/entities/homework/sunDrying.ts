@@ -3,6 +3,7 @@ import { EnumApiHomework } from '../../api';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
 import { Pagination } from '../basics/pagination';
 import { EntitiesBasics } from '../basics/entities';
+import { toJS } from 'mobx';
 /**
  * 晒作业
  * @export
@@ -38,6 +39,7 @@ export class ControllerHomeworkSunDrying extends Pagination<any> {
      * @param data 
      */
     async onLikes(data) {
+        data=toJS(data)
         if (data.likeRecord) {
             throw '您已经点过赞了'
         }
