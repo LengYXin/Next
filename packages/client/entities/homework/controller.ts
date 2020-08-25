@@ -7,9 +7,8 @@ import Entities from './entities';
 import SunDrying from './sunDrying';
 
 @BindAll()
-export class ControllerHomework extends Entities {
+export class ControllerHomework {
     constructor(protected $ajax: AjaxBasics) {
-        super()
     }
     /**
      * 晒作业

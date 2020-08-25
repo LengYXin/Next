@@ -1,12 +1,5 @@
 <template>
   <div>
-    <!-- <a-tabs :activeKey="activeKey" @change="tabsChange" class="xt-tabs-center">
-      <a-tab-pane v-for="tab in tabPane" :key="tab.key">
-        <span slot="tab">
-          <span v-t="tab.value"></span>
-        </span>
-      </a-tab-pane>
-    </a-tabs>-->
     <xt-tabs
       class="xt-cid-tabs"
       theme="circle"
@@ -20,28 +13,23 @@
   </div>
 </template>
 <script lang="ts">
-import {
-  Component,
-  Prop,
-  Vue,
-  Provide,
-  Inject,
-  Watch,
-} from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import lodash from "lodash";
+import { Observer } from "mobx-vue";
 import { EnumLocaleLinks } from "@xt/client";
-import introduction from "./introduction.vue";
-import goToTheClass from "./class.vue";
-import composition from "./composition.vue";
-import sunDrying from "./sunDrying.vue";
-import thoughts from "./thoughts.vue";
+import tab_introduction from "./tab_introduction.vue";
+import tab_class from "./tab_class.vue";
+import tab_composition from "./tab_composition.vue";
+import tab_sunDrying from "./tab_sunDrying.vue";
+import tab_thoughts from "./tab_thoughts.vue";
+@Observer
 @Component({
   components: {
-    [EnumLocaleLinks.links_courseIntroduction]: introduction,
-    [EnumLocaleLinks.links_courseComposition]: composition,
-    [EnumLocaleLinks.links_goToTheClass]: goToTheClass,
-    [EnumLocaleLinks.links_sunDrying]: sunDrying,
-    [EnumLocaleLinks.links_thoughts]: thoughts,
+    [EnumLocaleLinks.links_courseIntroduction]: tab_introduction,
+    [EnumLocaleLinks.links_courseComposition]: tab_composition,
+    [EnumLocaleLinks.links_goToTheClass]: tab_class,
+    [EnumLocaleLinks.links_sunDrying]: tab_sunDrying,
+    [EnumLocaleLinks.links_thoughts]: tab_thoughts,
   },
 })
 export default class PageView extends Vue {

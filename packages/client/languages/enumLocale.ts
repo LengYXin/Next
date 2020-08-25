@@ -1,3 +1,6 @@
+/**
+ * 本地连接枚举
+ */
 export enum EnumLocaleLinks {
     /** 首页 */
     links_home = 'links_home',
@@ -30,7 +33,9 @@ export enum EnumLocaleLinks {
     /** 订单 */
     links_order = "links_order",
 };
-
+/**
+ * 描述类枚举
+ */
 export enum EnumLocaleDescriptions {
     /** 微信公众号 */
     des_officialAccount = 'des_officialAccount',

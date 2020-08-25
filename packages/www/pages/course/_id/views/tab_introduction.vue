@@ -20,7 +20,7 @@ import lodash from "lodash";
 })
 export default class PageView extends Vue {
   get PageStore() {
-    return this.$store.$storeCourse;
+    return this.$store.$storeCourse.Details;
   }
   imgs = [];
   async created() {

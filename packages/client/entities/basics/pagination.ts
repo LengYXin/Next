@@ -7,7 +7,7 @@
  */
 import lodash, { ListIteratee } from 'lodash';
 import { BindAll } from 'lodash-decorators';
-import { action, observable } from 'mobx';
+import { action, observable, computed, toJS } from 'mobx';
 import { AjaxRequest } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
@@ -89,7 +89,15 @@ export class Pagination<T> {
      * @memberof Pagination
      */
     @observable
-    dataSource: Array<T> = [];
+    private _dataSource: Array<T> = [];
+    
+    @computed
+    get dataSource(): Array<T> {
+        // console.time()
+        const dataSource = toJS(this._dataSource);
+        // console.timeEnd()
+        return dataSource
+    }
     /**
      * 当前页
      * @memberof Pagination
@@ -233,9 +241,9 @@ export class Pagination<T> {
         }
         // 第一页
         if (lodash.eq(this.current, this.options.defaultCurrent) || this.options.infinite === false) {
-            this.dataSource = res.dataSource;
+            this._dataSource = res.dataSource;
         } else {
-            this.dataSource = lodash.concat(this.dataSource, res.dataSource);
+            this._dataSource = lodash.concat(this._dataSource, res.dataSource);
         }
         // 无限滚动
         if (this.options.infinite) {
@@ -261,7 +269,7 @@ export class Pagination<T> {
      * @memberof Pagination
      */
     onFind(key: string | T): T {
-        const data = lodash.find(this.dataSource, this.getPredicate(key));
+        const data = lodash.find(this._dataSource, this.getPredicate(key));
         if (!lodash.hasIn(data, this.options.key)) {
             throw new Error(`没有找到 Key:${key} 数据`)
         }
@@ -274,10 +282,10 @@ export class Pagination<T> {
      */
     @action
     onUpdate(key: string | T, value: T) {
-        const dataSource = lodash.clone(this.dataSource);
+        const dataSource = lodash.clone(this._dataSource);
         const index = lodash.findIndex(dataSource, this.getPredicate(key));
         lodash.updateWith(dataSource, `[${index}]`, lodash.constant(value))
-        this.dataSource = dataSource;
+        this._dataSource = dataSource;
         return dataSource
     }
     /**
@@ -288,9 +296,9 @@ export class Pagination<T> {
      */
     @action
     onRemove(key: string | T): T[] {
-        const dataSource = lodash.clone(this.dataSource);
+        const dataSource = lodash.clone(this._dataSource);
         const result = lodash.remove(dataSource, this.getPredicate(key));
-        this.dataSource = dataSource;
+        this._dataSource = dataSource;
         return result
     }
     /**
@@ -315,7 +323,7 @@ export class Pagination<T> {
         this.pageSize = this.options.defaultPageSize;
         this.isUndefined = false;
         this.total = 0;
-        this.dataSource = [];
+        this._dataSource = [];
         this.oldBody = null;
         this.loading = false;
         this.onlyKey = lodash.uniqueId('key_')

@@ -56,3 +56,15 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" scoped>
 </style>
+<i18n lang="json">
+{
+  "en": {
+    "sort_time": "Sort by time",
+    "sort_tuition": "Sort by tuition fee"
+  },
+  "zh": {
+     "sort_time": "按时间排序",
+    "sort_tuition": "按学费排序"
+  }
+}
+</i18n>

@@ -1,7 +1,7 @@
 /**
  * 课程详情
  */
-interface CourseDetails {
+interface ICourseDetails {
     buyButtonText?: string
     canBuy?: boolean
     canGift?: boolean

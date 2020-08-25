@@ -67,7 +67,7 @@ export default class PageView extends Vue {
     try {
       await this.Pagination.onInstall({
         singleCourseId: this.id,
-        content: event.text,
+        content: event.html,
         contentLength: event.length,
         userType: 1,
       });

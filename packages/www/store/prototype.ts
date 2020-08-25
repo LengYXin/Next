@@ -6,14 +6,13 @@
  * @desc [description]
  */
 // import * as EnumApi from '@xt/client/api';
-import { AjaxBasics } from '@xt/client';
-import { EnumLocaleDescriptions, EnumLocaleLinks } from '@xt/client';
+import { AjaxBasics, EnumLocaleDescriptions, EnumLocaleLinks } from '@xt/client';
+import lodash from 'lodash';
 import { toJS } from 'mobx';
 import Vue from 'vue';
 import { ajax } from "./clientConfig";
 import store from './create';
 import images from './images';
-import lodash from 'lodash';
 // 扩展
 Vue.prototype.$ajax = ajax;
 // Vue.prototype.$EnumApi = EnumApi;

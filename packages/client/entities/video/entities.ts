@@ -1,8 +1,4 @@
-import { observable, computed, action } from 'mobx';
-import { create, persist } from 'mobx-persist';
-import { Subject, Subscription } from 'rxjs';
-import { AjaxRequest } from 'rxjs/ajax';
-import lodash from 'lodash';
+import { action, observable } from 'mobx';
 
 
 export default class EntitiesVideo {

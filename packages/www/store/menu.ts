@@ -6,9 +6,9 @@
  * @desc [description]
  */
 import { EnumLocaleLinks } from '@xt/client';
-import { BindAll } from 'lodash-decorators';
 import lodash from 'lodash';
-import { action, observable, toJS } from 'mobx';
+import { BindAll } from 'lodash-decorators';
+import { action, observable } from 'mobx';
 import { Route } from 'vue-router';
 @BindAll()
 class Menu {

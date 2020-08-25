@@ -45,12 +45,14 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
         return res?.response?.result
     }
     AjaxBasics.onError = function (error) {
-        // notification.error({ key: "AjaxBasics", message: '提示', description: lodash.get(error, 'response.msg', error.message) })
-        message.error({ content: lodash.get(error, 'response.msg', error.message), key: 'message' })
         if (lodash.includes([600002, 900004], lodash.get(error, 'response.code'))) {
             $storeUser.onOutLogin()
             $storeUser.onToggleVisible(true)
+            return
         }
+        // notification.error({ key: "AjaxBasics", message: '提示', description: lodash.get(error, 'response.msg', error.message) })
+        message.error({ content: lodash.get(error, 'response.msg', error.message), key: 'message' })
+
     }
     AjaxBasics.onNProgress = function (type: 'start' | 'done' = 'start') {
         if (type == "start") {

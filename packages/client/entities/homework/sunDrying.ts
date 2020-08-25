@@ -1,8 +1,8 @@
 import { BindAll } from 'lodash-decorators';
-import { AjaxBasics } from '../../helpers/ajaxBasics';
 import { EnumApiHomework } from '../../api';
-import { Pagination, PaginationOptions } from '../basics/pagination';
-import { toJS } from 'mobx';
+import { AjaxBasics } from '../../helpers/ajaxBasics';
+import { Pagination } from '../basics/pagination';
+import { EntitiesBasics } from '../basics/entities';
 /**
  * 晒作业
  * @export
@@ -23,6 +23,11 @@ export class ControllerHomeworkSunDrying extends Pagination<any> {
         })
     }
     /**
+     * 晒作业详情
+     * @memberof ControllerHomeworkSunDrying
+     */
+    Details = new EntitiesBasics(this.$ajax, { url: '' });
+    /**
      * 发布一条作业
      */
     async onInstall(body: { content?, contentLength?, courseType?, picturesUrlList?, singleCourseId?, userType?}) {
@@ -36,7 +41,6 @@ export class ControllerHomeworkSunDrying extends Pagination<any> {
         if (data.likeRecord) {
             throw '您已经点过赞了'
         }
-        data = toJS(data);
         data.likeCount++;
         data.likeRecord = true;
         this.onUpdate(data, data);

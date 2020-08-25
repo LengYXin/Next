@@ -4,12 +4,17 @@ import { BindAll } from "lodash-decorators";
 import { EnumApiCourse } from "../../api";
 import { AjaxBasics } from "../../helpers/ajaxBasics";
 import { Pagination } from "../basics/pagination";
-import Entities from "./entities";
+import { CourseDetails } from "./details";
 @BindAll()
-export class ControllerCourse extends Entities {
+export class ControllerCourse {
   constructor(protected $ajax: AjaxBasics) {
-    super();
+
   }
+  /**
+   * 课程详情
+   * @memberof ControllerCourse
+   */
+  Details = new CourseDetails(this.$ajax);
   /**
    * 分页列表数据
    * @memberof ControllerCourse
@@ -78,39 +83,6 @@ export class ControllerCourse extends Entities {
       });
       return { dataSource, total: res.total };
     };
-  }
-  /**
-   * 获取
-   * @memberof ControllerCourse
-   */
-  // onMapSource(res) {
-  //     let dataSource = [];
-  //     lodash.map(res.courseFullResponseVos, item => {
-  //         if (!lodash.isNil(item.courseFullId)) {
-  //             dataSource = lodash.concat(dataSource, [item])
-  //         }
-  //         dataSource = lodash.concat(dataSource, item.courseSingleResponseVos)
-  //     })
-  //     return { dataSource, total: res.total }
-  // }
-  /**
-   * 获取课程详情
-   * @param {*} [body]
-   * @param {Object} [headers]
-   * @memberof ControllerCourse
-   */
-  async onGetDetails(body: { courseId: any }, headers?: Object) {
-    this.setDetails({});
-    const res = await this.$ajax.post<any>(
-      EnumApiCourse.CourseDetails,
-      body,
-      headers
-    );
-    this.setDetails(res);
-  }
-  async onGetCourseIntroduce(body) {
-    const res = await this.$ajax.post<any>(EnumApiCourse.CourseIntroduce, body);
-    return res;
   }
 }
 export default ControllerCourse;

@@ -67,7 +67,7 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" scoped>
 .xt-stationery {
-  padding-bottom: 20px;
+  padding-bottom: @padding-lg;
 }
 </style>
 <i18n>

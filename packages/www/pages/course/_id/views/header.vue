@@ -2,22 +2,26 @@
   <div class="xt-cid-header">
     <h1 class="xt-title-h3">
       <a-tag>直播课</a-tag>
-      <span v-text="PageStore.details.courseName"></span>
+      <span v-text="PageStore.dataSource.courseName"></span>
+      <a-button type="link" @click="onText">更改名称</a-button>
     </h1>
     <a-row>
       <a-col :span="12">
         <h2 class="xt-text-yellow xt-title-h6">
-          <span v-text="PageStore.details.courseSubtitle"></span>
+          <span v-text="PageStore.dataSource.courseSubtitle"></span>
         </h2>
         <div class="xt-flex-center">
-          <strong class="xt-text-green xt-font-size-xx" v-money="PageStore.details.courseFullPrice"></strong>
-          <span class="xt-cid-header-text">共{{PageStore.details.classHourCount}}课</span>
-          <span class="xt-cid-header-text" v-text="PageStore.details.statusName"></span>
+          <strong
+            class="xt-text-green xt-font-size-xx"
+            v-money="PageStore.dataSource.courseFullPrice"
+          ></strong>
+          <span class="xt-cid-header-text">共{{PageStore.dataSource.classHourCount}}课</span>
+          <span class="xt-cid-header-text" v-text="PageStore.dataSource.statusName"></span>
         </div>
       </a-col>
       <a-col :span="12">
         <div class="xt-cid-header-time">
-          <time v-dateFormat="PageStore.details.createTime" format="报名截至YYYY-MM-DD" />
+          <time v-dateFormat="PageStore.dataSource.createTime" format="报名截至YYYY-MM-DD" />
         </div>
         <div class="xt-cid-header-signup">
           <nuxt-link to="/homework">
@@ -26,8 +30,9 @@
           <nuxt-link to="/payment">
             <span>支付</span>
           </nuxt-link>
-          <Signup :give="true" :buy="true" :id="PageStore.details" />
-          <Signup :buy="true" :id="PageStore.details" />
+          <understand />
+          <Signup :give="true" :buy="true" :id="PageStore.dataSource" />
+          <Signup :buy="true" :id="PageStore.dataSource" />
         </div>
       </a-col>
     </a-row>
@@ -37,16 +42,21 @@
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
 import Signup from "../../views/signup.vue";
-import { computed } from "mobx";
+import understand from "./understand.vue";
 @Observer
 @Component({
-  components: { Signup },
+  components: { Signup, understand },
 })
 export default class PageView extends Vue {
   get PageStore() {
-    return this.$store.$storeCourse;
+    return this.$store.$storeCourse.Details;
   }
-  mounted() {}
+  mounted() {
+    console.log("LENG: PageView -> mounted -> this.PageStore", this.PageStore);
+  }
+  onText() {
+    this.PageStore.onUpdate({ courseName: "更改名字" + Date.now() });
+  }
   updated() {}
   destroyed() {}
 }

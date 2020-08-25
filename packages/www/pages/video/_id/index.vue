@@ -1,9 +1,9 @@
 <template>
   <div class="xt-content">
     <div>
-      <h1 v-text="PageStore.details.title"></h1>
-      <VeView :item="PageStore.details" />
-      <VeLike :item="PageStore.details" />
+      <h1 v-text="PageStore.dataSource.title"></h1>
+      <VeView :item="PageStore.dataSource" />
+      <VeLike :item="PageStore.dataSource" />
     </div>
     <xt-dplayer :options="options" />
     <a-row>
@@ -21,13 +21,12 @@ import lodash from "lodash";
 import VeLike from "../views/like.vue";
 import VeView from "../views/view.vue";
 import VeComment from "./views/comment.vue";
-import { toJS } from "mobx";
 @Component({
   async fetch(ctx: Context) {
-    const store = ctx.store.$storeVideo;
-    await store.onGetDetails(ctx.params.id);
+    const store = ctx.store.$storeVideo.Details;
+    await store.onLoading(ctx.params.id);
     ctx.store.$menu.setBreadcrumb({
-      linksName: store.details.title,
+      linksName: store.dataSource.title,
     });
   },
   validate({ params }) {
@@ -37,15 +36,18 @@ import { toJS } from "mobx";
 })
 export default class PageView extends Vue {
   @Provide("VideoStore")
-  get PageStore() {
+  get VideoStore() {
     return this.$store.$storeVideo;
+  }
+  get PageStore() {
+    return this.$store.$storeVideo.Details;
   }
   get options() {
     return {
       video: {
-        thumbnails: this.PageStore.details.videoCoverUrl,
-        pic: this.PageStore.details.videoCoverUrl,
-        quality: toJS(this.PageStore.details.quality),
+        thumbnails: this.PageStore.dataSource.videoCoverUrl,
+        pic: this.PageStore.dataSource.videoCoverUrl,
+        quality: this.PageStore.dataSource.quality,
       },
     };
   }
@@ -61,4 +63,7 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" scoped>
+.xt-content{
+  padding-bottom: @padding-lg;
+}
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div class="xt-content">
-    <titleView />
+    <!-- 课程标题信息 -->
+    <headerView />
     <tabsView />
   </div>
 </template>
@@ -9,32 +10,27 @@ import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import lodash from "lodash";
 import tabsView from "./views/tabs.vue";
-import titleView from "./views/title.vue";
+import headerView from "./views/header.vue";
 @Component({
   async fetch(ctx: Context) {
-    const store = ctx.store.$storeCourse;
-    await store.onGetDetails({
+    const store = ctx.store.$storeCourse.Details;
+    await store.onLoading({
       courseId: ctx.params.id,
     });
-    // ctx.store.$menu.setBreadcrumb({
-    //   linksName: store.details.courseName,
-    // });
   },
   validate({ params }) {
     return /^\d+$/.test(params.id);
   },
   components: {
     tabsView,
-    titleView,
+    headerView,
   },
 })
 export default class PageView extends Vue {
   get PageStore() {
-    return this.$store.$storeCourse;
+    return this.$store.$storeCourse.Details;
   }
-  created() {
-   
-  }
+  created() {}
   mounted() {
     // console.log(this.$route);
   }
