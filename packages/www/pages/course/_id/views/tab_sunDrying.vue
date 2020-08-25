@@ -6,7 +6,7 @@
  * @desc 晒作业
  */
 <template>
-  <div class="xt-content-small">
+  <div class="xt-content-small xt-course-sunDrying">
     <xt-editor @submit="onSubmit" :rules="{required:true,max:2000}" buttonText="晒作业"></xt-editor>
     <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
       <template slot="actions">
@@ -94,5 +94,10 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
-<style>
+<style lang="less" >
+.xt-course-sunDrying{
+  .xt-ellipsis .xt-ellipsis-btn{
+    background: #f8f3ee !important;
+  }
+}
 </style>
