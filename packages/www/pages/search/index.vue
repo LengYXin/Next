@@ -37,7 +37,7 @@
         ></component>
       </keep-alive>
     </div>
-    <xt-infinite-loading :key="activeKey" @loading="onLoading" />
+    <xt-infinite-loading :identifier="Pagination.onlyKey" @loading="onLoading" />
   </div>
 </template>
 <script lang="ts">
