@@ -7,6 +7,7 @@
  */
 <template>
   <div class="xt-content xt-stationery">
+    <div class="xt-stationery-search-box"><a-icon type="shopping-cart" /></div>
     <xt-tabs
       theme="circle"
       :tabPane="PageStore.typelist"
