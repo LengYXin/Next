@@ -39,15 +39,21 @@ Vue.prototype.$eqUser = function (code) {
     }
     return false
 };
+/** 
+ * 设置 面包屑
+*/
+Vue.prototype.$setBreadcrumb = store.$menu.setBreadcrumb;
 
 declare module 'vue/types/vue' {
     interface Vue {
-        /**
+        /** 
          * 检查用户是否登录
          */
         readonly $InspectUser: () => Object;
         /** 检查code 是否 是当前用户 */
         readonly $eqUser: (code: any) => Boolean;
+        /** 设置面包屑 */
+        readonly $setBreadcrumb: typeof store.$menu.setBreadcrumb;
         /** Ajax */
         readonly $ajax: AjaxBasics;
         /** APi 枚举 */

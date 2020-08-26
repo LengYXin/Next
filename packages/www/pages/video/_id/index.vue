@@ -25,9 +25,6 @@ import VeComment from "./views/comment.vue";
   async fetch(ctx: Context) {
     const store = ctx.store.$storeVideo.Details;
     await store.onLoading(ctx.params.id);
-    ctx.store.$menu.setBreadcrumb({
-      linksName: store.dataSource.title,
-    });
   },
   validate({ params }) {
     return /^\d+$/.test(params.id);
@@ -54,6 +51,9 @@ export default class PageView extends Vue {
   onLike() {
     console.log("onLike");
   }
+  created() {
+    this.$setBreadcrumb({ linksName: this.PageStore.dataSource.title }, true);
+  }
   mounted() {
     // console.log(this.$route);
   }
@@ -63,7 +63,7 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" scoped>
-.xt-content{
+.xt-content {
   padding-bottom: @padding-lg;
 }
 </style>
