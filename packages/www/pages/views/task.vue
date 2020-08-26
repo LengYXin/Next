@@ -2,15 +2,13 @@
   <a-card class="xt-view-task" :bordered="false" :loading="loading">
     <swiper class="swiper" ref="swiper" :options="swiperOption">
       <swiper-slide v-for="item in dataSource" :key="item.key">
-        <div class="xt-view-task-slide-item">
-          <img class="xt-view-task-img" alt="example" :src="item.src" />
-          <div class="xt-view-task-hover-box">
-            <div class="xt-view-task-hover-title">
-              {{ item.title }}
-            </div>
-            <div class="xt-view-task-hover-author">— {{ item.author }} —</div>
-          </div>
-        </div>
+          <xt-hover>
+            <img class="xt-view-task-img" alt="example" :src="item.src" />
+            <template #hover>
+                <div class="xt-view-task-hover-title">{{ item.title }}</div>
+                <div class="xt-view-task-hover-author">— {{ item.author }} —</div>
+            </template>
+          </xt-hover>
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -153,15 +151,6 @@ export default class PageView extends Vue {
       color: #ffffff;
     }
   }
-
-  &-slide-item {
-    position: relative;
-    &:hover {
-      .xt-view-task-hover-box {
-        display: block;
-      }
-    }
-  }
   .xt-swiper-pagination {
     margin-left: 33.33%;
     width: 33.33%;
@@ -175,18 +164,8 @@ export default class PageView extends Vue {
     height: 330px;
     object-fit: cover;
   }
-  &-hover-box {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.4);
-    width: 100%;
-    height: 100%;
-  }
   &-hover-title {
-    margin-top: 135px;
+    // margin-top: 135px;
     font-size: 36px;
     letter-spacing: 2px;
     font-weight: 400;
