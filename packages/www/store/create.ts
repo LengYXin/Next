@@ -8,7 +8,7 @@
 
 import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo, ControllerOrder, ControllerHomework } from "@xt/client";
 import { create, persist } from 'mobx-persist';
-import { ajax, onResetAjaxBasics } from "./clientConfig";
+import { ajax, onResetAjaxBasics } from "./ajaxBasics";
 import $global from './global';
 import $locale from './locale';
 import $menu from './menu';

@@ -10,7 +10,7 @@ import { AjaxBasics, EnumLocaleDescriptions, EnumLocaleLinks } from '@xt/client'
 import lodash from 'lodash';
 import { toJS } from 'mobx';
 import Vue from 'vue';
-import { ajax } from "./clientConfig";
+import { ajax } from "./ajaxBasics";
 import store from './create';
 import images from './images';
 // 扩展
