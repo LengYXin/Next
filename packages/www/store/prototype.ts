@@ -48,6 +48,7 @@ declare module 'vue/types/vue' {
     interface Vue {
         /** 
          * 检查用户是否登录
+         * 没有登录会抛异常。try 包裹使用
          */
         readonly $InspectUser: () => Object;
         /** 检查code 是否 是当前用户 */

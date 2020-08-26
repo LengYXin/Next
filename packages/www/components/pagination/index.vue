@@ -42,7 +42,7 @@ export default class extends Vue {
   // 当前页面显示
   get isConnected() {
     // return this.$el.isConnected && this.key === this.$route.name;
-    return  this.key === this.$route.name;
+    return this.key === this.$route.name;
   }
   isShow(total, pageSize) {
     return total > pageSize;
@@ -122,3 +122,11 @@ export default class extends Vue {
   }
 }
 </script>
+<style lang="less">
+.xt-pagination {
+  &-center,
+  .ant-pagination {
+    text-align: center;
+  }
+}
+</style>
