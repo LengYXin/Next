@@ -45,7 +45,7 @@ export default class PageView extends Vue {
   get options() {
     return {
       video: {
-        thumbnails: this.PageStore.dataSource.videoCoverUrl,
+        // thumbnails: this.PageStore.dataSource.videoCoverUrl,
         pic: this.PageStore.dataSource.videoCoverUrl,
         quality: this.PageStore.dataSource.quality,
       },
