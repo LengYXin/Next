@@ -71,7 +71,7 @@ class Menu {
      * @param breadcrumb 
      */
     @action
-    setBreadcrumb(breadcrumb, reset = false) {
+    setBreadcrumb(breadcrumb: { linksKey?, linksName?, links?}, reset = false) {
         if (reset) {
             this.breadcrumb = [breadcrumb];
         } else {

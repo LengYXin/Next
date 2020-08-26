@@ -68,10 +68,12 @@ export default class PageView extends Vue {
         this.$InspectUser();
         this.visible = true;
       } else {
-        this.$router.push({
-          name: "course-id",
-          params: { id: this.dataSource.courseId },
-        });
+        if (this.dataSource.courseId) {
+          this.$router.push({
+            name: "course-id",
+            params: { id: this.dataSource.courseId },
+          });
+        }
       }
     } catch (error) {}
   }
