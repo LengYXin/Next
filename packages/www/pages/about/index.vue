@@ -53,7 +53,10 @@ export default class PageView extends Vue {
   }
   mounted() {}
   updated() {}
-  destroyed() {}
+  destroyed() {
+    // 无限滚动列表 销毁时 清理
+    this.Pagination.onReset();
+  }
 }
 </script>
 <style lang="less" >

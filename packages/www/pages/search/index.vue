@@ -58,12 +58,6 @@ import stationery from "~/pages/stationery/views/list.vue";
 import videos from "~/pages/video/views/list.vue";
 @Observer
 @Component({
-  // asyncData(ctx) {
-  //   ctx.store.$menu.setBreadcrumb({
-  //     linksName: "搜索课程",
-  //   });
-  //   return;
-  // },
   components: { course, about, stationery, videos },
 })
 export default class PageView extends Vue {
@@ -138,7 +132,7 @@ export default class PageView extends Vue {
     const linksName = `搜索${
       lodash.find(this.tabPane, ["key", this.activeKey]).title
     }`;
-    this.$store.$menu.setBreadcrumb(
+    this.$setBreadcrumb(
       {
         linksName,
       },

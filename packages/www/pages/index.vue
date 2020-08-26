@@ -124,7 +124,7 @@ export default class PageIndex extends Vue {
       titleColor: "#000",
       subTitle: "从第一笔至今，每一步都踏实",
       footerText: "查看更多",
-      linkTo: { name: "about" },
+      linkTo: { name: "homework-share" },
       template: "task",
       isContent: false,
       background: "#FFFDF9",
