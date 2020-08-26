@@ -8,12 +8,18 @@ import { toJS } from 'mobx';
 export class VideoCommentPagination extends Pagination<any>{
     constructor(protected $ajax: AjaxBasics) {
         super($ajax, {
-            url: EnumApiVideo.VideoComment,
+            url: EnumApiVideo.VideoCommentList,
             key: 'id',
             currentKey: 'pageIndex',
             defaultPageSize: 10,
             onMapValues: 'courseFreeCommentResultVoList'
         })
+    }
+    /**
+   * 发布一条作业
+   */
+    async onInstall(body: { videoShareId, content, contentLength?, toCommentId?, toUserId?, toUserNickname?, userType?}) {
+        return this.$ajax.post(EnumApiVideo.VideoComment, body);
     }
     /**
      * 点赞

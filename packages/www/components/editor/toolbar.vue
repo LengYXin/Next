@@ -8,6 +8,7 @@
 <template>
   <a-row class="xt-editor-toolbar" type="flex" :gutter="4">
     <a-col>
+      <!-- 表情 -->
       <a-popover placement="rightTop" trigger="click">
         <template slot="content">
           <xt-face @select="onAddFace" />
@@ -18,6 +19,7 @@
         </span>
       </a-popover>
       <a-divider type="vertical"></a-divider>
+      <!-- 图片 -->
       <a-popover placement="rightTop" trigger="click">
         <template slot="content">
           <div class="xt-editor-upload">
@@ -44,8 +46,10 @@
       </a-popover>
     </a-col>
     <a-col flex="1" class="xt-editor-btns">
+      <!-- 默认插槽位置 -->
       <slot v-bind:quill="quill"></slot>
       <a-divider type="vertical"></a-divider>
+      <!-- 按钮插槽 -->
       <slot name="submit" v-bind:quill="quill">
         <a-button type="primary" v-text="buttonText" @click="onSubmitRules"></a-button>
       </slot>
@@ -171,15 +175,16 @@ export default class extends Vue {
     display: none;
   }
 }
+.xt-editor-upload-hide {
+  .xt-editor-upload-span {
+    display: none !important;
+  }
+}
+// 图片上传
 .xt-editor-upload {
   width: 336px;
   max-height: 336px;
   overflow: hidden;
-  // .ant-upload-list-item-actions {
-  //   > a {
-  //     display: none;
-  //   }
-  // }
   .ant-upload-list-picture .ant-upload-list-item,
   .ant-upload-list-picture-card .ant-upload-list-item {
     padding: 0;

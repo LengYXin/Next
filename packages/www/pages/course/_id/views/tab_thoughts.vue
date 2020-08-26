@@ -6,7 +6,7 @@
  * @desc 感想
  */
 <template>
-  <div class="xt-content-small">
+  <div v-if="UserStore.loggedIn" class="xt-content-small">
     <xt-editor @submit="onSubmit" buttonText="发感想"></xt-editor>
     <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
       <template slot="actions">
@@ -30,6 +30,7 @@
     </xt-comment>
     <xt-infinite-loading :identifier="Pagination.onlyKey" @loading="onLoading" />
   </div>
+  <a-empty v-else :image="$images.logo" description="报名后，可以浏览感想栏哦~~" />
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
@@ -39,6 +40,9 @@ import moment from "moment";
   components: {},
 })
 export default class PageView extends Vue {
+  get UserStore() {
+    return this.$store.$storeUser;
+  }
   get PageStore() {
     return this.$store.$storeCourse;
   }
@@ -58,6 +62,11 @@ export default class PageView extends Vue {
   }
   onSubmit(event) {
     console.log("LENG: PageView -> onSubmit -> event", event);
+  }
+  created() {
+    try {
+      this.$InspectUser();
+    } catch (error) {}
   }
   mounted() {}
   updated() {}

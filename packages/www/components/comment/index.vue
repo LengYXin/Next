@@ -40,8 +40,9 @@
       <template slot="actions">
         <slot name="actions"></slot>
       </template>
+      <!-- 默认插槽 -->
+      <slot />
     </a-comment>
-    <slot />
   </div>
 </template>
 <script lang="ts">
@@ -62,12 +63,24 @@ export default class extends Vue {
     time: string;
     // 笔山
     bishan: number;
+    // 回复
+    toUserName: string;
   };
   get datetime() {
     return this.comment.time;
   }
   get content() {
-    return this.comment.content;
+    let content = this.comment.content;
+    if (this.comment.toUserName) {
+      // const toUserNickname =Vue.compile(`回复 <span class="xt-text-yellow">${item.toUserNickname}</span> : `) ;
+      const toUserName = `回复 <span class="xt-text-yellow">${this.comment.toUserName}</span> : `;
+      if (lodash.startsWith(content, "<p>")) {
+        content = lodash.replace(content, "<p>", `<p>${toUserName}`);
+      } else {
+        content = toUserName + content;
+      }
+    }
+    return content;
   }
   mounted() {
     // console.log(this);

@@ -6,11 +6,15 @@
       <VeLike :item="PageStore.dataSource" />
     </div>
     <xt-dplayer :options="options" />
+
     <a-row>
       <a-col :span="16">
+        <h1>视频介绍</h1>
         <VeComment />
       </a-col>
-      <a-col :span="8"></a-col>
+      <a-col :span="8">
+        <h1>其他分享</h1>
+      </a-col>
     </a-row>
   </div>
 </template>

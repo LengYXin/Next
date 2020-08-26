@@ -11,7 +11,9 @@ export enum EnumApiVideo {
     /** 视频详情 */
     VideoDetail = '/coursefree/detail',
     /** 评论列表 */
-    VideoComment = '/coursefree/commentlist',
+    VideoCommentList = '/coursefree/commentlist',
+    /** 回复 评论 */
+    VideoComment = '/coursefree/comment',
     /** 评论列表 点赞 */
     VideoCommentPraise = '/coursefree/comment/praise',
     /** 课程详情 */
