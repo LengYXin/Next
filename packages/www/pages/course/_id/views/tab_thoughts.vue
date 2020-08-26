@@ -7,7 +7,7 @@
  */
 <template>
   <div v-if="UserStore.loggedIn" class="xt-content-small">
-    <xt-editor @submit="onSubmit" buttonText="发感想"></xt-editor>
+    <xt-editor class="xt-editor-upload-hide" @submit="onSubmit" buttonText="发感想"></xt-editor>
     <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
       <template slot="actions">
         <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />

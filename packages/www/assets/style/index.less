@@ -7,6 +7,7 @@
 @import "./swiper.less";
 @import "./font.less";
 @import "./background.less";
+@import "./hover/hover.less";
 
 html {
   // user-select: none;
@@ -63,5 +64,15 @@ img {
     position: relative;
     z-index: 1;
     box-shadow: @box-shadow-base;
+  }
+}
+// 悬浮放大
+.xt-hoverscale {
+  transition: all 0.3s;
+  cursor: pointer;
+  &:hover {
+    position: relative;
+    z-index: 1;
+    transform: scale(1.08);
   }
 }
