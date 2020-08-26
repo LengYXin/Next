@@ -14,7 +14,7 @@
         </swiper-slide>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
-        <div class="swiper-pagination" slot="pagination"></div>
+        <div class="xt-home-swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
     <xt-template v-for="item in templates" :key="item.template" v-bind="item">
@@ -73,7 +73,7 @@ export default class PageIndex extends Vue {
       prevEl: ".swiper-button-prev",
     },
     pagination: {
-      el: ".swiper-pagination",
+      el: ".xt-home-swiper-pagination",
       dynamicBullets: true,
     },
   };
@@ -158,12 +158,18 @@ export default class PageIndex extends Vue {
 }
 </script>
 <style lang="less">
-.swiper-pagination {
-  &-bullet-active {
-    background-color: #ffffff;
+.xt-home-swiper-pagination {
+  position: absolute;
+  text-align: center;
+  transition: 300ms opacity;
+  transform: translate3d(0, 0, 0);
+  z-index: 10;
+  .swiper-pagination-bullet-active {
+    background: #ffffff;
   }
 }
 </style>
+
 <style lang="less" scoped>
 .swiper-button {
   &-prev {

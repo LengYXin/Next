@@ -14,7 +14,7 @@
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
-      <div class="xt-swiper-pagination" slot="pagination"></div>
+      <div class="xt-task-swiper-pagination" slot="pagination"></div>
     </swiper>
     <div v-viewer ref="viewer" v-show="false">
       <img v-for="item in dataSource" :key="item.key" :src="item.src" />
@@ -48,7 +48,7 @@ export default class PageView extends Vue {
       prevEl: ".swiper-button-prev",
     },
     pagination: {
-      el: ".xt-swiper-pagination",
+      el: ".xt-task-swiper-pagination",
       // dynamicBullets: true,
       type: "bullets",
       bulletClass: "xt-bullet",
@@ -115,7 +115,7 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less">
-.xt-swiper-pagination {
+.xt-task-swiper-pagination {
   .xt-bullet {
     flex: 1;
     display: block;
@@ -164,13 +164,19 @@ export default class PageView extends Vue {
       color: #ffffff;
     }
   }
-  .xt-swiper-pagination {
+  .xt-task-swiper-pagination {
+    position: absolute;
+    text-align: center;
+    transition: 300ms opacity;
+    transform: translate3d(0, 30px, 0);
+    z-index: 10;
+    display: flex;
+
     margin-left: 33.33%;
     width: 33.33%;
     height: 3px;
     // bottom: 0;
-    transform: translateY(30px);
-    display: flex;
+    // transform: translateY(30px);
   }
   &-img {
     width: 100%;
