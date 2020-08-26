@@ -37,7 +37,7 @@ export default class PageView extends Vue {
   loading = true;
   swiperOption = {
     loop: true,
-    autoplay: false,
+    autoplay: true,
     watchOverflow: true,
     simulateTouch: true,
     slidesPerView: 3,
