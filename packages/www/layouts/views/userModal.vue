@@ -27,8 +27,8 @@
     </a-popover>
   </span>
   <span v-else>
-    <span @click="onVisible(true,'links_signin')" v-t="locale.links_signin">登录</span>
-    <span @click="onVisible(true,'links_register')" v-t="locale.links_register">注册</span>
+    <span @click="onVisible(true,locale.links_signin)" v-t="locale.links_signin">登录</span>
+    <span @click="onVisible(true,locale.links_register)" v-t="locale.links_register">注册</span>
     <!-- :title="$t(title||'links_signin')" -->
     <a-modal
       wrapClassName="xt-signin-modal"
@@ -40,8 +40,8 @@
     >
       <div v-show="PageStore.visible">
         <signin v-if="isSignin" @toggle="onToggle" />
-        <register v-else-if="title==='links_register'" @toggle="onToggle" />
-        <retrieve v-else-if="title==='links_retrieve'" @toggle="onToggle" />
+        <register v-else-if="title===locale.links_register" @toggle="onToggle" />
+        <retrieve v-else-if="title===locale.links_retrieve" @toggle="onToggle" />
       </div>
     </a-modal>
   </span>
@@ -51,6 +51,7 @@ import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import signin from "./signin.vue";
 import register from "./register.vue";
 import retrieve from "./retrieve.vue";
+import lodash from "lodash";
 import { Observer } from "mobx-vue";
 @Observer
 @Component({
@@ -60,10 +61,12 @@ export default class extends Vue {
   get PageStore() {
     return this.$store.$storeUser;
   }
-  visible = false;
   title = "";
   get isSignin() {
-    return this.title === "links_signin" || this.title == "";
+    return lodash.includes(
+      [this.locale.links_signin, "", undefined],
+      this.title
+    );
   }
   get locale() {
     return this.$EnumLocaleLinks;

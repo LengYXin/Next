@@ -1,13 +1,15 @@
 
 <template>
   <a-button
+    :type="type"
     :disabled="disabled"
     class="xt-signup"
     @click.prevent.stop="onSignup"
     slot="actions"
-    :type="type"
   >
-    <span v-t="text"></span>
+    <slot>
+      <span v-t="text"></span>
+    </slot>
     <a-modal :visible="visible" @cancel="onCancel" :footer="null" width="1000px">
       <div>
         <Agreement />
@@ -25,14 +27,20 @@ import Agreement from "./agreement.vue";
   components: { Agreement },
 })
 export default class PageView extends Vue {
+  get PageStore() {
+    return this.$store.$storeCourse;
+  }
   /** 课程数据 */
   @Prop({ default: () => ({}) }) dataSource;
   /** true 为 赠课  */
   @Prop({ default: false }) give;
   // @Prop({ required: true }) id;
   @Prop({}) title;
-  /** 购买 不是 购买跳转 详情 */
+  /** 购买 | 非购买跳转 详情 */
   @Prop({ default: false }) buy;
+  /** 图标 */
+  @Prop({ default: false }) icon;
+  /** modal visible */
   visible = false;
   /** 按钮显示文案 */
   get text() {
@@ -44,26 +52,28 @@ export default class PageView extends Vue {
     }
     return "signup";
   }
-  get PageStore() {
-    return this.$store.$storeCourse;
-  }
   /** 按钮类型 */
   get type() {
+    if (this.icon) {
+      return "link";
+    }
     return this.give ? "yellow" : "primary";
   }
   get disabled() {
-    return  !lodash.hasIn(this.dataSource, "courseId");
+    return lodash.get(this.dataSource, this.give ? "canGift" : "canBuy", false);
   }
   onSignup() {
-    console.log("LENG: PageView -> onSignup -> this", this);
-    if (this.buy) {
-      this.visible = true;
-    } else {
-      this.$router.push({
-        name: "course-id",
-        params: { id: this.dataSource.courseId },
-      });
-    }
+    try {
+      if (this.buy) {
+        this.$InspectUser();
+        this.visible = true;
+      } else {
+        this.$router.push({
+          name: "course-id",
+          params: { id: this.dataSource.courseId },
+        });
+      }
+    } catch (error) {}
   }
   onOk() {
     this.visible = false;
@@ -79,11 +89,16 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" scoped>
 .xt-signup {
-  color: @white;
+  // color: @white;
   width: 140px;
   height: 40px;
   font-size: @font-size-lg;
   margin-left: 20px;
+  &.ant-btn-link {
+    height: auto;
+    width: auto;
+    margin-left: auto;
+  }
   &[disabled] {
     background: @xt-grey-6 !important;
     color: @white !important;

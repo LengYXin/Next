@@ -1,39 +1,47 @@
 <template>
   <div class="xt-cid-header">
-    <h1 class="xt-title-h3">
-      <a-tag>直播课</a-tag>
-      <span v-text="PageStore.dataSource.courseName"></span>
-      <a-button type="link" @click="onText">更改名称</a-button>
-    </h1>
+    
     <a-row>
       <a-col :span="12">
+        <h1 class="xt-title-h3 xt-flex-center">
+      <a-tag class="xt-bg-yellow xt-cid-header-tag xt-font-size-md">直播课</a-tag>
+      <span v-text="dataSource.courseName"></span>
+      <!-- <a-button type="link" @click="onText">更改名称</a-button> -->
+    </h1>
         <h2 class="xt-text-yellow xt-title-h6">
-          <span v-text="PageStore.dataSource.courseSubtitle"></span>
+          <span v-text="dataSource.courseSubtitle"></span>
         </h2>
         <div class="xt-flex-center">
-          <strong
-            class="xt-text-green xt-font-size-xx"
-            v-money="PageStore.dataSource.courseFullPrice"
-          ></strong>
-          <span class="xt-cid-header-text">共{{PageStore.dataSource.classHourCount}}课</span>
-          <span class="xt-cid-header-text" v-text="PageStore.dataSource.statusName"></span>
+          <strong class="xt-text-green xt-font-size-xx" v-money="dataSource.courseFullPrice"></strong>
+          <span class="xt-cid-header-text">共{{dataSource.classHourCount}}课</span>
+          <span class="xt-cid-header-text" v-text="dataSource.statusName"></span>
         </div>
       </a-col>
       <a-col :span="12">
-        <div class="xt-cid-header-time">
-          <time v-dateFormat="PageStore.dataSource.createTime" format="报名截至YYYY-MM-DD" />
-        </div>
-        <div class="xt-cid-header-signup">
-          <nuxt-link to="/homework">
-            <span>交作业</span>
-          </nuxt-link>
-          <nuxt-link to="/payment">
-            <span>支付</span>
-          </nuxt-link>
-          <understand />
-          <Signup :give="true" :buy="true" :id="PageStore.dataSource" />
-          <Signup :buy="true" :id="PageStore.dataSource" />
-        </div>
+        <!-- 开课请了解 -->
+        <understand v-if="dataSource.purchased">
+          <a-tooltip>
+            <template slot="title">赠课给他人</template>
+            <Signup :give="true" :buy="true" :icon="true" :dataSource="dataSource">
+              <a-icon type="question" />
+            </Signup>
+          </a-tooltip>
+        </understand>
+        <template v-else>
+          <div class="xt-cid-header-time">
+            <time v-dateFormat="dataSource.createTime" format="报名截至YYYY-MM-DD" />
+          </div>
+          <div class="xt-cid-header-signup">
+            <nuxt-link to="/homework">
+              <span>交作业</span>
+            </nuxt-link>
+            <nuxt-link to="/payment">
+              <span>支付</span>
+            </nuxt-link>
+            <Signup :give="true" :buy="true" :dataSource="dataSource" />
+            <Signup :buy="true" :dataSource="dataSource" />
+          </div>
+        </template>
       </a-col>
     </a-row>
   </div>
@@ -51,6 +59,9 @@ export default class PageView extends Vue {
   get PageStore() {
     return this.$store.$storeCourse.Details;
   }
+  get dataSource() {
+    return this.PageStore.dataSource;
+  }
   mounted() {
     console.log("LENG: PageView -> mounted -> this.PageStore", this.PageStore);
   }
@@ -63,6 +74,12 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" scoped>
 .xt-cid-header {
+  &-tag {
+    width: 66px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+  }
   &-text {
     color: @xt-grey-6;
     margin-left: 15px;
@@ -79,6 +96,10 @@ export default class PageView extends Vue {
     margin-top: 10px;
     flex-direction: initial;
     justify-content: flex-start;
+  }
+  .xt-title-h3 {
+    height: 40px;
+    margin: 0;
   }
 }
 </style>

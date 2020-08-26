@@ -6,8 +6,12 @@
  * @desc 开课了解
  */
 <template>
-  <div>
-    <a-button type="link" @click="onVisible(true)" v-t="locale.link">开课前需要了解什么</a-button>
+  <div class="xt-text-align-right ">
+    <a-icon type="question" class="xt-text-yellow" />
+    <a-button class="xt-understand-btn" type="link" @click="onVisible(true)" v-t="locale.link">
+      <span>开课前需要了解什么</span>
+    </a-button>
+    <slot />
     <a-modal :visible="visible" @cancel="onVisible(false)" :footer="null" width="700px">
       <div>开课前请了解</div>
     </a-modal>
@@ -38,6 +42,9 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" scoped>
+.xt-understand-btn{
+  padding: 0;
+}
 </style>
 <i18n lang="json">
 {

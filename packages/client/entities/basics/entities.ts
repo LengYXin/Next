@@ -119,6 +119,7 @@ export class EntitiesBasics<T> {
      */
     @action
     onUpdate(value: T) {
+        console.log("LENG: EntitiesBasics<T> -> onUpdate -> value", value)
         const dataSource = this.dataSource;
         this.onSetDataSource(lodash.merge(dataSource, value))
     }
