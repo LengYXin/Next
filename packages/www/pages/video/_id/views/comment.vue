@@ -100,8 +100,8 @@ export default class PageView extends Vue {
     this.reply = data.id;
   }
   async onSubmit(event, data) {
-    console.log("LENG: PageView -> onSubmit -> data", data)
     try {
+      this.$InspectUser();
       await this.Pagination.onInstall({
         videoShareId: this.id,
         content: event.html,

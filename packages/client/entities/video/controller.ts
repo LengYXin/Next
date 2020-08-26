@@ -24,6 +24,16 @@ export class ControllerVideo {
         // onMapValues: 'courseFreeResponseVos'
     });
     /**
+     * 推荐列表
+     * @memberof ControllerVideo
+     */
+    RecommendPagination = new Pagination(this.$ajax, {
+        url: EnumApiVideo.VideoRecommend,
+        key: 'id',
+        currentKey: 'pageIndex',
+        onMapValues: 'videoShareDetialList'
+    });
+    /**
      * 评论列表
      * @memberof ControllerVideo
      */
