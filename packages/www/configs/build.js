@@ -125,11 +125,12 @@ module.exports = {
     // transpile: ['ant-design-vue'],
     babel: {
         plugins: [
+            'lodash',
             // ['import', {
             //   libraryName: 'ant-design-vue',
             //   libraryDirectory: 'es',
-            //   style: true
-            // }, 'ant-design-vue'],
+            //   style: 'less'
+            // }],
             // ['import', {
             //   libraryName: 'lodash',
             //   libraryDirectory: '',
