@@ -18,9 +18,7 @@
             <img
               class="xt-view-theWriter-cover"
               alt="example"
-              v-lazy="
-                'https://oss-free.xuantong.cn/picturePath/dc4e7ca6ddf67eb508d791346290cc36.jpg'
-              "
+              v-lazy="'https://oss-free.xuantong.cn/picturePath/dc4e7ca6ddf67eb508d791346290cc36.jpg'"
           /></a-col>
         </a-row>
       </a-col>

@@ -1,30 +1,39 @@
 <template>
   <a-card class="xt-view-task" :bordered="false" :loading="loading">
     <swiper class="swiper" ref="swiper" :options="swiperOption">
-      <swiper-slide v-for="item in dataSource" :key="item.key">
+      <swiper-slide v-for="(item,index) in dataSource" :key="item.key">
+        <div @click.prevent.stop="onViewer(index)">
           <xt-hover>
             <img class="xt-view-task-img" alt="example" :src="item.src" />
-            <template #hover>
-                <div class="xt-view-task-hover-title">{{ item.title }}</div>
-                <div class="xt-view-task-hover-author">— {{ item.author }} —</div>
-            </template>
+            <div slot="hover">
+              <div class="xt-view-task-hover-title">{{ item.title }}</div>
+              <div class="xt-view-task-hover-author">— {{ item.author }} —</div>
+            </div>
           </xt-hover>
+        </div>
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
       <div class="xt-swiper-pagination" slot="pagination"></div>
     </swiper>
+    <div v-viewer ref="viewer" v-show="false">
+      <img v-for="item in dataSource" :key="item.key" :src="item.src" />
+    </div>
   </a-card>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
+import Viewer from "viewerjs";
 import lodash from "lodash";
 @Component({
   components: {},
 })
 export default class PageView extends Vue {
+  get viewer(): Viewer {
+    return this.$refs.viewer["$viewer"];
+  }
   loading = true;
   swiperOption = {
     loop: true,
@@ -47,11 +56,7 @@ export default class PageView extends Vue {
       bulletElement: "li",
     },
     on: {
-      resize: () => {
-        // this.$refs.swiper.$swiper.changeDirection(
-        //   window.innerWidth <= 960 ? "vertical" : "horizontal"
-        // );
-      },
+      init: () => {},
     },
   };
   dataSource = [
@@ -91,6 +96,14 @@ export default class PageView extends Vue {
       author: "author",
     },
   ];
+  onViewer(index) {
+    this.viewer.view(index);
+    console.log(
+      "LENG: PageView -> onViewer -> this.viewer",
+      index,
+      this.viewer
+    );
+  }
   created() {
     lodash.delay(() => {
       this.loading = false;
