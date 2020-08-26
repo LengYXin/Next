@@ -1,13 +1,44 @@
 <template>
   <a-card :bordered="false" :loading="loading">
     <xt-dplayer :options="dplayer" />
-    <a-descriptions>
-      <a-descriptions-item>暄桐线上公开课</a-descriptions-item>
-      <a-descriptions-item>暄桐线上公开课</a-descriptions-item>
-      <a-descriptions-item>暄桐线上公开课</a-descriptions-item>
-      <a-descriptions-item>暄桐线上公开课</a-descriptions-item>
-      <a-descriptions-item>暄桐线上公开课</a-descriptions-item>
-      <a-descriptions-item>暄桐线上公开课</a-descriptions-item>
+    <a-descriptions class="xt-video-list">
+      <a-descriptions-item>
+        <a-badge
+          class="xt-video-item xt-font-family-FZLTHJW"
+          status="default"
+          text="暄桐线上公开课"
+        />
+      </a-descriptions-item>
+      <a-descriptions-item>
+        <a-badge
+          class="xt-video-item xt-font-family-FZLTHJW"
+          status="default"
+          text="如何上课和交作业"
+      /></a-descriptions-item>
+      <a-descriptions-item>
+        <a-badge
+          class="xt-video-item xt-font-family-FZLTHJW"
+          status="default"
+          text="暄桐线上公开课"
+      /></a-descriptions-item>
+      <a-descriptions-item>
+        <a-badge
+          class="xt-video-item xt-font-family-FZLTHJW"
+          status="default"
+          text="暄桐线上公开课"
+      /></a-descriptions-item>
+      <a-descriptions-item>
+        <a-badge
+          class="xt-video-item xt-font-family-FZLTHJW"
+          status="default"
+          text="ASK林曦 | 暄桐线上直播课的609天"
+      /></a-descriptions-item>
+      <a-descriptions-item>
+        <a-badge
+          class="xt-video-item xt-font-family-FZLTHJW"
+          status="default"
+          text="暄桐线上公开课"
+      /></a-descriptions-item>
     </a-descriptions>
   </a-card>
 </template>
@@ -40,5 +71,16 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" scoped>
+
+<style lang="less">
+.xt-video-list {
+  margin-top: 46px;
+}
+.xt-video-item {
+  .ant-badge-status-text {
+    color: #999899;
+    font-size: 16px;
+    line-height: 2.6;
+  }
+}
 </style>

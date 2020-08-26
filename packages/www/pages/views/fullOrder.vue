@@ -70,6 +70,7 @@
                 <div>
                   <span
                     class="xt-font-size-xx xt-font-bold"
+                    :class="'xt-text-' + item.color"
                     v-money="item.price"
                   ></span>
                   <span class="xt-font-size-md">
@@ -222,9 +223,6 @@ export default class PageView extends Vue {
   }
   &-box {
     margin-left: 40px;
-    div {
-      // border: 1px solid red;
-    }
   }
   &-warp {
     display: flex;
@@ -241,6 +239,11 @@ export default class PageView extends Vue {
       color: #ffffff;
       background-color: #e9e7e7;
       border: none;
+      &:hover {
+        color: #ffffff;
+        background-color: #e9e7e7;
+        border: none;
+      }
     }
   }
 }

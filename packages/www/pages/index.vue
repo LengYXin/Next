@@ -10,11 +10,11 @@
     <div class="xt-swiper">
       <swiper :options="swiperOptions" ref="mySwiper">
         <swiper-slide v-for="img in PageStore.Banners" :key="img.id">
-          <img :src="img.pictureUri" style="width:100%;" />
+          <img :src="img.pictureUri" style="width: 100%;" />
         </swiper-slide>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
         <div class="swiper-pagination" slot="pagination"></div>
-        <!-- <div class="swiper-button-prev" slot="button-prev"></div> -->
-        <!-- <div class="swiper-button-next" slot="button-next"></div> -->
       </swiper>
     </div>
     <xt-template v-for="item in templates" :key="item.template" v-bind="item">
@@ -67,6 +67,7 @@ export default class PageIndex extends Vue {
     autoplay: true,
     // allowTouchMove: false,
     autoHeight: true,
+    direction: "horizontal",
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
@@ -156,5 +157,20 @@ export default class PageIndex extends Vue {
   destroyed() {}
 }
 </script>
+<style lang="less">
+.swiper-pagination {
+  &-bullet-active {
+    background-color: #ffffff;
+  }
+}
+</style>
 <style lang="less" scoped>
+.swiper-button {
+  &-prev {
+    color: #ffffff;
+  }
+  &-next {
+    color: #ffffff;
+  }
+}
 </style>

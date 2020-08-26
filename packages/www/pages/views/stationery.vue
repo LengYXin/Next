@@ -6,7 +6,7 @@
       alt="example"
       v-lazy="'https://cr-uat.xuantong.cn/iconimg/Four_stores.png'"
     />
-    <a-row :gutter="16">
+    <a-row :gutter="16" class="xt-view-stationery-warp">
       <a-col v-bind="colProps" v-for="item in dataSource" :key="item.key">
         <a-card hoverable class="xt-view-stationery-card">
           <img slot="cover" alt="example" v-lazy="item.src" />
@@ -25,33 +25,32 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
 import lodash from "lodash";
-@Component({
-})
+@Component({})
 export default class PageView extends Vue {
   loading = true;
   colProps = { lg: 6 };
   dataSource = [
     {
       key: 1,
-      src: "https://cr-uat.xuantong.cn/iconimg/Four_stores.png",
+      src: "https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/thumbPath/653765e4ccc6fe11f3eeb41483e98863.jpg?Expires=1886065235&OSSAccessKeyId=LTAI4FoTa7tgoQpv1j3SU8zZ&Signature=e0ULPboXaLrA6U6Hgk%2F7fkb5XC8%3D",
       title: "暄桐教室",
       description: "description",
     },
     {
       key: 2,
-      src: "https://cr-uat.xuantong.cn/iconimg/Four_stores.png",
+      src: "https://oss-free.xuantong.cn/thumbPath/b67081a30af227494bffe5c4e52aee1e.jpg",
       title: "暄桐教室",
       description: "description",
     },
     {
       key: 3,
-      src: "https://cr-uat.xuantong.cn/iconimg/Four_stores.png",
+      src: "https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/thumbPath/40390738534d5e9e54f91de9ec75b796.jpg?Expires=1886065446&OSSAccessKeyId=LTAI4FoTa7tgoQpv1j3SU8zZ&Signature=4FPTvxeoDGPlGQPbMhFFRY%2FhOT8%3D",
       title: "暄桐教室",
       description: "description",
     },
     {
       key: 4,
-      src: "https://cr-uat.xuantong.cn/iconimg/Four_stores.png",
+      src: "https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/thumbPath/4ccefa0ab4d3302d4e983c6ed59e95be.jpg?Expires=1886066808&OSSAccessKeyId=LTAI4FoTa7tgoQpv1j3SU8zZ&Signature=bvv0L8HWkRVaXylE%2B38jqi%2FIAJM%3D",
       title: "暄桐教室",
       description: "description",
     },
@@ -68,12 +67,16 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" scoped>
 .xt-view-stationery {
+  margin-top: 60px;
+  &-warp {
+    margin-top: 27px;
+  }
   &-cover {
     max-height: 310px;
   }
   &-card {
     height: 230px;
-    img{
+    img {
       height: 230px;
     }
   }
