@@ -84,6 +84,7 @@ export default class extends Vue {
     position: relative;
     text-align: justify;
     word-break: break-all;
+    line-height: 26px;
   }
   &-author {
     position: relative;
@@ -101,6 +102,8 @@ export default class extends Vue {
   &-content {
     p {
       margin: auto;
+      line-height: 26px;
+      max-height: 26px;
     }
   }
   .ant-comment-content-author {

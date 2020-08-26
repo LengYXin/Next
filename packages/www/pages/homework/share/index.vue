@@ -18,7 +18,7 @@ import lodash from "lodash";
   // 每次进入页面都会调用
   async fetch(ctx: Context) {
     // await ctx.store.$storeStationery.onGetTypelist();
-    ctx.store.$menu.setBreadcrumb({ linksName: "作业分享" });
+    ctx.store.$menu.setBreadcrumb({ linksName: "作业分享" },true);
   },
   components: {},
 })
