@@ -20,7 +20,7 @@
     </a-tabs>
   </a-affix>-->
   <!-- 非固定模式 -->
-  <a-tabs :activeKey="activeKey" @change="tabsChange" :class="themeClass">
+  <a-tabs :activeKey="String(activeKey)" @change="tabsChange" :class="themeClass">
     <a-tab-pane v-for="tab in tabPane" :key="String(tab.key)">
       <span slot="tab">
         <span v-t="tab.title"></span>
@@ -91,7 +91,9 @@ export default class extends Vue {
   emitTabsChange() {
     return this.activeKey;
   }
-  mounted() {}
+  mounted() {
+    console.log("LENG: mounted -> this", this)
+  }
   updated() {}
   destroyed() {}
 }
