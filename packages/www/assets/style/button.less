@@ -5,6 +5,7 @@
   &.xt-btn-ghost {
     background-color: transparent;
   }
+
   &.ant-btn-link:hover,
   &.ant-btn-link:focus {
     color: @link-hover-color;
@@ -14,18 +15,19 @@
 }
 
 .ant-btn-yellow {
-  .button-variant-primary(@white, @xt-yellow-6);
-  border-style: dashed;
+  &.ant-btn {
+    .button-variant-primary(@white, @xt-yellow-6);
+    border-style: dashed;
+    &:hover,
+    &:focus {
+      color: @xt-yellow-5;
+      background-color: transparent;
+    }
+  }
   &.xt-btn-ghost {
-    background-color: transparent;
     color: @xt-yellow-6;
     border-style: solid;
-  }
-  &:hover,
-  &:focus {
-    color: @xt-gray-2;
     background-color: transparent;
-    border-color: transparent;
   }
 }
 
@@ -34,6 +36,7 @@
     .button-variant-primary(@xt-gray-6, transparent);
     box-shadow: none;
     border-style: dashed;
+
     &:hover,
     &:focus {
       color: @xt-gray-2;
@@ -54,6 +57,7 @@
     .button-variant-primary(@xt-green-6, transparent);
     box-shadow: none;
     border-style: dashed;
+
     &:hover,
     &:focus {
       color: @xt-green-2;
@@ -61,6 +65,7 @@
       border-color: transparent;
     }
   }
+
   &.xt-btn-ghost {
     color: @xt-green-6;
     background-color: transparent;
