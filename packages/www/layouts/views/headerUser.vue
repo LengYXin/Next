@@ -1,6 +1,6 @@
 <template>
   <div class="xt-header-user">
-    <a-space :size="12">
+    <a-space :size="10">
       <a-dropdown v-if="!production">
         <a class="ant-dropdown-link xt-header-user-item">
           <span v-text="$locale.locale"></span>
