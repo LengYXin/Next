@@ -26,16 +26,20 @@
       />
     </a-popover>
   </span>
-  <a-space :size="12" v-else>
-    <span
+  <a-space :size="0" v-else>
+    <a-button
+      size="small"
+      type="link"
       @click="onVisible(true, locale.links_signin)"
       v-t="locale.links_signin"
-      >登录</span
+      >登录</a-button
     >
-    <span
+    <a-button
+      size="small"
+      type="link"
       @click="onVisible(true, locale.links_register)"
       v-t="locale.links_register"
-      >注册</span
+      >注册</a-button
     >
     <!-- :title="$t(title||'links_signin')" -->
     <a-modal

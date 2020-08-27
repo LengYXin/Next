@@ -8,13 +8,12 @@
 <template>
   <div class="xt-content xt-stationery">
     <div class="xt-stationery-search-box">
-      <a-space
+      <div
         class="xt-stationery-head-title xt-font-family-FZLTHJW xt-font-size-lg xt-text-golden"
-        :size="size"
       >
         <a-icon type="shopping-cart" />
         <span>喧桐文房</span>
-      </a-space>
+      </div>
       <a-input-search
         placeholder="查找我想要的"
         style="width: 200px;"
@@ -66,6 +65,7 @@ export default class PageView extends Vue {
     this.Pagination.onReset();
     this.activeKey = activeKey;
   }
+  onSearch() {}
   /**
    *  初始化 和 页码 更改调用
    */

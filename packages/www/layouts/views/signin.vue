@@ -164,7 +164,7 @@ export default class extends Vue {
     }
   }
   &-form {
-    padding: @s-pd @l-pd;
+    padding: @s-pd @l-pd!important;
     background-color: #ffffff;
   }
 }

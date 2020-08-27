@@ -15,13 +15,18 @@
 
 .ant-btn-yellow {
   .button-variant-primary(@white, @xt-yellow-6);
-
+  border-style: dashed;
   &.xt-btn-ghost {
     background-color: transparent;
     color: @xt-yellow-6;
     border-style: solid;
   }
-  border-style: dashed;
+  &:hover,
+  &:focus {
+    color: @xt-gray-2;
+    background-color: transparent;
+    border-color: transparent;
+  }
 }
 
 .ant-btn-gray {
