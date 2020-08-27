@@ -119,7 +119,7 @@ export default class extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" >
+<style lang="less">
 @s-pd: 40px;
 @l-pd: 80px;
 @checkbox: ant-checkbox;
@@ -150,7 +150,7 @@ export default class extends Vue {
   &-logo {
     max-width: 100%;
   }
-  &-qrcode {
+  &-qrcode.ant-col {
     height: 100%;
     padding: @s-pd 0;
     &-img {
@@ -163,10 +163,10 @@ export default class extends Vue {
       margin-top: 10px;
     }
   }
-  &-form {
-    padding: @s-pd @l-pd;
-    background-color: #ffffff;
-  }
+}
+.xt-signin-form.ant-col {
+  padding: @s-pd @l-pd;
+  background-color: #ffffff;
 }
 </style>
 
