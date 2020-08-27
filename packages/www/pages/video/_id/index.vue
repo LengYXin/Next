@@ -1,16 +1,22 @@
 <template>
-  <div class="xt-content">
+  <div class="xt-content xt-videoid">
     <div>
       <h1 v-text="PageStore.dataSource.title"></h1>
       <VeView :item="PageStore.dataSource" />
       <VeLike :item="PageStore.dataSource" />
     </div>
-    <xt-dplayer :options="options" />
-    <a-row>
+    <xt-dplayer :options="options" @playing="onPlaying" />
+
+    <a-row class="xt-videoid-row" :gutter="16">
       <a-col :span="16">
+        <h1>视频介绍</h1>
+        <div class="xt-ellipsis xt-videoid-summary" v-text="PageStore.dataSource.summary"></div>
         <VeComment />
       </a-col>
-      <a-col :span="8"></a-col>
+      <a-col :span="8">
+        <h1>其他分享</h1>
+        <VeRecommend />
+      </a-col>
     </a-row>
   </div>
 </template>
@@ -21,6 +27,7 @@ import lodash from "lodash";
 import VeLike from "../views/like.vue";
 import VeView from "../views/view.vue";
 import VeComment from "./views/comment.vue";
+import VeRecommend from "./views/recommend.vue";
 @Component({
   async fetch(ctx: Context) {
     const store = ctx.store.$storeVideo.Details;
@@ -29,7 +36,7 @@ import VeComment from "./views/comment.vue";
   validate({ params }) {
     return /^\d+$/.test(params.id);
   },
-  components: { VeLike, VeView, VeComment },
+  components: { VeLike, VeView, VeComment, VeRecommend },
 })
 export default class PageView extends Vue {
   @Provide("VideoStore")
@@ -51,6 +58,9 @@ export default class PageView extends Vue {
   onLike() {
     console.log("onLike");
   }
+  onPlaying() {
+    console.log("aaa");
+  }
   created() {
     this.$setBreadcrumb({ linksName: this.PageStore.dataSource.title }, true);
   }
@@ -63,7 +73,13 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" scoped>
-.xt-content {
+.xt-videoid {
   padding-bottom: @padding-lg;
+  &-row {
+    padding-top: @padding-lg;
+  }
+  &-summary {
+    padding-bottom: @padding-lg;
+  }
 }
 </style>

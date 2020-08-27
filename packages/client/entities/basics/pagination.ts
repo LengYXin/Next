@@ -5,7 +5,7 @@
  * @modify date 2020-08-05 14:16:43
  * @desc [description]
  */
-import lodash, { ListIteratee } from 'lodash';
+import lodash from 'lodash';
 import { BindAll } from 'lodash-decorators';
 import { action, observable, computed, toJS } from 'mobx';
 import { AjaxRequest } from 'rxjs/ajax';
@@ -305,7 +305,7 @@ export class Pagination<T> {
      * 获取 lodash Predicate 参数
      * @param key 
      */
-    getPredicate(key: string | T): ListIteratee<any> {
+    getPredicate(key: string | T): any {
         if (lodash.isObject(key)) {
             return [this.key, lodash.get(key, this.key)]
         }

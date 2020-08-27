@@ -9,6 +9,7 @@
 import { Context } from "@nuxt/types";
 import "~/components/index";
 import "./icon";
+import "./usePlugins/alife-logger";
 import "./usePlugins/ant";
 import i18n from "./usePlugins/i18n";
 import "./usePlugins/lazyload";

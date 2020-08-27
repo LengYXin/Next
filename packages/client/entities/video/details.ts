@@ -34,5 +34,6 @@ export class VideoDetails extends EntitiesBasics<IVideoDetails> {
       ]
     })
   }
+  
 }
 export default VideoDetails;

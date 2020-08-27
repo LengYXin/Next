@@ -19,16 +19,20 @@ import face from "./face/index.vue";
 import comment from "./comment/index.vue";
 import action from "./comment/action.vue";
 import shadow from "./shadow/index.vue";
+import qrcode from "./qrcode/index.vue";
+import imgCode from "./imgCode/index.vue";
 // 视频
 Vue.component('xt-dplayer', () => import('./dplayer/index.vue'));
 // 富文本
 Vue.component('xt-editor', () => import('./editor/index.vue'));
-// 二维码
-Vue.component('xt-qrcode', () => import('./qrcode/index.vue'));
-// 图片验证
-Vue.component('xt-img-code', () => import('./imgCode/index.vue'));
 // 图片裁剪
 Vue.component('xt-img-cropper', () => import('./imgCropper/index.vue'));
+
+
+// 图片验证
+Vue.component('xt-img-code', imgCode);
+// 二维码
+Vue.component('xt-qrcode', qrcode);
 // Vue.component('xt-cat', () => import('./cat/index.vue'));
 // 分页
 Vue.component('xt-pagination', pagination);

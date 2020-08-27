@@ -8,7 +8,7 @@
     "packages/www"
   ],
   "scripts": {
-    "dev:www": "cd packages/www && npm start",
+    "dev:www": "cd packages/www && cross-env DEPLOY_ENV=dev npm start",
     "dev:h5": "cd packages/weapp && npm run dev:h5",
     "dev:weapp": "cd packages/weapp && npm run dev:weapp",
     "build:www": "cd packages/www && cross-env DEPLOY_ENV=uat npm run generate",
@@ -23,9 +23,37 @@
     "publish": "lerna publish --skip-npm",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "alife-logger": "^1.8.20",
+    "core-js": "^3.6.5",
+    "crypto-js": "^4.0.0",
+    "lodash": "^4.17.20",
+    "lodash-decorators": "^6.0.1",
+    "mobx": "^5.15.6",
+    "mobx-persist": "^0.4.1",
+    "mobx-react": "^6.2.5",
+    "mobx-vue": "^2.0.10",
+    "moment": "^2.27.0",
+    "qrcode": "^1.4.4",
+    "rxjs": "^6.6.2"
+  },
   "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@types/crypto-js": "^3.1.47",
+    "@types/lodash": "^4.14.160",
+    "babel-jest": "^26.3.0",
+    "babel-plugin-import": "^1.13.0",
+    "babel-plugin-lodash": "^3.3.4",
+    "cross-env": "^7.0.2",
+    "jest": "^26.4.2",
     "lerna": "^3.22.1",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.0",
+    "moment-locales-webpack-plugin": "^1.2.0",
     "rimraf": "^3.0.2",
+    "ts-jest": "^26.3.0",
+    "ts-loader": "^8.0.3",
+    "typescript": "~3.9.7",
     "webpack-bundle-analyzer": "^3.8.0"
   }
 }

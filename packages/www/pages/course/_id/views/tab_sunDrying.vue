@@ -6,7 +6,7 @@
  * @desc 晒作业
  */
 <template>
-  <div class="xt-content-small xt-course-sunDrying">
+  <div v-if="UserStore.loggedIn" class="xt-content-small xt-course-sunDrying">
     <xt-editor @submit="onSubmit" :rules="{required:true,max:2000}" buttonText="晒作业"></xt-editor>
     <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
       <template slot="actions">
@@ -31,6 +31,7 @@
     </xt-comment>
     <xt-infinite-loading :identifier="Pagination.onlyKey" @loading="onLoading" />
   </div>
+  <a-empty v-else :image="$images.logo" description="报名后，可以浏览晒作业栏哦~~" />
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
@@ -42,6 +43,9 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class PageView extends Vue {
+  get UserStore() {
+    return this.$store.$storeUser;
+  }
   get PageStore() {
     return this.$store.$storeHomework;
   }
@@ -87,7 +91,10 @@ export default class PageView extends Vue {
     }
   }
   created() {
-    this.Pagination.onReset();
+    try {
+      this.$InspectUser();
+      this.Pagination.onReset();
+    } catch (error) {}
   }
   mounted() {}
   updated() {}
@@ -95,8 +102,8 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" >
-.xt-course-sunDrying{
-  .xt-ellipsis .xt-ellipsis-btn{
+.xt-course-sunDrying {
+  .xt-ellipsis .xt-ellipsis-btn {
     background: #f8f3ee !important;
   }
 }

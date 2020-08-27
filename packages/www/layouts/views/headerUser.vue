@@ -1,12 +1,5 @@
 <template>
   <a-space size="20" class="xt-header-user" align="end">
-    <a-space :size="20">
-      <a-button type="primary">Primary</a-button>
-      <a-button>Default</a-button>
-      <a-button type="dashed">Dashed</a-button>
-      <a-button type="link">Link</a-button>
-    </a-space>
-
     <a-dropdown v-if="!production">
       <a class="ant-dropdown-link xt-header-user-item">
         <span v-text="$locale.locale"></span>

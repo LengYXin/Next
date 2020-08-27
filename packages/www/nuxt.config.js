@@ -6,11 +6,12 @@ const lodash = require('lodash');
 const target = {
   pro: 'https://cr-api-uat.xuantong.cn',
   uat: 'https://cr-api-uat.xuantong.cn',
+  dev: 'https://dev-api.xuantong.cn'
 }
 // api 地址
 const env = {
   // api 地址
-  target: lodash.get(target, process.env.DEPLOY_ENV, 'https://dev-api.xuantong.cn'),// 'https://dev-api.xuantong.cn'),
+  target: lodash.get(target, process.env.DEPLOY_ENV, target.dev),
   // 版本号
   version: `${process.env.npm_package_version} ${moment().format("YYYY-MM-DD HH:mm")}`,
   // 环境 uat pro
@@ -70,7 +71,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'ant-design-vue/dist/antd.less',
+    // 'ant-design-vue/dist/antd.less',
     'quill/dist/quill.snow.css',
     'swiper/css/swiper.css',
     '@/assets/style/index.less'
@@ -107,7 +108,6 @@ module.exports = {
   components: false,
   env,
   proxy,
-
   generate,
   /*
   ** Build configuration

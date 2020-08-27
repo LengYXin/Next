@@ -198,6 +198,9 @@ export default {
       else if (range && !oldRange) this.$emit("focus", this.quill);
     },
     handleTextChange(delta, oldContents) {
+      if (!this.quill) {
+        return
+      }
       let editorContent =
         this.quill.getHTML() === "<p><br></p>" ? "" : this.quill.getHTML();
       this.$emit("input", editorContent);
@@ -253,7 +256,10 @@ export default {
 .ql-snow .ql-thin {
   stroke-width: 1px !important;
 }
+.quillWrapper{
+  animation: antFadeIn 0.3s;
 
+}
 .quillWrapper .ql-snow.ql-toolbar {
   // padding-top: 8px;
   // padding-bottom: 4px;
@@ -371,5 +377,9 @@ button.ql-active svg {
   display: flex;
   align-items: center;
   flex-flow: row wrap;
+}
+.quillWrapper .ql-editor.ql-blank::before {
+  color: rgba(0,0,0,0.3);
+  font-style: normal;
 }
 </style>

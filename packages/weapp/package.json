@@ -42,24 +42,14 @@
     "@tarojs/react": "3.0.8",
     "@tarojs/runtime": "3.0.8",
     "@tarojs/taro": "3.0.8",
-    "crypto-js": "^4.0.0",
-    "lodash": "^4.17.20",
-    "lodash-decorators": "^6.0.1",
-    "mobx": "^5.15.6",
-    "mobx-react": "^6.2.5",
-    "qrcode": "^1.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "rxjs": "^6.6.2",
     "taro-ui": "3.0.0-alpha.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.4",
     "@tarojs/cli": "^3.0.8",
     "@tarojs/mini-runner": "3.0.8",
     "@tarojs/webpack-runner": "3.0.8",
-    "@types/crypto-js": "^3.1.47",
-    "@types/lodash": "^4.14.160",
     "@types/react": "^16.9.47",
     "@types/webpack-env": "^1.15.2",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
@@ -71,7 +61,6 @@
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
     "stylelint": "13.6.1",
-    "typescript": "~3.9.7",
     "vconsole-webpack-plugin": "^1.5.2"
   }
 }

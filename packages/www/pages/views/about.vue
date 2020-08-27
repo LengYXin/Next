@@ -2,7 +2,7 @@
   <a-card :bordered="false" :loading="loading">
     <a-row :gutter="16">
       <a-col v-bind="colProps" v-for="item in dataSource" :key="item.key">
-        <a-card hoverable :bordered="false">
+        <a-card hoverable :bordered="false" class="hvr-grow-shadow">
           <img slot="cover" alt="example" v-lazy="item.src" />
           <a-card-meta>
             <template slot="title">

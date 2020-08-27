@@ -1,14 +1,13 @@
 @import "./nprogress.less";
 @import "./text.less";
-@import "./tabs.less";
-@import "./pagination.less";
-@import "./badge.less";
+@import "./atn-replenish.less";
 @import "./button.less";
 @import "./scrollbar.less";
 @import "./flex.less";
 @import "./swiper.less";
 @import "./font.less";
 @import "./background.less";
+@import "./hover/hover.less";
 
 html {
   // user-select: none;
@@ -67,13 +66,13 @@ img {
     box-shadow: @box-shadow-base;
   }
 }
-
-// .ant-input {
-//   &:hover {
-//     border-color: @xt-yellow-6;
-//   }
-//   &:focus {
-//     border-color: @xt-yellow-6;
-//     box-shadow: 0 0 0 2px @xt-yellow-2;
-//   }
-// }
+// 悬浮放大
+.xt-hoverscale {
+  transition: all 0.3s;
+  cursor: pointer;
+  &:hover {
+    position: relative;
+    z-index: 1;
+    transform: scale(1.08);
+  }
+}

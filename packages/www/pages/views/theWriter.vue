@@ -16,23 +16,23 @@
           </a-col>
           <a-col :span="13">
             <img
-              class="xt-view-theWriter-cover"
+              class="xt-view-theWriter-cover hvr-grow-shadow"
               alt="example"
               v-lazy="'https://oss-free.xuantong.cn/picturePath/dc4e7ca6ddf67eb508d791346290cc36.jpg'"
           /></a-col>
         </a-row>
       </a-col>
       <a-col v-bind="colProps">
-        <a-card v-viewer class="xt-view-theWriter-card" :bordered="false">
+        <a-card  class="xt-view-theWriter-card" :bordered="false">
           <a-card-grid
             :hoverable="false"
-            class="xt-view-theWriter-card-grid"
+            class="xt-view-theWriter-card-grid "
             v-for="item in dataSource"
             :key="item.key"
           >
             <!-- <a href=""> -->
             <img
-              class="xt-view-theWriter-card-img"
+              class="xt-view-theWriter-card-img hvr-grow-shadow"
               alt="example"
               v-lazy="item.src"
             />

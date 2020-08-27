@@ -1,14 +1,14 @@
 <template>
   <a-card class="xt-view-stationery" :bordered="false" :loading="loading">
     <img
-      class="xt-view-stationery-cover"
+      class="xt-view-stationery-cover hvr-grow-shadow"
       slot="cover"
       alt="example"
       v-lazy="'https://cr-uat.xuantong.cn/iconimg/Four_stores.png'"
     />
     <a-row :gutter="16" class="xt-view-stationery-warp">
       <a-col v-bind="colProps" v-for="item in dataSource" :key="item.key">
-        <a-card hoverable class="xt-view-stationery-card">
+        <a-card hoverable class="xt-view-stationery-card hvr-grow-shadow">
           <img slot="cover" alt="example" v-lazy="item.src" />
           <!-- <a-card-meta :title="item.title">
             <template slot="description">

@@ -1,13 +1,12 @@
 <template>
   <div class="xt-cid-header">
-    
-    <a-row>
-      <a-col :span="12">
-        <h1 class="xt-title-h3 xt-flex-center">
+    <h1 class="xt-title-h3 xt-flex-center">
       <a-tag class="xt-bg-yellow xt-cid-header-tag xt-font-size-md">直播课</a-tag>
       <span v-text="dataSource.courseName"></span>
       <!-- <a-button type="link" @click="onText">更改名称</a-button> -->
     </h1>
+    <a-row>
+      <a-col :span="12">
         <h2 class="xt-text-yellow xt-title-h6">
           <span v-text="dataSource.courseSubtitle"></span>
         </h2>

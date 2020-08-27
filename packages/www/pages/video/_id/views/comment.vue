@@ -1,9 +1,15 @@
 <template>
   <div>
+    <xt-editor
+      class="xt-editor-upload-hide"
+      @submit="onSubmit"
+      :rules="{required:true,max:2000}"
+      buttonText="发布评论"
+    ></xt-editor>
     <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
       <template slot="actions">
         <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
-        <xt-action title="回复" />
+        <xt-action @click="onReply(item)" title="回复" />
       </template>
       <template slot="overlay">
         <a-menu>
@@ -18,7 +24,13 @@
           </a-menu-item>
         </a-menu>
       </template>
-      <!-- <xt-editor /> -->
+      <xt-editor
+        @submit="onSubmit($event,item)"
+        v-if="eqReply(item)"
+        class="xt-editor-single"
+        placeholder="回复xxx"
+        buttonText="回复"
+      />
     </xt-comment>
     <xt-pagination :Pagination="Pagination" @change="onCurrentChange" />
   </div>
@@ -39,28 +51,72 @@ export default class PageView extends Vue {
   get Pagination() {
     return this.PageStore.PaginationComment;
   }
+  get id() {
+    return this.$route.params.id;
+  }
+  // 回复
+  reply = null;
   getComment(item) {
     return {
       content: item.content,
       avatar: item.userHeader,
       author: item.userNickname,
       time: item.createTime,
+      toUserName: item.toUserNickname,
     };
+  }
+  /**
+   * 是否回复
+   */
+  eqReply(data) {
+    return lodash.eq(this.reply, data.id);
   }
   /**
    *  初始化 和 页码 更改调用
    */
-  onCurrentChange(current, options) {
+  onCurrentChange(current) {
     this.Pagination.onCurrentChange(current, {
       videoShareId: this.$route.params.id,
     });
   }
+  /**
+   * 点赞
+   */
   onLikes(data) {
     try {
       this.$InspectUser();
       this.Pagination.onLikes(data);
     } catch (error) {
       this.$message.warning({ content: error, key: "onLikes" });
+    }
+  }
+  /**
+   * 回复
+   */
+  onReply(data) {
+    if (this.eqReply(data)) {
+      return (this.reply = null);
+    }
+    this.reply = data.id;
+  }
+  async onSubmit(event, data) {
+    try {
+      this.$InspectUser();
+      await this.Pagination.onInstall({
+        videoShareId: this.id,
+        content: event.html,
+        contentLength: event.length,
+        userType: 1,
+        toCommentId: data?.id || 0,
+        toUserId: data?.userId,
+        toUserNickname: data?.userNickname,
+      });
+      event.onReset();
+      this.reply = null;
+      this.onCurrentChange(1);
+    } catch (error) {
+      console.log("LENG: PageView -> onSubmit -> error", error);
+      // this.$message.error(error);
     }
   }
   created() {
