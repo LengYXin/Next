@@ -149,6 +149,9 @@ export default class extends Vue {
 }
 </script>
 <style lang="less">
+.xt-pagination-center {
+  text-align: center;
+}
 .ant-pagination {
   &-prev,
   &-next {
