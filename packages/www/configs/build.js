@@ -126,11 +126,11 @@ module.exports = {
     babel: {
         plugins: [
             'lodash',
-            // ['import', {
-            //   libraryName: 'ant-design-vue',
-            //   libraryDirectory: 'es',
-            //   style: 'less'
-            // }],
+            ['import', {
+              libraryName: 'ant-design-vue',
+              libraryDirectory: 'lib',
+              style: (name) => `${name}/style/index.js`
+            }],
             // ['import', {
             //   libraryName: 'lodash',
             //   libraryDirectory: '',
