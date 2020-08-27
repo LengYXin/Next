@@ -14,6 +14,10 @@ export class VideoDetails extends EntitiesBasics<IVideoDetails> {
       url: EnumApiVideo.VideoDetail
     })
   }
+  /**
+   * 加载视频详情
+   * @param videoShareId 
+   */
   async onLoading(videoShareId) {
     await super.onLoading({ videoShareId });
     const urls = await this.$ajax.post<any>(EnumApiCurrency.UtilityUrl, { key: this.dataSource.videoUrl })
@@ -34,6 +38,12 @@ export class VideoDetails extends EntitiesBasics<IVideoDetails> {
       ]
     })
   }
-  
+  /**
+   * 添加视频播放量
+   * @param videoShareId 
+   */
+  async onPlayNumber(videoShareId) {
+    return this.$ajax.post(EnumApiVideo.VideoPlayNumber, { videoShareId })
+  }
 }
 export default VideoDetails;

@@ -18,6 +18,8 @@ export enum EnumApiVideo {
     VideoCommentPraise = '/coursefree/comment/praise',
     /** 推荐列表 */
     VideoRecommend = '/coursefree/recommendlist',
+    /** 添加播放量 */
+    VideoPlayNumber = '/coursefree/playNumber',
     /** 课程详情 */
     // CourseDetails = '/course/singledetail',
 }

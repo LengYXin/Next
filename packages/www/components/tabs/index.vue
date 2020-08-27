@@ -92,7 +92,7 @@ export default class extends Vue {
     return this.activeKey;
   }
   mounted() {
-    console.log("LENG: mounted -> this", this)
+    console.log("LENG: mounted -> this", this);
   }
   updated() {}
   destroyed() {}
@@ -101,99 +101,100 @@ export default class extends Vue {
 <style lang="less">
 @xt-tab-cls: ~"xt-tabs";
 @circle-padding: 20px;
-
-.@{xt-tab-cls} {
-  &-center,
-  .ant-tabs {
-    text-align: center;
-  }
-
-  &-left,
-  .ant-tabs {
-    text-align: left;
-  }
-
-  &-right,
-  .ant-tabs {
-    text-align: right;
-  }
-
-  // 无边框
-  &-not {
-    color: @xt-grey-6;
-    .ant-tabs-nav-container {
-      font-size: @font-size-md;
-    }
-    .ant-tabs-bar {
-      border: none;
+.ant-tabs {
+  &.@{xt-tab-cls} {
+    &-center,
+    .ant-tabs {
+      text-align: center;
     }
 
-    .ant-tabs-ink-bar {
-      opacity: 0;
+    &-left,
+    .ant-tabs {
+      text-align: left;
     }
 
-    .ant-tabs-nav .ant-tabs-tab {
-      margin: 0;
-      padding-right: 0;
+    &-right,
+    .ant-tabs {
+      text-align: right;
     }
-  }
 
-  // 黑色
-  &-black {
-    .ant-tabs-nav-container {
-      font-size: @font-size-lg;
-    }
-    .ant-tabs-tab {
-      &:hover {
-        color: @black;
+    // 无边框
+    &-not {
+      color: @xt-grey-6;
+      .ant-tabs-nav-container {
+        font-size: @font-size-md;
+      }
+      .ant-tabs-bar {
+        border: none;
       }
 
-      &:active {
-        color: @black;
+      .ant-tabs-ink-bar {
+        opacity: 0;
       }
 
-      &-active {
-        color: @black;
-        font-weight: 500;
+      .ant-tabs-nav .ant-tabs-tab {
+        margin: 0;
+        padding-right: 0;
       }
     }
 
-    .ant-tabs-ink-bar {
-      background-color: @black;
+    // 黑色
+    &-black {
+      .ant-tabs-nav-container {
+        font-size: @font-size-lg;
+      }
+      .ant-tabs-tab {
+        &:hover {
+          color: @black;
+        }
+
+        &:active {
+          color: @black;
+        }
+
+        &-active {
+          color: @black;
+          font-weight: 500;
+        }
+      }
+
+      .ant-tabs-ink-bar {
+        background-color: @black;
+      }
     }
-  }
 
-  // 圆的
-  &-circle {
-    padding-bottom: @circle-padding;
-    overflow: hidden;
+    // 圆的
+    &-circle {
+      padding-bottom: @circle-padding;
+      overflow: hidden;
 
-    .ant-tabs-bar {
-      margin: 0px;
-      padding-bottom: @circle-padding / 2;
-    }
+      .ant-tabs-bar {
+        margin: 0px;
+        padding-bottom: @circle-padding / 2;
+      }
 
-    .ant-tabs-nav-wrap,
-    .ant-tabs-nav-container,
-    .ant-tabs-nav-scroll {
-      // overflow-y: visible;
-      overflow: initial;
-    }
+      .ant-tabs-nav-wrap,
+      .ant-tabs-nav-container,
+      .ant-tabs-nav-scroll {
+        // overflow-y: visible;
+        overflow: initial;
+      }
 
-    .ant-tabs-ink-bar {
-      background-color: transparent;
+      .ant-tabs-ink-bar {
+        background-color: transparent;
 
-      &::after {
-        content: " ";
-        display: block;
-        border-radius: 100%;
-        height: @circle-padding;
-        width: @circle-padding !important;
-        border: 4px solid #fff;
-        box-shadow: 0 7px 7px 2px rgba(14, 5, 10, 0.05);
-        margin: auto;
-        background-color: @xt-yellow-6;
-        // transform: translateY(@circle-padding/2);
+        &::after {
+          content: " ";
+          display: block;
+          border-radius: 100%;
+          height: @circle-padding;
+          width: @circle-padding !important;
+          border: 4px solid #fff;
+          box-shadow: 0 7px 7px 2px rgba(14, 5, 10, 0.05);
+          margin: auto;
+          background-color: @xt-yellow-6;
+          // transform: translateY(@circle-padding/2);
+        }
       }
     }
   }
