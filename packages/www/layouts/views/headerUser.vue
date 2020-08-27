@@ -1,29 +1,31 @@
 <template>
-  <a-space size="20" class="xt-header-user" align="end">
-    <a-dropdown v-if="!production">
-      <a class="ant-dropdown-link xt-header-user-item">
-        <span v-text="$locale.locale"></span>
-        <a-icon type="down" />
-      </a>
-      <a-menu class="xt-header-user-item" slot="overlay">
-        <a-menu-item>
-          <a href="javascript:;" @click="onLocaleChange('zh')">中文</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;" @click="onLocaleChange('en')">英文</a>
-        </a-menu-item>
-      </a-menu>
-    </a-dropdown>
-    <nuxt-link to="/search">
-      <a-icon class="xt-header-user-item" type="search" />
-    </nuxt-link>
-    <nuxt-link to="/my/letter">
-      <a-badge class="xt-header-user-item" dot>
-        <a-icon type="bell" />
-      </a-badge>
-    </nuxt-link>
-    <userModal />
-  </a-space>
+  <div class="xt-header-user">
+    <a-space :size="12">
+      <a-dropdown v-if="!production">
+        <a class="ant-dropdown-link xt-header-user-item">
+          <span v-text="$locale.locale"></span>
+          <a-icon type="down" />
+        </a>
+        <a-menu class="xt-header-user-item" slot="overlay">
+          <a-menu-item>
+            <a href="javascript:;" @click="onLocaleChange('zh')">中文</a>
+          </a-menu-item>
+          <a-menu-item>
+            <a href="javascript:;" @click="onLocaleChange('en')">英文</a>
+          </a-menu-item>
+        </a-menu>
+      </a-dropdown>
+      <nuxt-link to="/search">
+        <a-icon class="xt-header-user-item" type="search" />
+      </nuxt-link>
+      <nuxt-link to="/my/letter">
+        <a-badge class="xt-header-user-item" dot>
+          <a-icon type="bell" />
+        </a-badge>
+      </nuxt-link>
+      <userModal />
+    </a-space>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";

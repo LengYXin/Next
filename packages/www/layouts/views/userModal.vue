@@ -26,7 +26,7 @@
       />
     </a-popover>
   </span>
-  <span size="10" v-else>
+  <a-space :size="12" v-else>
     <span
       @click="onVisible(true, locale.links_signin)"
       v-t="locale.links_signin"
@@ -58,7 +58,7 @@
         />
       </div>
     </a-modal>
-  </span>
+  </a-space>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
