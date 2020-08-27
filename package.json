@@ -8,7 +8,7 @@
     "packages/www"
   ],
   "scripts": {
-    "dev:www": "cd packages/www && npm start",
+    "dev:www": "cd packages/www && cross-env DEPLOY_ENV=dev npm start",
     "dev:h5": "cd packages/weapp && npm run dev:h5",
     "dev:weapp": "cd packages/weapp && npm run dev:weapp",
     "build:www": "cd packages/www && cross-env DEPLOY_ENV=uat npm run generate",
@@ -24,6 +24,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "alife-logger": "^1.8.20",
     "core-js": "^3.6.5",
     "crypto-js": "^4.0.0",
     "lodash": "^4.17.20",

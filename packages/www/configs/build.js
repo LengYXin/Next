@@ -91,9 +91,9 @@ module.exports = {
         splitChunks: {
             chunks: 'async',
             cacheGroups: {
-                // css: {
-                //     name: 'css',
-                //     test: /[\\/]node_modules[\\/](.*.css)[\\/]/,
+                // style: {
+                //     name: 'style',
+                //     test: /\.(css|less)$/,
                 //     chunks: 'all',
                 // },
                 min: {
@@ -127,9 +127,9 @@ module.exports = {
         plugins: [
             'lodash',
             ['import', {
-              libraryName: 'ant-design-vue',
-              libraryDirectory: 'lib',
-              style: (name) => `${name}/style/index.js`
+                libraryName: 'ant-design-vue',
+                libraryDirectory: 'lib',
+                style: (name) => `${name}/style/index.js`
             }],
             // ['import', {
             //   libraryName: 'lodash',

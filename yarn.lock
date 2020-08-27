@@ -4387,6 +4387,11 @@ ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.12.3, ajv@^6.9.1:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+alife-logger@^1.8.20:
+  version "1.8.20"
+  resolved "https://registry.npm.taobao.org/alife-logger/download/alife-logger-1.8.20.tgz#8e0abc2c8c0733ed943ff48d5b29eb17425f6526"
+  integrity sha1-jgq8LIwHM+2UP/SNWynrF0JfZSY=
+
 alphanum-sort@^1.0.0:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/alphanum-sort/download/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
