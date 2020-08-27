@@ -7,15 +7,16 @@
  */
 <template>
   <transition name="opacity">
-    <a-pagination
-      class="xt-pagination"
-      v-show="isShow(Pagination.total, Pagination.pageSize)"
-      :current="Pagination.current"
-      :total="Pagination.total"
-      :pageSize="Pagination.pageSize"
-      @change="onCurrentChange"
-      :item-render="itemRender"
-    />
+    <dir class="xt-pagination">
+      <a-pagination
+        v-show="isShow(Pagination.total, Pagination.pageSize)"
+        :current="Pagination.current"
+        :total="Pagination.total"
+        :pageSize="Pagination.pageSize"
+        @change="onCurrentChange"
+        :item-render="itemRender"
+      />
+    </dir>
   </transition>
 </template>
 <script lang="ts">
@@ -150,8 +151,8 @@ export default class extends Vue {
 </script>
 <style lang="less">
 .xt-pagination {
-  text-align: center;
-  & .ant-pagination {
+  .ant-pagination {
+    text-align: center;
     &-prev,
     &-next {
       a {
