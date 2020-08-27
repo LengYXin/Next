@@ -56,7 +56,7 @@
               <a-button
                 size="small"
                 type="link"
-                @click="onToggle('links_retrieve')"
+                @click="onToggle(locale.links_retrieve)"
                 >找回密码</a-button
               >
               <a-divider type="vertical"></a-divider>
@@ -64,7 +64,7 @@
                 class="ant-btn-green"
                 size="small"
                 type="link"
-                @click="onToggle('links_register')"
+                @click="onToggle(locale.links_register)"
                 >立即注册</a-button
               >
             </a-col>
@@ -92,6 +92,9 @@ import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
 export default class extends Vue {
   get PageStore() {
     return this.$store.$storeUser;
+  }
+   get locale() {
+    return this.$EnumLocaleLinks;
   }
   formInline = {
     user: "18611752863",

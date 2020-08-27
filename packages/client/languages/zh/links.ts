@@ -8,6 +8,7 @@ export default {
     [EnumLocaleLinks.links_my]: "去上课",
     [EnumLocaleLinks.links_register]: "注册",
     [EnumLocaleLinks.links_signin]: "登录",
+    [EnumLocaleLinks.links_retrieve]: "找回密码",
     [EnumLocaleLinks.links_courseIntroduction]: "课程介绍",
     [EnumLocaleLinks.links_courseComposition]: "课程组成",
     [EnumLocaleLinks.links_goToTheClass]: "去上课",

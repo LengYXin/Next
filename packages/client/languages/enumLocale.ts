@@ -18,6 +18,8 @@ export enum EnumLocaleLinks {
     links_register = "links_register",
     /** 登录 */
     links_signin = "links_signin",
+    /** 找回密码 */
+    links_retrieve = "links_retrieve",
     /** 课程介绍 */
     links_courseIntroduction = "links_courseIntroduction",
     /** 课程组成 */

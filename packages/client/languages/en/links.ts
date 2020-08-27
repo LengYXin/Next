@@ -8,6 +8,7 @@ export default {
     [EnumLocaleLinks.links_my]: "Go",
     [EnumLocaleLinks.links_register]: "Register",
     [EnumLocaleLinks.links_signin]: "Sign In",
+    [EnumLocaleLinks.links_retrieve]: "Retrieve",
     [EnumLocaleLinks.links_courseIntroduction]: "Course Introduction",
     [EnumLocaleLinks.links_courseComposition]: "Course Composition",
     [EnumLocaleLinks.links_goToTheClass]: "Go to the class",

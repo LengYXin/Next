@@ -105,6 +105,7 @@ export default class extends Vue {
   ];
   onToggle(title) {
     this.title = title;
+    console.log("LENG: extends -> onToggle -> this.title", this.title)
   }
   onVisible(visible, title?) {
     this.title = title;
