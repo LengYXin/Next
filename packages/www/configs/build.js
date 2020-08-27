@@ -27,7 +27,7 @@ module.exports = {
         // console.log("LENG: extend -> config", config.module.rules)
         // lodash.set(config,'mode','development')
         // uat 环境 
-        if (deployUat) {
+        if (!deployPro) {
             lodash.set(config, 'devtool', 'source-map')
         }
         // 图库替换
