@@ -12,7 +12,7 @@
 <script lang="ts">
 import dplayer from "dplayer";
 import lodash from "lodash";
-import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
 @Component({
   components: {},
 })
@@ -20,6 +20,7 @@ export default class extends Vue {
   @Prop() options;
   // @Prop() video;
   dplayer: dplayer;
+  isPlaying = false;
   mounted() {
     // console.log(lodash.cloneDeep(this.options));
     try {
@@ -47,9 +48,20 @@ export default class extends Vue {
           this.options
         )
       );
+      this.dplayer.on("playing", () => {
+        if (this.isPlaying) {
+          return;
+        }
+        this.onPlaying();
+      });
     } catch (error) {
       console.log("LENG: extends -> mounted -> error", error);
     }
+  }
+  @Emit("playing")
+  onPlaying() {
+    this.isPlaying = true;
+    return true;
   }
   updated() {}
   destroyed() {

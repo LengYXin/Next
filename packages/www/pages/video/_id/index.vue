@@ -5,7 +5,7 @@
       <VeView :item="PageStore.dataSource" />
       <VeLike :item="PageStore.dataSource" />
     </div>
-    <xt-dplayer :options="options" />
+    <xt-dplayer :options="options" @playing="onPlaying" />
 
     <a-row class="xt-videoid-row" :gutter="16">
       <a-col :span="16">
@@ -57,6 +57,9 @@ export default class PageView extends Vue {
   }
   onLike() {
     console.log("onLike");
+  }
+  onPlaying() {
+    console.log("aaa");
   }
   created() {
     this.$setBreadcrumb({ linksName: this.PageStore.dataSource.title }, true);
