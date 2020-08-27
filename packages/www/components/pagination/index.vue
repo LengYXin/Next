@@ -8,7 +8,7 @@
 <template>
   <transition name="opacity">
     <a-pagination
-      class="xt-pagination-center"
+      class="xt-pagination"
       v-show="isShow(Pagination.total, Pagination.pageSize)"
       :current="Pagination.current"
       :total="Pagination.total"
@@ -149,63 +149,63 @@ export default class extends Vue {
 }
 </script>
 <style lang="less">
-.xt-pagination-center {
+.xt-pagination {
   text-align: center;
-}
-.ant-pagination {
-  &-prev,
-  &-next {
-    a {
-      padding: 0 12px;
-      color: @xt-golden-6;
-      border-color: @xt-golden-6;
+  & .ant-pagination {
+    &-prev,
+    &-next {
+      a {
+        padding: 0 12px;
+        color: @xt-golden-6;
+        border-color: @xt-golden-6;
+      }
+      &:hover a {
+        border-color: @xt-golden-6;
+      }
+
+      &:focus .ant-pagination-item-link,
+      &:hover .ant-pagination-item-link {
+        color: @xt-golden-6;
+        border-color: @xt-golden-6;
+      }
     }
-    &:hover a {
-      border-color: @xt-golden-6;
+    &-item-link {
+      border: 1px solid @xt-golden-6;
+      display: inline-block;
+      min-width: 32px;
+      height: 32px;
+      border-radius: 4px;
     }
 
-    &:focus .ant-pagination-item-link,
-    &:hover .ant-pagination-item-link {
+    &-item {
       color: @xt-golden-6;
-      border-color: @xt-golden-6;
-    }
-  }
-  &-item-link {
-    border: 1px solid @xt-golden-6;
-    display: inline-block;
-    min-width: 32px;
-    height: 32px;
-    border-radius: 4px;
-  }
-
-  &-item {
-    color: @xt-golden-6;
-    border-color: @xt-golden-6;
-    a {
-      color: @xt-golden-6;
-    }
-    &:focus,
-    &:hover {
       border-color: @xt-golden-6;
       a {
         color: @xt-golden-6;
       }
-    }
-    &-active {
-      color: @xt-white-6;
-      background: @xt-golden-6;
-      a {
-        color: @xt-white-6;
-      }
-
       &:focus,
       &:hover {
-        color: @xt-white-6;
+        border-color: @xt-golden-6;
+        a {
+          color: @xt-golden-6;
+        }
       }
-
-      &:focus a,
-      &:hover a {
+      &-active {
         color: @xt-white-6;
+        background: @xt-golden-6;
+        a {
+          color: @xt-white-6;
+        }
+
+        &:focus,
+        &:hover {
+          color: @xt-white-6;
+        }
+
+        &:focus a,
+        &:hover a {
+          color: @xt-white-6;
+        }
       }
     }
   }
