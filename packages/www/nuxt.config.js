@@ -71,7 +71,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'ant-design-vue/dist/antd.less',
+    // 'ant-design-vue/dist/antd.less',
     'quill/dist/quill.snow.css',
     'swiper/css/swiper.css',
     '@/assets/style/index.less'
