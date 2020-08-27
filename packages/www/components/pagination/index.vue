@@ -47,8 +47,8 @@ export default class extends Vue {
     return this.key === this.$route.name;
   }
   itemRender(current, type, originalElement) {
-    console.log("extends -> itemRender -> originalElement", originalElement);
-    console.log("extends -> itemRender -> type", type);
+    // console.log("extends -> itemRender -> originalElement", originalElement);
+    // console.log("extends -> itemRender -> type", type);
     if (type === "jump-next" || type === "jump-prev") {
       originalElement.children = undefined;
       originalElement.text = "•••";
