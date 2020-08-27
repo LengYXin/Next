@@ -7,7 +7,21 @@
  */
 <template>
   <div class="xt-content xt-stationery">
-    <div class="xt-stationery-search-box"><a-icon type="shopping-cart" /></div>
+    <div class="xt-stationery-search-box">
+      <a-space
+        class="xt-stationery-head-title xt-font-family-FZLTHJW xt-font-size-lg xt-text-golden"
+        :size="size"
+      >
+        <a-icon type="shopping-cart" />
+        <span>喧桐文房</span>
+      </a-space>
+      <a-input-search
+        placeholder="查找我想要的"
+        style="width: 200px;"
+        :allowClear="true"
+        @search="onSearch"
+      />
+    </div>
     <xt-tabs
       theme="circle"
       :tabPane="PageStore.typelist"
@@ -69,6 +83,11 @@ export default class PageView extends Vue {
 <style lang="less" scoped>
 .xt-stationery {
   padding-bottom: @padding-lg;
+  &-search-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 60px 0 16px;
+  }
 }
 </style>
 <i18n>

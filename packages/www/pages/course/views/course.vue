@@ -10,7 +10,12 @@
   <a-list-item class="xt-course-item">
     <a-list-item-meta>
       <nuxt-link slot="title" :to="`/course/${dataSource.courseId}`">
-        <h2 class="xt-title-h2" v-text="dataSource.courseName">名称</h2>
+        <h2
+          class="xt-title-h2 xt-font-family-FZXIYSK"
+          v-text="dataSource.courseName"
+        >
+          名称
+        </h2>
       </nuxt-link>
       <div slot="description">
         <slot name="description">
@@ -19,17 +24,26 @@
               class="xt-course-item-money xt-font-size-xx"
               v-money="dataSource.courseFullPrice"
             ></strong>
-            <span class="xt-course-item-text">共{{dataSource.classHourCount}}课</span>
-            <span class="xt-course-item-text" v-text="dataSource.statusName"></span>
+            <span class="xt-course-item-text"
+              >共{{ dataSource.classHourCount }}课</span
+            >
+            <span
+              class="xt-course-item-text"
+              v-text="dataSource.statusName"
+            ></span>
           </div>
           <div class="xt-course-item-time">
-            <time v-dateFormat="dataSource.createTime" format="报名截至YYYY-MM-DD" />
+            <time
+              v-dateFormat="dataSource.createTime"
+              format="报名截至YYYY-MM-DD"
+            />
           </div>
         </slot>
+
         <slot name="signup">
           <div class="xt-course-item-signup">
-            <Signup :give="true" :dataSource="dataSource" />
             <Signup :dataSource="dataSource" />
+            <Signup :give="true" :dataSource="dataSource" />
           </div>
         </slot>
       </div>
@@ -39,7 +53,11 @@
             <div>直播</div>
             <div>课程</div>
           </div>
-          <img class="xt-course-logo" alt="logo" v-lazy="dataSource.coursePictureUri" />
+          <img
+            class="xt-course-logo"
+            alt="logo"
+            v-lazy="dataSource.coursePictureUri"
+          />
         </a-badge>
       </nuxt-link>
     </a-list-item-meta>

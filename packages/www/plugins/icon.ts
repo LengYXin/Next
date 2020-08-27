@@ -69,3 +69,5 @@ export { default as CaretDownOutline } from "@ant-design/icons/lib/outline/Caret
 // 警告
 export { default as WarningOutline } from "@ant-design/icons/lib/outline/WarningOutline";
 export { default as WarningFill } from "@ant-design/icons/lib/fill/WarningFill";
+// 购物车
+export { default as ShoppingCartOutline } from "@ant-design/icons/lib/outline/ShoppingCartOutline";

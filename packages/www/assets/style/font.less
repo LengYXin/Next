@@ -1,17 +1,24 @@
 @font-face {
-  font-family: 'FZLTHJ';
-  src: url('/font/FZLTHJ.OTF') format('opentype'),
-    url('/font/FZLTHJW.TTF') format('truetype');
+  font-family: "FZLTHJ";
+  src: url("/font/FZLTHJ.OTF") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'FZXIYSJ';
-  src: url('/font/FZXIYSJ.OTF') format('opentype'),
-    url('/font/FZXIYSJW.ttf') format('truetype');
+  font-family: "FZXIYSJ";
+  src: url("/font/FZXIYSJ.OTF") format("opentype");
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "FZLTHJW--GB1-0";
+  src: url(/font/FZLTHJW.TTF), url(/font/FZLTHJW.OTF);
+}
+@font-face {
+  font-family: "FZXIYSK--GBK1-0";
+  src: url(/font/FZXIYSJW.ttf), url(/font/FZXIYSJW.OTF);
 }
 
 // 标题
@@ -60,12 +67,23 @@
 }
 
 .xt-font-family {
-  &-FZXIYSK {
-    font-family: "FZXIYSK--GBK1-0", "宋体";
+  &-FZLTHJ {
+    font-family: "FZLTHJ";
   }
-
   &-FZLTHJW {
-    font-family: "FZLTHJW--GB1-0", "微软雅黑";
+    font-family: "FZLTHJW";
+  }
+  &-FZXIYSJ {
+    font-family: "FZXIYSJ";
+  }
+  &-FZXIYSJW {
+    font-family: "FZXIYSJW";
+  }
+  &-FZLTHJW {
+    font-family: "FZLTHJW--GB1-0";
+  }
+  &-FZXIYSK {
+    font-family: "FZXIYSK--GBK1-0";
   }
 }
 

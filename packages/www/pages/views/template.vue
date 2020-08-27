@@ -1,23 +1,35 @@
 <template>
-  <div class="xt-template" :style="{background:options.background}">
+  <div class="xt-template" :style="{ background: options.background }">
     <div class="xt-text-align-center">
       <slot name="title">
-        <h1 class="xt-title-h1-large" v-text="title" :style="{color:options.titleColor}">标题</h1>
+        <h1
+          class="xt-title-h1-large xt-font-family-FZLTHJW"
+          v-text="title"
+          :style="{ color: options.titleColor }"
+        >
+          标题
+        </h1>
       </slot>
       <slot name="subTitle">
         <h3
           v-text="subTitle"
-          class="xt-template-sub-title"
-          :style="{color:options.subTitleColor}"
-        >副标题</h3>
+          class="xt-template-sub-title xt-font-size-lg xt-font-family-FZLTHJW"
+          :style="{ color: options.subTitleColor }"
+        >
+          副标题
+        </h3>
       </slot>
     </div>
-    <div class="xt-template-content" :class="{'xt-content':isContent}">
+    <div class="xt-template-content" :class="{ 'xt-content': isContent }">
       <slot></slot>
     </div>
     <div class="xt-template-footer">
       <slot name="footer">
-        <nuxt-link :to="linkTo" class="xt-font-size-lg" :style="{color:options.footerColor}">
+        <nuxt-link
+          :to="linkTo"
+          class="xt-font-size-lg"
+          :style="{ color: options.footerColor }"
+        >
           <span v-text="footerText"></span>
         </nuxt-link>
       </slot>

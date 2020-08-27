@@ -6,22 +6,38 @@
  * @desc [description]
  */
 <template>
-  <a-list class="xt-about-list" item-layout="horizontal" :data-source="dataSource" :rowKey="rowKey">
+  <a-list
+    class="xt-about-list"
+    item-layout="horizontal"
+    :data-source="dataSource"
+    :rowKey="rowKey"
+  >
     <!-- <a
     
       target="_blank"
       :href="item.articleUrl"
     >-->
     <a-list-item slot="renderItem" class="xt-about-item" slot-scope="item">
-      <h1 class="xt-about-item-title" v-text="item.articleTitle">名称</h1>
+      <h1
+        class="xt-about-item-title xt-font-size-xx xt-font-family-FZXIYSK"
+        v-text="item.articleTitle"
+      >
+        名称
+      </h1>
       <a-list-item-meta>
-        <div slot="description" class="xt-about-item-description">
+        <div
+          slot="description"
+          class="xt-about-item-description xt-font-family-FZLTHJW"
+        >
           <div v-text="item.articleIntroduction"></div>
           <div class="xt-about-item-link">
             <a target="_blank" :href="item.articleUrl">查看全文</a>
           </div>
         </div>
-        <a-badge class="xt-badge xt-badge-left" slot="avatar">
+        <a-badge
+          class="xt-badge xt-badge-left xt-font-family-FZXIYSK"
+          slot="avatar"
+        >
           <div class="xt-badge-text" slot="count">
             <div v-dateFormat="item.publishTime" format="MM"></div>
             <div v-dateFormat="item.publishTime" format="DD日"></div>
@@ -93,9 +109,14 @@ export default class PageView extends Vue {
     transform: translate(-120%, -110%) !important;
   }
   .xt-badge-text {
+    width: 54px !important;
+    height: 54px !important;
     background: #f5f5f5 !important;
     color: @xt-grey-6 !important;
     font-size: @font-size-md;
+    div {
+      line-height: 1.1;
+    }
   }
 }
 </style>

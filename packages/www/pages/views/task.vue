@@ -1,7 +1,7 @@
 <template>
   <a-card class="xt-view-task" :bordered="false" :loading="loading">
     <swiper class="swiper" ref="swiper" :options="swiperOption">
-      <swiper-slide v-for="(item,index) in dataSource" :key="item.key">
+      <swiper-slide v-for="(item, index) in dataSource" :key="item.key">
         <div @click.prevent.stop="onViewer(index)">
           <xt-hover>
             <img class="xt-view-task-img" alt="example" :src="item.src" />

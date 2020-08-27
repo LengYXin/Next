@@ -1,5 +1,5 @@
 <template>
-  <span v-if="PageStore.loggedIn">
+  <span size="10" v-if="PageStore.loggedIn">
     <a-popover>
       <template slot="content">
         <div>
@@ -13,7 +13,7 @@
         </div>
         <a-row type="flex" :gutter="16">
           <a-col v-for="item in menu" :key="item.key">
-            <nuxt-link :to="{name:item.key}">
+            <nuxt-link :to="{ name: item.key }">
               <span v-t="item.name"></span>
             </nuxt-link>
           </a-col>
@@ -26,9 +26,17 @@
       />
     </a-popover>
   </span>
-  <span v-else>
-    <span @click="onVisible(true,locale.links_signin)" v-t="locale.links_signin">登录</span>
-    <span @click="onVisible(true,locale.links_register)" v-t="locale.links_register">注册</span>
+  <span size="10" v-else>
+    <span
+      @click="onVisible(true, locale.links_signin)"
+      v-t="locale.links_signin"
+      >登录</span
+    >
+    <span
+      @click="onVisible(true, locale.links_register)"
+      v-t="locale.links_register"
+      >注册</span
+    >
     <!-- :title="$t(title||'links_signin')" -->
     <a-modal
       wrapClassName="xt-signin-modal"
@@ -40,8 +48,14 @@
     >
       <div v-show="PageStore.visible">
         <signin v-if="isSignin" @toggle="onToggle" />
-        <register v-else-if="title===locale.links_register" @toggle="onToggle" />
-        <retrieve v-else-if="title===locale.links_retrieve" @toggle="onToggle" />
+        <register
+          v-else-if="title === locale.links_register"
+          @toggle="onToggle"
+        />
+        <retrieve
+          v-else-if="title === locale.links_retrieve"
+          @toggle="onToggle"
+        />
       </div>
     </a-modal>
   </span>

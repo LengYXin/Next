@@ -9,11 +9,12 @@
   <transition name="opacity">
     <a-pagination
       class="xt-pagination-center"
-      v-show="isShow(Pagination.total,Pagination.pageSize)"
+      v-show="isShow(Pagination.total, Pagination.pageSize)"
       :current="Pagination.current"
       :total="Pagination.total"
       :pageSize="Pagination.pageSize"
       @change="onCurrentChange"
+      :item-render="itemRender"
     />
   </transition>
 </template>
@@ -42,8 +43,33 @@ export default class extends Vue {
   // 当前页面显示
   get isConnected() {
     // return this.$el.isConnected && this.key === this.$route.name;
-    return  this.key === this.$route.name;
+    return this.key === this.$route.name;
   }
+  itemRender(current, type, originalElement) {
+    console.log("extends -> itemRender -> originalElement", originalElement);
+    console.log("extends -> itemRender -> type", type);
+    if (type === "jump-next" || type === "jump-prev") {
+      originalElement.children = undefined;
+      originalElement.text = "•••";
+      originalElement.data.class = originalElement.data.class + " xt-jump-link";
+      return originalElement;
+    }
+    if (type === "prev") {
+      originalElement.children = undefined;
+      originalElement.text = "上一页";
+      originalElement.data.class =
+        "xt-pagination-link " + originalElement.data.class;
+      return originalElement;
+    } else if (type === "next") {
+      originalElement.children = undefined;
+      originalElement.text = "下一页";
+      originalElement.data.class =
+        "xt-pagination-link " + originalElement.data.class;
+      return originalElement;
+    }
+    return originalElement;
+  }
+
   isShow(total, pageSize) {
     return total > pageSize;
   }
@@ -122,3 +148,63 @@ export default class extends Vue {
   }
 }
 </script>
+<style lang="less">
+.ant-pagination {
+  &-prev,
+  &-next {
+    a {
+      padding: 0 12px;
+      color: @xt-golden-6;
+      border-color: @xt-golden-6;
+    }
+    &:hover a {
+      border-color: @xt-golden-6;
+    }
+
+    &:focus .ant-pagination-item-link,
+    &:hover .ant-pagination-item-link {
+      color: @xt-golden-6;
+      border-color: @xt-golden-6;
+    }
+  }
+  &-item-link {
+    border: 1px solid @xt-golden-6;
+    display: inline-block;
+    min-width: 32px;
+    height: 32px;
+    border-radius: 4px;
+  }
+
+  &-item {
+    color: @xt-golden-6;
+    border-color: @xt-golden-6;
+    a {
+      color: @xt-golden-6;
+    }
+    &:focus,
+    &:hover {
+      border-color: @xt-golden-6;
+      a {
+        color: @xt-golden-6;
+      }
+    }
+    &-active {
+      color: @xt-white-6;
+      background: @xt-golden-6;
+      a {
+        color: @xt-white-6;
+      }
+
+      &:focus,
+      &:hover {
+        color: @xt-white-6;
+      }
+
+      &:focus a,
+      &:hover a {
+        color: @xt-white-6;
+      }
+    }
+  }
+}
+</style>

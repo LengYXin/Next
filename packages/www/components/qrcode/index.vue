@@ -7,7 +7,7 @@
  */
 <template>
   <div class="xt-qrcode">
-    <img :src="src" />
+    <img class="xt-qrcode-img" :src="src" />
   </div>
 </template>
 <script lang="ts">
@@ -42,5 +42,9 @@ export default class extends Vue {
 </script>
 <style lang="less" scoped>
 .xt-qrcode {
+  &-img {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

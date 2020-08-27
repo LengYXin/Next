@@ -1,5 +1,5 @@
 <template>
-  <a-row class="xt-signin">
+  <a-row class="xt-signin" type="flex" justify="center" align="middle">
     <a-col :span="16" class="xt-signin-form">
       <a-form-model
         layout="horizontal"
@@ -10,8 +10,15 @@
         <a-form-model-item>
           <img class="xt-signin-logo" :src="$images.title" alt srcset />
         </a-form-model-item>
+        <h4 class="xt-font-bold">登录</h4>
+
         <a-form-model-item>
-          <a-input size="large" addon-before="+86" v-model="formInline.user" placeholder="Username"></a-input>
+          <a-input
+            size="large"
+            addon-before="+86"
+            v-model="formInline.user"
+            placeholder="Username"
+          ></a-input>
         </a-form-model-item>
         <a-form-model-item>
           <a-input
@@ -24,25 +31,42 @@
         <a-form-model-item>
           <a-row type="flex">
             <a-col>
-              <a-checkbox>30天内自动登录</a-checkbox>
+              <a-checkbox class="xt-signin-auto-login"
+                >30天内自动登录</a-checkbox
+              >
             </a-col>
-            <a-col flex="auto" class="xt-text-align-right">
-              <a-button size="large" type="link">海外登录</a-button>
+            <a-col flex="auto" class="xt-text-align-right xt-font-size-base">
+              <a-button size="small" type="link">海外登录</a-button>
             </a-col>
           </a-row>
         </a-form-model-item>
         <a-form-model-item>
-          <a-button size="large" type="primary" html-type="submit" block>登录</a-button>
+          <a-button size="large" type="primary" html-type="submit" block
+            >登录</a-button
+          >
         </a-form-model-item>
         <a-form-model-item>
           <a-row type="flex">
             <a-col>
-              <a-button size="large" type="link">手机验证码登录</a-button>
+              <a-button class="ant-btn-gray" size="small" type="link"
+                >手机验证码登录</a-button
+              >
             </a-col>
             <a-col flex="auto" class="xt-text-align-right">
-              <a-button size="large" type="link" @click="onToggle('links_retrieve')">找回密码</a-button>
+              <a-button
+                size="small"
+                type="link"
+                @click="onToggle('links_retrieve')"
+                >找回密码</a-button
+              >
               <a-divider type="vertical"></a-divider>
-              <a-button size="large" type="link" @click="onToggle('links_register')">立即注册</a-button>
+              <a-button
+                class="ant-btn-green"
+                size="small"
+                type="link"
+                @click="onToggle('links_register')"
+                >立即注册</a-button
+              >
             </a-col>
           </a-row>
         </a-form-model-item>
@@ -51,8 +75,11 @@
     <a-col :span="8" class="xt-signin-qrcode">
       <div class="xt-flex-center">
         <img :src="$images.logo" alt srcset />
-        <xt-qrcode options="https://www.baidu.com/?tn=64075107_1_dg" />
-        <div>微信扫码登录</div>
+        <xt-qrcode
+          class="xt-signin-qrcode-img"
+          options="https://www.baidu.com/?tn=64075107_1_dg"
+        />
+        <div class="xt-signin-qrcode-subtitle">微信扫码登录</div>
       </div>
     </a-col>
   </a-row>
@@ -94,16 +121,51 @@ export default class extends Vue {
 </script>
 <style lang="less" >
 @s-pd: 40px;
+@l-pd: 80px;
+@checkbox: ant-checkbox;
 .xt-signin {
   min-height: 480px;
-  .xt-signin-logo {
+  background-color: rgba(14, 5, 10, 0.05);
+  .xt-signin-auto-login {
+    color: @xt-yellow-6;
+    &:hover .ant-checkbox-inner,
+    .@{checkbox}:hover .ant-checkbox-inner,
+    .@{checkbox}-input:hover + .ant-checkbox-inner {
+      border-color: @xt-yellow-6;
+    }
+    .@{checkbox} {
+      &-checked {
+        .ant-checkbox-inner {
+          color: @xt-white-6;
+          background-color: @xt-yellow-6;
+        }
+        &::after {
+          color: @xt-white-6;
+          border-color: @xt-yellow-6!important;
+        }
+      }
+    }
+  }
+
+  &-logo {
     max-width: 100%;
   }
-  .xt-signin-qrcode {
+  &-qrcode {
+    height: 100%;
     padding: @s-pd 0;
+    &-img {
+      width: 140px;
+      height: 140px;
+      border: 1px solid #e2e2e2;
+      margin-top: 120px;
+    }
+    &-subtitle {
+      margin-top: 10px;
+    }
   }
-  .xt-signin-form {
-    padding: @s-pd;
+  &-form {
+    padding: @s-pd @l-pd;
+    background-color: #ffffff;
   }
 }
 </style>
