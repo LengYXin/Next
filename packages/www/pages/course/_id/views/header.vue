@@ -1,5 +1,5 @@
 <template>
-  <div class="xt-cid-header">
+  <div class="xt-content xt-cid-header">
     <h1 class="xt-title-h3 xt-flex-center">
       <a-tag class="xt-bg-yellow xt-cid-header-tag xt-font-size-md">直播课</a-tag>
       <span v-text="dataSource.courseName"></span>
@@ -31,18 +31,26 @@
             <time v-dateFormat="dataSource.createTime" format="报名截至YYYY-MM-DD" />
           </div>
           <div class="xt-cid-header-signup">
-            <nuxt-link to="/homework">
-              <span>交作业</span>
-            </nuxt-link>
-            <nuxt-link to="/payment">
-              <span>支付</span>
-            </nuxt-link>
             <Signup :give="true" :buy="true" :dataSource="dataSource" />
             <Signup :buy="true" :dataSource="dataSource" />
           </div>
         </template>
       </a-col>
     </a-row>
+    <a-space size="large">
+      <nuxt-link to="/homework">
+        <span>交作业</span>
+      </nuxt-link>
+      <nuxt-link to="/payment">
+        <span>支付</span>
+      </nuxt-link>
+      <nuxt-link :to="`/course/${id-1}?active=to`">
+        <span>上一课</span>
+      </nuxt-link>
+      <nuxt-link :to="`/course/${id+1}?active=to`">
+        <span>下一课</span>
+      </nuxt-link>
+    </a-space>
   </div>
 </template>
 <script lang="ts">
@@ -60,6 +68,9 @@ export default class PageView extends Vue {
   }
   get dataSource() {
     return this.PageStore.dataSource;
+  }
+  get id() {
+    return parseInt(this.$route.params.id);
   }
   mounted() {
     console.log("LENG: PageView -> mounted -> this.PageStore", this.PageStore);

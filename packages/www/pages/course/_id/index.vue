@@ -1,5 +1,5 @@
 <template>
-  <div class="xt-content">
+  <div class="xt-course-id">
     <!-- 课程标题信息 -->
     <headerView />
     <tabsView />

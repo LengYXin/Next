@@ -6,7 +6,7 @@
  * @desc 介绍
  */
 <template>
-  <div>
+  <div class="xt-content">
     <img v-for="img in imgs" :key="img" v-lazy="img" />
   </div>
 </template>

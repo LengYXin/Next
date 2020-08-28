@@ -22,7 +22,7 @@ import tab_class from "./tab_class.vue";
 import tab_composition from "./tab_composition.vue";
 import tab_sunDrying from "./tab_sunDrying.vue";
 import tab_thoughts from "./tab_thoughts.vue";
-@Observer
+// @Observer
 @Component({
   components: {
     [EnumLocaleLinks.links_courseIntroduction]: tab_introduction,
@@ -33,7 +33,7 @@ import tab_thoughts from "./tab_thoughts.vue";
   },
 })
 export default class PageView extends Vue {
-  defaultActiveKey = "ci";
+  defaultActiveKey = "to";
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   get activeValue() {
     return lodash.get(

@@ -6,30 +6,32 @@
  * @desc 课程组成
  */
 <template>
-  <a-card class="xt-cid-composition-card">
-    <a-card-grid
-      class="xt-cid-composition"
-      :hoverable="false"
-      v-for="item in dataSource"
-      :key="item.key"
-    >
-      <div class="xt-cid-composition-info xt-hoverable">
-        <img class="xt-cid-composition-img" v-lazy="item.src" />
-        <div class="xt-cid-composition-pd">
-          <div class="xt-cid-composition-title">标题</div>
-          <a-row class="xt-cid-composition-static" type="flex">
-            <a-col :flex="1">
-              <strong class="xt-text-green" v-money="999"></strong>
-            </a-col>
-            <a-col :flex="1">
-              <span>共3课</span>
-              <span>已结课</span>
-            </a-col>
-          </a-row>
+  <div class="xt-content">
+    <a-card class="xt-cid-composition-card">
+      <a-card-grid
+        class="xt-cid-composition"
+        :hoverable="false"
+        v-for="item in dataSource"
+        :key="item.key"
+      >
+        <div class="xt-cid-composition-info xt-hoverable">
+          <img class="xt-cid-composition-img" v-lazy="item.src" />
+          <div class="xt-cid-composition-pd">
+            <div class="xt-cid-composition-title">标题</div>
+            <a-row class="xt-cid-composition-static" type="flex">
+              <a-col :flex="1">
+                <strong class="xt-text-green" v-money="999"></strong>
+              </a-col>
+              <a-col :flex="1">
+                <span>共3课</span>
+                <span>已结课</span>
+              </a-col>
+            </a-row>
+          </div>
         </div>
-      </div>
-    </a-card-grid>
-  </a-card>
+      </a-card-grid>
+    </a-card>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
