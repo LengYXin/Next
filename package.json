@@ -4,6 +4,7 @@
   "private": true,
   "workspaces": [
     "packages/client",
+    "packages/live",
     "packages/weapp",
     "packages/www"
   ],
