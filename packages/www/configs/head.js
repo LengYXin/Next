@@ -24,6 +24,7 @@ module.exports = {
         { hid: 'version', name: 'version', content: `${process.env.npm_package_version} ${moment().format("YYYY-MM-DD HH:mm")}` }
     ],
     link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'stylesheet', href: '//at.alicdn.com/t/font_2037753_6zobxeuq2hh.css' }
     ]
 }

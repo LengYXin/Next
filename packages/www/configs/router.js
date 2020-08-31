@@ -34,7 +34,7 @@ module.exports = {
             return route
         })
         // 生成可视化 路径文件 参考 使用
-        fs.writeFile(path.resolve(process.cwd(), '_routers.json'), JSON.stringify(routes, null, 4), (err) => {
+        fs.writeFile(path.resolve(process.cwd(), '_routers.json'), JSON.stringify(lodash.orderBy(routes, ['name']), null, 4), (err) => {
             console.log(err)
         });
         // 生成可视化 路径文件 参考 使用
