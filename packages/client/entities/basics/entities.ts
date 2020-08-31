@@ -31,7 +31,7 @@ export class EntitiesBasics<T> {
      * @memberof EntitiesBasics
      */
     @observable
-    private _dataSource: Object = {};
+    protected _dataSource:any = {};
     /**
      * 加载状态
      * @memberof EntitiesBasics
@@ -58,6 +58,7 @@ export class EntitiesBasics<T> {
             if (this.loading) {
                 return console.warn('数据 加载中')
             }
+            this.onToggleLoading(true);
             AjaxRequest = lodash.merge({
                 url: this.options.url,
                 method: this.options.method,
@@ -72,6 +73,7 @@ export class EntitiesBasics<T> {
             return this.onSetDataSource(res);
         } catch (error) {
             console.error("LENG: Pagination<T> -> onLoading -> error", error)
+            this.onToggleLoading(false);
         }
     }
     /**

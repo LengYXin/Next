@@ -92,7 +92,7 @@ export default class extends Vue {
     return this.activeKey;
   }
   mounted() {
-    console.log("LENG: mounted -> this", this);
+    // console.log("LENG: mounted -> this", this);
   }
   updated() {}
   destroyed() {}

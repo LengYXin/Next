@@ -9,6 +9,7 @@ export enum EnumApiCourse {
   /** 课程详情 */
   CourseDetails = "/course/singledetail",
   /** 课程介绍 */
-
   CourseIntroduce = "/usercourse/courseIntroduce",
+  /** 地图页 */
+  CourseMap = "/userclasshour/map/list",
 }

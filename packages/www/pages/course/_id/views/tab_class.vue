@@ -12,8 +12,8 @@
       <img :src="bgSrc" alt srcset :class="template" />
       <!-- 课程信息 -->
       <div
-        v-for="(item,index) in PageStore.dataSource.tempNum+2"
-        :key="item"
+        v-for="(item,index) in PageStore.mapList"
+        :key="item.classhourId"
         :class="'index-'+index"
         class="xt-course-class-info"
       >
@@ -27,13 +27,9 @@
             <div class="xt-course-class-img">
               <a-popover placement="rightTop">
                 <template slot="content">
-                  <p>第3课 《笔论与一画》</p>
+                  <h5 v-text="item.classhourName"></h5>
                 </template>
-                <img
-                  src="https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/picturePath/568feec434929a669ff4bfe75326c28a.jpeg"
-                  alt
-                  srcset
-                />
+                <img :src="item.copyBookUri" />
               </a-popover>
               <ul class="xt-course-class-bs">
                 <li v-for="bs in 4" :key="bs">
@@ -70,18 +66,34 @@
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Modal } from "ant-design-vue";
+import { Observer } from "mobx-vue";
+
+@Observer
 @Component({
   components: {},
 })
 export default class PageView extends Vue {
-  get PageStore() {
+  get id() {
+    return this.$route.params.id;
+  }
+  get Details() {
     return this.$store.$storeCourse.Details;
   }
+  get PageStore() {
+    return this.$store.$storeCourse.Details.Map;
+  }
   get template() {
-    return "xt-cc-template-" + this.PageStore.dataSource.tempNum;
+    return "xt-cc-template-" + this.Details.dataSource.tempNum;
   }
   get bgSrc() {
-    return `/template/${this.PageStore.dataSource.tempNum}.png`;
+    return `/template/${this.Details.dataSource.tempNum}.png`;
+  }
+  onLoading() {
+    this.PageStore.onLoading({ courseId: this.id });
+  }
+  created() {
+    this.onLoading();
+    
   }
   mounted() {}
   updated() {}
@@ -114,6 +126,7 @@ export default class PageView extends Vue {
     left: 0;
     z-index: 10;
     animation: antFadeIn 0.6s;
+    width: 140px;
   }
   // 学习回顾
   &-review {
@@ -142,6 +155,7 @@ export default class PageView extends Vue {
     justify-content: center;
     padding: @padding-sm 0;
     position: relative;
+    cursor: pointer;
     img {
       width: @img;
       height: @img;

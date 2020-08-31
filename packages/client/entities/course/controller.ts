@@ -15,6 +15,7 @@ export class ControllerCourse {
    * @memberof ControllerCourse
    */
   Details = new CourseDetails(this.$ajax);
+  
   /**
    * 分页列表数据
    * @memberof ControllerCourse

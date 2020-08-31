@@ -73,7 +73,7 @@ export default class PageView extends Vue {
     return parseInt(this.$route.params.id);
   }
   mounted() {
-    console.log("LENG: PageView -> mounted -> this.PageStore", this.PageStore);
+    // console.log("LENG: PageView -> mounted -> this.PageStore", this.PageStore);
   }
   onText() {
     this.PageStore.onUpdate({ courseName: "更改名字" + Date.now() });
