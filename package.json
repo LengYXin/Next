@@ -31,7 +31,7 @@
     "lodash-decorators": "^6.0.1",
     "mobx": "^5.15.6",
     "mobx-persist": "^0.4.1",
-    "mobx-react": "^6.2.5",
+    "mobx-react": "^6.3.0",
     "mobx-vue": "^2.0.10",
     "moment": "^2.27.0",
     "qrcode": "^1.4.4",
@@ -40,7 +40,7 @@
   "devDependencies": {
     "@babel/core": "^7.11.4",
     "@types/crypto-js": "^3.1.47",
-    "@types/lodash": "^4.14.160",
+    "@types/lodash": "^4.14.161",
     "babel-jest": "^26.3.0",
     "babel-plugin-import": "^1.13.0",
     "babel-plugin-lodash": "^3.3.4",

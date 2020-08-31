@@ -3509,10 +3509,15 @@
   dependencies:
     "@types/lodash" "*"
 
-"@types/lodash@*", "@types/lodash@^4.14.160":
+"@types/lodash@*":
   version "4.14.160"
   resolved "https://registry.npm.taobao.org/@types/lodash/download/@types/lodash-4.14.160.tgz?cache=0&sync_timestamp=1598288460918&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Flodash%2Fdownload%2F%40types%2Flodash-4.14.160.tgz#2f1bba6500bc3cb9a732c6d66a083378fb0b0b29"
   integrity sha1-Lxu6ZQC8PLmnMsbWaggzePsLCyk=
+
+"@types/lodash@^4.14.161":
+  version "4.14.161"
+  resolved "https://registry.npm.taobao.org/@types/lodash/download/@types/lodash-4.14.161.tgz?cache=0&sync_timestamp=1598664997598&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Flodash%2Fdownload%2F%40types%2Flodash-4.14.161.tgz#a21ca0777dabc6e4f44f3d07f37b765f54188b18"
+  integrity sha1-ohygd32rxuT0Tz0H83t2X1QYixg=
 
 "@types/memory-fs@*":
   version "0.3.2"
@@ -3600,10 +3605,10 @@
   resolved "https://registry.npm.taobao.org/@types/range-parser/download/@types/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
   integrity sha1-fuMwunyq+5gJC+zoal7kQRWQTCw=
 
-"@types/react@^16.9.47":
-  version "16.9.47"
-  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.47.tgz?cache=0&sync_timestamp=1598334116538&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.47.tgz#fb092936f0b56425f874d0ff1b08051fdf70c1ba"
-  integrity sha1-+wkpNvC1ZCX4dND/GwgFH99wwbo=
+"@types/react@^16.9.48":
+  version "16.9.48"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.48.tgz?cache=0&sync_timestamp=1598472931690&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.48.tgz#d3387329f070d1b1bc0ff4a54a54ceefd5a8485c"
+  integrity sha1-0zhzKfBw0bG8D/SlSlTO79WoSFw=
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -3924,10 +3929,10 @@
   optionalDependencies:
     prettier "^1.18.2"
 
-"@vue/test-utils@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.npm.taobao.org/@vue/test-utils/download/@vue/test-utils-1.0.4.tgz#6341caccdf72da5914a5168e680ea12550fba98a"
-  integrity sha1-Y0HKzN9y2lkUpRaOaA6hJVD7qYo=
+"@vue/test-utils@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.npm.taobao.org/@vue/test-utils/download/@vue/test-utils-1.0.5.tgz#676e1f986bb93ddc869d9c6cf1c820183d64d92f"
+  integrity sha1-Z24fmGu5PdyGnZxs8cggGD1k2S8=
   dependencies:
     dom-event-types "^1.0.0"
     lodash "^4.17.15"
@@ -13320,17 +13325,17 @@ mobx-persist@^0.4.1:
   dependencies:
     serializr "^1.1.11"
 
-mobx-react-lite@>=2.0.6:
-  version "2.1.0"
-  resolved "https://registry.npm.taobao.org/mobx-react-lite/download/mobx-react-lite-2.1.0.tgz#1c70723832317ba55ac2094fec66845e3d320f45"
-  integrity sha1-HHByODIxe6VawglP7GaEXj0yD0U=
+mobx-react-lite@>=2.2.0:
+  version "2.2.0"
+  resolved "https://registry.npm.taobao.org/mobx-react-lite/download/mobx-react-lite-2.2.0.tgz#95eecde237367af1087cc5c51d962ae081b6d1de"
+  integrity sha1-le7N4jc2evEIfMXFHZYq4IG20d4=
 
-mobx-react@^6.2.5:
-  version "6.2.5"
-  resolved "https://registry.npm.taobao.org/mobx-react/download/mobx-react-6.2.5.tgz#9020a17b79cc6dc3d124ad89ab36eb9ea540a45b"
-  integrity sha1-kCChe3nMbcPRJK2JqzbrnqVApFs=
+mobx-react@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.npm.taobao.org/mobx-react/download/mobx-react-6.3.0.tgz#7d11799f988bbdadc49e725081993b18baa20329"
+  integrity sha1-fRF5n5iLva3EnnJQgZk7GLqiAyk=
   dependencies:
-    mobx-react-lite ">=2.0.6"
+    mobx-react-lite ">=2.2.0"
 
 mobx-vue@^2.0.10:
   version "2.0.10"
@@ -19322,10 +19327,10 @@ vfile@^4.0.0:
     unist-util-stringify-position "^2.0.0"
     vfile-message "^2.0.0"
 
-viewerjs@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.npm.taobao.org/viewerjs/download/viewerjs-1.6.1.tgz#719719898cbf7b63dd41763a0b4dabfa927ddfcf"
-  integrity sha1-cZcZiYy/e2PdQXY6C02r+pJ9388=
+viewerjs@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.npm.taobao.org/viewerjs/download/viewerjs-1.6.2.tgz#0826eaa9bb143875690b0506712335722dcbeaa3"
+  integrity sha1-CCbqqbsUOHVpCwUGcSM1ci3L6qM=
 
 vinyl-file@^3.0.0:
   version "3.0.0"
