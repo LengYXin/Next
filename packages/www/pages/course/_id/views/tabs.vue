@@ -1,12 +1,14 @@
 <template>
   <div>
-    <xt-tabs
+    <div class="xt-content">
+      <xt-tabs
       class="xt-cid-tabs"
       theme="circle"
       :tabPane="tabPane"
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
     />
+    </div>
     <keep-alive>
       <component :is="activeValue"></component>
     </keep-alive>

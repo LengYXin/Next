@@ -21,12 +21,13 @@ Vue.prototype.$EnumLocaleDescriptions = EnumLocaleDescriptions;
 Vue.prototype.$images = images;
 /**
  * 检查用户 状态 已登录返回用户信息
+ * @visible 吊起 登录框
  */
-Vue.prototype.$InspectUser = function () {
+Vue.prototype.$InspectUser = function (visible = true) {
     if (store.$storeUser.loggedIn) {
         return toJS(store.$storeUser.UserInfo);
     }
-    store.$storeUser.onToggleVisible(true);
+    store.$storeUser.onToggleVisible(visible);
     throw 'Please log in'
 };
 /** 
@@ -49,8 +50,9 @@ declare module 'vue/types/vue' {
         /** 
          * 检查用户是否登录
          * 没有登录会抛异常。try 包裹使用
+         * @visible 吊起 登录框
          */
-        readonly $InspectUser: () => Object;
+        readonly $InspectUser: (visible?: Boolean) => Object;
         /** 检查code 是否 是当前用户 */
         readonly $eqUser: (code: any) => Boolean;
         /** 设置面包屑 */

@@ -3,7 +3,7 @@
  * @email lengyingxin8966@gmail.com
  * @create date 2020-08-05 14:16:27
  * @modify date 2020-08-05 14:16:27
- * @desc [description]
+ * @desc 滚动加载
  */
 <template>
   <infinite-loading :identifier="identifier" :distance="300" @infinite="onInfinite">

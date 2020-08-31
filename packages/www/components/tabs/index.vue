@@ -3,7 +3,7 @@
  * @email lengyingxin8966@gmail.com
  * @create date 2020-08-05 14:16:32
  * @modify date 2020-08-05 14:16:32
- * @desc [description]
+ * @desc 页签切换
  */
 <template>
   <!-- <a-affix v-if="affix" :offset-top="offsetTop">

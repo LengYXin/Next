@@ -3,7 +3,7 @@
  * @email lengyingxin8966@gmail.com
  * @create date 2020-08-05 14:16:32
  * @modify date 2020-08-05 14:16:32
- * @desc [description]
+ * @desc 富文本按钮
  */
 <template>
   <a-row class="xt-editor-toolbar" type="flex" :gutter="4">

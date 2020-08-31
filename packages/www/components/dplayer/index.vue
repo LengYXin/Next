@@ -3,7 +3,7 @@
  * @email lengyingxin8966@gmail.com
  * @create date 2020-08-05 14:16:12
  * @modify date 2020-08-05 14:16:12
- * @desc [description]
+ * @desc 视频
  */
 <template>
   <div class="xt-dplayer" ref="dplayer">播放器</div>

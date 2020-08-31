@@ -1,5 +1,5 @@
 <template>
-  <span size="10" v-if="PageStore.loggedIn">
+  <span v-if="PageStore.loggedIn">
     <a-popover>
       <template slot="content">
         <div>
@@ -32,15 +32,13 @@
       type="link"
       @click="onVisible(true, locale.links_signin)"
       v-t="locale.links_signin"
-      >登录</a-button
-    >
+    >登录</a-button>
     <a-button
       size="small"
       type="link"
       @click="onVisible(true, locale.links_register)"
       v-t="locale.links_register"
-      >注册</a-button
-    >
+    >注册</a-button>
     <!-- :title="$t(title||'links_signin')" -->
     <a-modal
       wrapClassName="xt-signin-modal"
@@ -52,14 +50,8 @@
     >
       <div v-show="PageStore.visible">
         <signin v-if="isSignin" @toggle="onToggle" />
-        <register
-          v-else-if="title === locale.links_register"
-          @toggle="onToggle"
-        />
-        <retrieve
-          v-else-if="title === locale.links_retrieve"
-          @toggle="onToggle"
-        />
+        <register v-else-if="title === locale.links_register" @toggle="onToggle" />
+        <retrieve v-else-if="title === locale.links_retrieve" @toggle="onToggle" />
       </div>
     </a-modal>
   </a-space>
@@ -105,7 +97,7 @@ export default class extends Vue {
   ];
   onToggle(title) {
     this.title = title;
-    console.log("LENG: extends -> onToggle -> this.title", this.title)
+    console.log("LENG: extends -> onToggle -> this.title", this.title);
   }
   onVisible(visible, title?) {
     this.title = title;

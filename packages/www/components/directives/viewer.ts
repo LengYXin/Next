@@ -3,7 +3,7 @@
  * @email lengyingxin8966@gmail.com
  * @create date 2020-08-05 14:16:05
  * @modify date 2020-08-05 14:16:05
- * @desc [description]
+ * @desc viewerjs
  */
 import Viewer from 'viewerjs'
 import 'viewerjs/dist/viewer.css'

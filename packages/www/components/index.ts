@@ -21,6 +21,7 @@ import action from "./comment/action.vue";
 import shadow from "./shadow/index.vue";
 import qrcode from "./qrcode/index.vue";
 import imgCode from "./imgCode/index.vue";
+import inspect from './business/user/inspect.vue'
 // 视频
 Vue.component('xt-dplayer', () => import('./dplayer/index.vue'));
 // 富文本
@@ -29,6 +30,8 @@ Vue.component('xt-editor', () => import('./editor/index.vue'));
 Vue.component('xt-img-cropper', () => import('./imgCropper/index.vue'));
 
 
+// 检查用户登录
+Vue.component('xt-inspect', inspect);
 // 图片验证
 Vue.component('xt-img-code', imgCode);
 // 二维码
