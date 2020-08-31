@@ -27,8 +27,9 @@
         </div>
       </div>
       <!-- 时间 -->
-      <a-tooltip slot="datetime" :title="datetime">
-        <span v-text="datetime"></span>
+      <a-tooltip slot="datetime">
+        <span slot="title" v-dateFormat="datetime" format="YYYY-MM-DD HH:mm"></span>
+        <span>发布于 <time v-dateFormat="datetime" format="YYYY-MM-DD HH:mm" fromNow  /></span>
       </a-tooltip>
       <!-- 内容 -->
       <div class="xt-comment-content" slot="content">

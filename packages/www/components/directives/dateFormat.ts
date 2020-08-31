@@ -68,13 +68,18 @@ function onClear(el: HTMLDivElement) {
 function onInnerHTML(el: HTMLDivElement, value, format, fromNow) {
     // 元素显示
     if (isConnected(el)) {
+        let momentDate = moment(value);
+        // 纠正时间差
+        if (lodash.includes(value, 'T')) {
+            momentDate = momentDate.add(-8, "hours")
+        }
         if (fromNow) {
-            value = moment(value).fromNow();
+            value = momentDate.fromNow();
             if (value == "几秒前" || value == "几秒内" || value == "几秒后") {
                 value = "刚刚";
             }
         } else {
-            value = moment(value).format(format);
+            value = momentDate.format(format);
         }
         el.innerHTML = value
     }

@@ -9,7 +9,7 @@
   <div class="xt-course-class xt-flex-center">
     <div class="xt-course-class-map" :class="template">
       <!-- 背景 -->
-      <img :src="bgSrc" alt srcset />
+      <img :src="bgSrc" alt srcset :class="template" />
       <!-- 课程信息 -->
       <div
         v-for="(item,index) in PageStore.dataSource.tempNum+2"
@@ -25,19 +25,21 @@
           <!-- 图片 笔山 -->
           <a-col :span="24" :order="2">
             <div class="xt-course-class-img">
-              <img
-                src="https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/picturePath/568feec434929a669ff4bfe75326c28a.jpeg"
-                alt
-                srcset
-              />
+              <a-popover placement="rightTop">
+                <template slot="content">
+                  <p>第3课 《笔论与一画》</p>
+                </template>
+                <img
+                  src="https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/picturePath/568feec434929a669ff4bfe75326c28a.jpeg"
+                  alt
+                  srcset
+                />
+              </a-popover>
               <ul class="xt-course-class-bs">
                 <li v-for="bs in 4" :key="bs">
                   <a-popover placement="rightTop">
                     <template slot="content">
-                      <p>Content</p>
-                    </template>
-                    <template slot="title">
-                      <span>Title</span>
+                      <p>观看直播</p>
                     </template>
                     <a-icon type="check-circle" />
                   </a-popover>
@@ -61,7 +63,7 @@
         </div>
         <div>学习回顾</div>
       </div>
-      <div>您可以在北京时间2020年09月17日24时之前提交作业和将作业发布到“晒作业”与大家分享</div>
+      <div class="xt-text-align-right xt-text-yellow">您可以在北京时间2020年09月17日24时之前提交作业和将作业发布到“晒作业”与大家分享</div>
     </div>
   </div>
 </template>
@@ -95,6 +97,14 @@ export default class PageView extends Vue {
     position: relative;
     // background: rgba(0, 0, 0, 0.2);
     animation: antFadeIn 0.6s;
+    > img {
+      display: block;
+      padding: 0;
+      margin: 0;
+      &.xt-cc-template-10 {
+        padding-bottom: 120px;
+      }
+    }
   }
   // 信息
   &-info {
@@ -224,141 +234,159 @@ export default class PageView extends Vue {
 <style lang="less" scoped>
 // 10 节课模板
 .xt-cc-template-10 {
+  margin-top: 90px;
   .xt-course-class-info {
     &.index-0 {
-      top: 200px;
-      left: 35px;
+      top: 210px;
+      left: 355px;
     }
     &.index-1 {
-      top: 70px;
-      left: 325px;
+      top: 130px;
+      left: 140px;
     }
     &.index-2 {
-      top: 240px;
-      left: 610px;
+      top: 80px;
+      left: 365px;
     }
     &.index-3 {
-      top: 50px;
-      left: 750px;
+      top: 10px;
+      left: 540px;
     }
     &.index-4 {
-      top: 85px;
-      left: 910px;
+      top: 10px;
+      left: 865px;
     }
     &.index-5 {
-      top: 50px;
-      left: 750px;
+      top: 150px;
+      left: 1030px;
     }
     &.index-6 {
-      top: 85px;
-      left: 910px;
+      top: 470px;
+      left: 1005px;
     }
     &.index-7 {
-      top: 85px;
-      left: 910px;
+      top: 480px;
+      left: 666px;
     }
     &.index-8 {
-      top: 50px;
-      left: 750px;
+      top: 460px;
+      left: 435px;
     }
     &.index-9 {
-      top: 85px;
-      left: 910px;
+      top: 410px;
+      left: 200px;
+    }
+    &.index-10 {
+      top: 570px;
+      left: -18px;
+    }
+    &.index-11 {
+      top: 400px;
+      left: -130px;
     }
   }
   .xt-course-class-review {
-    top: 140px;
-    left: 1050px;
+    top: 230px;
+    left: 10px;
   }
 }
 </style>
 <style lang="less" scoped>
 // 20 节课模板
 .xt-cc-template-20 {
+  margin-top: 120px;
   .xt-course-class-info {
     &.index-0 {
-      top: 200px;
-      left: 35px;
+      top: -60px;
+      left: 0px;
     }
     &.index-1 {
-      top: 70px;
-      left: 325px;
+      top: 45px;
+      left: 260px;
     }
     &.index-2 {
-      top: 240px;
-      left: 610px;
+      top: 138px;
+      left: 400px;
     }
     &.index-3 {
-      top: 50px;
-      left: 750px;
+      top: -70px;
+      left: 525px;
     }
     &.index-4 {
-      top: 85px;
-      left: 910px;
+      top: 102px;
+      left: 664px;
     }
     &.index-5 {
-      top: 50px;
-      left: 750px;
+      top: -70px;
+      left: 800px;
     }
     &.index-6 {
-      top: 85px;
-      left: 910px;
+      top: 66px;
+      left: 960px;
     }
     &.index-7 {
-      top: 85px;
-      left: 910px;
+      top: 187px;
+      left: 973px;
     }
     &.index-8 {
-      top: 50px;
-      left: 750px;
+      top: 330px;
+      left: 774px;
     }
     &.index-9 {
-      top: 85px;
-      left: 910px;
-    }
-    &.index-10 {
-      top: 200px;
-      left: 35px;
-    }
-    &.index-11 {
-      top: 70px;
-      left: 325px;
-    }
-    &.index-12 {
-      top: 240px;
+      top: 330px;
       left: 610px;
     }
+    &.index-10 {
+      top: 308px;
+      left: 450px;
+    }
+    &.index-11 {
+      top: 300px;
+      left: 300px;
+    }
+    &.index-12 {
+      top: 300px;
+      left: 200px;
+    }
     &.index-13 {
-      top: 50px;
-      left: 750px;
+      top: 210px;
+      left: 70px;
     }
     &.index-14 {
-      top: 85px;
-      left: 910px;
+      top: 310px;
+      left: 0px;
     }
     &.index-15 {
-      top: 50px;
-      left: 750px;
+      top: 610px;
+      left: 40px;
     }
     &.index-16 {
-      top: 85px;
-      left: 910px;
+      top: 630px;
+      left: 210px;
     }
     &.index-17 {
-      top: 85px;
-      left: 910px;
+      top: 585px;
+      left: 340px;
     }
     &.index-18 {
-      top: 50px;
-      left: 750px;
+      top: 540px;
+      left: 470px;
     }
     &.index-19 {
-      top: 85px;
-      left: 910px;
+      top: 525px;
+      left: 590px;
+    }
+    &.index-20 {
+      top: 540px;
+      left: 700px;
+    }
+    &.index-21 {
+      top: 640px;
+      left: 875px;
     }
   }
   .xt-course-class-review {
-    top: 140px;
+    top: 500px;
     left: 1050px;
   }
 }
