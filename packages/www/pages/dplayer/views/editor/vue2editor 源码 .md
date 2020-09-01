@@ -1,1 +1,0 @@
-# https://www.vue2editor.com/guide.html#installation
