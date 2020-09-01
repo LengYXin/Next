@@ -12,9 +12,9 @@ import { message } from 'ant-design-vue';
 import lodash from 'lodash';
 import NProgress from 'nprogress';
 import { TimeoutError } from "rxjs";
+import $global from './global';
 import { AjaxError, AjaxResponse } from "rxjs/ajax";
-const production = process.env.NODE_ENV === "production";
-export const ajax = new AjaxBasics({ target: process.env.target });
+export const ajax = new AjaxBasics({ target: $global.target });
 /**
  * 重置  AjaxBasics  配置
  */
@@ -28,7 +28,7 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
         if (res instanceof AjaxResponse) {
             // 无 响应 数据
             if (lodash.isNil(res.response)) {
-                throw lodash.merge(res, production ? { message: '服务器开小差了' } : { message: '响应体不存在' })
+                throw lodash.merge(res, $global.production ? { message: '服务器开小差了' } : { message: '响应体不存在' })
             }
             else if (!lodash.eq(lodash.get(res.response, 'code', 0), 0)) {
                 throw lodash.merge(res, { message: lodash.get(res.response, 'msg') })

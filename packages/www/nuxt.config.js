@@ -1,22 +1,9 @@
-const moment = require('moment');
 const build = require('./configs/build');
 const head = require('./configs/head');
+const env = require('./env.config.js');
 const router = require('./configs/router');
 const lodash = require('lodash');
-const target = {
-  pro: 'https://cr-api-uat.xuantong.cn',
-  uat: 'https://cr-api-uat.xuantong.cn',
-  dev: 'https://dev-api.xuantong.cn'
-}
-// api 地址
-const env = {
-  // api 地址
-  target: lodash.get(target, process.env.DEPLOY_ENV, target.dev),
-  // 版本号
-  version: `${process.env.npm_package_version} ${moment().format("YYYY-MM-DD HH:mm")}`,
-  // 环境 uat pro
-  DEPLOY_ENV: process.env.DEPLOY_ENV,
-};
+
 const proxy = {
   "/api": {
     target: env.target, // 代理地址

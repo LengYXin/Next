@@ -6,7 +6,19 @@ import "./utils/es6-proxy-polyfill.js";
 import "./utils/registerHooks";
 // Bowser()
 console.group('Start')
-console.info("LENG: middleware", process.env.NODE_ENV, process.env.version)
+console.info("LENG: middleware", {
+    NODE_ENV: process.env.NODE_ENV,
+    // 微信 App id
+    appid: process.env.appid,
+    // 域名
+    domain: process.env.domain,
+    // api 地址
+    target: process.env.target,
+    // 版本号
+    version: process.env.version,
+    // 环境 uat pro
+    DEPLOY_ENV: process.env.DEPLOY_ENV,
+})
 export default function (context: Context) {
     try {
         isBowser(context)
@@ -28,7 +40,7 @@ function onLog(context: Context) {
         if (context.from.name !== context.route.name) {
             console.clear();
             console.group('Route', context.route);
-            console.info("LENG: middleware", process.env.NODE_ENV, process.env.version);
+            console.info("LENG: middleware", context.store.$global);
             console.log("LENG: context", context);
             console.groupEnd();
         }

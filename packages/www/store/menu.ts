@@ -9,6 +9,7 @@ import { EnumLocaleLinks } from '@xt/client';
 import lodash from 'lodash';
 import { BindAll } from 'lodash-decorators';
 import { action, observable } from 'mobx';
+import $global from './global';
 import { Route } from 'vue-router';
 @BindAll()
 class Menu {
@@ -80,7 +81,7 @@ class Menu {
         this.breadcrumbShow = true;
     }
 }
-function onCreate(development = process.env.NODE_ENV === 'development') {
+function onCreate() {
     return [
         {
             key: "index",
@@ -106,7 +107,7 @@ function onCreate(development = process.env.NODE_ENV === 'development') {
         //     key: "my",
         //     name: EnumLocaleLinks.links_my,
         // },
-        development && {
+        $global.DEPLOY_ENV === "dev" && {
             key: "locale",
             name: '测试'
         },

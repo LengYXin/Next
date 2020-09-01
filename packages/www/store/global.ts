@@ -14,6 +14,21 @@ class XTGlobal {
         this.onInspectVersion()
     }
     /**
+     * 微信 appid
+     * @memberof XTGlobal
+     */
+    appid = process.env.appid;
+    /**
+     * domain 域名
+     * @memberof XTGlobal
+     */
+    domain = process.env.domain;
+    /**
+     * api 地址
+     * @memberof XTGlobal
+     */
+    target = process.env.target;
+    /**
      * 环境设备信息
      * @memberof XTGlobal
      */
@@ -29,10 +44,22 @@ class XTGlobal {
      */
     version = process.env.version;
     /**
+     * Node env
+     * @memberof XTGlobal
+     */
+    NODE_ENV = process.env.NODE_ENV;
+    /**
+     * 环境
+     * @memberof XTGlobal
+     */
+    DEPLOY_ENV = process.env.DEPLOY_ENV;
+    /**
      *生产环境
      * @memberof XTGlobal
      */
-    production = process.env.DEPLOY_ENV === 'pro' //&& process.env.NODE_ENV === "production";
+    get production() {
+        return this.DEPLOY_ENV === 'pro'
+    }
     /**
      * 检查版本信息 
      */
