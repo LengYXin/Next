@@ -29,6 +29,8 @@ export interface PaginationOptions {
     method?: string;
     /** 无限滚动 */
     infinite?: boolean;
+    /** 滚动加载的方向。默认 bottom */
+    direction?: 'top' | 'bottom'
     /** 数据唯一标识 key */
     key?: string;
     /** 默认的当前页数 1 */
@@ -55,6 +57,7 @@ export class Pagination<T> {
             key: 'key',
             method: 'post',
             infinite: false,
+            direction: 'bottom',
             defaultCurrent: 1,
             defaultPageSize: 10,
             currentKey: 'current',
@@ -90,7 +93,7 @@ export class Pagination<T> {
      */
     @observable
     private _dataSource: Array<T> = [];
-    
+
     @computed
     get dataSource(): Array<T> {
         // console.time()
@@ -243,7 +246,11 @@ export class Pagination<T> {
         if (lodash.eq(this.current, this.options.defaultCurrent) || this.options.infinite === false) {
             this._dataSource = res.dataSource;
         } else {
-            this._dataSource = lodash.concat(this._dataSource, res.dataSource);
+            if (this.options.direction === 'bottom') {
+                this._dataSource = lodash.concat(this._dataSource, res.dataSource);
+            } else {
+                this._dataSource = lodash.concat(res.dataSource, this._dataSource);
+            }
         }
         // 无限滚动
         if (this.options.infinite) {

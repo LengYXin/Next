@@ -12,7 +12,8 @@
         <lyx-dplayer :options="dplayer" />
       </a-col>
       <a-col :lg="6">
-        <lyx-editor class="lyx-editor-single" />
+        <message />
+        <!-- <lyx-editor class="lyx-editor-single" /> -->
       </a-col>
     </a-row>
   </div>
@@ -20,11 +21,14 @@
 <script lang="ts">
 import lodash from "lodash";
 import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
+import message from "./message.vue";
+// import message from "./test.vue";
+// import RootStore from "./store";
 @Component({
-  components: {
-  },
+  components: { message },
 })
 export default class extends Vue {
+  // RootStore = RootStore();
   dplayer = {
     video: {
       url:
@@ -33,6 +37,9 @@ export default class extends Vue {
       thumbnails: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
     },
   };
+  created() {
+    console.log("LENG: extends -> created -> this", this);
+  }
   mounted() {}
 
   updated() {}
@@ -44,4 +51,5 @@ export default class extends Vue {
   height: 100vh;
   width: 100vw;
 }
+
 </style>

@@ -117,7 +117,7 @@ export default class extends Vue {
     p {
       margin: auto;
       line-height: 26px;
-      max-height: 26px;
+      // max-height: 26px;
     }
   }
   .ant-comment-content-author {
