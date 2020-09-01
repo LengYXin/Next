@@ -9,6 +9,7 @@ import Viewer from 'viewerjs'
 import 'viewerjs/dist/viewer.css'
 import { debounce } from 'lodash'
 import Vue from 'vue';
+declare var global: any;
 const install = (Vue, { name = 'viewer', debug = false }) => {
     function createViewer(el, options, rebuild = false) {
         // nextTick执行，否则可能漏掉未渲染完的子元素

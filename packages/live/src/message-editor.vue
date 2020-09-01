@@ -11,7 +11,7 @@
       <a-avatar size="large" icon="user" />
     </a-col>
     <a-col :span="20">
-      <lyx-editor class="lyx-editor-single" @submit="onSubmit" />
+      <lyx-editor :rules="{required:true}" class="lyx-editor-single" @submit="onSubmit" />
     </a-col>
   </a-row>
 </template>

@@ -74,6 +74,27 @@ export default class extends Vue {
 .lyx-message {
   &-scroller {
     height: 100%;
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+      height: 0.5rem;
+      background: #fff;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 0.5rem;
+      background-color: #ccc;
+      -webkit-transition: background-color 0.15s;
+      transition: background-color 0.15s;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #999;
+    }
   }
 }
 </style>

@@ -10,44 +10,44 @@ import Base from 'ant-design-vue/lib/base';
 import Space from 'ant-design-vue/lib/space';
 import Vue from 'vue';
 Vue.use(Base)
-Vue.use(Space)
-Vue.use(ConfigProvider)
+// Vue.use(Space)
+// Vue.use(ConfigProvider)
 Vue.use(Tag)
-Vue.use(Badge)
-Vue.use(FormModel)
-Vue.use(Affix)
-Vue.use(Empty)
+// Vue.use(Badge)
+// Vue.use(FormModel)
+// Vue.use(Affix)
+// Vue.use(Empty)
 Vue.use(Layout)
-Vue.use(Menu)
-Vue.use(Tabs)
+// Vue.use(Menu)
+// Vue.use(Tabs)
 Vue.use(Button)
 Vue.use(Modal)
 Vue.use(Icon)
-Vue.use(Upload)
-Vue.use(Spin)
-Vue.use(BackTop)
+// Vue.use(Upload)
+// Vue.use(Spin)
+// Vue.use(BackTop)
 Vue.use(Divider)
-Vue.use(Popconfirm)
+// Vue.use(Popconfirm)
 Vue.use(Avatar)
-Vue.use(Input)
-Vue.use(List)
+// Vue.use(Input)
+// Vue.use(List)
 Vue.use(Dropdown)
-Vue.use(Descriptions)
-Vue.use(Skeleton)
-Vue.use(Card)
+// Vue.use(Descriptions)
+// Vue.use(Skeleton)
+// Vue.use(Card)
 Vue.use(Row)
 Vue.use(Col)
-Vue.use(Pagination)
-Vue.use(Breadcrumb)
+// Vue.use(Pagination)
+// Vue.use(Breadcrumb)
 Vue.use(Comment)
 Vue.use(Tooltip)
 Vue.use(Popover)
-Vue.use(Result)
-Vue.use(Steps)
-Vue.use(Checkbox)
-Vue.use(Radio)
-Vue.use(Statistic)
-Vue.use(Timeline)
+// Vue.use(Result)
+// Vue.use(Steps)
+// Vue.use(Checkbox)
+// Vue.use(Radio)
+// Vue.use(Statistic)
+// Vue.use(Timeline)
 Vue.prototype.$message = message;
 Vue.prototype.$notification = notification;
 Vue.prototype.$info = Modal.info;
@@ -61,9 +61,9 @@ message.config({
     duration: 2,
     maxCount: 3,
 });
-Spin.setDefaultIndicator({
-    indicator: h => {
-        const NodeJsx: any = Icon;
-        return <NodeJsx type="loading" size="large" />;
-    },
-});
+// Spin.setDefaultIndicator({
+//     indicator: h => {
+//         const NodeJsx: any = Icon;
+//         return <NodeJsx type="loading" size="large" />;
+//     },
+// });

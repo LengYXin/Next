@@ -19,6 +19,7 @@
   </div>
 </template>
 <script lang="ts">
+import './components'
 import lodash from "lodash";
 import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
 import message from "./message.vue";

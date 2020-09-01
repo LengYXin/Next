@@ -39,7 +39,7 @@ const store = {
 // 重置 AjaxBasics 配置
 onResetAjaxBasics(store.$storeUser);
 // 配置缓存数据
-onCreatePersist();
+// onCreatePersist();
 console.log("LENG: store", store)
 /**
  * 配置缓存数据
