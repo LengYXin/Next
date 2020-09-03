@@ -50,16 +50,18 @@ export class ControllerVideo {
      */
     onLikes(data, list = true) {
         try {
-            data = toJS(data)
             if (data.isLiked) {
                 throw '已点赞'
             }
-            data.likeCount++;
-            data.isLiked = true;
+            const updater = (old) => {
+                old.likeCount++;
+                old.isLiked = true;
+                return old
+            }
             if (list) {
-                this.Pagination.onUpdate(data, data);
+                this.Pagination.onUpdate(data, updater);
             } else {
-                this.Details.onUpdate(data);
+                this.Details.onUpdate(updater);
             }
             this.$ajax.post(EnumApiVideo.VideoPraise, { videoShareId: data.id })
         } catch (error) {

@@ -288,10 +288,11 @@ export class Pagination<T> {
      * @param value 
      */
     @action
-    onUpdate(key: string | T, value: T) {
+    onUpdate(key: string | T, updater: (oldValue: any) => any) {
         const dataSource = lodash.clone(this._dataSource);
         const index = lodash.findIndex(dataSource, this.getPredicate(key));
-        lodash.updateWith(dataSource, `[${index}]`, lodash.constant(value))
+        // lodash.updateWith(dataSource, `[${index}]`, lodash.constant(value))
+        lodash.updateWith(dataSource, `[${index}]`, (old) => updater(toJS(old)))
         this._dataSource = dataSource;
         return dataSource
     }

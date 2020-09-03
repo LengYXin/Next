@@ -26,13 +26,14 @@ export class VideoCommentPagination extends Pagination<any>{
      */
     onLikes(data) {
         try {
-            data = toJS(data)
             if (data.likeRecord) {
                 throw '已点赞'
             }
-            data.likeCount++;
-            data.likeRecord = true;
-            this.onUpdate(data, data);
+            this.onUpdate(data, (old) => {
+                old.likeCount++;
+                old.likeRecord = true;
+                return old
+            });
             this.$ajax.post(EnumApiVideo.VideoCommentPraise, { videoShareCommentId: data.id })
         } catch (error) {
             throw error

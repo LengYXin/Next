@@ -21,7 +21,7 @@ export class VideoDetails extends EntitiesBasics<IVideoDetails> {
   async onLoading(videoShareId) {
     await super.onLoading({ videoShareId });
     const urls = await this.$ajax.post<any>(EnumApiCurrency.UtilityUrl, { key: this.dataSource.videoUrl })
-    this.onUpdate({
+    this.onUpdate(() => ({
       quality: [
         {
           name: "高清",
@@ -36,7 +36,7 @@ export class VideoDetails extends EntitiesBasics<IVideoDetails> {
           url: urls.lowUrl
         }
       ]
-    })
+    }))
   }
   /**
    * 添加视频播放量

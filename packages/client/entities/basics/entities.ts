@@ -31,7 +31,7 @@ export class EntitiesBasics<T> {
      * @memberof EntitiesBasics
      */
     @observable
-    protected _dataSource:any = {};
+    protected _dataSource: any = {};
     /**
      * 加载状态
      * @memberof EntitiesBasics
@@ -120,10 +120,9 @@ export class EntitiesBasics<T> {
      * @param value 
      */
     @action
-    onUpdate(value: T) {
-        console.log("LENG: EntitiesBasics<T> -> onUpdate -> value", value)
+    onUpdate(updater: (oldValue: any) => any) {
         const dataSource = this.dataSource;
-        this.onSetDataSource(lodash.merge(dataSource, value))
+        this.onSetDataSource(lodash.merge(dataSource, updater(toJS(dataSource))))
     }
     /**
      * 重置
