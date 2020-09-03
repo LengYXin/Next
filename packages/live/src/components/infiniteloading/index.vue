@@ -3,10 +3,10 @@
  * @email lengyingxin8966@gmail.com
  * @create date 2020-08-05 14:16:27
  * @modify date 2020-08-05 14:16:27
- * @desc 滚动加载
+ * @desc 滚动加载 https://peachscript.github.io/vue-infinite-loading/zh/
  */
 <template>
-  <infinite-loading :identifier="identifier" :distance="300" @infinite="onInfinite">
+  <infinite-loading :direction="direction" :identifier="identifier" :distance="300" @infinite="onInfinite">
     <div class="infinite-loading-text" slot="spinner">正在加载...</div>
     <div class="infinite-loading-text" slot="no-more">暂时都在这里了~</div>
     <div class="infinite-loading-text" slot="no-results">暂时都在这里了~</div>
@@ -25,6 +25,7 @@ import lodash from "lodash";
 })
 export default class infinite extends Vue {
   @Prop({ default: Date.now() }) identifier;
+  @Prop({ default: 'bottom' }) direction;
   // @Debounce(50)
   // onLoading(event) {
   //   console.log("LENG: infinite -> onLoading -> this", this);
@@ -48,7 +49,7 @@ export default class infinite extends Vue {
 <style lang="less" scoped>
 .infinite-loading-text {
   // font-size: @font-size-md;
-  // padding: 40px 0 20px;
+  padding: 10px 0;
   // color: @xt-yellow-6;
 }
 </style>
