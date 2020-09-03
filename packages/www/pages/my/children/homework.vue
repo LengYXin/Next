@@ -14,7 +14,12 @@
       :tabPane="tabPane"
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
-    />
+    >
+      <span slot="tab" slot-scope="tab" >
+        aaa
+        <span v-text="tab.title"></span>
+      </span>
+    </xt-tabs>
     <a-list class="xt-content" item-layout="horizontal" :data-source="[{},{},{},{},{},{},{},{}]">
       <!-- <nuxt-link slot="renderItem" slot-scope="item" :to="`/course/${item.courseId}`"> -->
       <a-list-item slot="renderItem" slot-scope="item">
