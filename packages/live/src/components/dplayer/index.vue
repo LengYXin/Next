@@ -75,6 +75,7 @@ export default class extends Vue {
 </script>
 
 <style lang="less">
+@import "./style.less";
 .lyx-dplayer {
   height: 100vh;
   .dplayer-video {

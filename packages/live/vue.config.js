@@ -17,11 +17,19 @@ module.exports = {
       new MomentLocalesPlugin({ localesToKeep: ['es-us', 'zh-cn'] }),
       new webpack.BannerPlugin({ banner: `@author 冷 (https://github.com/LengYXin)\n@email lengyingxin8966@gmail.com` })
     ],
-    resolve:{
-      alias:{
+    resolve: {
+      alias: {
         "@ant-design/icons/lib/dist$": path.resolve(process.cwd(), 'src/components/icon.ts'),
       }
-    }
+    },
+    // module: {
+    //   rules: [
+    //     {
+    //       test: /\.art$/,
+    //       loader: 'art-template-loader',
+    //     },
+    //   ]
+    // }
   },
   css: {
     loaderOptions: {
