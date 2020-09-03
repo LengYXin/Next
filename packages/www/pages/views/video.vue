@@ -1,18 +1,34 @@
 <template>
   <a-card :bordered="false" :loading="loading">
-    <xt-dplayer class="xt-hoeme-video" :options="dplayer" />
+    <xt-dplayer class="xt-home-video" :options="dplayer" />
     <a-descriptions class="xt-video-list">
       <a-descriptions-item>
-        <a-badge class="xt-video-item xt-font-family-FZLTHJW" status="default" text="暄桐线上公开课" />
+        <a-badge
+          class="xt-video-item xt-font-family-FZLTHJW xt-video-item-active"
+          status="processing"
+          text="暄桐线上公开课"
+        />
       </a-descriptions-item>
       <a-descriptions-item>
-        <a-badge class="xt-video-item xt-font-family-FZLTHJW" status="default" text="如何上课和交作业" />
+        <a-badge
+          class="xt-video-item xt-font-family-FZLTHJW"
+          status="default"
+          text="如何上课和交作业"
+        />
       </a-descriptions-item>
       <a-descriptions-item>
-        <a-badge class="xt-video-item xt-font-family-FZLTHJW" status="default" text="暄桐线上公开课" />
+        <a-badge
+          class="xt-video-item xt-font-family-FZLTHJW"
+          status="default"
+          text="暄桐线上公开课"
+        />
       </a-descriptions-item>
       <a-descriptions-item>
-        <a-badge class="xt-video-item xt-font-family-FZLTHJW" status="default" text="暄桐线上公开课" />
+        <a-badge
+          class="xt-video-item xt-font-family-FZLTHJW"
+          status="default"
+          text="暄桐线上公开课"
+        />
       </a-descriptions-item>
       <a-descriptions-item>
         <a-badge
@@ -22,7 +38,11 @@
         />
       </a-descriptions-item>
       <a-descriptions-item>
-        <a-badge class="xt-video-item xt-font-family-FZLTHJW" status="default" text="暄桐线上公开课" />
+        <a-badge
+          class="xt-video-item xt-font-family-FZLTHJW"
+          status="default"
+          text="暄桐线上公开课"
+        />
       </a-descriptions-item>
     </a-descriptions>
   </a-card>
@@ -56,21 +76,37 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
+<style lang="less">
+.xt-video-item {
+  .ant-badge-status-dot.ant-badge-status-processing {
+    background: @xt-green-6;
+  }
+  .ant-badge-status-text {
+    color: @xt-grey-6;
+    font-size: 16px;
+    line-height: 2.6;
+  }
+  &:hover {
+    .ant-badge-status-text {
+      color: @xt-green-6;
+    }
+    .ant-badge-status-dot {
+      background-color: @xt-green-6;
+    }
+  }
+  &.xt-video-item-active {
+    .ant-badge-status-text {
+      color: @xt-green-6;
+    }
+  }
+}
+</style>
 <style lang="less" scoped>
-.xt-hoeme-video {
+.xt-home-video {
   width: 560px;
   margin: auto;
 }
 .xt-video-list {
   margin-top: 46px;
-}
-</style>
-<style lang="less" >
-.xt-video-item {
-  .ant-badge-status-text {
-    color: #999899;
-    font-size: 16px;
-    line-height: 2.6;
-  }
 }
 </style>

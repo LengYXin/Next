@@ -6,7 +6,7 @@
  * @desc 作业
  */
 <template>
-  <div class="xt-content">
+  <div class="xt-homework">
     <xt-tabs
       :affix="true"
       align="right"
@@ -15,43 +15,200 @@
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
     />
-    <a-list class="xt-content" item-layout="horizontal" :data-source="[{},{},{},{},{},{},{},{}]">
+
+    <!-- <List :loading="Pagination.loading" :dataSource="Pagination.dataSource" /> -->
+    <!-- 存在 更改地址栏 页签的时候 设置 key 用于触发初始化 change   -->
+    <!-- <xt-pagination :key="activeKey" :Pagination="Pagination" :toQuery="true" /> -->
+    <!-- @change="onCurrentChange" -->
+
+    <a-list
+      class="xt-content"
+      item-layout="vertical"
+      :data-source="Pagination.dataSource"
+    >
       <!-- <nuxt-link slot="renderItem" slot-scope="item" :to="`/course/${item.courseId}`"> -->
-      <a-list-item slot="renderItem" slot-scope="item">
-        <a-list-item-meta :description="item.statusName">
-          <a slot="title" href="https://www.antdv.com/">{{ item.courseName }}</a>
-          <img slot="avatar" width="272" alt="logo" v-lazy="item.coursePictureUri" />
-        </a-list-item-meta>
-        <!-- <a-button slot="actions" type="primary">Primary</a-button> -->
+      <a-list-item slot="renderItem" slot-scope="item, index">
+        <!-- <a-list-item-meta :description="'来自《' + item.courseName + '》'">
+          <a slot="title" href="https://www.antdv.com/">{{
+            item.classhourName + item.homeworkTitle
+          }}</a>
+        </a-list-item-meta> -->
+        <h3>{{ item.classhourName + item.homeworkTitle }}</h3>
+        <a-row type="flex" justify="space-around" align="middle">
+          <a-col :span="20">
+            来自
+            <nuxt-link :to="`/course/${item.courseId}`"
+              >《{{ item.courseName }}》
+            </nuxt-link></a-col
+          >
+          <a-col :span="4">
+            <a-button type="primary" v-if="item.suned !== 0">
+              晒作业
+            </a-button>
+            <a-buttton type="primary" v-else :disabled="disabled"
+              >已晒过</a-buttton
+            >
+          </a-col>
+        </a-row>
+        <div v-html="item.content"></div>
+        <div>图片占位</div>
+        <div class="xt-font-size-sm">共1张</div>
+        <a-row type="flex" justify="space-around" align="middle">
+          <a-col :span="14">
+            {{ item.createTime }}
+          </a-col>
+          <a-col :span="10" class="xt-text-align-right">
+            <span>cici助教已评阅作业</span
+            ><a-button type="link" @click="showTeachingModal(index)"
+              >去看看 ></a-button
+            >
+          </a-col>
+        </a-row>
       </a-list-item>
       <!-- </nuxt-link> -->
     </a-list>
+
+    <xt-infinite-loading
+      :identifier="Pagination.onlyKey"
+      @loading="onLoading"
+    />
+
+    <a-modal
+      v-model="visible"
+      title="助教老师说"
+      :footer="null"
+      :width="730"
+      class="xt-homework-modal"
+    >
+      <div>
+        <h3>{{ currentItem.classhourName + currentItem.homeworkTitle }}</h3>
+        <a-row type="flex" justify="space-around" align="middle">
+          <a-col :span="20">
+            来自
+            <nuxt-link :to="`/course/${currentItem.courseId}`"
+              >《{{ currentItem.courseName }}》
+            </nuxt-link></a-col
+          >
+          <a-col :span="4" class="xt-text-align-right">
+            <a-button type="primary" v-if="currentItem.suned !== 0">
+              晒作业
+            </a-button>
+            <a-buttton type="primary" v-else :disabled="disabled"
+              >已晒过</a-buttton
+            >
+          </a-col>
+        </a-row>
+        <div v-html="currentItem.content"></div>
+        <div>图片占位</div>
+        <div class="xt-font-size-sm">共1张</div>
+        <div>{{ currentItem.createTime }}</div>
+      </div>
+
+      <div>
+        <a-row type="flex" justify="start" align="middle" :gutter="[12, 0]">
+          <a-col flex="40px">
+            <a-avatar
+              size="large"
+              src="http://127.0.0.1:3001/_nuxt/assets/img/zj_default.jpg"
+              alt="助教头像"
+            />
+          </a-col>
+          <a-col flex="auto">
+            <div>张磊助教</div>
+            <div>05-28 19:11</div>
+          </a-col>
+        </a-row>
+        <div class="xt-content-reply">回复内容</div>
+      </div>
+
+      <div>
+        <a-row type="flex" justify="end" align="middle" :gutter="[12, 0]">
+          <a-col flex="auto" class="xt-text-align-right">
+            <div>张磊助教</div>
+            <div>05-28 19:11</div>
+          </a-col>
+          <a-col flex="40px">
+            <a-avatar
+              size="large"
+              src="http://127.0.0.1:3001/_nuxt/assets/img/zj_default.jpg"
+              alt="助教头像"
+            />
+          </a-col>
+        </a-row>
+        <div class="xt-text-align-right">
+          <div class="xt-content-reply">回复内容</div>
+        </div>
+      </div>
+    </a-modal>
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Modal } from "ant-design-vue";
+import { Observer } from "mobx-vue";
 import lodash from "lodash";
+import { Context } from "@nuxt/types";
+
+@Observer
 @Component({
+  // async fetch(ctx: Context) {
+  //   // await ctx.store.$my.onGetMyCourseList();
+  // },
   scrollToTop: true,
   components: {},
 })
 export default class PageView extends Vue {
+  @Provide("MyStore")
+  get PageStore() {
+    return this.$store.$my;
+  }
+  get Pagination() {
+    return this.PageStore.MyWork;
+  }
+  currentItem = {};
   tabPane = [
     { key: 1, title: "已评阅" },
-    { key: 2, title: "未评阅" },
+    { key: 0, title: "已提交" },
   ];
   defaultActiveKey = "1";
-  activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
+  activeKey = "1";
+  visible = true;
+
   tabsChange(activeKey) {
-    // this.Pagination.onReset();
+    this.Pagination.onReset();
     this.activeKey = activeKey;
-    // this.onLoading();
+    this.onLoading();
   }
-  mounted() {}
+  onLoading(event?) {
+    this.Pagination.onLoading({ typeKey: this.activeKey }, {}, event);
+  }
+  showTeachingModal(index) {
+    this.visible = true;
+    this.currentItem = this.Pagination.dataSource[index];
+  }
+  handleOk(e) {
+    console.log(e);
+    this.visible = false;
+  }
+  mounted() {
+    console.log("PageView -> mounted -> this.Pagination", this.Pagination);
+  }
   updated() {}
   destroyed() {}
 }
 </script>
-<style>
+<style lang="less" scope>
+.xt-homework {
+  &-modal {
+    .ant-modal-content {
+      background-color: #fdfcfa;
+    }
+  }
+}
+.xt-content-reply {
+  margin: 0 20px;
+  display: inline-block;
+  padding: 20px;
+  background-color: #ffffff;
+}
 </style>
