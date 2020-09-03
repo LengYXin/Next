@@ -15,7 +15,6 @@
   <!-- </div> -->
 </template>
 <script lang="ts">
-import InfiniteLoading from "vue-infinite-loading";
 import { Component, Prop, Vue, Emit } from "vue-property-decorator";
 import { Debounce, BindAll } from "lodash-decorators";
 import lodash from "lodash";
