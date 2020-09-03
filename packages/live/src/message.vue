@@ -62,9 +62,10 @@ export default class extends Vue {
 <style lang="less" scoped>
 .lyx-message {
   height: 100vh;
+    background: #fff;
   &-header {
     background: #fff;
-    height: 200px;
+    height: auto;
     padding: 0;
   }
   &-content {

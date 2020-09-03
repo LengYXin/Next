@@ -7,14 +7,14 @@
  */
 <template>
   <div class="lyx-header">
-    <a-row>
+    <a-row class="lyx-header-row">
       <a-col class="lyx-header-avatar" :span="4">
-        <a-avatar size="large" icon="user" />
+        <a-avatar :size="52" icon="user" />
       </a-col>
       <a-col class="lyx-header-title" :span="20">
         <h1>第15课《玄密塔碑》楷书进阶~</h1>
         <div class="lyx-header-time">
-          <a-tag>直播</a-tag>
+          <a-tag class="lyx-header-tag">直播</a-tag>
           <time v-dateFormat="dataTime" format="YYYY.MM.DD HH:mm:ss" />
         </div>
       </a-col>
@@ -62,10 +62,18 @@ export default class extends Vue {
 </script>
 <style lang="less" scoped>
 .lyx-header {
-  padding: 50px 0 24px;
+  padding: 53px 0 0;
   font-family: PingFangSC-Regular, PingFang SC;
+  &-row {
+    // padding: 0 20px;
+  }
   &-avatar {
     text-align: center;
+  }
+  &-tag {
+    background: #f05a5a;
+    color: #fff;
+    border: none;
   }
   &-title {
     padding-right: 20px;
@@ -73,7 +81,7 @@ export default class extends Vue {
       font-size: 23px;
       font-weight: 600;
       color: rgba(0, 0, 0, 0.85);
-      line-height: 25px;
+      line-height: 31px;
       margin: 0;
     }
   }
@@ -81,14 +89,26 @@ export default class extends Vue {
     font-size: 16px;
     font-weight: 400;
     color: #999999;
-    line-height: 30px;
+    line-height: 25px;
   }
   &-des {
-    padding: 20px;
+    padding: 18px 20px 24px;
     font-size: 18px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.85);
     line-height: 25px;
+    text-align: justify;
+    position: relative;
+    &::after {
+      content: " ";
+      position: absolute;
+      display: block;
+      height: 1px;
+      bottom: 0;
+      background: #d0d0d0;
+      left: 20px;
+      right: 20px;
+    }
   }
 }
 </style>
