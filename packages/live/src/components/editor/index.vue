@@ -244,6 +244,7 @@ export default {
 </script>
 
 <style lang="less">
+@import "./style.less";
 .ql-editor {
   min-height: 100px;
   max-height: 500px;

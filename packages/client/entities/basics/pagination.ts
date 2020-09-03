@@ -270,6 +270,14 @@ export class Pagination<T> {
         this.loading = loading;
     }
     /**
+     * 追加
+     * @param item 
+     */
+    @action
+    onPush(item: T) {
+        this._dataSource.push(item)
+    }
+    /**
      * 根据 key 查找 数据
      * @param {string} key
      * @returns {T}

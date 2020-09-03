@@ -1,0 +1,60 @@
+@color-1: #C4A57F;
+@color-2: #5E5E5E;
+
+.videoIcon(@content) {
+    font-family: "video" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #fff;
+
+    &::before {
+        content: @content;
+    }
+
+    >span,
+    >svg {
+        display: none;
+    }
+
+}
+
+.lyx-dplayer {
+    .dplayer-icon.dplayer-play-icon {
+        .videoIcon("\e609")
+    }
+
+    &.dplayer-playing {
+
+        // 播放按钮
+        .dplayer-icon.dplayer-play-icon {
+            .videoIcon("\e60a")
+        }
+    }
+
+    &.dplayer-paused {
+
+        // 播放按钮
+        .dplayer-icon.dplayer-play-icon {
+            .videoIcon("\e609")
+        }
+    }
+
+    // 音量
+    .dplayer-icon.dplayer-volume-icon {
+        .videoIcon("\e603")
+    }
+
+    // 进度
+    .dplayer-controller .dplayer-bar-wrap .dplayer-bar {
+        color: @color-2;
+
+        .dplayer-played {
+            background: @color-1  !important;
+            .dplayer-thumb {
+                background: #FFFFFF !important;
+            }
+        }
+    }
+}

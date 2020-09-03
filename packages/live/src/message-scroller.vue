@@ -6,7 +6,12 @@
  * @desc 视频
  */
 <template>
-  <DynamicScroller class="lyx-message-scroller" :items="Pagination.dataSource" :min-item-size="24">
+  <DynamicScroller
+    ref="Scroller"
+    class="lyx-message-scroller"
+    :items="Pagination.dataSource"
+    :min-item-size="24"
+  >
     <template #before>
       <lyx-infinite-loading direction="top" @loading="onLoading" />
     </template>
@@ -35,8 +40,11 @@
 </template>
 <script lang="ts">
 import lodash from "lodash";
+import { Debounce } from "lodash-decorators";
 import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
+import { map } from "rxjs/operators";
+import { interval } from "rxjs";
 @Observer
 @Component({
   components: {},
@@ -51,20 +59,51 @@ export default class extends Vue {
   get id() {
     return 28; //this.$route.params.id;
   }
-  created() {
-    this.Pagination.onReset({ direction: "top" });
+  get Scroller(): any {
+    return this.$refs.Scroller;
   }
-  onLoading(event?) {
-    this.Pagination.onLoading({ singleCourseId: this.id }, {}, event);
+  created() {
+    this.Pagination.onReset({ direction: "top", defaultPageSize: 30 });
+  }
+  async onLoading(event?) {
+    // await this.Pagination.onLoading({ singleCourseId: this.id }, {}, event);
+    // if (this.Pagination.current === 2) {
+    //   this.scrollToBottom();
+    // }
   }
   getComment(item) {
-    return {
-      content: item.content,
-      avatar: item.userHeader,
-      author: item.userNickname,
-      time: item.createTime,
-      bishan: item.bishanNum,
-    };
+    return item;
+  }
+  // @Debounce(50)
+  scrollToBottom() {
+    // lodash.delay(() => this.Scroller.scrollToBottom(), 100);
+    this.Scroller.scrollToBottom();
+  }
+  mounted() {
+    console.log("LENG: extends -> scrollToBottom -> this.Scroller", this.Scroller)
+    this.onText();
+  }
+  onText() {
+    const int = interval(100)
+      .pipe(
+        map((x) => {
+          if (x > 50) {
+            int.unsubscribe();
+          }
+          return {
+            id: x,
+            author: "author",
+            time: Date.now(),
+            avatar:
+              "https://oss-free.xuantong.cn/picturePath/a1815d5ecbf18fad30e48998f00b4a0e.blob",
+            content: "信息",
+          };
+        })
+      )
+      .subscribe((obs) => {
+        this.Pagination.onPush(obs);
+        this.scrollToBottom();
+      });
   }
   updated() {}
   destroyed() {}

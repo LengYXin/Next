@@ -96,6 +96,7 @@ export default class extends Vue {
 <style lang="less" scoped>
 .lyx-comment {
   padding: 0 20px;
+  // animation: antFadeIn 0.3s;
   &-content {
     overflow: hidden;
     text-overflow: ellipsis;
