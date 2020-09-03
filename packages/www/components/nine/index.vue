@@ -21,7 +21,7 @@ import lodash from "lodash";
 @Component({
   components: {},
 })
-export default class infinite extends Vue {
+export default class extends Vue {
   @Prop({ default: () => [] }) dataSource: Array<any>;
   @Prop({ default: "thumb" }) thumb;
   @Prop({ default: 200 }) size;
@@ -71,7 +71,7 @@ export default class infinite extends Vue {
       maxHeight: null,
     };
     if (this.length === 1) {
-    //   style.overflow = "hidden";
+      //   style.overflow = "hidden";
     } else if (this.length === 4) {
       base = 2;
     }
@@ -86,7 +86,7 @@ export default class infinite extends Vue {
 <style lang="less" scoped>
 .xt-nine {
   //   overflow: hidden;
-//   padding: 20px;
+  //   padding: 20px;
   &-img {
     display: block;
     width: 100%;
