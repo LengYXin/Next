@@ -22,6 +22,8 @@ import shadow from "./shadow/index.vue";
 import qrcode from "./qrcode/index.vue";
 import imgCode from "./imgCode/index.vue";
 import inspect from './business/user/inspect.vue'
+import nine from "./nine/index.vue";
+
 // 视频
 Vue.component('xt-dplayer', () => import('./dplayer/index.vue'));
 // 富文本
@@ -53,4 +55,6 @@ Vue.component('xt-comment', comment);
 Vue.component('xt-action', action);
 // 阴影
 Vue.component('xt-shadow', shadow);
+// 九宫格
+Vue.component('xt-nine', nine);
 

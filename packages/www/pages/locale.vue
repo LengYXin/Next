@@ -17,7 +17,12 @@
     <a-divider>视频</a-divider>
     <xt-dplayer :options="dplayer" />
     <a-divider>富文本</a-divider>
-    <xt-editor :rules="{requiredFile:true}"  @submit="onSubmit" v-model="editor" :editorOptions="editorSettings" />
+    <xt-editor
+      :rules="{requiredFile:true}"
+      @submit="onSubmit"
+      v-model="editor"
+      :editorOptions="editorSettings"
+    />
     <a-divider></a-divider>
     <xt-editor
       @submit="onSubmit"
@@ -95,13 +100,11 @@
         <img :src="cropper.img" :style="previews.img" />
       </div>
     </div>
+    <a-divider>九宫格</a-divider>
+    <xt-nine :dataSource="nine" />
     <a-divider>图片查看</a-divider>
-    <a-card v-viewer >
-      <a-card-grid
-        style="width:33.33%;text-align:center"
-        v-for="item in imgs"
-        :key="item.key"
-      >
+    <a-card v-viewer>
+      <a-card-grid style="width:33.33%;text-align:center" v-for="item in imgs" :key="item.key">
         <img alt="example" style="width:100%;" v-lazy="item.src" />
       </a-card-grid>
     </a-card>
@@ -169,6 +172,20 @@ export default class PageView extends Vue {
       thumbnails: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
     },
   };
+  // 九宫格数据
+  nine = [
+    // "https://oss-free.xuantong.cn/picturePath/9b58a19a5cfb4321a8007a50e90361aa.jpg"
+    // "https://cr-uat.xuantong.cn/iconimg/Four_stores.png"
+    "https://oss-free.xuantong.cn/thumbPath/9718635a41b958895b78414b7a2cf554.jpg",
+    "https://oss-free.xuantong.cn/thumbPath/b67081a30af227494bffe5c4e52aee1e.jpg",
+    "https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/thumbPath/f3847e23a3149bb19e889f5a82a38e40.jpg",
+    "https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/thumbPath/b97681765e229956728ed86a1539823c.jpg",
+    "https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/thumbPath/7ac2682c6df818867b9f74eb1e2bb05b.jpg",
+    "https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/thumbPath/1392e2cabaa55d33610a51b71bce5091.jpg",
+    "https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/thumbPath/bf492f3c96a8b643836d3c1240ea120a.jpg",
+    "https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/thumbPath/1e798baa014bb0f0f7afe11e9ecc700b.jpg",
+    "https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/thumbPath/59921de3e348c0cd84c588888272c0e9.jpg",
+  ];
   dataTime = Date.now();
   deadline = Date.now() + 1000 * 10;
   onUpdateTime() {
