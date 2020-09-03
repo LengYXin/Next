@@ -8,7 +8,7 @@
 <template>
   <!-- <div class="xt-flex-center"> -->
   <a-row class="xt-nine" v-viewer :style="getNineStyle()">
-    <a-col :span="getSpan(index)" v-for="(img,index) in imgs" :key="img">
+    <a-col :span="getSpan()" v-for="img in imgs" :key="img">
       <img class="xt-nine-img hvr-float-shadow" v-lazy="img" :style="getStyle()" />
     </a-col>
   </a-row>
@@ -37,7 +37,7 @@ export default class extends Vue {
   get length() {
     return this.dataSource.length;
   }
-  getSpan(index) {
+  getSpan() {
     if (this.length === 1) {
       return 24;
     } else if (this.length === 4) {
