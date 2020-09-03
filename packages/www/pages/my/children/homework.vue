@@ -33,21 +33,21 @@
             item.classhourName + item.homeworkTitle
           }}</a>
         </a-list-item-meta> -->
-        <h3>{{ item.classhourName + item.homeworkTitle }}</h3>
+        <h3 v-text="item.classhourName + item.homeworkTitle"></h3>
         <a-row type="flex" justify="space-around" align="middle">
           <a-col :span="20">
             来自
-            <nuxt-link :to="`/course/${item.courseId}`"
-              >《{{ item.courseName }}》
-            </nuxt-link></a-col
-          >
+            <nuxt-link
+              :to="`/course/${item.courseId}`"
+              v-text="'《' + item.courseName + '》'"
+            >
+            </nuxt-link
+          ></a-col>
           <a-col :span="4">
             <a-button type="primary" v-if="item.suned !== 0">
               晒作业
             </a-button>
-            <a-buttton type="primary" v-else :disabled="disabled"
-              >已晒过</a-buttton
-            >
+            <a-button type="primary" v-else disabled>已晒过</a-button>
           </a-col>
         </a-row>
         <div v-html="item.content"></div>
@@ -107,11 +107,7 @@
       <div>
         <a-row type="flex" justify="start" align="middle" :gutter="[12, 0]">
           <a-col flex="40px">
-            <a-avatar
-              size="large"
-              src="http://127.0.0.1:3001/_nuxt/assets/img/zj_default.jpg"
-              alt="助教头像"
-            />
+            <a-avatar size="large" icon="user" />
           </a-col>
           <a-col flex="auto">
             <div>张磊助教</div>
@@ -128,11 +124,7 @@
             <div>05-28 19:11</div>
           </a-col>
           <a-col flex="40px">
-            <a-avatar
-              size="large"
-              src="http://127.0.0.1:3001/_nuxt/assets/img/zj_default.jpg"
-              alt="助教头像"
-            />
+            <a-avatar size="large" icon="user" />
           </a-col>
         </a-row>
         <div class="xt-text-align-right">
