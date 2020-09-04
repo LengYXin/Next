@@ -71,6 +71,7 @@ export default class extends Vue {
   &-content {
   }
   &-footer {
+    background: #fff;
     padding: 0;
     height: 120px;
   }
