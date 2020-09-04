@@ -8,10 +8,15 @@
 <template>
   <a-row class="lyx-msg-editor">
     <a-col class="lyx-msg-editor-avatar" :span="4">
-      <a-avatar size="large" icon="user" />
+      <a-avatar :size="40" icon="user" />
     </a-col>
     <a-col :span="20">
-      <lyx-editor :rules="{required:true}" class="lyx-editor-single" @submit="onSubmit" />
+      <lyx-editor
+        placeholder="和同学们聊聊吧…"
+        :rules="{required:true}"
+        class="lyx-editor-single"
+        @submit="onSubmit"
+      />
     </a-col>
   </a-row>
 </template>
@@ -36,14 +41,25 @@ export default class extends Vue {
 
   async onSubmit(event) {
     try {
-      await this.Pagination.onInstall({
-        singleCourseId: this.id,
-        content: event.html,
-        contentLength: event.length,
-        userType: 1,
-      });
+      // await this.Pagination.onInstall({
+      //   singleCourseId: this.id,
+      //   content: event.html,
+      //   contentLength: event.length,
+      //   userType: 1,
+      // });
       event.onReset();
-      this.Pagination.onReset();
+      // this.Pagination.onReset();
+      this.Pagination.onPush({
+        id: lodash.uniqueId("test"),
+        author: lodash.sample(["林一", "张三", "李四四"]),
+        time: Date.now(),
+        avatar: lodash.sample([
+          "https://oss-free.xuantong.cn/picturePath/b8938fb359b16ce19be6419160b428f5.blob",
+          "https://oss-free.xuantong.cn/picturePath/a1815d5ecbf18fad30e48998f00b4a0e.blob",
+        ]),
+        content: event.html,
+        jushou: lodash.sample([true, false]),
+      });
     } catch (error) {
       console.log("LENG: PageView -> onSubmit -> error", error);
       // this.$message.error(error);

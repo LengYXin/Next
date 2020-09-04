@@ -19,7 +19,7 @@
   </div>
 </template>
 <script lang="ts">
-import './components'
+import "./components";
 import lodash from "lodash";
 import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
 import message from "./message.vue";
@@ -51,6 +51,15 @@ export default class extends Vue {
 .lyx-layout {
   height: 100vh;
   width: 100vw;
+  font-family: PingFangSC-Regular, PingFang SC;
 }
-
+</style>
+<style lang="less">
+.lyx-icon {
+  width: 2em;
+  height: 2em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 </style>

@@ -9,18 +9,26 @@
   <a-row class="lyx-editor-toolbar" type="flex" :gutter="4">
     <a-col>
       <!-- 表情 -->
-      <a-popover placement="rightTop" trigger="click">
+      <a-popover placement="top" trigger="click">
         <template slot="content">
           <lyx-face @select="onAddFace" />
         </template>
         <span class="lyx-editor-span">
-          <a-icon class="lyx-editor-icon" type="smile" />
-          <span class="lyx-editor-icon-text">表情</span>
+          <svg class="lyx-icon lyx-icon-bq" aria-hidden="true">
+            <use xlink:href="#video-biaoqing" />
+          </svg>
+          <!-- <a-icon class="lyx-editor-icon" type="smile" /> -->
+          <!-- <span class="lyx-editor-icon-text">表情</span> -->
         </span>
       </a-popover>
       <a-divider type="vertical"></a-divider>
+      <span class="lyx-editor-span">
+        <svg class="lyx-icon lyx-icon-jushou" aria-hidden="true">
+          <use xlink:href="#video-jushou" />
+        </svg>
+      </span>
       <!-- 图片 -->
-      <a-popover placement="rightTop" trigger="click">
+      <!-- <a-popover placement="rightTop" trigger="click">
         <template slot="content">
           <div class="lyx-editor-upload">
             <a-upload
@@ -43,7 +51,7 @@
             <span v-text="maxFile"></span>)
           </span>
         </span>
-      </a-popover>
+      </a-popover>-->
     </a-col>
     <a-col flex="1" class="lyx-editor-btns">
       <!-- 默认插槽位置 -->
@@ -51,7 +59,11 @@
       <a-divider type="vertical"></a-divider>
       <!-- 按钮插槽 -->
       <slot name="submit" v-bind:quill="quill">
-        <a-button type="primary" v-text="buttonText" @click="onSubmitRules"></a-button>
+        <a-button class="lyx-editor-submit" type="link" @click="onSubmitRules">
+          <svg class="lyx-icon" aria-hidden="true">
+            <use xlink:href="#video-fasong" />
+          </svg>
+        </a-button>
       </slot>
     </a-col>
   </a-row>
@@ -60,8 +72,7 @@
 import { Component, Prop, Vue, Emit } from "vue-property-decorator";
 import lodash from "lodash";
 @Component({
-  components: {
-  },
+  components: {},
 })
 export default class extends Vue {
   // 富文本
@@ -150,22 +161,32 @@ export default class extends Vue {
 }
 </script>
 <style lang="less" >
+@color: #c4a57f4d;
 // 单行样式
 .lyx-editor-single.quillWrapper {
   position: relative;
-  padding-right: 110px;
+  width: 360px;
+  // padding-right: 110px;
+  .ql-snow.ql-toolbar {
+    display: none;
+  }
+  .ql-container.ql-snow {
+    border: none;
+  }
   .ql-editor {
-    min-height: 44px;
-    max-height: 66px;
+    min-height: 40px;
+    max-height: 40px;
     padding-right: 44px;
+    background: @color;
+    border-radius: 50px;
   }
   .lyx-editor-toolbar {
-    position: absolute;
-    right: 16px;
-    bottom: 50%;
-    // margin-bottom: 50%;
-    transform: translateY(50%);
-    padding: 0;
+    // position: absolute;
+    // right: 16px;
+    // bottom: 50%;
+    // // margin-bottom: 50%;
+    // transform: translateY(50%);
+    // padding: 0;
   }
   .lyx-editor-icon {
     margin-top: 4px;
@@ -195,11 +216,12 @@ export default class extends Vue {
   }
 }
 .lyx-editor-toolbar {
-  padding-top: 16px;
+  padding: 10px 10px 0;
   .lyx-editor-span {
     display: inline-block;
     cursor: pointer;
   }
+
   .lyx-editor-icon-text {
     display: inline-block;
     transform: translateY(-25%);
@@ -209,6 +231,25 @@ export default class extends Vue {
   }
   .lyx-editor-btns {
     text-align: right;
+    position: absolute;
+    right: 3px;
+    top: 5px;
+    // top: 25%;
+    // margin-bottom: 50%;
+    // transform: translateY(50%);
+    padding: 0;
+  }
+  .lyx-icon-jushou{
+    width: 29px !important;
+    height: 29px !important;
+    margin-left: 15px;
+  }
+  .lyx-icon-bq {
+    width: 29px !important;
+    height: 29px !important;
+  }
+  .lyx-editor-submit {
+    color: #333333;
   }
 }
 </style>

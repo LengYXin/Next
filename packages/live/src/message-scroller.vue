@@ -80,7 +80,10 @@ export default class extends Vue {
     this.Scroller.scrollToBottom();
   }
   mounted() {
-    console.log("LENG: extends -> scrollToBottom -> this.Scroller", this.Scroller)
+    console.log(
+      "LENG: extends -> scrollToBottom -> this.Scroller",
+      this.Scroller
+    );
     this.onText();
   }
   onText() {
@@ -92,11 +95,21 @@ export default class extends Vue {
           }
           return {
             id: x,
-            author: "author",
+            author: lodash.sample(["林一", "张三", "李四四"]),
             time: Date.now(),
-            avatar:
+            avatar: lodash.sample([
+              "https://oss-free.xuantong.cn/picturePath/b8938fb359b16ce19be6419160b428f5.blob",
               "https://oss-free.xuantong.cn/picturePath/a1815d5ecbf18fad30e48998f00b4a0e.blob",
-            content: "信息",
+            ]),
+            content: lodash.sample([
+              `各位好，这字帖好漂亮，好像珍藏一份。
+老师今天好漂亮。各位好，这字帖好漂亮，好像珍藏一份。
+老师今天好漂亮。各位好，这字帖好漂亮，好像珍藏一份。
+老师今天好漂亮。`,
+              `[失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸]`,
+              '[失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸]'
+            ]),
+            jushou: lodash.sample([true, false]),
           };
         })
       )
