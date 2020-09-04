@@ -15,24 +15,12 @@
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
     />
-
-    <!-- <List :loading="Pagination.loading" :dataSource="Pagination.dataSource" /> -->
-    <!-- 存在 更改地址栏 页签的时候 设置 key 用于触发初始化 change   -->
-    <!-- <xt-pagination :key="activeKey" :Pagination="Pagination" :toQuery="true" /> -->
-    <!-- @change="onCurrentChange" -->
-
     <a-list
       class="xt-content"
       item-layout="vertical"
       :data-source="Pagination.dataSource"
     >
-      <!-- <nuxt-link slot="renderItem" slot-scope="item" :to="`/course/${item.courseId}`"> -->
-      <a-list-item slot="renderItem" slot-scope="item, index">
-        <!-- <a-list-item-meta :description="'来自《' + item.courseName + '》'">
-          <a slot="title" href="https://www.antdv.com/">{{
-            item.classhourName + item.homeworkTitle
-          }}</a>
-        </a-list-item-meta> -->
+      <a-list-item slot="renderItem" slot-scope="item">
         <h3 v-text="item.classhourName + item.homeworkTitle"></h3>
         <a-row type="flex" justify="space-around" align="middle">
           <a-col :span="20">
@@ -95,7 +83,6 @@
           </a-col>
         </a-row>
       </a-list-item>
-      <!-- </nuxt-link> -->
     </a-list>
 
     <xt-infinite-loading
@@ -114,9 +101,6 @@ import Reply from "./views/reply.vue";
 
 @Observer
 @Component({
-  // async fetch(ctx: Context) {
-  //   // await ctx.store.$my.onGetMyCourseList();
-  // },
   scrollToTop: true,
   components: { Reply },
 })
@@ -161,8 +145,10 @@ export default class PageView extends Vue {
       await this.Pagination.ondelWork(item);
       this.$message.success({ content: "删除成功", key: "delHomework" });
     } catch (error) {
-      console.log("PageView -> delHomework -> error", error);
-      // this.$message.warning({ content: error, key: "sunHomeworkErr" });
+      this.$message.warning({
+        content: "删除失败，请重试",
+        key: "delHomework",
+      });
     }
   }
   mounted() {}

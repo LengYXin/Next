@@ -17,12 +17,15 @@ export class ControllerMy extends Entities {
    */
   MyWork = new MyWork(this.$ajax)
 
+  /**
+   * 获取我的课程列表
+   * typeKey 0：全部，1：学习中，2：已学完，3：收藏
+   */
   async onGetMyCourseList() {
     const res = await this.$ajax.post(EnumApiMy.MyCourseList, {
       typeKey: 0,
-      pageIndex: 1,
     })
-    this.setMyCourseList(res)
+    this.setMyCourseList(lodash.get(res, "userCourseFullResponseVos", []))
   }
 }
 export default ControllerMy

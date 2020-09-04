@@ -1,12 +1,13 @@
-/**
- * @author 冷 (https://github.com/LengYXin)
- * @email lengyingxin8966@gmail.com
- * @create date 2020-08-05 14:13:36
- * @modify date 2020-08-05 14:13:36
- * @desc 课程 去上课
- */
+<!--
+ * @Author: Erlin
+ * @CreateTime: 2020-08-20 15:22:58
+ * @LastEditTime: 2020-09-04 18:13:30
+ * @LastEditors: Erlin
+ * @Description: 去上课
+-->
+
 <template>
-  <div class="xt-content">
+  <div class="xt-class">
     <xt-tabs
       :affix="true"
       theme="circle"
@@ -14,43 +15,25 @@
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
     />
-
-    <a-list
-      class="xt-content"
-      item-layout="horizontal"
-      :data-source="[{}, {}, {}, {}, {}, {}, {}, {}]"
-    >
-      <!-- <nuxt-link slot="renderItem" slot-scope="item" :to="`/course/${item.courseId}`"> -->
-      <a-list-item slot="renderItem" slot-scope="item">
-        <a-list-item-meta :description="item.statusName">
-          <a slot="title" href="https://www.antdv.com/">{{
-            item.courseName
-          }}</a>
-          <img
-            slot="avatar"
-            width="272"
-            alt="logo"
-            v-lazy="item.coursePictureUri"
-          />
-        </a-list-item-meta>
-        <!-- <a-button slot="actions" type="primary">Primary</a-button> -->
-      </a-list-item>
-      <!-- </nuxt-link> -->
-    </a-list>
+    <List :dataSource="PageStore.MyCourseList" />
+    <!-- :loading="PageStore.loading" -->
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import lodash from "lodash";
 import { Modal } from "ant-design-vue";
+import { Observer } from "mobx-vue";
 import { Context } from "@nuxt/types";
+import List from "./views/list.vue";
 
+@Observer
 @Component({
   async fetch(ctx: Context) {
     await ctx.store.$my.onGetMyCourseList();
   },
   scrollToTop: true,
-  components: {},
+  components: { List },
 })
 export default class PageView extends Vue {
   @Provide("MyStore")
@@ -74,5 +57,5 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
-<style>
+<style lang="less" scope>
 </style>
