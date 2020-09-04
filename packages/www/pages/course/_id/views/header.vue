@@ -76,7 +76,7 @@ export default class PageView extends Vue {
     // console.log("LENG: PageView -> mounted -> this.PageStore", this.PageStore);
   }
   onText() {
-    this.PageStore.onUpdate({ courseName: "更改名字" + Date.now() });
+    this.PageStore.onUpdate(()=>({ courseName: "更改名字" + Date.now() }));
   }
   updated() {}
   destroyed() {}
