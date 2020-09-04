@@ -14,14 +14,52 @@
   }
 }
 
+.ant-button-round {
+  border-radius: 20px;
+}
+
 .ant-btn-yellow {
   &.ant-btn {
     .button-variant-primary(@white, @xt-yellow-6);
     border-style: dashed;
     &:hover,
     &:focus {
-      color: @xt-yellow-5;
-      background-color: transparent;
+      color: @white;
+      background-color: @xt-yellow-5;
+    }
+  }
+  &.xt-btn-ghost {
+    color: @xt-yellow-6;
+    border-style: solid;
+    background-color: transparent;
+  }
+}
+
+.ant-btn-yellow {
+  &.ant-btn {
+    .button-variant-primary(@white, @xt-yellow-6);
+    border-style: dashed;
+    &:hover,
+    &:focus {
+      color: @white;
+      background-color: @xt-yellow-5;
+    }
+  }
+  &.xt-btn-ghost {
+    color: @xt-yellow-6;
+    border-style: solid;
+    background-color: transparent;
+  }
+}
+
+.ant-btn-line-yellow {
+  &.ant-btn {
+    .button-variant-primary(@xt-yellow-6, @xt-yellow-3);
+    border-style: dashed;
+    &:hover,
+    &:focus {
+      color: @xt-yellow-6;
+      background-color: @xt-yellow-3;
     }
   }
   &.xt-btn-ghost {

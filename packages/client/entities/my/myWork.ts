@@ -22,5 +22,51 @@ export class ControllerMyWork extends Pagination<any> {
       currentKey: "pageIndex",
     })
   }
+
+  /**
+   * 晒作业详情
+   * @memberof ControllerMyWork
+   */
+  Details = new EntitiesBasics<any>(this.$ajax, {
+    url: EnumApiMy.MyHomeworkDetail,
+  })
+
+  /**
+   * 晒作业
+   */
+  async onSunWork(data) {
+    if (data.suned !== 0) {
+      throw "作业已经晒出了"
+    }
+    this.onUpdate(data, (old) => {
+      old.suned = 1
+      return old
+    })
+    return this.$ajax.post(EnumApiMy.SunHomework, {
+      courseType: 1,
+      homeworkId: data.homeworkFinishId,
+    })
+  }
+  /**
+   * 删除作业
+   */
+  async ondelWork(data) {
+    this.onRemove(data)
+    return this.$ajax.post(EnumApiMy.DelHomework, {
+      id: data.homeworkFinishId,
+    })
+  }
+
+  /**
+   * 回复助教
+   */
+  async onReply(body: {
+    courseId?
+    homeworkId?
+    replyContent?
+    replyContentNum?
+  }) {
+    return this.$ajax.post(EnumApiMy.MyHomeworkReply, body)
+  }
 }
 export default ControllerMyWork

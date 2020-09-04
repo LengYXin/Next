@@ -1,0 +1,225 @@
+<template>
+  <div class="xt-homework-reply">
+    <a-button type="link" @click="onVisible(true)">去看看 ></a-button>
+    <a-modal
+      v-model="visible"
+      title="助教老师说"
+      :centered="true"
+      :width="730"
+      class="xt-homework-reply-modal"
+    >
+      <template slot="footer">
+        <div class="xt-homework-reply-bottom">
+          <a-form-model
+            ref="formReply"
+            :model="formInline"
+            @submit="onSubmit"
+            @submit.native.prevent
+          >
+            <a-form-model-item ref="content" prop="content">
+              <a-row
+                type="flex"
+                justify="center"
+                align="middle"
+                :gutter="[12, 0]"
+              >
+                <a-col flex="1">
+                  <a-input
+                    class="xt-text-align-left"
+                    placeholder="回复xxx助教"
+                    v-model="formInline.content"
+                  >
+                    <a-icon
+                      slot="suffix"
+                      type="smile"
+                      style="color: rgba(0, 0, 0, 0.25)"
+                    /> </a-input
+                ></a-col>
+                <a-button
+                  class="ant-btn-yellow"
+                  type="primary"
+                  html-type="submit"
+                  >回复</a-button
+                >
+              </a-row>
+            </a-form-model-item>
+          </a-form-model>
+        </div>
+      </template>
+
+      <a-spin :spinning="PageStore.loading">
+        <div class="xt-homework-reply-main">
+          <h3 v-text="PageStore.dataSource.homeworkTaskTitle"></h3>
+          <a-row type="flex" justify="space-around" align="middle">
+            <a-col :span="20">
+              来自
+              <nuxt-link
+                :to="`/course/${PageStore.dataSource.courseId}`"
+                v-text="'《' + PageStore.dataSource.courseName + '》'"
+              >
+              </nuxt-link
+            ></a-col>
+            <a-col :span="4" class="xt-text-align-right">
+              <a-button type="primary" v-if="PageStore.dataSource.suned !== 0">
+                晒作业
+              </a-button>
+              <a-button type="primary" v-else disabled>已晒过</a-button>
+            </a-col>
+          </a-row>
+          <div v-html="PageStore.dataSource.content"></div>
+          <div>图片占位</div>
+          <div class="xt-font-size-sm">共1张</div>
+          <div>
+            <time
+              v-dateFormat="PageStore.dataSource.createTime"
+              format="YYYY-MM-DD HH:mm"
+              fromNow
+            />
+          </div>
+        </div>
+
+        <div v-for="item in PageStore.dataSource.commentList" :key="item.id">
+          <div v-if="item.userType == 2">
+            <a-row type="flex" justify="start" align="middle" :gutter="[12, 0]">
+              <a-col flex="40px">
+                <a-avatar size="large" icon="user" />
+              </a-col>
+              <a-col flex="auto">
+                <div v-text="item.userNickname + '助教'"></div>
+                <div>
+                  <time
+                    v-dateFormat="item.createTime"
+                    format="YYYY-MM-DD HH:mm"
+                    fromNow
+                  />
+                </div>
+              </a-col>
+            </a-row>
+            <div class="xt-homework-reply-content" v-html="item.content"></div>
+          </div>
+          <div v-else>
+            <a-row type="flex" justify="end" align="middle" :gutter="[12, 0]">
+              <a-col flex="auto" class="xt-text-align-right">
+                <div v-text="item.userNickname"></div>
+                <div>
+                  <time
+                    v-dateFormat="item.createTime"
+                    format="YYYY-MM-DD HH:mm"
+                    fromNow
+                  />
+                </div>
+              </a-col>
+              <a-col flex="40px">
+                <a-avatar
+                  size="large"
+                  :src="item.userHeader"
+                  alt="userHeader"
+                />
+              </a-col>
+            </a-row>
+            <div class="xt-text-align-right">
+              <div
+                class="xt-homework-reply-content"
+                v-html="item.content"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </a-spin>
+    </a-modal>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Prop, Vue, Watch, Ref } from "vue-property-decorator";
+import { Context } from "@nuxt/types";
+import { Observer } from "mobx-vue";
+import lodash from "lodash";
+
+@Observer
+@Component({
+  components: {},
+})
+export default class PageView extends Vue {
+  @Prop() id;
+  @Ref("formReply") formReply;
+  get MyWork() {
+    return this.$store.$my.MyWork;
+  }
+  get PageStore() {
+    return this.MyWork.Details;
+  }
+  visible = false;
+  formInline: any = {};
+  onVisible(visible) {
+    this.visible = visible;
+    this.onReset();
+    if (visible) {
+      this.onLoading();
+    }
+  }
+  onReset() {
+    this.PageStore.onReset();
+  }
+
+  onLoading() {
+    this.PageStore.onLoading({ id: this.id });
+  }
+  async onSubmit() {
+    try {
+      let { singleCourseId, id } = this.PageStore.dataSource;
+      let replyContent = this.formInline.content;
+      let replyContentNum = replyContent.length;
+      await this.MyWork.onReply({
+        homeworkId: id,
+        courseId: singleCourseId,
+        replyContent,
+        replyContentNum,
+      });
+      this.formReply.resetFields();
+      this.onLoading();
+    } catch (error) {
+      this.$message.warning({ content: error, key: "onReply" });
+    }
+  }
+  mounted() {}
+}
+</script>
+<style lang="less">
+.xt-homework-reply-modal {
+  .ant-modal-content {
+    background-color: #fdfcfa;
+  }
+  .ant-modal-body {
+    max-height: 600px;
+    overflow-y: auto;
+  }
+}
+.xt-homework-reply-bottom {
+  .ant-row.ant-form-item {
+    margin: 0;
+  }
+}
+</style>
+<style lang="less" scope>
+.xt-homework-reply {
+  display: inline;
+  //   &-warp {
+  //     box-sizing: border-box;
+  //     max-height: 700px;
+  //     overflow-y: auto;
+  //   }
+  &-main {
+    margin-bottom: 20px;
+  }
+  &-content {
+    margin: 0 20px;
+    display: inline-block;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  &-bottom {
+    width: 100%;
+  }
+}
+</style>

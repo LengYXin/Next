@@ -7,4 +7,8 @@ export enum EnumApiMy {
    */
   MyCourseList = "/usercourse/list",
   MyHomeworkList = "/userhomework/list",
+  MyHomeworkDetail = "/userhomework/detail",
+  SunHomework = "/userhomework/sunbyhomeworkId",
+  DelHomework = "/userhomework/delete",
+  MyHomeworkReply = "/userhomework/reply",
 }
