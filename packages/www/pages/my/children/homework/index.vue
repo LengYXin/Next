@@ -124,7 +124,8 @@ export default class PageView extends Vue {
   tabsChange(activeKey) {
     this.Pagination.onReset();
     this.activeKey = activeKey;
-    this.onLoading();
+    // 不需要手动执行
+    // this.onLoading();
   }
   onLoading(event?) {
     this.Pagination.onLoading({ typeKey: this.activeKey }, {}, event);
