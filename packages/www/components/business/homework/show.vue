@@ -15,7 +15,7 @@
     width="700px"
   >
     <!-- 主题 -->
-    <div>
+    <div v-if="Details.dataSource.id">
       <xt-comment :comment="getComment(Details.dataSource)">
         <template slot="actions">
           <xt-action
@@ -45,47 +45,52 @@
           </a-menu>
         </template>
       </xt-comment>
-    </div>
-    <!-- 回复主题 -->
-    <xt-editor
-      v-show="!reply.id"
-      @submit="onSubmit"
-      class="xt-editor-single"
-      :rules="{required:true,max:2000}"
-      buttonText="回复"
-    ></xt-editor>
-    <!-- 评论列表 -->
-    <xt-comment
-      v-for="item in Details.dataSource.momentComments"
-      :key="item.id"
-      :comment="getComment(item)"
-    >
-      <template slot="actions">
-        <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
-        <xt-action :statistics="item.commentCount" title="回复" @click="onReply(item)" />
-      </template>
-      <template slot="overlay">
-        <a-menu>
-          <a-menu-item v-if="$eqUser(item.userId)">
-            <a-popconfirm title="确定删除作业?" ok-text="确定" cancel-text="取消" @confirm="onConfirm(item)">
-              <a href="javascript:;">删除</a>
-            </a-popconfirm>
-          </a-menu-item>
-          <a-menu-item v-else>
-            <nuxt-link to="/my/letter">
-              <span>私信</span>
-            </nuxt-link>
-          </a-menu-item>
-        </a-menu>
-      </template>
+      <!-- 回复主题 -->
       <xt-editor
-        @submit="onSubmit($event,item)"
-        v-if="eqReply(item)"
+        v-show="!reply.id"
+        @submit="onSubmit"
         class="xt-editor-single"
-        placeholder="回复xxx"
+        :rules="{required:true,max:2000}"
         buttonText="回复"
-      />
-    </xt-comment>
+      ></xt-editor>
+      <!-- 评论列表 -->
+      <xt-comment
+        v-for="item in Details.dataSource.momentComments"
+        :key="item.id"
+        :comment="getComment(item)"
+      >
+        <template slot="actions">
+          <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
+          <xt-action :statistics="item.commentCount" title="回复" @click="onReply(item)" />
+        </template>
+        <template slot="overlay">
+          <a-menu>
+            <a-menu-item v-if="$eqUser(item.userId)">
+              <a-popconfirm
+                title="确定删除作业?"
+                ok-text="确定"
+                cancel-text="取消"
+                @confirm="onConfirm(item)"
+              >
+                <a href="javascript:;">删除</a>
+              </a-popconfirm>
+            </a-menu-item>
+            <a-menu-item v-else>
+              <nuxt-link to="/my/letter">
+                <span>私信</span>
+              </nuxt-link>
+            </a-menu-item>
+          </a-menu>
+        </template>
+        <xt-editor
+          @submit="onSubmit($event,item)"
+          v-if="eqReply(item)"
+          class="xt-editor-single"
+          placeholder="回复xxx"
+          buttonText="回复"
+        />
+      </xt-comment>
+    </div>
   </a-modal>
 </template>
 <script lang="ts">
@@ -190,7 +195,13 @@ export default class extends Vue {
 .xt-homework-show {
   .ant-modal-body {
     max-height: 85vh;
+    min-height: 300px;
     overflow: auto;
+    animation: antFadeIn 0.4s;
+    > div {
+      animation: antFadeIn 0.6s;
+      transition: all 0.5s;
+    }
   }
 }
 </style>

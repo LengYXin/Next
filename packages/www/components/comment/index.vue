@@ -141,6 +141,7 @@ export default class extends Vue {
   text-align: justify;
   word-break: break-all;
   display: block;
+  transition: all 0.5s;
 }
 
 .xt-ellipsis .xt-ellipsis-btn {
