@@ -8,45 +8,6 @@
       :width="730"
       class="xt-homework-reply-modal"
     >
-      <template slot="footer">
-        <div class="xt-homework-reply-bottom">
-          <a-form-model
-            ref="formReply"
-            :model="formInline"
-            @submit="onSubmit"
-            @submit.native.prevent
-          >
-            <a-form-model-item ref="content" prop="content">
-              <a-row
-                type="flex"
-                justify="center"
-                align="middle"
-                :gutter="[12, 0]"
-              >
-                <a-col flex="1">
-                  <a-input
-                    class="xt-text-align-left"
-                    placeholder="回复xxx助教"
-                    v-model="formInline.content"
-                  >
-                    <a-icon
-                      slot="suffix"
-                      type="smile"
-                      style="color: rgba(0, 0, 0, 0.25)"
-                    /> </a-input
-                ></a-col>
-                <a-button
-                  class="ant-btn-yellow"
-                  type="primary"
-                  html-type="submit"
-                  >回复</a-button
-                >
-              </a-row>
-            </a-form-model-item>
-          </a-form-model>
-        </div>
-      </template>
-
       <a-spin :spinning="PageStore.loading">
         <div class="xt-homework-reply-main">
           <h3 v-text="PageStore.dataSource.homeworkTaskTitle"></h3>
@@ -66,7 +27,7 @@
               <a-button type="primary" v-else disabled>已晒过</a-button>
             </a-col>
           </a-row>
-          <div v-html="PageStore.dataSource.content"></div>
+          <div v-html="formatFace(PageStore.dataSource.content)"></div>
           <div>图片占位</div>
           <div class="xt-font-size-sm">共1张</div>
           <div>
@@ -126,6 +87,16 @@
           </div>
         </div>
       </a-spin>
+
+      <template slot="footer">
+        <div class="xt-homework-reply-bottom">
+          <xt-editor
+            @submit="onSubmit"
+            class="xt-editor-single"
+            buttonText="回复"
+          />
+        </div>
+      </template>
     </a-modal>
   </div>
 </template>
@@ -142,7 +113,6 @@ import lodash from "lodash";
 })
 export default class PageView extends Vue {
   @Prop() id;
-  @Ref("formReply") formReply;
   get MyWork() {
     return this.$store.$my.MyWork;
   }
@@ -165,18 +135,19 @@ export default class PageView extends Vue {
   onLoading() {
     this.PageStore.onLoading({ id: this.id });
   }
-  async onSubmit() {
+  /**
+   * 回复助教
+   */
+  async onSubmit(event) {
     try {
       let { singleCourseId, id } = this.PageStore.dataSource;
-      let replyContent = this.formInline.content;
-      let replyContentNum = replyContent.length;
       await this.MyWork.onReply({
         homeworkId: id,
         courseId: singleCourseId,
-        replyContent,
-        replyContentNum,
+        replyContent: event.html,
+        replyContentNum: event.length,
       });
-      this.formReply.resetFields();
+      event.onReset();
       this.onLoading();
     } catch (error) {
       this.$message.warning({ content: error, key: "onReply" });

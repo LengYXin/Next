@@ -1,10 +1,11 @@
-/**
- * @author 冷 (https://github.com/LengYXin)
- * @email lengyingxin8966@gmail.com
- * @create date 2020-08-05 14:13:26
- * @modify date 2020-08-05 14:13:26
- * @desc 作业
- */
+<!--
+ * @Author: Erlin
+ * @CreateTime: 2020-09-03 10:33:03
+ * @LastEditors: Erlin
+ * @LastEditTime: 2020-09-06 14:34:10
+ * @Description: 我的作业
+-->
+
 <template>
   <div class="xt-homework">
     <xt-tabs
@@ -36,7 +37,7 @@
               type="primary"
               v-if="item.suned == 0"
               class="ant-btn-yellow ant-button-round"
-              @click="sunHomework(item)"
+              @click="onSunWork(item)"
             >
               晒作业
             </a-button>
@@ -48,7 +49,7 @@
             >
           </a-col>
         </a-row>
-        <div v-html="item.content"></div>
+        <div v-html="formatFace(item.content)"></div>
         <xt-nine
           size="120"
           thumb="waterThumbUrl"
@@ -76,7 +77,7 @@
               title="作业确定删除吗？"
               ok-text="确认"
               cancel-text="取消"
-              @confirm="delHomework(item)"
+              @confirm="onDelWork(item)"
             >
               <a-button type="link" icon="delete">删除作业</a-button>
             </a-popconfirm>
@@ -124,12 +125,16 @@ export default class PageView extends Vue {
   tabsChange(activeKey) {
     this.Pagination.onReset();
     this.activeKey = activeKey;
-    this.onLoading();
+    // this.onLoading();
   }
   onLoading(event?) {
     this.Pagination.onLoading({ typeKey: this.activeKey }, {}, event);
   }
-  async sunHomework(item) {
+
+  /**
+   * 晒作业
+   */
+  async onSunWork(item) {
     try {
       await this.Pagination.onSunWork(item);
       this.$message.success({
@@ -140,9 +145,13 @@ export default class PageView extends Vue {
       this.$message.warning({ content: error, key: "sunHomeworkErr" });
     }
   }
-  async delHomework(item) {
+
+  /**
+   * 删除作业
+   */
+  async onDelWork(item) {
     try {
-      await this.Pagination.ondelWork(item);
+      await this.Pagination.onDelWork(item);
       this.$message.success({ content: "删除成功", key: "delHomework" });
     } catch (error) {
       this.$message.warning({

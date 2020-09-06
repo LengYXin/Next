@@ -1,3 +1,10 @@
+/*
+ * @Author: Erlin
+ * @CreateTime: 2020-09-01 18:28:10
+ * @LastEditors: Erlin
+ * @LastEditTime: 2020-09-06 18:16:32
+ * @Description: 我的作业
+ */
 import { BindAll } from "lodash-decorators"
 import { EnumApiMy } from "../../api"
 import { AjaxBasics } from "../../helpers/ajaxBasics"
@@ -50,7 +57,7 @@ export class ControllerMyWork extends Pagination<any> {
   /**
    * 删除作业
    */
-  async ondelWork(data) {
+  async onDelWork(data) {
     this.onRemove(data)
     return this.$ajax.post(EnumApiMy.DelHomework, {
       id: data.homeworkFinishId,

@@ -1,12 +1,45 @@
+<!--
+ * @Author: Erlin
+ * @CreateTime: 2020-08-20 15:22:58
+ * @LastEditors: Erlin
+ * @LastEditTime: 2020-09-06 18:01:43
+ * @Description: 我的
+-->
 <template>
-  <div class="xt-content xt-page-my">
+  <div class="xt-content xt-page-my" :gutter="20">
+    <a-row class="xt-page-my-header" type="flex" align="middle">
+      <a-col :span="4" class="xt-text-align-center">
+        <a-row type="flex" justify="center" align="middle" :gutter="10">
+          <a-col>
+            <a-avatar
+              :src="PageStore.UserInfo.headThumbnailUri"
+              :alt="PageStore.UserInfo.nickName"
+              :size="45"
+            />
+          </a-col>
+          <a-col
+            class="xt-font-family-FZLTHJW"
+            v-text="PageStore.UserInfo.nickName"
+          ></a-col>
+        </a-row>
+      </a-col>
+      <a-col :span="20" class="xt-font-size-md xt-text-yellow">
+        <a-row type="flex" justify="start" align="middle" :gutter="2">
+          <a-col class="xt-font-family-FZLTHJW" v-t="activeItem.key"></a-col>
+          <a-col><a-icon :type="activeItem.icon" /></a-col>
+        </a-row>
+        <!-- <div class="xt-font-family-FZLTHJW" v-t="activeItem.key"></div>
+        <a-icon :type="activeItem.icon" /> -->
+      </a-col>
+    </a-row>
     <a-row type="flex">
       <a-col :span="4">
-        <div class="xt-text-align-center">
-          <a-avatar :size="64" icon="user" />
-        </div>
         <a-affix :offset-top="72">
-          <a-tabs tabPosition="left" :activeKey="activeKey" @change="tabsChange">
+          <a-tabs
+            tabPosition="left"
+            :activeKey="activeKey"
+            @change="tabsChange"
+          >
             <a-tab-pane v-for="tab in tabPane" :key="tab.path">
               <span slot="tab">
                 <span v-t="tab.key"></span>
@@ -24,7 +57,11 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import { Observer } from "mobx-vue";
 import { Modal } from "ant-design-vue";
+import lodash from "lodash";
+
+@Observer
 @Component({
   asyncData(ctx) {
     return { defaultActiveKey: ctx.route.name };
@@ -32,18 +69,27 @@ import { Modal } from "ant-design-vue";
   components: {},
 })
 export default class PageView extends Vue {
+  get PageStore() {
+    return this.$store.$storeUser;
+  }
   defaultActiveKey = "my";
   get activeKey() {
     return this.$route.name;
   }
+  get activeItem() {
+    return lodash.filter(
+      this.tabPane,
+      (item) => item.path === this.activeKey
+    )[0];
+  }
   tabPane = [
-    { key: "course", path: "my" },
-    { key: "homework", path: "my-homework" },
-    { key: "showHomework", path: "my-showHomework" },
-    { key: "order", path: "my-order" },
-    { key: "letter", path: "my-letter" },
-    { key: "information", path: "my-information" },
-    { key: "security", path: "my-security" },
+    { key: "course", path: "my", icon: "search" },
+    { key: "homework", path: "my-homework", icon: "search" },
+    { key: "showHomework", path: "my-showHomework", icon: "search" },
+    { key: "order", path: "my-order", icon: "search" },
+    { key: "letter", path: "my-letter", icon: "search" },
+    { key: "information", path: "my-information", icon: "search" },
+    { key: "security", path: "my-security", icon: "search" },
   ];
   tabsChange(activeKey) {
     this.$router.push({
@@ -58,6 +104,9 @@ export default class PageView extends Vue {
 <style lang="less" scoped>
 .xt-page-my {
   padding-top: @padding-lg;
+  &-header {
+    margin: 72px 0 32px;
+  }
 }
 </style>
 <i18n>
