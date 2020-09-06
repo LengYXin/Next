@@ -1,10 +1,7 @@
-import lodash from 'lodash';
 import { BindAll } from 'lodash-decorators';
-import { EnumApiOrder } from '../../api';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
-import { Pagination } from '../basics/pagination';
-import Entities from './entities';
 import SunDrying from './sunDrying';
+import Details from './details';
 
 @BindAll()
 export class ControllerHomework {
@@ -15,6 +12,11 @@ export class ControllerHomework {
      * @memberof ControllerHomework
      */
     SunDrying = new SunDrying(this.$ajax);
+    /**
+     * 作业详情
+     * @memberof ControllerHomework
+     */
+    Details = new Details(this.$ajax);
 
 }
 export default ControllerHomework

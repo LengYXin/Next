@@ -7,9 +7,14 @@
  */
 <template>
   <!-- <div class="xt-flex-center"> -->
-  <a-row class="xt-nine" v-viewer :style="getNineStyle()">
-    <a-col :span="getSpan()" v-for="img in imgs" :key="img">
-      <img class="xt-nine-img hvr-float-shadow" v-lazy="img" :style="getStyle()" />
+  <a-row class="xt-nine" v-viewer="options" :style="getNineStyle()">
+    <a-col :span="getSpan()" v-for="img in dataSource" :key="getThumb(img)">
+      <img
+        class="xt-nine-img hvr-float-shadow"
+        v-lazy="getThumb(img)"
+        :data-original="getOriginal(img)"
+        :style="getStyle()"
+      />
     </a-col>
   </a-row>
   <!-- </div> -->
@@ -23,19 +28,27 @@ import lodash from "lodash";
 })
 export default class extends Vue {
   @Prop({ default: () => [] }) dataSource: Array<any>;
-  @Prop({ default: "thumb" }) thumb;
+  @Prop({ default: "thumb" }) thumb; //缩略图
+  @Prop({ default: "original" }) original; //原图
   @Prop({ default: 200 }) size;
   @Prop({ default: 10 }) margin;
-  get imgs() {
-    return lodash.map(this.dataSource, (item) => {
-      if (lodash.isString(item)) {
-        return item;
-      }
-      return lodash.get(item, this.thumb);
-    });
-  }
+  options = {
+    url: "data-original",
+  };
   get length() {
     return this.dataSource.length;
+  }
+  getThumb(img) {
+    if (lodash.isString(img)) {
+      return img;
+    }
+    return lodash.get(img, this.thumb);
+  }
+  getOriginal(img) {
+    if (lodash.isString(img)) {
+      return img;
+    }
+    return lodash.get(img, this.original);
   }
   getSpan() {
     if (this.length === 1) {
@@ -52,12 +65,14 @@ export default class extends Vue {
       maxWidth: null,
       width: this.size + "px",
       height: this.size + "px",
+      margin: "auto",
       marginBottom: this.margin + "px",
     };
     if (this.length === 1) {
       style.width = null;
       style.maxWidth = this.size * 3 + "px";
       style.height = "auto";
+      style.margin = "0";
     }
     return style;
   }
@@ -86,11 +101,11 @@ export default class extends Vue {
 <style lang="less" scoped>
 .xt-nine {
   //   overflow: hidden;
-  //   padding: 20px;
+  padding: 10px 0;
   &-img {
     display: block;
-    width: 100%;
-    height: 100%;
+    // width: 100%;
+    // height: 100%;
     object-fit: cover;
     margin: auto;
     cursor: pointer;

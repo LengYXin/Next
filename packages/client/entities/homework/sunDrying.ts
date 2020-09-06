@@ -24,11 +24,6 @@ export class ControllerHomeworkSunDrying extends Pagination<any> {
         })
     }
     /**
-     * 晒作业详情
-     * @memberof ControllerHomeworkSunDrying
-     */
-    Details = new EntitiesBasics(this.$ajax, { url: '' });
-    /**
      * 发布一条作业
      */
     async onInstall(body: { content?, contentLength?, courseType?, picturesUrlList?, singleCourseId?, userType?}) {

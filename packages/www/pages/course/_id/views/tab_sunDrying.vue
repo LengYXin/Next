@@ -12,7 +12,7 @@
       <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
         <template slot="actions">
           <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
-          <xt-action :statistics="item.commentCount" title="回复" />
+          <xt-action :statistics="item.commentCount" title="回复" @click="onReply(item)" />
         </template>
         <template slot="overlay">
           <a-menu>
@@ -36,6 +36,7 @@
         <!-- <xt-editor /> -->
       </xt-comment>
       <xt-infinite-loading :identifier="Pagination.onlyKey" @loading="onLoading" />
+      <HomeworkShow :momentId="reply" @cancel="onReply()" />
     </div>
     <!-- 没有登录显示内容 -->
     <a-empty slot="not" :image="$images.logo" description="报名后，可以浏览晒作业栏哦~~" />
@@ -46,9 +47,10 @@ import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Modal } from "ant-design-vue";
 import moment from "moment";
 import { Observer } from "mobx-vue";
+import HomeworkShow from "~/components/business/homework/show.vue";
 @Observer
 @Component({
-  components: {},
+  components: { HomeworkShow },
 })
 export default class PageView extends Vue {
   get PageStore() {
@@ -60,6 +62,21 @@ export default class PageView extends Vue {
   get id() {
     return this.$route.params.id;
   }
+  // 回复
+  reply = null;
+  /**
+   * 回复
+   */
+  onReply(data) {
+    if (data) {
+      try {
+        this.$InspectUser();
+        this.reply = data.id;
+      } catch (error) {}
+    } else {
+      this.reply = null;
+    }
+  }
   onLoading(event?) {
     this.Pagination.onLoading({ singleCourseId: this.id }, {}, event);
   }
@@ -70,6 +87,7 @@ export default class PageView extends Vue {
       author: item.userNickname,
       time: item.createTime,
       bishan: item.bishanNum,
+      imgs: item.momentPicturelist,
     };
   }
   async onSubmit(event) {
