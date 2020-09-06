@@ -1,7 +1,7 @@
 <!--
  * @Author: Erlin
  * @CreateTime: 2020-09-04 15:57:12
- * @LastEditTime: 2020-09-06 16:16:43
+ * @LastEditTime: 2020-09-06 19:00:17
  * @LastEditors: Erlin
  * @Description: 去上课列表
 -->
@@ -91,9 +91,7 @@ export default class PageView extends Vue {
   @Prop({ default: false }) loading;
   @Prop({ default: [] }) dataSource;
   @Prop({ default: "key" }) rowKey;
-  mounted() {
-    console.log("PageView -> mounted -> this.dataSource", this.dataSource);
-  }
+  mounted() {}
   updated() {}
   destroyed() {}
 }

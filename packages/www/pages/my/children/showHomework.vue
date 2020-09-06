@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-06 18:51:54
+ * @LastEditTime: 2020-09-06 19:00:32
  * @Description: 我晒出的作业
 -->
 
@@ -84,12 +84,7 @@ export default class PageView extends Vue {
 
   onLikes() {}
   onConfirm() {}
-  mounted() {
-    console.log(
-      "PageView -> mounted -> this.Pagination.dataSource",
-      this.Pagination.dataSource
-    );
-  }
+  mounted() {}
   updated() {}
   destroyed() {}
 }

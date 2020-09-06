@@ -1,7 +1,7 @@
 <!--
  * @Author: Erlin
  * @CreateTime: 2020-08-20 15:22:58
- * @LastEditTime: 2020-09-06 18:12:26
+ * @LastEditTime: 2020-09-06 19:00:03
  * @LastEditors: Erlin
  * @Description: 去上课
 -->
@@ -63,11 +63,8 @@ export default class PageView extends Vue {
   defaultActiveKey = 0;
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   tabsChange(activeKey) {
-    // this.Pagination.onReset();
     this.activeKey = activeKey;
-    // this.onLoading();
     this.PageStore.onGetMyCourseList(this.activeKey);
-    console.log("PageView -> tabsChange -> this.PageStore", this.PageStore);
   }
   mounted() {}
   updated() {}
