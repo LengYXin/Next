@@ -32,17 +32,20 @@ Vue.directive('dateFormat', {
  */
 function onRender(el: HTMLDivElement, binding, vnode, oldVnode) {
     const { value, oldValue } = binding;
-    let { format = "YYYY-MM-DD HH:mm:ss", interval, fromNow } = vnode?.data?.attrs;
-    interval = lodash.eq(interval, '') || lodash.eq(interval, 'true');
-    fromNow = lodash.eq(fromNow, '') || lodash.eq(fromNow, 'true');
-    if (lodash.eq(value, oldValue)) {
-        return
+    if (value) {
+        let { format = "YYYY-MM-DD HH:mm:ss", interval, fromNow } = vnode?.data?.attrs;
+        interval = lodash.eq(interval, '') || lodash.eq(interval, 'true');
+        fromNow = lodash.eq(fromNow, '') || lodash.eq(fromNow, 'true');
+        if (lodash.eq(value, oldValue)) {
+            return
+        }
+        // 倒计时
+        if (interval) {
+            onInterval(el, value, format, fromNow);
+        }
+        onInnerHTML(el, value, format, fromNow);
     }
-    // 倒计时
-    if (interval) {
-        onInterval(el, value, format, fromNow);
-    }
-    onInnerHTML(el, value, format, fromNow);
+
 }
 /**
  * 倒计时

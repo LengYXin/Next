@@ -90,7 +90,7 @@ export default class extends Vue {
     const int = interval(100)
       .pipe(
         map((x) => {
-          if (x > 500) {
+          if (x > 50) {
             int.unsubscribe();
           }
           return {

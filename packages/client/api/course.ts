@@ -12,4 +12,6 @@ export enum EnumApiCourse {
   CourseIntroduce = "/usercourse/courseIntroduce",
   /** 地图页 */
   CourseMap = "/userclasshour/map/list",
+  /** 地图页详情 */
+  CourseMapDetails = "/userclasshour/detail",
 }
