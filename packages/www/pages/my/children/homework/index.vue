@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-03 10:33:03
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-06 14:34:10
+ * @LastEditTime: 2020-09-06 18:58:18
  * @Description: 我的作业
 -->
 
@@ -125,6 +125,7 @@ export default class PageView extends Vue {
   tabsChange(activeKey) {
     this.Pagination.onReset();
     this.activeKey = activeKey;
+    // 不需要手动执行
     // this.onLoading();
   }
   onLoading(event?) {

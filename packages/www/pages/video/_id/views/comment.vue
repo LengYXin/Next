@@ -1,6 +1,7 @@
 <template>
   <div>
     <xt-editor
+      v-show="!reply.id"
       class="xt-editor-upload-hide"
       @submit="onSubmit"
       :rules="{required:true,max:2000}"
@@ -42,7 +43,7 @@ export default class PageView extends Vue {
     return this.$route.params.id;
   }
   // 回复
-  reply = null;
+  reply: any = {};
   getComment(item) {
     return {
       content: item.content,
@@ -56,7 +57,7 @@ export default class PageView extends Vue {
    * 是否回复
    */
   eqReply(data) {
-    return lodash.eq(this.reply, data.id);
+    return lodash.eq(this.reply.id, data.id);
   }
   /**
    *  初始化 和 页码 更改调用
@@ -82,9 +83,9 @@ export default class PageView extends Vue {
    */
   onReply(data) {
     if (this.eqReply(data)) {
-      return (this.reply = null);
+      return (this.reply = {});
     }
-    this.reply = data.id;
+    this.reply = data;
   }
   async onSubmit(event, data) {
     try {

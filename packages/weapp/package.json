@@ -33,34 +33,31 @@
   ],
   "author": "",
   "license": "MIT",
-  "peerDependencies": {
-    "@xt/client": "^0.0.7"
-  },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "@tarojs/components": "3.0.8",
-    "@tarojs/react": "3.0.8",
-    "@tarojs/runtime": "3.0.8",
-    "@tarojs/taro": "3.0.8",
+    "@tarojs/components": "3.0.9",
+    "@tarojs/react": "3.0.9",
+    "@tarojs/runtime": "3.0.9",
+    "@tarojs/taro": "3.0.9",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "taro-ui": "3.0.0-alpha.3"
   },
   "devDependencies": {
-    "@tarojs/cli": "^3.0.8",
-    "@tarojs/mini-runner": "3.0.8",
-    "@tarojs/webpack-runner": "3.0.8",
-    "@types/react": "^16.9.48",
+    "@tarojs/cli": "^3.0.9",
+    "@tarojs/mini-runner": "3.0.9",
+    "@tarojs/webpack-runner": "3.0.9",
+    "@types/react": "^16.9.49",
     "@types/webpack-env": "^1.15.2",
-    "@typescript-eslint/eslint-plugin": "^3.10.1",
-    "@typescript-eslint/parser": "^3.10.1",
-    "babel-preset-taro": "3.0.8",
-    "eslint": "^7.7.0",
-    "eslint-config-taro": "3.0.8",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "babel-preset-taro": "3.0.9",
+    "eslint": "^7.8.1",
+    "eslint-config-taro": "3.0.9",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
-    "stylelint": "13.6.1",
+    "stylelint": "13.7.0",
     "vconsole-webpack-plugin": "^1.5.2"
   }
 }

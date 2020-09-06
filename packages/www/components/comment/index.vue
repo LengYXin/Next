@@ -29,12 +29,16 @@
       <!-- 时间 -->
       <a-tooltip slot="datetime">
         <span slot="title" v-dateFormat="datetime" format="YYYY-MM-DD HH:mm"></span>
-        <span>发布于 <time v-dateFormat="datetime" format="YYYY-MM-DD HH:mm" fromNow  /></span>
+        <span>
+          发布于
+          <time v-dateFormat="datetime" format="YYYY-MM-DD HH:mm" fromNow />
+        </span>
       </a-tooltip>
       <!-- 内容 -->
       <div class="xt-comment-content" slot="content">
         <slot name="content">
           <div v-ellipsis v-html="formatFace(content)"></div>
+          <xt-nine :dataSource="comment.imgs" thumb="waterThumbUrl" original="waterUrl" />
         </slot>
       </div>
       <!-- 操作按钮 -->
@@ -66,6 +70,8 @@ export default class extends Vue {
     bishan: number;
     // 回复
     toUserName: string;
+    // 图片
+    imgs: any[];
   };
   get datetime() {
     return this.comment.time;
@@ -135,6 +141,7 @@ export default class extends Vue {
   text-align: justify;
   word-break: break-all;
   display: block;
+  transition: all 0.5s;
 }
 
 .xt-ellipsis .xt-ellipsis-btn {

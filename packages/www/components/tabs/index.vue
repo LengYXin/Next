@@ -51,8 +51,10 @@ export default class extends Vue {
   @Prop({ default: [], required: true }) tabPane;
   // 主题
   @Prop({ default: "" }) theme;
+  // 联动路由
+  @Prop({ default: true }) linkageRoute;
   // 选择
-  activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
+  activeKey: any = "0"; //lodash.get(this.$route.query, "active", this.defaultActiveKey);
   // 当前页面显示
   get isConnected() {
     // return this.$el.isConnected && this.key === this.$route.name;
@@ -63,21 +65,26 @@ export default class extends Vue {
   }
   // 更改
   tabsChange(activeKey) {
-    const query = lodash.merge({}, this.$route.query, {
-      active: activeKey,
-    });
-    // 存在分页页码
-    if (query.current) {
-      query.current = "1";
+    if (this.linkageRoute) {
+      const query = lodash.merge({}, this.$route.query, {
+        active: activeKey,
+      });
+      // 存在分页页码
+      if (query.current) {
+        query.current = "1";
+      }
+      this.$router.push({
+        query,
+      });
+    } else {
+      this.activeKey = activeKey;
+      this.emitTabsChange();
     }
-    this.$router.push({
-      query,
-    });
   }
   // 组件中 使用不了 生命周期 beforeRouteUpdate
   @Watch("$route.query.active")
   queryUpdate(to, from, next) {
-    if (this.isConnected) {
+    if (this.linkageRoute && this.isConnected) {
       const { active } = this.$route.query;
       if (!lodash.eq(active, this.activeKey)) {
         if (lodash.isNil(active)) {
@@ -92,6 +99,17 @@ export default class extends Vue {
   @Emit("tabsChange")
   emitTabsChange() {
     return this.activeKey;
+  }
+  created() {
+    if (this.linkageRoute) {
+      this.activeKey = lodash.get(
+        this.$route.query,
+        "active",
+        this.defaultActiveKey
+      );
+    } else {
+      this.activeKey = this.defaultActiveKey;
+    }
   }
   mounted() {
     // console.log("LENG: mounted -> this", this);

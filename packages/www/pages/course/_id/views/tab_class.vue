@@ -17,7 +17,7 @@
         :class="'index-'+index"
         class="xt-course-class-info"
       >
-        <a-row type="flex">
+        <a-row type="flex" v-if="item.classhourId">
           <!-- 序号 -->
           <a-col :span="24" :order="1" flex="auto">
             <div class="xt-course-class-tag" v-text="index"></div>
@@ -28,14 +28,16 @@
               <a-popover placement="rightTop">
                 <template slot="content">
                   <h5 v-text="item.classhourName"></h5>
+                  <div v-text="item.classhourIntroduction" />
+                  <time v-dateFormat="item.courseStartTime" format="YYYY-MM-DD HH:mm" />
                 </template>
-                <img :src="item.copyBookUri" />
+                <img @click="onVisible(item)" :src="item.copyBookUri" />
               </a-popover>
               <ul class="xt-course-class-bs">
-                <li v-for="bs in 4" :key="bs">
+                <li v-for="bs in getTask(item)" :key="bs.homeworkTaskId">
                   <a-popover placement="rightTop">
                     <template slot="content">
-                      <p>观看直播</p>
+                      <p v-text="bs.homeworkTypeDesc">观看直播</p>
                     </template>
                     <a-icon type="check-circle" />
                   </a-popover>
@@ -49,28 +51,28 @@
           </a-col>
         </a-row>
       </div>
+      <!-- 学习回顾 -->
       <div class="xt-course-class-review">
         <div>
-          <img
-            src="https://xuantong-upload-free.oss-cn-beijing.aliyuncs.com/picturePath/568feec434929a669ff4bfe75326c28a.jpeg"
-            alt
-            srcset
-          />
+          <img src="https://www.xuantong.cn/_nuxt/img/3e229e1.png" alt srcset />
         </div>
         <div>学习回顾</div>
       </div>
       <div class="xt-text-align-right xt-text-yellow">您可以在北京时间2020年09月17日24时之前提交作业和将作业发布到“晒作业”与大家分享</div>
     </div>
+    <mapDetails :classhour="classhour" @cancel="onVisible(null)" />
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Modal } from "ant-design-vue";
 import { Observer } from "mobx-vue";
+import lodash from "lodash";
+import mapDetails from "./tab_class_details.vue";
 
 @Observer
 @Component({
-  components: {},
+  components: { mapDetails },
 })
 export default class PageView extends Vue {
   get id() {
@@ -82,18 +84,47 @@ export default class PageView extends Vue {
   get PageStore() {
     return this.$store.$storeCourse.Details.Map;
   }
+  // 模板类
   get template() {
     return "xt-cc-template-" + this.Details.dataSource.tempNum;
   }
+  // 背景图
   get bgSrc() {
     return `/template/${this.Details.dataSource.tempNum}.png`;
   }
-  onLoading() {
-    this.PageStore.onLoading({ courseId: this.id });
+  classhour = {};
+  // 笔山列表
+  getTask(item) {
+    if (item) {
+      return lodash.concat(
+        [
+          {
+            hasCompleted: false,
+            homeworkTaskId: -1,
+            homeworkTitle: "观看直播",
+            homeworkType: 1,
+            homeworkTypeDesc: "观看直播",
+          },
+        ],
+        item.homeworkTaskList
+      );
+    }
+  }
+  onLoading(courseId) {
+    this.PageStore.onLoading({ courseId });
+  }
+  async onVisible(classhour) {
+    if (classhour) {
+      try {
+        this.$InspectUser();
+        this.classhour = classhour;
+      } catch (error) {}
+    } else {
+      this.classhour = {};
+    }
   }
   created() {
-    this.onLoading();
-    
+    this.onLoading(this.id);
   }
   mounted() {}
   updated() {}
@@ -143,7 +174,8 @@ export default class PageView extends Vue {
   &-tag {
     width: @tag;
     height: @tag;
-    background: red;
+    color: @white;
+    background: @xt-golden-6;
     margin: auto;
     border-radius: 100%;
     text-align: center;

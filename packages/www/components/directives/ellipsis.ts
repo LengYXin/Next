@@ -11,6 +11,10 @@ import lodash from 'lodash';
 // const inserted = lodash.debounce(onRender, 50);
 Vue.directive('ellipsis', {
     inserted: onRender,
+    //  (el, bind) => {
+    //     const debouncedRender = lodash.debounce(onRender)
+    //     debouncedRender(el, bind)
+    // },
     // componentUpdated: onRender,
     unbind(el: any) {
     }
@@ -26,7 +30,14 @@ function onRender(el, { value = 9 }: any) {
     const maxHeight = lineheight * value;
     el.style.maxHeight = maxHeight + 'px';
     el.classList.add('xt-ellipsis');
-    // console.log("LENG: onRender -> height", el, height)
+    // console.log("LENG: onRender -> height", {
+    //     el,
+    //     top,
+    //     bottom,
+    //     height,
+    //     maxHeight,
+    //     lineheight
+    // })
     if (height > (maxHeight - lineheight)) {
         let open = false;
         const btn = document.createElement('div');
