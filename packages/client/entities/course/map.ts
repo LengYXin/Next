@@ -28,7 +28,14 @@ export class CourseMap extends EntitiesBasics<any> {
       // 没有头部课程 补充占位
       if (lodash.get(data, "[0].kind") !== "top") {
         data.unshift({
+          kind: "top",
           classhourId: 0,
+        });
+      }
+      if (lodash.get(data, `[${data.length - 1}].kind`) != "bottom") {
+        data.push({
+          kind: "bottom",
+          classhourId: -1,
         });
       }
       return data;
