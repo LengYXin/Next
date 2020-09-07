@@ -208,7 +208,7 @@ export default class PageView extends Vue {
     display: inline-block;
     position: absolute;
     left: 0;
-    z-index: 10;
+    // z-index: 10;
     animation: antFadeIn 0.6s;
     width: 140px;
   }
@@ -220,6 +220,7 @@ export default class PageView extends Vue {
   &-line {
     position: absolute;
     // opacity: 0;
+    z-index: 0;
   }
   // 学习回顾
   &-review {
