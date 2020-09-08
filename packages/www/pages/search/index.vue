@@ -28,14 +28,14 @@
         <span v-text="Pagination.dataSource.length" /> 个相关结果
       </h1>
       <!-- </a-affix> -->
-      <keep-alive>
+      <!-- <keep-alive> -->
         <component
           v-bind:is="activeKey"
           :loading="false"
           :dataSource="Pagination.dataSource"
           :rowKey="Pagination.key"
         ></component>
-      </keep-alive>
+      <!-- </keep-alive> -->
     </div>
     <xt-infinite-loading :identifier="Pagination.onlyKey" @loading="onLoading" />
   </div>

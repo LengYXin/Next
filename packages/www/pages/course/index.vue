@@ -64,7 +64,7 @@ export default class PageView extends Vue {
     this.onLoading();
   }
   async onLoading(event?) {
-    this.Pagination.onLoading({}, null, event);
+    this.Pagination.onLoading({ sortType: this.activeKey,sortName: "Asc" }, null, event);
   }
   created() {
     this.onLoading();

@@ -100,7 +100,7 @@ export default class PageView extends Vue {
         toUserNickname: data?.userNickname,
       });
       event.onReset();
-      this.reply = null;
+      this.reply = {};
       this.onCurrentChange(1);
     } catch (error) {
       console.log("LENG: PageView -> onSubmit -> error", error);
