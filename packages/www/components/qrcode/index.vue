@@ -31,7 +31,7 @@ export default class extends Vue {
   created() {
     this.onCreate();
   }
-  @Watch("qrcode")
+  @Watch("options")
   onWatch() {
     this.onCreate();
   }
