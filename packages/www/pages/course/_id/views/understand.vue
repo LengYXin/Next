@@ -6,7 +6,7 @@
  * @desc 开课了解
  */
 <template>
-  <div class="xt-text-align-right ">
+  <div class="xt-understand">
     <a-icon type="question" class="xt-text-yellow" />
     <a-button class="xt-understand-btn" type="link" @click="onVisible(true)" v-t="locale.link">
       <span>开课前需要了解什么</span>
@@ -42,8 +42,12 @@ export default class PageView extends Vue {
 }
 </script>
 <style lang="less" scoped>
-.xt-understand-btn{
-  padding: 0;
+.xt-understand {
+  position: absolute;
+  right: 0;
+  &-btn {
+    padding: 0;
+  }
 }
 </style>
 <i18n lang="json">

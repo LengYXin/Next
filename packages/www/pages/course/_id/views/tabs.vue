@@ -2,12 +2,12 @@
   <div>
     <div class="xt-content">
       <xt-tabs
-      class="xt-cid-tabs"
-      theme="circle"
-      :tabPane="tabPane"
-      :defaultActiveKey="defaultActiveKey"
-      @tabsChange="tabsChange"
-    />
+        class="xt-cid-tabs"
+        theme="circle"
+        :tabPane="tabPane"
+        :defaultActiveKey="defaultActiveKey"
+        @tabsChange="tabsChange"
+      />
     </div>
     <keep-alive>
       <component :is="activeValue"></component>
@@ -44,14 +44,28 @@ export default class PageView extends Vue {
       this.$EnumLocaleLinks.links_courseIntroduction
     );
   }
+  /**
+   * 单阶课程 true / 全阶 false
+   */
+  get single() {
+    return true;
+  }
   get tabPane() {
-    return [
+    let tabs = [
       { key: "ci", title: this.$EnumLocaleLinks.links_courseIntroduction },
-      { key: "cc", title: this.$EnumLocaleLinks.links_courseComposition },
-      { key: "to", title: this.$EnumLocaleLinks.links_goToTheClass },
-      { key: "sd", title: this.$EnumLocaleLinks.links_sunDrying },
-      { key: "th", title: this.$EnumLocaleLinks.links_thoughts },
     ];
+    if (this.single) {
+      tabs = lodash.concat(tabs, [
+        { key: "to", title: this.$EnumLocaleLinks.links_goToTheClass }, //去上课地图页
+        { key: "sd", title: this.$EnumLocaleLinks.links_sunDrying }, //晒作业
+        { key: "th", title: this.$EnumLocaleLinks.links_thoughts }, //感想
+      ]);
+    } else {
+      tabs = lodash.concat(tabs, [
+        { key: "cc", title: this.$EnumLocaleLinks.links_courseComposition }, //课程组成
+      ]);
+    }
+    return tabs;
   }
   tabsChange(activeKey) {
     this.activeKey = activeKey;

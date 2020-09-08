@@ -1,13 +1,11 @@
 {
   "name": "@xt/client",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
     "tsc": "tsc"
-  },
-  "dependencies": {
   },
   "devDependencies": {
     "jest": "^26.4.2",

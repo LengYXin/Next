@@ -71,7 +71,9 @@
         <div class="xt-course-class-review">
           <a-row type="flex">
             <a-col :span="24" class="xt-course-class-content">
-              <img src="https://www.xuantong.cn/_nuxt/img/3e229e1.png" alt srcset />
+              <mapReview>
+                <img src="https://www.xuantong.cn/_nuxt/img/3e229e1.png" alt srcset />
+              </mapReview>
             </a-col>
             <a-col :span="24" class="xt-course-class-state">
               <div class="xt-text-yellow xt-margin-md">学习回顾</div>
@@ -90,10 +92,11 @@ import { Modal } from "ant-design-vue";
 import { Observer } from "mobx-vue";
 import lodash from "lodash";
 import mapDetails from "./tab_class_details.vue";
+import mapReview from "./tab_class_review.vue";
 
 @Observer
 @Component({
-  components: { mapDetails },
+  components: { mapDetails, mapReview },
 })
 export default class PageView extends Vue {
   get id() {
@@ -216,6 +219,7 @@ export default class PageView extends Vue {
     // opacity: 0.1;
     position: relative;
     z-index: 5;
+    cursor: pointer;
   }
   &-line {
     position: absolute;
@@ -274,7 +278,7 @@ export default class PageView extends Vue {
   }
 }
 </style>
-<style lang="less" scoped>
+<style lang="less" scoped dec="三阶">
 .info(@top,@left) {
   top: @top;
   left: @left;
@@ -325,7 +329,7 @@ export default class PageView extends Vue {
   }
 }
 </style>
-<style lang="less" scoped>
+<style lang="less" scoped dec="五阶">
 .info(@top,@left,@index:1,@content:2,@state:3) {
   top: @top;
   left: @left;
@@ -382,7 +386,7 @@ export default class PageView extends Vue {
   }
 }
 </style>
-<style lang="less" scoped>
+<style lang="less" scoped dec="十阶">
 .info(@top,@left,@index:1,@content:2,@state:3) {
   top: @top;
   left: @left;
@@ -496,7 +500,7 @@ export default class PageView extends Vue {
   }
 }
 </style>
-<style lang="less" scoped>
+<style lang="less" scoped dec="二十阶">
 .info(@top,@left,@index:1,@content:2,@state:3) {
   top: @top;
   left: @left;
