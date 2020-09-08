@@ -29,13 +29,15 @@ export default class extends Vue {
     }
   }
   created() {
-    this.onCreate();
+    
   }
   @Watch("options")
   onWatch() {
     this.onCreate();
   }
-  mounted() {}
+  mounted() {
+    this.onCreate();
+  }
   updated() {}
   destroyed() {}
 }

@@ -10,7 +10,7 @@
     <div @click.prevent.stop="onVisible(true)">
       <slot />
     </div>
-    
+
     <a-modal
       wrapClassName="xt-course-review-modal"
       :visible="visible"
@@ -52,15 +52,13 @@
       </div>
       <div ref="popover" class="xt-course-review-share">
         <a-popover
-          destroyTooltipOnHide
-          arrowPointAtCenter
           trigger="click"
           placement="top"
           @visibleChange="visibleChange"
           :getPopupContainer="getPopupContainer"
         >
           <template slot="content">
-            <div slot="content" class="xt-course-review-qrcode">
+            <div class="xt-course-review-qrcode">
               <xt-qrcode :options="qrcode" />
             </div>
           </template>
@@ -120,10 +118,13 @@ export default class PageView extends Vue {
 .xt-course-review {
   &-share {
     text-align: center;
+    position: relative;
   }
   &-qrcode {
     width: 180px;
     height: 180px;
+    position: relative;
+    overflow: hidden;
   }
 }
 </style>
