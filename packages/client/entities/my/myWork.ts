@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-01 18:28:10
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-06 18:16:32
+ * @LastEditTime: 2020-09-08 15:34:36
  * @Description: 我的作业
  */
 import { BindAll } from "lodash-decorators"
@@ -31,7 +31,7 @@ export class ControllerMyWork extends Pagination<any> {
   }
 
   /**
-   * 晒作业详情
+   * 回复作业详情
    * @memberof ControllerMyWork
    */
   Details = new EntitiesBasics<any>(this.$ajax, {
@@ -41,18 +41,31 @@ export class ControllerMyWork extends Pagination<any> {
   /**
    * 晒作业
    */
-  async onSunWork(data) {
-    if (data.suned !== 0) {
-      throw "作业已经晒出了"
+  async onSunWork(data, list = true) {
+    try {
+      if (data.suned !== 0) {
+        throw "作业已经晒出了"
+      }
+      const updater = (old) => {
+        old.suned = 1
+        return old
+      }
+      let homeworkId
+      if (list) {
+        homeworkId = data.homeworkFinishId
+        this.onUpdate(data, updater)
+      } else {
+        homeworkId = data.id
+        this.onUpdate(this.onFind(data.id), updater)
+        this.Details.onUpdate(updater)
+      }
+      return this.$ajax.post(EnumApiMy.SunHomework, {
+        courseType: 1,
+        homeworkId,
+      })
+    } catch (error) {
+      throw error
     }
-    this.onUpdate(data, (old) => {
-      old.suned = 1
-      return old
-    })
-    return this.$ajax.post(EnumApiMy.SunHomework, {
-      courseType: 1,
-      homeworkId: data.homeworkFinishId,
-    })
   }
   /**
    * 删除作业

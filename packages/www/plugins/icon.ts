@@ -73,3 +73,15 @@ export { default as WarningFill } from "@ant-design/icons/lib/fill/WarningFill";
 export { default as ShoppingCartOutline } from "@ant-design/icons/lib/outline/ShoppingCartOutline";
 // 右标识 caret-right
 export { default as CaretRightOutline } from "@ant-design/icons/lib/outline/CaretRightOutline";
+// <a-icon type="laptop" />
+export { default as LaptopOutline } from "@ant-design/icons/lib/outline/LaptopOutline";
+// <a-icon type="edit" />
+export { default as EditOutline } from "@ant-design/icons/lib/outline/EditOutline";
+// <a-icon type="container" />
+export { default as ContainerOutline } from "@ant-design/icons/lib/outline/ContainerOutline";
+// <a-icon type="mail" />
+export { default as MailOutline } from "@ant-design/icons/lib/outline/MailOutline";
+// <a-icon type="user" />
+export { default as UserOutline } from "@ant-design/icons/lib/outline/UserOutline";
+// <a-icon type="lock" />
+export { default as LockOutline } from "@ant-design/icons/lib/outline/LockOutline";

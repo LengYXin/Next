@@ -6,12 +6,12 @@
  * @desc 操作按钮
  */
 <template>
-  <span @click="onLike">
+  <span @click="onLike" :class="'xt-text-' + iconColor">
     <!-- <a-tooltip title="Like"> -->
     <slot name="icon" v-bind:action="action">
-      <a-icon :type="icon" :theme="action? 'filled' : 'outlined'" />
+      <a-icon :type="icon" :theme="action ? 'filled' : 'outlined'" />
     </slot>
-    <span v-text="text"></span>
+    <span :class="'xt-text-' + textColor" v-text="text"></span>
     <!-- </a-tooltip> -->
   </span>
 </template>
@@ -30,6 +30,11 @@ export default class extends Vue {
   @Prop({ default: "点赞" }) title;
   // 图标
   @Prop({ default: "like" }) icon;
+  // 图标颜色
+  @Prop({ default: "yellow" }) iconColor;
+  // 文字颜色
+  @Prop({ default: "grey" }) textColor;
+
   get text() {
     return this.statistics || this.title;
   }

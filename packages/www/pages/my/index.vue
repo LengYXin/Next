@@ -2,11 +2,11 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-20 15:22:58
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-06 18:01:43
+ * @LastEditTime: 2020-09-08 14:58:58
  * @Description: 我的
 -->
 <template>
-  <div class="xt-content xt-page-my" :gutter="20">
+  <div class="xt-content xt-page-my">
     <a-row class="xt-page-my-header" type="flex" align="middle">
       <a-col :span="4" class="xt-text-align-center">
         <a-row type="flex" justify="center" align="middle" :gutter="10">
@@ -23,13 +23,14 @@
           ></a-col>
         </a-row>
       </a-col>
-      <a-col :span="20" class="xt-font-size-md xt-text-yellow">
-        <a-row type="flex" justify="start" align="middle" :gutter="2">
+      <a-col
+        :span="20"
+        class="xt-font-size-md xt-text-yellow xt-page-my-header-title"
+      >
+        <a-row type="flex" justify="start" align="middle" :gutter="10">
           <a-col class="xt-font-family-FZLTHJW" v-t="activeItem.key"></a-col>
-          <a-col><a-icon :type="activeItem.icon" /></a-col>
+          <a-icon :type="activeItem.icon" />
         </a-row>
-        <!-- <div class="xt-font-family-FZLTHJW" v-t="activeItem.key"></div>
-        <a-icon :type="activeItem.icon" /> -->
       </a-col>
     </a-row>
     <a-row type="flex">
@@ -83,13 +84,13 @@ export default class PageView extends Vue {
     )[0];
   }
   tabPane = [
-    { key: "course", path: "my", icon: "search" },
-    { key: "homework", path: "my-homework", icon: "search" },
-    { key: "showHomework", path: "my-showHomework", icon: "search" },
-    { key: "order", path: "my-order", icon: "search" },
-    { key: "letter", path: "my-letter", icon: "search" },
-    { key: "information", path: "my-information", icon: "search" },
-    { key: "security", path: "my-security", icon: "search" },
+    { key: "course", path: "my", icon: "laptop" },
+    { key: "homework", path: "my-homework", icon: "edit" },
+    { key: "showHomework", path: "my-showHomework", icon: "edit" },
+    { key: "order", path: "my-order", icon: "container" },
+    { key: "letter", path: "my-letter", icon: "mail" },
+    { key: "information", path: "my-information", icon: "user" },
+    { key: "security", path: "my-security", icon: "lock" },
   ];
   tabsChange(activeKey) {
     this.$router.push({
@@ -106,6 +107,9 @@ export default class PageView extends Vue {
   padding-top: @padding-lg;
   &-header {
     margin: 72px 0 32px;
+  }
+  &-header-title {
+    padding-left: 20px;
   }
 }
 </style>

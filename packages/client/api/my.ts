@@ -12,4 +12,5 @@ export enum EnumApiMy {
   DelHomework = "/userhomework/delete",
   MyHomeworkReply = "/userhomework/reply",
   MySunWorkList = "/moment/usermomentlist",
+  MySunWorkDetail = "/moment/momentdetail",
 }

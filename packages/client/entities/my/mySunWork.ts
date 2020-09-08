@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-06 18:15:02
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-06 18:34:14
+ * @LastEditTime: 2020-09-08 15:34:16
  * @Description: 我晒出的作业列表
  */
 
@@ -31,5 +31,13 @@ export class ControllerMySunWork extends Pagination<any> {
       onMapValues: "userMomentListResponseVoList",
     })
   }
+
+  /**
+   * 我晒出的作业详情
+   * @memberof ControllerMyWork
+   */
+  Details = new EntitiesBasics<any>(this.$ajax, {
+    url: EnumApiMy.MySunWorkDetail,
+  })
 }
 export default ControllerMySunWork

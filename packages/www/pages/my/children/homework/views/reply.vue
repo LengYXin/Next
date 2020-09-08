@@ -21,10 +21,20 @@
               </nuxt-link
             ></a-col>
             <a-col :span="4" class="xt-text-align-right">
-              <a-button type="primary" v-if="PageStore.dataSource.suned !== 0">
+              <a-button
+                type="primary"
+                v-if="PageStore.dataSource.suned == 0"
+                class="ant-btn-yellow ant-button-round"
+                @click="onSunWork(PageStore.dataSource)"
+              >
                 晒作业
               </a-button>
-              <a-button type="primary" v-else disabled>已晒过</a-button>
+              <a-button
+                type="primary"
+                v-else
+                class="ant-btn-line-yellow ant-button-round"
+                >已晒过</a-button
+              >
             </a-col>
           </a-row>
           <div v-html="formatFace(PageStore.dataSource.content)"></div>
@@ -139,6 +149,23 @@ export default class PageView extends Vue {
   onLoading() {
     this.PageStore.onLoading({ id: this.id });
   }
+
+  /**
+   * 晒作业
+   */
+  async onSunWork(item) {
+    console.log("PageView -> onSunWork -> this.Pagination", this.MyWork);
+    try {
+      await this.MyWork.onSunWork(item, false);
+      this.$message.success({
+        content: "晒作业成功",
+        key: "sunHomeworkSuccess",
+      });
+    } catch (error) {
+      this.$message.warning({ content: error, key: "sunHomeworkErr" });
+    }
+  }
+
   /**
    * 回复助教
    */

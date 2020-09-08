@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-03 10:33:03
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-06 18:58:18
+ * @LastEditTime: 2020-09-08 11:26:38
  * @Description: 我的作业
 -->
 
@@ -62,7 +62,11 @@
         ></div>
         <a-row type="flex" justify="space-around" align="middle">
           <a-col :span="14">
-            {{ item.createTime }}
+            <time
+              v-dateFormat="item.createTime"
+              format="YYYY-MM-DD HH:mm"
+              fromNow
+            />
           </a-col>
           <a-col
             :span="10"
@@ -106,7 +110,6 @@ import Reply from "./views/reply.vue";
   components: { Reply },
 })
 export default class PageView extends Vue {
-  @Provide("MyStore")
   get PageStore() {
     return this.$store.$my;
   }

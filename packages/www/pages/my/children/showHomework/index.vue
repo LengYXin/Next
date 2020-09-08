@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-07 19:44:02
+ * @LastEditTime: 2020-09-08 15:41:47
  * @Description: 我晒出的作业
 -->
 
@@ -15,19 +15,16 @@
     >
       <template slot="actions">
         <div class="xt-font-size-base xt-font-family-FZLTHJW">
-          <xt-action
-            icon="message"
-            title="评论"
-            @click="onOpenComment(item)"
-            :statistics="item.commentCount"
-          />
-          <xt-action
-            icon="heart"
-            title="喜欢"
-            @click="onLikes(item)"
-            :statistics="item.likeCount"
-            :action="item.likeRecord"
-          />
+          <a-space size="middle">
+            <Comment :dataSource="item" />
+            <xt-action
+              icon="heart"
+              title="喜欢"
+              @click="onLikes(item)"
+              :statistics="item.likeCount"
+              :action="item.likeRecord"
+            />
+          </a-space>
         </div>
       </template>
       <template slot="overlay">
@@ -57,6 +54,7 @@ import { Modal } from "ant-design-vue";
 import { Observer } from "mobx-vue";
 import lodash from "lodash";
 import { Context } from "@nuxt/types";
+import Comment from "./view/comment.vue";
 
 @Observer
 @Component({
@@ -64,7 +62,7 @@ import { Context } from "@nuxt/types";
     await ctx.store.$my.MySunWork.onLoading();
   },
   scrollToTop: true,
-  components: {},
+  components: { Comment },
 })
 export default class PageView extends Vue {
   get PageStore() {
