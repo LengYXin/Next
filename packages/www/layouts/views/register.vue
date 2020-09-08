@@ -1,5 +1,5 @@
 <template>
-  <a-row class="xt-register">
+  <a-row class="xt-register" type="flex" justify="center" align="middle">
     <a-col :span="16" class="xt-register-form">
       <a-form-model
         layout="horizontal"
@@ -34,8 +34,23 @@
         </a-form-model-item>
 
         <a-form-model-item>
+          <a-popover trigger="click" placement="top">
+            <div slot="content">
+              <xt-img-code />
+            </div>
+            <a-button size="large" class="ant-btn-white" type="primary" block>
+              <a-badge
+                class="xt-processing-yellow"
+                status="processing"
+                text="点击此处验证"
+              />
+            </a-button>
+          </a-popover>
+        </a-form-model-item>
+
+        <a-form-model-item>
           <a-input size="large" placeholder="请输入六位验证码">
-            <a-button slot="addonAfter">获取验证码</a-button>
+            <a-button type="link" slot="addonAfter">获取验证码</a-button>
           </a-input>
         </a-form-model-item>
 
@@ -57,7 +72,8 @@
           ></a-input>
         </a-form-model-item>
         <a-form-model-item>
-          <a-checkbox>我已经阅读过并同意《用户注册协议》</a-checkbox>
+          <a-checkbox>我已经阅读过并同意</a-checkbox>
+          <Protocol />
         </a-form-model-item>
         <a-form-model-item>
           <a-button size="large" type="primary" html-type="submit" block
@@ -67,18 +83,19 @@
       </a-form-model>
     </a-col>
     <a-col :span="8" class="xt-register-qrcode">
-      <div class="xt-flex-center">
-        <img :src="$images.logo" alt srcset />
+      <img :src="$images.logo" alt srcset />
+      <a-space direction="vertical" align="center">
         <xt-qrcode options="https://www.baidu.com/?tn=64075107_1_dg" />
         <div>微信扫码注册</div>
-      </div>
+      </a-space>
     </a-col>
   </a-row>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
+import Protocol from "./protocol.vue";
 @Component({
-  components: {},
+  components: { Protocol },
 })
 export default class extends Vue {
   tabKey = "1";
@@ -88,6 +105,7 @@ export default class extends Vue {
   formInline = {
     user: "",
   };
+
   tabChange(key) {
     this.tabKey = key;
   }
@@ -101,18 +119,37 @@ export default class extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" >
+<style lang="less">
 @s-pd: 40px;
 .xt-register {
   min-height: 480px;
+  background-color: #f3f3f3;
   .xt-register-logo {
     max-width: 100%;
   }
   .xt-register-qrcode {
-    padding: @s-pd 0;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 0 80px;
   }
   .xt-register-form {
     padding: @s-pd;
+    background-color: #ffffff;
+    .ant-input.ant-input-lg {
+      font-size: @font-size-base;
+    }
+    .ant-btn.ant-btn-lg {
+      font-size: @font-size-base;
+    }
+    .xt-processing-yellow {
+      .ant-badge-status-dot {
+        width: 12px;
+        height: 12px;
+      }
+    }
   }
   .ant-tabs-bar {
     margin: 0;

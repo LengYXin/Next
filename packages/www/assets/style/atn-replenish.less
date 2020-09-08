@@ -1,25 +1,31 @@
 .xt-badge {
+  // 角标 左边
+  &-left.ant-badge .ant-scroll-number-custom-component {
+    left: 0;
+    right: initial;
+    transform: translate(-50%, -50%) !important;
+  }
 
-    // 角标 左边
-    &-left.ant-badge .ant-scroll-number-custom-component {
-        left: 0;
-        right: initial;
-        transform: translate(-50%, -50%) !important;
-    }
-
-    .xt-badge-text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        border-radius: 100%;
-        height: 52px;
-        width: 52px;
-        background: @xt-yellow-6;
-        line-height: 20px;
-        color: @white;
-        border: 2px solid white;
-        box-sizing: border-box;
-    }
+  .xt-badge-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 100%;
+    height: 52px;
+    width: 52px;
+    background: @xt-yellow-6;
+    line-height: 20px;
+    color: @white;
+    border: 2px solid white;
+    box-sizing: border-box;
+  }
 }
-
+.xt-processing-yellow {
+  .ant-badge-status-processing {
+    background: @xt-yellow-6;
+    &::after {
+      border: 1px solid @xt-yellow-6;
+    }
+  }
+}

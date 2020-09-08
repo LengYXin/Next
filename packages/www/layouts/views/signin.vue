@@ -73,14 +73,11 @@
       </a-form-model>
     </a-col>
     <a-col :span="8" class="xt-signin-qrcode">
-      <div class="xt-flex-center">
-        <img :src="$images.logo" alt srcset />
-        <xt-qrcode
-          class="xt-signin-qrcode-img"
-          options="https://www.baidu.com/?tn=64075107_1_dg"
-        />
-        <div class="xt-signin-qrcode-subtitle">微信扫码登录</div>
-      </div>
+      <img :src="$images.logo" alt srcset />
+      <a-space direction="vertical" align="center">
+        <xt-qrcode options="https://www.baidu.com/?tn=64075107_1_dg" />
+        <div>微信扫码登录</div>
+      </a-space>
     </a-col>
   </a-row>
 </template>
@@ -93,7 +90,7 @@ export default class extends Vue {
   get PageStore() {
     return this.$store.$storeUser;
   }
-   get locale() {
+  get locale() {
     return this.$EnumLocaleLinks;
   }
   formInline = {
@@ -154,22 +151,20 @@ export default class extends Vue {
     max-width: 100%;
   }
   &-qrcode.ant-col {
-    height: 100%;
-    padding: @s-pd 0;
-    &-img {
-      width: 140px;
-      height: 140px;
-      border: 1px solid #e2e2e2;
-      margin-top: 120px;
-    }
-    &-subtitle {
-      margin-top: 10px;
-    }
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 0 80px;
   }
 }
 .xt-signin-form.ant-col {
   padding: @s-pd @l-pd;
   background-color: #ffffff;
+  .ant-input.ant-input-lg {
+    font-size: @font-size-base;
+  }
 }
 </style>
 

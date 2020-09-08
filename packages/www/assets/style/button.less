@@ -90,6 +90,26 @@
   }
 }
 
+.ant-btn-white {
+  &.ant-btn {
+    .button-variant-primary(@xt-black-3, transparent);
+    box-shadow: none;
+    border: 1px solid @xt-yellow-3;
+    &:hover,
+    &:focus {
+      color: @xt-black-5;
+      background-color: transparent;
+      border: 1px solid @xt-yellow-3;
+    }
+  }
+
+  &.xt-btn-ghost {
+    color: @xt-gray-6;
+    background-color: transparent;
+    border-style: solid;
+  }
+}
+
 .ant-btn-green {
   &.ant-btn {
     .button-variant-primary(@xt-green-6, transparent);

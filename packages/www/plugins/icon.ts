@@ -71,3 +71,5 @@ export { default as WarningOutline } from "@ant-design/icons/lib/outline/Warning
 export { default as WarningFill } from "@ant-design/icons/lib/fill/WarningFill";
 // 购物车
 export { default as ShoppingCartOutline } from "@ant-design/icons/lib/outline/ShoppingCartOutline";
+// 右标识 caret-right
+export { default as CaretRightOutline } from "@ant-design/icons/lib/outline/CaretRightOutline";

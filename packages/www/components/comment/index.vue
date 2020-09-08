@@ -28,7 +28,11 @@
       </div>
       <!-- 时间 -->
       <a-tooltip slot="datetime">
-        <span slot="title" v-dateFormat="datetime" format="YYYY-MM-DD HH:mm"></span>
+        <span
+          slot="title"
+          v-dateFormat="datetime"
+          format="YYYY-MM-DD HH:mm"
+        ></span>
         <span>
           发布于
           <time v-dateFormat="datetime" format="YYYY-MM-DD HH:mm" fromNow />
@@ -38,7 +42,12 @@
       <div class="xt-comment-content" slot="content">
         <slot name="content">
           <div v-ellipsis v-html="formatFace(content)"></div>
-          <xt-nine :dataSource="comment.imgs" thumb="waterThumbUrl" original="waterUrl" />
+          <xt-nine
+            :size="imgSize"
+            :dataSource="comment.imgs"
+            thumb="waterThumbUrl"
+            original="waterUrl"
+          />
         </slot>
       </div>
       <!-- 操作按钮 -->
@@ -57,6 +66,7 @@ import lodash from "lodash";
   components: {},
 })
 export default class extends Vue {
+  @Prop({ default: 120 }) imgSize; // 图片大小
   @Prop({ default: {} }) comment: {
     // 内容
     content: string;

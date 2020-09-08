@@ -1,23 +1,39 @@
 <template>
   <span v-if="PageStore.loggedIn">
-    <a-popover>
+    <a-popover placement="bottomRight">
       <template slot="content">
-        <div>
-          <a-avatar
-            :src="PageStore.UserInfo.headThumbnailUri"
-            :alt="PageStore.UserInfo.nickName"
-            size="large"
-          />
-          <span v-text="PageStore.UserInfo.nickName"></span>
-          <a-button type="link" @click="onOutLogin">退出登录</a-button>
+        <div class="user-modal-warp">
+          <a-row type="flex" justify="space-between" align="middle">
+            <a-col>
+              <a-row type="flex" justify="start" align="middle" :gutter="12">
+                <a-col>
+                  <a-avatar
+                    :src="PageStore.UserInfo.headThumbnailUri"
+                    :alt="PageStore.UserInfo.nickName"
+                    :size="55"
+                /></a-col>
+                <a-col>
+                  <nuxt-link
+                    :to="'/my/information'"
+                    v-text="PageStore.UserInfo.nickName"
+                  ></nuxt-link>
+                </a-col>
+              </a-row>
+            </a-col>
+            <a-col>
+              <a-button type="link" @click="onOutLogin">退出登录</a-button>
+            </a-col>
+          </a-row>
+          <a-divider></a-divider>
+          <a-row type="flex" :gutter="16">
+            <a-col v-for="item in menu" :key="item.key">
+              <nuxt-link :to="{ name: item.key }">
+                <a-icon type="caret-right" />
+                <span v-t="item.name"></span>
+              </nuxt-link>
+            </a-col>
+          </a-row>
         </div>
-        <a-row type="flex" :gutter="16">
-          <a-col v-for="item in menu" :key="item.key">
-            <nuxt-link :to="{ name: item.key }">
-              <span v-t="item.name"></span>
-            </nuxt-link>
-          </a-col>
-        </a-row>
       </template>
       <a-avatar
         :src="PageStore.UserInfo.headThumbnailUri"
@@ -32,13 +48,15 @@
       type="link"
       @click="onVisible(true, locale.links_signin)"
       v-t="locale.links_signin"
-    >登录</a-button>
+      >登录</a-button
+    >
     <a-button
       size="small"
       type="link"
       @click="onVisible(true, locale.links_register)"
       v-t="locale.links_register"
-    >注册</a-button>
+      >注册</a-button
+    >
     <!-- :title="$t(title||'links_signin')" -->
     <a-modal
       wrapClassName="xt-signin-modal"
@@ -50,8 +68,14 @@
     >
       <div v-show="PageStore.visible">
         <signin v-if="isSignin" @toggle="onToggle" />
-        <register v-else-if="title === locale.links_register" @toggle="onToggle" />
-        <retrieve v-else-if="title === locale.links_retrieve" @toggle="onToggle" />
+        <register
+          v-else-if="title === locale.links_register"
+          @toggle="onToggle"
+        />
+        <retrieve
+          v-else-if="title === locale.links_retrieve"
+          @toggle="onToggle"
+        />
       </div>
     </a-modal>
   </a-space>
@@ -132,6 +156,9 @@ export default class extends Vue {
   .ant-modal-body {
     padding: 0;
   }
+}
+.user-modal-warp {
+  padding: 8px;
 }
 </style>
 

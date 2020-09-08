@@ -28,7 +28,11 @@
             </a-col>
           </a-row>
           <div v-html="formatFace(PageStore.dataSource.content)"></div>
-          <div>图片占位</div>
+          <xt-nine
+            size="120"
+            thumb="waterThumbUrl"
+            :dataSource="PageStore.dataSource.homeworkPicList || []"
+          />
           <div class="xt-font-size-sm">共1张</div>
           <div>
             <time

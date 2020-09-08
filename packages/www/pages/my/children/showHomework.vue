@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-06 19:00:32
+ * @LastEditTime: 2020-09-07 19:44:02
  * @Description: 我晒出的作业
 -->
 
@@ -14,16 +14,25 @@
       :comment="getComment(item)"
     >
       <template slot="actions">
-        <xt-action
-          @click="onLikes(item)"
-          :statistics="item.likeCount"
-          :action="item.likeRecord"
-        />
-        <xt-action :statistics="item.commentCount" title="回复" />
+        <div class="xt-font-size-base xt-font-family-FZLTHJW">
+          <xt-action
+            icon="message"
+            title="评论"
+            @click="onOpenComment(item)"
+            :statistics="item.commentCount"
+          />
+          <xt-action
+            icon="heart"
+            title="喜欢"
+            @click="onLikes(item)"
+            :statistics="item.likeCount"
+            :action="item.likeRecord"
+          />
+        </div>
       </template>
       <template slot="overlay">
         <a-menu>
-          <a-menu-item v-if="$eqUser(item.userId)">
+          <a-menu-item>
             <a-popconfirm
               title="确定删除作业?"
               ok-text="确定"
@@ -32,11 +41,6 @@
             >
               <a href="javascript:;">删除</a>
             </a-popconfirm>
-          </a-menu-item>
-          <a-menu-item v-else>
-            <nuxt-link to="/my/letter">
-              <span>私信</span>
-            </nuxt-link>
           </a-menu-item>
         </a-menu>
       </template>
@@ -76,6 +80,7 @@ export default class PageView extends Vue {
       author: item.userNickname,
       time: item.createTime,
       bishan: item.bishanNum,
+      imgs: item.momentPicturelist || [],
     };
   }
   onLoading(event?) {
@@ -83,6 +88,7 @@ export default class PageView extends Vue {
   }
 
   onLikes() {}
+  onOpenComment() {}
   onConfirm() {}
   mounted() {}
   updated() {}
