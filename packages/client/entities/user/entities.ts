@@ -41,6 +41,17 @@ export default class EntitiesUser {
         return !!this.UserInfo.token
     }
     /**
+     * 特殊协议
+     * @readonly
+     * @memberof EntitiesUser
+     */
+    @computed
+    get visibleSpecialAgreement() {
+        return this.UserInfo.specialProtocolId === 0
+    }
+
+
+    /**
      * 切换加载状态
      * @private
      * @param {boolean} [loading=!this.loading]

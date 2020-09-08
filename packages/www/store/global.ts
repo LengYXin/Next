@@ -11,7 +11,8 @@ import Bowser from 'bowser';
 @BindAll()
 class XTGlobal {
     constructor() {
-        this.onInspectVersion()
+        this.onInspectVersion();
+        console.log("LENG: XTGlobal -> ", this)
     }
     /**
      * 微信 appid
