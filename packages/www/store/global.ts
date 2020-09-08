@@ -17,17 +17,17 @@ class XTGlobal {
      * 微信 appid
      * @memberof XTGlobal
      */
-    appid = process.env.appid;
+    appid = lodash.get(window, '__xt__env.appid', process.env.appid);
     /**
      * domain 域名
      * @memberof XTGlobal
      */
-    domain = process.env.domain;
+    domain = lodash.get(window, '__xt__env.domain', process.env.domain);
     /**
      * api 地址
      * @memberof XTGlobal
      */
-    target = process.env.target;
+    target = lodash.get(window, '__xt__env.target', process.env.target);
     /**
      * 环境设备信息
      * @memberof XTGlobal
@@ -42,17 +42,17 @@ class XTGlobal {
      * 版本信息
      * @memberof XTGlobal
      */
-    version = process.env.version;
+    version = lodash.get(window, '__xt__env.version', process.env.version);
     /**
      * Node env
      * @memberof XTGlobal
      */
-    NODE_ENV = process.env.NODE_ENV;
+    NODE_ENV = lodash.get(window, '__xt__env.NODE_ENV', process.env.NODE_ENV);
     /**
      * 环境
      * @memberof XTGlobal
      */
-    DEPLOY_ENV = process.env.DEPLOY_ENV;
+    DEPLOY_ENV = lodash.get(window, '__xt__env.DEPLOY_ENV', process.env.DEPLOY_ENV);
     /**
      *生产环境
      * @memberof XTGlobal

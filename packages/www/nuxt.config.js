@@ -1,7 +1,8 @@
 const build = require('./configs/build');
 const head = require('./configs/head');
-const env = require('./env.config.js');
+const env = require('./env.config');
 const router = require('./configs/router');
+const hooks = require('./configs/hooks');
 const lodash = require('lodash');
 
 const proxy = {
@@ -100,5 +101,7 @@ module.exports = {
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
-  build: build
+  build,
+  // https://zh.nuxtjs.org/api/configuration-hooks
+  hooks
 }

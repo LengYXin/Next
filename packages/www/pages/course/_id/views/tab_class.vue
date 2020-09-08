@@ -274,7 +274,7 @@ export default class PageView extends Vue {
   }
 }
 </style>
-<style lang="less" scoped>
+<style lang="less" scoped dec="三阶">
 .info(@top,@left) {
   top: @top;
   left: @left;
@@ -325,7 +325,7 @@ export default class PageView extends Vue {
   }
 }
 </style>
-<style lang="less" scoped>
+<style lang="less" scoped dec="五阶">
 .info(@top,@left,@index:1,@content:2,@state:3) {
   top: @top;
   left: @left;
@@ -382,7 +382,7 @@ export default class PageView extends Vue {
   }
 }
 </style>
-<style lang="less" scoped>
+<style lang="less" scoped dec="十阶">
 .info(@top,@left,@index:1,@content:2,@state:3) {
   top: @top;
   left: @left;
@@ -496,7 +496,7 @@ export default class PageView extends Vue {
   }
 }
 </style>
-<style lang="less" scoped>
+<style lang="less" scoped dec="二十阶">
 .info(@top,@left,@index:1,@content:2,@state:3) {
   top: @top;
   left: @left;
