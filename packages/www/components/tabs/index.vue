@@ -199,7 +199,11 @@ export default class extends Vue {
         // overflow-y: visible;
         overflow: initial;
       }
-
+      .ant-tabs-top-content,
+      .ant-tabs-bottom-content {
+        padding-top: 10px;
+        text-align: left;
+      }
       .ant-tabs-ink-bar {
         background-color: transparent;
 
