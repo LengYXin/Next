@@ -2,12 +2,12 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-06 18:15:02
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-08 15:34:16
+ * @LastEditTime: 2020-09-09 16:11:25
  * @Description: 我晒出的作业列表
  */
 
 import { BindAll } from "lodash-decorators"
-import { EnumApiMy } from "../../api"
+import { EnumApiMy, EnumApiHomework } from "../../api"
 import { AjaxBasics } from "../../helpers/ajaxBasics"
 import { Pagination } from "../basics/pagination"
 import { EntitiesBasics } from "../basics/entities"
@@ -32,12 +32,31 @@ export class ControllerMySunWork extends Pagination<any> {
     })
   }
 
+  // /**
+  //  * 我晒出的作业详情
+  //  * @memberof ControllerMyWork
+  //  */
+  // Details = new EntitiesBasics<any>(this.$ajax, {
+  //   url: EnumApiMy.MySunWorkDetail,
+  // })
   /**
-   * 我晒出的作业详情
-   * @memberof ControllerMyWork
+   * 点赞
+   * @param data 点赞的数据
    */
-  Details = new EntitiesBasics<any>(this.$ajax, {
-    url: EnumApiMy.MySunWorkDetail,
-  })
+  onLikes(data) {
+    try {
+      if (data.isLiked) {
+        throw "已点赞"
+      }
+      this.onUpdate(data, (old) => {
+        old.likeCount++
+        old.likeRecord = true
+        return old
+      })
+      this.$ajax.post(EnumApiHomework.Momentlike, { momentId: data.id })
+    } catch (error) {
+      throw error
+    }
+  }
 }
 export default ControllerMySunWork

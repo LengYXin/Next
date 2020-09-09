@@ -9,9 +9,17 @@
   <div class="xt-comment">
     <a-comment>
       <!-- 头像 -->
-      <a-avatar slot="avatar" :src="comment.avatar" :alt="comment.author" />
+      <a-avatar
+        slot="avatar"
+        :size="40"
+        :src="comment.avatar"
+        :alt="comment.author"
+      />
       <!-- 作者 笔山 右侧菜单 -->
-      <div class="xt-comment-author" slot="author">
+      <div
+        class="xt-comment-author xt-font-size-md xt-font-family-FZLTHJW"
+        slot="author"
+      >
         <span v-text="comment.author"></span>
         <span v-show="comment.bishan">
           笔山
@@ -19,7 +27,7 @@
         </span>
         <div class="xt-comment-dropdown" v-if="$slots.overlay">
           <a-dropdown>
-            <a-icon type="ellipsis" />
+            <a-icon type="ellipsis" :style="{ fontSize: '16px' }" />
             <template slot="overlay">
               <slot name="overlay"></slot>
             </template>
@@ -27,7 +35,7 @@
         </div>
       </div>
       <!-- 时间 -->
-      <a-tooltip slot="datetime">
+      <a-tooltip class="xt-comment-datetime" slot="datetime">
         <span
           slot="title"
           v-dateFormat="datetime"
@@ -138,6 +146,9 @@ export default class extends Vue {
   }
   .ant-comment-content-author {
     flex-direction: column;
+    .ant-comment-content-author-time {
+      margin-top: 6px;
+    }
   }
   .ant-comment-actions {
     text-align: right;

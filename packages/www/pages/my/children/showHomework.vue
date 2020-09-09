@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-08 15:41:47
+ * @LastEditTime: 2020-09-09 16:11:34
  * @Description: 我晒出的作业
 -->
 
@@ -13,10 +13,39 @@
       :key="item.id"
       :comment="getComment(item)"
     >
-      <template slot="actions">
+      <div class="xt-font-size-base xt-font-family-FZLTHJW">
+        <a-row type="flex" justify="space-between" algin="middle">
+          <a-col
+            class="xt-text-grey"
+            v-text="item.viewCount > 0 ? item.viewCount + '位同学看过' : ''"
+          ></a-col>
+          <a-space size="middle">
+            <xt-action
+              icon="message"
+              title="评论"
+              @click="onReply(item)"
+              :statistics="item.commentCount"
+            />
+            <xt-action
+              icon="heart"
+              title="喜欢"
+              @click="onLikes(item)"
+              :statistics="item.likeCount"
+              :action="item.likeRecord"
+            />
+          </a-space>
+        </a-row>
+      </div>
+      <a-divider />
+      <!-- <template slot="actions">
         <div class="xt-font-size-base xt-font-family-FZLTHJW">
           <a-space size="middle">
-            <Comment :dataSource="item" />
+            <xt-action
+              icon="message"
+              title="评论"
+              @click="onReply(item)"
+              :statistics="item.commentCount"
+            />
             <xt-action
               icon="heart"
               title="喜欢"
@@ -26,7 +55,7 @@
             />
           </a-space>
         </div>
-      </template>
+      </template> -->
       <template slot="overlay">
         <a-menu>
           <a-menu-item>
@@ -46,6 +75,7 @@
       :identifier="Pagination.onlyKey"
       @loading="onLoading"
     />
+    <HomeworkShow :momentId="reply" @cancel="onReply()" @like="onLikes" />
   </div>
 </template>
 <script lang="ts">
@@ -54,7 +84,7 @@ import { Modal } from "ant-design-vue";
 import { Observer } from "mobx-vue";
 import lodash from "lodash";
 import { Context } from "@nuxt/types";
-import Comment from "./view/comment.vue";
+import HomeworkShow from "~/components/business/homework/show.vue";
 
 @Observer
 @Component({
@@ -62,9 +92,12 @@ import Comment from "./view/comment.vue";
     await ctx.store.$my.MySunWork.onLoading();
   },
   scrollToTop: true,
-  components: { Comment },
+  components: { HomeworkShow },
 })
 export default class PageView extends Vue {
+  // 回复
+  reply = null;
+
   get PageStore() {
     return this.$store.$my;
   }
@@ -81,12 +114,31 @@ export default class PageView extends Vue {
       imgs: item.momentPicturelist || [],
     };
   }
+
+  /**
+   * 回复
+   */
+  onReply(data) {
+    if (data) {
+      try {
+        this.$InspectUser();
+        this.reply = data.id;
+      } catch (error) {}
+    } else {
+      this.reply = null;
+    }
+  }
   onLoading(event?) {
     this.Pagination.onLoading({}, {}, event);
   }
 
-  onLikes() {}
-  onOpenComment() {}
+  async onLikes(item) {
+    try {
+      await this.Pagination.onLikes(item);
+    } catch (error) {
+      this.$message.warning({ content: error, key: "likes" });
+    }
+  }
   onConfirm() {}
   mounted() {}
   updated() {}

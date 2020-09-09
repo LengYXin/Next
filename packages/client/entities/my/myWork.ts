@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-01 18:28:10
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-08 15:34:36
+ * @LastEditTime: 2020-09-09 15:14:25
  * @Description: 我的作业
  */
 import { BindAll } from "lodash-decorators"
@@ -56,7 +56,6 @@ export class ControllerMyWork extends Pagination<any> {
         this.onUpdate(data, updater)
       } else {
         homeworkId = data.id
-        this.onUpdate(this.onFind(data.id), updater)
         this.Details.onUpdate(updater)
       }
       return this.$ajax.post(EnumApiMy.SunHomework, {

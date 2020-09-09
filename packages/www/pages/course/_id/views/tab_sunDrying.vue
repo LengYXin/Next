@@ -8,12 +8,45 @@
 <template>
   <xt-inspect inspect>
     <div class="xt-content-small xt-course-sunDrying">
-      <xt-editor @submit="onSubmit" :rules="{required:true,max:2000}" buttonText="晒作业"></xt-editor>
-      <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
-        <template slot="actions">
+      <xt-editor
+        @submit="onSubmit"
+        :rules="{ required: true, max: 2000 }"
+        buttonText="晒作业"
+      ></xt-editor>
+      <xt-comment
+        v-for="item in Pagination.dataSource"
+        :key="item.id"
+        :comment="getComment(item)"
+      >
+        <div class="xt-font-size-base xt-font-family-FZLTHJW">
+          <a-row type="flex" justify="space-between" algin="middle">
+            <a-col
+              class="xt-text-grey"
+              v-text="item.viewCount > 0 ? item.viewCount + '位同学看过' : ''"
+            ></a-col>
+            <a-space size="middle">
+              <xt-action
+                icon="message"
+                title="评论"
+                :statistics="item.commentCount"
+                @click="onReply(item)"
+              />
+              <xt-action
+                icon="heart"
+                title="喜欢"
+                @click="onLikes(item)"
+                :statistics="item.likeCount"
+                :action="item.likeRecord"
+              />
+            </a-space>
+          </a-row>
+        </div>
+        <a-divider />
+
+        <!-- <template slot="actions">
           <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
           <xt-action :statistics="item.commentCount" title="回复" @click="onReply(item)" />
-        </template>
+        </template> -->
         <template slot="overlay">
           <a-menu>
             <a-menu-item v-if="$eqUser(item.userId)">
@@ -35,11 +68,18 @@
         </template>
         <!-- <xt-editor /> -->
       </xt-comment>
-      <xt-infinite-loading :identifier="Pagination.onlyKey" @loading="onLoading" />
+      <xt-infinite-loading
+        :identifier="Pagination.onlyKey"
+        @loading="onLoading"
+      />
       <HomeworkShow :momentId="reply" @cancel="onReply()" />
     </div>
     <!-- 没有登录显示内容 -->
-    <a-empty slot="not" :image="$images.logo" description="报名后，可以浏览晒作业栏哦~~" />
+    <a-empty
+      slot="not"
+      :image="$images.logo"
+      description="报名后，可以浏览晒作业栏哦~~"
+    />
   </xt-inspect>
 </template>
 <script lang="ts">

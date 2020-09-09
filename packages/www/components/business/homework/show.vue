@@ -7,6 +7,7 @@
  */
 <template>
   <a-modal
+    :title="title"
     wrapClassName="xt-homework-show"
     :visible="visible"
     destroyOnClose
@@ -16,15 +17,30 @@
   >
     <!-- 主题 -->
     <div v-if="Details.dataSource.id">
-      <xt-comment :comment="getComment(Details.dataSource)">
-        <template slot="actions">
-          <xt-action
-            @click="onLikes(item)"
-            :statistics="Details.dataSource.likeCount"
-            :action="Details.dataSource.likeRecord"
-          />
-          <xt-action :statistics="Details.dataSource.commentCount" title="回复" @click="onReply({})" />
-        </template>
+      <xt-comment :comment="getComment(Details.dataSource, true)">
+        <div class="xt-font-size-base xt-font-family-FZLTHJW">
+          <a-row type="flex" justify="space-between" algin="middle">
+            <a-col
+              class="xt-text-grey"
+              v-text="Details.dataSource.viewCount + '位同学看过'"
+            ></a-col>
+            <a-space size="middle">
+              <xt-action
+                icon="message"
+                title="评论"
+                :statistics="Details.dataSource.commentCount"
+                @click="onReply({})"
+              />
+              <xt-action
+                icon="heart"
+                title="喜欢"
+                @click="onLikes(Details.dataSource)"
+                :statistics="Details.dataSource.likeCount"
+                :action="Details.dataSource.likeRecord"
+              />
+            </a-space>
+          </a-row>
+        </div>
         <template slot="overlay">
           <a-menu>
             <a-menu-item v-if="$eqUser(Details.dataSource.userId)">
@@ -50,7 +66,7 @@
         v-show="!reply.id"
         @submit="onSubmit"
         class="xt-editor-single"
-        :rules="{required:true,max:2000}"
+        :rules="{ required: true, max: 2000 }"
         buttonText="回复"
       ></xt-editor>
       <!-- 评论列表 -->
@@ -60,8 +76,16 @@
         :comment="getComment(item)"
       >
         <template slot="actions">
-          <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
-          <xt-action :statistics="item.commentCount" title="回复" @click="onReply(item)" />
+          <xt-action
+            @click="onLikes(item)"
+            :statistics="item.likeCount"
+            :action="item.likeRecord"
+          />
+          <xt-action
+            :statistics="item.commentCount"
+            title="回复"
+            @click="onReply(item)"
+          />
         </template>
         <template slot="overlay">
           <a-menu>
@@ -83,11 +107,11 @@
           </a-menu>
         </template>
         <xt-editor
-          @submit="onSubmit($event,item)"
+          @submit="onSubmit($event, item)"
           v-if="eqReply(item)"
           class="xt-editor-single"
           placeholder="回复xxx"
-          buttonText="回复"
+          buttonText="评论"
         />
       </xt-comment>
     </div>
@@ -104,6 +128,7 @@ import lodash from "lodash";
 })
 export default class extends Vue {
   @Prop({}) momentId;
+  @Prop({ default: "查看评论" }) title;
   // 显示
   get visible() {
     return !!this.momentId;
@@ -131,13 +156,13 @@ export default class extends Vue {
   updateClasshour(newVal, oldVal) {
     this.onLoading(newVal);
   }
-  getComment(item) {
+  getComment(item, work = false) {
     return {
       content: item.content,
       avatar: item.userHeader,
       author: item.userNickname,
       time: item.createTime,
-      bishan: item.bishanNum,
+      bishan: work ? "" : item.bishanNum,
       imgs: item.momentPictures,
     };
   }
@@ -178,9 +203,15 @@ export default class extends Vue {
       console.log("LENG: PageView -> onSubmit -> error", error);
     }
   }
+
+  // onLikes(item) {
+  //   this.$emit("like", item, false);
+  // }
+
   async onLikes(item) {
     try {
-      //   await this.Pagination.onLikes(item);
+      await this.Details.onLikes(item);
+      await this.$emit("like", item);
     } catch (error) {
       this.$message.warning({ content: error, key: "likes" });
     }

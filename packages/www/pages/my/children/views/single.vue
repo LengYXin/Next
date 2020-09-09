@@ -1,7 +1,7 @@
 <!--
  * @Author: Erlin
  * @CreateTime: 2020-09-04 15:57:12
- * @LastEditTime: 2020-09-06 19:00:17
+ * @LastEditTime: 2020-09-09 14:36:50
  * @LastEditors: Erlin
  * @Description: 去上课列表
 -->
@@ -13,9 +13,6 @@
       :data-source="dataSource"
       :grid="{ gutter: 16, column: 3 }"
     >
-      <!-- <nuxt-link slot="renderItem" slot-scope="item" :to="`/course/${item.courseId}`"> -->
-      <!-- <a-row class="xt-class-full-renderItem" slot="renderItem" slot-scope="item"> -->
-      <!-- <a-row class="xt-class-single-warp" :gutter="16"> -->
       <a-col :span="7" slot="renderItem" slot-scope="item">
         <nuxt-link :to="`/course/${item.courseId}`">
           <a-card class="xt-class-single-card" hoverable :bordered="false">
@@ -34,47 +31,21 @@
               />
             </a-badge>
 
-            <a-card-meta :title="item.courseName">
-              <template slot="description">
-                <span v-text="item.studyTips"></span>
-              </template>
+            <a-card-meta>
+              <div
+                slot="title"
+                class="xt-font-size-md xt-text-align-center"
+                v-text="item.courseName"
+              ></div>
+              <div
+                slot="description"
+                class="xt-font-size-sm xt-text-align-center"
+                v-text="item.studyTips"
+              ></div>
             </a-card-meta>
           </a-card>
         </nuxt-link>
       </a-col>
-      <!-- </a-row> -->
-      <!-- <xt-shadow /> -->
-      <!-- </a-row> -->
-
-      <!-- <a-list-item
-      class="xt-class-single-renderItem"
-      slot="renderItem"
-      slot-scope="item"
-    >
-      <a-card class="xt-class-single-card" hoverable :bordered="false">
-        <a-badge
-          class="xt-class-single-badge xt-badge xt-badge-left"
-          slot="cover"
-        >
-          <div class="xt-badge-text" slot="count">
-            <div>直播</div>
-            <div>课程</div>
-          </div>
-          <img
-            alt="coursePicture"
-            class="xt-class-single-img"
-            v-lazy="item.coursePictureUri"
-          />
-        </a-badge>
-
-        <a-card-meta :title="item.courseName">
-          <template slot="description">
-            <span v-text="item.studyTips"></span>
-          </template>
-        </a-card-meta>
-      </a-card>
-    </a-list-item> -->
-      <!-- </nuxt-link> -->
     </a-list>
     <xt-shadow />
   </div>

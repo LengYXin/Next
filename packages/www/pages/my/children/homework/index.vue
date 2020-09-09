@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-03 10:33:03
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-08 11:26:38
+ * @LastEditTime: 2020-09-09 15:14:36
  * @Description: 我的作业
 -->
 
@@ -74,7 +74,7 @@
             v-if="item.reviewed == 1"
           >
             <span v-text="item.reviewUserName + '助教已评阅作业'"></span>
-            <Reply :id="item.homeworkFinishId" />
+            <Reply @sun="onSunWork" :dataSource="item" />
           </a-col>
           <a-col :span="10" class="xt-text-align-right" v-else>
             <a-popconfirm
@@ -139,6 +139,8 @@ export default class PageView extends Vue {
    * 晒作业
    */
   async onSunWork(item) {
+    console.log("PageView -> onSunWork -> item", item);
+
     try {
       await this.Pagination.onSunWork(item);
       this.$message.success({

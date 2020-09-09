@@ -1,7 +1,7 @@
 <!--
  * @Author: Erlin
  * @CreateTime: 2020-09-04 15:57:12
- * @LastEditTime: 2020-09-06 16:19:28
+ * @LastEditTime: 2020-09-09 14:35:05
  * @LastEditors: Erlin
  * @Description: 去上课列表
 -->
@@ -40,17 +40,44 @@
                 slot="cover"
                 alt="coursePicture"
                 class="xt-class-full-img"
+                :class="single.purchased ? '' : 'xt-class-full-img-inactive'"
                 v-lazy="single.coursePictureUri"
               />
-              <a-card-meta :title="single.courseName">
-                <template slot="description">
-                  <span v-text="single.studyTips"></span>
-                </template>
+              <a-card-meta>
+                <div
+                  slot="title"
+                  class="xt-font-size-md xt-text-align-center"
+                  v-text="single.courseName"
+                ></div>
+                <div
+                  slot="description"
+                  class="xt-font-size-sm xt-text-align-center"
+                  v-text="single.studyTips"
+                ></div>
               </a-card-meta>
             </a-card>
           </nuxt-link>
         </a-col>
       </a-row>
+      <!-- 转报全阶 -->
+      <a-row
+        class="xt-class-full-foot xt-text-align-center"
+        :gutter="[0, 16]"
+        v-if="item.isTurnFullCourse"
+      >
+        <a-col :span="24">
+          <a-button size="large" type="primary" class="ant-btn-yellow">
+            转报全阶
+          </a-button>
+        </a-col>
+        <a-col
+          :span="24"
+          class="xt-font-family-FZLTHJW xt-text-yellow"
+          v-text="`转为全阶后可优惠${item.transCourseFullSavePrice}元`"
+        >
+        </a-col>
+      </a-row>
+
       <xt-shadow />
     </div>
     <!-- </nuxt-link> -->
@@ -79,6 +106,7 @@ export default class PageView extends Vue {
     padding-bottom: 30px;
   }
   &-warp {
+    margin-top: 12px;
     padding-left: 54px;
   }
   &-card.ant-card {
@@ -89,6 +117,10 @@ export default class PageView extends Vue {
     width: 100%;
     height: 130px;
     // height: 180px;
+  }
+  &-img-inactive {
+    filter: grayscale(100%);
+    filter: gray;
   }
   &-badge.xt-badge.ant-badge {
     height: 46px;
@@ -102,6 +134,9 @@ export default class PageView extends Vue {
       letter-spacing: 1px;
       transform: none !important;
     }
+  }
+  &-foot {
+    padding: 12px 0;
   }
 }
 </style>

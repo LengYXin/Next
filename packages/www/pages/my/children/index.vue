@@ -1,7 +1,7 @@
 <!--
  * @Author: Erlin
  * @CreateTime: 2020-08-20 15:22:58
- * @LastEditTime: 2020-09-06 19:00:03
+ * @LastEditTime: 2020-09-09 14:42:21
  * @LastEditors: Erlin
  * @Description: 去上课
 -->
@@ -26,7 +26,7 @@
           返回老教室
         </a-button>
       </a-col>
-      <a-col :span="24" class="xt-class- xt-font-family-FZLTHJW xt-text-yellow">
+      <a-col :span="24" class="xt-font-family-FZLTHJW xt-text-yellow">
         点击此按钮，可以查看您所报名的《从书法之美到生活之美——全阶课程》或《从书法之美到生活之美——自在行草》课程。
       </a-col>
     </a-row>
@@ -45,7 +45,8 @@ import FullList from "./views/full.vue";
 @Observer
 @Component({
   async fetch(ctx: Context) {
-    await ctx.store.$my.onGetMyCourseList();
+    let activeKey = lodash.get(ctx.query, "active", 0);
+    await ctx.store.$my.onGetMyCourseList(activeKey);
   },
   scrollToTop: true,
   components: { SingleList, FullList },

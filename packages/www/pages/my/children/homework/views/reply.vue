@@ -126,7 +126,7 @@ import lodash from "lodash";
   components: {},
 })
 export default class PageView extends Vue {
-  @Prop() id;
+  @Prop({ default: {} }) dataSource;
   get MyWork() {
     return this.$store.$my.MyWork;
   }
@@ -147,16 +147,16 @@ export default class PageView extends Vue {
   }
 
   onLoading() {
-    this.PageStore.onLoading({ id: this.id });
+    this.PageStore.onLoading({ id: this.dataSource.homeworkFinishId });
   }
 
   /**
    * 晒作业
    */
   async onSunWork(item) {
-    console.log("PageView -> onSunWork -> this.Pagination", this.MyWork);
     try {
       await this.MyWork.onSunWork(item, false);
+      await this.$emit("sun", this.dataSource);
       this.$message.success({
         content: "晒作业成功",
         key: "sunHomeworkSuccess",
@@ -193,7 +193,7 @@ export default class PageView extends Vue {
     background-color: #fdfcfa;
   }
   .ant-modal-body {
-    max-height: 600px;
+    max-height: calc(85vh - 400px);
     overflow-y: auto;
   }
 }
