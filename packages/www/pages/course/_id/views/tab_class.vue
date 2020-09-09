@@ -80,7 +80,6 @@
             </a-row>
           </mapReview>
         </div>
-       
       </template>
       <div class="xt-text-align-right xt-text-yellow">您可以在北京时间2020年09月17日24时之前提交作业和将作业发布到“晒作业”与大家分享</div>
     </div>
@@ -183,7 +182,9 @@ export default class PageView extends Vue {
   created() {
     this.onLoading(this.id);
   }
-  mounted() {}
+  mounted() {
+    // this.onVisible({ classhourId: 339, createTime: Date.now() });
+  }
   updated() {}
   destroyed() {}
 }

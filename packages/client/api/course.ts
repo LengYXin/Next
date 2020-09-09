@@ -14,6 +14,8 @@ export enum EnumApiCourse {
   CourseMap = "/userclasshour/map/list",
   /** 地图页详情 */
   CourseMapDetails = "/userclasshour/detail",
+  /** 学习资料  */
+  Coursematerial = "/coursematerial/list",
   /** 课程回顾 */
   CourseReview = "/activity/coursestudyreview",
   /** 创建分享 临时 token */
