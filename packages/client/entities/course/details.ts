@@ -4,7 +4,7 @@ import { EnumApiCourse } from "../../api";
 import { AjaxBasics } from "../../helpers/ajaxBasics";
 import { EntitiesBasics } from "../basics/entities";
 import { CourseMap } from "./map";
-import { CourseThoughts } from "./Thoughts";
+import { CourseThoughts } from "./thoughts";
 /**
  * 课程详情
  */

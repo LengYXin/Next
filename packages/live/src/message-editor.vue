@@ -29,11 +29,8 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class extends Vue {
-  get PageStore() {
-    return this.$rootStore.$storeHomework;
-  }
-  get Pagination() {
-    return this.PageStore.SunDrying;
+  get socketMessage() {
+    return this.$rootStore.$socketMessage;
   }
   get id() {
     return 28; //this.$route.params.id;
@@ -41,24 +38,28 @@ export default class extends Vue {
 
   async onSubmit(event) {
     try {
-      // await this.Pagination.onInstall({
-      //   singleCourseId: this.id,
-      //   content: event.html,
-      //   contentLength: event.length,
-      //   userType: 1,
-      // });
       event.onReset();
       // this.Pagination.onReset();
-      this.Pagination.onPush({
-        id: lodash.uniqueId("test"),
-        author: lodash.sample(["林一", "张三", "李四四"]),
-        time: Date.now(),
-        avatar: lodash.sample([
-          "https://oss-free.xuantong.cn/picturePath/b8938fb359b16ce19be6419160b428f5.blob",
-          "https://oss-free.xuantong.cn/picturePath/a1815d5ecbf18fad30e48998f00b4a0e.blob",
-        ]),
-        content: event.html,
-        jushou: lodash.sample([true, false]),
+      // this.Pagination.onPush({
+      //   id: lodash.uniqueId("test"),
+      //   author: lodash.sample(["林一", "张三", "李四四"]),
+      //   time: Date.now(),
+      //   avatar: lodash.sample([
+      //     "https://oss-free.xuantong.cn/picturePath/b8938fb359b16ce19be6419160b428f5.blob",
+      //     "https://oss-free.xuantong.cn/picturePath/a1815d5ecbf18fad30e48998f00b4a0e.blob",
+      //   ]),
+      //   content: event.html,
+      //   jushou: lodash.sample([true, false]),
+      // });
+      this.socketMessage.onSendRichTxt({
+        senderId: "6a757a92-693b-419b-9063-aac86b2b0121",
+        nickName: "LENG",
+        header:
+          "https://oss-free.xuantong.cn/thumbPath/daf64bd8e1647294c1ba436ffbed03cc.blob",
+        chan: "123",
+        content: {
+          content: event.html,
+        },
       });
     } catch (error) {
       console.log("LENG: PageView -> onSubmit -> error", error);

@@ -1,8 +1,6 @@
 const moment = require('moment');
 const lodash = require('lodash');
-
-// 环境配置
-module.exports = lodash.mapValues(lodash.mapKeys({
+const config = {
     // 微信 App id
     appid: getWXAppid(),
     // 域名
@@ -13,9 +11,15 @@ module.exports = lodash.mapValues(lodash.mapKeys({
     version: `${process.env.npm_package_version} ${moment().format("YYYY-MM-DD HH:mm")}`,
     // 环境 uat pro
     DEPLOY_ENV: process.env.DEPLOY_ENV,
-}, (value, key) => {
-    return `process.env.${key}`
-}), value => JSON.stringify(value));
+};
+// 环境配置
+module.exports = {
+    config,
+    process: lodash.mapValues(lodash.mapKeys(config, (value, key) => {
+        return `process.env.${key}`
+    }), value => JSON.stringify(value))
+};
+
 /**
  * API target
  * @param {*} env 
@@ -24,7 +28,7 @@ function getTarget(env = process.env.DEPLOY_ENV) {
     const config = {
         pro: 'https://cr-api-uat.xuantong.cn',
         uat: 'https://cr-api-uat.xuantong.cn',
-        dev: 'https://dev-api.xuantong.cn'
+        dev: 'https://imweb.xuantong.cn'//'https://dev-api.xuantong.cn'
     }
     return lodash.get(config, env, config.dev)
 }

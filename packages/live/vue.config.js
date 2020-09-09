@@ -13,7 +13,7 @@ module.exports = {
   // ],
   configureWebpack: {
     plugins: [
-      new webpack.DefinePlugin(env),
+      new webpack.DefinePlugin(env.process),
       new MomentLocalesPlugin({ localesToKeep: ['es-us', 'zh-cn'] }),
       new webpack.BannerPlugin({ banner: `@author 冷 (https://github.com/LengYXin)\n@email lengyingxin8966@gmail.com` })
     ],
@@ -41,6 +41,18 @@ module.exports = {
       }
     }
 
+  },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: env.config.target,
+        changeOrigin: true,
+        logLevel: "debug",
+        pathRewrite: {
+          "^/api": ""
+        }
+      },
+    }
   },
   pluginOptions: {
     'style-resources-loader': {
