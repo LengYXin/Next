@@ -6,46 +6,88 @@
  * @desc 订单
  */
 <template>
-  <a class="xt-my-order-item" target="_blank" :href="dataSource.articleUrl">
-    <a-list-item>
-      <a-list-item-meta>
-        <h1 slot="title" v-text="dataSource.orderStatusText">名称</h1>
-        <div slot="description">
-          <div>
-            <time v-dateFormat="dataSource.orderTime" format="YYYY-MM-DD HH:mm:ss" />
-            <a-divider type="vertical"></a-divider>
-            <span>
-              订单编号：
-              <span v-text="dataSource.orderSn"></span>
-            </span>
+  <div class="xt-my-order-item">
+    <!-- <a class="xt-my-order-item" target="_blank" :href="dataSource.articleUrl"> -->
+    <!-- <a-list-item> -->
+    <a-row type="flex" justify="space-between" align="middle">
+      <a-col
+        class="xt-font-size-lg xt-text-bold xt-text-yellow"
+        v-text="dataSource.orderStatusText"
+      ></a-col>
+      <a-col class="xt-text-green">
+        <span>实付学费：</span>
+        <span
+          class="xt-font-size-xxl xt-text-bold"
+          v-money="dataSource.courseActualPaymentPrice"
+        ></span>
+      </a-col>
+    </a-row>
+    <div>
+      <div>
+        <time
+          v-dateFormat="dataSource.orderTime"
+          format="YYYY-MM-DD HH:mm:ss"
+        />
+        <a-divider type="vertical"></a-divider>
+        <span>
+          订单编号：
+          <span v-text="dataSource.orderSn"></span>
+        </span>
+      </div>
+
+      <div class="xt-my-order-item-warp">
+        <a-badge class="xt-badge xt-badge-left">
+          <div class="xt-badge-text" slot="count">
+            <!-- v-text="dataSource.courseType" -->
+            <div>直播</div>
+            <div>课程</div>
           </div>
-          <a-badge
-            class="xt-badge xt-badge-left"
-            v-for="item in dataSource.courseIdList"
-            :key="item.courseId"
-          >
-            <div class="xt-badge-text" slot="count">
-              <div v-text="dataSource.courseType">直播</div>
+          <img
+            class="xt-my-order-item-img"
+            width="480"
+            height="270"
+            alt="logo"
+            v-lazy="courseData.coursePictureThumbUri"
+          />
+        </a-badge>
+        <div class="xt-my-order-item-content">
+          <div class="xt-my-order-item-course-box">
+            <div class="xt-font-size-md" v-text="courseData.courseName"></div>
+            <div
+              class="xt-text-green xt-text-bold xt-font-size-md"
+              v-money="courseData.coursePrice"
+            ></div>
+            <div class="xt-text-yellow xt-font-size-sm">
+              <span>退课截止至</span>
+              <time
+                v-dateFormat="courseData.refundEndTime"
+                format="YYYY-MM-DD HH:mm:ss"
+              />
             </div>
-            <img
-              class="xt-my-order-item-img"
-              width="480"
-              height="270"
-              alt="logo"
-              v-lazy="item.coursePictureThumbUri"
-            />
-          </a-badge>
+          </div>
+          <Invoice :dataSource="dataSource" />
+          <!-- <a-button
+            type="primary"
+            class="ant-btn-yellow xt-my-order-item-btn"
+            block
+          >
+            申请发票
+          </a-button> -->
         </div>
-      </a-list-item-meta>
-      <div class="xt-my-order-item-content">
+      </div>
+    </div>
+    <xt-shadow />
+
+    <!-- <div class="xt-my-order-item-content">
         <h1>
           <span>实付学费：</span>
           <span v-money="dataSource.refundAmount"></span>
         </h1>
         <Invoice :dataSource="dataSource" />
-      </div>
-    </a-list-item>
-  </a>
+      </div> -->
+    <!-- </a-list-item> -->
+    <!-- </a> -->
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
@@ -59,6 +101,9 @@ import Invoice from "./invoice.vue";
 })
 export default class PageView extends Vue {
   @Prop({ default: {} }) dataSource;
+  get courseData() {
+    return lodash.get(this.dataSource, ["courseIdList", 0], {});
+  }
   mounted() {}
   updated() {}
   destroyed() {}
@@ -66,16 +111,36 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" scoped>
 @height: 270px;
+@contentHeight: 115px;
 .xt-my-order-item {
   display: block;
   height: @height;
-  //   overflow: hidden;
   &-img {
     width: 200px;
-    height: 115px;
+    height: @contentHeight;
+  }
+  &-warp {
+    height: @contentHeight;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
   }
   &-content {
-    height: @height;
+    padding-left: 30px;
+    height: @contentHeight;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &-course-box {
+    // padding-top: 20px;
+    height: @contentHeight;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
   }
   &-btn {
     color: @white;

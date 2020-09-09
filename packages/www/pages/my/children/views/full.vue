@@ -22,7 +22,7 @@
             <div>课程</div>
           </div>
           <div
-            class="xt-font-size-lg xt-font-bold xt-font-family-FZXIYSK xt-text-black"
+            class="xt-font-size-lg xt-text-bold xt-font-family-FZXIYSK xt-text-black"
             v-text="item.courseName"
           ></div>
         </a-badge>

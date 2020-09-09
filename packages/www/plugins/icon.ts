@@ -86,3 +86,7 @@ export { default as MailOutline } from "@ant-design/icons/lib/outline/MailOutlin
 export { default as UserOutline } from "@ant-design/icons/lib/outline/UserOutline";
 // <a-icon type="lock" />
 export { default as LockOutline } from "@ant-design/icons/lib/outline/LockOutline";
+// <a-icon type="man" />
+export { default as ManOutline } from "@ant-design/icons/lib/outline/ManOutline";
+// WomanOutline
+export { default as WomanOutline } from "@ant-design/icons/lib/outline/WomanOutline";

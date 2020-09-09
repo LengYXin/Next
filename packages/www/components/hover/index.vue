@@ -11,7 +11,10 @@
       <!-- 默认展示 -->
       <slot></slot>
       <!-- 悬浮展示 -->
-      <div class="xt-hover-suspension">
+      <div
+        class="xt-hover-suspension"
+        :class="'xt-hover-suspension-transform-' + animation"
+      >
         <slot name="hover"></slot>
       </div>
     </div>
@@ -32,6 +35,7 @@ import lodash from "lodash";
   components: {},
 })
 export default class extends Vue {
+  @Prop({ default: "slide" }) animation;
   updated() {}
   destroyed() {}
 }
@@ -47,7 +51,8 @@ export default class extends Vue {
     z-index: 2;
     width: 100%;
     height: 100%;
-    top: 100%;
+    top: 0;
+    // top: 100%;
     background-color: @modal-mask-bg;
     display: flex;
     align-items: center;
@@ -57,9 +62,28 @@ export default class extends Vue {
     transition: all 0.2s;
   }
 
+  &-suspension-transform {
+    &-slide {
+      top: 100%;
+    }
+    &-fade {
+      display: none;
+      opacity: 0;
+    }
+  }
+
   &:hover {
-    .xt-hover-suspension {
-      top: 0;
+    // .xt-hover-suspension {
+    //   top: 0;
+    // }
+    .xt-hover-suspension-transform {
+      &-slide {
+        top: 0;
+      }
+      &-fade {
+        display: flex;
+        opacity: 1;
+      }
     }
   }
   button {
