@@ -23,6 +23,7 @@ export { default as InfoOutline } from "@ant-design/icons/lib/outline/InfoOutlin
 
 export { default as ExclamationCircleOutline } from "@ant-design/icons/lib/outline/ExclamationCircleOutline";
 export { default as ExclamationCircleFill } from "@ant-design/icons/lib/fill/ExclamationCircleFill";
+export { default as ShareAltOutline } from "@ant-design/icons/lib/outline/ShareAltOutline";
 
 export { default as ExclamationOutline } from "@ant-design/icons/lib/outline/ExclamationOutline";
 // 勾

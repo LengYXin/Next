@@ -69,17 +69,18 @@
         </div>
         <!-- 学习回顾 -->
         <div class="xt-course-class-review">
-          <a-row type="flex">
-            <a-col :span="24" class="xt-course-class-content">
-              <mapReview>
+          <mapReview :classhour="Details.dataSource">
+            <a-row type="flex">
+              <a-col :span="24" class="xt-course-class-content">
                 <img src="https://www.xuantong.cn/_nuxt/img/3e229e1.png" alt srcset />
-              </mapReview>
-            </a-col>
-            <a-col :span="24" class="xt-course-class-state">
-              <div class="xt-text-yellow xt-margin-md">学习回顾</div>
-            </a-col>
-          </a-row>
+              </a-col>
+              <a-col :span="24" class="xt-course-class-state">
+                <div class="xt-text-yellow xt-margin-md">学习回顾</div>
+              </a-col>
+            </a-row>
+          </mapReview>
         </div>
+       
       </template>
       <div class="xt-text-align-right xt-text-yellow">您可以在北京时间2020年09月17日24时之前提交作业和将作业发布到“晒作业”与大家分享</div>
     </div>

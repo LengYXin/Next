@@ -4,7 +4,7 @@ import lodash from "lodash";
 import { EnumApiCourse } from "../../api";
 import { AjaxBasics } from "../../helpers/ajaxBasics";
 import { EntitiesBasics } from "../basics/entities";
-import { computed, toJS } from "mobx";
+import { computed, toJS, observable, runInAction } from "mobx";
 /**
  * 课程详情
  */
@@ -16,6 +16,12 @@ export class CourseMap extends EntitiesBasics<any> {
       url: EnumApiCourse.CourseMap
     })
   }
+  /**
+   * 课程回顾
+   * @type {*}
+   * @memberof CourseMap
+   */
+  @observable CourseReview: any = {};
   /**
    * 地图页详情
    * @memberof CourseMap
@@ -41,6 +47,23 @@ export class CourseMap extends EntitiesBasics<any> {
       return data;
     }
     return []
+  }
+  /**
+   * 获取课程回顾
+   * @param courseId 
+   */
+  async onGetCourseReview(courseId: string) {
+    const res = await this.$ajax.post(EnumApiCourse.CourseReview, { courseId });
+    runInAction(() => {
+      this.CourseReview = res;
+    })
+  }
+  /**
+   * 创建分享 临时 token
+   * @param courseId 
+   */
+  onGetCreatetempToken(courseId: string) {
+    return this.$ajax.post(EnumApiCourse.CreatetempToken, { courseId })
   }
 }
 export default CourseMap;

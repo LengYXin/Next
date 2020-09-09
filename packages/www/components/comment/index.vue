@@ -163,6 +163,11 @@ export default class extends Vue {
   word-break: break-all;
   display: block;
   transition: all 0.5s;
+  p {
+    margin: auto;
+    line-height: 26px;
+    // max-height: 26px;
+  }
 }
 
 .xt-ellipsis .xt-ellipsis-btn {

@@ -156,7 +156,7 @@ export default class PageView extends Vue {
   &-input {
     transform: translateY(-67px);
     height: @searchHeight;
-    background: url(/images/search-bg.png);
+    background: url(/images/background/search.png);
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
