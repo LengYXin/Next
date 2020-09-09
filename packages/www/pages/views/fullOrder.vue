@@ -69,7 +69,7 @@
                 ></span>
                 <div>
                   <span
-                    class="xt-font-size-xx xt-font-bold"
+                    class="xt-font-size-xx xt-text-bold"
                     :class="'xt-text-' + item.color"
                     v-money="item.price"
                   ></span>

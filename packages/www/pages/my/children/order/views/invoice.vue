@@ -3,11 +3,13 @@
  * @email lengyingxin8966@gmail.com
  * @create date 2020-08-05 14:17:52
  * @modify date 2020-08-05 14:17:52
- * @desc 订单
+ * @desc 申请发票
  */
 <template>
   <div class="xt-order-invoice">
-    <a-button class="ant-btn" type="yellow" @click="onVisible(true)">申请发票</a-button>
+    <a-button class="ant-btn" type="yellow" @click="onVisible(true)"
+      >申请发票</a-button
+    >
     <a-modal
       title="申请发票"
       :footer="null"
@@ -48,7 +50,13 @@
           <a-input size="large"></a-input>
         </a-form-model-item>
         <div class="xt-text-align-center">
-          <a-button class="ant-btn" size="large" type="primary" html-type="submit">提交</a-button>
+          <a-button
+            class="ant-btn"
+            size="large"
+            type="primary"
+            html-type="submit"
+            >提交</a-button
+          >
         </div>
       </a-form-model>
     </a-modal>
@@ -85,6 +93,9 @@ export default class PageView extends Vue {
 }
 .ant-btn {
   color: @white;
+  width: 145px;
+  height: 40px;
+  font-size: @font-size-lg;
 }
 </style>
 

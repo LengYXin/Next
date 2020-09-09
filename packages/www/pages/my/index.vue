@@ -2,12 +2,12 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-20 15:22:58
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-08 14:58:58
+ * @LastEditTime: 2020-09-09 19:48:18
  * @Description: 我的
 -->
 <template>
   <div class="xt-content xt-page-my">
-    <a-row class="xt-page-my-header" type="flex" align="middle">
+    <!-- <a-row class="xt-page-my-header" type="flex" align="middle">
       <a-col :span="4" class="xt-text-align-center">
         <a-row type="flex" justify="center" align="middle" :gutter="10">
           <a-col>
@@ -32,10 +32,31 @@
           <a-icon :type="activeItem.icon" />
         </a-row>
       </a-col>
-    </a-row>
+    </a-row> -->
+
     <a-row type="flex">
       <a-col :span="4">
         <a-affix :offset-top="72">
+          <a-row
+            class="xt-margin-bottom-lg xt-margin-top-lg"
+            type="flex"
+            justify="center"
+            align="middle"
+            :gutter="10"
+          >
+            <a-col>
+              <a-avatar
+                :src="PageStore.UserInfo.headThumbnailUri"
+                :alt="PageStore.UserInfo.nickName"
+                :size="45"
+              />
+            </a-col>
+            <a-col
+              class="xt-font-family-FZLTHJW"
+              v-text="PageStore.UserInfo.nickName"
+            ></a-col>
+          </a-row>
+
           <a-tabs
             tabPosition="left"
             :activeKey="activeKey"
@@ -49,7 +70,18 @@
           </a-tabs>
         </a-affix>
       </a-col>
-      <a-col :span="20">
+      <a-col class="xt-page-my-content" :span="20">
+        <a-row
+          type="flex"
+          justify="start"
+          align="middle"
+          :gutter="10"
+          class="xt-font-size-md xt-text-yellow xt-page-my-header-title"
+        >
+          <a-col class="xt-font-family-FZLTHJW" v-t="activeItem.key"></a-col>
+          <a-icon :type="activeItem.icon" />
+        </a-row>
+
         <!-- <nuxt-child keep-alive /> -->
         <nuxt-child />
       </a-col>
@@ -105,11 +137,16 @@ export default class PageView extends Vue {
 <style lang="less" scoped>
 .xt-page-my {
   padding-top: @padding-lg;
-  &-header {
-    margin: 72px 0 32px;
-  }
+  // &-header {
+  //   margin: 72px 0 32px;
+  // }
   &-header-title {
+    height: 45px;
     padding-left: 20px;
+    margin: 20px 0;
+  }
+  &-content {
+    padding-left: 40px;
   }
 }
 </style>

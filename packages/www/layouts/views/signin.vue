@@ -10,7 +10,7 @@
         <a-form-model-item>
           <img class="xt-signin-logo" :src="$images.title" alt srcset />
         </a-form-model-item>
-        <h4 class="xt-font-bold">登录</h4>
+        <h4 class="xt-text-bold">登录</h4>
 
         <a-form-model-item>
           <a-input
