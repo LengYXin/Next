@@ -4,6 +4,7 @@ import { EnumApiCourse } from "../../api";
 import { AjaxBasics } from "../../helpers/ajaxBasics";
 import { EntitiesBasics } from "../basics/entities";
 import { CourseMap } from "./map";
+import { CourseThoughts } from "./Thoughts";
 /**
  * 课程详情
  */
@@ -20,6 +21,11 @@ export class CourseDetails extends EntitiesBasics<ICourseDetails> {
    * @memberof ControllerCourse
    */
   Map = new CourseMap(this.$ajax);
+  /**
+   * 感想
+   * @memberof CourseDetails
+   */
+  Thoughts = new CourseThoughts(this.$ajax);
   /**
    * 课程介绍
    * @param body 

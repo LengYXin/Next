@@ -50,7 +50,7 @@ export interface PaginationInfiniteEvent {
     loaded: Function;
     reset: Function
 }
-@BindAll()
+// @BindAll()
 export class Pagination<T> {
     constructor(protected $ajax: AjaxBasics, options: PaginationOptions) {
         this.onReset(lodash.merge({
