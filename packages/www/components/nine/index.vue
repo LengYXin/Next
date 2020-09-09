@@ -7,7 +7,7 @@
  */
 <template>
   <!-- <div class="xt-flex-center"> -->
-  <a-row class="xt-nine" v-viewer="options" :style="getNineStyle()">
+  <a-row class="xt-nine" v-if="length" v-viewer="options" :style="getNineStyle()">
     <a-col :span="getSpan()" v-for="img in dataSource" :key="getThumb(img)">
       <img
         class="xt-nine-img hvr-float-shadow"

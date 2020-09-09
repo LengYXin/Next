@@ -28,11 +28,7 @@
       </div>
       <!-- 时间 -->
       <a-tooltip slot="datetime">
-        <span
-          slot="title"
-          v-dateFormat="datetime"
-          format="YYYY-MM-DD HH:mm"
-        ></span>
+        <span slot="title" v-dateFormat="datetime" format="YYYY-MM-DD HH:mm"></span>
         <span>
           发布于
           <time v-dateFormat="datetime" format="YYYY-MM-DD HH:mm" fromNow />
@@ -152,6 +148,11 @@ export default class extends Vue {
   word-break: break-all;
   display: block;
   transition: all 0.5s;
+  p {
+    margin: auto;
+    line-height: 26px;
+    // max-height: 26px;
+  }
 }
 
 .xt-ellipsis .xt-ellipsis-btn {
