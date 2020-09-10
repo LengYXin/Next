@@ -43,19 +43,26 @@
         </span>
       </a-tooltip>
       <!-- 内容 -->
-      <a-row type="flex" justify="space-between" align="bottom" slot="content">
-        <a-col flex="320px" class="lyx-comment-content">
+      <a-row
+        type="flex"
+        class="lyx-comment-content-flex"
+        justify="space-between"
+        align="bottom"
+        slot="content"
+        :gutter="16"
+      >
+        <a-col class="lyx-comment-content">
           <slot name="content">
             <!-- <div v-ellipsis v-html="formatFace(content)"></div> -->
             <div v-html="formatFace(content)"></div>
           </slot>
         </a-col>
-        <a-col flex="80px" class="lyx-comment-guzhang">
+        <!-- <a-col flex="80px" class="lyx-comment-guzhang">
           <svg class="lyx-icon" aria-hidden="true">
             <use xlink:href="#video-guzhang" />
           </svg>
           <span>66k</span>
-        </a-col>
+        </a-col>-->
       </a-row>
       <!-- 操作按钮 -->
       <template slot="actions">
@@ -147,6 +154,9 @@ export default class extends Vue {
 </style>
 <style lang="less" >
 .lyx-comment {
+  &-content-flex {
+    padding-right: 70px;
+  }
   &-content {
     p {
       margin: auto;

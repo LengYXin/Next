@@ -42,7 +42,7 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
         return true
     }
     AjaxBasics.onMap = function (res) {
-        return res?.response?.result
+        return res.response
     }
     AjaxBasics.onError = function (error) {
         if (lodash.includes([600002, 900004], lodash.get(error, 'response.code'))) {

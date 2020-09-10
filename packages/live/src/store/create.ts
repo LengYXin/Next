@@ -6,7 +6,7 @@
  * @desc [description]
  */
 
-import { ControllerAbout, ControllerCourse, ControllerHome, ControllerStationery, ControllerUser, ControllerVideo, ControllerOrder, ControllerHomework } from "@xt/client";
+import { ControllerAbout, ControllerCourse, ControllerHome,SocketMessage, ControllerStationery, ControllerUser, ControllerVideo, ControllerOrder, ControllerHomework } from "@xt/client";
 import { create, persist } from 'mobx-persist';
 import { ajax, onResetAjaxBasics } from "./ajaxBasics";
 import $global from './global';
@@ -33,6 +33,7 @@ const store = {
     // $storeOrder: new ControllerOrder(ajax),
     // // 作业
     $storeHomework: new ControllerHomework(ajax),
+    $socketMessage: new SocketMessage(ajax),
     // 用户
     $storeUser: new ControllerUser(ajax),
 }

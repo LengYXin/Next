@@ -66,7 +66,7 @@ export class EntitiesBasics<T> {
             }, AjaxRequest);
             const res = await this.$ajax.request<T>(AjaxRequest)
                 .pipe(
-                    map(this.onMapValues)
+                    map(res => this.onMapValues(res))
                 )
                 .toPromise();
             this.onToggleLoading(false);
@@ -80,7 +80,7 @@ export class EntitiesBasics<T> {
      * 处理 过滤 res
      * @param res 
      */
-    @Bind()
+    // @Bind()
     protected onMapValues(res): any {
         const { onMapValues } = this.options;
         if (lodash.isFunction(onMapValues)) {

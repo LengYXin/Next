@@ -30,6 +30,14 @@ export class ControllerHomeworkSunDrying extends Pagination<any> {
         return this.$ajax.post(EnumApiHomework.MomentAdd, body);
     }
     /**
+     * 删除评论
+     * @param momentId 
+     */
+    async onDeleteMoment(momentId: string) {
+        this.onRemove(momentId);
+        return this.$ajax.post(EnumApiHomework.MomentDeletemoment, { momentId })
+    }
+    /**
      * 点赞
      * @param data 
      */

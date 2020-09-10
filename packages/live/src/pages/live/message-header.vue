@@ -9,7 +9,7 @@
   <div class="lyx-header">
     <a-row class="lyx-header-row">
       <a-col class="lyx-header-avatar" :span="4">
-        <a-avatar :size="52" icon="user" />
+        <a-avatar :size="52" src="https://oss-free.xuantong.cn/thumbPath/daf64bd8e1647294c1ba436ffbed03cc.blob" />
       </a-col>
       <a-col class="lyx-header-title" :span="20">
         <h1>第15课《玄密塔碑》楷书进阶~</h1>
@@ -31,31 +31,7 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class extends Vue {
-  get PageStore() {
-    return this.$rootStore.$storeHomework;
-  }
-  get Pagination() {
-    return this.PageStore.SunDrying;
-  }
-  get id() {
-    return 28; //this.$route.params.id;
-  }
   dataTime = Date.now();
-  created() {
-    this.Pagination.onReset({ direction: "top" });
-  }
-  onLoading(event?) {
-    this.Pagination.onLoading({ singleCourseId: this.id }, {}, event);
-  }
-  getComment(item) {
-    return {
-      content: item.content,
-      avatar: item.userHeader,
-      author: item.userNickname,
-      time: item.createTime,
-      bishan: item.bishanNum,
-    };
-  }
   updated() {}
   destroyed() {}
 }

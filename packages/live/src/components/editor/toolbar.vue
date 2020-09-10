@@ -165,7 +165,7 @@ export default class extends Vue {
 // 单行样式
 .lyx-editor-single.quillWrapper {
   position: relative;
-  width: 360px;
+  width: 100%;
   // padding-right: 110px;
   .ql-snow.ql-toolbar {
     display: none;

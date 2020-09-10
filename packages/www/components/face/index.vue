@@ -9,7 +9,7 @@
   <div style="width:360px">
     <a-tooltip v-for="face in faces" :key="face.value">
       <template slot="title">{{face.phrase}}</template>
-      <a-avatar class="xt-face" :src="face.icon" @click="onFace(face)" size="small"/>
+      <a-avatar class="xt-face" :src="face.icon" @click="onFace(face)" size="small" />
     </a-tooltip>
   </div>
 </template>
@@ -60,7 +60,14 @@ export default class extends Vue {
 </script>
 
 <style>
-.xt-face{
+.xt-face.ant-avatar {
   margin: 0 3px;
+}
+p>img[src^='//img.t.sinajs.cn/']
+{
+  width: 24px;
+  height: 24px;
+  margin: 0 3px;
+  transform: translateY(3px);
 }
 </style>

@@ -8,22 +8,11 @@
 <template>
   <xt-inspect inspect>
     <div class="xt-content-small xt-course-sunDrying">
-      <xt-editor
-        @submit="onSubmit"
-        :rules="{ required: true, max: 2000 }"
-        buttonText="晒作业"
-      ></xt-editor>
-      <xt-comment
-        v-for="item in Pagination.dataSource"
-        :key="item.id"
-        :comment="getComment(item)"
-      >
+      <xt-editor @submit="onSubmit" :rules="{ required: true, max: 2000 }" buttonText="晒作业"></xt-editor>
+      <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
         <div class="xt-font-size-base xt-font-family-FZLTHJW">
           <a-row type="flex" justify="space-between" algin="middle">
-            <a-col
-              class="xt-text-grey"
-              v-text="item.viewCount > 0 ? item.viewCount + '位同学看过' : ''"
-            ></a-col>
+            <a-col class="xt-text-grey" v-text="item.viewCount > 0 ? item.viewCount + '位同学看过' : ''"></a-col>
             <a-space size="middle">
               <xt-action
                 icon="message"
@@ -46,16 +35,11 @@
         <!-- <template slot="actions">
           <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
           <xt-action :statistics="item.commentCount" title="回复" @click="onReply(item)" />
-        </template> -->
+        </template>-->
         <template slot="overlay">
           <a-menu>
             <a-menu-item v-if="$eqUser(item.userId)">
-              <a-popconfirm
-                title="确定删除作业?"
-                ok-text="确定"
-                cancel-text="取消"
-                @confirm="onConfirm(item)"
-              >
+              <a-popconfirm title="确定删除作业?" ok-text="确定" cancel-text="取消" @confirm="onDelete(item)">
                 <a href="javascript:;">删除</a>
               </a-popconfirm>
             </a-menu-item>
@@ -68,18 +52,17 @@
         </template>
         <!-- <xt-editor /> -->
       </xt-comment>
-      <xt-infinite-loading
-        :identifier="Pagination.onlyKey"
-        @loading="onLoading"
+      <xt-infinite-loading :identifier="Pagination.onlyKey" @loading="onLoading" />
+      <!-- 晒作业详情 -->
+      <HomeworkShow
+        :momentId="reply.id"
+        @cancel="onReply()"
+        @like="onLikes(reply)"
+        @delete="onDelete(reply)"
       />
-      <HomeworkShow :momentId="reply" @cancel="onReply()" />
     </div>
     <!-- 没有登录显示内容 -->
-    <a-empty
-      slot="not"
-      :image="$images.logo"
-      description="报名后，可以浏览晒作业栏哦~~"
-    />
+    <a-empty slot="not" :image="$images.logo" description="报名后，可以浏览晒作业栏哦~~" />
   </xt-inspect>
 </template>
 <script lang="ts">
@@ -103,7 +86,7 @@ export default class PageView extends Vue {
     return this.$route.params.id;
   }
   // 回复
-  reply = null;
+  reply = {};
   /**
    * 回复
    */
@@ -111,10 +94,10 @@ export default class PageView extends Vue {
     if (data) {
       try {
         this.$InspectUser();
-        this.reply = data.id;
+        this.reply = data;
       } catch (error) {}
     } else {
-      this.reply = null;
+      this.reply = {};
     }
   }
   onLoading(event?) {
@@ -145,7 +128,15 @@ export default class PageView extends Vue {
       // this.$message.error(error);
     }
   }
-  onConfirm(item) {}
+  /**
+   * 删除
+   */
+  async onDelete(item) {
+    try {
+      await this.Pagination.onDeleteMoment(item.id);
+      this.onReply({});
+    } catch (error) {}
+  }
   async onLikes(item) {
     try {
       await this.Pagination.onLikes(item);

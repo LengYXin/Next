@@ -9,7 +9,8 @@
   <DynamicScroller
     ref="Scroller"
     class="lyx-message-scroller"
-    :items="Pagination.dataSource"
+    keyField="msgId"
+    :items="PageStore.dataSource"
     :min-item-size="24"
   >
     <template #before>
@@ -51,19 +52,19 @@ import { interval } from "rxjs";
 })
 export default class extends Vue {
   get PageStore() {
-    return this.$rootStore.$storeHomework;
+    return this.$rootStore.$socketMessage.MessageQueue;
   }
-  get Pagination() {
-    return this.PageStore.SunDrying;
+  get socketMessage() {
+    return this.$rootStore.$socketMessage;
   }
   get id() {
-    return 28; //this.$route.params.id;
+    return "123"; //this.$route.params.id;
   }
   get Scroller(): any {
     return this.$refs.Scroller;
   }
   created() {
-    this.Pagination.onReset({ direction: "top", defaultPageSize: 30 });
+    // this.Pagination.onReset({ direction: "top", defaultPageSize: 30 });
   }
   async onLoading(event?) {
     // await this.Pagination.onLoading({ singleCourseId: this.id }, {}, event);
@@ -72,52 +73,59 @@ export default class extends Vue {
     // }
   }
   getComment(item) {
-    return item;
+    return {
+      content: item.content.content,
+      avatar: item.header,
+      author: item.nickName,
+      time: item.time,
+    };
   }
   // @Debounce(50)
   scrollToBottom() {
     // lodash.delay(() => this.Scroller.scrollToBottom(), 100);
-    this.Scroller.scrollToBottom();
+    requestAnimationFrame(this.Scroller.scrollToBottom);
+  }
+  async onLink() {
+    await this.socketMessage.onLink(this.id);
+    this.socketMessage.WebSocketSubject.subscribe((msg) => {
+      this.scrollToBottom();
+    });
   }
   mounted() {
-    console.log(
-      "LENG: extends -> scrollToBottom -> this.Scroller",
-      this.Scroller
-    );
-    this.onText();
+    this.onLink();
   }
-  onText() {
-    const int = interval(100)
-      .pipe(
-        map((x) => {
-          if (x > 50) {
-            int.unsubscribe();
-          }
-          return {
-            id: x,
-            author: lodash.sample(["林一", "张三", "李四四"]),
-            time: Date.now(),
-            avatar: lodash.sample([
-              "https://oss-free.xuantong.cn/picturePath/b8938fb359b16ce19be6419160b428f5.blob",
-              "https://oss-free.xuantong.cn/picturePath/a1815d5ecbf18fad30e48998f00b4a0e.blob",
-            ]),
-            content: lodash.sample([
-              `各位好，这字帖好漂亮，好像珍藏一份。
-老师今天好漂亮。各位好，这字帖好漂亮，好像珍藏一份。
-老师今天好漂亮。各位好，这字帖好漂亮，好像珍藏一份。
-老师今天好漂亮。`,
-              `[失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸]`,
-              '[失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸]'
-            ]),
-            jushou: lodash.sample([true, false]),
-          };
-        })
-      )
-      .subscribe((obs) => {
-        this.Pagination.onPush(obs);
-        this.scrollToBottom();
-      });
-  }
+  //   onText() {
+  //     const int = interval(100)
+  //       .pipe(
+  //         map((x) => {
+  //           if (x > 50) {
+  //             int.unsubscribe();
+  //           }
+  //           return {
+  //             id: x,
+  //             author: lodash.sample(["林一", "张三", "李四四"]),
+  //             time: Date.now(),
+  //             avatar: lodash.sample([
+  //               "https://oss-free.xuantong.cn/picturePath/b8938fb359b16ce19be6419160b428f5.blob",
+  //               "https://oss-free.xuantong.cn/picturePath/a1815d5ecbf18fad30e48998f00b4a0e.blob",
+  //             ]),
+  //             content: lodash.sample([
+  //               `各位好，这字帖好漂亮，好像珍藏一份。
+  // 老师今天好漂亮。各位好，这字帖好漂亮，好像珍藏一份。
+  // 老师今天好漂亮。各位好，这字帖好漂亮，好像珍藏一份。
+  // 老师今天好漂亮。`,
+  //               `[失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸]`,
+  //               "[失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸]",
+  //             ]),
+  //             jushou: lodash.sample([true, false]),
+  //           };
+  //         })
+  //       )
+  //       .subscribe((obs) => {
+  //         // this.Pagination.onPush(obs);
+  //         this.scrollToBottom();
+  //       });
+  //   }
   updated() {}
   destroyed() {}
 }

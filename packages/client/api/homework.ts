@@ -15,9 +15,21 @@ export enum EnumApiHomework {
    */
   MomentAdd = "/moment/addmoment",
   /**
+   * 删除评论
+   */
+  MomentDeletemoment = "/moment/deletemoment",
+  /**
+   * 删除回复
+   */
+  MomentDeletecomment = "/moment/deletecomment",
+  /**
    * 朋友圈点赞
    */
   Momentlike = "/moment/momentlike",
+  /**
+   * 朋友圈 评论 点赞
+   */
+  MomentLikeComment = "/moment/momentcommentlike",
   /**
    * 晒作业详情
    */
