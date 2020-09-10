@@ -3,14 +3,11 @@ const webpack = require('webpack');
 const lodash = require('lodash');
 const path = require('path');
 const env = require('./env.config.js');
+const deployUat = process.env.DEPLOY_ENV === 'uat';
+const deployPro = process.env.DEPLOY_ENV === 'pro';
 module.exports = {
-  outputDir: "build",
-  // plugins: [
-  //   [
-  //     "import",
-  //     { libraryName: "ant-design-vue", libraryDirectory: "es", style: true }
-  //   ]
-  // ],
+  outputDir: `build_${lodash.snakeCase(process.env.npm_package_version)}`,
+  productionSourceMap: deployUat,
   configureWebpack: {
     plugins: [
       new webpack.DefinePlugin(env.process),
