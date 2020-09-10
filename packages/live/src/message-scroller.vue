@@ -86,7 +86,7 @@ export default class extends Vue {
   // @Debounce(50)
   scrollToBottom() {
     // lodash.delay(() => this.Scroller.scrollToBottom(), 100);
-    this.Scroller.scrollToBottom();
+    // requestAnimationFrame(this.Scroller.scrollToBottom);
   }
   async onLink() {
     await this.socketMessage.onLink("123");

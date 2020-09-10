@@ -29,7 +29,7 @@ export class SocketMessageQueue<T> {
      * @param msg 
      */
     onAnalysis(msg: SocketMessage.MessageContent) {
-        console.log("LENG: SocketMessageQueue<T> -> onAnalysis -> msg", msg)
+        // console.log("LENG: SocketMessageQueue<T> -> onAnalysis -> msg", msg)
         this.onPush(msg);
     }
 }

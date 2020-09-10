@@ -38,27 +38,39 @@ export class SocketMessage {
      * @param content 
      */
     async onSendRichTxt(content: SocketMessage.MessageContent) {
-        await this.$ajax.post<any>(this.options.sendUrl, lodash.merge<SocketMessage.MessageContent, SocketMessage.MessageContent>({
-            type: MessageType.chan_msg,
-            content: { type: ContentType.richTxt }
-        }, content));
+        await this.$ajax.post<any>(this.options.sendUrl, {
+            senderId: "6a757a92-693b-419b-9063-aac86b2b0121",
+            chan: "123",
+            msg: lodash.merge<SocketMessage.MessageContent, SocketMessage.MessageContent>({
+                type: MessageType.chan_msg,
+                content: { type: ContentType.richTxt }
+            }, content)
+        });
     }
 }
-export enum MessageType {
+enum MessageType {
     /** 私聊消息 */
     pri_msg = 'pri_msg',
-    /** 私聊消息 */
+    /** 群消息 */
     chan_msg = 'chan_msg',
-    /** 私聊消息 */
+    /** 系统消息 */
     sys_notice = 'sys_notice',
     /** 教室通知 */
     cr_notice = 'cr_notice',
-    /** 进入直播间 */
+}
+enum ContentType {
+    /** 上线 */
     online = 'online',
-    /** 离开直播间 */
+    /** 下线 */
     offline = 'offline',
+    /** 进入直播间 */
+    joinChan = 'joinChan',
+    /** 离开直播间 */
+    leaveChan = 'leaveChan',
     /** 开始直播 */
     biginLive = 'biginLive',
+    /** 结束直播 */
+    endLive = 'endLive',
     /** 禁言 */
     mute = 'mute',
     /** 关闭禁言 */
@@ -67,10 +79,8 @@ export enum MessageType {
     chanMute = 'chanMute',
     /** 关闭直播间禁言 */
     closeChanMute = 'closeChanMute',
-}
-export enum ContentType {
     /** 纯文本 */
-    text = 'text',
+    txt = 'txt',
     /** 富文本 */
     richTxt = 'richTxt',
     /** 图片 */
@@ -78,6 +88,6 @@ export enum ContentType {
     /** 视频 */
     video = 'video',
     /** 图文消息 */
-    imgtxt = 'imgtxt',
+    imgTxt = 'imgTxt',
 }
 export default SocketMessage;

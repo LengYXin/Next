@@ -9,7 +9,7 @@
   <div class="lyx-header">
     <a-row class="lyx-header-row">
       <a-col class="lyx-header-avatar" :span="4">
-        <a-avatar :size="52" icon="user" />
+        <a-avatar :size="52" src="https://oss-free.xuantong.cn/thumbPath/daf64bd8e1647294c1ba436ffbed03cc.blob" />
       </a-col>
       <a-col class="lyx-header-title" :span="20">
         <h1>第15课《玄密塔碑》楷书进阶~</h1>

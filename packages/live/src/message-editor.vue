@@ -8,9 +8,9 @@
 <template>
   <a-row class="lyx-msg-editor">
     <a-col class="lyx-msg-editor-avatar" :span="4">
-      <a-avatar :size="40" icon="user" />
+      <a-avatar :size="40" src="https://oss-free.xuantong.cn/thumbPath/daf64bd8e1647294c1ba436ffbed03cc.blob" />
     </a-col>
-    <a-col :span="20">
+    <a-col :span="19">
       <lyx-editor
         placeholder="和同学们聊聊吧…"
         :rules="{required:true}"

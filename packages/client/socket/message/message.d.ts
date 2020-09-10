@@ -3,20 +3,28 @@
  */
 declare module SocketMessage {
     enum MessageType {
-        /** 私聊消息 */
-        pri_msg = 'pri_msg',
-        /** 私聊消息 */
-        chan_msg = 'chan_msg',
-        /** 私聊消息 */
-        sys_notice = 'sys_notice',
-        /** 教室通知 */
-        cr_notice = 'cr_notice',
-        /** 进入直播间 */
+         /** 私聊消息 */
+         pri_msg = 'pri_msg',
+         /** 群消息 */
+         chan_msg = 'chan_msg',
+         /** 系统消息 */
+         sys_notice = 'sys_notice',
+         /** 教室通知 */
+         cr_notice = 'cr_notice',
+    }
+    enum ContentType {
+        /** 上线 */
         online = 'online',
-        /** 离开直播间 */
+        /** 下线 */
         offline = 'offline',
+        /** 进入直播间 */
+        joinChan = 'joinChan',
+        /** 离开直播间 */
+        leaveChan = 'leaveChan',
         /** 开始直播 */
         biginLive = 'biginLive',
+        /** 结束直播 */
+        endLive = 'endLive',
         /** 禁言 */
         mute = 'mute',
         /** 关闭禁言 */
@@ -25,10 +33,8 @@ declare module SocketMessage {
         chanMute = 'chanMute',
         /** 关闭直播间禁言 */
         closeChanMute = 'closeChanMute',
-    }
-    enum ContentType {
         /** 纯文本 */
-        text = 'text',
+        txt = 'txt',
         /** 富文本 */
         richTxt = 'richTxt',
         /** 图片 */
@@ -36,7 +42,7 @@ declare module SocketMessage {
         /** 视频 */
         video = 'video',
         /** 图文消息 */
-        imgtxt = 'imgtxt',
+        imgTxt = 'imgTxt',
     }
     interface Content {
         type?: ContentType | string;
@@ -58,7 +64,7 @@ declare module SocketMessage {
     }
     interface MessageContent {
         msgId?: string;
-        type?: MessageType | string;
+        type?: MessageType | BizType;
         senderId?: string;
         nickName?: string;
         header?: string;
