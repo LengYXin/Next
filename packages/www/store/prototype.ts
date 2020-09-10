@@ -6,7 +6,7 @@
  * @desc [description]
  */
 // import * as EnumApi from '@xt/client/api';
-import { AjaxBasics, EnumLocaleDescriptions, EnumLocaleLinks } from '@xt/client';
+import { AjaxBasics, EnumLocaleDescriptions, EnumLocaleLinks, EnumApiCurrency } from '@xt/client';
 import lodash from 'lodash';
 import { toJS } from 'mobx';
 import Vue from 'vue';
@@ -15,7 +15,7 @@ import store from './create';
 import images from './images';
 // 扩展
 Vue.prototype.$ajax = ajax;
-// Vue.prototype.$EnumApi = EnumApi;
+Vue.prototype.$EnumApiCurrency = EnumApiCurrency;
 Vue.prototype.$EnumLocaleLinks = EnumLocaleLinks;
 Vue.prototype.$EnumLocaleDescriptions = EnumLocaleDescriptions;
 Vue.prototype.$images = images;
@@ -52,7 +52,7 @@ declare module 'vue/types/vue' {
          * 没有登录会抛异常。try 包裹使用
          * @visible 吊起 登录框
          */
-        readonly $InspectUser: (visible?: Boolean) => Object;
+        readonly $InspectUser: (visible?: Boolean) => any;
         /** 检查code 是否 是当前用户 */
         readonly $eqUser: (code: any) => Boolean;
         /** 设置面包屑 */
@@ -60,7 +60,7 @@ declare module 'vue/types/vue' {
         /** Ajax */
         readonly $ajax: AjaxBasics;
         /** APi 枚举 */
-        // readonly $EnumApi: typeof EnumApi;
+        readonly $EnumApiCurrency: typeof EnumApiCurrency;
         /** 链接枚举 */
         readonly $EnumLocaleLinks: typeof EnumLocaleLinks;
         /** 说明枚举 */

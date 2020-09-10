@@ -76,10 +76,47 @@ export default class extends Vue {
     return this.fileList.length < this.maxFile;
   }
   uploadProps = {
-    action: "",
+    accept: "image/*",
+    action: this.$store.$global.target + this.$EnumApiCurrency.UploadImg,
     listType: "picture-card",
     multiple: true,
     showUploadList: { showPreviewIcon: false, showRemoveIcon: true },
+    name: "profile",
+    // 上传开始前 计算 水印
+    beforeUpload: (file) => {
+      return new Promise((res, rej) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+          const img = new Image();
+          img.src = event.target.result as any;
+          img.onload = () => {
+            const picWidth = Math.ceil((img.width / 1600) * 15);
+            const picLong = Math.ceil((img.height / 1200) * 12);
+            let wordSize = Math.ceil((img.height / 1200) * 18);
+            if (wordSize <= 13) {
+              wordSize = 13;
+            }
+            file.imgSize = {
+              picWidth,
+              picLong,
+              wordSize,
+            };
+            res(file);
+          };
+        };
+      });
+    },
+    data: (file) => {
+      try {
+        const user: any = this.$InspectUser(false);
+        return {
+          ...file.imgSize,
+          isLocalThumb: true,
+          nickName: user.nickName,
+        };
+      } catch (error) {}
+    },
   };
   onAddFace(face) {
     this.quill.insertText(
@@ -97,9 +134,10 @@ export default class extends Vue {
       const max = lodash.get(this.rules, "max", Number.MAX_SAFE_INTEGER);
       // 自定义校验 函数
       const validator = lodash.get(this.rules, "validator", () => true);
-
+      const fileList = lodash.cloneDeep(this.fileList);
       const data = {
-        fileList: lodash.cloneDeep(this.fileList),
+        fileList: fileList,
+        fileResult: lodash.map(fileList, "response.result"),
         text: this.quill.getText(),
         html: this.quill.getHTML(),
         length: this.quill.getLength(),
@@ -110,14 +148,10 @@ export default class extends Vue {
           this.fileList = [];
         },
       };
+      console.log("LENG: extends -> onSubmitRules -> data", data);
       if (required) {
         if (!/^[\s\S]*.*[^\s][\s\S]*$/.test(data.text)) {
           throw "内容必填";
-        }
-      }
-      if (requiredFile) {
-        if (data.fileList.length === 0) {
-          throw "文件必填";
         }
       }
       if (max != Number.MAX_SAFE_INTEGER) {
@@ -125,6 +159,15 @@ export default class extends Vue {
           throw "超过最大长度";
         }
       }
+      if (requiredFile) {
+        if (data.fileList.length === 0) {
+          throw "文件必填";
+        }
+      }
+      if (lodash.some(data.fileList, ["status", "uploading"])) {
+        throw "文件还在上传中";
+      }
+
       if (validator(data, this.rules)) {
         this.onSubmit(data);
       }

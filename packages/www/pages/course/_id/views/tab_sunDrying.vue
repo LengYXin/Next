@@ -119,6 +119,7 @@ export default class PageView extends Vue {
         singleCourseId: this.id,
         content: event.html,
         contentLength: event.length,
+        picturesUrlList: event.fileResult,
         userType: 1,
       });
       event.onReset();
