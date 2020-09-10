@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-03 10:33:03
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-09 15:14:36
+ * @LastEditTime: 2020-09-10 16:00:42
  * @Description: 我的作业
 -->
 
@@ -26,12 +26,10 @@
         <a-row type="flex" justify="space-around" align="middle">
           <a-col :span="20">
             来自
-            <nuxt-link
-              :to="`/course/${item.courseId}`"
-              v-text="'《' + item.courseName + '》'"
-            >
-            </nuxt-link
-          ></a-col>
+            <nuxt-link :to="`/course/${item.courseId}`">
+              《<span v-text="item.courseName"></span>》
+            </nuxt-link></a-col
+          >
           <a-col :span="4" class="xt-text-align-right">
             <a-button
               type="primary"
@@ -55,11 +53,9 @@
           thumb="waterThumbUrl"
           :dataSource="item.picList || []"
         />
-        <div
-          v-if="item.picList && item.picList.length > 0"
-          class="xt-font-size-sm"
-          v-text="'共' + (item.picList || []).length + '张'"
-        ></div>
+        <div v-if="getPicLength(item.picList) > 0" class="xt-font-size-sm">
+          共<span v-text="getPicLength(item.picList)"></span>张
+        </div>
         <a-row type="flex" justify="space-around" align="middle">
           <a-col :span="14">
             <time
@@ -73,7 +69,7 @@
             class="xt-text-align-right"
             v-if="item.reviewed == 1"
           >
-            <span v-text="item.reviewUserName + '助教已评阅作业'"></span>
+            <span v-text="item.reviewUserName"></span>助教已评阅作业
             <Reply @sun="onSunWork" :dataSource="item" />
           </a-col>
           <a-col :span="10" class="xt-text-align-right" v-else>
@@ -124,6 +120,12 @@ export default class PageView extends Vue {
   defaultActiveKey = 1;
   activeKey = 1;
   visible = true;
+
+  // 获取图片个数
+  getPicLength(item) {
+    if (lodash.isEmpty(item)) return 0;
+    return item.length;
+  }
 
   tabsChange(activeKey) {
     this.Pagination.onReset();

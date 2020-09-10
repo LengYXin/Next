@@ -14,12 +14,10 @@
           <a-row type="flex" justify="space-around" align="middle">
             <a-col :span="20">
               来自
-              <nuxt-link
-                :to="`/course/${PageStore.dataSource.courseId}`"
-                v-text="'《' + PageStore.dataSource.courseName + '》'"
-              >
-              </nuxt-link
-            ></a-col>
+              <nuxt-link :to="`/course/${PageStore.dataSource.courseId}`">
+                《<span v-text="PageStore.dataSource.courseName"></span>》
+              </nuxt-link></a-col
+            >
             <a-col :span="4" class="xt-text-align-right">
               <a-button
                 type="primary"
@@ -43,7 +41,12 @@
             thumb="waterThumbUrl"
             :dataSource="PageStore.dataSource.homeworkPicList || []"
           />
-          <div class="xt-font-size-sm">共1张</div>
+          <div class="xt-font-size-sm">
+            共<span
+              v-text="getPicLength(PageStore.dataSource.homeworkPicList)"
+            ></span
+            >张
+          </div>
           <div>
             <time
               v-dateFormat="PageStore.dataSource.createTime"
@@ -148,6 +151,12 @@ export default class PageView extends Vue {
 
   onLoading() {
     this.PageStore.onLoading({ id: this.dataSource.homeworkFinishId });
+  }
+
+  // 获取图片个数
+  getPicLength(item) {
+    if (lodash.isEmpty(item)) return 0;
+    return item.length;
   }
 
   /**

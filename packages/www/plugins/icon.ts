@@ -31,6 +31,11 @@ export { default as CheckCircleOutline } from "@ant-design/icons/lib/outline/Che
 
 export { default as CheckOutline } from "@ant-design/icons/lib/outline/CheckOutline";
 export { default as CheckCircleFill } from "@ant-design/icons/lib/fill/CheckCircleFill";
+
+// 上
+export { default as UpOutline } from "@ant-design/icons/lib/outline/UpOutline";
+// 下
+export { default as DownOutline } from "@ant-design/icons/lib/outline/DownOutline";
 // 左
 export { default as LeftCircleOutline } from "@ant-design/icons/lib/outline/LeftCircleOutline";
 
@@ -90,3 +95,5 @@ export { default as LockOutline } from "@ant-design/icons/lib/outline/LockOutlin
 export { default as ManOutline } from "@ant-design/icons/lib/outline/ManOutline";
 // WomanOutline
 export { default as WomanOutline } from "@ant-design/icons/lib/outline/WomanOutline";
+// <a-icon type="calendar" />
+export { default as CalendarOutline } from "@ant-design/icons/lib/outline/CalendarOutline";

@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-09 22:51:45
+ * @LastEditTime: 2020-09-10 16:50:00
  * @Description: 个人信息
 -->
 
@@ -29,7 +29,7 @@
           v-else
           size="large"
           class="xt-my-information-nickname-input"
-          :value="nickName"
+          v-model="nickName"
           placeholder="请输入您的昵称"
           :max-length="25"
           @change="onChange"
@@ -49,18 +49,59 @@
 
     <a-form-model
       ref="ruleForm"
+      :model="userForm"
       :label-col="{ span: 9 }"
       :wrapper-col="{ span: 15 }"
     >
       <a-form-model-item> 基本信息 </a-form-model-item>
-      <a-form-model-item label="性别" prop="resource">
-        <a-radio-group>
-          <a-radio value="1"> Sponsor </a-radio>
-          <a-radio value="2"> Venue </a-radio>
+      <a-form-model-item label="性别" prop="sex">
+        <a-radio-group v-model="userForm.sex">
+          <a-radio value="1">男</a-radio>
+          <a-radio value="2">女</a-radio>
         </a-radio-group>
       </a-form-model-item>
-      <a-form-model-item label="生日" prop="resource">
-        <a-date-picker />
+      <a-form-model-item label="生日" prop="birthday">
+        <a-date-picker
+          v-model="userForm.birthday"
+          class="xt-my-information-calendar"
+          size="large"
+          format="YYYY年MM月DD日"
+        />
+      </a-form-model-item>
+
+      <a-form-model-item> 更多 </a-form-model-item>
+      <a-form-model-item label="所在行业" prop="career">
+        <a-select
+          placeholder="请选择"
+          class="xt-my-information-select"
+          v-model="userForm.career"
+        >
+          <a-select-option value="shanghai"> Zone one </a-select-option>
+          <a-select-option value="beijing"> Zone two </a-select-option>
+        </a-select>
+      </a-form-model-item>
+      <a-form-model-item label="职业">
+        <a-select
+          placeholder="请选择"
+          class="xt-my-information-select"
+          v-model="userForm.education"
+        >
+          <a-select-option value="shanghai"> Zone one </a-select-option>
+          <a-select-option value="beijing"> Zone two </a-select-option>
+        </a-select>
+      </a-form-model-item>
+      <a-form-model-item label="学历">
+        <a-select
+          placeholder="请选择"
+          class="xt-my-information-select"
+          v-model="userForm.location"
+        >
+          <a-select-option value="shanghai"> Zone one </a-select-option>
+          <a-select-option value="beijing"> Zone two </a-select-option>
+        </a-select>
+      </a-form-model-item>
+      <a-form-model-item>
+        <a-button type="primary" class="ant-btn-yellow">保存</a-button>
       </a-form-model-item>
     </a-form-model>
   </div>
@@ -91,6 +132,10 @@ export default class PageView extends Vue {
   @Ref("nickNameInput") nickNameInput;
   inputVisible = false;
   nickName = this.PageStore.UserInfo.nickName;
+  userForm = {
+    ...this.PageStore.UserInfo,
+    birthday: moment(this.PageStore.UserInfo.birthday),
+  };
   toggleInput() {
     this.inputVisible = !this.inputVisible;
     if (this.inputVisible) {
@@ -100,15 +145,48 @@ export default class PageView extends Vue {
     }
   }
   onChange() {}
-  onBlur() {
-    this.inputVisible = false;
+  async onBlur() {
+    try {
+      console.log("PageView -> onBlur -> this.nickName", this.nickName);
+      if (this.nickName.trim() == "") {
+        this.nickName = this.PageStore.UserInfo.nickName;
+        this.inputVisible = false;
+        return;
+      }
+      await this.PageStore.onUpdateNickName({ nickName: this.nickName });
+      this.inputVisible = false;
+    } catch (error) {
+      this.$message.warning({ content: error, key: "onUpdateNickName" });
+    }
   }
-  mounted() {}
+  mounted() {
+    // this.userForm
+    console.log("PageView -> mounted -> this.userForm", this.userForm);
+  }
   updated() {}
   destroyed() {}
 }
 </script>
 <style lang="less" scope>
+// 输入框高度
+.ant-input-lg {
+  height: 36px;
+  line-height: 36px;
+  font-size: @font-size-base;
+}
+.ant-calendar.ant-calendar-picker-container-content {
+  width: 310px;
+}
+// 日历被选中样式
+.ant-calendar-selected-day .ant-calendar-date {
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  color: @white;
+  background: @xt-yellow-6;
+  border-radius: 666px;
+}
+
 .xt-my-information {
   &-avatar-warp {
     position: relative;
@@ -135,6 +213,26 @@ export default class PageView extends Vue {
     background: #e7afb1;
     border-radius: 666px;
     padding: 5px;
+  }
+  &-calendar {
+    width: 310px;
+    .ant-calendar-picker-input.ant-input {
+      color: @xt-yellow-6;
+    }
+  }
+  &-select {
+    @selectHeight: 36px;
+    max-width: 310px;
+    height: @selectHeight;
+    line-height: @selectHeight;
+    .ant-select-selection.ant-select-selection--single {
+      height: @selectHeight;
+      line-height: @selectHeight;
+      .ant-select-selection__rendered {
+        height: @selectHeight;
+        line-height: @selectHeight;
+      }
+    }
   }
 }
 </style>
