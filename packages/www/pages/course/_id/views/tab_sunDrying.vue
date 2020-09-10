@@ -9,10 +9,19 @@
   <xt-inspect inspect>
     <div class="xt-content-small xt-course-sunDrying">
       <xt-editor @submit="onSubmit" :rules="{ required: true, max: 2000 }" buttonText="晒作业"></xt-editor>
-      <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
+      <xt-comment
+        v-for="item in Pagination.dataSource"
+        :key="item.id"
+        :comment="getComment(item)"
+        @viewerShow="onAddbrowsenum(item)"
+      >
         <div class="xt-font-size-base xt-font-family-FZLTHJW">
           <a-row type="flex" justify="space-between" algin="middle">
-            <a-col class="xt-text-grey" v-text="item.viewCount > 0 ? item.viewCount + '位同学看过' : ''"></a-col>
+            <a-col class="xt-text-grey">
+              <div v-show="item.viewCount">
+                <span v-text="item.viewCount"></span> 位同学看过
+              </div>
+            </a-col>
             <a-space size="middle">
               <xt-action
                 icon="message"
@@ -94,6 +103,7 @@ export default class PageView extends Vue {
     if (data) {
       try {
         this.$InspectUser();
+        this.onAddbrowsenum(data);
         this.reply = data;
       } catch (error) {}
     } else {
@@ -128,6 +138,9 @@ export default class PageView extends Vue {
       console.log("LENG: PageView -> onSubmit -> error", error);
       // this.$message.error(error);
     }
+  }
+  onAddbrowsenum(item) {
+    this.Pagination.onAddbrowsenum(item.id);
   }
   /**
    * 删除

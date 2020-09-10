@@ -32,9 +32,16 @@ export default class extends Vue {
   @Prop({ default: "original" }) original; //原图
   @Prop({ default: 200 }) size;
   @Prop({ default: 10 }) margin;
-  options = {
-    url: "data-original",
-  };
+  @Prop({}) viewerOptions;
+
+  get options() {
+    return lodash.merge(
+      {
+        url: "data-original",
+      },
+      this.viewerOptions
+    );
+  }
   get length() {
     return this.dataSource.length;
   }

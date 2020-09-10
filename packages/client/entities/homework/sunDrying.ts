@@ -30,6 +30,16 @@ export class ControllerHomeworkSunDrying extends Pagination<any> {
         return this.$ajax.post(EnumApiHomework.MomentAdd, body);
     }
     /**
+     * 添加浏览量
+     */
+    async onAddbrowsenum(momentId: string) {
+        this.onUpdate(momentId, (old) => {
+            old.viewCount++;
+            return old
+        });
+        return this.$ajax.post(EnumApiHomework.MomentAddbrowsenum, { momentId })
+    }
+    /**
      * 删除评论
      * @param momentId 
      */

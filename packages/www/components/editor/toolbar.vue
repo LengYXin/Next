@@ -7,6 +7,7 @@
  */
 <template>
   <a-row class="xt-editor-toolbar" type="flex" :gutter="4">
+    <!-- <div ref="popover"></div> -->
     <a-col class>
       <!-- 表情 -->
       <a-popover placement="bottom" trigger="click">
@@ -20,7 +21,7 @@
       </a-popover>
       <a-divider type="vertical"></a-divider>
       <!-- 图片 -->
-      <a-popover placement="bottom" trigger="click">
+      <a-popover placement="bottom" trigger="click" overlayClassName="xt-editor-upload-popover">
         <template slot="content">
           <div class="xt-editor-upload">
             <a-upload
@@ -74,6 +75,9 @@ export default class extends Vue {
   // 显示 上传按钮
   get showUpload() {
     return this.fileList.length < this.maxFile;
+  }
+  getPopupContainer() {
+    return this.$refs.popover;
   }
   uploadProps = {
     accept: "image/*",
@@ -235,6 +239,15 @@ export default class extends Vue {
   }
   .anticon-plus {
     font-size: 60px;
+  }
+
+  .ant-upload-list-item-uploading-text {
+    text-align: center;
+  }
+}
+.xt-editor-upload-popover {
+  .ant-popover-inner-content {
+    padding-bottom: 0;
   }
 }
 .xt-editor-toolbar {
