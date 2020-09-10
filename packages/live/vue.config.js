@@ -2,7 +2,7 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const webpack = require('webpack');
 const lodash = require('lodash');
 const path = require('path');
-const env = require('./env.config.js');
+const env = require('./env.config');
 const deployUat = process.env.DEPLOY_ENV === 'uat';
 const deployPro = process.env.DEPLOY_ENV === 'pro';
 module.exports = {
@@ -10,6 +10,7 @@ module.exports = {
   productionSourceMap: deployUat,
   configureWebpack: {
     plugins: [
+      new env.plugin(),
       new webpack.DefinePlugin(env.process),
       new MomentLocalesPlugin({ localesToKeep: ['es-us', 'zh-cn'] }),
       new webpack.BannerPlugin({ banner: `@author 冷 (https://github.com/LengYXin)\n@email lengyingxin8966@gmail.com` })
