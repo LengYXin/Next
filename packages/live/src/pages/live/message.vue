@@ -30,31 +30,6 @@ import layHeader from "./message-header.vue";
   components: { scroller, editor, layHeader },
 })
 export default class extends Vue {
-  get PageStore() {
-    return this.$rootStore.$storeHomework;
-  }
-  get Pagination() {
-    return this.PageStore.SunDrying;
-  }
-  get id() {
-    return 28; //this.$route.params.id;
-  }
-
-  async onSubmit(event) {
-    try {
-      await this.Pagination.onInstall({
-        singleCourseId: this.id,
-        content: event.html,
-        contentLength: event.length,
-        userType: 1,
-      });
-      event.onReset();
-      this.Pagination.onReset();
-    } catch (error) {
-      console.log("LENG: PageView -> onSubmit -> error", error);
-      // this.$message.error(error);
-    }
-  }
   updated() {}
   destroyed() {}
 }

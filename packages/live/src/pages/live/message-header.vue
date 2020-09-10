@@ -31,31 +31,7 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class extends Vue {
-  get PageStore() {
-    return this.$rootStore.$storeHomework;
-  }
-  get Pagination() {
-    return this.PageStore.SunDrying;
-  }
-  get id() {
-    return 28; //this.$route.params.id;
-  }
   dataTime = Date.now();
-  created() {
-    this.Pagination.onReset({ direction: "top" });
-  }
-  onLoading(event?) {
-    this.Pagination.onLoading({ singleCourseId: this.id }, {}, event);
-  }
-  getComment(item) {
-    return {
-      content: item.content,
-      avatar: item.userHeader,
-      author: item.userNickname,
-      time: item.createTime,
-      bishan: item.bishanNum,
-    };
-  }
   updated() {}
   destroyed() {}
 }

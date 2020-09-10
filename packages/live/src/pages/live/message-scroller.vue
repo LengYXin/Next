@@ -57,11 +57,8 @@ export default class extends Vue {
   get socketMessage() {
     return this.$rootStore.$socketMessage;
   }
-  // get Pagination() {
-  //   return this.PageStore.SunDrying;
-  // }
   get id() {
-    return 28; //this.$route.params.id;
+    return "123"; //this.$route.params.id;
   }
   get Scroller(): any {
     return this.$refs.Scroller;
@@ -86,10 +83,10 @@ export default class extends Vue {
   // @Debounce(50)
   scrollToBottom() {
     // lodash.delay(() => this.Scroller.scrollToBottom(), 100);
-    // requestAnimationFrame(this.Scroller.scrollToBottom);
+    requestAnimationFrame(this.Scroller.scrollToBottom);
   }
   async onLink() {
-    await this.socketMessage.onLink("123");
+    await this.socketMessage.onLink(this.id);
     this.socketMessage.WebSocketSubject.subscribe((msg) => {
       this.scrollToBottom();
     });
