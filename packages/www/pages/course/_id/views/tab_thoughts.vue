@@ -8,25 +8,31 @@
 <template>
   <xt-inspect inspect>
     <div class="xt-content-small xt-course-thoughts">
-      <template v-if="Pagination.userIsComment">
+      <div v-show="!Pagination.loading">
+        <template v-if="Pagination.userIsComment">
+          <xt-comment
+            v-for="item in Pagination.userCommentList"
+            :key="item.id"
+            :comment="getComment(item)"
+          ></xt-comment>
+        </template>
+        <template v-else>
+          <xt-editor
+            class="xt-editor-upload-hide"
+            @submit="onSubmit"
+            buttonText="发感想"
+            placeholder="你听了课程后有什么心得，说给大家听吧~仅支持一次提交机会哦~"
+          ></xt-editor>
+        </template>
+        <a-divider>
+          <span class="xt-text-yellow">最新留言</span>
+        </a-divider>
         <xt-comment
-          v-for="item in Pagination.userCommentList"
+          v-for="item in Pagination.dataSource"
           :key="item.id"
           :comment="getComment(item)"
         ></xt-comment>
-      </template>
-      <template v-else-if="!Pagination.loading">
-        <xt-editor
-          class="xt-editor-upload-hide"
-          @submit="onSubmit"
-          buttonText="发感想"
-          placeholder="你听了课程后有什么心得，说给大家听吧~仅支持一次提交机会哦~"
-        ></xt-editor>
-      </template>
-      <a-divider>
-        <span class="xt-text-yellow">最新留言</span>
-      </a-divider>
-      <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)"></xt-comment>
+      </div>
       <xt-infinite-loading :identifier="Pagination.onlyKey" @loading="onLoading" />
     </div>
     <!-- 没有登录显示内容 -->

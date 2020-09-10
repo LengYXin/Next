@@ -28,6 +28,7 @@ export class CourseThoughts extends Pagination<any> {
      */
     @observable userIsComment = false;
     onMapValues(res): PaginationResponse<any> {
+        // console.log("LENG: CourseThoughts -> res", res)
         runInAction(() => {
             this.userCommentList = res.userCommentList;
             this.userIsComment = res.userIsComment;

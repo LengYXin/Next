@@ -6,7 +6,7 @@
  * @desc [description]
  */
 import lodash from 'lodash';
-import { BindAll } from 'lodash-decorators';
+import { BindAll, Bind } from 'lodash-decorators';
 import { action, observable, computed, toJS } from 'mobx';
 import { AjaxRequest } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
@@ -170,7 +170,7 @@ export class Pagination<T> {
             const res = await this.$ajax.request<PaginationResponse<T>>(AjaxRequest)
                 .pipe(
                     // filter(() => lodash.eq(onlyKey, this.onlyKey)), 
-                    map(this.onMapValues)
+                    map(res => this.onMapValues(res))
                 )
                 .toPromise();
             if (!lodash.eq(this.onlyKey, onlyKey)) {
@@ -210,6 +210,7 @@ export class Pagination<T> {
      * @returns
      * @memberof Pagination
      */
+    // @Bind()
     protected onMapValues(res): PaginationResponse<T> {
         const { onMapValues } = this.options;
         if (lodash.isFunction(onMapValues)) {
