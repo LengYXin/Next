@@ -1,7 +1,6 @@
 <template>
   <div>
     <xt-editor
-      v-show="!reply.id"
       class="xt-editor-upload-hide"
       @submit="onSubmit"
       :rules="{required:true,max:2000}"

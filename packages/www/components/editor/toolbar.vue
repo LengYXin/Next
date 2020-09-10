@@ -7,9 +7,9 @@
  */
 <template>
   <a-row class="xt-editor-toolbar" type="flex" :gutter="4">
-    <a-col>
+    <a-col class>
       <!-- 表情 -->
-      <a-popover placement="rightTop" trigger="click">
+      <a-popover placement="bottom" trigger="click">
         <template slot="content">
           <xt-face @select="onAddFace" />
         </template>
@@ -20,7 +20,7 @@
       </a-popover>
       <a-divider type="vertical"></a-divider>
       <!-- 图片 -->
-      <a-popover placement="rightTop" trigger="click">
+      <a-popover placement="bottom" trigger="click">
         <template slot="content">
           <div class="xt-editor-upload">
             <a-upload
@@ -51,7 +51,7 @@
       <a-divider type="vertical"></a-divider>
       <!-- 按钮插槽 -->
       <slot name="submit" v-bind:quill="quill">
-        <a-button type="primary" v-text="buttonText" @click="onSubmitRules"></a-button>
+        <a-button type="yellow" v-text="buttonText" @click="onSubmitRules"></a-button>
       </slot>
     </a-col>
   </a-row>
@@ -152,7 +152,7 @@ export default class extends Vue {
 // 单行样式
 .xt-editor-single.quillWrapper {
   position: relative;
-  padding-right: 110px;
+  padding-right: 80px;
   .ql-editor {
     min-height: 44px;
     max-height: 66px;
@@ -168,6 +168,7 @@ export default class extends Vue {
   }
   .xt-editor-icon {
     margin-top: 4px;
+    margin-right: 12px;
   }
   .ant-divider,
   .xt-editor-upload-span,
@@ -198,6 +199,9 @@ export default class extends Vue {
   .xt-editor-span {
     display: inline-block;
     cursor: pointer;
+  }
+  .xt-editor-icon {
+    color: @xt-yellow-6;
   }
   .xt-editor-icon-text {
     display: inline-block;

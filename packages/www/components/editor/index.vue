@@ -339,7 +339,7 @@ export default {
   svg {
     width: 24px !important;
     height: 24px !important;
-    fill: rgba(65, 65, 65, 0.9);
+    // fill: rgba(65, 65, 65, 0.9);
   }
 }
 
