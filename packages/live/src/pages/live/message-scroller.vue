@@ -10,7 +10,7 @@
     ref="Scroller"
     class="lyx-message-scroller"
     keyField="msgId"
-    :items="PageStore.dataSource"
+    :items="MessageQueue.dataSource"
     :min-item-size="24"
   >
     <template #before>
@@ -44,14 +44,14 @@ import lodash from "lodash";
 import { Debounce } from "lodash-decorators";
 import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
-import { map } from "rxjs/operators";
+import { map, throttleTime } from "rxjs/operators";
 import { interval } from "rxjs";
 @Observer
 @Component({
   components: {},
 })
 export default class extends Vue {
-  get PageStore() {
+  get MessageQueue() {
     return this.$rootStore.$socketMessage.MessageQueue;
   }
   get socketMessage() {
@@ -87,14 +87,17 @@ export default class extends Vue {
   }
   async onLink() {
     await this.socketMessage.onLink(this.id);
-    this.socketMessage.WebSocketSubject.subscribe((msg) => {
+    // this.socketMessage.WebSocketSubject.subscribe((msg) => {
+    //   this.scrollToBottom();
+    // });
+    this.MessageQueue.SuccessSubject.pipe(throttleTime(999)).subscribe(() => {
       this.scrollToBottom();
     });
   }
   mounted() {
     this.onLink();
   }
-  
+
   updated() {}
   destroyed() {}
 }

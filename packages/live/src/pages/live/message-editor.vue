@@ -27,7 +27,7 @@
 import lodash from "lodash";
 import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
-import { map } from "rxjs/operators";
+import { map, delay, throttleTime } from "rxjs/operators";
 import { interval } from "rxjs";
 @Observer
 @Component({
@@ -61,11 +61,14 @@ export default class extends Vue {
   }
   onText() {
     this.$message.success("测试");
-    const int = interval(100)
+    console.time("interval");
+    const int = interval(1000)
       .pipe(
+        // delay(100),
         map((x) => {
           if (x > 100) {
             int.unsubscribe();
+            console.timeEnd("interval");
           }
           return {
             id: x,
@@ -85,9 +88,12 @@ export default class extends Vue {
             ]),
             jushou: lodash.sample([true, false]),
           };
-        })
+        }),
+        // delay(100)
+        // throttleTime(1000)
       )
       .subscribe((obs) => {
+        // console.log("LENG: extends -> onText -> obs", obs);
         this.onSubmit({
           html: obs.content,
           onReset: () => {},

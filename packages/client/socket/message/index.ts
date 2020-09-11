@@ -2,7 +2,7 @@
 import lodash from "lodash";
 import { BindAll } from "lodash-decorators";
 import { Observable } from "rxjs";
-import { filter } from "rxjs/operators";
+import { delay, filter } from "rxjs/operators";
 import { webSocket, WebSocketSubject } from "rxjs/webSocket";
 import { AjaxBasics } from "../../helpers/ajaxBasics";
 import { SocketMessageQueue } from "./queue";
@@ -58,7 +58,7 @@ export class SocketMessage {
             // 过滤消息
             filter<SocketMessage.MessageContent>((msg) => {
                 try {
-                    console.warn("LENG: SocketMessage -> ", msg)
+                    // console.warn("LENG: SocketMessage -> ", msg)
                     const msgType = lodash.get(msg, 'type');
                     const ctnType = lodash.get(msg, 'content.type');
                     const ischan_msg = lodash.includes([MessageType.chan_msg], msgType);
@@ -69,6 +69,7 @@ export class SocketMessage {
                 }
                 return false
             }),
+            // delay(100)
         );
         this.onSubscribeonMessage()
     }
@@ -77,7 +78,9 @@ export class SocketMessage {
      */
     onSubscribeonMessage() {
         this.MessageObservable.subscribe(msg => {
+            // lodash.defer(() => {
             this.MessageQueue.onAnalysis(msg)
+            // })
         });
     }
     /**
