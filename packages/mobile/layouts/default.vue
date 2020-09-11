@@ -1,18 +1,17 @@
 <template>
   <div>
-    <Nuxt :keep-alive="keepAlive" :keepAliveProps="keepAliveProps" />
-    <van-tabbar v-model="active">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="search">去上课</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">暄桐文房</van-tabbar-item>
-      <van-tabbar-item icon="setting-o">我的</van-tabbar-item>
-    </van-tabbar>
+    <navbar />
+    <Nuxt :keep-alive="keepAlive"  />
+    <!-- :keepAliveProps="keepAliveProps" -->
+    <tabbar />
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import tabbar from "./views/tabbar.vue";
+import navbar from "./views/navbar.vue";
 @Component({
-  components: {},
+  components: { navbar, tabbar },
 })
 export default class extends Vue {
   active = 0;
@@ -42,6 +41,17 @@ export default class extends Vue {
 }
 </script>
 <style lang="less">
+@max-width: 750px;
+html {
+  background: #ccc;
+  max-width: @max-width;
+  margin: auto;
+  height: 100%;
+}
+body {
+  background: #fff;
+  height: 100%;
+}
 .page-enter-active {
   transition: opacity 0.2s;
 }
@@ -50,4 +60,5 @@ export default class extends Vue {
   opacity: 0;
 }
 </style>
+
 

@@ -129,7 +129,18 @@ export class Pagination<T> {
      * 没有更多数据
      * @memberof Pagination
      */
+    @observable
     isUndefined = false;
+    /**
+     * 是否已加载完成
+     * @readonly
+     * @memberof Pagination
+     */
+    @computed
+    get finished() {
+        console.log("LENG: Pagination<T> -> getfinished -> this.isUndefined", this.isUndefined)
+        return this.isUndefined;
+    }
     /**
      * 加载 数据 body
      * @memberof Pagination

@@ -31,12 +31,12 @@ module.exports = {
             lodash.set(config, 'devtool', 'source-map')
         }
         // 图库替换
-        // lodash.update(config, 'resolve.alias', alias => {
-        //     return lodash.merge({
-        //         // 'swiper': require.resolve('swiper'),
-        //         "@ant-design/icons/lib/dist$": path.resolve(process.cwd(), 'plugins/icon.ts'),
-        //     }, alias)
-        // });
+        lodash.update(config, 'resolve.alias', alias => {
+            return lodash.merge({
+                // 'swiper': require.resolve('swiper'),
+                // "vant/lib/style/var.less": path.resolve(process.cwd(), 'assets/themes/modifyVars.less'),
+            }, alias)
+        });
         // i18n 单文件组件 https://kazupon.github.io/vue-i18n/zh/guide/sfc.html#%E5%AE%89%E8%A3%85-vue-i18n-loader
         lodash.update(config, 'module.rules', rules => {
             rules.push({
@@ -73,6 +73,10 @@ module.exports = {
         less: {
             lessOptions: {
                 // modifyVars: modifyVars,
+                modifyVars: {
+                    // 或者可以通过 less 文件覆盖（文件路径为绝对路径）
+                    hack: `true; @import "${path.resolve(process.cwd(), 'assets/themes/modifyVars.less')}";`,
+                },
                 javascriptEnabled: true
             }
         }

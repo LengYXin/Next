@@ -24,6 +24,7 @@
     "build:weapp": "cd packages/weapp && npm run build:weapp",
     "build:h5": "cd packages/weapp && npm run build:h5",
     "serve": "cd packages/www && npm run serve",
+    "serve:mobile": "cd packages/mobile && cross-env DEPLOY_ENV=pro npm run serve",
     "init": "lerna bootstrap",
     "docs": "docsify serve docs",
     "clean": "lerna clean",

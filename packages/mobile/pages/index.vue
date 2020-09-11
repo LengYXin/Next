@@ -7,6 +7,18 @@
  */
 <template>
   <div class="xt-home">
+    <van-swipe class="xt-home-swipe" :autoplay="3000" indicator-color="white">
+      <van-swipe-item>1</van-swipe-item>
+      <van-swipe-item>2</van-swipe-item>
+      <van-swipe-item>3</van-swipe-item>
+      <van-swipe-item>4</van-swipe-item>
+    </van-swipe>
+    <van-grid>
+      <van-grid-item icon="photo-o" text="文字" />
+      <van-grid-item icon="photo-o" text="文字" />
+      <van-grid-item icon="photo-o" text="文字" />
+      <van-grid-item icon="photo-o" text="文字" />
+    </van-grid>
     <van-button class="van-button" type="primary">主要按钮</van-button>
   </div>
 </template>
@@ -16,8 +28,7 @@ import { Observer } from "mobx-vue";
 @Observer
 @Component({
   name: "PageIndex",
-  components: {
-  },
+  components: {},
 })
 export default class PageIndex extends Vue {
   created() {}
@@ -28,8 +39,16 @@ export default class PageIndex extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" scoped>
-.van-button{
-  // background: @red;
+<style lang="less">
+.xt-home {
+  &-swipe {
+    .van-swipe-item {
+      color: @green;
+      font-size: 20px;
+      line-height: 150px;
+      text-align: center;
+      background-color: #39a9ed;
+    }
+  }
 }
 </style>

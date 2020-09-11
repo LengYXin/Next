@@ -10,7 +10,7 @@ import { Context } from "@nuxt/types";
 import "~/components/index";
 import "./usePlugins/alife-logger";
 import i18n from "./usePlugins/i18n";
-import "./usePlugins/lazyload";
+// import "./usePlugins/lazyload";
 import "./usePlugins/vant";
 export default (context: Context) => {
     console.log("LENG: context", context)
