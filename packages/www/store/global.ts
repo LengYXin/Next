@@ -20,6 +20,11 @@ class XTGlobal {
      */
     appid = lodash.get(window, '__xt__env.appid', process.env.appid);
     /**
+     * 阿里云 日志 pid 
+     * @memberof XTGlobal
+     */
+    logger = lodash.get(window, '__xt__env.logger', process.env.logger);
+    /**
      * domain 域名
      * @memberof XTGlobal
      */
@@ -48,12 +53,12 @@ class XTGlobal {
      * Node env
      * @memberof XTGlobal
      */
-    NODE_ENV = lodash.get(window, '__xt__env.NODE_ENV', process.env.NODE_ENV);
+    NODE_ENV: typeof process.env.NODE_ENV = lodash.get(window, '__xt__env.NODE_ENV', process.env.NODE_ENV);
     /**
      * 环境
      * @memberof XTGlobal
      */
-    DEPLOY_ENV = lodash.get(window, '__xt__env.DEPLOY_ENV', process.env.DEPLOY_ENV);
+    DEPLOY_ENV: typeof process.env.DEPLOY_ENV = lodash.get(window, '__xt__env.DEPLOY_ENV', process.env.DEPLOY_ENV);
     /**
      *生产环境
      * @memberof XTGlobal

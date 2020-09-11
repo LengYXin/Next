@@ -107,7 +107,7 @@ function onCreate() {
         //     key: "my",
         //     name: EnumLocaleLinks.links_my,
         // },
-        $global.DEPLOY_ENV === "dev" && {
+        $global.NODE_ENV === "development" && {
             key: "locale",
             name: '测试'
         },

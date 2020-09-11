@@ -5,6 +5,8 @@ const lodash = require('lodash');
 module.exports = {
     // 微信 App id
     appid: getWXAppid(),
+    // 阿里云日志
+    logger: getLogger(),
     // 域名
     domain: getDomain(),
     // api 地址
@@ -23,6 +25,18 @@ function getTarget(env = process.env.DEPLOY_ENV) {
         pro: 'https://cr-api-uat.xuantong.cn',
         uat: 'https://cr-api-uat.xuantong.cn',
         dev: 'https://dev-api.xuantong.cn'
+    }
+    return lodash.get(config, env, config.dev)
+}
+/**
+ * BrowerLogger Pid
+ * @param {*} env 
+ */
+function getLogger(env = process.env.DEPLOY_ENV) {
+    const config = {
+        pro: "eezf26fnf7@53c926088ab1292",
+        uat: "eezf26fnf7@7395531b1258a13",
+        dev: ''
     }
     return lodash.get(config, env, config.dev)
 }

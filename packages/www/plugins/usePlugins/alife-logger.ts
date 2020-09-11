@@ -1,13 +1,8 @@
 import BrowerLogger from 'alife-logger';
-import lodash from 'lodash';
-if (process.env.DEPLOY_ENV !== 'dev') {
-    const pid = {
-        pro: "eezf26fnf7@53c926088ab1292",
-        uat: "eezf26fnf7@7395531b1258a13",
-        dev: ''
-    }
+import $global from '~/store/global';
+if ($global.logger) {
     const __bl = BrowerLogger.singleton({
-        pid: lodash.get(pid, process.env.DEPLOY_ENV, ''),
+        pid: $global.logger,
         appType: "web",
         imgUrl: "https://arms-retcode.aliyuncs.com/r.png?",
         sendResource: true,
