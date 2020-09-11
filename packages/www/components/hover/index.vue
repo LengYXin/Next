@@ -67,7 +67,7 @@ export default class extends Vue {
       top: 100%;
     }
     &-fade {
-      display: none;
+      // display: none;
       opacity: 0;
     }
   }
@@ -81,7 +81,7 @@ export default class extends Vue {
         top: 0;
       }
       &-fade {
-        display: flex;
+        // display: flex;
         opacity: 1;
       }
     }
