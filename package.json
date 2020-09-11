@@ -9,11 +9,14 @@
     "packages/www"
   ],
   "scripts": {
+    "dev:live": "cd packages/live && cross-env DEPLOY_ENV=dev npm start",
     "dev:www": "cd packages/www && cross-env DEPLOY_ENV=dev npm start",
     "dev:h5": "cd packages/weapp && npm run dev:h5",
     "dev:weapp": "cd packages/weapp && npm run dev:weapp",
     "build:www": "cd packages/www && cross-env DEPLOY_ENV=dev npm run generate",
     "build:www_pro": "cd packages/www && cross-env DEPLOY_ENV=pro npm run generate",
+    "build:live": "cd packages/live && cross-env DEPLOY_ENV=dev npm run build",
+    "build:live_pro": "cd packages/live && cross-env DEPLOY_ENV=pro npm run build",
     "build:weapp": "cd packages/weapp && npm run build:weapp",
     "build:h5": "cd packages/weapp && npm run build:h5",
     "serve": "cd packages/www && npm run serve",

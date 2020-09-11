@@ -6,7 +6,7 @@ const env = require('./env.config');
 const deployUat = process.env.DEPLOY_ENV === 'uat';
 const deployPro = process.env.DEPLOY_ENV === 'pro';
 module.exports = {
-  outputDir: `build_${lodash.snakeCase(process.env.npm_package_version)}`,
+  outputDir: `build_${lodash.snakeCase(process.env.npm_package_version)}/${env.config.DEPLOY_ENV}`,
   productionSourceMap: deployUat,
   configureWebpack: {
     plugins: [
