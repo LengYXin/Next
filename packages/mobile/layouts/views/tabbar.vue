@@ -7,9 +7,9 @@
           <van-icon :name="props.active ? 'wap-home' : 'wap-home-o'" />
         </template>
       </van-tabbar-item>
-      <van-tabbar-item replace to="/course">
+      <van-tabbar-item replace to="/toclass">
         <span>去上课</span>
-        <template #icon="props">
+        <template #icon="">
           <van-icon name="cashier-o" />
         </template>
       </van-tabbar-item>

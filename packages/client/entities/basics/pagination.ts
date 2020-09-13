@@ -9,7 +9,7 @@ import lodash from 'lodash';
 import { BindAll, Bind } from 'lodash-decorators';
 import { action, observable, computed, toJS } from 'mobx';
 import { AjaxRequest } from 'rxjs/ajax';
-import { map } from 'rxjs/operators';
+import { delay, map, throttleTime } from 'rxjs/operators';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
 export interface PaginationResponse<T> {
     /** 数据集 */
@@ -181,7 +181,8 @@ export class Pagination<T> {
             const res = await this.$ajax.request<PaginationResponse<T>>(AjaxRequest)
                 .pipe(
                     // filter(() => lodash.eq(onlyKey, this.onlyKey)), 
-                    map(res => this.onMapValues(res))
+                    // delay(800),
+                    map(res => this.onMapValues(res)),
                 )
                 .toPromise();
             if (!lodash.eq(this.onlyKey, onlyKey)) {

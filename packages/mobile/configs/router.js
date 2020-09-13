@@ -8,7 +8,9 @@
 const lodash = require('lodash');
 const path = require('path');
 const fs = require('fs');
+const production = process.env.NODE_ENV === 'production';
 module.exports = {
+    base: production ? '/mobile/' : '/',
     middleware: 'auth',
     extendRoutes(routes, resolve) {
         // 删除 非 page 生成的路由

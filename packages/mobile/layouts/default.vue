@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="xt-layout">
     <navbar />
-    <Nuxt :keep-alive="keepAlive"  />
+    <Nuxt :keep-alive="keepAlive" class="xt-layout-content" :class="pageClass" />
     <!-- :keepAliveProps="keepAliveProps" -->
     <tabbar />
   </div>
@@ -19,13 +19,13 @@ export default class extends Vue {
     return {};
   }
   get pageClass() {
-    return "xt-page-" + this.$route.name;
+    return " xt-page-" + this.$route.name;
   }
   get production() {
     return this.$store.$global.production;
   }
   get keepAlive() {
-    return true; //this.$store.$global.production;
+    return false; //this.$store.$global.production;
   }
   get version() {
     return this.$store.$global.version;
@@ -58,6 +58,15 @@ body {
 .page-enter,
 .page-leave-active {
   opacity: 0;
+}
+</style>
+<style lang="less" >
+.xt-layout {
+  height: calc(100vh - @tabbar-height - @nav-bar-height);
+  &-content {
+    height: 100%;
+    background: #fff;
+  }
 }
 </style>
 

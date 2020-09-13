@@ -13,6 +13,7 @@ const config = {
     version: `${process.env.npm_package_version} ${moment().format("YYYY-MM-DD HH:mm")}`,
     // 环境 uat pro
     DEPLOY_ENV: process.env.DEPLOY_ENV,
+    NODE_ENV: process.env.NODE_ENV,
 };
 /**
  * API target

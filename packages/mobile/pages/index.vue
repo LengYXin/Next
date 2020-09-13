@@ -13,11 +13,14 @@
       <van-swipe-item>3</van-swipe-item>
       <van-swipe-item>4</van-swipe-item>
     </van-swipe>
-    <van-grid>
-      <van-grid-item icon="photo-o" text="文字" />
-      <van-grid-item icon="photo-o" text="文字" />
-      <van-grid-item icon="photo-o" text="文字" />
-      <van-grid-item icon="photo-o" text="文字" />
+    <van-grid column-num="5">
+      <van-grid-item
+        v-for="item in grid"
+        :key="item.key"
+        icon="photo-o"
+        :text="item.text"
+        @click="onLink(item)"
+      />
     </van-grid>
     <van-button class="van-button" type="primary">主要按钮</van-button>
   </div>
@@ -31,9 +34,19 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class PageIndex extends Vue {
+  grid = [
+    { key: 1, text: "全部课程", name: "course" },
+    { key: 2, text: "写字的事", name: "about", query: { active: 2 } },
+    { key: 3, text: "视频分享", name: "video" },
+    { key: 4, text: "写字的人", name: "about", query: { active: 1 } },
+    { key: 5, text: "同学作业", name: "homework-share" },
+  ];
+  onLink(item) {
+    this.$router.push(item);
+  }
   created() {}
   mounted() {
-    console.log("LENG: PageView -> mounted -> this", this);
+    // console.log("LENG: PageView -> mounted -> this", this);
   }
   updated() {}
   destroyed() {}
@@ -41,6 +54,7 @@ export default class PageIndex extends Vue {
 </script>
 <style lang="less">
 .xt-home {
+  height: 999px !important;
   &-swipe {
     .van-swipe-item {
       color: @green;
