@@ -12,6 +12,7 @@ export { default as QuestionCircleOutline } from "@ant-design/icons/lib/outline/
 export { default as QuestionOutline } from "@ant-design/icons/lib/outline/QuestionOutline";
 
 export { default as LoadingOutline } from "@ant-design/icons/lib/outline/LoadingOutline";
+export { default as RedoOutline } from "@ant-design/icons/lib/outline/RedoOutline";
 
 export { default as CloseOutline } from "@ant-design/icons/lib/outline/CloseOutline";
 export { default as CloseCircleOutline } from "@ant-design/icons/lib/outline/CloseCircleOutline";
@@ -43,6 +44,10 @@ export { default as LeftOutline } from "@ant-design/icons/lib/outline/LeftOutlin
 // 右
 export { default as RightCircleOutline } from "@ant-design/icons/lib/outline/RightCircleOutline";
 
+// 眼睛
+export { default as EyeOutline } from "@ant-design/icons/lib/outline/EyeOutline";
+export { default as EyeInvisibleOutline } from "@ant-design/icons/lib/outline/EyeInvisibleOutline";
+
 export { default as RightOutline } from "@ant-design/icons/lib/outline/RightOutline";
 // 搜索
 export { default as SearchOutline } from "@ant-design/icons/lib/outline/SearchOutline";
@@ -68,7 +73,6 @@ export { default as TeamOutline } from "@ant-design/icons/lib/outline/TeamOutlin
 export { default as PlayCircleOutline } from "@ant-design/icons/lib/outline/PlayCircleOutline";
 // 删除
 export { default as DeleteOutline } from "@ant-design/icons/lib/outline/DeleteOutline";
-export { default as EyeOutline } from "@ant-design/icons/lib/outline/EyeOutline";
 export { default as PlusOutline } from "@ant-design/icons/lib/outline/PlusOutline";
 // 下箭头
 export { default as CaretDownOutline } from "@ant-design/icons/lib/outline/CaretDownOutline";
@@ -97,3 +101,5 @@ export { default as ManOutline } from "@ant-design/icons/lib/outline/ManOutline"
 export { default as WomanOutline } from "@ant-design/icons/lib/outline/WomanOutline";
 // <a-icon type="calendar" />
 export { default as CalendarOutline } from "@ant-design/icons/lib/outline/CalendarOutline";
+// <a-icon type="double-right" />
+export { default as DoubleRightOutline } from "@ant-design/icons/lib/outline/DoubleRightOutline";

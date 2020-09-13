@@ -1,7 +1,7 @@
 <!--
  * @Author: Erlin
  * @CreateTime: 2020-09-04 15:57:12
- * @LastEditTime: 2020-09-10 15:51:34
+ * @LastEditTime: 2020-09-10 19:32:39
  * @LastEditors: Erlin
  * @Description: 去上课列表
 -->
@@ -40,7 +40,7 @@
                 slot="cover"
                 alt="coursePicture"
                 class="xt-class-full-img"
-                :class="single.purchased ? '' : 'xt-class-full-img-inactive'"
+                :class="{ 'xt-class-full-img-inactive': single.purchased }"
                 v-lazy="single.coursePictureUri"
               />
               <a-card-meta>

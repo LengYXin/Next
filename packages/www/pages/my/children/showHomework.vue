@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-09 16:11:34
+ * @LastEditTime: 2020-09-10 18:38:06
  * @Description: 我晒出的作业
 -->
 
@@ -15,10 +15,9 @@
     >
       <div class="xt-font-size-base xt-font-family-FZLTHJW">
         <a-row type="flex" justify="space-between" algin="middle">
-          <a-col
-            class="xt-text-grey"
-            v-text="item.viewCount > 0 ? item.viewCount + '位同学看过' : ''"
-          ></a-col>
+          <a-col class="xt-text-yellow">
+            来自《<span v-text="item.courseName"></span>》
+          </a-col>
           <a-space size="middle">
             <xt-action
               icon="message"
@@ -37,25 +36,6 @@
         </a-row>
       </div>
       <a-divider />
-      <!-- <template slot="actions">
-        <div class="xt-font-size-base xt-font-family-FZLTHJW">
-          <a-space size="middle">
-            <xt-action
-              icon="message"
-              title="评论"
-              @click="onReply(item)"
-              :statistics="item.commentCount"
-            />
-            <xt-action
-              icon="heart"
-              title="喜欢"
-              @click="onLikes(item)"
-              :statistics="item.likeCount"
-              :action="item.likeRecord"
-            />
-          </a-space>
-        </div>
-      </template> -->
       <template slot="overlay">
         <a-menu>
           <a-menu-item>
@@ -63,7 +43,7 @@
               title="确定删除作业?"
               ok-text="确定"
               cancel-text="取消"
-              @confirm="onConfirm(item)"
+              @confirm="onDelete(item)"
             >
               <a href="javascript:;">删除</a>
             </a-popconfirm>
@@ -75,7 +55,13 @@
       :identifier="Pagination.onlyKey"
       @loading="onLoading"
     />
-    <HomeworkShow :momentId="reply" @cancel="onReply()" @like="onLikes" />
+    <!-- 作业详情 -->
+    <HomeworkShow
+      :momentId="reply.id"
+      @cancel="onReply()"
+      @like="onLikes(reply)"
+      @delete="onDelete(reply)"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -96,7 +82,7 @@ import HomeworkShow from "~/components/business/homework/show.vue";
 })
 export default class PageView extends Vue {
   // 回复
-  reply = null;
+  reply = {};
 
   get PageStore() {
     return this.$store.$my;
@@ -122,15 +108,18 @@ export default class PageView extends Vue {
     if (data) {
       try {
         this.$InspectUser();
-        this.reply = data.id;
+        this.reply = data;
       } catch (error) {}
     } else {
-      this.reply = null;
+      this.reply = {};
     }
   }
   onLoading(event?) {
     this.Pagination.onLoading({}, {}, event);
   }
+  /**
+   * 作业点赞
+   */
 
   async onLikes(item) {
     try {
@@ -139,7 +128,18 @@ export default class PageView extends Vue {
       this.$message.warning({ content: error, key: "likes" });
     }
   }
-  onConfirm() {}
+
+  /**
+   * 删除晒出的作业
+   */
+  async onDelete(item) {
+    try {
+      await this.Pagination.onDelWork(item.id);
+      this.onReply({});
+      this.$message.success({ content: "删除成功", key: "onDelete" });
+    } catch (error) {}
+  }
+
   mounted() {}
   updated() {}
   destroyed() {}

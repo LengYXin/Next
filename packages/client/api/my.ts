@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-28 17:53:56
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-08 19:01:33
+ * @LastEditTime: 2020-09-10 17:20:56
  * @Description: 我的 api 枚举
  */
 
@@ -39,4 +39,8 @@ export enum EnumApiMy {
    * 我晒出的作业详情
    */
   MySunWorkDetail = "/moment/momentdetail",
+  /**
+   * 删除我晒出的作业
+   */
+  DelSunWork = "/moment/deletemoment",
 }

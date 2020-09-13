@@ -63,7 +63,7 @@
                 <a-avatar size="large" icon="user" />
               </a-col>
               <a-col flex="auto">
-                <div v-text="item.userNickname + '助教'"></div>
+                <div><span v-text="item.userNickname"></span>助教</div>
                 <div>
                   <time
                     v-dateFormat="item.createTime"

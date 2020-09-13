@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-03 10:33:03
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-10 16:00:42
+ * @LastEditTime: 2020-09-10 19:13:53
  * @Description: 我的作业
 -->
 
@@ -11,11 +11,16 @@
     <xt-tabs
       :affix="true"
       align="right"
-      theme="not"
+      theme="yellow"
       :tabPane="tabPane"
       :defaultActiveKey="defaultActiveKey"
       @tabsChange="tabsChange"
-    />
+    >
+      <span slot="tab" slot-scope="tab">
+        <span v-t="tab.title"></span>
+      </span>
+    </xt-tabs>
+
     <a-list
       class="xt-content"
       item-layout="vertical"
@@ -118,7 +123,7 @@ export default class PageView extends Vue {
     { key: 0, title: "已提交" },
   ];
   defaultActiveKey = 1;
-  activeKey = 1;
+  activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   visible = true;
 
   // 获取图片个数
@@ -159,14 +164,9 @@ export default class PageView extends Vue {
    */
   async onDelWork(item) {
     try {
-      await this.Pagination.onDelWork(item);
+      await this.Pagination.onDelWork(item.homeworkFinishId);
       this.$message.success({ content: "删除成功", key: "delHomework" });
-    } catch (error) {
-      this.$message.warning({
-        content: "删除失败，请重试",
-        key: "delHomework",
-      });
-    }
+    } catch (error) {}
   }
   mounted() {}
   updated() {}

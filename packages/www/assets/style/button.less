@@ -129,3 +129,24 @@
     border-style: solid;
   }
 }
+
+.ant-radio-yellow {
+  .ant-radio {
+    &-checked {
+      &::after {
+        border-color: @xt-yellow-6;
+      }
+      .ant-radio-inner {
+        border-color: @xt-yellow-6;
+        &::after {
+          background-color: @xt-yellow-6;
+        }
+      }
+    }
+  }
+  .ant-radio-wrapper:hover .ant-radio,
+  .ant-radio:hover .ant-radio-inner,
+  .ant-radio-input:focus + .ant-radio-inner {
+    border-color: @xt-yellow-6;
+  }
+}

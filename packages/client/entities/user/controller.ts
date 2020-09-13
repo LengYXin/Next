@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-12 14:38:30
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-10 15:36:04
+ * @LastEditTime: 2020-09-13 16:42:04
  * @Description:
  */
 import lodash from "lodash"
@@ -84,9 +84,76 @@ export class ControllerUser extends Entities {
     // console.log("LENG: ControllerUser -> onSignatureUser -> user", str, user)
     return user
   }
-  async onUpdateNickName(body: { nickName }) {
-    await this.$ajax.post(EnumApiUser.UpdateNickName, body)
+
+  /**
+   * 更新密码
+   */
+  async onUpdatePassword(body: {
+    confirmNewPassword?
+    newPassword?
+    oldPassword?
+  }) {
+    await this.$ajax.post(EnumApiUser.UpdatePassword, body)
+    this.onOutLogin()
+  }
+  /**
+   * 更新姓名
+   */
+  async onUpdateNickName(nickName) {
+    await this.$ajax.post(EnumApiUser.UpdateNickName, {
+      nickName,
+    })
+    this.setUserInfo(
+      lodash.merge(toJS(this.UserInfo), {
+        nickName,
+      })
+    )
+  }
+
+  /**
+   * 更新个人信息
+   */
+  async onUpdateUserInfo(body: {
+    birthday?
+    career?
+    careerId?
+    cityId?
+    countryId?
+    education?
+    educationId?
+    headThumbnailUri?
+    headUri?
+    industry?
+    industryId?
+    nickName?
+    provinceId?
+    sex?
+  }) {
+    const res = await this.$ajax.post(EnumApiUser.UpdateUserInfo, body)
+    console.log("ControllerUser -> res", res)
     this.setUserInfo(lodash.merge(toJS(this.UserInfo), body))
+  }
+
+  /**
+   * 获取国家
+   */
+  async onGetCountry() {
+    const res: Array<any> = await this.$ajax.post(EnumApiUser.SearchCountry)
+    return res
+  }
+  /**
+   * 获取省
+   */
+  async onGetProvince(id) {
+    const res = await this.$ajax.post(EnumApiUser.SearchProvince, { id })
+    return res
+  }
+  /**
+   * 获取市
+   */
+  async onGetCity(id) {
+    const res = this.$ajax.post(EnumApiUser.SearchCity, { id })
+    return res
   }
 }
 export default ControllerUser
