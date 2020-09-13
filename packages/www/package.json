@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nuxt-ts",
-    "build": "nuxt-ts build",
-    "generate": "nuxt-ts generate",
+    "build": "nuxt-ts generate",
+    "build:server": "nuxt-ts build",
     "serve": "nuxt-ts serve",
     "test": "jest"
   },
