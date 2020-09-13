@@ -6,15 +6,17 @@
     "packages/client",
     "packages/live",
     "packages/mobile",
-    "packages/weapp",
     "packages/www"
   ],
   "scripts": {
+    "start": " cross-env DEPLOY_ENV=dev lerna run start",
     "dev:live": "cd packages/live && cross-env DEPLOY_ENV=dev npm start",
     "dev:www": "cd packages/www && cross-env DEPLOY_ENV=dev npm start",
     "dev:mobile": "cd packages/mobile && cross-env DEPLOY_ENV=dev npm start",
     "dev:h5": "cd packages/weapp && npm run dev:h5",
     "dev:weapp": "cd packages/weapp && npm run dev:weapp",
+    "build": " cross-env DEPLOY_ENV=dev lerna run build",
+    "build:pro": " cross-env DEPLOY_ENV=pro lerna run build",
     "build:www": "cd packages/www && cross-env DEPLOY_ENV=dev npm run generate",
     "build:www_pro": "cd packages/www && cross-env DEPLOY_ENV=pro npm run generate",
     "build:mobile": "cd packages/mobile && cross-env DEPLOY_ENV=dev npm run generate",
@@ -68,6 +70,9 @@
     "@babel/core": "^7.11.6",
     "@types/crypto-js": "^3.1.47",
     "@types/lodash": "^4.14.161",
+    "@kazupon/vue-i18n-loader": "^0.5.0",
+    "@vue/test-utils": "^1.1.0",
+    "ava": "^3.12.1",
     "babel-jest": "^26.3.0",
     "babel-plugin-import": "^1.13.0",
     "babel-plugin-lodash": "^3.3.4",
@@ -78,10 +83,12 @@
     "less": "^3.12.2",
     "less-loader": "^7.0.1",
     "moment-locales-webpack-plugin": "^1.2.0",
+    "postcss-pxtorem": "^5.1.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.3.0",
     "ts-loader": "^8.0.3",
     "typescript": "~3.9.7",
+    "vue-jest": "^3.0.6",
     "webpack-bundle-analyzer": "^3.8.0"
   }
 }
