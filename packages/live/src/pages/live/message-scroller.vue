@@ -10,7 +10,7 @@
     ref="Scroller"
     class="lyx-message-scroller"
     keyField="msgId"
-    :items="PageStore.dataSource"
+    :items="MessageQueue.dataSource"
     :min-item-size="24"
   >
     <template #before>
@@ -44,14 +44,14 @@ import lodash from "lodash";
 import { Debounce } from "lodash-decorators";
 import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
-import { map } from "rxjs/operators";
+import { map, throttleTime } from "rxjs/operators";
 import { interval } from "rxjs";
 @Observer
 @Component({
   components: {},
 })
 export default class extends Vue {
-  get PageStore() {
+  get MessageQueue() {
     return this.$rootStore.$socketMessage.MessageQueue;
   }
   get socketMessage() {
@@ -87,45 +87,17 @@ export default class extends Vue {
   }
   async onLink() {
     await this.socketMessage.onLink(this.id);
-    this.socketMessage.WebSocketSubject.subscribe((msg) => {
+    // this.socketMessage.WebSocketSubject.subscribe((msg) => {
+    //   this.scrollToBottom();
+    // });
+    this.MessageQueue.SuccessSubject.pipe(throttleTime(999)).subscribe(() => {
       this.scrollToBottom();
     });
   }
   mounted() {
     this.onLink();
   }
-  //   onText() {
-  //     const int = interval(100)
-  //       .pipe(
-  //         map((x) => {
-  //           if (x > 50) {
-  //             int.unsubscribe();
-  //           }
-  //           return {
-  //             id: x,
-  //             author: lodash.sample(["林一", "张三", "李四四"]),
-  //             time: Date.now(),
-  //             avatar: lodash.sample([
-  //               "https://oss-free.xuantong.cn/picturePath/b8938fb359b16ce19be6419160b428f5.blob",
-  //               "https://oss-free.xuantong.cn/picturePath/a1815d5ecbf18fad30e48998f00b4a0e.blob",
-  //             ]),
-  //             content: lodash.sample([
-  //               `各位好，这字帖好漂亮，好像珍藏一份。
-  // 老师今天好漂亮。各位好，这字帖好漂亮，好像珍藏一份。
-  // 老师今天好漂亮。各位好，这字帖好漂亮，好像珍藏一份。
-  // 老师今天好漂亮。`,
-  //               `[失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸]`,
-  //               "[失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸][失望][泪][允悲][晕][害羞][右哼哼][抓狂][打脸]",
-  //             ]),
-  //             jushou: lodash.sample([true, false]),
-  //           };
-  //         })
-  //       )
-  //       .subscribe((obs) => {
-  //         // this.Pagination.onPush(obs);
-  //         this.scrollToBottom();
-  //       });
-  //   }
+
   updated() {}
   destroyed() {}
 }

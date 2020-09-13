@@ -9,17 +9,9 @@
   <div class="xt-comment">
     <a-comment>
       <!-- 头像 -->
-      <a-avatar
-        slot="avatar"
-        :size="40"
-        :src="comment.avatar"
-        :alt="comment.author"
-      />
+      <a-avatar slot="avatar" :size="40" :src="comment.avatar" :alt="comment.author" />
       <!-- 作者 笔山 右侧菜单 -->
-      <div
-        class="xt-comment-author xt-font-size-md xt-font-family-FZLTHJW"
-        slot="author"
-      >
+      <div class="xt-comment-author xt-font-size-md xt-font-family-FZLTHJW" slot="author">
         <span v-text="comment.author"></span>
         <span v-show="comment.bishan">
           笔山
@@ -36,11 +28,7 @@
       </div>
       <!-- 时间 -->
       <a-tooltip class="xt-comment-datetime" slot="datetime">
-        <span
-          slot="title"
-          v-dateFormat="datetime"
-          format="YYYY-MM-DD HH:mm"
-        ></span>
+        <span slot="title" v-dateFormat="datetime" format="YYYY-MM-DD HH:mm"></span>
         <span>
           发布于
           <time v-dateFormat="datetime" format="YYYY-MM-DD HH:mm" fromNow />
@@ -53,6 +41,7 @@
           <xt-nine
             :size="imgSize"
             :dataSource="comment.imgs"
+            :viewerOptions="viewerOptions"
             thumb="waterThumbUrl"
             original="waterUrl"
           />
@@ -90,6 +79,11 @@ export default class extends Vue {
     toUserName: string;
     // 图片
     imgs: any[];
+  };
+  viewerOptions = {
+    show: () => {
+      this.$emit("viewerShow", this.comment);
+    },
   };
   get datetime() {
     return this.comment.time;

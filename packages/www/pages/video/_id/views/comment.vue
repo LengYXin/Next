@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :data-id="reply.id">
     <xt-editor
       class="xt-editor-upload-hide"
       @submit="onSubmit"

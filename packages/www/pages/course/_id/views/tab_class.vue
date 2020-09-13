@@ -202,6 +202,7 @@ export default class PageView extends Vue {
       display: block;
       padding: 0;
       margin: 0;
+      // min-height: 300px;
       &.xt-cc-template-10 {
         padding-bottom: 120px;
       }
@@ -307,6 +308,7 @@ export default class PageView extends Vue {
 }
 // 3 节课模板
 .xt-cc-template-3 {
+  width: 1172px;
   .xt-course-class-info {
     &.index-0 {
       .info(200px,35px);
@@ -358,6 +360,7 @@ export default class PageView extends Vue {
 }
 // 5 节课模板
 .xt-cc-template-5 {
+  width: 1497px;
   .xt-course-class-info {
     &.index-0 {
       .info(220px,50px,3,2,1);
@@ -434,6 +437,7 @@ export default class PageView extends Vue {
 }
 // 10 节课模板
 .xt-cc-template-10 {
+  width: 1141px;
   margin-top: 90px;
   .xt-course-class-info {
     &.index-0 {
@@ -548,6 +552,7 @@ export default class PageView extends Vue {
 }
 // 20 节课模板
 .xt-cc-template-20 {
+  width: 1222px;
   margin-top: 120px;
   .xt-course-class-info {
     &.index-0 {

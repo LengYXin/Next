@@ -1,9 +1,12 @@
 /// <reference types="./message" />
+import lodash from "lodash";
+import { BindAll } from "lodash-decorators";
+import { Observable } from "rxjs";
+import { delay, filter } from "rxjs/operators";
 import { webSocket, WebSocketSubject } from "rxjs/webSocket";
 import { AjaxBasics } from "../../helpers/ajaxBasics";
 import { SocketMessageQueue } from "./queue";
-import lodash from "lodash";
-
+@BindAll()
 export class SocketMessage {
     constructor(protected $ajax: AjaxBasics) {
 
@@ -21,16 +24,63 @@ export class SocketMessage {
      * @memberof SocketMessage
      */
     MessageQueue = new SocketMessageQueue<SocketMessage.MessageContent>();
-    WebSocketSubject: WebSocketSubject<any>
+    /**
+     * Socket
+     * @type {WebSocketSubject<SocketMessage.MessageContent>}
+     * @memberof SocketMessage
+     */
+    WebSocketSubject: WebSocketSubject<SocketMessage.MessageContent>;
+    /**
+     * 消息 Observable
+     * @type {Observable<SocketMessage.MessageContent>}
+     * @memberof SocketMessage
+     */
+    MessageObservable: Observable<SocketMessage.MessageContent>;
+    /**
+     * 建立链接
+     * @param chan 
+     */
     async onLink(chan) {
         const res = await this.$ajax.post<any>(this.options.connectUrl, { chan });
         await this.$ajax.post(this.options.joinUrl, { ...res, chan })
-        this.WebSocketSubject = webSocket(`${this.protocol}${res.imServer}`);
-        this.onSubscribe()
+        this.WebSocketSubject = webSocket({
+            url: `${this.protocol}${res.imServer}`,
+            deserializer: e => {
+                try {
+                    return JSON.parse(e.data);
+                } catch (error) {
+                    console.log("LENG: SocketMessage -> onLink -> error", error)
+                }
+            }
+        });
+        this.MessageObservable = this.WebSocketSubject.pipe(
+            // catchError((err) => of(err)),
+            // 过滤消息
+            filter<SocketMessage.MessageContent>((msg) => {
+                try {
+                    // console.warn("LENG: SocketMessage -> ", msg)
+                    const msgType = lodash.get(msg, 'type');
+                    const ctnType = lodash.get(msg, 'content.type');
+                    const ischan_msg = lodash.includes([MessageType.chan_msg], msgType);
+                    const isCtn = lodash.includes([ContentType.txt, ContentType.richTxt], ctnType);
+                    return ischan_msg && isCtn
+                } catch (error) {
+                    console.log("LENG: SocketMessage  -> error", error)
+                }
+                return false
+            }),
+            // delay(100)
+        );
+        this.onSubscribeonMessage()
     }
-    onSubscribe() {
-        this.WebSocketSubject.subscribe(msg => {
+    /**
+     * 订阅消息
+     */
+    onSubscribeonMessage() {
+        this.MessageObservable.subscribe(msg => {
+            // lodash.defer(() => {
             this.MessageQueue.onAnalysis(msg)
+            // })
         });
     }
     /**

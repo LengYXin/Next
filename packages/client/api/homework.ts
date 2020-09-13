@@ -15,6 +15,10 @@ export enum EnumApiHomework {
    */
   MomentAdd = "/moment/addmoment",
   /**
+   * 添加浏览量
+   */
+  MomentAddbrowsenum = "/moment/addbrowsenum",
+  /**
    * 删除评论
    */
   MomentDeletemoment = "/moment/deletemoment",
@@ -34,5 +38,5 @@ export enum EnumApiHomework {
    * 晒作业详情
    */
   Momentdetail = "/moment/momentdetail"
-  
+
 }

@@ -14,8 +14,15 @@ module.exports = {
         // 删除 非 page 生成的路由
         const remRoutes = lodash.remove(routes, route => /[\\/](view|views|children)[\\/]|\.(ts)/.test(route.component));
         routes = lodash.map(routes, route => {
-            // 查找是否有 children 页面
-            const children = lodash.filter(remRoutes, rem => lodash.startsWith(rem.name, `${route.name}-children`))
+            // 查找当前有 children 页面
+            const children = lodash.filter(remRoutes, rem => {
+                if (lodash.startsWith(rem.name, `${route.name}-children`)) {
+                    if (!/[\\/](view|views)[\\/]|\.(ts)/.test(rem.component)) {
+                        return true
+                    }
+                }
+                return false
+            });
             if (children && children.length > 0) {
                 lodash.set(route, 'children', lodash.map(children, item => {
                     const path = `/${route.name}/children`;

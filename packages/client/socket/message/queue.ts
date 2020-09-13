@@ -1,9 +1,12 @@
 import { observable, computed, action } from "mobx";
+import { Subject } from "rxjs";
+import { map, delay, throttleTime } from "rxjs/operators";
 
 export class SocketMessageQueue<T> {
     constructor() {
 
     }
+    SuccessSubject = new Subject();
     /**
      * 数据源
      * @type {Array<T>}
@@ -22,7 +25,8 @@ export class SocketMessageQueue<T> {
      */
     @action
     onPush(msg: SocketMessage.MessageContent) {
-        this._dataSource.push(msg)
+        this._dataSource.push(msg);
+        this.SuccessSubject.next()
     }
     /**
      * 解析消息

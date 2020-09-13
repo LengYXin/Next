@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-12 14:38:30
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-13 16:42:04
+ * @LastEditTime: 2020-09-13 16:57:04
  * @Description:
  */
 import lodash from "lodash"
@@ -80,6 +80,7 @@ export class ControllerUser extends Entities {
     }
     // const str='appid48832f76dc1411e898f900163e048dd6password6581a04d-dc14-11e8-98f9-00163e048dd6timestamp1596724426013token1e2a5c0b32b94434b66f2eefc864ecd4'
     const str = `appid${user.appid}password${user.password}timestamp${user.timestamp}token${user.token}`
+    lodash.unset(user, "password")
     user.signature = lodash.toUpper(cryptoMd5(str).toString())
     // console.log("LENG: ControllerUser -> onSignatureUser -> user", str, user)
     return user

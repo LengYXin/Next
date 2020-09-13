@@ -34,6 +34,7 @@
           :label-col="{ span: 9 }"
           :wrapper-col="{ span: 10 }"
           @submit="onUpdatePassword"
+          @submit.native.prevent
         >
           <a-form-model-item has-feedback label="当前密码" prop="pass">
             <a-input-password v-model="passwordForm.oldPassword" />

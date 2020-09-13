@@ -3,10 +3,12 @@ const webpack = require('webpack');
 const lodash = require('lodash');
 const path = require('path');
 const env = require('./env.config');
-const deployUat = process.env.DEPLOY_ENV === 'uat';
-const deployPro = process.env.DEPLOY_ENV === 'pro';
+const deployUat = env.config.DEPLOY_ENV === 'uat';
+const deployPro = env.config.DEPLOY_ENV === 'pro';
+const production = env.config.NODE_ENV === 'production';
 module.exports = {
-  outputDir: `build_${lodash.snakeCase(process.env.npm_package_version)}`,
+  outputDir: `build_${lodash.snakeCase(process.env.npm_package_version)}/${env.config.DEPLOY_ENV}`,
+  publicPath: production ? '/live/' : '/',
   productionSourceMap: deployUat,
   configureWebpack: {
     plugins: [
