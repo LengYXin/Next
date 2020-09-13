@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-01 18:28:10
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-09 15:14:25
+ * @LastEditTime: 2020-09-10 17:32:32
  * @Description: 我的作业
  */
 import { BindAll } from "lodash-decorators"
@@ -66,14 +66,15 @@ export class ControllerMyWork extends Pagination<any> {
       throw error
     }
   }
+
   /**
    * 删除作业
    */
-  async onDelWork(data) {
-    this.onRemove(data)
-    return this.$ajax.post(EnumApiMy.DelHomework, {
-      id: data.homeworkFinishId,
+  async onDelWork(id: string) {
+    await this.$ajax.post(EnumApiMy.DelHomework, {
+      id,
     })
+    this.onRemove(id)
   }
 
   /**

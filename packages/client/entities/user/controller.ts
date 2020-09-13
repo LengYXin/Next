@@ -1,80 +1,161 @@
-import lodash from 'lodash';
-import { BindAll } from 'lodash-decorators';
-import { EnumApiUser } from '../../api';
-import { AjaxBasics } from '../../helpers/ajaxBasics';
-import { Pagination } from '../basics/pagination';
-import Entities from './entities';
-import cryptoMd5 from 'crypto-js/md5';
-import { toJS } from 'mobx';
+/*
+ * @Author: Erlin
+ * @CreateTime: 2020-08-12 14:38:30
+ * @LastEditors: Erlin
+ * @LastEditTime: 2020-09-13 16:57:04
+ * @Description:
+ */
+import lodash from "lodash"
+import { BindAll } from "lodash-decorators"
+import { EnumApiUser } from "../../api"
+import { AjaxBasics } from "../../helpers/ajaxBasics"
+import { Pagination } from "../basics/pagination"
+import Entities from "./entities"
+import cryptoMd5 from "crypto-js/md5"
+import { toJS } from "mobx"
 
 @BindAll()
 export class ControllerUser extends Entities {
-    constructor(protected $ajax: AjaxBasics) {
-        super()
+  constructor(protected $ajax: AjaxBasics) {
+    super()
+  }
+  /**
+   * 登录
+   * @param itcode
+   * @param passworid
+   */
+  async onLogin(itcode, password) {
+    this.onToggleLoading(true)
+    try {
+      const res = await this.$ajax.post(EnumApiUser.Login, {
+        account: itcode,
+        password,
+      })
+      const user = {
+        // appid: '48832f76dc1411e898f900163e048dd6',
+        // timestamp: Date.now(),
+        // password: '6581a04d-dc14-11e8-98f9-00163e048dd6',
+        token: res,
+        // signature: ''
+      }
+      this.onToggleLoading(false)
+      this.setUserInfo(user)
+      this.onGetUserInfo()
+    } catch (error) {
+      this.onOutLogin()
+      this.onToggleLoading(false)
+      // console.error("LENG: ControllerUser -> onLogin -> error", error)
+      throw error
     }
-    /**
-     * 登录
-     * @param itcode 
-     * @param passworid 
-     */
-    async onLogin(itcode, password) {
-        this.onToggleLoading(true);
-        try {
-            const res = await this.$ajax.post(EnumApiUser.Login, { account: itcode, password });
-            const user = {
-                // appid: '48832f76dc1411e898f900163e048dd6',
-                // timestamp: Date.now(),
-                // password: '6581a04d-dc14-11e8-98f9-00163e048dd6',
-                token: res,
-                // signature: ''
-            };
-            this.onToggleLoading(false)
-            this.setUserInfo(user);
-            this.onGetUserInfo()
-        } catch (error) {
-            this.onOutLogin()
-            this.onToggleLoading(false)
-            // console.error("LENG: ControllerUser -> onLogin -> error", error)
-            throw error
-        }
+  }
+  /**
+   * 获取用户信息
+   */
+  async onGetUserInfo() {
+    if (!this.loggedIn) {
+      return
     }
-    /**
-     * 获取用户信息
-     */
-    async onGetUserInfo() {
-        if (!this.loggedIn) {
-            return
-        }
-        const res = await this.$ajax.post(EnumApiUser.Userinfo);
-        this.setUserInfo(lodash.merge(toJS(this.UserInfo), res));
+    const res = await this.$ajax.post(EnumApiUser.Userinfo)
+    this.setUserInfo(lodash.merge(toJS(this.UserInfo), res))
+  }
+  /**
+   * 退出登录状态
+   */
+  onOutLogin() {
+    this.setUserInfo({})
+  }
+  /**
+   * 配置授权用户
+   */
+  onSignatureUser() {
+    if (!this.loggedIn) {
+      return
     }
-    /**
-     * 退出登录状态
-     */
-    onOutLogin() {
-        this.setUserInfo({});
+    const user = {
+      appid: "48832f76dc1411e898f900163e048dd6",
+      timestamp: Date.now(),
+      password: "6581a04d-dc14-11e8-98f9-00163e048dd6",
+      token: this.UserInfo.token,
+      signature: "",
     }
-    /**
-     * 配置授权用户
-     */
-    onSignatureUser() {
-        if (!this.loggedIn) {
-            return
-        }
-        const user = {
-            appid: '48832f76dc1411e898f900163e048dd6',
-            timestamp: Date.now(),
-            password: '6581a04d-dc14-11e8-98f9-00163e048dd6',
-            token: this.UserInfo.token,
-            signature: ''
-        };
-        // const str='appid48832f76dc1411e898f900163e048dd6password6581a04d-dc14-11e8-98f9-00163e048dd6timestamp1596724426013token1e2a5c0b32b94434b66f2eefc864ecd4'
-        const str = `appid${user.appid}password${user.password}timestamp${user.timestamp}token${user.token}`;
-        lodash.unset(user, 'password');
-        user.signature = lodash.toUpper(cryptoMd5(str).toString())
-        // console.log("LENG: ControllerUser -> onSignatureUser -> user", str, user)
-        return user
-    }
+    // const str='appid48832f76dc1411e898f900163e048dd6password6581a04d-dc14-11e8-98f9-00163e048dd6timestamp1596724426013token1e2a5c0b32b94434b66f2eefc864ecd4'
+    const str = `appid${user.appid}password${user.password}timestamp${user.timestamp}token${user.token}`
+    lodash.unset(user, "password")
+    user.signature = lodash.toUpper(cryptoMd5(str).toString())
+    // console.log("LENG: ControllerUser -> onSignatureUser -> user", str, user)
+    return user
+  }
+
+  /**
+   * 更新密码
+   */
+  async onUpdatePassword(body: {
+    confirmNewPassword?
+    newPassword?
+    oldPassword?
+  }) {
+    await this.$ajax.post(EnumApiUser.UpdatePassword, body)
+    this.onOutLogin()
+  }
+  /**
+   * 更新姓名
+   */
+  async onUpdateNickName(nickName) {
+    await this.$ajax.post(EnumApiUser.UpdateNickName, {
+      nickName,
+    })
+    this.setUserInfo(
+      lodash.merge(toJS(this.UserInfo), {
+        nickName,
+      })
+    )
+  }
+
+  /**
+   * 更新个人信息
+   */
+  async onUpdateUserInfo(body: {
+    birthday?
+    career?
+    careerId?
+    cityId?
+    countryId?
+    education?
+    educationId?
+    headThumbnailUri?
+    headUri?
+    industry?
+    industryId?
+    nickName?
+    provinceId?
+    sex?
+  }) {
+    const res = await this.$ajax.post(EnumApiUser.UpdateUserInfo, body)
+    console.log("ControllerUser -> res", res)
+    this.setUserInfo(lodash.merge(toJS(this.UserInfo), body))
+  }
+
+  /**
+   * 获取国家
+   */
+  async onGetCountry() {
+    const res: Array<any> = await this.$ajax.post(EnumApiUser.SearchCountry)
+    return res
+  }
+  /**
+   * 获取省
+   */
+  async onGetProvince(id) {
+    const res = await this.$ajax.post(EnumApiUser.SearchProvince, { id })
+    return res
+  }
+  /**
+   * 获取市
+   */
+  async onGetCity(id) {
+    const res = this.$ajax.post(EnumApiUser.SearchCity, { id })
+    return res
+  }
 }
 export default ControllerUser
 // export const getRequestData = () => {

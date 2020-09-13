@@ -1,7 +1,7 @@
 <!--
  * @Author: Erlin
  * @CreateTime: 2020-09-04 15:57:12
- * @LastEditTime: 2020-09-09 14:35:05
+ * @LastEditTime: 2020-09-10 19:32:39
  * @LastEditors: Erlin
  * @Description: 去上课列表
 -->
@@ -40,7 +40,7 @@
                 slot="cover"
                 alt="coursePicture"
                 class="xt-class-full-img"
-                :class="single.purchased ? '' : 'xt-class-full-img-inactive'"
+                :class="{ 'xt-class-full-img-inactive': single.purchased }"
                 v-lazy="single.coursePictureUri"
               />
               <a-card-meta>
@@ -70,11 +70,8 @@
             转报全阶
           </a-button>
         </a-col>
-        <a-col
-          :span="24"
-          class="xt-font-family-FZLTHJW xt-text-yellow"
-          v-text="`转为全阶后可优惠${item.transCourseFullSavePrice}元`"
-        >
+        <a-col :span="24" class="xt-font-family-FZLTHJW xt-text-yellow">
+          转为全阶后可优惠<span v-text="item.transCourseFullSavePrice"></span>元
         </a-col>
       </a-row>
 

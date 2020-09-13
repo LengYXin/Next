@@ -12,6 +12,7 @@ export { default as QuestionCircleOutline } from "@ant-design/icons/lib/outline/
 export { default as QuestionOutline } from "@ant-design/icons/lib/outline/QuestionOutline";
 
 export { default as LoadingOutline } from "@ant-design/icons/lib/outline/LoadingOutline";
+export { default as RedoOutline } from "@ant-design/icons/lib/outline/RedoOutline";
 
 export { default as CloseOutline } from "@ant-design/icons/lib/outline/CloseOutline";
 export { default as CloseCircleOutline } from "@ant-design/icons/lib/outline/CloseCircleOutline";
@@ -31,12 +32,21 @@ export { default as CheckCircleOutline } from "@ant-design/icons/lib/outline/Che
 
 export { default as CheckOutline } from "@ant-design/icons/lib/outline/CheckOutline";
 export { default as CheckCircleFill } from "@ant-design/icons/lib/fill/CheckCircleFill";
+
+// 上
+export { default as UpOutline } from "@ant-design/icons/lib/outline/UpOutline";
+// 下
+export { default as DownOutline } from "@ant-design/icons/lib/outline/DownOutline";
 // 左
 export { default as LeftCircleOutline } from "@ant-design/icons/lib/outline/LeftCircleOutline";
 
 export { default as LeftOutline } from "@ant-design/icons/lib/outline/LeftOutline";
 // 右
 export { default as RightCircleOutline } from "@ant-design/icons/lib/outline/RightCircleOutline";
+
+// 眼睛
+export { default as EyeOutline } from "@ant-design/icons/lib/outline/EyeOutline";
+export { default as EyeInvisibleOutline } from "@ant-design/icons/lib/outline/EyeInvisibleOutline";
 
 export { default as RightOutline } from "@ant-design/icons/lib/outline/RightOutline";
 // 搜索
@@ -63,7 +73,6 @@ export { default as TeamOutline } from "@ant-design/icons/lib/outline/TeamOutlin
 export { default as PlayCircleOutline } from "@ant-design/icons/lib/outline/PlayCircleOutline";
 // 删除
 export { default as DeleteOutline } from "@ant-design/icons/lib/outline/DeleteOutline";
-export { default as EyeOutline } from "@ant-design/icons/lib/outline/EyeOutline";
 export { default as PlusOutline } from "@ant-design/icons/lib/outline/PlusOutline";
 // 下箭头
 export { default as CaretDownOutline } from "@ant-design/icons/lib/outline/CaretDownOutline";
@@ -90,3 +99,7 @@ export { default as LockOutline } from "@ant-design/icons/lib/outline/LockOutlin
 export { default as ManOutline } from "@ant-design/icons/lib/outline/ManOutline";
 // WomanOutline
 export { default as WomanOutline } from "@ant-design/icons/lib/outline/WomanOutline";
+// <a-icon type="calendar" />
+export { default as CalendarOutline } from "@ant-design/icons/lib/outline/CalendarOutline";
+// <a-icon type="double-right" />
+export { default as DoubleRightOutline } from "@ant-design/icons/lib/outline/DoubleRightOutline";

@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-06 18:15:02
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-09 16:11:25
+ * @LastEditTime: 2020-09-10 17:31:55
  * @Description: 我晒出的作业列表
  */
 
@@ -57,6 +57,16 @@ export class ControllerMySunWork extends Pagination<any> {
     } catch (error) {
       throw error
     }
+  }
+
+  /**
+   * 删除作业
+   */
+  async onDelWork(momentId: string) {
+    await this.$ajax.post(EnumApiMy.DelSunWork, {
+      momentId,
+    })
+    this.onRemove(momentId)
   }
 }
 export default ControllerMySunWork

@@ -20,7 +20,11 @@
     </a-tabs>
   </a-affix>-->
   <!-- 非固定模式 -->
-  <a-tabs :activeKey="String(activeKey)" @change="tabsChange" :class="themeClass">
+  <a-tabs
+    :activeKey="String(activeKey)"
+    @change="tabsChange"
+    :class="themeClass"
+  >
     <a-tab-pane v-for="tab in tabPane" :key="String(tab.key)">
       <span slot="tab">
         <slot name="tab" v-bind="tab">
@@ -180,6 +184,34 @@ export default class extends Vue {
 
       .ant-tabs-ink-bar {
         background-color: @black;
+      }
+    }
+
+    // 黄色
+    &-yellow {
+      .ant-tabs-nav-container {
+        font-size: @font-size-md;
+      }
+      .ant-tabs-bar {
+        border: none;
+      }
+      .ant-tabs-tab {
+        &:hover {
+          color: @xt-yellow-6;
+        }
+
+        &:active {
+          color: @xt-yellow-6;
+        }
+
+        &-active {
+          color: @xt-yellow-6;
+          font-weight: 500;
+        }
+      }
+
+      .ant-tabs-ink-bar {
+        background-color: @xt-yellow-6;
       }
     }
 
