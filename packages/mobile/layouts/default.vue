@@ -11,6 +11,7 @@
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import tabbar from "./views/tabbar.vue";
 import navbar from "./views/navbar.vue";
+import lodash from "lodash";
 import signin from "./views/signin.vue";
 @Component({
   components: { navbar, tabbar, signin },
@@ -36,7 +37,7 @@ export default class extends Vue {
     include: "PageIndex",
   };
   mounted() {
-    // console.log(this);
+    console.log("LENG: extends -> mounted -> this)", this, lodash);
   }
   updated() {}
   destroyed() {}

@@ -21,7 +21,7 @@ Vue.prototype.$EnumLocaleLinks = EnumLocaleLinks;
 Vue.prototype.$EnumLocaleDescriptions = EnumLocaleDescriptions;
 Vue.prototype.$images = images;
 Vue.prototype.$regulars = Regulars;
-Vue.prototype.lodash = lodash;
+// Vue.prototype.lodash = lodash;
 Vue.prototype.moment = moment;
 /**
  * 检查用户 状态 已登录返回用户信息
@@ -51,7 +51,7 @@ Vue.prototype.$setBreadcrumb = store.$menu.setBreadcrumb;
 
 declare module 'vue/types/vue' {
     interface Vue {
-        readonly lodash: typeof lodash;
+        // readonly lodash: typeof lodash;
         readonly moment: typeof moment;
         /** 
          * 检查用户是否登录
