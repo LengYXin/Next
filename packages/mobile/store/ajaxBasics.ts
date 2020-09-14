@@ -9,6 +9,7 @@
 import { ControllerUser } from '@xt/client';
 import { AjaxBasics } from '@xt/client';
 // import { message } from 'ant-design-vue';
+import { Notify } from 'vant';
 import lodash from 'lodash';
 import NProgress from 'nprogress';
 import { TimeoutError } from "rxjs";
@@ -50,6 +51,7 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
             $storeUser.onToggleVisible(true)
             return
         }
+        Notify({ type: 'danger', message: lodash.get(error, 'response.msg', error.message) });
         // notification.error({ key: "AjaxBasics", message: '提示', description: lodash.get(error, 'response.msg', error.message) })
         // message.error({ content: lodash.get(error, 'response.msg', error.message), key: 'message' })
 
