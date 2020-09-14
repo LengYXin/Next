@@ -47,7 +47,7 @@ module.exports = {
         // console.log("extend -> config", config.resolve.alias)
         // throw 'aaa'
     },
-    transpile: ['swiper', 'serializr', 'dom7'],
+    transpile: ['swiper', 'serializr', 'dom7', 'asn1.js'],
     publicPath: '/assets/',
     corejs: 3,
     // 分离css
@@ -90,6 +90,9 @@ module.exports = {
     ],
     optimization: {
         minimize: deployPro,
+        namedModules: !deployPro,
+        // moduleIds: deployPro ? 'deterministic' : 'named',
+        // chunkIds: deployPro ? 'deterministic' : 'named',
         splitChunks: {
             chunks: 'async',
             cacheGroups: {
