@@ -4,7 +4,7 @@ import { Subject, Subscription } from "rxjs"
 import { AjaxRequest } from "rxjs/ajax"
 import lodash from "lodash"
 export default class EntitiesUser {
-  constructor() { }
+  constructor() {}
   /**
    * 加载状态
    * @memberof Pagination

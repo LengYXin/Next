@@ -1,10 +1,3 @@
-/*
- * @Author: Erlin
- * @CreateTime: 2020-08-12 14:38:30
- * @LastEditors: Erlin
- * @LastEditTime: 2020-09-13 16:57:04
- * @Description:
- */
 import lodash from "lodash"
 import { BindAll } from "lodash-decorators"
 import { EnumApiUser } from "../../api"
@@ -95,8 +88,8 @@ export class ControllerUser extends Entities {
     oldPassword?
   }) {
     await this.$ajax.post(EnumApiUser.UpdatePassword, body)
-    this.onOutLogin()
   }
+
   /**
    * 更新姓名
    */
@@ -131,7 +124,6 @@ export class ControllerUser extends Entities {
     sex?
   }) {
     const res = await this.$ajax.post(EnumApiUser.UpdateUserInfo, body)
-    console.log("ControllerUser -> res", res)
     this.setUserInfo(lodash.merge(toJS(this.UserInfo), body))
   }
 

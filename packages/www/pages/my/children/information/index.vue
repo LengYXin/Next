@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-13 16:33:31
+ * @LastEditTime: 2020-09-14 18:02:57
  * @Description: 个人信息
 -->
 
@@ -60,16 +60,11 @@
         <a-radio-group
           class="ant-radio-yellow"
           v-model="userForm.sex"
-          :options="sexOptions"
+          :options="enumOptions.sexOptions"
         />
-        <!-- 
-        <a-radio-group v-model="userForm.sex">
-          <a-radio :value="0">男</a-radio>
-          <a-radio :value="1">女</a-radio>
-        </a-radio-group> -->
       </a-form-model-item>
       <a-form-model-item label="生日" prop="birthday">
-        <a-date-picker
+        <DatePicker
           v-model="userForm.birthday"
           class="xt-my-information-calendar"
           size="large"
@@ -83,7 +78,7 @@
           placeholder="请选择"
           class="xt-my-information-select"
           v-model="userForm.industryId"
-          :options="industryList"
+          :options="enumOptions.industryOptions"
         />
       </a-form-model-item>
       <a-form-model-item label="职业">
@@ -91,7 +86,7 @@
           placeholder="请选择"
           class="xt-my-information-select"
           v-model="userForm.careerId"
-          :options="jobList"
+          :options="enumOptions.careerOptions"
         />
       </a-form-model-item>
       <a-form-model-item label="学历">
@@ -99,26 +94,12 @@
           placeholder="请选择"
           class="xt-my-information-select"
           v-model="userForm.educationId"
-          :options="educationList"
+          :options="enumOptions.educationOptions"
         />
       </a-form-model-item>
 
       <a-form-model-item label="所在地">
-        <!-- :field-names="{ label: 'name', value: 'code', children: 'items' }" -->
-        <!-- :defaultValue="[
-            userForm.countryId,
-            userForm.provinceId,
-            userForm.cityId,
-          ]" -->
-        <a-cascader
-          :allowClear="false"
-          :defaultValue="defaultLocation"
-          :options="locationOptions"
-          :load-data="lodationLoadData"
-          placeholder="请选择地区"
-          change-on-select
-          @change="onChange"
-        />
+        <Location @change="onLocationChange" />
       </a-form-model-item>
       <a-form-model-item
         class="xt-my-information-save-warp"
@@ -142,32 +123,23 @@ import moment from "moment";
 import { Component, Prop, Vue, Ref } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
-import { Modal, DatePicker, Cascader } from "ant-design-vue";
-Vue.use(DatePicker);
-Vue.use(Cascader);
+import { DatePicker } from "ant-design-vue";
+import Location from "./views/location.vue";
+import enumOptions from "./dataSource";
 
 @Observer
 @Component({
-  // 每次进入页面都会调用
-  // async fetch(ctx: Context) {
-  //   const countryData = await ctx.store.$storeUser.onGetCountry();
-  // },
   scrollToTop: true,
-  components: {
-    DatePicker,
-  },
+  components: { DatePicker, Location },
 })
 export default class PageView extends Vue {
+  enumOptions = enumOptions;
   get PageStore() {
     return this.$store.$storeUser;
   }
   @Ref("nickNameInput") nickNameInput;
   inputVisible = false;
   nickName = this.PageStore.UserInfo.nickName;
-  // userForm = {
-  //   ...this.PageStore.UserInfo,
-  //   birthday: moment(this.PageStore.UserInfo.birthday),
-  // };
   userForm = lodash.set(
     lodash.pick(this.PageStore.UserInfo, [
       "sex", // 性别
@@ -186,181 +158,6 @@ export default class PageView extends Vue {
     "birthday",
     moment(this.PageStore.UserInfo.birthday)
   );
-  sexOptions = [
-    { label: "男", value: 0 },
-    { label: "女", value: 1 },
-  ];
-  industryList = [
-    {
-      value: 20,
-      label: "教育",
-    },
-    {
-      value: 21,
-      label: "文化艺术",
-    },
-    {
-      value: 82,
-      label: "互联网",
-    },
-    {
-      value: 84,
-      label: "传媒",
-    },
-    {
-      value: 85,
-      label: "金融",
-    },
-    {
-      value: 86,
-      label: "政府机关",
-    },
-    {
-      value: 87,
-      label: "其他",
-    },
-  ];
-  jobList = [
-    {
-      value: 22,
-      label: "教师",
-    },
-    {
-      value: 23,
-      label: "医生",
-    },
-    {
-      value: 90,
-      label: "工程师",
-    },
-    {
-      value: 91,
-      label: "程序员",
-    },
-    {
-      value: 92,
-      label: "公务员",
-    },
-    {
-      value: 93,
-      label: "创业者",
-    },
-    {
-      value: 94,
-      label: "管理者",
-    },
-    {
-      value: 95,
-      label: "职员",
-    },
-    {
-      value: 96,
-      label: "退休",
-    },
-    {
-      value: 97,
-      label: "自由职业",
-    },
-    {
-      value: 98,
-      label: "家庭主妇",
-    },
-    {
-      value: 99,
-      label: "学生",
-    },
-    {
-      value: 100,
-      label: "其他",
-    },
-  ];
-
-  educationList = [
-    {
-      value: 24,
-      label: "高中及以下",
-    },
-    {
-      value: 25,
-      label: "专科",
-    },
-    {
-      value: 26,
-      label: "本科",
-    },
-    {
-      value: 88,
-      label: "硕士",
-    },
-    {
-      value: 89,
-      label: "博士及以上",
-    },
-  ];
-  locationOptions = [];
-  get defaultLocation() {
-    let userInfo = this.PageStore.UserInfo;
-    return userInfo.countryId == 1
-      ? [9999]
-      : [userInfo.countryId, userInfo.provinceId, userInfo.cityId];
-  }
-
-  onMapValues = new Map([
-    [
-      "country",
-      (item) => {
-        return {
-          value: item.country_id,
-          label: item.country_name,
-          isLeaf: item.country_id !== 1,
-        };
-      },
-    ],
-    [
-      "province",
-      (item) => {
-        return {
-          value: item.id,
-          label: item.provincial,
-          isLeaf: false,
-        };
-      },
-    ],
-    [
-      "city",
-      (item) => {
-        return {
-          value: item.id,
-          label: item.city,
-          isLeaf: true,
-        };
-      },
-    ],
-  ]);
-
-  onGetLabel(key, options) {
-    return options.find((item) => item.value === key)["label"];
-  }
-
-  /**
-   * 地区级联加载方法
-   */
-  async lodationLoadData(selectedOptions) {
-    const targetLevel = selectedOptions.length;
-    const targetOption = selectedOptions[selectedOptions.length - 1];
-    targetOption.loading = true;
-    let actions = new Map<any, any>([
-      // [级联级别, [获取数据方法, 循环数据方法key]]
-      [1, ["onGetProvince", "province"]],
-      [2, ["onGetCity", "city"]],
-    ]);
-    let action = actions.get(targetLevel);
-    console.log("PageView -> lodationLoadData -> action", action);
-    const res = await this.PageStore[action[0]](targetOption.value);
-    targetOption.children = lodash.map(res, this.onMapValues.get(action[1]));
-    targetOption.loading = false;
-    this.locationOptions = [...this.locationOptions];
-  }
 
   /**
    * 切换nickName输入框
@@ -373,7 +170,17 @@ export default class PageView extends Vue {
       });
     }
   }
+
+  /**
+   * 选择地区
+   */
+  onLocationChange(value) {
+    this.userForm.countryId = value[0];
+    this.userForm.provinceId = value[1];
+    this.userForm.cityId = value[2];
+  }
   onChange() {}
+
   /**
    * input取消焦点 更新nickname
    */
@@ -390,20 +197,9 @@ export default class PageView extends Vue {
       this.$message.warning({ content: error, key: "onUpdateNickName" });
     }
   }
+
   async onSubmit() {
     try {
-      this.userForm.industry = this.onGetLabel(
-        this.userForm.industryId,
-        this.industryList
-      );
-      this.userForm.education = this.onGetLabel(
-        this.userForm.educationId,
-        this.educationList
-      );
-      this.userForm.career = this.onGetLabel(
-        this.userForm.careerId,
-        this.jobList
-      );
       await this.PageStore.onUpdateUserInfo(this.userForm);
       this.$message.success({
         content: "保存成功",
@@ -411,34 +207,7 @@ export default class PageView extends Vue {
       });
     } catch (error) {}
   }
-  async created() {
-    // 加载国家数据
-    const res = await this.PageStore.onGetCountry();
-    this.locationOptions = lodash.map(res, this.onMapValues.get("country"));
 
-    let userInfo = this.PageStore.UserInfo;
-    if (userInfo.countryId == 1) {
-      this.locationOptions.unshift({
-        value: 9999,
-        label: userInfo.location,
-        isLeaf: true,
-      });
-      // this.locationOptions[0].children = [
-      //   {
-      //     value: userInfo.provinceId,
-      //     label: "北京市66",
-      //     isLeaf: false,
-      //     children: [
-      //       {
-      //         value: userInfo.cityId,
-      //         label: "北京市88",
-      //         isLeaf: true,
-      //       },
-      //     ],
-      //   },
-      // ];
-    }
-  }
   mounted() {}
   updated() {}
   destroyed() {}
