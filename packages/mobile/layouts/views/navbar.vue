@@ -1,9 +1,9 @@
 <template>
-  <div class="xt-layout-nav" v-show="PageStore.breadcrumbShow">
+  <div class="xt-layout-nav" v-show="show">
     <van-nav-bar
       fixed
       left-arrow
-      :title="getTitle(PageStore.breadcrumb)"
+      :title="title"
       @click-left="onClickLeft"
       @click-right="onClickRight"
     />
@@ -18,11 +18,14 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class Page extends Vue {
-  get PageStore() {
-    return this.$store.$menu;
+  get show() {
+    return !lodash.includes(
+      ["index", "toclass", "stationery", "my"],
+      this.$route.name
+    );
   }
-  getTitle(breadcrumb) {
-    return this.$t(lodash.get(lodash.last(breadcrumb), "linksName"));
+  get title() {
+    return this.$t(this.$route.name);
   }
   onClickLeft() {
     return this.$router.back();

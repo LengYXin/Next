@@ -10,10 +10,10 @@ export default function (context: Context) {
     try {
         isBowser(context)
         // 面包屑
-        context.store.$menu.initBreadcrumb(context.route);
+        // context.store.$menu.initBreadcrumb(context.route);
         context.store.$storeUser.onToggleVisible(false);
         onLog(context)
-        loggedIn(context)
+        // loggedIn(context)
     } catch (error) {
         console.error("LENG: error", error)
     }

@@ -17,100 +17,99 @@ class Menu {
 
     }
     /** 头部菜单合集 */
-    Menus = onCreate();
-    /** 当前路由 */
-    route: Route;
-    /** 选择的菜单 */
-    getSelectedkeys(route: Route) {
-        const name = this.getRouteName(route);
-        return [name]
-    }
-    /** 路由名称 */
-    getRouteName(route: Route) {
-        return lodash.head(lodash.split(route.name, "-"));
-    }
-    /**
-     * 面包屑
-     * @memberof Menu
-     */
-    @observable
-    breadcrumb = [];
-    /**
-     * 面包屑 显示
-     * @memberof Menu
-     */
-    @observable
-    breadcrumbShow = false;
-    /**
-     * 初始化面包屑状态
-     * @param route 
-     */
-    @action
-    initBreadcrumb(route: Route) {
-        if (this.route?.name === route.name) {
-            return
-        }
-        this.route = route
-        const exclude = ["index", "toclass", "stationery", "user"];
-        const name = this.getRouteName(route);
-        const menu = lodash.find(this.Menus, ["key", name]);
-        const linksName = menu?.name;
-        const linksKey = menu?.key;
-        this.breadcrumbShow = linksKey && !lodash.includes(exclude, name) && !lodash.includes(exclude, route.name);
-        if (this.breadcrumbShow) {
-            this.breadcrumb = [{
-                linksKey,
-                linksName,
-                links: lodash.includes(route.name, '-id'),
-                // path: route.path,
-            }]
-        }
-
-    }
+    // Menus = onCreate();
+    // /** 当前路由 */
+    // route: Route;
+    // /** 选择的菜单 */
+    // getSelectedkeys(route: Route) {
+    //     const name = this.getRouteName(route);
+    //     return [name]
+    // }
+    // /** 路由名称 */
+    // getRouteName(route: Route) {
+    //     return lodash.head(lodash.split(route.name, "-"));
+    // }
+    // /**
+    //  * 面包屑
+    //  * @memberof Menu
+    //  */
+    // @observable
+    // breadcrumb = [];
+    // /**
+    //  * 面包屑 显示
+    //  * @memberof Menu
+    //  */
+    // @observable
+    // breadcrumbShow = false;
+    // /**
+    //  * 初始化面包屑状态
+    //  * @param route 
+    //  */
+    // @action
+    // initBreadcrumb(route: Route) {
+    //     if (this.route?.name === route.name) {
+    //         return
+    //     }
+    //     this.route = route
+    //     const exclude = ["index", "toclass", "stationery", "user"];
+    //     const name = this.getRouteName(route);
+    //     const menu = lodash.find(this.Menus, ["key", name]);
+    //     const linksName = menu?.name;
+    //     const linksKey = menu?.key;
+    //     this.breadcrumbShow = linksKey && !lodash.includes(exclude, name) && !lodash.includes(exclude, route.name);
+    //     if (this.breadcrumbShow) {
+    //         this.breadcrumb = [{
+    //             linksKey,
+    //             linksName,
+    //             links: lodash.includes(route.name, '-id'),
+    //             // path: route.path,
+    //         }]
+    //     }
+    // }
     /**
      * 设置面包屑
      * @param breadcrumb 
      */
     @action
     setBreadcrumb(breadcrumb: { linksKey?, linksName?, links?}, reset = false) {
-        if (reset) {
-            this.breadcrumb = [breadcrumb];
-        } else {
-            this.breadcrumb.push(breadcrumb);
-        }
-        this.breadcrumbShow = true;
+        // if (reset) {
+        //     this.breadcrumb = [breadcrumb];
+        // } else {
+        //     this.breadcrumb.push(breadcrumb);
+        // }
+        // this.breadcrumbShow = true;
     }
 }
-function onCreate() {
-    return [
-        {
-            key: "index",
-            name: EnumLocaleLinks.links_home,
-        },
-        {
-            key: "course",
-            name: EnumLocaleLinks.links_course,
-        },
-        {
-            key: "video",
-            name: EnumLocaleLinks.links_video,
-        },
-        {
-            key: "stationery",
-            name: EnumLocaleLinks.links_stationery,
-        },
-        {
-            key: "about",
-            name: EnumLocaleLinks.links_about,
-        },
-        // {
-        //     key: "my",
-        //     name: EnumLocaleLinks.links_my,
-        // },
-        $global.NODE_ENV === "development" && {
-            key: "locale",
-            name: '测试'
-        },
-    ].filter(Boolean)
-}
+// function onCreate() {
+//     return [
+//         {
+//             key: "index",
+//             name: EnumLocaleLinks.links_home,
+//         },
+//         {
+//             key: "course",
+//             name: EnumLocaleLinks.links_course,
+//         },
+//         {
+//             key: "video",
+//             name: EnumLocaleLinks.links_video,
+//         },
+//         {
+//             key: "stationery",
+//             name: EnumLocaleLinks.links_stationery,
+//         },
+//         {
+//             key: "about",
+//             name: EnumLocaleLinks.links_about,
+//         },
+//         // {
+//         //     key: "my",
+//         //     name: EnumLocaleLinks.links_my,
+//         // },
+//         $global.NODE_ENV === "development" && {
+//             key: "locale",
+//             name: '测试'
+//         },
+//     ].filter(Boolean)
+// }
 export default new Menu();
