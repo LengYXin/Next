@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-14 17:40:29
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-14 19:15:44
+ * @LastEditTime: 2020-09-14 20:15:07
  * @Description: 地区联动选择
 -->
 
@@ -31,7 +31,7 @@ import { Cascader } from "ant-design-vue";
   components: { Cascader },
 })
 export default class PageView extends Vue {
-  @Prop({ default: {} }) dataSource;
+  // @Prop({ default: {} }) dataSource;
   get PageStore() {
     return this.$store.$storeUser;
   }

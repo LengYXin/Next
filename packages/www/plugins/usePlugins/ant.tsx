@@ -46,8 +46,7 @@ import {
   Tooltip,
   Upload,
   Select,
-  DatePicker,
-  Cascader
+  Collapse
 } from "ant-design-vue";
 import "ant-design-vue/lib/base/style/index";
 import "ant-design-vue/lib/space/style/index";
@@ -94,6 +93,7 @@ Vue.use(Checkbox);
 Vue.use(Radio);
 Vue.use(Statistic);
 Vue.use(Timeline);
+Vue.use(Collapse);
 
 Vue.prototype.$message = message;
 Vue.prototype.$notification = notification;
