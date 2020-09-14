@@ -4,14 +4,16 @@
     <Nuxt :keep-alive="keepAlive" class="xt-layout-content" :class="pageClass" />
     <!-- :keepAliveProps="keepAliveProps" -->
     <tabbar />
+    <signin />
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import tabbar from "./views/tabbar.vue";
 import navbar from "./views/navbar.vue";
+import signin from "./views/signin.vue";
 @Component({
-  components: { navbar, tabbar },
+  components: { navbar, tabbar, signin },
 })
 export default class extends Vue {
   active = 0;

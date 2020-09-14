@@ -11,7 +11,7 @@ export default function (context: Context) {
         isBowser(context)
         // 面包屑
         context.store.$menu.initBreadcrumb(context.route);
-        context.store.$storeUser.onToggleVisible(false);
+        context.store.$storeUser.onToggleVisible(lodash.hasIn(context.route.query, 'login'));
         onLog(context)
         loggedIn(context)
     } catch (error) {
@@ -41,8 +41,8 @@ function onLog(context: Context) {
 function loggedIn(context: Context) {
     if (lodash.startsWith(context.route.name, 'my')) {
         if (!context.store.$storeUser.loggedIn) {
-            // message.success({ content: '请登录' })
-            return context.redirect('/')
+            // login 表示弹出登录框
+            return context.redirect('/', { login: '' })
         }
     }
 }

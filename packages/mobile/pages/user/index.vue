@@ -6,7 +6,23 @@
  * @desc [description]
  */
 <template>
-  <div class="xt-">页面</div>
+  <xt-inspect inspect="false">
+    <div>
+      <van-nav-bar title="暄桐文房" />
+      <van-image
+        round
+        fit="cover"
+        width="90"
+        height="90"
+        :src="PageStore.UserInfo.headThumbnailUri"
+      />
+      <div v-text="PageStore.UserInfo.nickName">点击登录</div>
+    </div>
+    <div slot="not" @click="onInspectUser">
+      <van-image round fit="cover" width="90" height="90" />
+      <div>点击登录</div>
+    </div>
+  </xt-inspect>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
@@ -16,9 +32,16 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class Page extends Vue {
-  created() {}
-  mounted() {
+  get PageStore() {
+    return this.$store.$storeUser;
   }
+  onInspectUser() {
+    try {
+      this.$InspectUser();
+    } catch (error) {}
+  }
+  created() {}
+  mounted() {}
   updated() {}
   destroyed() {}
 }

@@ -63,8 +63,9 @@ export default class EntitiesUser {
    */
   @action
   onToggleVisible(visible: boolean = !this.visible) {
-    console.log("EntitiesUser -> onToggleVisible -> visible", visible)
-
+    if (this.loggedIn) {
+      return
+    }
     this.visible = visible
   }
 }

@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-14 20:30:32
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-14 20:53:58
+ * @LastEditTime: 2020-09-14 20:56:54
  * @Description: 格式化手机号码展示
  */
 
@@ -22,14 +22,14 @@ Vue.directive("phone", {
  */
 function onRender(el: HTMLDivElement, binding, vnode, oldVnode) {
   let { value, oldValue } = binding;
-  if (value.length !== 11 || lodash.isEmpty(value)) {
-    return;
-  }
-  if (lodash.eq(value, oldValue)) {
+  if (
+    lodash.eq(value, oldValue) ||
+    lodash.isEmpty(value) ||
+    value.length !== 11
+  ) {
     return;
   }
   let tel = value.split("");
-  console.log("onRender -> tel", tel);
-  let res = lodash.fill(tel, "*", 3, tel.length - 4).join();
+  let res = lodash.join(lodash.fill(tel, "*", 3, tel.length - 4), "");
   el.innerHTML = res;
 }
