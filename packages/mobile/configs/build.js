@@ -6,6 +6,7 @@
  * @desc 扩展 配置信息 请勿随便更改
  */
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const lodash = require('lodash');
 const path = require('path');
@@ -84,6 +85,10 @@ module.exports = {
         reportFilename: path.resolve(process.cwd(), 'report.html')
     },
     plugins: [
+        // https://github.com/webpack-contrib/copy-webpack-plugin/tree/v5
+        new CopyPlugin([
+            { from: require.resolve('@xt/client').replace('index.ts', 'static') },
+        ]),
         new MomentLocalesPlugin({ localesToKeep: ['es-us', 'zh-cn'] }),
         new webpack.BannerPlugin({ banner: `@author 冷 (https://github.com/LengYXin)\n@email lengyingxin8966@gmail.com` })
     ],
