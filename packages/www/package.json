@@ -5,6 +5,9 @@
   "scripts": {
     "start": "nuxt-ts",
     "build": "nuxt-ts generate",
+    "build:test": "cross-env DEPLOY_ENV=test nuxt-ts generate",
+    "build:uat": "cross-env DEPLOY_ENV=uat nuxt-ts generate",
+    "build:pro": "cross-env DEPLOY_ENV=pro nuxt-ts generate",
     "build:server": "nuxt-ts build",
     "serve": "nuxt-ts serve",
     "test": "jest"
@@ -18,6 +21,7 @@
     "@nuxt/typescript-runtime": "~2.0.0",
     "@nuxtjs/proxy": "^2.0.1",
     "@nuxtjs/style-resources": "^1.0.0",
-    "jest": "^26.4.2"
+    "jest": "^26.4.2",
+    "cross-env": "^7.0.2"
   }
 }
