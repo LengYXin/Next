@@ -51,7 +51,7 @@ class Menu {
             return
         }
         this.route = route
-        const exclude = ["index", "my", "course-id"];
+        const exclude = ["index", "toclass", "stationery", "user"];
         const name = this.getRouteName(route);
         const menu = lodash.find(this.Menus, ["key", name]);
         const linksName = menu?.name;

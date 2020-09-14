@@ -6,24 +6,28 @@
  * @desc [description]
  */
 <template>
-  <van-tree-select
-    height="100%"
-    :items="getItems(PageStore.typelist)"
-    :main-active-index.sync="activeKey"
-    @click-nav="tabsChange"
-  >
-    <template #content>
-      <xt-refresh-list :key="activeKey" :Pagination="Pagination" :body="body">
-        <van-grid :border="false" column-num="2">
-          <van-grid-item v-for="item in Pagination.dataSource" :key="item.commodityId">
-            <van-image lazy-load :src="item.commodityCoverUrl" />
-            <div v-text="item.commodityName"></div>
-            <div v-money="item.commodityPrice"></div>
-          </van-grid-item>
-        </van-grid>
-      </xt-refresh-list>
-    </template>
-  </van-tree-select>
+  <div>
+    <van-nav-bar title="暄桐文房" />
+    <van-search shape="round" placeholder="查找我想要的" />
+    <van-tree-select
+      height="90%"
+      :items="getItems(PageStore.typelist)"
+      :main-active-index.sync="activeKey"
+      @click-nav="tabsChange"
+    >
+      <template #content>
+        <xt-refresh-list :key="activeKey" :Pagination="Pagination" :body="body">
+          <van-grid :border="false" column-num="2">
+            <van-grid-item v-for="item in Pagination.dataSource" :key="item.commodityId">
+              <van-image lazy-load :src="item.commodityCoverUrl" />
+              <div v-text="item.commodityName"></div>
+              <div v-money="item.commodityPrice"></div>
+            </van-grid-item>
+          </van-grid>
+        </xt-refresh-list>
+      </template>
+    </van-tree-select>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
@@ -55,6 +59,7 @@ export default class Page extends Vue {
   }
   activeKey = 0;
   tabsChange(activeKey) {
+    this.activeKey = activeKey;
     this.Pagination.onReset({ infinite: true });
   }
   created() {}
@@ -65,6 +70,7 @@ export default class Page extends Vue {
 </script>
 <style lang="less">
 .xt-page-stationery {
+  height: 100%;
   .van-sidebar {
     max-width: 60px;
   }

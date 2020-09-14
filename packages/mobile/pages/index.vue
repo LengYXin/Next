@@ -19,7 +19,7 @@
         :key="item.key"
         icon="photo-o"
         :text="item.text"
-        @click="onLink(item)"
+        :to="item"
       />
     </van-grid>
     <van-button class="van-button" type="primary">主要按钮</van-button>
@@ -41,9 +41,6 @@ export default class PageIndex extends Vue {
     { key: 4, text: "写字的人", name: "about", query: { active: 1 } },
     { key: 5, text: "同学作业", name: "homework-share" },
   ];
-  onLink(item) {
-    this.$router.push(item);
-  }
   created() {}
   mounted() {
     // console.log("LENG: PageView -> mounted -> this", this);

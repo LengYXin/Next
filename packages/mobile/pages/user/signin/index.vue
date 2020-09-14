@@ -1,0 +1,53 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-08-05 14:17:41
+ * @modify date 2020-08-05 14:17:41
+ * @desc [description]
+ */
+<template>
+  <van-form @submit="onSubmit">
+    <van-field
+      v-model="username"
+      name="username"
+      label="用户名"
+      placeholder="用户名"
+      :rules="[{ required: true, message: '请填写用户名' }]"
+    />
+    <van-field
+      v-model="password"
+      type="password"
+      name="password"
+      label="密码"
+      placeholder="密码"
+      :rules="[{ required: true, message: '请填写密码' }]"
+    />
+    <div style="margin: 16px;">
+      <van-button round block type="info" native-type="submit">提交</van-button>
+    </div>
+  </van-form>
+</template>
+<script lang="ts">
+import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import { Observer } from "mobx-vue";
+import lodash from "lodash";
+@Observer
+@Component({
+  components: {},
+})
+export default class Page extends Vue {
+  active = lodash.get(this.$route.query, "active", "phone");
+  username = "18611752863";
+  password = "leng147896325";
+  async onSubmit(values) {
+    await this.$store.$storeUser.onLogin(values.username, values.password);
+    this.$router.back();
+  }
+  created() {}
+  mounted() {}
+  updated() {}
+  destroyed() {}
+}
+</script>
+<style lang="less" scoped>
+</style>

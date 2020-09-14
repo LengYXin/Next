@@ -11,8 +11,8 @@
     <slot v-if="PageStore.loggedIn"></slot>
     <!-- 没有登录 -->
     <slot v-else name="not">
-      <div class="xt-text-align-center">
-        <a-button type="primary" @click="PageStore.onToggleVisible(true)">请登录</a-button>
+      <div class="xt-inspect-center">
+        <van-button type="primary" @click="PageStore.onToggleVisible(true)">请登录</van-button>
       </div>
     </slot>
   </div>
@@ -38,6 +38,7 @@ export default class extends Vue {
   }
   created() {
     try {
+      console.log("LENG: extends -> created -> this.isInspect", this.isInspect)
       this.$InspectUser(this.isInspect);
     } catch (error) {
       console.error("LENG: extends -> error", error);
@@ -49,4 +50,10 @@ export default class extends Vue {
 }
 </script>
 <style lang="less" scoped>
+.xt-inspect-center {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 50vh;
+}
 </style>
