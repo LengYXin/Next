@@ -12,9 +12,6 @@ const path = require('path');
 const production = process.env.NODE_ENV === 'production';
 const deployUat = process.env.DEPLOY_ENV === 'uat';
 const deployPro = process.env.DEPLOY_ENV === 'pro';
-console.log();
-console.log("LENG: process.env", process.env.DEPLOY_ENV, process.env.NODE_ENV);
-console.log();
 /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/

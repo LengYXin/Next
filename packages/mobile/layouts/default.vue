@@ -64,7 +64,7 @@ body {
 .xt-layout {
   height: calc(100vh - @tabbar-height - @nav-bar-height);
   &-content {
-    height: 100%;
+    min-height: 100%;
     background: #fff;
   }
 }
