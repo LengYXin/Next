@@ -93,7 +93,7 @@ declare module "vuex/types/index" {
     /**
      * 菜单
      */
-    readonly $menu: typeof $menu;
+    // readonly $menu: typeof $menu;
     /**
      * 本地语音全局状态
      */

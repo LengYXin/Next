@@ -24,7 +24,7 @@
         <!-- <Nuxt keep-alive /> -->
         <Nuxt :keep-alive="keepAlive" :keepAliveProps="keepAliveProps" />
         <!-- 滚动 -->
-        <a-back-top />
+        <fab />
         <!-- <xt-cat /> -->
       </a-layout-content>
       <!-- 底部 -->
@@ -44,8 +44,9 @@ import headerMenu from "./views/headerMenu.vue";
 import headerUser from "./views/headerUser.vue";
 import layoutFooter from "./views/footer.vue";
 import breadcrumb from "./views/breadcrumb.vue";
+import fab from "./views/fab.vue";
 @Component({
-  components: { headerMenu, headerUser, layoutFooter, breadcrumb },
+  components: { fab, headerMenu, headerUser, layoutFooter, breadcrumb },
 })
 export default class extends Vue {
   get config() {
