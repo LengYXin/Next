@@ -43,28 +43,28 @@ export class AjaxBasics {
     }
     options: IAjaxBasicsOptions = {};
     /** get */
-    get<T>(url: string, body?: any, headers?: Object) {
-        return this.request<T>({ url, body, headers, method: 'get' }).toPromise()
+    get<T>(url: string, body?: any, headers?: Object, options?: IAjaxBasicsOptions) {
+        return this.request<T>({ url, body, headers, method: 'get' }, options).toPromise()
     }
     /** post */
-    post<T>(url: string, body?: any, headers?: Object) {
-        return this.request<T>({ url, body, headers, method: 'post' }).toPromise()
+    post<T>(url: string, body?: any, headers?: Object, options?: IAjaxBasicsOptions) {
+        return this.request<T>({ url, body, headers, method: 'post' }, options).toPromise()
     }
     /** put */
-    put<T>(url: string, body?: any, headers?: Object) {
-        return this.request<T>({ url, body, headers, method: 'put' }).toPromise()
+    put<T>(url: string, body?: any, headers?: Object, options?: IAjaxBasicsOptions) {
+        return this.request<T>({ url, body, headers, method: 'put' }, options).toPromise()
     }
     /** patch */
-    patch<T>(url: string, body?: any, headers?: Object) {
-        return this.request<T>({ url, body, headers, method: 'patch' }).toPromise()
+    patch<T>(url: string, body?: any, headers?: Object, options?: IAjaxBasicsOptions) {
+        return this.request<T>({ url, body, headers, method: 'patch' }, options).toPromise()
     }
     /** delete */
-    delete<T>(url: string, body?: any, headers?: Object) {
-        return this.request<T>({ url, body, headers, method: 'delete' }).toPromise()
+    delete<T>(url: string, body?: any, headers?: Object, options?: IAjaxBasicsOptions) {
+        return this.request<T>({ url, body, headers, method: 'delete' }, options).toPromise()
     }
     /** request */
-    request<T>(request: string | AjaxRequest) {
-        return AjaxBasics.onRequest<T>(request, this.options)
+    request<T>(request: string | AjaxRequest, options?: IAjaxBasicsOptions) {
+        return AjaxBasics.onRequest<T>(request, lodash.merge({}, this.options, options))
     }
     /**
      * request

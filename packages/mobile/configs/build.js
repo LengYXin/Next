@@ -5,53 +5,19 @@
  * @modify date 2020-08-05 14:28:48
  * @desc 扩展 配置信息 请勿随便更改
  */
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
 const lodash = require('lodash');
 const path = require('path');
-const production = process.env.NODE_ENV === 'production';
-const deployUat = process.env.DEPLOY_ENV === 'uat';
-const deployPro = process.env.DEPLOY_ENV === 'pro';
+const build = require('@xt/client/config/build');
+const env = require('../env.config');
+const production = env.NODE_ENV === 'production';
+const deployUat = env.DEPLOY_ENV === 'uat';
+const deployPro = env.DEPLOY_ENV === 'pro';
+const buildConfig = build(env);
 /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
-module.exports = {
-    /*
-    ** You can extend webpack config here
-    */
-    extend(config, ctx) {
-        // console.log("LENG: extend -> config", config.module.rules)
-        // lodash.set(config,'mode','development')
-        // uat 环境 
-        if (!deployPro) {
-            lodash.set(config, 'devtool', 'source-map')
-        }
-        // 图库替换
-        lodash.update(config, 'resolve.alias', alias => {
-            return lodash.merge({
-                // 'swiper': require.resolve('swiper'),
-                // "vant/lib/style/var.less": path.resolve(process.cwd(), 'assets/themes/modifyVars.less'),
-            }, alias)
-        });
-        // i18n 单文件组件 https://kazupon.github.io/vue-i18n/zh/guide/sfc.html#%E5%AE%89%E8%A3%85-vue-i18n-loader
-        lodash.update(config, 'module.rules', rules => {
-            rules.push({
-                resourceQuery: /blockType=i18n/,
-                type: 'javascript/auto',
-                loader: '@kazupon/vue-i18n-loader'
-            });
-            return rules
-        })
-        // console.log("extend -> config", config.resolve.alias)
-        // throw 'aaa'
-    },
-    transpile: ['swiper', 'serializr', 'dom7','asn1.js'],
-    publicPath: '/assets/',
-    corejs: 3,
-    // 分离css
-    extractCSS: production,
+module.exports = lodash.merge({}, buildConfig, {
     postcss: {
         plugins: {
             'postcss-pxtorem': require('postcss-pxtorem')({
@@ -79,30 +45,12 @@ module.exports = {
             }
         }
     },
-    // 包分析 
-    analyze: {
-        analyzerMode: 'static',
-        reportFilename: path.resolve(process.cwd(), 'report.html')
-    },
-    plugins: [
-        // https://github.com/webpack-contrib/copy-webpack-plugin/tree/v5
-        new CopyPlugin([
-            { from: require.resolve('@xt/client').replace('index.ts', 'static') },
-        ]),
-        new MomentLocalesPlugin({ localesToKeep: ['es-us', 'zh-cn'] }),
-        new webpack.BannerPlugin({ banner: `@author 冷 (https://github.com/LengYXin)\n@email lengyingxin8966@gmail.com` })
-    ],
     optimization: {
         minimize: deployPro,
         namedModules: !deployPro,
         splitChunks: {
             chunks: 'async',
             cacheGroups: {
-                // style: {
-                //     name: 'style',
-                //     test: /\.(css|less)$/,
-                //     chunks: 'all',
-                // },
                 min: {
                     name: 'min',
                     test: /[\\/]node_modules[\\/](vue.*|mobx.*|core.*|rxjs.*|nuxt.*|.*nuxt.*)[\\/]/,
@@ -116,33 +64,14 @@ module.exports = {
             }
         }
     },
-    splitChunks: {
-        layouts: false,
-        pages: false,
-        commons: false
-    },
-    terser: {
-        terserOptions: {
-            compress: {
-                drop_console: deployPro,
-                // pure_funcs: ['console.log', 'console.warn']
-            },
-        }
-    },
-    // transpile: ['ant-design-vue'],
     babel: {
         plugins: [
             'lodash',
-            // ['import', {
+           // ['import', {
             //     libraryName: 'vant',
             //     libraryDirectory: 'lib',
             //     style: (name) => `${name}/style/less`,
             // }, 'vant'],
-            // ['import', {
-            //   libraryName: 'lodash',
-            //   libraryDirectory: '',
-            //   camel2DashComponentName: false
-            // }, 'lodash']
         ]
     }
-}
+}) 

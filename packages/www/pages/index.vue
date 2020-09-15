@@ -17,6 +17,11 @@
         <div class="xt-home-swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
+    <!-- 课程 -->
+    <xt-template v-for="(item,index) in dataSource.course" :key="index" v-bind="item">
+      <component :is="item.template"></component>
+    </xt-template>
+    <!--  -->
     <xt-template v-for="item in templates" :key="item.template" v-bind="item">
       <component :is="item.template"></component>
     </xt-template>
@@ -25,7 +30,6 @@
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
-import { Context } from "@nuxt/types";
 import XtTemplate from "./views/template.vue";
 import summer from "./views/summer.vue";
 import fullOrder from "./views/fullOrder.vue";
@@ -38,7 +42,19 @@ import stationery from "./views/stationery.vue";
 @Observer
 @Component({
   name: "PageIndex",
-  fetch(ctx: Context) {
+  async asyncData(ctx) {
+    // 加载课程静态数据
+    const res = await ctx.store.$ajax.get(
+      "/assets/mocks/home.json",
+      {},
+      {},
+      { target: "/" }
+    );
+    return {
+      dataSource: res,
+    };
+  },
+  fetch(ctx) {
     ctx.store.$storeHome.onGetBanners();
   },
   components: {
@@ -79,29 +95,29 @@ export default class PageIndex extends Vue {
     },
   };
   templates = [
-    {
-      title: "写字课",
-      subTitle: "欣赏、读书、技法于一体，深入学习颜真卿",
-      footerText: "查看课程",
-      linkTo: { name: "course-id", params: { id: 1 } },
-      template: "summer",
-      background: "#F7F3F0",
-    },
-    {
-      title: "写字课",
-      titleColor: "#087276",
-      subTitle: "以一支毛笔，开启中国传统文化的大门，从书法之美到生活之美",
-      template: "fullOrder",
-      background: "#FFFDF9",
-    },
-    {
-      title: "写字课进阶",
-      subTitle: "以静定，滋养身和心",
-      footerText: "查看课程",
-      linkTo: { name: "course-id", params: { id: 1 } },
-      template: "write",
-      background: "#FFFDF9",
-    },
+    // {
+    //   title: "写字课",
+    //   subTitle: "欣赏、读书、技法于一体，深入学习颜真卿",
+    //   footerText: "查看课程",
+    //   linkTo: { name: "course-id", params: { id: 1 } },
+    //   template: "summer",
+    //   background: "#F7F3F0",
+    // },
+    // {
+    //   title: "写字课",
+    //   titleColor: "#087276",
+    //   subTitle: "以一支毛笔，开启中国传统文化的大门，从书法之美到生活之美",
+    //   template: "fullOrder",
+    //   background: "#FFFDF9",
+    // },
+    // {
+    //   title: "写字课进阶",
+    //   subTitle: "以静定，滋养身和心",
+    //   footerText: "查看课程",
+    //   linkTo: { name: "course-id", params: { id: 1 } },
+    //   template: "write",
+    //   background: "#FFFDF9",
+    // },
     {
       title: "视频分享",
       titleColor: "#000",

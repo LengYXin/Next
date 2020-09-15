@@ -1,10 +1,10 @@
 const build = require('./configs/build');
-const head = require('./configs/head');
 const env = require('./env.config');
-const router = require('./configs/router');
-const hooks = require('./configs/hooks');
+const head = require('@xt/client/config/head');
+const router = require('@xt/client/config/router');
+const hooks = require('@xt/client/config/hooks');
 const lodash = require('lodash');
-
+console.log("LENG: env", env)
 const proxy = {
   "/api": {
     target: env.target, // 代理地址
@@ -26,11 +26,7 @@ module.exports = {
   ** See https://nuxtjs.org/api/configuration-target
   */
   target: 'static',//static server
-  /*
-  ** Headers of the page
-  ** See https://nuxtjs.org/api/configuration-head
-  */
-  head,
+
   server: {
     port: 4000, // default: 3000
     host: '0.0.0.0' // default: localhost,
@@ -84,12 +80,17 @@ module.exports = {
       devtools: false,
     }
   },
-  router,
   /*
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
   */
   components: false,
+  /*
+  ** Headers of the page
+  ** See https://nuxtjs.org/api/configuration-head
+  */
+  head: head(env),
+  router: lodash.merge(router, { base: env.base }),
   env,
   proxy,
   generate,
@@ -99,5 +100,5 @@ module.exports = {
   */
   build,
   // https://zh.nuxtjs.org/api/configuration-hooks
-  hooks
+  hooks: hooks(env)
 }

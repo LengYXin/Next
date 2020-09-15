@@ -23,6 +23,7 @@ import $global from "./global";
 import $locale from "./locale";
 import $menu from "./menu";
 const store = {
+  $ajax: ajax,
   // 语言
   $locale,
   // 菜单
@@ -86,6 +87,8 @@ async function onCreatePersist() {
 // 扩展 ts
 declare module "vuex/types/index" {
   interface Store<S> {
+    /** 请求 */
+    $ajax: typeof ajax;
     /**
      * 全局公用
      */
