@@ -10,6 +10,7 @@
     if (scope['__xt__env']) {
         return;
     }
+    var env,global;
     // 环境配置
     scope.__xt__env = ({ env });
     // 全局数据
