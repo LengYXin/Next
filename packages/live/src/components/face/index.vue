@@ -7,7 +7,7 @@
  */
 <template>
   <div style="width:360px">
-    <a-tooltip v-for="face in faces" :key="face.value">
+    <a-tooltip v-for="face in faces" :key="face.value" :mouseEnterDelay="1">
       <template slot="title">{{face.phrase}}</template>
       <a-avatar class="xt-face" :src="face.icon" @click="onFace(face)" size="small"/>
     </a-tooltip>
