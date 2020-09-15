@@ -72,7 +72,8 @@ function getLogger(env = DEPLOY_ENV) {
 function getWXAppid(env = DEPLOY_ENV) {
     const config = {
         pro: 'wx86b9c08d1269ab6e',
-        dev: 'wx0ec5ab0807138971'
+        uat: 'wxe3c9b33fb107e610',
+        dev: 'wxf569186c8e22c135'
     }
     return lodash.get(config, env, config.dev)
 }

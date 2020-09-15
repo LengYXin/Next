@@ -30,6 +30,7 @@ module.exports = (env) => {
             { rel: 'stylesheet', href: '//at.alicdn.com/t/font_2037753_6zobxeuq2hh.css' }
         ],
         script: [
+            { src: 'https://res2.wx.qq.com/open/js/jweixin-1.6.0.js' },
             { src: `${path.join(env.base, env.publicPath)}env.config.js` }
         ],
     }
