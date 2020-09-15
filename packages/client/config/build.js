@@ -67,7 +67,7 @@ module.exports = env => {
         // 包分析 
         analyze: {
             analyzerMode: 'static',
-            reportFilename: path.resolve(process.cwd(), 'report.html')
+            reportFilename: path.resolve(process.cwd(), path.dirname(env.dir), `report_${env.DEPLOY_ENV}.html`)
         },
         plugins: [
             // https://github.com/webpack-contrib/copy-webpack-plugin/tree/v5

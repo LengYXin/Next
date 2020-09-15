@@ -14,11 +14,18 @@ module.exports = env => {
     return {
         generate: {
             done({ options }) {
-                writeFileSync(env, path.join(options.generate.dir, env.publicPath))
+                writeFileSync(env, path.join(options.generate.dir, env.publicPath));
+                writeFileSyncMD(env, options.generate.dir);
             }
         }
     }
 }
+/**
+ * 写入环境配置文件
+ * @param {*} env 
+ * @param {*} dir 
+ * @param {*} global 
+ */
 function writeFileSync(env, dir, global = {}) {
     try {
         const envPath = path.join(dir, 'env.config.js');
@@ -41,4 +48,30 @@ function writeFileSync(env, dir, global = {}) {
         console.log("env failed", error);
     }
 }
+/**
+ * 写入环境配置 备注 MD 文件
+ * @param {*} env 
+ * @param {*} dir 
+ * @param {*} global 
+ */
+function writeFileSyncMD(env, dir, global = {}) {
+    try {
+        const envPath = path.join(dir, 'README.md');
+        if (fs.existsSync(envPath)) {
+            const envjs = fs.readFileSync(envPath).toString();
+
+            const newEnvjs = lodash.template(envjs, { interpolate: /\({([\s\S]+?)}\)/g })({
+                // 环境配置
+                env: JSON.stringify(env, null, 4),
+                // 全局数据
+                global: JSON.stringify(global, null, 4),
+                // process: JSON.stringify(process.env, null, 4),
+            });
+            fs.writeFileSync(envPath, newEnvjs);
+        }
+    } catch (error) {
+        console.log("env failed", error);
+    }
+}
 module.exports.writeFileSync = writeFileSync;
+module.exports.writeFileSyncMD = writeFileSyncMD;

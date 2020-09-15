@@ -4,11 +4,12 @@ const lodash = require('lodash');
 const path = require('path');
 const build = require('@xt/client/config/build');
 const env = require('./env.config');
+console.log("LENG: env", env.config)
 const deployUat = env.config.DEPLOY_ENV === 'uat';
 const deployPro = env.config.DEPLOY_ENV === 'pro';
 const production = env.config.NODE_ENV === 'production';
 module.exports = {
-  outputDir: `build_${lodash.snakeCase(process.env.npm_package_version)}/${env.config.DEPLOY_ENV}`,
+  outputDir: env.config.dir,
   publicPath: env.config.publicPath,
   productionSourceMap: deployUat,
   configureWebpack: {

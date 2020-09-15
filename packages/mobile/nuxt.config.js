@@ -15,7 +15,7 @@ const proxy = {
   }
 };
 const generate = {
-  dir: `build_${lodash.snakeCase(process.env.npm_package_version)}/${env.DEPLOY_ENV}`,
+  dir: env.dir,
   // 设置为false时，将根据路由路径生成 HTML 文件：
   // subFolders: false
 }

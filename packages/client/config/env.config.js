@@ -3,6 +3,7 @@ const lodash = require('lodash');
 const DEPLOY_ENV = process.env.DEPLOY_ENV || 'dev';
 // 环境配置
 module.exports = {
+    dir: `build_${lodash.snakeCase(process.env.npm_package_version)}/${DEPLOY_ENV}`,
     // 路由 base
     base: '/',
     // https://zh.nuxtjs.org/api/configuration-build
