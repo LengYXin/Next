@@ -36,7 +36,9 @@ export default class Page extends Vue {
   }
 
   created() {}
-  mounted() {}
+  mounted() {
+    this.$AppMessageShareData({})
+  }
   updated() {}
   destroyed() {}
 }

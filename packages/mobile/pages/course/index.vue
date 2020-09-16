@@ -44,7 +44,9 @@ export default class Page extends Vue {
   created() {
     // this.onLoading();
   }
-  mounted() {}
+  mounted() {
+    this.$AppMessageShareData({ title: "暄桐课程" });
+  }
   updated() {}
   destroyed() {}
 }

@@ -202,14 +202,14 @@ declare namespace wx {
     function onMenuShareQZone(params: IonMenuShareQZone): void;
   
     interface IupdateAppMessageShareData extends BaseParams {
-      title: string; // 分享标题
-      desc: string; // 分享描述
-      link: string; // 分享链接
-      imgUrl: string; // 分享图标
+      title?: string; // 分享标题
+      desc?: string; // 分享描述
+      link?: string; // 分享链接
+      imgUrl?: string; // 分享图标
       // 用户确认分享后执行的回调函数
-      success(): void;
+      success?(): void;
       // 用户取消分享后执行的回调函数
-      cancel(): void;
+      cancel?(): void;
     }
     /**
      * 获取“分享给朋友”及“分享到QQ”按钮点击状态及自定义分享内容接口（新）

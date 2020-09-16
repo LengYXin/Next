@@ -5,7 +5,7 @@ import Bowser from "./utils/bowser";
 import "./utils/es6-proxy-polyfill.js";
 import "./utils/registerHooks";
 import readyWx from './wx';
-readyWx()
+// readyWx()
 // Bowser()
 console.group('Start')
 export default function (context: Context) {
