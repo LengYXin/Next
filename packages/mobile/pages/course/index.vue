@@ -14,7 +14,9 @@
       @load="onLoading"
     >
       <div v-for="(item,index) in Pagination.dataSource" :key="index">
-        <img v-lazy="item.picIndexSmallThumb" />
+        <nuxt-link :to="`/course/${item.courseId}`">
+          <img v-lazy="item.coursePictureUri" />
+        </nuxt-link>
       </div>
     </van-list>
   </van-pull-refresh>
@@ -28,7 +30,7 @@ import { Observer } from "mobx-vue";
 })
 export default class Page extends Vue {
   get PageStore() {
-    return this.$store.$storeAbout;
+    return this.$store.$storeCourse;
   }
   get Pagination() {
     return this.PageStore.Pagination;
@@ -38,8 +40,7 @@ export default class Page extends Vue {
     this.onLoading();
   }
   onLoading() {
-    this.Pagination.onLoading({ columnId: 1 });
-    console.log("LENG: Page -> onLoading -> this", this);
+    this.Pagination.onLoading({});
   }
   created() {
     // this.onLoading();
