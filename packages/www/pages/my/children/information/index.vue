@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-14 18:02:57
+ * @LastEditTime: 2020-09-15 14:54:26
  * @Description: 个人信息
 -->
 
@@ -125,7 +125,7 @@ import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
 import { DatePicker } from "ant-design-vue";
 import Location from "./views/location.vue";
-import enumOptions from "./dataSource";
+import { DataMy } from "../../../../../client/dataSource";
 
 @Observer
 @Component({
@@ -133,7 +133,7 @@ import enumOptions from "./dataSource";
   components: { DatePicker, Location },
 })
 export default class PageView extends Vue {
-  enumOptions = enumOptions;
+  enumOptions = DataMy;
   get PageStore() {
     return this.$store.$storeUser;
   }
@@ -239,6 +239,9 @@ export default class PageView extends Vue {
 }
 
 .xt-my-information {
+  padding-top: 30px;
+  padding-bottom: 40px;
+
   &-avatar-warp {
     position: relative;
     width: 95px;
