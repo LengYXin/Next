@@ -1,5 +1,6 @@
 <template>
-  <div class="xt-layout-nav" v-show="show">
+  <div v-if="WechatBowser"></div>
+  <div class="xt-layout-nav" v-else v-show="show">
     <van-nav-bar
       fixed
       left-arrow
@@ -18,6 +19,9 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class Page extends Vue {
+  get WechatBowser() {
+    return this.$store.$global.WechatBowser;
+  }
   get show() {
     return !lodash.includes(
       ["index", "toclass", "stationery", "my"],

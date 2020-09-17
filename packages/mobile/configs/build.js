@@ -14,10 +14,12 @@ const production = env.NODE_ENV === 'production';
 const deployUat = env.DEPLOY_ENV === 'uat';
 const deployPro = env.DEPLOY_ENV === 'pro';
 const buildConfig = build(env);
-buildConfig.plugins.push(new vconsole({
-    filter: [], // 需要过滤的入口文件
-    enable: !deployPro // 发布代码前记得改回 false
-}))
+if (production) {
+    buildConfig.plugins.push(new vconsole({
+        filter: [], // 需要过滤的入口文件
+        enable: !deployPro // 发布代码前记得改回 false
+    }))
+}
 /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
