@@ -43,6 +43,7 @@ export default class Page extends Vue {
     try {
       await this.$store.$storeUser.onLogin(values.username, values.password);
       this.$router.back();
+      lodash.delay(() => window.location.reload(), 1);
     } catch (error) {}
   }
   created() {}

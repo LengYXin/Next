@@ -1,7 +1,7 @@
 <template>
   <div class="xt-layout">
     <navbar />
-    <Nuxt :keep-alive="keepAlive" class="xt-layout-content" :class="pageClass" />
+    <Nuxt :keep-alive="keepAlive" :keepAliveProps="keepAliveProps" class="xt-layout-content" :class="pageClass" />
     <!-- :keepAliveProps="keepAliveProps" -->
     <tabbar />
     <signin />
@@ -27,13 +27,13 @@ export default class extends Vue {
     return this.$store.$global.production;
   }
   get keepAlive() {
-    return false; //this.$store.$global.production;
+    return true; //this.$store.$global.production;
   }
   get version() {
     return this.$store.$global.version;
   }
   keepAliveProps = {
-    include: "PageIndex",
+    // include: "PageIndex",
   };
   mounted() {
     // console.log(this);
@@ -45,7 +45,6 @@ export default class extends Vue {
 <style lang="less">
 @max-width: 750px;
 html {
-  background: #ccc;
   max-width: @max-width;
   margin: auto;
   height: 100%;
@@ -68,6 +67,8 @@ body {
   &-content {
     min-height: 100%;
     background: #fff;
+    // padding: 0 10px 10px 10px;
+    box-sizing: border-box;
   }
 }
 </style>
