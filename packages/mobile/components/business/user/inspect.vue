@@ -51,7 +51,8 @@ export default class extends Vue {
       console.error("LENG: extends -> error", error);
     }
   }
-  created() {}
+  created() {
+  }
   @Watch("$route")
   RouteUpdate(to, from, next) {
     if (lodash.eq(this.$route.name, this.inspectName)) {
@@ -59,7 +60,9 @@ export default class extends Vue {
       this.onInspectUser();
     }
   }
-  mounted() {}
+  mounted() {
+    this.onInspectUser();
+  }
   updated() {}
   destroyed() {}
 }
