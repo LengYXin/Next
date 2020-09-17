@@ -1,16 +1,18 @@
 <template>
   <div class="xt-layout-nav" v-show="show">
-    <div class="xt-layout-nav-wechat" v-if="WechatBowser">
-      <van-icon class="xt-layout-nav-icon" name="arrow-left" @click="onClickLeft" />
-    </div>
-    <van-nav-bar
-      v-else
-      fixed
-      left-arrow
-      :title="title"
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
-    />
+    <xt-wechat-bowser>
+      <van-nav-bar
+        fixed
+        left-arrow
+        :title="title"
+        @click-left="onClickLeft"
+        @click-right="onClickRight"
+      />
+      <!-- 微信显示 -->
+      <div class="xt-layout-nav-wechat" slot="yes">
+        <van-icon class="xt-layout-nav-icon" name="arrow-left" @click="onClickLeft" />
+      </div>
+    </xt-wechat-bowser>
   </div>
 </template>
 <script lang="ts">

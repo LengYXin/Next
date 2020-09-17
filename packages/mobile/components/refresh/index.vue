@@ -23,7 +23,7 @@
   </van-pull-refresh>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import { Component, Prop, Vue, Provide, Watch } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
 import { Pagination } from "@xt/client";
 import lodash from "lodash";
@@ -35,23 +35,36 @@ export default class Page extends Vue {
   @Prop({}) body: any;
   @Prop({}) rowKey: string;
   @Prop({ required: true }) Pagination: Pagination<any>;
+  inspectName = this.$route.name;
   getRowKey(rowDate, index) {
     return lodash.get(rowDate, this.rowKey || this.Pagination.key, index);
   }
+  // 刷新
   onRefresh() {
-    this.Pagination.onReset({ infinite: true });
-    this.onLoading();
+    this.onLoading(true);
   }
-  onLoading() {
+  // 加载
+  onLoading(reset = false) {
+    reset && this.Pagination.onReset({ infinite: true });
     this.Pagination.onLoading(this.body);
   }
   created() {
-    this.Pagination.onReset({ infinite: true });
-    this.onLoading();
+    this.onLoading(true);
+  }
+  // 参数变化
+  @Watch("body")
+  bodyUpdate(to, from, next) {
+    if (this.inspectName === this.$route.name) {
+      if (!lodash.isEqual(this.body, this.Pagination.oldBody)) {
+        this.onLoading(true);
+      }
+    }
   }
   mounted() {}
   updated() {}
-  destroyed() {}
+  destroyed() {
+    // this.Pagination.onReset({ infinite: true });
+  }
 }
 </script>
 <style lang="less">
