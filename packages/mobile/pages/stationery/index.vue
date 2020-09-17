@@ -7,7 +7,9 @@
  */
 <template>
   <div>
-    <van-nav-bar title="暄桐文房" />
+    <xt-wechat-bowser>
+      <van-nav-bar title="暄桐文房" />
+    </xt-wechat-bowser>
     <van-search shape="round" placeholder="查找我想要的" />
     <van-tree-select
       height="90%"
@@ -43,6 +45,9 @@ import lodash from "lodash";
   components: {},
 })
 export default class Page extends Vue {
+  head() {
+    return this.$AppCreateShareData({ title: "暄桐文房" });
+  }
   get PageStore() {
     return this.$store.$storeStationery;
   }

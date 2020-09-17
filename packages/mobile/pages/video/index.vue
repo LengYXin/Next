@@ -20,6 +20,9 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class Page extends Vue {
+  head() {
+    return this.$AppCreateShareData({title: "暄桐视频分享"});
+  }
   get PageStore() {
     return this.$store.$storeVideo;
   }
@@ -32,7 +35,6 @@ export default class Page extends Vue {
 
   created() {}
   mounted() {
-    this.$AppMessageShareData({ title: "暄桐视频分享" });
   }
   updated() {}
   destroyed() {}

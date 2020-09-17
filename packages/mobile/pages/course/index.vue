@@ -29,6 +29,9 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class Page extends Vue {
+  head() {
+    return this.$AppCreateShareData({ title: "全部课程" });
+  }
   get PageStore() {
     return this.$store.$storeCourse;
   }
@@ -46,7 +49,7 @@ export default class Page extends Vue {
     // this.onLoading();
   }
   mounted() {
-    this.$AppMessageShareData({ title: "暄桐课程" });
+    
   }
   updated() {}
   destroyed() {}

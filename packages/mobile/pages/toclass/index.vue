@@ -6,25 +6,27 @@
  * @desc 去上课
  */
 <template>
-  <xt-inspect inspect>
-    <xt-refresh-list :Pagination="Pagination" :body="body">
-      <template #renderItem="item">
-        <img v-lazy="item.commodityCoverUrl" />
-      </template>
-    </xt-refresh-list>
-  </xt-inspect>
+  <div>
+    <xt-inspect inspect>
+      <xt-refresh-list :Pagination="Pagination" :body="body">
+        <template #renderItem="item">
+          <img v-lazy="item.commodityCoverUrl" />
+        </template>
+      </xt-refresh-list>
+    </xt-inspect>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
 @Observer
 @Component({
-  fetch(ctx) {
-    // ctx.store.$storeUser.
-  },
   components: {},
 })
 export default class Page extends Vue {
+  head() {
+    return this.$AppCreateShareData({ title: "去上课" });
+  }
   get PageStore() {
     return this.$store.$storeStationery;
   }
@@ -36,9 +38,7 @@ export default class Page extends Vue {
   }
 
   created() {}
-  mounted() {
-    this.$AppMessageShareData({})
-  }
+  mounted() {}
   updated() {}
   destroyed() {}
 }

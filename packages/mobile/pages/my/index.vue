@@ -7,14 +7,25 @@
  */
 <template>
   <div>
-    <van-nav-bar title="我的">
-      <template #left>
-        <van-icon name="search" size="18" />
-      </template>
-      <template #right>
-        <van-icon name="search" size="18" />
-      </template>
-    </van-nav-bar>
+    <xt-wechat-bowser>
+      <van-nav-bar title="我的">
+        <template #left>
+          <van-icon name="search" size="18" />
+        </template>
+        <template #right>
+          <van-icon name="search" size="18" />
+        </template>
+      </van-nav-bar>
+      <van-cell slot="yes" title=" ">
+        <template #icon>
+          <van-icon name="search" size="18" />
+        </template>
+        <template #right-icon>
+          <van-icon name="search" size="18" />
+        </template>
+      </van-cell>
+    </xt-wechat-bowser>
+
     <xt-inspect inspect="false">
       <div class="xt-flex-center">
         <van-image
@@ -45,6 +56,9 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class Page extends Vue {
+  get WechatBowser() {
+    return this.$store.$global.WechatBowser;
+  }
   get PageStore() {
     return this.$store.$storeUser;
   }

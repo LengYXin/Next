@@ -35,6 +35,9 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class PageIndex extends Vue {
+  head() {
+    return this.$AppCreateShareData({});
+  }
   grid = [
     { key: 1, text: "全部课程", name: "course" },
     { key: 2, text: "写字的事", name: "about", query: { active: 2 } },
@@ -43,9 +46,7 @@ export default class PageIndex extends Vue {
     { key: 5, text: "同学作业", name: "homework-share" },
   ];
   created() {}
-  mounted() {
-    this.$AppMessageShareData({})
-  }
+  mounted() {}
   updated() {}
   destroyed() {}
 }

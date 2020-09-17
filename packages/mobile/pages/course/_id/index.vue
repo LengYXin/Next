@@ -20,17 +20,18 @@ import lodash from "lodash";
   components: {},
 })
 export default class PageView extends Vue {
+  head() {
+    return this.$AppCreateShareData({
+      title: this.PageStore.dataSource.courseName,
+      desc: this.PageStore.dataSource.courseSubtitle,
+      imgUrl: this.PageStore.dataSource.coursePictureUri,
+    });
+  }
   get PageStore() {
     return this.$store.$storeCourse.Details;
   }
   created() {}
   mounted() {
-    // console.log(this.$route);
-    this.$AppMessageShareData({
-      title: this.PageStore.dataSource.courseName,
-      desc: this.PageStore.dataSource.courseSubtitle,
-      imgUrl: this.PageStore.dataSource.coursePictureUri,
-    });
   }
 
   updated() {}

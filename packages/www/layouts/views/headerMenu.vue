@@ -27,7 +27,9 @@ export default class extends Vue {
     return this.$store.$storeUser;
   }
   get selectedkeys() {
-    return [this.$route.name, ...this.PageStore.getSelectedkeys(this.$route)];
+    if (this.$route.name) {
+      return [this.$route.name, ...this.PageStore.getSelectedkeys(this.$route)];
+    }
   }
   get locale() {
     return this.$EnumLocaleLinks;

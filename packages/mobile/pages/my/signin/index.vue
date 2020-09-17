@@ -42,10 +42,21 @@ export default class Page extends Vue {
   async onSubmit(values) {
     try {
       await this.$store.$storeUser.onLogin(values.username, values.password);
-      this.$router.back();
+      // this.$router.back();
+      window.location.reload();
+      // lodash.delay(() => window.location.reload(), 100);
     } catch (error) {}
   }
-  created() {}
+  created() {
+    // 已登录 返回前一页
+    try {
+      this.$InspectUser(false);
+      if (window.history.length > 1) {
+        this.$router.back();
+      }
+      this.$router.replace({ name: "index" });
+    } catch (error) {}
+  }
   mounted() {}
   updated() {}
   destroyed() {}

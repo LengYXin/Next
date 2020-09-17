@@ -28,7 +28,7 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
         if (res instanceof AjaxResponse) {
             // 无 响应 数据
             if (lodash.isNil(res.response)) {
-                throw lodash.merge(res, $global.production ? { message: '服务器开小差了' } : { message: '响应体不存在' })
+                // throw lodash.merge(res, $global.production ? { message: '服务器开小差了' } : { message: '响应体不存在' })
             }
             else if (!lodash.eq(lodash.get(res.response, 'code', 0), 0)) {
                 throw lodash.merge(res, { message: lodash.get(res.response, 'msg') })
@@ -42,7 +42,7 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
         return true
     }
     AjaxBasics.onMap = function (res) {
-        return lodash.get(res, 'response.result', res.response);
+        return lodash.get(res, 'response.result', res.response || res);
     }
     AjaxBasics.onError = function (error) {
         if (lodash.includes([600002, 900004], lodash.get(error, 'response.code'))) {
