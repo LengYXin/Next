@@ -31,9 +31,13 @@ export default class Page extends Vue {
       this.$route.name
     );
   }
-  get title() {
-    return this.$t(this.$route.name);
+  title = this.getTitle();
+  getTitle() {
+    return (document.head.firstElementChild as any).innerText;
   }
+  // get title() {
+  //   // return this.$t(this.$route.name);
+  // }
   onClickLeft() {
     if (window.history.length > 2) {
       return this.$router.back();
@@ -41,11 +45,13 @@ export default class Page extends Vue {
     return this.$router.push({ name: "index" });
   }
   onClickRight() {}
-  mounted() {
-  }
+  mounted() {}
   @Watch("$route")
   RouteUpdate(to, from, next) {
-    console.log(this);
+    console.warn("LENG: Navbar -> this", this);
+    lodash.delay(() => {
+      this.title = this.getTitle();
+    }, 100);
   }
   updated() {}
   destroyed() {}
