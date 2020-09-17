@@ -49,6 +49,7 @@ Vue.prototype.$eqUser = function (code) {
  * 分享 配置
 */
 Vue.prototype.$AppMessageShareData = Wechat.onAppMessageShareData
+Vue.prototype.$AppCreateShareData = Wechat.onCreateShareData
 /** 
  * 设置 面包屑
 */
@@ -68,6 +69,8 @@ declare module 'vue/types/vue' {
         readonly $eqUser: (code: any) => Boolean;
         /** 微信分享 配置 */
         readonly $AppMessageShareData: (params?: wx.IupdateAppMessageShareData) => void;
+        /** 微信分享 配置 */
+        readonly $AppCreateShareData: (params?: wx.IupdateAppMessageShareData) => void;
         /** 设置面包屑 */
         readonly $setBreadcrumb: typeof store.$menu.setBreadcrumb;
         /** Ajax */

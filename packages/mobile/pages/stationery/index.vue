@@ -43,6 +43,9 @@ import lodash from "lodash";
   components: {},
 })
 export default class Page extends Vue {
+  head() {
+    return this.$AppCreateShareData({ title: "暄桐文房" });
+  }
   get PageStore() {
     return this.$store.$storeStationery;
   }

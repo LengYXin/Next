@@ -21,6 +21,9 @@ import lodash from "lodash";
   components: {},
 })
 export default class Page extends Vue {
+  head() {
+    return this.$AppCreateShareData({ title: "暄桐关于" });
+  }
   get PageStore() {
     return this.$store.$storeAbout;
   }
@@ -32,9 +35,7 @@ export default class Page extends Vue {
   }
 
   created() {}
-  mounted() {
-    this.$AppMessageShareData({ title: "暄桐关于" });
-  }
+  mounted() {}
   updated() {}
   destroyed() {}
 }

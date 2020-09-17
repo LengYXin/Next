@@ -8,7 +8,9 @@
 <template>
   <div>
     <!-- 已经登录 -->
-    <slot v-if="PageStore.loggedIn"></slot>
+    <div v-if="PageStore.loggedIn" :key="inspectKey">
+      <slot></slot>
+    </div>
     <!-- 没有登录 -->
     <slot v-else name="not">
       <div class="xt-inspect-center">
@@ -30,18 +32,31 @@ export default class extends Vue {
    * 检查用户 不通过 唤起 登录窗口
    */
   @Prop({ default: false }) inspect: any;
+  /**
+   * 用于刷新认证的key
+   */
+  inspectKey = Date.now();
+  inspectName = this.$route.name;
   get isInspect() {
     return lodash.includes(["", "true", true], this.inspect);
   }
   get PageStore() {
     return this.$store.$storeUser;
   }
-  created() {
+  onInspectUser() {
     try {
-      console.log("LENG: extends -> created -> this.isInspect", this.isInspect)
-      this.$InspectUser(this.isInspect);
+      const user = this.$InspectUser(this.isInspect);
+      console.warn("LENG: User", user);
     } catch (error) {
       console.error("LENG: extends -> error", error);
+    }
+  }
+  created() {}
+  @Watch("$route")
+  RouteUpdate(to, from, next) {
+    if (lodash.eq(this.$route.name, this.inspectName)) {
+      // this.inspectKey = Date.now();
+      this.onInspectUser();
     }
   }
   mounted() {}

@@ -11,6 +11,7 @@
       :value="Pagination.loading"
       :finished="Pagination.finished"
       finished-text="没有更多了"
+      :immediate-check="false"
       @load="onLoading"
     >
       <slot>
@@ -46,6 +47,7 @@ export default class Page extends Vue {
   }
   created() {
     this.Pagination.onReset({ infinite: true });
+    this.onLoading();
   }
   mounted() {}
   updated() {}
