@@ -8,4 +8,6 @@ export enum EnumApiCurrency {
     UtilityUrl = '/utility/getUrl',
     /**  上穿图片 */
     UploadImg = '/image/upload',
+    /** 微信认证 */
+    WechatTicket='/wechat/wxshare'
 }

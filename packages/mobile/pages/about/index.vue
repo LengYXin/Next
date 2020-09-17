@@ -32,7 +32,9 @@ export default class Page extends Vue {
   }
 
   created() {}
-  mounted() {}
+  mounted() {
+    this.$AppMessageShareData({ title: "暄桐关于" });
+  }
   updated() {}
   destroyed() {}
 }

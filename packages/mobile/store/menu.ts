@@ -65,7 +65,6 @@ class Menu {
                 // path: route.path,
             }]
         }
-
     }
     /**
      * 设置面包屑
@@ -73,12 +72,12 @@ class Menu {
      */
     @action
     setBreadcrumb(breadcrumb: { linksKey?, linksName?, links?}, reset = false) {
-        if (reset) {
-            this.breadcrumb = [breadcrumb];
-        } else {
-            this.breadcrumb.push(breadcrumb);
-        }
-        this.breadcrumbShow = true;
+        // if (reset) {
+        //     this.breadcrumb = [breadcrumb];
+        // } else {
+        //     this.breadcrumb.push(breadcrumb);
+        // }
+        // this.breadcrumbShow = true;
     }
 }
 function onCreate() {

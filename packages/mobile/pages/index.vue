@@ -7,6 +7,7 @@
  */
 <template>
   <div class="xt-home">
+    <van-search shape="round" placeholder="搜索你感兴趣的内容" />
     <van-swipe class="xt-home-swipe" :autoplay="3000" indicator-color="white">
       <van-swipe-item>1</van-swipe-item>
       <van-swipe-item>2</van-swipe-item>
@@ -43,7 +44,7 @@ export default class PageIndex extends Vue {
   ];
   created() {}
   mounted() {
-    // console.log("LENG: PageView -> mounted -> this", this);
+    this.$AppMessageShareData({})
   }
   updated() {}
   destroyed() {}

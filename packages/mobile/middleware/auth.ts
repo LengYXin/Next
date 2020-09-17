@@ -4,16 +4,18 @@ import lodash from "lodash";
 import Bowser from "./utils/bowser";
 import "./utils/es6-proxy-polyfill.js";
 import "./utils/registerHooks";
+import readyWx from './wx';
+// readyWx()
 // Bowser()
 console.group('Start')
 export default function (context: Context) {
     try {
         isBowser(context)
         // 面包屑
-        context.store.$menu.initBreadcrumb(context.route);
+        // context.store.$menu.initBreadcrumb(context.route);
         context.store.$storeUser.onToggleVisible(false);
         onLog(context)
-        loggedIn(context)
+        // loggedIn(context)
     } catch (error) {
         console.error("LENG: error", error)
     }

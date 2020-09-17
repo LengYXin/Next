@@ -1,0 +1,53 @@
+{
+    "course": [
+        {
+            "title": "中国画美育课",
+            "titleColor":"#c47d7d",
+            "subTitle": "笔墨游戏 ，蒙养生活",
+            "footerText": "查看课程",
+            "linkTo": {
+                "name": "course-id",
+                "params": {
+                    "id": 1
+                }
+            },
+            "template": "summer",
+
+            "background": "#F7F3F0"
+        },
+        {
+            "title": "写字课",
+            "subTitle": "欣赏、读书、技法于一体，深入学习颜真卿",
+            "footerText": "查看课程",
+            "linkTo": {
+                "name": "course-id",
+                "params": {
+                    "id": 1
+                }
+            },
+            "template": "summer",
+
+            "background": "#F7F3F0"
+        },
+        {
+            "title": "写字课",
+            "titleColor": "#087276",
+            "subTitle": "以一支毛笔，开启中国传统文化的大门，从书法之美到生活之美",
+            "template": "fullOrder",
+            "background": "#FFFDF9"
+        },
+        {
+            "title": "写字课进阶",
+            "subTitle": "以静定，滋养身和心",
+            "footerText": "查看课程",
+            "linkTo": {
+                "name": "course-id",
+                "params": {
+                    "id": 1
+                }
+            },
+            "template": "write",
+            "background": "#FFFDF9"
+        }
+    ]
+}

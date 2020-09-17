@@ -31,11 +31,12 @@ export default class Page extends Vue {
   }
 
   created() {}
-  mounted() {}
+  mounted() {
+    this.$AppMessageShareData({ title: "暄桐视频分享" });
+  }
   updated() {}
   destroyed() {}
 }
 </script>
 <style lang="less" scoped>
-
 </style>

@@ -15,7 +15,8 @@ import {
   ControllerVideo,
   ControllerOrder,
   ControllerHomework,
-  ControllerMy
+  ControllerMy,
+  ControllerWechat
 } from "@xt/client";
 import { create, persist } from "mobx-persist";
 import { ajax, onResetAjaxBasics } from "./ajaxBasics";
@@ -46,7 +47,9 @@ const store = {
   // 用户
   $storeUser: new ControllerUser(ajax),
   // 我的
-  $my: new ControllerMy(ajax)
+  $my: new ControllerMy(ajax),
+  // 微信
+  $wechat: new ControllerWechat(ajax, $global.appid)
 };
 // 重置 AjaxBasics 配置
 onResetAjaxBasics(store.$storeUser);
@@ -82,6 +85,10 @@ async function onCreatePersist() {
   hydrate(`${$global.localStorageStartsWith}Order`, store.$storeOrder);
   await hydrate(`${$global.localStorageStartsWith}User`, store.$storeUser);
   store.$storeUser.onGetUserInfo();
+  // 微信中 启用 微信 jssdk
+  // if (lodash.eq($global.userAgent.browser.name, Bowser.BROWSER_MAP.wechat)) {
+  //   store.$wechat.onInit();
+  // }
 }
 // 扩展 ts
 declare module "vuex/types/index" {
@@ -93,7 +100,7 @@ declare module "vuex/types/index" {
     /**
      * 菜单
      */
-    readonly $menu: typeof $menu;
+    // readonly $menu: typeof $menu;
     /**
      * 本地语音全局状态
      */
@@ -130,7 +137,9 @@ declare module "vuex/types/index" {
      * @memberof Store
      */
     readonly $storeOrder: ControllerOrder;
-
+    /**
+     * 作业
+     */
     readonly $storeHomework: ControllerHomework;
     /**
      * 用户
@@ -138,13 +147,18 @@ declare module "vuex/types/index" {
      * @memberof Store
      */
     readonly $storeUser: ControllerUser;
-
     /**
      * 我的
      * @type {ControllerMy}
      * @memberof Store
      */
     readonly $my: ControllerMy;
+    /**
+     * 微信
+     * @type {ControllerMy}
+     * @memberof Store
+     */
+    readonly $wechat: ControllerWechat;
   }
 }
 // 状态 导出

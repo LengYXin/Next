@@ -40,8 +40,10 @@ export default class Page extends Vue {
   username = "18611752863";
   password = "leng147896325";
   async onSubmit(values) {
-    await this.$store.$storeUser.onLogin(values.username, values.password);
-    this.$router.back();
+    try {
+      await this.$store.$storeUser.onLogin(values.username, values.password);
+      this.$router.back();
+    } catch (error) {}
   }
   created() {}
   mounted() {}

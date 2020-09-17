@@ -1,5 +1,5 @@
 <template>
-  <div class="xt-layout-tabbar">
+  <div class="xt-layout-tabbar" v-if="show">
     <div class="xt-layout-tabbar-fixed">
       <van-tabbar class="xt-tabbar" :fixed="false" route :active-color="activeColor">
         <van-tabbar-item replace to="/">
@@ -20,7 +20,7 @@
             <van-icon :name="props.active ? 'shopping-cart' : 'shopping-cart-o'" />
           </template>
         </van-tabbar-item>
-        <van-tabbar-item icon="setting-o" replace to="/user">
+        <van-tabbar-item icon="setting-o" replace to="/my">
           <span>我的</span>
           <template #icon="props">
             <van-icon :name="props.active ? 'friends' : 'friends-o'" />
@@ -31,6 +31,7 @@
   </div>
 </template>
 <script lang="ts">
+import lodash from "lodash";
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 @Component({
   components: {},
@@ -38,6 +39,12 @@ import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 export default class Page extends Vue {
   get activeColor() {
     return "#097276";
+  }
+  get show() {
+    return lodash.includes(
+      ["index", "toclass", "stationery", "my"],
+      this.$route.name
+    );
   }
   mounted() {}
   updated() {}

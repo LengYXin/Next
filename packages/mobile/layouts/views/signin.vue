@@ -31,7 +31,7 @@ export default class Page extends Vue {
     return this.$EnumLocaleLinks;
   }
   toSignin(active) {
-    return { name: "user-signin", query: { active } };
+    return { name: "my-signin", query: { active } };
   }
   onClose() {
     this.PageStore.onToggleVisible(false);

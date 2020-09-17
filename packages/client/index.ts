@@ -1,3 +1,4 @@
+/// <reference path="wx.d.ts" />
 import "./configure";
 export * from "./api";
 export * from "./entities";

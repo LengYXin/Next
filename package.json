@@ -14,15 +14,15 @@
     "start:mobile": "lerna run start --stream --scope @xt/mobile",
     "start:live": "lerna run start --stream --scope @xt/live",
     "build": "lerna run build --stream",
-    "build:test": "lerna run build:test",
-    "build:uat": "lerna run build:uat",
-    "build:pro": "lerna run build:pro",
+    "build:test": "lerna run build:test --stream",
+    "build:uat": "lerna run build:uat --stream",
+    "build:pro": "lerna run build:pro --stream",
     "build:all": "npm run build && npm run build:test && npm run build:uat && npm run build:pro",
-    "serve": "lerna run serve",
+    "serve": "lerna run serve --stream",
     "init": "lerna bootstrap",
     "docs": "docsify serve docs",
     "clean": "lerna clean",
-    "clean-all": "npm run clean && rimraf node_modules",
+    "clean:all": "npm run clean && rimraf node_modules",
     "publish": "lerna publish --skip-npm",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -80,6 +80,7 @@
     "ts-jest": "^26.3.0",
     "ts-loader": "^8.0.3",
     "typescript": "~4.0.2",
+    "vconsole-webpack-plugin": "^1.5.2",
     "vue-jest": "^3.0.7",
     "webpack-bundle-analyzer": "^3.8.0"
   }

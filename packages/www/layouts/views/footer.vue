@@ -4,11 +4,11 @@
       <a-descriptions class="xt-footer-descriptions" layout="vertical" :column="2">
         <a-descriptions-item>
           <span slot="label" v-t="locale.des_officialAccount"></span>
-          <img v-lazy class="xt-footer-orcode" />
+          <img v-lazy="$images.wx" class="xt-footer-orcode" />
         </a-descriptions-item>
         <a-descriptions-item>
           <span slot="label" v-t="locale.des_sinaWeibo"></span>
-          <img v-lazy class="xt-footer-orcode" />
+          <img v-lazy="$images.wx" class="xt-footer-orcode" />
         </a-descriptions-item>
       </a-descriptions>
     </a-col>

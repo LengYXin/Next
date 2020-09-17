@@ -6,19 +6,26 @@
  * @desc [description]
  */
 // import * as EnumApi from '@xt/client/api';
-import { AjaxBasics, EnumLocaleDescriptions, EnumLocaleLinks, EnumApiCurrency } from '@xt/client';
+import { AjaxBasics, EnumLocaleDescriptions, EnumLocaleLinks, EnumApiCurrency, Regulars } from '@xt/client';
 import lodash from 'lodash';
+import moment from "moment";
 import { toJS } from 'mobx';
 import Vue from 'vue';
 import { ajax } from "./ajaxBasics";
 import store from './create';
+import $global from "./global";
 import images from './images';
+import Bowser from 'bowser';
+onAppMessageShareData({})
 // 扩展
 Vue.prototype.$ajax = ajax;
 Vue.prototype.$EnumApiCurrency = EnumApiCurrency;
 Vue.prototype.$EnumLocaleLinks = EnumLocaleLinks;
 Vue.prototype.$EnumLocaleDescriptions = EnumLocaleDescriptions;
 Vue.prototype.$images = images;
+Vue.prototype.$regulars = Regulars;
+// Vue.prototype.lodash = lodash;
+Vue.prototype.moment = moment;
 /**
  * 检查用户 状态 已登录返回用户信息
  * @visible 吊起 登录框
@@ -41,12 +48,18 @@ Vue.prototype.$eqUser = function (code) {
     return false
 };
 /** 
+ * 分享 配置
+*/
+Vue.prototype.$AppMessageShareData = onAppMessageShareData
+/** 
  * 设置 面包屑
 */
 Vue.prototype.$setBreadcrumb = store.$menu.setBreadcrumb;
 
 declare module 'vue/types/vue' {
     interface Vue {
+        // readonly lodash: typeof lodash;
+        readonly moment: typeof moment;
         /** 
          * 检查用户是否登录
          * 没有登录会抛异常。try 包裹使用
@@ -55,6 +68,8 @@ declare module 'vue/types/vue' {
         readonly $InspectUser: (visible?: Boolean) => any;
         /** 检查code 是否 是当前用户 */
         readonly $eqUser: (code: any) => Boolean;
+        /** 微信分享 配置 */
+        readonly $AppMessageShareData: (params: wx.IupdateAppMessageShareData) => void;
         /** 设置面包屑 */
         readonly $setBreadcrumb: typeof store.$menu.setBreadcrumb;
         /** Ajax */
@@ -67,5 +82,29 @@ declare module 'vue/types/vue' {
         readonly $EnumLocaleDescriptions: typeof EnumLocaleDescriptions;
         /** 图片资源 */
         readonly $images: typeof images;
+        /** 正则表达式 */
+        readonly $regulars: typeof Regulars;
+    }
+}
+/**
+ * 设置微信分享
+ * @param params 
+ */
+async function onAppMessageShareData(params: wx.IupdateAppMessageShareData) {
+    if (lodash.eq($global.userAgent.browser.name, Bowser.BROWSER_MAP.wechat)) {
+        (await store.$wechat.onInit()).updateAppMessageShareData(lodash.merge<wx.IupdateAppMessageShareData, wx.IupdateAppMessageShareData>({
+            title: '暄桐教室', // 分享标题
+            desc: '暄桐的写字课 | 文人式的生活与快乐',//
+            link: window.location.href, // 分享链接
+            imgUrl: window.location.origin + '/images/logo.png', // 分享图标
+            // 用户确认分享后执行的回调函数
+            success: () => {
+                console.log('分享成功')
+            },
+            // 用户取消分享后执行的回调函数
+            cancel: () => {
+                console.log('分享失败')
+            }
+        }, params))
     }
 }
