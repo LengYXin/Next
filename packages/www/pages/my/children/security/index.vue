@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-14 20:49:50
+ * @LastEditTime: 2020-09-17 17:19:33
  * @Description: 安全设置
 -->
 
@@ -49,7 +49,6 @@
           <span class="xt-margin-left-xxl">已绑定</span>
         </template>
         <template slot="extra">编辑</template>
-        <div>当前密码：xxx</div>
       </a-collapse-panel>
 
       <a-collapse-panel key="4" class="xt-my-security-panel">

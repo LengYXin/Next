@@ -145,8 +145,35 @@ export class ControllerUser extends Entities {
    * 获取市
    */
   async onGetCity(id) {
-    const res = this.$ajax.post(EnumApiUser.SearchCity, { id })
+    const res = await this.$ajax.post(EnumApiUser.SearchCity, { id })
     return res
+  }
+
+  /**
+   * 发送验证码
+   */
+  async onSendSms(phone, type) {
+    await this.$ajax.post(EnumApiUser.SendSms, {
+      phoneNumList: [phone],
+      sendType: type,
+    })
+  }
+
+  /**
+   * 检测验证码是否正确
+   */
+  async onCheckConfirmCode(body: {
+    phone?
+    confirmCode?
+    isExist?: false
+    type?
+  }) {
+    await this.$ajax.post(EnumApiUser.CheckConfirmCode, {
+      findWay: body.phone,
+      confirmCode: body.confirmCode,
+      isExist: body.isExist,
+      type: body.type,
+    })
   }
 }
 export default ControllerUser

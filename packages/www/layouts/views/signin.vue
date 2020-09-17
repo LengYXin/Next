@@ -48,8 +48,8 @@
         <a-form-model-item>
           <a-row type="flex">
             <a-col>
-              <a-button class="ant-btn-gray" size="small" type="link"
-                >手机验证码登录</a-button
+              <a-button class="xt-text-gray" size="small" type="link">
+                手机验证码登录</a-button
               >
             </a-col>
             <a-col flex="auto" class="xt-text-align-right">

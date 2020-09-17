@@ -70,22 +70,35 @@
 
 .ant-btn-gray {
   &.ant-btn {
-    .button-variant-primary(@xt-gray-6, transparent);
-    box-shadow: none;
+    .button-variant-primary(@xt-gray-6, @xt-gray-3);
     border-style: dashed;
-
     &:hover,
     &:focus {
-      color: @xt-gray-2;
-      background-color: transparent;
-      border-color: transparent;
+      color: @white;
+      background-color: @xt-gray-5;
     }
   }
-
   &.xt-btn-ghost {
-    color: @xt-gray-6;
-    background-color: transparent;
+    color: @white;
     border-style: solid;
+    background-color: transparent;
+  }
+}
+
+.ant-btn-grey {
+  &.ant-btn {
+    .button-variant-primary(@xt-grey-6, @xt-grey-3);
+    border-style: dashed;
+    &:hover,
+    &:focus {
+      color: @white;
+      background-color: @xt-grey-5;
+    }
+  }
+  &.xt-btn-ghost {
+    color: @white;
+    border-style: solid;
+    background-color: transparent;
   }
 }
 
