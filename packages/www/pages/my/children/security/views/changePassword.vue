@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-14 19:26:54
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-14 20:28:16
+ * @LastEditTime: 2020-09-14 21:32:36
  * @Description: 修改密码折叠内容
 -->
 <template>
@@ -52,7 +52,7 @@ export default class PageView extends Vue {
     try {
       await this.PageStore.onUpdatePassword(this.passwordForm);
       this.PageStore.onOutLogin();
-      this.$router.replace("/my");
+      // this.$router.replace("/", { login: "" });
     } catch (error) {}
   }
 }

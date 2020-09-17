@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-14 19:26:54
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-14 20:51:39
+ * @LastEditTime: 2020-09-14 21:38:04
  * @Description: 修改密码折叠内容
 -->
 <template>
@@ -14,18 +14,14 @@
     @submit="onSubmit"
     @submit.native.prevent
   >
-    <!-- <a-form-model-item has-feedback label="当前密码" prop="pass">
-      <a-input-password v-model="passwordForm.oldPassword" />
+    <a-form-model-item has-feedback label="已绑定手机号" prop="">
+      <span class="xt-text-yellow" v-phone="PageStore.UserInfo.phoneNum"></span>
     </a-form-model-item>
-    <a-form-model-item has-feedback label="新密码" prop="checkPass">
-      <a-input-password
-        placeholder="密码 (8-16位字母＋数字组合)"
-        v-model="passwordForm.newPassword"
-      />
+    <a-form-model-item has-feedback label="短信验证码" prop="checkPass">
+      <a-input size="large" placeholder="请输入六位验证码">
+        <span slot="addonAfter">获取验证码</span>
+      </a-input>
     </a-form-model-item>
-    <a-form-model-item has-feedback label="确认密码" prop="age">
-      <a-input-password v-model="passwordForm.confirmNewPassword" />
-    </a-form-model-item> -->
 
     <a-form-model-item :wrapper-col="{ span: 10, offset: 9 }">
       <a-button block class="ant-btn-yellow" type="primary" html-type="submit"
