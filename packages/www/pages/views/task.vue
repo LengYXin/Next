@@ -98,16 +98,11 @@ export default class PageView extends Vue {
   ];
   onViewer(index) {
     this.viewer.view(index);
-    console.log(
-      "LENG: PageView -> onViewer -> this.viewer",
-      index,
-      this.viewer
-    );
   }
   created() {
-    lodash.delay(() => {
+    // lodash.delay(() => {
       this.loading = false;
-    }, 2000);
+    // }, 2000);
   }
   mounted() {}
   updated() {}

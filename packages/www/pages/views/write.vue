@@ -33,9 +33,9 @@ export default class PageView extends Vue {
       "https://oss-free.xuantong.cn/picturePath/6135cbd3490aa11bc4e052d1e4e681e4.jpg",
   };
   created() {
-    lodash.delay(() => {
+    // lodash.delay(() => {
       this.loading = false;
-    }, 2000);
+    // }, 2000);
   }
   mounted() {}
   updated() {}

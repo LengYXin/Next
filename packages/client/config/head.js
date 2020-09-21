@@ -26,6 +26,8 @@ module.exports = (env) => {
             { hid: 'version', name: 'version', content: `${process.env.npm_package_version} ${moment().format("YYYY-MM-DD HH:mm")}` }
         ],
         link: [
+            //  <link rel="preload" href="/assets/lib.b6ba1f1.js" as="script">
+            { rel: 'preload', href: `${path.join(env.base, env.publicPath)}mocks/home.json`, as: 'fetch' },
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             { rel: 'stylesheet', href: '//at.alicdn.com/t/font_2037753_6zobxeuq2hh.css' }
         ],

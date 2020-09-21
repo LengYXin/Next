@@ -53,9 +53,9 @@ export default class PageView extends Vue {
     },
   ];
   created() {
-    lodash.delay(() => {
+    // lodash.delay(() => {
       this.loading = false;
-    }, 2000);
+    // }, 2000);
   }
   mounted() {}
   updated() {}
