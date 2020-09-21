@@ -12,7 +12,9 @@
       <van-grid-item icon="photo-o" text="手机" :to="toSignin()" />
       <van-grid-item icon="photo-o" text="微信" :to="toSignin('wx')" />
     </van-grid>
-    <van-button class="van-button" type="primary">海外登陆</van-button>
+    <div class="xt-text-center">
+      <van-button class="van-button" type="primary">海外登陆</van-button>
+    </div>
     <van-divider />
   </van-dialog>
 </template>
@@ -42,7 +44,7 @@ export default class Page extends Vue {
 }
 </script>
 <style lang="less">
-@max-width: 750px;
+@max-width: 1024px;
 .xt-layout-tabbar {
   height: @tabbar-height;
   &-fixed {

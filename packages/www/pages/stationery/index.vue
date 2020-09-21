@@ -8,9 +8,7 @@
 <template>
   <div class="xt-content xt-stationery">
     <div class="xt-stationery-search-box">
-      <div
-        class="xt-stationery-head-title xt-font-family-FZLTHJW xt-font-size-lg xt-text-golden"
-      >
+      <div class="xt-stationery-head-title xt-font-family-FZLTHJW xt-font-size-lg xt-text-golden">
         <a-icon type="shopping-cart" />
         <span>喧桐文房</span>
       </div>
@@ -47,7 +45,7 @@ import lodash from "lodash";
 @Component({
   // 每次进入页面都会调用
   async fetch(ctx: Context) {
-    await ctx.store.$storeStationery.onGetTypelist();
+    ctx.store.$storeStationery.onGetTypelist();
   },
   components: { List },
 })

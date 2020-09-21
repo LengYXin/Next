@@ -158,8 +158,7 @@ export class Pagination<T> {
     async onLoading(body?, AjaxRequest?: AjaxRequest, infiniteEvent?: PaginationInfiniteEvent) {
         try {
             if (this.options.infinite && this.isUndefined) {
-                console.warn('分页 数据 没有更多数据')
-                return []
+                throw new Error('分页 数据 没有更多数据')
             }
             if (this.loading) {
                 return console.warn('分页 数据 加载中')
@@ -250,9 +249,8 @@ export class Pagination<T> {
         // 检查 是否是完全的一页数据 完全 可以继续加载
         if (res.dataSource.length < this.options.defaultPageSize) {
             this.isUndefined = true;
-            console.warn('分页 数据 没有更多数据')
             if (res.dataSource.length <= 0) {
-                return []
+                throw new Error('分页 数据 没有更多数据')
             }
         }
         // 第一页

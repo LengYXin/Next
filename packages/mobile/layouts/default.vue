@@ -1,7 +1,12 @@
 <template>
   <div class="xt-layout">
     <navbar />
-    <Nuxt :keep-alive="keepAlive" :keepAliveProps="keepAliveProps" class="xt-layout-content" :class="pageClass" />
+    <Nuxt
+      :keep-alive="keepAlive"
+      :keepAliveProps="keepAliveProps"
+      class="xt-layout-content"
+      :class="pageClass"
+    />
     <!-- :keepAliveProps="keepAliveProps" -->
     <tabbar />
     <signin />
@@ -43,15 +48,23 @@ export default class extends Vue {
 }
 </script>
 <style lang="less">
-@max-width: 750px;
+@max-width: 1024px;
 html {
-  max-width: @max-width;
+  // max-width: @max-width;
   margin: auto;
   height: 100%;
+  width: 100vw;
 }
 body {
-  background: #fff;
+  background: @gray-2;
   height: 100%;
+  width: 100vw;
+}
+#__layout {
+  min-height: 100vh;
+  background: #fff;
+  max-width: @max-width;
+  margin: auto;
 }
 .page-enter-active {
   transition: opacity 0.2s;
@@ -60,13 +73,11 @@ body {
 .page-leave-active {
   opacity: 0;
 }
-</style>
-<style lang="less" >
 .xt-layout {
-  height: calc(100vh - @tabbar-height - @nav-bar-height);
+  height: calc(100vh - @tabbar-height);
+
   &-content {
     min-height: 100%;
-    background: #fff;
     // padding: 0 10px 10px 10px;
     box-sizing: border-box;
   }

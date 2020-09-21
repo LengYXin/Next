@@ -37,8 +37,8 @@ import lodash from "lodash";
 })
 export default class Page extends Vue {
   active = lodash.get(this.$route.query, "active", "phone");
-  username = "18611752863";
-  password = "leng147896325";
+  username = "";
+  password = "";
   async onSubmit(values) {
     try {
       await this.$store.$storeUser.onLogin(values.username, values.password);
@@ -50,6 +50,10 @@ export default class Page extends Vue {
   created() {
     // 已登录 返回前一页
     try {
+      if (this.$store.$global.NODE_ENV === "development") {
+        this.username = "16619998681";
+        this.password = "leng147896325";
+      }
       this.$InspectUser(false);
       if (window.history.length > 1) {
         this.$router.back();

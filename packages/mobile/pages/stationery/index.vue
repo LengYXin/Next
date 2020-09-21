@@ -12,7 +12,7 @@
     </xt-wechat-bowser>
     <van-search shape="round" placeholder="查找我想要的" />
     <van-tree-select
-      height="90%"
+      :height="height"
       :items="getItems(PageStore.typelist)"
       :main-active-index.sync="activeKey"
       @click-nav="tabsChange"
@@ -40,7 +40,7 @@ import lodash from "lodash";
 @Component({
   // 每次进入页面都会调用
   async fetch(ctx: Context) {
-    await ctx.store.$storeStationery.onGetTypelist();
+    ctx.store.$storeStationery.onGetTypelist();
   },
   components: {},
 })
@@ -55,7 +55,10 @@ export default class Page extends Vue {
     return this.PageStore.Pagination;
   }
   get body() {
-    return { typeId: lodash.nth(this.PageStore.typelist, this.activeKey).key };
+    return { typeId: lodash.nth(this.PageStore.typelist, this.activeKey)?.key };
+  }
+  get height() {
+    return `calc(100% - ${this.$store.$global.WechatBowser ? 54 : 100}px)`;
   }
   getItems(typelist) {
     return lodash.map(typelist, (item) => {

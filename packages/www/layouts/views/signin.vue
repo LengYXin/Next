@@ -13,12 +13,7 @@
         <h4 class="xt-text-bold">登录</h4>
 
         <a-form-model-item>
-          <a-input
-            size="large"
-            addon-before="+86"
-            v-model="formInline.user"
-            placeholder="Username"
-          ></a-input>
+          <a-input size="large" addon-before="+86" v-model="formInline.user" placeholder="Username"></a-input>
         </a-form-model-item>
         <a-form-model-item>
           <a-input
@@ -31,9 +26,7 @@
         <a-form-model-item>
           <a-row type="flex">
             <a-col>
-              <a-checkbox class="xt-signin-auto-login"
-                >30天内自动登录</a-checkbox
-              >
+              <a-checkbox class="xt-signin-auto-login">30天内自动登录</a-checkbox>
             </a-col>
             <a-col flex="auto" class="xt-text-align-right xt-font-size-base">
               <a-button size="small" type="link">海外登录</a-button>
@@ -41,32 +34,22 @@
           </a-row>
         </a-form-model-item>
         <a-form-model-item>
-          <a-button size="large" type="primary" html-type="submit" block
-            >登录</a-button
-          >
+          <a-button size="large" type="primary" html-type="submit" block>登录</a-button>
         </a-form-model-item>
         <a-form-model-item>
           <a-row type="flex">
             <a-col>
-              <a-button class="ant-btn-gray" size="small" type="link"
-                >手机验证码登录</a-button
-              >
+              <a-button class="ant-btn-gray" size="small" type="link">手机验证码登录</a-button>
             </a-col>
             <a-col flex="auto" class="xt-text-align-right">
-              <a-button
-                size="small"
-                type="link"
-                @click="onToggle(locale.links_retrieve)"
-                >找回密码</a-button
-              >
+              <a-button size="small" type="link" @click="onToggle(locale.links_retrieve)">找回密码</a-button>
               <a-divider type="vertical"></a-divider>
               <a-button
                 class="ant-btn-green"
                 size="small"
                 type="link"
                 @click="onToggle(locale.links_register)"
-                >立即注册</a-button
-              >
+              >立即注册</a-button>
             </a-col>
           </a-row>
         </a-form-model-item>
@@ -94,8 +77,8 @@ export default class extends Vue {
     return this.$EnumLocaleLinks;
   }
   formInline = {
-    user: "18611752863",
-    password: "leng147896325",
+    user: "",
+    password: "",
   };
   async onSubmit() {
     try {
@@ -113,6 +96,15 @@ export default class extends Vue {
   @Emit("toggle")
   onToggle(value) {
     return value; //"links_register";
+  }
+  created() {
+    // 已登录 返回前一页
+    try {
+      if (this.$store.$global.NODE_ENV === "development") {
+        this.formInline.user = "16619998681";
+        this.formInline.password = "leng147896325";
+      }
+    } catch (error) {}
   }
   mounted() {}
   updated() {}

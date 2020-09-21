@@ -1,24 +1,26 @@
 <template>
   <div class="xt-layout-nav" v-show="show">
-    <xt-wechat-bowser>
-      <van-nav-bar
-        fixed
-        left-arrow
-        :title="title"
-        @click-left="onClickLeft"
-        @click-right="onClickRight"
-      />
-      <!-- 微信显示 -->
-      <div class="xt-layout-nav-wechat" slot="yes">
-        <van-icon class="xt-layout-nav-icon" name="arrow-left" @click="onClickLeft" />
-      </div>
-    </xt-wechat-bowser>
+    <div class="xt-layout-nav-fixed">
+      <xt-wechat-bowser>
+        <van-nav-bar
+          left-arrow
+          :title="title"
+          @click-left="onClickLeft"
+          @click-right="onClickRight"
+        />
+        <!-- 微信显示 -->
+        <div class="xt-layout-nav-wechat" slot="yes">
+          <van-icon class="xt-layout-nav-icon" name="arrow-left" @click="onClickLeft" />
+        </div>
+      </xt-wechat-bowser>
+    </div>
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Watch } from "vue-property-decorator";
 import lodash from "lodash";
 import { Observer } from "mobx-vue";
+import { Debounce } from "lodash-decorators";
 @Observer
 @Component({
   components: {},
@@ -29,13 +31,14 @@ export default class Page extends Vue {
   }
   get show() {
     return !lodash.includes(
-      ["index", "toclass", "stationery", "my"],
+      ["index", "toclass", "stationery", "my", "search"],
       this.$route.name
     );
   }
-  title = this.getTitle();
+  title = "";
+  @Debounce(50)
   getTitle() {
-    return (document.head.firstElementChild as any).innerText;
+    this.title = (document.head.firstElementChild as any).innerText;
   }
   // get title() {
   //   // return this.$t(this.$route.name);
@@ -47,19 +50,20 @@ export default class Page extends Vue {
     return this.$router.push({ name: "index" });
   }
   onClickRight() {}
-  mounted() {}
+  mounted() {
+    this.getTitle();
+  }
   @Watch("$route")
   RouteUpdate(to, from, next) {
     console.warn("LENG: Navbar -> this", this);
-    lodash.delay(() => {
-      this.title = this.getTitle();
-    }, 100);
+    this.getTitle();
   }
   updated() {}
   destroyed() {}
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
+@max-width: 1024px;
 .xt-layout-nav {
   height: @nav-bar-height;
   padding: @nav-bar-height / 4;
@@ -75,6 +79,17 @@ export default class Page extends Vue {
     align-items: center;
     position: fixed;
     z-index: 10;
+  }
+  &-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+  .van-nav-bar {
+    max-width: @max-width;
+    margin: auto;
   }
 }
 </style>

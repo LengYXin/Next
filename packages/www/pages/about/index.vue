@@ -30,7 +30,7 @@ import lodash from "lodash";
 @Component({
   // 每次进入页面都会调用
   async fetch(ctx: Context) {
-    const types = await ctx.store.$storeAbout.onGetTypelist();
+    ctx.store.$storeAbout.onGetTypelist();
   },
   components: { List },
 })
