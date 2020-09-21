@@ -71,7 +71,12 @@ export default class PageView extends Vue {
     this.PageStore.onPlayNumber(this.id);
   }
   created() {
-    this.$setBreadcrumb({ linksName: this.PageStore.dataSource.title }, true);
+    this.$setBreadcrumb(
+      { linksName: "视频分享", links: "video", linksKey: "video" },
+      true
+    ).setBreadcrumb({
+      linksName: this.PageStore.dataSource.title,
+    });
   }
   mounted() {
     // console.log(this.$route);

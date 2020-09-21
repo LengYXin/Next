@@ -79,6 +79,7 @@ class Menu {
             this.breadcrumb.push(breadcrumb);
         }
         this.breadcrumbShow = true;
+        return this
     }
 }
 function onCreate() {
