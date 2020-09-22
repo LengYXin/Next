@@ -120,5 +120,24 @@ export class ControllerWechat {
     }
     return this.WeixinJSBridge
   }
+  /**
+   * 授权 url https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html#0
+   * @param redirect_uri 
+   */
+  getAuthorizeUrl(redirect_uri, scope: 'snsapi_base' | 'snsapi_userinfo' = 'snsapi_userinfo') {
+    return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.appId}&redirect_uri=${encodeURI(redirect_uri)}&response_type=code&scope=${scope}&state=WXLOGIN#wechat_redirect`
+  }
+  /**
+   *  获取 access_token
+   * @param code 
+   */
+  async onGetAccessToken(code, state) {
+    const res = await this.$ajax.post(`/wechat/wapcallback`, {
+      code,
+      state,
+      type: 1
+    })
+    console.log("LENG: ControllerWechat -> onGetAccessToken -> res", res)
+  }
 }
 export default ControllerWechat

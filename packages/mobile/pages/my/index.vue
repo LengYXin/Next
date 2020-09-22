@@ -53,6 +53,7 @@ import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
 @Observer
 @Component({
+  name: "PageMy",
   components: {},
 })
 export default class Page extends Vue {

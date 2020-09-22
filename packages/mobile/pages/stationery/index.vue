@@ -38,6 +38,7 @@ import { Context } from "@nuxt/types";
 import lodash from "lodash";
 @Observer
 @Component({
+  name: "PageStationery",
   // 每次进入页面都会调用
   async fetch(ctx: Context) {
     ctx.store.$storeStationery.onGetTypelist();
@@ -55,7 +56,13 @@ export default class Page extends Vue {
     return this.PageStore.Pagination;
   }
   get body() {
-    return { typeId:lodash.get(this.PageStore.typelist,`[${this.activeKey}].key`,-1) };
+    return {
+      typeId: lodash.get(
+        this.PageStore.typelist,
+        `[${this.activeKey}].key`,
+        -1
+      ),
+    };
   }
   get height() {
     return `calc(100% - ${this.$store.$global.WechatBowser ? 54 : 100}px)`;

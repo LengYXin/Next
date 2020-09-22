@@ -31,6 +31,7 @@ import { Observer } from "mobx-vue";
 import { Context } from "@nuxt/types";
 @Observer
 @Component({
+  name: "PageSearch",
   components: {},
 })
 export default class PageView extends Vue {

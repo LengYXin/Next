@@ -22,7 +22,9 @@ import lodash from "lodash";
 })
 export default class Page extends Vue {
   head() {
-    return this.$AppCreateShareData({ title: "暄桐关于" });
+    return this.$AppCreateShareData({
+      title: lodash.get({ "1": "写字的人", "2": "写字的事" }, this.active),
+    });
   }
   get PageStore() {
     return this.$store.$storeAbout;
@@ -30,8 +32,11 @@ export default class Page extends Vue {
   get Pagination() {
     return this.PageStore.Pagination;
   }
+  get active() {
+    return lodash.get(this.$route.query, "active", 1);
+  }
   get body() {
-    return { columnId: lodash.get(this.$route.query, "active", 1) };
+    return { columnId: this.active };
   }
 
   created() {}

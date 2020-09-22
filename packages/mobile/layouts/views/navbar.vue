@@ -66,7 +66,6 @@ export default class Page extends Vue {
 @max-width: 1024px;
 .xt-layout-nav {
   height: @nav-bar-height;
-  padding: @nav-bar-height / 4;
   box-sizing: border-box;
   &-wechat {
     height: @nav-bar-height / 2;
@@ -86,6 +85,9 @@ export default class Page extends Vue {
     left: 0;
     right: 0;
     z-index: 100;
+    .xt-wechat-bowser {
+      padding: @nav-bar-height / 4;
+    }
   }
   .van-nav-bar {
     max-width: @max-width;

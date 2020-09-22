@@ -38,8 +38,8 @@ export default class extends Vue {
     return this.$store.$global.version;
   }
   keepAliveProps = {
-    // include: "PageIndex",
-    exclude: ["PageSignin"],
+    include: ['PageIndex','PageClass','PageStationery','PageMy'],
+    // exclude: ["PageSearch", "PageSignin"],
   };
   mounted() {
     // console.log(this);

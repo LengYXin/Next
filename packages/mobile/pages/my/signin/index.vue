@@ -43,7 +43,7 @@ import lodash from "lodash";
   name: "PageSignin",
   components: {},
 })
-export default class  extends Vue {
+export default class extends Vue {
   active = lodash.get(this.$route.query, "active", "phone");
   username = "";
   password = "";
@@ -55,10 +55,18 @@ export default class  extends Vue {
   }
   async onSubmit(values) {
     try {
+      // 调整 微信授权
+      if (this.isWx) {
+        return window.location.replace(
+          this.$store.$wechat.getAuthorizeUrl(
+            window.location.origin + this.$store.$global.base
+          )
+        );
+      }
+      // 验证账号密码
       await this.$store.$storeUser.onLogin(values.username, values.password);
-      // this.$router.back();
+      // 刷新页面
       window.location.reload();
-      // lodash.delay(() => window.location.reload(), 100);
     } catch (error) {}
   }
   created() {
@@ -69,6 +77,7 @@ export default class  extends Vue {
         this.password = "leng147896325";
       }
       this.$InspectUser(false);
+      // 已登录 返回 上一页 或者返回首页
       if (window.history.length > 1) {
         this.$router.back();
       }
