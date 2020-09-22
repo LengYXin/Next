@@ -10,7 +10,7 @@
     <xt-wechat-bowser>
       <van-nav-bar title="暄桐文房" />
     </xt-wechat-bowser>
-    <van-search shape="round" placeholder="查找我想要的" />
+    <van-search shape="round" placeholder="查找我想要的" input-align="center" />
     <van-tree-select
       :height="height"
       :items="getItems(PageStore.typelist)"
@@ -22,8 +22,8 @@
           <van-grid :border="false" column-num="2">
             <van-grid-item v-for="item in Pagination.dataSource" :key="item.commodityId">
               <van-image lazy-load :src="item.commodityCoverUrl" />
-              <div v-text="item.commodityName"></div>
-              <div v-money="item.commodityPrice"></div>
+              <div class="xt-stationery-name" v-text="item.commodityName"></div>
+              <div class="xt-stationery-money xt-text-yellow" v-money="item.commodityPrice"></div>
             </van-grid-item>
           </van-grid>
         </xt-refresh-list>
@@ -88,6 +88,19 @@ export default class Page extends Vue {
   height: 100%;
   .van-sidebar {
     max-width: 60px;
+  }
+  .van-grid-item__content {
+    padding-top: 8px;
+  }
+}
+.xt-stationery {
+  &-name {
+    text-align: left;
+    width: 100%;
+  }
+  &-money {
+    text-align: left;
+    width: 100%;
   }
 }
 </style>

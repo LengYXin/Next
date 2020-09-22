@@ -10,7 +10,7 @@
   >
     <van-grid column-num="2">
       <van-grid-item icon="photo-o" text="手机" :to="toSignin()" />
-      <van-grid-item icon="photo-o" text="微信" :to="toSignin('wx')" />
+      <van-grid-item icon="photo-o" text="微信" @click="toSignin('wx')" />
     </van-grid>
     <div class="xt-text-center">
       <van-button class="van-button" type="primary">海外登陆</van-button>
@@ -33,7 +33,14 @@ export default class Page extends Vue {
     return this.$EnumLocaleLinks;
   }
   toSignin(active) {
-    return { name: "my-signin", query: { active } };
+    const router = { name: "my-signin", query: { active } };
+    if (active === "wx") {
+      if (!this.$store.$global.WechatBowser) {
+        return this.$toast("请您在微信客户端内操作");
+      }
+      this.$router.push(router);
+    }
+    return router;
   }
   onClose() {
     this.PageStore.onToggleVisible(false);

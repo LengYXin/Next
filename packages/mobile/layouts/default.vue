@@ -38,7 +38,13 @@ export default class extends Vue {
     return this.$store.$global.version;
   }
   keepAliveProps = {
-    include: ['PageIndex','PageClass','PageStationery','PageMy'],
+    include: [
+      "PageIndex",
+      "PageClass",
+      "PageStationery",
+      "PageMy",
+      "PageVideo",
+    ],
     // exclude: ["PageSearch", "PageSignin"],
   };
   mounted() {
