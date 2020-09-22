@@ -10,6 +10,14 @@ import { AjaxBasics } from "../../helpers/ajaxBasics";
 export class ControllerWechat {
   constructor(protected $ajax: AjaxBasics, protected appId) {
   }
+  /**
+   * 微信授权后 返回 信息
+   * @type {*}
+   * @memberof ControllerWechat
+   */
+  AccessInfo: any = {
+
+  };
   WeixinJSBridge = wx;
   isReady = false;
   loading = false;
@@ -132,12 +140,16 @@ export class ControllerWechat {
    * @param code 
    */
   async onGetAccessToken(code, state) {
-    const res = await this.$ajax.post(`/wechat/wapcallback`, {
+    // 已有 openid 
+    if (this.AccessInfo.openid) {
+      return
+    }
+    const res = await this.$ajax.post<{ loginSuccess }>(`/wechat/wapcallback`, {
       code,
       state,
       type: 1
     })
-    console.log("LENG: ControllerWechat -> onGetAccessToken -> res", res)
+    this.AccessInfo = res;
   }
 }
 export default ControllerWechat

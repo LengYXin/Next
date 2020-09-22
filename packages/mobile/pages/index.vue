@@ -34,17 +34,27 @@ import { Observer } from "mobx-vue";
 @Observer
 @Component({
   name: "PageIndex",
+  async fetch(ctx) {
+    const { code, state } = ctx.route.query;
+    // 微信授权
+    if (code) {
+      try {
+        const wechat = ctx.store.$wechat;
+        await wechat.onGetAccessToken(code, state);
+        if (wechat.AccessInfo.loginSuccess === false) {
+          ctx.redirect({ name: "my-bind" });
+        }
+      } catch (error) {
+        console.error("LENG: fetch -> error", error);
+      }
+      ctx.redirect({ name: "index" });
+    }
+  },
   components: {},
 })
 export default class PageIndex extends Vue {
   head() {
     return this.$AppCreateShareData({});
-  }
-  get code() {
-    return this.$route.query.code;
-  }
-  get state() {
-    return this.$route.query.state;
   }
   grid = [
     { key: 1, text: "全部课程", name: "course" },
@@ -53,15 +63,7 @@ export default class PageIndex extends Vue {
     { key: 4, text: "写字的人", name: "about", query: { active: 1 } },
     { key: 5, text: "同学作业", name: "homework-share" },
   ];
-  created() {
-    if (this.code) {
-      this.$store.$wechat.onGetAccessToken(this.code, this.state);
-      // 使用完 清空 code state
-      this.$router.replace({
-        query: {},
-      });
-    }
-  }
+  created() {}
   mounted() {}
   updated() {}
   destroyed() {}
