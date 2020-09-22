@@ -7,24 +7,31 @@
  */
 <template>
   <van-form @submit="onSubmit">
-    <van-field
-      v-model="username"
-      name="username"
-      label="用户名"
-      placeholder="用户名"
-      :rules="[{ required: true, message: '请填写用户名' }]"
-    />
-    <van-field
-      v-model="password"
-      type="password"
-      name="password"
-      label="密码"
-      placeholder="密码"
-      :rules="[{ required: true, message: '请填写密码' }]"
-    />
-    <div style="margin: 16px;">
-      <van-button round block type="info" native-type="submit">提交</van-button>
-    </div>
+    <template v-if="isPhone">
+      <van-field
+        v-model="username"
+        name="username"
+        label="用户名"
+        placeholder="用户名"
+        :rules="[{ required: true, message: '请填写用户名' }]"
+      />
+      <van-field
+        v-model="password"
+        type="password"
+        name="password"
+        label="密码"
+        placeholder="密码"
+        :rules="[{ required: true, message: '请填写密码' }]"
+      />
+      <div style="margin: 16px;">
+        <van-button round block type="info" native-type="submit">提交</van-button>
+      </div>
+    </template>
+    <template v-else>
+      <div class="xt-login-wx xt-flex-center">
+        <van-button round block type="info" native-type="submit">微信授权</van-button>
+      </div>
+    </template>
   </van-form>
 </template>
 <script lang="ts">
@@ -33,12 +40,19 @@ import { Observer } from "mobx-vue";
 import lodash from "lodash";
 @Observer
 @Component({
+  name: "PageSignin",
   components: {},
 })
-export default class Page extends Vue {
+export default class  extends Vue {
   active = lodash.get(this.$route.query, "active", "phone");
   username = "";
   password = "";
+  get isPhone() {
+    return lodash.eq(this.active, "phone");
+  }
+  get isWx() {
+    return lodash.eq(this.active, "wx");
+  }
   async onSubmit(values) {
     try {
       await this.$store.$storeUser.onLogin(values.username, values.password);
@@ -67,4 +81,7 @@ export default class Page extends Vue {
 }
 </script>
 <style lang="less" scoped>
+.xt-login-wx {
+  height: calc(100vh - @tabbar-height);
+}
 </style>

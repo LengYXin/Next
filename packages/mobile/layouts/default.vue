@@ -39,6 +39,7 @@ export default class extends Vue {
   }
   keepAliveProps = {
     // include: "PageIndex",
+    exclude: ["PageSignin"],
   };
   mounted() {
     // console.log(this);
@@ -79,6 +80,7 @@ body {
   &-content {
     min-height: 100%;
     // padding: 0 10px 10px 10px;
+    background: #fff;
     box-sizing: border-box;
   }
 }

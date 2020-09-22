@@ -55,7 +55,7 @@ export default class Page extends Vue {
     return this.PageStore.Pagination;
   }
   get body() {
-    return { typeId: lodash.nth(this.PageStore.typelist, this.activeKey)?.key };
+    return { typeId:lodash.get(this.PageStore.typelist,`[${this.activeKey}].key`,-1) };
   }
   get height() {
     return `calc(100% - ${this.$store.$global.WechatBowser ? 54 : 100}px)`;

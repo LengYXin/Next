@@ -21,6 +21,7 @@ module.exports = {
     resolve: {
       alias: {
         "@ant-design/icons/lib/dist$": path.resolve(process.cwd(), 'src/components/icon.ts'),
+        "mobx-vue": path.resolve(path.dirname(process.cwd()), 'mobx-vue/src/index.ts'),
       }
     },
     // module: {

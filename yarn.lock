@@ -1968,10 +1968,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@nuxt/babel-preset-app@2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/babel-preset-app/download/@nuxt/babel-preset-app-2.14.5.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nuxt%2Fbabel-preset-app%2Fdownload%2F%40nuxt%2Fbabel-preset-app-2.14.5.tgz#458946a2850cb93343cbcd25a8f83bc4d20e61c9"
-  integrity sha1-RYlGooUMuTNDy80lqPg7xNIOYck=
+"@nuxt/babel-preset-app@2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/babel-preset-app/download/@nuxt/babel-preset-app-2.14.6.tgz#0fd74b147801f3227857bbe05ed885129324336c"
+  integrity sha1-D9dLFHgB8yJ4V7vgXtiFEpMkM2w=
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/helper-compilation-targets" "^7.10.4"
@@ -1983,15 +1983,15 @@
     "@vue/babel-preset-jsx" "^1.1.2"
     core-js "^2.6.5"
 
-"@nuxt/builder@2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/builder/download/@nuxt/builder-2.14.5.tgz?cache=0&sync_timestamp=1599741404391&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nuxt%2Fbuilder%2Fdownload%2F%40nuxt%2Fbuilder-2.14.5.tgz#5a06785d704fd8eab81bfa1c0ab698ea876ac01b"
-  integrity sha1-WgZ4XXBP2Oq4G/ocCraY6odqwBs=
+"@nuxt/builder@2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/builder/download/@nuxt/builder-2.14.6.tgz#b05753355de9cce2a1a25e95b24d102de7b724c0"
+  integrity sha1-sFdTNV3pzOKhol6Vsk0QLee3JMA=
   dependencies:
     "@nuxt/devalue" "^1.2.4"
-    "@nuxt/utils" "2.14.5"
-    "@nuxt/vue-app" "2.14.5"
-    "@nuxt/webpack" "2.14.5"
+    "@nuxt/utils" "2.14.6"
+    "@nuxt/vue-app" "2.14.6"
+    "@nuxt/webpack" "2.14.6"
     chalk "^3.0.0"
     chokidar "^3.4.2"
     consola "^2.15.0"
@@ -2002,17 +2002,17 @@
     lodash "^4.17.20"
     pify "^4.0.1"
     semver "^7.3.2"
-    serialize-javascript "^5.0.0"
+    serialize-javascript "^5.0.1"
     upath "^1.2.0"
 
-"@nuxt/cli@2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/cli/download/@nuxt/cli-2.14.5.tgz?cache=0&sync_timestamp=1599741404117&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nuxt%2Fcli%2Fdownload%2F%40nuxt%2Fcli-2.14.5.tgz#6027e5c8c8d41d083a6fe1071e8efab908f415ea"
-  integrity sha1-YCflyMjUHQg6b+EHHo76uQj0Feo=
+"@nuxt/cli@2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/cli/download/@nuxt/cli-2.14.6.tgz#bb8a62a917e6c0fa01768c0cf4826604696701ee"
+  integrity sha1-u4piqRfmwPoBdowM9IJmBGlnAe4=
   dependencies:
-    "@nuxt/config" "2.14.5"
+    "@nuxt/config" "2.14.6"
     "@nuxt/static" "^1.0.0"
-    "@nuxt/utils" "2.14.5"
+    "@nuxt/utils" "2.14.6"
     boxen "^4.2.0"
     chalk "^3.0.0"
     compression "^1.7.4"
@@ -2046,12 +2046,12 @@
     lodash "^4.17.19"
     semver "^7.3.2"
 
-"@nuxt/config@2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/config/download/@nuxt/config-2.14.5.tgz?cache=0&sync_timestamp=1599741404611&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nuxt%2Fconfig%2Fdownload%2F%40nuxt%2Fconfig-2.14.5.tgz#26119edcaf49d6093f373076883ca2aed15711b3"
-  integrity sha1-JhGe3K9J1gk/NzB2iDyirtFXEbM=
+"@nuxt/config@2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/config/download/@nuxt/config-2.14.6.tgz#a9783662a678165e6cd4556cc4582ea99b878d52"
+  integrity sha1-qXg2YqZ4Fl5s1FVsxFguqZuHjVI=
   dependencies:
-    "@nuxt/utils" "2.14.5"
+    "@nuxt/utils" "2.14.6"
     consola "^2.15.0"
     create-require "^1.0.2"
     defu "^2.0.4"
@@ -2062,18 +2062,18 @@
     rc9 "^1.0.0"
     std-env "^2.2.1"
 
-"@nuxt/core@2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/core/download/@nuxt/core-2.14.5.tgz?cache=0&sync_timestamp=1599741404851&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nuxt%2Fcore%2Fdownload%2F%40nuxt%2Fcore-2.14.5.tgz#03c71198a25999864153819e5772cd42f4346bb4"
-  integrity sha1-A8cRmKJZmYZBU4GeV3LNQvQ0a7Q=
+"@nuxt/core@2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/core/download/@nuxt/core-2.14.6.tgz#4385c9d063ea600bac99f5d91a51480cb6f00bbc"
+  integrity sha1-Q4XJ0GPqYAusmfXZGlFIDLbwC7w=
   dependencies:
-    "@nuxt/config" "2.14.5"
+    "@nuxt/config" "2.14.6"
     "@nuxt/devalue" "^1.2.4"
-    "@nuxt/server" "2.14.5"
-    "@nuxt/utils" "2.14.5"
-    "@nuxt/vue-renderer" "2.14.5"
+    "@nuxt/server" "2.14.6"
+    "@nuxt/utils" "2.14.6"
+    "@nuxt/vue-renderer" "2.14.6"
     consola "^2.15.0"
-    debug "^4.1.1"
+    debug "^4.2.0"
     esm "^3.2.25"
     fs-extra "^8.1.0"
     hable "^3.0.0"
@@ -2097,12 +2097,12 @@
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
-"@nuxt/generator@2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/generator/download/@nuxt/generator-2.14.5.tgz#1212f0383b5dbb7f2cdf6e8bca08dd99b9d7ac1b"
-  integrity sha1-EhLwODtdu38s326LygjdmbnXrBs=
+"@nuxt/generator@2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/generator/download/@nuxt/generator-2.14.6.tgz#e08e88d7029a1b881fa188e7a0c39d1dc683511f"
+  integrity sha1-4I6I1wKaG4gfoYjnoMOdHcaDUR8=
   dependencies:
-    "@nuxt/utils" "2.14.5"
+    "@nuxt/utils" "2.14.6"
     chalk "^3.0.0"
     consola "^2.15.0"
     fs-extra "^8.1.0"
@@ -2129,14 +2129,14 @@
     consola "^2.10.1"
     node-fetch "^2.6.0"
 
-"@nuxt/server@2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/server/download/@nuxt/server-2.14.5.tgz?cache=0&sync_timestamp=1599741416878&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nuxt%2Fserver%2Fdownload%2F%40nuxt%2Fserver-2.14.5.tgz#2e81868fb006fef951ccdb6da8e61df9efc9f230"
-  integrity sha1-LoGGj7AG/vlRzNttqOYd+e/J8jA=
+"@nuxt/server@2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/server/download/@nuxt/server-2.14.6.tgz#a30bf1921af2bd7217ed546bac4f17a46b36ae6f"
+  integrity sha1-owvxkhryvXIX7VRrrE8XpGs2rm8=
   dependencies:
-    "@nuxt/config" "2.14.5"
-    "@nuxt/utils" "2.14.5"
-    "@nuxt/vue-renderer" "2.14.5"
+    "@nuxt/config" "2.14.6"
+    "@nuxt/utils" "2.14.6"
+    "@nuxt/vue-renderer" "2.14.6"
     "@nuxtjs/youch" "^4.2.3"
     chalk "^3.0.0"
     compression "^1.7.4"
@@ -2187,10 +2187,10 @@
     rc9 "^1.0.0"
     std-env "^2.2.1"
 
-"@nuxt/types@^2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/types/download/@nuxt/types-2.14.5.tgz#426236eda1790f15c123110421c6d222c3d02c8f"
-  integrity sha1-QmI27aF5DxXBIxEEIcbSIsPQLI8=
+"@nuxt/types@^2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/types/download/@nuxt/types-2.14.6.tgz#0b6626acdecf83ddf1d288272f8e97d7127ac2f0"
+  integrity sha1-C2YmrN7Pg93x0ognL46X1xJ6wvA=
   dependencies:
     "@types/autoprefixer" "^9.7.2"
     "@types/babel__core" "^7.1.9"
@@ -2200,7 +2200,7 @@
     "@types/file-loader" "^4.2.0"
     "@types/html-minifier" "^4.0.0"
     "@types/less" "^3.0.1"
-    "@types/node" "^12.12.56"
+    "@types/node" "^12.12.62"
     "@types/node-sass" "^4.11.1"
     "@types/optimize-css-assets-webpack-plugin" "^5.0.1"
     "@types/pug" "^2.0.4"
@@ -2229,24 +2229,24 @@
     ts-node "^9.0.0"
     typescript "~4.0"
 
-"@nuxt/utils@2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/utils/download/@nuxt/utils-2.14.5.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nuxt%2Futils%2Fdownload%2F%40nuxt%2Futils-2.14.5.tgz#b67e76c81cf0e19330a11ffc75289d1b862fb8c2"
-  integrity sha1-tn52yBzw4ZMwoR/8dSidG4YvuMI=
+"@nuxt/utils@2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/utils/download/@nuxt/utils-2.14.6.tgz#fbd8ff8eafa4b7d9fd043239bf0f63b8e645be72"
+  integrity sha1-+9j/jq+kt9n9BDI5vw9juOZFvnI=
   dependencies:
     consola "^2.15.0"
     fs-extra "^8.1.0"
     hash-sum "^2.0.0"
     proper-lockfile "^4.1.1"
     semver "^7.3.2"
-    serialize-javascript "^5.0.0"
+    serialize-javascript "^5.0.1"
     signal-exit "^3.0.3"
-    ua-parser-js "^0.7.21"
+    ua-parser-js "^0.7.22"
 
-"@nuxt/vue-app@2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/vue-app/download/@nuxt/vue-app-2.14.5.tgz#4f0e2edbe55a4a24c164081c9085044e513bdce3"
-  integrity sha1-Tw4u2+VaSiTBZAgckIUETlE73OM=
+"@nuxt/vue-app@2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/vue-app/download/@nuxt/vue-app-2.14.6.tgz#fbd6980f2a81946a32f43aa7f513980534bff536"
+  integrity sha1-+9aYDyqBlGoy9Dqn9ROYBTS/9TY=
   dependencies:
     node-fetch "^2.6.1"
     unfetch "^4.1.0"
@@ -2258,13 +2258,13 @@
     vue-template-compiler "^2.6.12"
     vuex "^3.5.1"
 
-"@nuxt/vue-renderer@2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/vue-renderer/download/@nuxt/vue-renderer-2.14.5.tgz?cache=0&sync_timestamp=1599741389990&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nuxt%2Fvue-renderer%2Fdownload%2F%40nuxt%2Fvue-renderer-2.14.5.tgz#fa7504479caa28fcd96d001024ef927826bda781"
-  integrity sha1-+nUER5yqKPzZbQAQJO+SeCa9p4E=
+"@nuxt/vue-renderer@2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/vue-renderer/download/@nuxt/vue-renderer-2.14.6.tgz#1f214966272d27f9a9a43a42413e7deaf6ece9d2"
+  integrity sha1-HyFJZictJ/mppDpCQT596vbs6dI=
   dependencies:
     "@nuxt/devalue" "^1.2.4"
-    "@nuxt/utils" "2.14.5"
+    "@nuxt/utils" "2.14.6"
     consola "^2.15.0"
     fs-extra "^8.1.0"
     lru-cache "^5.1.1"
@@ -2272,18 +2272,18 @@
     vue-meta "^2.4.0"
     vue-server-renderer "^2.6.12"
 
-"@nuxt/webpack@2.14.5":
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/@nuxt/webpack/download/@nuxt/webpack-2.14.5.tgz?cache=0&sync_timestamp=1599741405460&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nuxt%2Fwebpack%2Fdownload%2F%40nuxt%2Fwebpack-2.14.5.tgz#8f1496e7455b4ebde185be063cb32cd44cf33ddd"
-  integrity sha1-jxSW50VbTr3hhb4GPLMs1EzzPd0=
+"@nuxt/webpack@2.14.6":
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/@nuxt/webpack/download/@nuxt/webpack-2.14.6.tgz#f89990a79589211632f08ed492f922985e839686"
+  integrity sha1-+JmQp5WJIRYy8I7UkvkimF6DloY=
   dependencies:
     "@babel/core" "^7.11.6"
-    "@nuxt/babel-preset-app" "2.14.5"
+    "@nuxt/babel-preset-app" "2.14.6"
     "@nuxt/friendly-errors-webpack-plugin" "^2.5.0"
-    "@nuxt/utils" "2.14.5"
+    "@nuxt/utils" "2.14.6"
     babel-loader "^8.1.0"
     cache-loader "^4.1.0"
-    caniuse-lite "^1.0.30001125"
+    caniuse-lite "^1.0.30001133"
     chalk "^3.0.0"
     consola "^2.15.0"
     create-require "^1.0.2"
@@ -2310,11 +2310,11 @@
     style-resources-loader "^1.3.3"
     terser-webpack-plugin "^2.3.5"
     thread-loader "^2.1.3"
-    time-fix-plugin "^2.0.6"
+    time-fix-plugin "^2.0.7"
     url-loader "^2.3.0"
     vue-loader "^15.9.3"
-    webpack "^4.44.1"
-    webpack-bundle-analyzer "^3.8.0"
+    webpack "^4.44.2"
+    webpack-bundle-analyzer "^3.9.0"
     webpack-dev-middleware "^3.7.2"
     webpack-hot-middleware "^2.25.0"
     webpack-node-externals "^2.5.2"
@@ -2758,10 +2758,10 @@
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-14.10.1.tgz?cache=0&sync_timestamp=1599841262884&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-14.10.1.tgz#cc323bad8e8a533d4822f45ce4e5326f36e42177"
   integrity sha1-zDI7rY6KUz1IIvRc5OUybzbkIXc=
 
-"@types/node@^12.12.56":
-  version "12.12.58"
-  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.12.58.tgz?cache=0&sync_timestamp=1599841262884&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-12.12.58.tgz#46dae9b2b9ee5992818c8f7cee01ff4ce03ab44c"
-  integrity sha1-RtrpsrnuWZKBjI987gH/TOA6tEw=
+"@types/node@^12.12.62":
+  version "12.12.62"
+  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.12.62.tgz?cache=0&sync_timestamp=1600732750169&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-12.12.62.tgz#733923d73669188d35950253dd18a21570085d2b"
+  integrity sha1-czkj1zZpGI01lQJT3RiiFXAIXSs=
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -4607,6 +4607,11 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, can
   resolved "https://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30001129.tgz?cache=0&sync_timestamp=1600024302299&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcaniuse-lite%2Fdownload%2Fcaniuse-lite-1.0.30001129.tgz#e6514b94c0ef50f98cf7476daa91228ddd2ef7bc"
   integrity sha1-5lFLlMDvUPmM90dtqpEijd0u97w=
 
+caniuse-lite@^1.0.30001133:
+  version "1.0.30001133"
+  resolved "https://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30001133.tgz#ec564c5495311299eb05245e252d589a84acd95e"
+  integrity sha1-7FZMVJUxEpnrBSReJS1YmoSs2V4=
+
 capture-exit@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/capture-exit/download/capture-exit-2.0.0.tgz#fb953bfaebeb781f62898239dabb426d08a509a4"
@@ -5708,6 +5713,13 @@ debug@^4.1.0, debug@^4.1.1:
   integrity sha1-O3ImAlUQnGtYnO4FDx1RYTlmR5E=
   dependencies:
     ms "^2.1.1"
+
+debug@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.npm.taobao.org/debug/download/debug-4.2.0.tgz?cache=0&sync_timestamp=1600502914504&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdebug%2Fdownload%2Fdebug-4.2.0.tgz#7f150f93920e94c58f5574c2fd01a3110effe7f1"
+  integrity sha1-fxUPk5IOlMWPVXTC/QGjEQ7/5/E=
+  dependencies:
+    ms "2.1.2"
 
 debuglog@^1.0.1:
   version "1.0.1"
@@ -8805,7 +8817,7 @@ jest-snapshot@^26.4.2:
     pretty-format "^26.4.2"
     semver "^7.3.2"
 
-jest-util@26.x, jest-util@^26.3.0:
+jest-util@26.x, jest-util@^26.1.0, jest-util@^26.3.0:
   version "26.3.0"
   resolved "https://registry.npm.taobao.org/jest-util/download/jest-util-26.3.0.tgz?cache=0&sync_timestamp=1597057472711&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjest-util%2Fdownload%2Fjest-util-26.3.0.tgz#a8974b191df30e2bf523ebbfdbaeb8efca535b3e"
   integrity sha1-qJdLGR3zDiv1I+u/266478pTWz4=
@@ -9890,10 +9902,10 @@ mobx-vue@^2.0.10:
   dependencies:
     tslib "^1.9.0"
 
-mobx@^5.15.6:
-  version "5.15.6"
-  resolved "https://registry.npm.taobao.org/mobx/download/mobx-5.15.6.tgz?cache=0&sync_timestamp=1598112689550&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmobx%2Fdownload%2Fmobx-5.15.6.tgz#24750af56f87bcf9c3cf82ece4c79eb91bb71968"
-  integrity sha1-JHUK9W+HvPnDz4Ls5MeeuRu3GWg=
+mobx@^5.15.7:
+  version "5.15.7"
+  resolved "https://registry.npm.taobao.org/mobx/download/mobx-5.15.7.tgz#b9a5f2b6251f5d96980d13c78e9b5d8d4ce22665"
+  integrity sha1-uaXytiUfXZaYDRPHjptdjUziJmU=
 
 modify-values@^1.0.0:
   version "1.0.1"
@@ -9934,7 +9946,7 @@ ms@2.1.1:
   resolved "https://registry.npm.taobao.org/ms/download/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha1-MKWGTrPrsKZvLr5tcnrwagnYbgo=
 
-ms@^2.0.0, ms@^2.1.1:
+ms@2.1.2, ms@^2.0.0, ms@^2.1.1:
   version "2.1.2"
   resolved "https://registry.npm.taobao.org/ms/download/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha1-0J0fNXtEP0kzgqjrPM0YOHKuYAk=
@@ -10369,21 +10381,21 @@ number-is-nan@^1.0.0:
   resolved "https://registry.npm.taobao.org/number-is-nan/download/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuxt@^2.14.5:
-  version "2.14.5"
-  resolved "https://registry.npm.taobao.org/nuxt/download/nuxt-2.14.5.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnuxt%2Fdownload%2Fnuxt-2.14.5.tgz#d4da8ed7dd03cf199cf3981637377ab1fe682187"
-  integrity sha1-1NqO190Dzxmc85gWNzd6sf5oIYc=
+nuxt@^2.14.6:
+  version "2.14.6"
+  resolved "https://registry.npm.taobao.org/nuxt/download/nuxt-2.14.6.tgz?cache=0&sync_timestamp=1600685221586&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnuxt%2Fdownload%2Fnuxt-2.14.6.tgz#56ba99cbd055ebdb33250a4d1ed09f084ad7fa14"
+  integrity sha1-VrqZy9BV69szJQpNHtCfCErX+hQ=
   dependencies:
-    "@nuxt/builder" "2.14.5"
-    "@nuxt/cli" "2.14.5"
+    "@nuxt/builder" "2.14.6"
+    "@nuxt/cli" "2.14.6"
     "@nuxt/components" "^1.1.0"
-    "@nuxt/core" "2.14.5"
-    "@nuxt/generator" "2.14.5"
+    "@nuxt/core" "2.14.6"
+    "@nuxt/generator" "2.14.6"
     "@nuxt/loading-screen" "^2.0.2"
     "@nuxt/opencollective" "^0.3.0"
     "@nuxt/static" "^1.0.0"
     "@nuxt/telemetry" "^1.2.3"
-    "@nuxt/webpack" "2.14.5"
+    "@nuxt/webpack" "2.14.6"
 
 nwsapi@^2.2.0:
   version "2.2.0"
@@ -12676,7 +12688,7 @@ serialize-javascript@^4.0.0:
   dependencies:
     randombytes "^2.1.0"
 
-serialize-javascript@^5.0.0:
+serialize-javascript@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npm.taobao.org/serialize-javascript/download/serialize-javascript-5.0.1.tgz?cache=0&sync_timestamp=1599740666792&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fserialize-javascript%2Fdownload%2Fserialize-javascript-5.0.1.tgz#7886ec848049a462467a97d3d918ebb2aaf934f4"
   integrity sha1-eIbshIBJpGJGepfT2Rjrsqr5NPQ=
@@ -13599,10 +13611,10 @@ thunky@^1.0.2:
   resolved "https://registry.npm.taobao.org/thunky/download/thunky-1.1.0.tgz#5abaf714a9405db0504732bbccd2cedd9ef9537d"
   integrity sha1-Wrr3FKlAXbBQRzK7zNLO3Z75U30=
 
-time-fix-plugin@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.npm.taobao.org/time-fix-plugin/download/time-fix-plugin-2.0.6.tgz#3210121d269b475a7e7661766e682bd768ba1ced"
-  integrity sha1-MhASHSabR1p+dmF2bmgr12i6HO0=
+time-fix-plugin@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.npm.taobao.org/time-fix-plugin/download/time-fix-plugin-2.0.7.tgz#4ba70ae2e40cedf34dabe505eda7b71b1b244f50"
+  integrity sha1-S6cK4uQM7fNNq+UF7ae3GxskT1A=
 
 timers-browserify@^2.0.4:
   version "2.0.11"
@@ -13763,6 +13775,23 @@ ts-jest@^26.3.0:
     semver "7.x"
     yargs-parser "18.x"
 
+ts-jest@^26.4.0:
+  version "26.4.0"
+  resolved "https://registry.npm.taobao.org/ts-jest/download/ts-jest-26.4.0.tgz#903c7827f3d3bc33efc2f91be294b164400c32e3"
+  integrity sha1-kDx4J/PTvDPvwvkb4pSxZEAMMuM=
+  dependencies:
+    "@types/jest" "26.x"
+    bs-logger "0.x"
+    buffer-from "1.x"
+    fast-json-stable-stringify "2.x"
+    jest-util "^26.1.0"
+    json5 "2.x"
+    lodash.memoize "4.x"
+    make-error "1.x"
+    mkdirp "1.x"
+    semver "7.x"
+    yargs-parser "20.x"
+
 ts-loader@^6.2.2:
   version "6.2.2"
   resolved "https://registry.npm.taobao.org/ts-loader/download/ts-loader-6.2.2.tgz?cache=0&sync_timestamp=1598257143547&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fts-loader%2Fdownload%2Fts-loader-6.2.2.tgz#dffa3879b01a1a1e0a4b85e2b8421dc0dfff1c58"
@@ -13778,6 +13807,17 @@ ts-loader@^8.0.3:
   version "8.0.3"
   resolved "https://registry.npm.taobao.org/ts-loader/download/ts-loader-8.0.3.tgz?cache=0&sync_timestamp=1598257143547&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fts-loader%2Fdownload%2Fts-loader-8.0.3.tgz#56858f4296edf1ed55e01f8520552984d3f0911c"
   integrity sha1-VoWPQpbt8e1V4B+FIFUphNPwkRw=
+  dependencies:
+    chalk "^2.3.0"
+    enhanced-resolve "^4.0.0"
+    loader-utils "^1.0.2"
+    micromatch "^4.0.0"
+    semver "^6.0.0"
+
+ts-loader@^8.0.4:
+  version "8.0.4"
+  resolved "https://registry.npm.taobao.org/ts-loader/download/ts-loader-8.0.4.tgz?cache=0&sync_timestamp=1600495471686&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fts-loader%2Fdownload%2Fts-loader-8.0.4.tgz#02b9c91fbcfdb3114d8b1e98a3829265270eee7a"
+  integrity sha1-ArnJH7z9sxFNix6Yo4KSZScO7no=
   dependencies:
     chalk "^2.3.0"
     enhanced-resolve "^4.0.0"
@@ -13916,12 +13956,17 @@ typedarray@^0.0.6:
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@~4.0, typescript@~4.0.2:
+typescript@~4.0:
   version "4.0.2"
   resolved "https://registry.npm.taobao.org/typescript/download/typescript-4.0.2.tgz?cache=0&sync_timestamp=1600067969267&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-4.0.2.tgz#7ea7c88777c723c681e33bf7988be5d008d05ac2"
   integrity sha1-fqfIh3fHI8aB4zv3mIvl0AjQWsI=
 
-ua-parser-js@^0.7.21:
+typescript@~4.0.3:
+  version "4.0.3"
+  resolved "https://registry.npm.taobao.org/typescript/download/typescript-4.0.3.tgz?cache=0&sync_timestamp=1600687450754&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-4.0.3.tgz#153bbd468ef07725c1df9c77e8b453f8d36abba5"
+  integrity sha1-FTu9Ro7wdyXB35x36LRT+NNqu6U=
+
+ua-parser-js@^0.7.22:
   version "0.7.22"
   resolved "https://registry.npm.taobao.org/ua-parser-js/download/ua-parser-js-0.7.22.tgz?cache=0&sync_timestamp=1599900411653&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fua-parser-js%2Fdownload%2Fua-parser-js-0.7.22.tgz#960df60a5f911ea8f1c818f3747b99c6e177eae3"
   integrity sha1-lg32Cl+RHqjxyBjzdHuZxuF36uM=
@@ -14203,10 +14248,10 @@ validate-npm-package-name@^3.0.0:
   dependencies:
     builtins "^1.0.3"
 
-vant@^2.10.6:
-  version "2.10.6"
-  resolved "https://registry.npm.taobao.org/vant/download/vant-2.10.6.tgz#64259be294f5b8f5f89fe3c21fdac82c4f2a0175"
-  integrity sha1-ZCWb4pT1uPX4n+PCH9rILE8qAXU=
+vant@^2.10.8:
+  version "2.10.8"
+  resolved "https://registry.npm.taobao.org/vant/download/vant-2.10.8.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvant%2Fdownload%2Fvant-2.10.8.tgz#7ae566ad106290c9ae845d2649bcbd8b1df6cb14"
+  integrity sha1-euVmrRBikMmuhF0mSby9ix32yxQ=
   dependencies:
     "@babel/runtime" "7.x"
     "@vant/icons" "1.3.0"
@@ -14259,10 +14304,10 @@ vue-awesome-swiper@^4.1.1:
   resolved "https://registry.npm.taobao.org/vue-awesome-swiper/download/vue-awesome-swiper-4.1.1.tgz#8f7ab221ad003021d756b86aa618f429924900fe"
   integrity sha1-j3qyIa0AMCHXVrhqphj0KZJJAP4=
 
-vue-class-component@^7.2.5:
-  version "7.2.5"
-  resolved "https://registry.npm.taobao.org/vue-class-component/download/vue-class-component-7.2.5.tgz?cache=0&sync_timestamp=1599922087847&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-class-component%2Fdownload%2Fvue-class-component-7.2.5.tgz#212b3548c4fdd3314774c4adbc1c3792a40b52d0"
-  integrity sha1-ISs1SMT90zFHdMStvBw3kqQLUtA=
+vue-class-component@^7.2.6:
+  version "7.2.6"
+  resolved "https://registry.npm.taobao.org/vue-class-component/download/vue-class-component-7.2.6.tgz#8471e037b8e4762f5a464686e19e5afc708502e4"
+  integrity sha1-hHHgN7jkdi9aRkaG4Z5a/HCFAuQ=
 
 vue-cli-plugin-style-resources-loader@~0.1.4:
   version "0.1.4"
@@ -14524,6 +14569,25 @@ webpack-bundle-analyzer@^3.8.0:
     opener "^1.5.1"
     ws "^6.0.0"
 
+webpack-bundle-analyzer@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.npm.taobao.org/webpack-bundle-analyzer/download/webpack-bundle-analyzer-3.9.0.tgz?cache=0&sync_timestamp=1600360392552&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwebpack-bundle-analyzer%2Fdownload%2Fwebpack-bundle-analyzer-3.9.0.tgz#f6f94db108fb574e415ad313de41a2707d33ef3c"
+  integrity sha1-9vlNsQj7V05BWtMT3kGicH0z7zw=
+  dependencies:
+    acorn "^7.1.1"
+    acorn-walk "^7.1.1"
+    bfj "^6.1.1"
+    chalk "^2.4.1"
+    commander "^2.18.0"
+    ejs "^2.6.1"
+    express "^4.16.3"
+    filesize "^3.6.1"
+    gzip-size "^5.0.0"
+    lodash "^4.17.19"
+    mkdirp "^0.5.1"
+    opener "^1.5.1"
+    ws "^6.0.0"
+
 webpack-chain@^6.4.0:
   version "6.5.1"
   resolved "https://registry.npm.taobao.org/webpack-chain/download/webpack-chain-6.5.1.tgz?cache=0&sync_timestamp=1595813200961&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwebpack-chain%2Fdownload%2Fwebpack-chain-6.5.1.tgz#4f27284cbbb637e3c8fbdef43eef588d4d861206"
@@ -14633,10 +14697,39 @@ webpack-sources@^1.0.1, webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@^4.0.0, webpack@^4.44.1:
+webpack@^4.0.0:
   version "4.44.1"
   resolved "https://registry.npm.taobao.org/webpack/download/webpack-4.44.1.tgz?cache=0&sync_timestamp=1599859683835&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwebpack%2Fdownload%2Fwebpack-4.44.1.tgz#17e69fff9f321b8f117d1fda714edfc0b939cc21"
   integrity sha1-F+af/58yG48RfR/acU7fwLk5zCE=
+  dependencies:
+    "@webassemblyjs/ast" "1.9.0"
+    "@webassemblyjs/helper-module-context" "1.9.0"
+    "@webassemblyjs/wasm-edit" "1.9.0"
+    "@webassemblyjs/wasm-parser" "1.9.0"
+    acorn "^6.4.1"
+    ajv "^6.10.2"
+    ajv-keywords "^3.4.1"
+    chrome-trace-event "^1.0.2"
+    enhanced-resolve "^4.3.0"
+    eslint-scope "^4.0.3"
+    json-parse-better-errors "^1.0.2"
+    loader-runner "^2.4.0"
+    loader-utils "^1.2.3"
+    memory-fs "^0.4.1"
+    micromatch "^3.1.10"
+    mkdirp "^0.5.3"
+    neo-async "^2.6.1"
+    node-libs-browser "^2.2.1"
+    schema-utils "^1.0.0"
+    tapable "^1.1.3"
+    terser-webpack-plugin "^1.4.3"
+    watchpack "^1.7.4"
+    webpack-sources "^1.4.1"
+
+webpack@^4.44.2:
+  version "4.44.2"
+  resolved "https://registry.npm.taobao.org/webpack/download/webpack-4.44.2.tgz?cache=0&sync_timestamp=1600637424946&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwebpack%2Fdownload%2Fwebpack-4.44.2.tgz#6bfe2b0af055c8b2d1e90ed2cd9363f841266b72"
+  integrity sha1-a/4rCvBVyLLR6Q7SzZNj+EEma3I=
   dependencies:
     "@webassemblyjs/ast" "1.9.0"
     "@webassemblyjs/helper-module-context" "1.9.0"
@@ -14943,6 +15036,11 @@ yargs-parser@18.x, yargs-parser@^18.1.2, yargs-parser@^18.1.3:
   dependencies:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
+
+yargs-parser@20.x:
+  version "20.2.0"
+  resolved "https://registry.npm.taobao.org/yargs-parser/download/yargs-parser-20.2.0.tgz?cache=0&sync_timestamp=1600655135635&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fyargs-parser%2Fdownload%2Fyargs-parser-20.2.0.tgz#944791ca2be2e08ddadd3d87e9de4c6484338605"
+  integrity sha1-lEeRyivi4I3a3T2H6d5MZIQzhgU=
 
 yargs-parser@^13.1.2:
   version "13.1.2"
