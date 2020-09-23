@@ -88,6 +88,7 @@ body {
     // padding: 0 10px 10px 10px;
     background: #fff;
     box-sizing: border-box;
+    font-size: 14px;
   }
 }
 </style>

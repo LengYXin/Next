@@ -9,9 +9,9 @@
           @click-right="onClickRight"
         />
         <!-- 微信显示 -->
-        <div class="xt-layout-nav-wechat" slot="yes">
+        <!-- <div class="xt-layout-nav-wechat" slot="yes">
           <van-icon class="xt-layout-nav-icon" name="arrow-left" @click="onClickLeft" />
-        </div>
+        </div>-->
       </xt-wechat-bowser>
     </div>
   </div>
@@ -30,9 +30,12 @@ export default class Page extends Vue {
     return this.$store.$global.WechatBowser;
   }
   get show() {
-    return !lodash.includes(
-      ["index", "toclass", "stationery", "my", "search"],
-      this.$route.name
+    return (
+      !this.WechatBowser &&
+      !lodash.includes(
+        ["index", "toclass", "stationery", "my", "search"],
+        this.$route.name
+      )
     );
   }
   title = "";

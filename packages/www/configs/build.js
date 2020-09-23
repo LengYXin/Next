@@ -43,7 +43,7 @@ module.exports = lodash.merge({}, buildConfig, {
                 replace: true,
                 mediaQuery: false,
                 minPixelValue: 0,
-                exclude: /node_modules/i
+                // exclude: /node_modules/i
             }
         }
     },

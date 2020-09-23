@@ -6,23 +6,28 @@
  * @desc 评论
  */
 <template>
-  <div class="xt-comment">
-    <van-card>
-      <template #thumb>
-        <van-image round :src="comment.avatar" />
-      </template>
-      <template #title>
-        <span v-text="comment.author"></span>
-      </template>
-      <template #desc>
-        <div v-ellipsis v-html="formatFace(content)"></div>
-      </template>
-      <template #footer>
-        <van-button size="mini">按钮</van-button>
-        <van-button size="mini">按钮</van-button>
-      </template>
-    </van-card>
-  </div>
+  <van-card class="xt-comment">
+    <template #thumb>
+      <van-image round :src="comment.avatar" />
+    </template>
+    <template #title>
+      <span class="xt-comment-author" v-text="comment.author"></span>
+    </template>
+    <template #desc>
+      <div class="xt-comment-content" v-ellipsis v-html="formatFace(content)"></div>
+    </template>
+    <template #price>
+      <time class="xt-comment-time" v-dateFormat="comment.time" format="MM-DD HH:mm" />
+    </template>
+    <template #num>
+      <slot />
+    </template>
+    <template #footer>
+      <slot name="footer">
+        <van-divider />
+      </slot>
+    </template>
+  </van-card>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from "vue-property-decorator";
@@ -78,7 +83,28 @@ export default class extends Vue {
 </script>
 <style lang="less" >
 .xt-comment {
-  
+  background: transparent;
+  padding: 0;
+  &-author {
+    font-size: 16px;
+    color: @xt-grey-6;
+  }
+  &-content {
+    margin: 5px 0;
+    text-align: justify;
+    word-break: break-all;
+    font-size: 16px;
+    line-height: 20px;
+    color: #555;
+  }
+  &-time {
+    font-size: 12px;
+    color: @xt-grey-6;
+  }
+  .van-card__thumb {
+    width: 45px;
+    height: 45px;
+  }
 }
 .xt-ellipsis {
   overflow: hidden;

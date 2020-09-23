@@ -16,7 +16,7 @@ module.exports = (env) => {
         title: '暄桐教室',//process.env.npm_package_name || '',
         meta: [
             { charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover' },
             { hid: 'description', name: 'description', content: '暄桐的写字课 | 文人式的生活与快乐' },
             {
                 name: "keywords",

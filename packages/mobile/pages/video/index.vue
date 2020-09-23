@@ -12,7 +12,7 @@
         <nuxt-link :to="{name:'video-id',params:{id:item.id}}">
           <div class="xt-video-item">
             <h1 class="xt-video-title" v-text="item.title"></h1>
-            <div class="xt-video-des van-multi-ellipsis--l2" v-text="item.summary"></div>
+            <div class="xt-video-des van-multi-ellipsis--l2" v-text="item.summary" v-show="item.summary"></div>
             <time class="xt-video-time" v-dateFormat="item.publishTime" format="YYYY-MM-DD" />
             <div class="xt-video-cover">
               <img v-lazy="item.videoCoverUrl" />
@@ -21,9 +21,9 @@
               </div>
             </div>
             <van-grid class="xt-video-grid" direction="horizontal" column-num="3">
-              <van-grid-item icon="chat-o" :text="String(item.playCount)" />
-              <van-grid-item icon="friends-o" :text="String(item.commentCount)" />
-              <VeLike :item="item"/>
+              <van-grid-item icon="friends-o" :text="String(item.playCount)" />
+              <van-grid-item icon="chat-o" :text="String(item.commentCount)" />
+              <VeLike :item="item" />
             </van-grid>
             <van-divider />
           </div>
@@ -38,8 +38,8 @@ import { Observer } from "mobx-vue";
 import VeLike from "./view/like.vue";
 @Observer
 @Component({
-  name:'PageVideo',
-  components: {VeLike},
+  name: "PageVideo",
+  components: { VeLike },
 })
 export default class Page extends Vue {
   head() {
@@ -61,7 +61,7 @@ export default class Page extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 .xt-video {
   &-item {
     text-align: justify;
@@ -104,8 +104,16 @@ export default class Page extends Vue {
       font-size: 40px;
     }
   }
-  &-grid{
+  &-grid {
     color: @xt-yellow-6;
+    &.van-hairline--top::after {
+      opacity: 0;
+    }
+    .van-grid-item__content {
+      &::after {
+        opacity: 0;
+      }
+    }
   }
 }
 </style>

@@ -6,11 +6,14 @@
  * @desc 表情
  */
 <template>
-  <div style="width:360px">
-    <a-tooltip v-for="face in faces" :key="face.value" :mouseEnterDelay="1">
-      <template slot="title">{{face.phrase}}</template>
-      <a-avatar class="xt-face" :src="face.icon" @click="onFace(face)" size="small" />
-    </a-tooltip>
+  <div class="xt-text-center">
+    <van-image
+      class="xt-face"
+      v-for="face in faces"
+      :key="face.value"
+      :src="face.icon"
+      @click="onFace(face)"
+    />
   </div>
 </template>
 
@@ -37,7 +40,7 @@ Vue.prototype.formatFace = function (html: string) {
         html = lodash.replace(
           html,
           reg,
-          `<span class="ant-avatar ant-avatar-sm ant-avatar-circle ant-avatar-image xt-face"><img src="${face.icon}"></span>`
+          `<span class="van-image van-image--round xt-face"><img src="${face.icon}"></span>`
         );
       }
     });
@@ -60,14 +63,18 @@ export default class extends Vue {
 </script>
 
 <style>
-.xt-face.ant-avatar {
-  margin: 0 3px;
+.xt-face.van-image {
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 3px !important;
 }
-p>img[src^='//img.t.sinajs.cn/']
+p>img[src^='//img.t.sinajs.cn/'],
+p>img[src^='http://img.t.sinajs.cn/'],
+p>img[src^='https://img.t.sinajs.cn/']
 {
-  width: 24px;
-  height: 24px;
-  margin: 0 3px;
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 2px !important;
   transform: translateY(3px);
 }
 </style>

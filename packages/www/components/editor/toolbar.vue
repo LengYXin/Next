@@ -127,6 +127,7 @@ export default class extends Vue {
       this.quill.getSelection() || this.quill.getLength() - 1,
       face.value
     );
+    this.quill.scrollIntoView();
   }
   onSubmitRules() {
     try {

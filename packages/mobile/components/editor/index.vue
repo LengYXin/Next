@@ -1,8 +1,9 @@
 <template>
-  <div class="quillWrapper">
-    <!-- <slot name="toolbar"></slot> -->
-    <div :id="id" ref="quillContainer"></div>
-    <!-- <input
+  <div>
+    <div class="quillWrapper">
+      <!-- <slot name="toolbar"></slot> -->
+      <div :id="id" ref="quillContainer"></div>
+      <!-- <input
       v-if="useCustomImageHandler"
       id="file-upload"
       ref="fileInput"
@@ -10,13 +11,15 @@
       accept="image/*"
       style="display:none;"
       @change="emitImageInfo($event)"
-    />-->
-    <toolbar @submit="onSubmit" :rules="rules" :buttonText="buttonText" :quill="quill">
-      <slot></slot>
-      <template slot="submit">
-        <slot name="submit"></slot>
-      </template>
-    </toolbar>
+      />-->
+      <toolbar @submit="onSubmit" :rules="rules" :buttonText="buttonText" :quill="quill">
+        <slot></slot>
+        <template slot="submit">
+          <slot name="submit"></slot>
+        </template>
+      </toolbar>
+    </div>
+    <div class="xt-editor-single-seat"></div>
   </div>
 </template>
 
@@ -85,6 +88,14 @@ export default {
     },
     disabled(status) {
       this.quill.enable(!status);
+    },
+    placeholder(val) {
+      try {
+        const root = this.quill.root;
+        root.setAttribute("data-placeholder", val);
+      } catch (error) {
+        console.log("LENG: placeholder -> error", error);
+      }
     },
   },
   mounted() {
@@ -199,7 +210,7 @@ export default {
     },
     handleTextChange(delta, oldContents) {
       if (!this.quill) {
-        return
+        return;
       }
       let editorContent =
         this.quill.getHTML() === "<p><br></p>" ? "" : this.quill.getHTML();
@@ -256,9 +267,8 @@ export default {
 .ql-snow .ql-thin {
   stroke-width: 1px !important;
 }
-.quillWrapper{
+.quillWrapper {
   animation: antFadeIn 0.3s;
-
 }
 .quillWrapper .ql-snow.ql-toolbar {
   // padding-top: 8px;
@@ -379,7 +389,7 @@ button.ql-active svg {
   flex-flow: row wrap;
 }
 .quillWrapper .ql-editor.ql-blank::before {
-  color: rgba(0,0,0,0.3);
+  color: rgba(0, 0, 0, 0.3);
   font-style: normal;
 }
 </style>

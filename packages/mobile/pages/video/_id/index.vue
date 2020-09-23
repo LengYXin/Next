@@ -2,14 +2,21 @@
   <div class="xt-videoid">
     <xt-dplayer :options="options" @playing="onPlaying" />
     <div class="xt-content">
-      <h1 v-text="PageStore.dataSource.title"></h1>
+      <h1 class="xt-title-h5" v-text="PageStore.dataSource.title"></h1>
       <div v-text="PageStore.dataSource.summary" v-ellipsis="3"></div>
-      <time v-dateFormat="PageStore.dataSource.publishTime" format="YYYY-MM-DD" />
-      <van-grid class="xt-videoid-grid" direction="horizontal" column-num="3">
-        <van-grid-item icon="chat-o" :text="String(PageStore.dataSource.playCount)" />
-        <van-grid-item icon="friends-o" :text="String(PageStore.dataSource.commentCount)" />
-        <VeLike :item="PageStore.dataSource" :list="false" />
-      </van-grid>
+      <van-row>
+        <van-col span="8">
+          <time v-dateFormat="PageStore.dataSource.publishTime" format="YYYY-MM-DD" />
+        </van-col>
+        <van-col span="16">
+          <van-grid class="xt-videoid-grid" direction="horizontal" column-num="3">
+            <van-grid-item icon="friends-o" :text="String(PageStore.dataSource.playCount)" />
+            <van-grid-item icon="chat-o" :text="String(PageStore.dataSource.commentCount)" />
+            <VeLike :item="PageStore.dataSource" :list="false" />
+          </van-grid>
+        </van-col>
+      </van-row>
+      <van-divider />
       <VeComment />
     </div>
   </div>
@@ -34,6 +41,12 @@ import VeRecommend from "./views/recommend.vue";
   components: { VeLike, VeComment, VeRecommend },
 })
 export default class PageView extends Vue {
+  head() {
+    return this.$AppCreateShareData({
+      title: this.PageStore.dataSource.title,
+      imgUrl: this.PageStore.dataSource.videoCoverUrl,
+    });
+  }
   get id() {
     return this.$route.params.id;
   }
@@ -75,10 +88,23 @@ export default class PageView extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" scoped>
+<style lang="less" >
 .xt-videoid {
   &-grid {
     color: @xt-yellow-6;
+    &.van-hairline--top::after {
+      opacity: 0;
+    }
+    .van-grid-item__content {
+      padding-top: 0;
+      padding-bottom: 0;
+      &::after {
+        opacity: 0;
+      }
+    }
+    .van-grid-item__icon {
+      font-size: 16px;
+    }
   }
 }
 </style>

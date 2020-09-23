@@ -8,11 +8,11 @@ interface IVideoDetails {
     likeCount?: number
     playCount?: number
     publishTime?: number
-    summary?: String
-    title?: String
-    videoCoverThumbUrl?: String
-    videoCoverUrl?: String
-    videoUrl?: String
+    summary?: string
+    title?: string
+    videoCoverThumbUrl?: string
+    videoCoverUrl?: string
+    videoUrl?: string
     viewCount?: number
     quality?: any;
 }

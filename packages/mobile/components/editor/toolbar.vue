@@ -6,56 +6,17 @@
  * @desc 富文本按钮
  */
 <template>
-  <a-row class="xt-editor-toolbar" type="flex" :gutter="4">
-    <!-- <div ref="popover"></div> -->
-    <a-col class>
-      <!-- 表情 -->
-      <a-popover placement="bottom" trigger="click">
-        <template slot="content">
-          <xt-face @select="onAddFace" />
-        </template>
-        <span class="xt-editor-span">
-          <a-icon class="xt-editor-icon" type="smile" />
-          <span class="xt-editor-icon-text">表情</span>
-        </span>
-      </a-popover>
-      <a-divider type="vertical"></a-divider>
-      <!-- 图片 -->
-      <a-popover placement="bottom" trigger="click" overlayClassName="xt-editor-upload-popover">
-        <template slot="content">
-          <div class="xt-editor-upload">
-            <a-upload
-              v-bind="uploadProps"
-              :file-list="fileList"
-              @change="onUploadChange"
-              @remove="onRemove"
-            >
-              <div v-if="showUpload">
-                <a-icon type="plus" />
-              </div>
-            </a-upload>
-          </div>
-        </template>
-        <span class="xt-editor-span xt-editor-upload-span">
-          <a-icon class="xt-editor-icon" type="picture" />
-          <span class="xt-editor-icon-text">
-            图片 (
-            <span v-text="fileList.length"></span>/
-            <span v-text="maxFile"></span>)
-          </span>
-        </span>
-      </a-popover>
-    </a-col>
-    <a-col flex="1" class="xt-editor-btns">
-      <!-- 默认插槽位置 -->
-      <slot v-bind:quill="quill"></slot>
-      <a-divider type="vertical"></a-divider>
-      <!-- 按钮插槽 -->
-      <slot name="submit" v-bind:quill="quill">
-        <a-button type="yellow" v-text="buttonText" @click="onSubmitRules"></a-button>
-      </slot>
-    </a-col>
-  </a-row>
+  <div class="xt-editor-toolbar">
+    <div class="xt-editor-toolbar-icon">
+      <van-icon name="smile-o" @click="onShowFace" />
+    </div>
+    <div class="xt-editor-toolbar-btn">
+      <van-button block @click="onSubmitRules">
+        <span v-text="buttonText"></span>
+      </van-button>
+    </div>
+    <xt-face class="xt-face-hied" :class="{'xt-face-show':showFace}" @select="onAddFace" />
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from "vue-property-decorator";
@@ -76,6 +37,7 @@ export default class extends Vue {
   get showUpload() {
     return this.fileList.length < this.maxFile;
   }
+  showFace = false;
   getPopupContainer() {
     return this.$refs.popover;
   }
@@ -122,11 +84,15 @@ export default class extends Vue {
       } catch (error) {}
     },
   };
+  onShowFace() {
+    this.showFace = !this.showFace;
+  }
   onAddFace(face) {
     this.quill.insertText(
       this.quill.getSelection() || this.quill.getLength() - 1,
       face.value
     );
+    // this.quill.scrollIntoView()
   }
   onSubmitRules() {
     try {
@@ -148,6 +114,7 @@ export default class extends Vue {
         quill: this.quill,
         /** 重置内容 */
         onReset: () => {
+          this.showFace = false;
           this.quill.root.innerHTML = "";
           this.fileList = [];
         },
@@ -177,6 +144,7 @@ export default class extends Vue {
       }
     } catch (error) {
       // this.$message.warning({ content: error, key: "quill_rules" });
+      this.$toast(error);
     }
   }
   @Emit("submit")
@@ -196,78 +164,84 @@ export default class extends Vue {
 }
 </script>
 <style lang="less" >
-// 单行样式
-.xt-editor-single.quillWrapper {
-  position: relative;
-  padding-right: 80px;
-  .ql-editor {
-    min-height: 44px;
-    max-height: 66px;
-    padding-right: 44px;
+@height: 48px; // 单行样式
+.xt-editor-single {
+  .quillWrapper {
+    box-shadow: 0px 0px 0.5rem 0px rgba(231, 231, 231, 0.72);
+    // background: #ccc;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    // height: @height;
+    background: white;
+    overflow: hidden;
+    .ql-toolbar.ql-snow,
+    .ql-container.ql-snow {
+      border: none;
+    }
+    .ql-editor {
+      min-height: @height;
+      max-height: @height;
+      font-size: 16px;
+      text-align: justify;
+      word-break: break-all;
+      padding-right: 95px;
+      padding-left: 48px;
+      &.ql-blank::before {
+        padding-right: 95px;
+        padding-left: 48px;
+      }
+    }
   }
   .xt-editor-toolbar {
-    position: absolute;
-    right: 16px;
-    bottom: 50%;
-    // margin-bottom: 50%;
-    transform: translateY(50%);
-    padding: 0;
+    // height: @height;
+    &-icon,
+    &-btn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 99;
+    }
+    &-btn {
+      right: 0;
+      left: auto;
+      float: none;
+      .van-button {
+        width: 88px;
+        height: @height;
+        border-radius: 0;
+        background: @xt-yellow-6;
+        color: white;
+        border: none;
+        // &::before {
+        //   opacity: 0;
+        // }
+      }
+    }
+    .van-icon-smile-o {
+      margin-top: 6.5px;
+      margin-left: 6.5px;
+      font-size: 32px;
+      color: @xt-yellow-6;
+    }
+    .xt-face-hied {
+      height: 0;
+      transition: all 0.3s;
+      box-sizing: border-box;
+      &.xt-face-show {
+        box-shadow: 0px 0px 0.5rem 0px rgba(231, 231, 231, 0.72);
+        padding-top: 10px;
+        height: 179px;
+      }
+    }
   }
-  .xt-editor-icon {
-    margin-top: 4px;
-    margin-right: 12px;
-  }
-  .ant-divider,
-  .xt-editor-upload-span,
-  .xt-editor-icon-text {
-    display: none;
+  &-seat {
+    height: @height;
   }
 }
-.xt-editor-upload-hide {
-  .xt-editor-upload-span {
-    display: none !important;
-  }
-}
-// 图片上传
-.xt-editor-upload {
-  width: 336px;
-  max-height: 336px;
-  overflow: hidden;
-  .ant-upload-list-picture .ant-upload-list-item,
-  .ant-upload-list-picture-card .ant-upload-list-item {
-    padding: 0;
-  }
-  .anticon-plus {
-    font-size: 60px;
-  }
 
-  .ant-upload-list-item-uploading-text {
-    text-align: center;
-  }
-}
-.xt-editor-upload-popover {
-  .ant-popover-inner-content {
-    padding-bottom: 0;
-  }
-}
 .xt-editor-toolbar {
-  padding-top: 16px;
-  .xt-editor-span {
-    display: inline-block;
-    cursor: pointer;
-  }
-  .xt-editor-icon {
-    color: @xt-yellow-6;
-  }
-  .xt-editor-icon-text {
-    display: inline-block;
-    transform: translateY(-25%);
-  }
-  .ant-divider {
-    background: transparent;
-  }
-  .xt-editor-btns {
-    text-align: right;
-  }
 }
 </style>
