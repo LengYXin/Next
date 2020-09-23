@@ -1,25 +1,25 @@
 <template>
-  <div :data-id="reply.id">
-    <xt-editor
+  <div>
+    <!-- <xt-editor
       class="xt-editor-upload-hide"
       @submit="onSubmit"
       :rules="{required:true,max:2000}"
       buttonText="发布评论"
-    ></xt-editor>
-    <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
-      <template slot="actions">
-        <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
-        <xt-action @click="onReply(item)" title="回复" />
+    ></xt-editor>-->
+    <xt-refresh-list :Pagination="Pagination" :body="body">
+      <template #renderItem="item">
+        <xt-comment :comment="getComment(item)">
+          <template slot="actions"></template>
+          <xt-editor
+            @submit="onSubmit($event,item)"
+            v-if="eqReply(item)"
+            class="xt-editor-single"
+            placeholder="回复xxx"
+            buttonText="回复"
+          />
+        </xt-comment>
       </template>
-      <xt-editor
-        @submit="onSubmit($event,item)"
-        v-if="eqReply(item)"
-        class="xt-editor-single"
-        placeholder="回复xxx"
-        buttonText="回复"
-      />
-    </xt-comment>
-    <xt-pagination :Pagination="Pagination" @change="onCurrentChange" />
+    </xt-refresh-list>
   </div>
 </template>
 <script lang="ts">
@@ -37,6 +37,9 @@ export default class PageView extends Vue {
   PageStore: ControllerVideo;
   get Pagination() {
     return this.PageStore.PaginationComment;
+  }
+  get body() {
+    return { videoShareId: this.id };
   }
   get id() {
     return this.$route.params.id;
@@ -57,14 +60,6 @@ export default class PageView extends Vue {
    */
   eqReply(data) {
     return lodash.eq(this.reply.id, data.id);
-  }
-  /**
-   *  初始化 和 页码 更改调用
-   */
-  onCurrentChange(current) {
-    this.Pagination.onCurrentChange(current, {
-      videoShareId: this.$route.params.id,
-    });
   }
   /**
    * 点赞
@@ -100,7 +95,6 @@ export default class PageView extends Vue {
       });
       event.onReset();
       this.reply = {};
-      this.onCurrentChange(1);
     } catch (error) {
       console.log("LENG: PageView -> onSubmit -> error", error);
       // this.$message.error(error);

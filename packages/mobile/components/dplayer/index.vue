@@ -79,5 +79,8 @@ export default class extends Vue {
   .dplayer-video {
     object-fit: cover;
   }
+  .dplayer-full-in-icon{
+    display: none !important;
+  }
 }
 </style>

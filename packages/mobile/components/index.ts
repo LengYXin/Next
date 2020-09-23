@@ -1,11 +1,12 @@
 import Vue from 'vue';
-// 格式化钱
-import "./directives/money";
+import inspect from './business/user/inspect.vue';
+import comment from "./comment/index.vue";
 import "./directives/dateFormat";
-import refresh from "./refresh/index.vue";
-import inspect from './business/user/inspect.vue'
-import wechatBowser from './wechatBowser/index.vue'
+import "./directives/ellipsis";
+import "./directives/money";
 import face from "./face/index.vue";
+import refresh from "./refresh/index.vue";
+import wechatBowser from './wechatBowser/index.vue';
 
 // 视频
 Vue.component("xt-dplayer", () => import("./dplayer/index.vue"));
@@ -19,3 +20,5 @@ Vue.component('xt-refresh-list', refresh);
 Vue.component('xt-wechat-bowser', wechatBowser);
 // 表情
 Vue.component("xt-face", face);
+// 评论
+Vue.component("xt-comment", comment);

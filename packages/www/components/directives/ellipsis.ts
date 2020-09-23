@@ -20,16 +20,15 @@ Vue.directive('ellipsis', {
     }
 });
 function onRender(el, { value = 9 }: any) {
-    value = (value || 9) + 1
+    value = (value || 9) + 1;
+    el.classList.add('xt-ellipsis');
     const style = window.getComputedStyle(el, null);
-    // console.log("LENG: onRender -> style", style)
     const top = getPropertyValue('padding-top', style);
     const bottom = getPropertyValue('padding-bottom', style);
     const height = getPropertyValue('height', style) - top - bottom;
-    const lineheight = getPropertyValue('line-height', style);
+    const lineheight = getPropertyValue('line-height', style, 26);
     const maxHeight = lineheight * value;
     el.style.maxHeight = maxHeight + 'px';
-    el.classList.add('xt-ellipsis');
     // console.log("LENG: onRender -> height", {
     //     el,
     //     top,
@@ -61,6 +60,6 @@ function onRender(el, { value = 9 }: any) {
 
 
 }
-function getPropertyValue(property, style) {
-    return parseInt(lodash.replace(style.getPropertyValue(property), 'px', '')) || 0;
+function getPropertyValue(property, style, defaultValue = 0) {
+    return parseInt(lodash.replace(style.getPropertyValue(property), 'px', '')) || defaultValue;
 }

@@ -6,7 +6,7 @@
         <time v-dateFormat="PageStore.dataSource.publishTime" format="YYYY-MM-DD" />
         <VeView :item="PageStore.dataSource" />
         <xt-action title="0" icon="message" :statistics="PageStore.dataSource.commentCount" />
-        <VeLike :item="PageStore.dataSource" />
+        <VeLike :item="PageStore.dataSource" :list="false" />
       </a-space>
     </div>
     <xt-dplayer :options="options" @playing="onPlaying" />

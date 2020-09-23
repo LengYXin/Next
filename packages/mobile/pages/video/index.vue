@@ -6,7 +6,7 @@
  * @desc [description]
  */
 <template>
-  <div class="xt-video">
+  <div class="xt-content xt-video">
     <xt-refresh-list :Pagination="Pagination" :body="body">
       <template #renderItem="item">
         <nuxt-link :to="{name:'video-id',params:{id:item.id}}">
@@ -23,7 +23,7 @@
             <van-grid class="xt-video-grid" direction="horizontal" column-num="3">
               <van-grid-item icon="chat-o" :text="String(item.playCount)" />
               <van-grid-item icon="friends-o" :text="String(item.commentCount)" />
-              <van-grid-item icon="like-o" :text="String(item.likeCount)" />
+              <VeLike :item="item"/>
             </van-grid>
             <van-divider />
           </div>
@@ -35,10 +35,11 @@
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
+import VeLike from "./view/like.vue";
 @Observer
 @Component({
   name:'PageVideo',
-  components: {},
+  components: {VeLike},
 })
 export default class Page extends Vue {
   head() {
@@ -62,7 +63,6 @@ export default class Page extends Vue {
 </script>
 <style lang="less" scoped>
 .xt-video {
-  padding: 0 30px;
   &-item {
     text-align: justify;
     color: #333;
