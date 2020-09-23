@@ -5,6 +5,9 @@ const router = require('@xt/client/config/router');
 const hooks = require('@xt/client/config/hooks');
 const lodash = require('lodash');
 console.log("LENG: env", env)
+const headconfig = head(env);
+// 添加 lib-flexible
+headconfig.script.push({ src: `${env.base}flexible.js` })
 const proxy = {
   "/api": {
     target: env.target, // 代理地址
@@ -89,7 +92,7 @@ module.exports = {
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
   */
-  head: head(env),
+  head: headconfig,
   router: lodash.merge(router, { base: env.base }),
   env,
   proxy,
