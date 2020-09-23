@@ -2,11 +2,20 @@
   <div class="xt-videoid">
     <xt-dplayer :options="options" @playing="onPlaying" />
     <div class="xt-content">
-      <h1 class="xt-title-h5" v-text="PageStore.dataSource.title"></h1>
-      <div v-text="PageStore.dataSource.summary" v-ellipsis="3"></div>
+      <h1 class="xt-title-h5 xt-margin-tb-lg" v-text="PageStore.dataSource.title"></h1>
+      <div
+        v-if="PageStore.dataSource.summary"
+        v-text="PageStore.dataSource.summary"
+        v-ellipsis="3"
+        class="xt-margin-bottom-md"
+      ></div>
       <van-row>
         <van-col span="8">
-          <time v-dateFormat="PageStore.dataSource.publishTime" format="YYYY-MM-DD" />
+          <time
+            class="xt-text-grey"
+            v-dateFormat="PageStore.dataSource.publishTime"
+            format="YYYY-MM-DD"
+          />
         </van-col>
         <van-col span="16">
           <van-grid class="xt-videoid-grid" direction="horizontal" column-num="3">
@@ -92,6 +101,9 @@ export default class PageView extends Vue {
 .xt-videoid {
   &-grid {
     color: @xt-yellow-6;
+    .van-grid-item__content--center {
+      padding: 0;
+    }
     &.van-hairline--top::after {
       opacity: 0;
     }
