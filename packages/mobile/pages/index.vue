@@ -7,7 +7,9 @@
  */
 <template>
   <div class="xt-home">
-    <van-search shape="round" placeholder="搜索你感兴趣的内容" />
+    <nuxt-link :to="{name:'search'}" replace>
+      <van-search shape="round" placeholder="搜索你感兴趣的内容" />
+    </nuxt-link>
     <van-swipe class="xt-home-swipe" :autoplay="3000" indicator-color="white">
       <van-swipe-item>1</van-swipe-item>
       <van-swipe-item>2</van-swipe-item>
@@ -32,6 +34,22 @@ import { Observer } from "mobx-vue";
 @Observer
 @Component({
   name: "PageIndex",
+  async fetch(ctx) {
+    const { code, state } = ctx.route.query;
+    // 微信授权
+    if (code) {
+      try {
+        const wechat = ctx.store.$wechat;
+        await wechat.onGetAccessToken(code, state);
+        if (wechat.AccessInfo.loginSuccess === false) {
+          ctx.redirect({ name: "my-bind" });
+        }
+      } catch (error) {
+        console.error("LENG: fetch -> error", error);
+      }
+      ctx.redirect({ name: "index" });
+    }
+  },
   components: {},
 })
 export default class PageIndex extends Vue {

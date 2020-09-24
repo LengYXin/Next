@@ -6,7 +6,7 @@
  * @desc 检查登录状态
  */
 <template>
-  <div>
+  <div :class="wxClass">
     <!-- 浏览器 -->
     <slot v-if="WechatBowser" name="yes"></slot>
     <!-- 不是 微信浏览器 -->
@@ -22,6 +22,9 @@ import lodash from "lodash";
 export default class extends Vue {
   get WechatBowser() {
     return this.$store.$global.WechatBowser;
+  }
+  get wxClass() {
+    return this.WechatBowser && "xt-wechat-bowser";
   }
   mounted() {}
   updated() {}

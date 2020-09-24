@@ -69,6 +69,8 @@ export default class Page extends Vue {
 </script>
 <style lang="less">
 .van-pull-refresh {
-  min-height: 70vh;
+  .xt-layout-content>& {
+    min-height: 70vh;
+  }
 }
 </style>

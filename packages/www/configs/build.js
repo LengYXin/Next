@@ -34,7 +34,7 @@ module.exports = lodash.merge({}, buildConfig, {
     },
     postcss: {
         plugins: {
-            'postcss-pxtorem': require('postcss-pxtorem')({
+            'postcss-pxtorem': {
                 rootValue: 16,
                 unitPrecision: 5,
                 // propList: ['font', 'font-size', 'line-height', 'letter-spacing', 'widht', 'height'],
@@ -43,8 +43,8 @@ module.exports = lodash.merge({}, buildConfig, {
                 replace: true,
                 mediaQuery: false,
                 minPixelValue: 0,
-                exclude: /node_modules/i
-            })
+                // exclude: /node_modules/i
+            }
         }
     },
     loaders: {

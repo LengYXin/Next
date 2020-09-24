@@ -23,6 +23,7 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import lodash from "lodash";
 import { Observer } from "mobx-vue";
+import { Debounce } from "lodash-decorators";
 @Observer
 @Component({
   components: {},
@@ -43,6 +44,7 @@ export default class extends Vue {
   get PageStore() {
     return this.$store.$storeUser;
   }
+  @Debounce(50)
   onInspectUser() {
     try {
       const user = this.$InspectUser(this.isInspect);
@@ -51,8 +53,7 @@ export default class extends Vue {
       console.error("LENG: extends -> error", error);
     }
   }
-  created() {
-  }
+  created() {}
   @Watch("$route")
   RouteUpdate(to, from, next) {
     if (lodash.eq(this.$route.name, this.inspectName)) {
@@ -67,11 +68,13 @@ export default class extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" scoped>
+<style lang="less" >
 .xt-inspect-center {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  min-height: 50vh;
+  flex-direction: column;
+  text-align: justify;
+  height: calc(100vh - @tabbar-height - @nav-bar-height);
 }
 </style>

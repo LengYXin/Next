@@ -27,10 +27,14 @@
           <span>直播课与回放</span>
           <span class="xt-text-green">（ 直播课： 回放已结束 ）</span>
         </h3>
-        <nuxt-link class="xt-cc-del-video" :to="`/video/${Details.dataSource.classhourId}`">
+        <!-- <nuxt-link class="xt-cc-del-video" :to="`/video/${Details.dataSource.classhourId}`">
           <img v-lazy="'https://www.xuantong.cn/_nuxt/img/7ef345b.png'" />
           <a-icon type="play-circle" />
-        </nuxt-link>
+        </nuxt-link>-->
+        <a :href="liveUrl" target="_black" class="xt-cc-del-video">
+          <img v-lazy="'https://www.xuantong.cn/_nuxt/img/7ef345b.png'" />
+          <a-icon type="play-circle" />
+        </a>
         <h3 class="xt-font-size-base">
           <a-icon type="play-circle" />
           <span>内容预告</span>
@@ -143,6 +147,16 @@ export default class PageView extends Vue {
   }
   get PageStore() {
     return this.$store.$storeCourse.Details.Map;
+  }
+  get liveUrl() {
+    const url = lodash.get(
+      {
+        development: `http://localhost:5000`,
+        production: `/live`,
+      },
+      this.$store.$global.NODE_ENV
+    );
+    return `${url}?id=${this.classhour?.classhourId}`;
   }
   getPopupContainer() {
     return this.$refs.Container;

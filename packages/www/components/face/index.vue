@@ -63,7 +63,9 @@ export default class extends Vue {
 .xt-face.ant-avatar {
   margin: 0 3px;
 }
-p>img[src^='//img.t.sinajs.cn/']
+p>img[src^='//img.t.sinajs.cn/'],
+p>img[src^='http://img.t.sinajs.cn/'],
+p>img[src^='https://img.t.sinajs.cn/']
 {
   width: 24px;
   height: 24px;

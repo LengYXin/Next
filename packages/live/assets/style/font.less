@@ -1,0 +1,126 @@
+@font-face {
+  font-family: "FZLTHJ";
+  src: url("/assets/font/FZLTHJ.OTF") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FZXIYSJ";
+  src: url("/assets/font/FZXIYSJ.OTF") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FZLTHJW--GB1-0";
+  src: url(/assets/font/FZLTHJW.TTF), url(/font/FZLTHJW.OTF);
+}
+@font-face {
+  font-family: "FZXIYSK--GBK1-0";
+  src: url(/assets/font/FZXIYSJW.ttf), url(/font/FZXIYSJW.OTF);
+}
+
+// 标题
+.xt-title {
+  &-h1 {
+    font-size: 36px;
+    font-weight: 400;
+    margin: 0;
+
+    &-large {
+      font-size: 38px;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+
+  &-h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 400;
+  }
+
+  &-h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  &-h4 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  &-h5 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  &-h6 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+
+.xt-font-family {
+  &-FZLTHJ {
+    font-family: "FZLTHJ";
+  }
+  &-FZLTHJW {
+    font-family: "FZLTHJW";
+  }
+  &-FZXIYSJ {
+    font-family: "FZXIYSJ";
+  }
+  &-FZXIYSJW {
+    font-family: "FZXIYSJW";
+  }
+  &-FZLTHJW {
+    font-family: "FZLTHJW--GB1-0";
+  }
+  &-FZXIYSK {
+    font-family: "FZXIYSK--GBK1-0";
+  }
+}
+
+.xt-font-size {
+  &-sm {
+    // 12px
+    font-size: @font-size-sm !important;
+  }
+
+  &-base {
+    // 14px
+    font-size: @font-size-base !important;
+  }
+
+  &-md {
+    // 16px
+    font-size: @font-size-md !important;
+  }
+
+  &-lg {
+    // 18px
+    font-size: @font-size-lg !important;
+  }
+
+  &-x {
+    font-size: 20px !important;
+  }
+
+  &-xx {
+    font-size: 24px !important;
+  }
+
+  &-xl {
+    font-size: 28px !important;
+  }
+
+  &-xxl {
+    font-size: 32px !important;
+  }
+}

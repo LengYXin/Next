@@ -25,6 +25,11 @@ class XTGlobal {
      */
     logger = lodash.get(window, '__xt__env.logger', process.env.logger);
     /**
+     * domain 域名 根目录
+     * @memberof XTGlobal
+     */
+    base = lodash.get(window, '__xt__env.base', process.env.base);
+    /**
      * domain 域名
      * @memberof XTGlobal
      */
@@ -59,6 +64,13 @@ class XTGlobal {
      * @memberof XTGlobal
      */
     DEPLOY_ENV: typeof process.env.DEPLOY_ENV = lodash.get(window, '__xt__env.DEPLOY_ENV', process.env.DEPLOY_ENV);
+    /**
+     * 本地 dev
+     * @memberof XTGlobal
+     */
+    get dev() {
+        return this.NODE_ENV === 'development'
+    }
     /**
      *生产环境
      * @memberof XTGlobal

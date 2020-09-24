@@ -6,7 +6,7 @@
         <time v-dateFormat="PageStore.dataSource.publishTime" format="YYYY-MM-DD" />
         <VeView :item="PageStore.dataSource" />
         <xt-action title="0" icon="message" :statistics="PageStore.dataSource.commentCount" />
-        <VeLike :item="PageStore.dataSource" />
+        <VeLike :item="PageStore.dataSource" :list="false" />
       </a-space>
     </div>
     <xt-dplayer :options="options" @playing="onPlaying" />
@@ -71,7 +71,12 @@ export default class PageView extends Vue {
     this.PageStore.onPlayNumber(this.id);
   }
   created() {
-    this.$setBreadcrumb({ linksName: this.PageStore.dataSource.title }, true);
+    this.$setBreadcrumb(
+      { linksName: "视频分享", links: "video", linksKey: "video" },
+      true
+    ).setBreadcrumb({
+      linksName: this.PageStore.dataSource.title,
+    });
   }
   mounted() {
     // console.log(this.$route);

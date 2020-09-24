@@ -60,6 +60,7 @@ export default class Page extends Vue {
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 100;
   }
   .van-tabbar {
     max-width: @max-width;

@@ -73,6 +73,7 @@ async function onCreatePersist() {
   persist({ typelist: { type: "list" } })(store.$storeStationery);
   persist({ typelist: { type: "list" } })(store.$storeAbout);
   persist({ typelist: { type: "list" } })(store.$storeOrder);
+  // persist({ dataSource: { type: "list" } })(store.$storeVideo.Pagination);
   persist({ UserInfo: { type: "object" } })(store.$storeUser);
   // 设置类
   hydrate(`${$global.localStorageStartsWith}locale`, store.$locale);
@@ -83,6 +84,7 @@ async function onCreatePersist() {
   );
   hydrate(`${$global.localStorageStartsWith}About`, store.$storeAbout);
   hydrate(`${$global.localStorageStartsWith}Order`, store.$storeOrder);
+  // hydrate(`${$global.localStorageStartsWith}Video`, store.$storeVideo.Pagination);
   await hydrate(`${$global.localStorageStartsWith}User`, store.$storeUser);
   store.$storeUser.onGetUserInfo();
   // 微信中 启用 微信 jssdk

@@ -94,8 +94,8 @@ export default class extends Vue {
     return this.$EnumLocaleLinks;
   }
   formInline = {
-    user: "18611752863",
-    password: "leng147896325",
+    user: "",
+    password: "",
   };
   async onSubmit() {
     try {
@@ -113,6 +113,15 @@ export default class extends Vue {
   @Emit("toggle")
   onToggle(value) {
     return value; //"links_register";
+  }
+  created() {
+    // 已登录 返回前一页
+    try {
+      if (this.$store.$global.NODE_ENV === "development") {
+        this.formInline.user = "16619998681";
+        this.formInline.password = "leng147896325";
+      }
+    } catch (error) {}
   }
   mounted() {}
   updated() {}

@@ -10,6 +10,14 @@ import { AjaxBasics } from "../../helpers/ajaxBasics";
 export class ControllerWechat {
   constructor(protected $ajax: AjaxBasics, protected appId) {
   }
+  /**
+   * 微信授权后 返回 信息
+   * @type {*}
+   * @memberof ControllerWechat
+   */
+  AccessInfo: any = {
+
+  };
   WeixinJSBridge = wx;
   isReady = false;
   loading = false;
@@ -119,6 +127,29 @@ export class ControllerWechat {
       this.isReady = false;
     }
     return this.WeixinJSBridge
+  }
+  /**
+   * 授权 url https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html#0
+   * @param redirect_uri 
+   */
+  getAuthorizeUrl(redirect_uri, scope: 'snsapi_base' | 'snsapi_userinfo' = 'snsapi_userinfo') {
+    return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.appId}&redirect_uri=${encodeURI(redirect_uri)}&response_type=code&scope=${scope}&state=WXLOGIN#wechat_redirect`
+  }
+  /**
+   *  获取 access_token
+   * @param code 
+   */
+  async onGetAccessToken(code, state) {
+    // 已有 openid 
+    if (this.AccessInfo.openid) {
+      return
+    }
+    const res = await this.$ajax.post<{ loginSuccess }>(`/wechat/wapcallback`, {
+      code,
+      state,
+      type: 1
+    })
+    this.AccessInfo = res;
   }
 }
 export default ControllerWechat

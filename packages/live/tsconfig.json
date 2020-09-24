@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2018",
     "module": "esnext",
-    "jsx": "preserve",
-    "importHelpers": true,
     "moduleResolution": "node",
+    "lib": [
+      "esnext",
+      "esnext.asynciterable",
+      "dom"
+    ],
     "esModuleInterop": true,
     "allowJs": true,
     "sourceMap": true,
@@ -18,31 +21,25 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "jsx": "preserve",
     "baseUrl": ".",
-    // "types": [
-    //   "webpack-env"
-    // ],
     "paths": {
       "~/*": [
-        "src/*"
-      ]
+        "./*"
+      ],
+      // "@/*": [
+      //   "./*"
+      // ]
     },
-    "lib": [
-      "esnext",
-      "esnext.asynciterable",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    // "types": [
+    //   "@types/node",
+    //   "@nuxt/types"
+    // ]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
-  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".nuxt",
+    "build*",
+    "dist"
   ]
 }

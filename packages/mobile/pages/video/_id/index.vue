@@ -1,0 +1,122 @@
+<template>
+  <div class="xt-videoid">
+    <xt-dplayer :options="options" @playing="onPlaying" />
+    <div class="xt-content">
+      <h1 class="xt-title-h5 xt-margin-tb-lg" v-text="PageStore.dataSource.title"></h1>
+      <div
+        v-if="PageStore.dataSource.summary"
+        v-text="PageStore.dataSource.summary"
+        v-ellipsis="3"
+        class="xt-margin-bottom-md"
+      ></div>
+      <van-row>
+        <van-col span="8">
+          <time
+            class="xt-text-grey"
+            v-dateFormat="PageStore.dataSource.publishTime"
+            format="YYYY-MM-DD"
+          />
+        </van-col>
+        <van-col span="16">
+          <van-grid class="xt-videoid-grid" direction="horizontal" column-num="3">
+            <van-grid-item icon="friends-o" :text="String(PageStore.dataSource.playCount)" />
+            <van-grid-item icon="chat-o" :text="String(PageStore.dataSource.commentCount)" />
+            <VeLike :item="PageStore.dataSource" :list="false" />
+          </van-grid>
+        </van-col>
+      </van-row>
+      <van-divider />
+      <VeComment />
+    </div>
+  </div>
+</template>
+<script lang="ts">
+import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
+import { Observer } from "mobx-vue";
+import lodash from "lodash";
+import VeLike from "../view/like.vue";
+// import VeView from "../views/view.vue";
+import VeComment from "./views/comment.vue";
+import VeRecommend from "./views/recommend.vue";
+@Observer
+@Component({
+  async fetch(ctx) {
+    const store = ctx.store.$storeVideo.Details;
+    await store.onLoading(ctx.params.id);
+  },
+  validate({ params }) {
+    return /^\d+$/.test(params.id);
+  },
+  components: { VeLike, VeComment, VeRecommend },
+})
+export default class PageView extends Vue {
+  head() {
+    return this.$AppCreateShareData({
+      title: this.PageStore.dataSource.title,
+      imgUrl: this.PageStore.dataSource.videoCoverUrl,
+    });
+  }
+  get id() {
+    return this.$route.params.id;
+  }
+  @Provide("VideoStore")
+  get VideoStore() {
+    return this.$store.$storeVideo;
+  }
+  get PageStore() {
+    return this.$store.$storeVideo.Details;
+  }
+  get options() {
+    return {
+      video: {
+        // thumbnails: this.PageStore.dataSource.videoCoverUrl,
+        pic: this.PageStore.dataSource.videoCoverUrl,
+        quality: this.PageStore.dataSource.quality,
+      },
+    };
+  }
+  onLike() {
+    console.log("onLike");
+  }
+  onPlaying() {
+    this.PageStore.onPlayNumber(this.id);
+  }
+  created() {
+    this.$setBreadcrumb(
+      { linksName: "视频分享", links: "video", linksKey: "video" },
+      true
+    ).setBreadcrumb({
+      linksName: this.PageStore.dataSource.title,
+    });
+  }
+  mounted() {
+    // console.log(this.$route);
+  }
+
+  updated() {}
+  destroyed() {}
+}
+</script>
+<style lang="less" >
+.xt-videoid {
+  &-grid {
+    color: @xt-yellow-6;
+    .van-grid-item__content--center {
+      padding: 0;
+    }
+    &.van-hairline--top::after {
+      opacity: 0;
+    }
+    .van-grid-item__content {
+      padding-top: 0;
+      padding-bottom: 0;
+      &::after {
+        opacity: 0;
+      }
+    }
+    .van-grid-item__icon {
+      font-size: 16px;
+    }
+  }
+}
+</style>

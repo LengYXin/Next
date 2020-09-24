@@ -19,12 +19,13 @@ import lodash from "lodash";
 })
 export default class PageView extends Vue {
   @Prop({ default: {} }) item;
+  @Prop({ default: true }) list;
   @Inject("VideoStore")
   PageStore: ControllerVideo;
   onClick() {
     try {
       this.$InspectUser();
-      this.PageStore.onLikes(this.item);
+      this.PageStore.onLikes(this.item, this.list);
     } catch (error) {
       this.$message.warn({ content: error, key: error });
     }

@@ -8,15 +8,12 @@
 
 <template>
   <div class="xt-content">
-    <xt-comment
-      v-for="item in Pagination.dataSource"
-      :key="item.id"
-      :comment="getComment(item)"
-    >
+    <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
       <div class="xt-font-size-base xt-font-family-FZLTHJW">
         <a-row type="flex" justify="space-between" algin="middle">
           <a-col class="xt-text-yellow">
-            来自《<span v-text="item.courseName"></span>》
+            来自《
+            <span v-text="item.courseName"></span>》
           </a-col>
           <a-space size="middle">
             <xt-action
@@ -39,22 +36,14 @@
       <template slot="overlay">
         <a-menu>
           <a-menu-item>
-            <a-popconfirm
-              title="确定删除作业?"
-              ok-text="确定"
-              cancel-text="取消"
-              @confirm="onDelete(item)"
-            >
+            <a-popconfirm title="确定删除作业?" ok-text="确定" cancel-text="取消" @confirm="onDelete(item)">
               <a href="javascript:;">删除</a>
             </a-popconfirm>
           </a-menu-item>
         </a-menu>
       </template>
     </xt-comment>
-    <xt-infinite-loading
-      :identifier="Pagination.onlyKey"
-      @loading="onLoading"
-    />
+    <xt-infinite-loading :identifier="Pagination.onlyKey" @loading="onLoading" />
     <!-- 作业详情 -->
     <HomeworkShow
       :momentId="reply.id"
@@ -142,7 +131,9 @@ export default class PageView extends Vue {
 
   mounted() {}
   updated() {}
-  destroyed() {}
+  destroyed() {
+    this.Pagination.onReset();
+  }
 }
 </script>
 <style>
