@@ -58,7 +58,7 @@
     <a-col :span="8" class="xt-signin-qrcode">
       <img :src="$images.logo" alt srcset />
       <a-space direction="vertical" align="center">
-        <xt-qrcode options="https://www.baidu.com/?tn=64075107_1_dg" />
+        <lyx-qrcode options="https://www.baidu.com/?tn=64075107_1_dg" />
         <div>微信扫码登录</div>
       </a-space>
     </a-col>

@@ -21,7 +21,7 @@ Vue.component('lyx-dplayer', () => import('./dplayer/index.vue'));
 // 富文本
 Vue.component('lyx-editor', () => import('./editor/index.vue'));
 // 检查登录
-Vue.component("xt-inspect", inspect);
+Vue.component("lyx-inspect", inspect);
 // 滚动
 Vue.component('lyx-infinite-loading', infiniteloading);
 // 表情
@@ -30,5 +30,5 @@ Vue.component('lyx-face', face);
 Vue.component('lyx-comment', comment);
 // 评论操作
 Vue.component('lyx-action', action);
-Vue.component("xt-qrcode", qrcode);
+Vue.component("lyx-qrcode", qrcode);
 Vue.use(VueVirtualScroller)

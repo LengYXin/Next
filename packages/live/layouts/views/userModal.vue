@@ -83,13 +83,13 @@
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import signin from "./signin.vue";
-import register from "./register.vue";
-import retrieve from "./retrieve.vue";
+// import register from "./register.vue";
+// import retrieve from "./retrieve.vue";
 import lodash from "lodash";
 import { Observer } from "mobx-vue";
 @Observer
 @Component({
-  components: { signin, register, retrieve },
+  components: { signin },
 })
 export default class extends Vue {
   get PageStore() {

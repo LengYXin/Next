@@ -11,11 +11,11 @@ import "~/components/index";
 import "./icon";
 import "./usePlugins/alife-logger";
 import "./usePlugins/ant";
-import i18n from "./usePlugins/i18n";
+// import i18n from "./usePlugins/i18n";
 import "./usePlugins/lazyload";
-import "./usePlugins/swiper";
+// import "./usePlugins/swiper";
 export default (context: Context) => {
     console.log("LENG: context", context)
-    i18n(context)
+    // i18n(context)
     console.groupEnd()
 }

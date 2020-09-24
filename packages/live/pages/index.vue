@@ -6,7 +6,7 @@
  * @desc 视频
  */
 <template>
-  <xt-inspect inspect>
+  <lyx-inspect inspect>
     <div class="lyx-layout">
       <a-row type="flex">
         <a-col :lg="18">
@@ -15,9 +15,9 @@
         <a-col :lg="6">
           <message />
         </a-col>
-      </a-row>
+      </a-row> 
     </div>
-  </xt-inspect>
+  </lyx-inspect>
 </template>
 <script lang="ts">
 import lodash from "lodash";
