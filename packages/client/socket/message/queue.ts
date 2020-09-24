@@ -26,7 +26,7 @@ export class SocketMessageQueue<T> {
     @action
     onPush(msg: SocketMessage.MessageContent) {
         this._dataSource.push(msg);
-        this.SuccessSubject.next()
+        this.SuccessSubject.next(msg)
     }
     /**
      * 解析消息

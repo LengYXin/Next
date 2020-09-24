@@ -33,6 +33,7 @@
     "core-js": "^3.6.5",
     "crypto-js": "^4.0.0",
     "dplayer": "^1.26.0",
+    "flv.js": "^1.5.0",
     "lodash": "^4.17.20",
     "lodash-decorators": "^6.0.1",
     "mobx": "^5.15.7",

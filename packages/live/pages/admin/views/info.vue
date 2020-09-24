@@ -6,25 +6,18 @@
  * @desc 视频
  */
 <template>
-  <div class="lyx-header">
-    <a-row class="lyx-header-row">
-      <a-col class="lyx-header-avatar" :span="4">
-        <a-avatar
-          :size="52"
-          src="https://oss-free.xuantong.cn/thumbPath/daf64bd8e1647294c1ba436ffbed03cc.blob"
-        />
-      </a-col>
-      <a-col class="lyx-header-title" :span="20">
-        <h1 v-text="Details.dataSource.classhourName">
-          第15课《玄密塔碑》楷书进阶~
-        </h1>
-        <div class="lyx-header-time">
-          <a-tag class="lyx-header-tag">直播</a-tag>
-          <time v-dateFormat="Details.dataSource.courseStartTime" format="YYYY.MM.DD HH:mm:ss" />
-        </div>
-      </a-col>
-    </a-row>
-    <div class="lyx-header-des">
+  <div class="lyx-admininfo">
+    <h1 class="lyx-admininfo-title" v-text="Details.dataSource.classhourName">
+      第15课《玄密塔碑》楷书进阶~
+    </h1>
+    <div class="lyx-admininfo-time">
+      <a-tag class="lyx-admininfo-tag">直播</a-tag>
+      <time
+        v-dateFormat="Details.dataSource.courseStartTime"
+        format="YYYY.MM.DD HH:mm:ss"
+      />
+    </div>
+    <div class="lyx-admininfo-des">
       简介：<span v-text="Details.dataSource.classhourIntroduction"></span>
     </div>
   </div>
@@ -55,27 +48,20 @@ export default class extends Vue {
   mounted() {
     this.onLoading(this.id);
   }
+  created() {}
   updated() {}
   destroyed() {}
 }
 </script>
 <style lang="less" scoped>
-.lyx-header {
-  padding: 53px 0 0;
-  font-family: PingFangSC-Regular, PingFang SC;
-  &-row {
-    // padding: 0 20px;
-  }
-  &-avatar {
-    text-align: center;
-  }
+.lyx-admininfo {
   &-tag {
     background: #f05a5a;
     color: #fff;
     border: none;
   }
   &-title {
-    padding-right: 20px;
+    padding: 18px 20px;
     > h1 {
       font-size: 23px;
       font-weight: 600;
@@ -85,6 +71,7 @@ export default class extends Vue {
     }
   }
   &-time {
+    padding: 18px 20px 24px;
     font-size: 16px;
     font-weight: 400;
     color: #999999;
@@ -98,16 +85,6 @@ export default class extends Vue {
     line-height: 25px;
     text-align: justify;
     position: relative;
-    &::after {
-      content: " ";
-      position: absolute;
-      display: block;
-      height: 1px;
-      bottom: 0;
-      background: #d0d0d0;
-      left: 20px;
-      right: 20px;
-    }
   }
 }
 </style>

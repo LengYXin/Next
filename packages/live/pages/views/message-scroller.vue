@@ -58,7 +58,7 @@ export default class extends Vue {
     return this.$store.$socketMessage;
   }
   get id() {
-    return "123"; //this.$route.params.id;
+    return this.$route.params.id;
   }
   get Scroller(): any {
     return this.$refs.Scroller;
@@ -74,6 +74,7 @@ export default class extends Vue {
   }
   getComment(item) {
     return {
+      question: item.content.question,
       content: item.content.content,
       avatar: item.header,
       author: item.nickName,
@@ -85,17 +86,10 @@ export default class extends Vue {
     // lodash.delay(() => this.Scroller.scrollToBottom(), 100);
     requestAnimationFrame(this.Scroller.scrollToBottom);
   }
-  async onLink() {
-    await this.socketMessage.onLink(this.id);
-    // this.socketMessage.WebSocketSubject.subscribe((msg) => {
-    //   this.scrollToBottom();
-    // });
+  mounted() {
     this.MessageQueue.SuccessSubject.pipe(throttleTime(999)).subscribe(() => {
       this.scrollToBottom();
     });
-  }
-  mounted() {
-    this.onLink();
   }
 
   updated() {}

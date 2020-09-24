@@ -9,7 +9,7 @@
   <div class="lyx-comment">
     <a-comment>
       <a-badge slot="avatar">
-        <div v-if="comment.jushou" slot="count" class="lyx-comment-badge">
+        <div v-if="comment.question" slot="count" class="lyx-comment-badge">
           <svg class="lyx-icon" aria-hidden="true">
             <use xlink:href="#video-jushou" />
           </svg>
@@ -90,7 +90,7 @@ export default class extends Vue {
     // 时间
     time: string;
     // 举手
-    jushou: boolean;
+    question: boolean;
     // // 回复
     // toUserName: string;
   };
@@ -139,7 +139,7 @@ export default class extends Vue {
   &-badge {
     left: 0;
     right: initial;
-    transform: translate(-50%, -50%) !important;
+    transform: translate(-40%, -40%) !important;
   }
   &-dropdown {
     position: absolute;

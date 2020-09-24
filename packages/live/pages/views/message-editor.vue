@@ -8,18 +8,30 @@
 <template>
   <a-row class="lyx-msg-editor">
     <a-col class="lyx-msg-editor-avatar" :span="4" @click="onText">
-      <a-avatar
-        :size="40"
-        src="https://oss-free.xuantong.cn/thumbPath/daf64bd8e1647294c1ba436ffbed03cc.blob"
-      />
+      <a-badge class="xt-badge xt-badge-left">
+        <span class="lyx-editor-span" slot="count" v-if="question">
+          <svg class="lyx-icon lyx-icon-jushou" aria-hidden="true">
+            <use xlink:href="#video-jushou" />
+          </svg>
+        </span>
+        <a-avatar :size="40" :src="UserStore.UserInfo.headThumbnailUri" />
+      </a-badge>
     </a-col>
     <a-col :span="19">
       <lyx-editor
         placeholder="和同学们聊聊吧…"
-        :rules="{required:true}"
+        :rules="{ required: true }"
         class="lyx-editor-single"
         @submit="onSubmit"
-      />
+      >
+        <template #toolbar>
+          <span class="lyx-editor-span" @click="onQuestion">
+            <svg class="lyx-icon lyx-icon-jushou" aria-hidden="true">
+              <use xlink:href="#video-jushou" />
+            </svg>
+          </span>
+        </template>
+      </lyx-editor>
     </a-col>
   </a-row>
 </template>
@@ -34,26 +46,32 @@ import { interval } from "rxjs";
   components: {},
 })
 export default class extends Vue {
+  get UserStore() {
+    return this.$store.$storeUser;
+  }
   get socketMessage() {
     return this.$store.$socketMessage;
   }
   get id() {
-    return "123"; //this.$route.params.id;
+    return this.$route.query.id as string;
   }
-
+  question = false;
+  // 提问
+  onQuestion(question = !this.question) {
+    this.question = question;
+  }
   async onSubmit(event) {
     try {
-      event.onReset();
       this.socketMessage.onSendRichTxt({
-        senderId: "6a757a92-693b-419b-9063-aac86b2b0121",
-        nickName: "LENG",
-        header:
-          "https://oss-free.xuantong.cn/thumbPath/daf64bd8e1647294c1ba436ffbed03cc.blob",
-        chan: this.id,
+        nickName: this.UserStore.UserInfo.nickName,
+        header: this.UserStore.UserInfo.headThumbnailUri,
         content: {
+          question: this.question,
           content: event.html,
         },
       });
+      event.onReset();
+      this.onQuestion(false);
     } catch (error) {
       console.log("LENG: PageView -> onSubmit -> error", error);
       // this.$message.error(error);
@@ -88,7 +106,7 @@ export default class extends Vue {
             ]),
             jushou: lodash.sample([true, false]),
           };
-        }),
+        })
         // delay(100)
         // throttleTime(1000)
       )
@@ -104,11 +122,13 @@ export default class extends Vue {
   destroyed() {}
 }
 </script>
-<style lang="less" scoped>
+<style lang="less" >
 .lyx-msg-editor {
   padding-top: 20px;
   &-avatar {
     text-align: center;
+  }
+  &-badge {
   }
 }
 </style>

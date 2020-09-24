@@ -13,6 +13,9 @@
     />-->
     <toolbar @submit="onSubmit" :rules="rules" :buttonText="buttonText" :quill="quill">
       <slot></slot>
+      <template slot="toolbar">
+        <slot name="toolbar"></slot>
+      </template>
       <template slot="submit">
         <slot name="submit"></slot>
       </template>

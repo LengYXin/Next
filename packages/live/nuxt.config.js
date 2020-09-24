@@ -93,7 +93,7 @@ module.exports = {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: headconfig,
-  router,
+  router: lodash.merge(router, { base: env.base }),
   env,
   proxy,
   generate,

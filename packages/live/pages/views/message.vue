@@ -30,6 +30,21 @@ import layHeader from "./message-header.vue";
   components: { scroller, editor, layHeader },
 })
 export default class extends Vue {
+  get id() {
+    return this.$route.query.id as string;
+  }
+  get MessageQueue() {
+    return this.socketMessage.MessageQueue;
+  }
+  get socketMessage() {
+    return this.$store.$socketMessage;
+  }
+  async onLink() {
+    await this.socketMessage.onLink(this.id);
+  }
+  created() {
+    this.onLink();
+  }
   updated() {}
   destroyed() {}
 }
@@ -37,7 +52,7 @@ export default class extends Vue {
 <style lang="less" scoped>
 .lyx-message {
   height: 100vh;
-    background: #fff;
+  background: #fff;
   &-header {
     background: #fff;
     height: auto;

@@ -11,6 +11,7 @@
 
 <script lang="ts">
 import dplayer from "dplayer";
+import flvjs from "flv.js";
 import lodash from "lodash";
 import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
 @Component({
@@ -24,30 +25,53 @@ export default class extends Vue {
   mounted() {
     // console.log(lodash.cloneDeep(this.options));
     try {
-      this.dplayer = new dplayer(
-        lodash.merge(
-          {
-            container: this.$refs.dplayer,
-            screenshot: true,
-            video: {
-              defaultQuality: 1,
-              // url:
-              //   "https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4",
-              // pic: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
-              // thumbnails:
-              //   "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
+      const config = lodash.merge(
+        {
+          container: this.$refs.dplayer,
+          screenshot: true,
+          autoplay: true,
+          video: {
+            defaultQuality: 1,
+            // url:
+            //   "https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4",
+            // pic: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
+            // thumbnails:
+            //   "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
+            type: "customFlv",
+            customType: {
+              customFlv: function (video, player) {
+                const flvPlayer = flvjs.createPlayer({
+                  type: "flv",
+                  url: video.src,
+                });
+                flvPlayer.attachMediaElement(video);
+                flvPlayer.load();
+              },
             },
-            // subtitle: {
-            //   url: "https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt",
-            // },
-            // danmaku: {
-            //   id: "demo",
-            //   api: "https://api.prprpr.me/dplayer/",
-            // },
           },
-          this.options
-        )
+          // subtitle: {
+          //   url: "https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt",
+          // },
+          danmaku: {
+            id: "live",
+            // api: "https://api.prprpr.me/dplayer/",
+          },
+          // pluginOptions: {
+          //   flv: {
+          //     // refer to https://github.com/bilibili/flv.js/blob/master/docs/api.md#flvjscreateplayer
+          //     mediaDataSource: {
+          //       // mediaDataSource config
+          //     },
+          //     config: {
+          //       // config
+          //     },
+          //   },
+          // },
+        },
+        this.options
       );
+      this.dplayer = new dplayer(config);
+      console.log("LENG: extends -> mounted -> config", config);
       this.dplayer.on("playing", () => {
         if (this.isPlaying) {
           return;
@@ -78,6 +102,9 @@ export default class extends Vue {
 @import "./style.less";
 .lyx-dplayer {
   height: 100%;
+  .dplayer-comment {
+    display: none !important;
+  }
   .dplayer-video {
     // object-fit: cover;
   }
