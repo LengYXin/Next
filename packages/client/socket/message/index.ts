@@ -8,7 +8,7 @@ import { AjaxBasics } from "../../helpers/ajaxBasics";
 import { SocketMessageQueue } from "./queue";
 @BindAll()
 export class SocketMessage {
-    constructor(protected $ajax: AjaxBasics) {
+    constructor(protected $ajax: AjaxBasics,protected $socketAjax: AjaxBasics) {
 
     }
     options = {
@@ -41,8 +41,8 @@ export class SocketMessage {
      * @param chan 
      */
     async onLink(chan) {
-        const res = await this.$ajax.post<any>(this.options.connectUrl, { chan });
-        await this.$ajax.post(this.options.joinUrl, { ...res, chan })
+        const res = await this.$socketAjax.post<any>(this.options.connectUrl, { chan });
+        await this.$socketAjax.post(this.options.joinUrl, { ...res, chan })
         this.WebSocketSubject = webSocket({
             url: `${this.protocol}${res.imServer}`,
             deserializer: e => {
@@ -88,7 +88,7 @@ export class SocketMessage {
      * @param content 
      */
     async onSendRichTxt(content: SocketMessage.MessageContent) {
-        await this.$ajax.post<any>(this.options.sendUrl, {
+        await this.$socketAjax.post<any>(this.options.sendUrl, {
             senderId: "6a757a92-693b-419b-9063-aac86b2b0121",
             chan: "123",
             msg: lodash.merge<SocketMessage.MessageContent, SocketMessage.MessageContent>({

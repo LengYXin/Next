@@ -60,6 +60,13 @@ class XTGlobal {
      */
     DEPLOY_ENV: typeof process.env.DEPLOY_ENV = lodash.get(window, '__xt__env.DEPLOY_ENV', process.env.DEPLOY_ENV);
     /**
+     * 本地 dev
+     * @memberof XTGlobal
+     */
+    get dev() {
+        return this.NODE_ENV === 'development'
+    }
+    /**
      *生产环境
      * @memberof XTGlobal
      */
