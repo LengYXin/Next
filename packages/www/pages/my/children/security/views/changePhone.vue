@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-14 19:26:54
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-17 20:57:36
+ * @LastEditTime: 2020-09-22 11:49:08
  * @Description: 修改密码折叠内容
 -->
 <template>
@@ -18,24 +18,7 @@
       <span class="xt-text-yellow" v-phone="PageStore.UserInfo.phoneNum"></span>
     </a-form-model-item>
 
-    <a-form-model-item
-      ref="phone"
-      label="新手机号"
-      prop="phone"
-      v-else
-      :rules="[
-        {
-          required: true,
-          message: '请输入手机号码',
-          trigger: 'change',
-        },
-        {
-          pattern: $regulars.mobilePhone,
-          message: '请输入正确的手机号码',
-          trigger: 'blur',
-        },
-      ]"
-    >
+    <a-form-model-item ref="phoneRef" label="新手机号" prop="phone" v-else>
       <a-input
         allowClear
         size="large"
@@ -47,7 +30,7 @@
     </a-form-model-item>
 
     <a-form-model-item
-      ref="confirmCode"
+      ref="confirmCodeRef"
       label="短信验证码"
       prop="confirmCode"
       :autoLink="false"
@@ -60,16 +43,8 @@
             :maxLength="6"
             placeholder="请输入六位验证码"
             v-model="phoneForm.confirmCode"
-            @blur="
-              () => {
-                $refs.confirmCode.onFieldBlur();
-              }
-            "
-            @change="
-              () => {
-                $refs.confirmCode.onFieldChange();
-              }
-            "
+            @blur="confirmCodeRef.onFieldBlur()"
+            @change="confirmCodeRef.onFieldChange()"
           />
         </a-col>
         <a-col :span="10">
@@ -109,8 +84,8 @@
         class="ant-btn-yellow"
         type="primary"
         html-type="submit"
-        >下一步</a-button
-      >
+        v-text="isEnterNewPhone ? '绑定' : '下一步'"
+      />
     </a-form-model-item>
   </a-form-model>
 </template>
@@ -128,6 +103,9 @@ export default class PageView extends Vue {
     return this.$store.$storeUser;
   }
   @Ref("phoneFormRef") phoneFormRef;
+  @Ref("phoneRef") phoneRef;
+  @Ref("confirmCodeRef") confirmCodeRef;
+
   phoneForm = {
     phone: "",
     confirmCode: "",
@@ -135,13 +113,7 @@ export default class PageView extends Vue {
   rules = {
     phone: [
       {
-        required: true,
-        message: "请输入手机号码",
-        trigger: "change",
-      },
-      {
-        pattern: this.$regulars.mobilePhone,
-        message: "请输入正确的手机号码",
+        validator: this.validatePhone,
         trigger: "blur",
       },
     ],
@@ -161,15 +133,47 @@ export default class PageView extends Vue {
   deadline = 60;
   isStartCountDown = false;
   isEnterNewPhone = false;
+
+  /**
+   * 手机号字段验证
+   */
+  validatePhone(rule, value, callback) {
+    if (value == "") {
+      callback(new Error("请输入手机号码"));
+    } else if (!this.$regulars.mobilePhone.test(value)) {
+      callback(new Error("请输入正确的手机号码"));
+    } else if (value == this.PageStore.UserInfo.phoneNum) {
+      callback(new Error("新手机号不能与原手机号相同"));
+    } else {
+      callback();
+    }
+  }
+
+  /**
+   * 表单提交
+   */
   onSubmit(e) {
     e.preventDefault();
-    this.phoneFormRef.validate((valid) => {
+    this.phoneFormRef.validate(async (valid) => {
       if (valid) {
-        this.onCheckConfirmCode({
-          phone: this.PageStore.UserInfo.phoneNum,
-          confirmCode: this.phoneForm.confirmCode,
-          type: 4,
-        });
+        if (this.isEnterNewPhone) {
+          let phone = this.phoneForm.phone;
+          await this.onCheckConfirmCode({
+            phone: phone,
+            confirmCode: this.phoneForm.confirmCode,
+            type: 4,
+          });
+          this.isEnterNewPhone = false;
+          this.$message.success("绑定成功");
+          this.$emit("reset");
+        } else {
+          let phone = this.PageStore.UserInfo.phoneNum;
+          await this.onCheckConfirmCode({
+            phone: phone,
+            confirmCode: this.phoneForm.confirmCode,
+            type: 4,
+          });
+        }
       }
     });
   }
@@ -183,6 +187,9 @@ export default class PageView extends Vue {
       this.phoneForm.confirmCode = "";
       this.toggleCountDown(false);
       this.isEnterNewPhone = true;
+      this.$nextTick(() => {
+        this.phoneFormRef.addField(this.phoneRef);
+      });
     } catch (error) {}
   }
 
@@ -190,21 +197,23 @@ export default class PageView extends Vue {
    * 发送验证码
    */
   async onSendSms() {
-    this.phoneFormRef.validateField("phone", (err) => {
-      console.log("PageView -> onSendSms -> err", err);
-    });
     // this.toggleCountDown(true);
-
-    return;
+    // return;
     let phone = this.PageStore.UserInfo.phoneNum;
     if (this.isEnterNewPhone) {
+      // 验证新手机号成功后再发送
       phone = this.phoneForm.phone;
-      this.phoneFormRef.validateField("phone", (err) => {
-        console.log("PageView -> onSendSms -> err", err);
+      this.phoneFormRef.validateField("phone", async (err) => {
+        if (!err) {
+          await this.PageStore.onSendSms(phone, 4);
+          this.toggleCountDown(true);
+        }
       });
+    } else {
+      // 直接发送
+      await this.PageStore.onSendSms(phone, 4);
+      this.toggleCountDown(true);
     }
-    await this.PageStore.onSendSms(phone, 4);
-    this.toggleCountDown(true);
   }
 
   /**

@@ -2,13 +2,14 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-17 17:19:33
+ * @LastEditTime: 2020-09-24 16:53:33
  * @Description: 安全设置
 -->
 
 <template>
   <div class="xt-content xt-my-security">
     <a-collapse
+      v-model="activeKey"
       accordion
       :bordered="false"
       expandIconPosition="right"
@@ -28,7 +29,7 @@
           <span v-if="props.isActive">收起</span>
           <span v-else>编辑</span>
         </template>
-        <ChangePassword />
+        <ChangePassword @reset="onResetCollapse" />
       </a-collapse-panel>
 
       <a-collapse-panel key="2" class="xt-my-security-panel">
@@ -40,7 +41,7 @@
           ></span>
         </template>
         <template slot="extra">编辑</template>
-        <ChangePhone />
+        <ChangePhone @reset="onResetCollapse" />
       </a-collapse-panel>
 
       <a-collapse-panel key="3" class="xt-my-security-panel">
@@ -76,6 +77,11 @@ import ChangePhone from "./views/changePhone.vue";
 export default class PageView extends Vue {
   get PageStore() {
     return this.$store.$storeUser;
+  }
+  activeKey = null;
+  // 关闭折叠面板
+  onResetCollapse() {
+    this.activeKey = null;
   }
   mounted() {}
   updated() {}

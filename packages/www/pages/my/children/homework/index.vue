@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-03 10:33:03
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-10 19:13:53
+ * @LastEditTime: 2020-09-21 17:47:32
  * @Description: 我的作业
 -->
 
@@ -146,8 +146,6 @@ export default class PageView extends Vue {
    * 晒作业
    */
   async onSunWork(item) {
-    console.log("PageView -> onSunWork -> item", item);
-
     try {
       await this.Pagination.onSunWork(item);
       this.$message.success({
@@ -170,7 +168,9 @@ export default class PageView extends Vue {
   }
   mounted() {}
   updated() {}
-  destroyed() {}
+  destroyed() {
+    this.Pagination.onReset();
+  }
 }
 </script>
 <style lang="less" scope>

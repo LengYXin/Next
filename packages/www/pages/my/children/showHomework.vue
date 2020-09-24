@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-10 18:38:06
+ * @LastEditTime: 2020-09-21 17:47:02
  * @Description: 我晒出的作业
 -->
 
@@ -74,9 +74,9 @@ import HomeworkShow from "~/components/business/homework/show.vue";
 
 @Observer
 @Component({
-  async fetch(ctx: Context) {
-    await ctx.store.$my.MySunWork.onLoading();
-  },
+  // async fetch(ctx: Context) {
+  //   await ctx.store.$my.MySunWork.onLoading();
+  // },
   scrollToTop: true,
   components: { HomeworkShow },
 })

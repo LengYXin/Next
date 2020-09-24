@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-15 14:54:26
+ * @LastEditTime: 2020-09-24 16:36:27
  * @Description: 个人信息
 -->
 
@@ -125,7 +125,7 @@ import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
 import { DatePicker } from "ant-design-vue";
 import Location from "./views/location.vue";
-import { DataMy } from "../../../../../client/dataSource";
+import { dataSource_My } from "@xt/client";
 
 @Observer
 @Component({
@@ -133,7 +133,7 @@ import { DataMy } from "../../../../../client/dataSource";
   components: { DatePicker, Location },
 })
 export default class PageView extends Vue {
-  enumOptions = DataMy;
+  enumOptions = dataSource_My;
   get PageStore() {
     return this.$store.$storeUser;
   }
@@ -201,6 +201,7 @@ export default class PageView extends Vue {
   async onSubmit() {
     try {
       await this.PageStore.onUpdateUserInfo(this.userForm);
+      await this.PageStore.onGetUserInfo();
       this.$message.success({
         content: "保存成功",
         key: "onUpdateUserInfo",

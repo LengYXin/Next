@@ -23,7 +23,10 @@
       <RenderItem slot="renderItem" slot-scope="item" :dataSource="item" />
     </a-list>
     <!-- 存在 更改地址栏 页签的时候 设置 key 用于触发初始化 change   -->
-    <xt-infinite-loading @loading="onLoading" :identifier="Pagination.onlyKey" />
+    <xt-infinite-loading
+      @loading="onLoading"
+      :identifier="Pagination.onlyKey"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -59,6 +62,8 @@ export default class PageView extends Vue {
   }
   mounted() {}
   updated() {}
-  destroyed() {}
+  destroyed() {
+    this.Pagination.onReset();
+  }
 }
 </script>
