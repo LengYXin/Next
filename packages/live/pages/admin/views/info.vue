@@ -3,7 +3,7 @@
  * @email lengyingxin8966@gmail.com
  * @create date 2020-08-05 14:16:12
  * @modify date 2020-08-05 14:16:12
- * @desc 视频
+ * @desc 信息
  */
 <template>
   <div class="lyx-admininfo">
@@ -19,6 +19,10 @@
     </div>
     <div class="lyx-admininfo-des">
       简介：<span v-text="Details.dataSource.classhourIntroduction"></span>
+    </div>
+    <div class="lyx-admininfo-live">
+      <h1>推流地址</h1>
+      <div v-text="liveUrl"></div>
     </div>
   </div>
 </template>
@@ -40,6 +44,9 @@ export default class extends Vue {
   get id() {
     return this.$route.query.id as string;
   }
+  get liveUrl() {
+    return window.location.origin + `/live?id=${this.id}`;
+  }
   async onLoading(classhourId) {
     if (classhourId) {
       this.Details.onLoading({ classhourId });
@@ -55,36 +62,48 @@ export default class extends Vue {
 </script>
 <style lang="less" scoped>
 .lyx-admininfo {
+  background: #fff;
   &-tag {
     background: #f05a5a;
     color: #fff;
     border: none;
   }
   &-title {
-    padding: 18px 20px;
-    > h1 {
-      font-size: 23px;
-      font-weight: 600;
-      color: rgba(0, 0, 0, 0.85);
-      line-height: 31px;
-      margin: 0;
-    }
+    padding: 10px 20px;
+    font-size: 23px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 31px;
+    margin: 0;
   }
   &-time {
-    padding: 18px 20px 24px;
+    padding: 10px 20px;
     font-size: 16px;
     font-weight: 400;
     color: #999999;
     line-height: 25px;
   }
   &-des {
-    padding: 18px 20px 24px;
+    padding: 10px 20px;
     font-size: 18px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.85);
     line-height: 25px;
     text-align: justify;
     position: relative;
+  }
+  &-live {
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 25px;
+    text-align: justify;
+    position: relative;
+    > div {
+      background: #f4f5f8;
+      padding: 20px;
+    }
   }
 }
 </style>

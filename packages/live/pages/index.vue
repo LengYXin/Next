@@ -8,14 +8,14 @@
 <template>
   <lyx-inspect inspect>
     <div class="lyx-layout">
-      <a-row type="flex">
+      <a-row type="flex" class="lyx-layout-row">
         <a-col :lg="18">
           <lyx-dplayer ref="dplayer" :options="options" />
         </a-col>
         <a-col :lg="6">
           <message />
         </a-col>
-      </a-row> 
+      </a-row>
     </div>
   </lyx-inspect>
 </template>
@@ -55,7 +55,15 @@ export default class extends Vue {
         dplayer.danmaku.draw(
           {
             text: this["formatFace"](lodash.get(msg, "content.content")),
-            color: lodash.sample(['#d0021b', '#f5a623', '#8b572a', '#7ed321', '#9013fe', '#4a90e2', '#50e3c2']),
+            color: lodash.sample([
+              "#d0021b",
+              "#f5a623",
+              "#8b572a",
+              "#7ed321",
+              "#9013fe",
+              "#4a90e2",
+              "#50e3c2",
+            ]),
             type: "right", // should be `top` `bottom` or `right`
           }
           // function () {
@@ -66,7 +74,7 @@ export default class extends Vue {
     });
   }
   mounted() {
-    console.log("LENG: extends -> mounted -> this", this)
+    console.log("LENG: extends -> mounted -> this", this);
   }
 
   updated() {}
@@ -75,17 +83,11 @@ export default class extends Vue {
 </script>
 <style lang="less" scoped>
 .lyx-layout {
-  height: 100vh;
-  width: 100vw;
+  &-row {
+    height: 100vh;
+    width: 100vw;
+  }
+
   font-family: PingFangSC-Regular, PingFang SC;
-}
-</style>
-<style lang="less">
-.lyx-icon {
-  width: 2em;
-  height: 2em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
 }
 </style>

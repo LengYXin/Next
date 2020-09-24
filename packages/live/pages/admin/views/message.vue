@@ -6,10 +6,10 @@
  * @desc 视频
  */
 <template>
-  <a-layout class="lyx-message">
-    <a-layout-header class="lyx-message-header">
+  <a-layout class="lyx-message" v-auto-height="{ styleKey: 'minHeight', subtract: 140 }">
+    <!-- <a-layout-header class="lyx-message-header">
       <layHeader />
-    </a-layout-header>
+    </a-layout-header> -->
     <a-layout-content class="lyx-message-content">
       <scroller />
     </a-layout-content>
