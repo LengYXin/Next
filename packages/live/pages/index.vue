@@ -55,7 +55,7 @@ export default class extends Vue {
         dplayer.danmaku.draw(
           {
             text: this["formatFace"](lodash.get(msg, "content.content")),
-            color: "#b7daff",
+            color: lodash.sample(['#d0021b', '#f5a623', '#8b572a', '#7ed321', '#9013fe', '#4a90e2', '#50e3c2']),
             type: "right", // should be `top` `bottom` or `right`
           }
           // function () {
@@ -65,7 +65,9 @@ export default class extends Vue {
       }
     });
   }
-  mounted() {}
+  mounted() {
+    console.log("LENG: extends -> mounted -> this", this)
+  }
 
   updated() {}
   destroyed() {}

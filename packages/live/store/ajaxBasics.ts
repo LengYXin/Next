@@ -56,9 +56,9 @@ export function onResetAjaxBasics($storeUser: ControllerUser) {
     }
     AjaxBasics.onNProgress = function (type: 'start' | 'done' = 'start') {
         if (type == "start") {
-            NProgress.start();
+            // NProgress.start();
         } else {
-            NProgress.done();
+            // NProgress.done();
         }
     }
 }

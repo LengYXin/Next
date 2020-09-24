@@ -139,7 +139,7 @@ export default class extends Vue {
   }
   onSubmit() {}
   mounted() {
-    console.log(this);
+    // console.log(this);
   }
   updated() {}
   destroyed() {}

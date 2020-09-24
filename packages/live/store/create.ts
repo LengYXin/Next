@@ -29,7 +29,7 @@ const store = {
   // 语言
   $locale,
   // 菜单
-  // $menu,
+  $menu,
   // 全局
   $global,
   // // 首页
@@ -99,7 +99,7 @@ declare module "vuex/types/index" {
     /**
      * 菜单
      */
-    // readonly $menu: typeof $menu;
+    readonly $menu: typeof $menu;
     // /**
     //  * 本地语音全局状态
     //  */

@@ -47,7 +47,7 @@ export default class extends Vue {
     include: "PageIndex",
   };
   mounted() {
-    console.log(this);
+    // console.log(this);
   }
   updated() {}
   destroyed() {}

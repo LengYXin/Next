@@ -9,10 +9,7 @@
   <div class="lyx-header">
     <a-row class="lyx-header-row">
       <a-col class="lyx-header-avatar" :span="4">
-        <a-avatar
-          :size="52"
-          src="https://oss-free.xuantong.cn/thumbPath/daf64bd8e1647294c1ba436ffbed03cc.blob"
-        />
+        <a-avatar :size="52" :src="$images.avatar" />
       </a-col>
       <a-col class="lyx-header-title" :span="20">
         <h1 v-text="Details.dataSource.classhourName">
@@ -20,7 +17,10 @@
         </h1>
         <div class="lyx-header-time">
           <a-tag class="lyx-header-tag">直播</a-tag>
-          <time v-dateFormat="Details.dataSource.courseStartTime" format="YYYY.MM.DD HH:mm:ss" />
+          <time
+            v-dateFormat="Details.dataSource.courseStartTime"
+            format="YYYY.MM.DD HH:mm:ss"
+          />
         </div>
       </a-col>
     </a-row>
@@ -65,9 +65,13 @@ export default class extends Vue {
   font-family: PingFangSC-Regular, PingFang SC;
   &-row {
     // padding: 0 20px;
+    height: 52px;
+    overflow: hidden;
   }
   &-avatar {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center
   }
   &-tag {
     background: #f05a5a;
@@ -80,7 +84,7 @@ export default class extends Vue {
       font-size: 23px;
       font-weight: 600;
       color: rgba(0, 0, 0, 0.85);
-      line-height: 31px;
+      line-height: 30px;
       margin: 0;
     }
   }
@@ -88,7 +92,7 @@ export default class extends Vue {
     font-size: 16px;
     font-weight: 400;
     color: #999999;
-    line-height: 25px;
+    line-height: 22px;
   }
   &-des {
     padding: 18px 20px 24px;
