@@ -7,13 +7,12 @@
  */
 <template>
   <div class="lyx-layout">
-    <a-row>
+    <a-row type="flex">
       <a-col :lg="18">
         <lyx-dplayer :options="dplayer" />
       </a-col>
       <a-col :lg="6">
         <message />
-        <!-- <lyx-editor class="lyx-editor-single" /> -->
       </a-col>
     </a-row>
   </div>
@@ -23,6 +22,9 @@ import lodash from "lodash";
 import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
 import message from "./views/message.vue";
 @Component({
+  validate({ query }) {
+    return /^\d+$/.test(query.id as string);
+  },
   components: { message },
 })
 export default class extends Vue {
@@ -31,7 +33,8 @@ export default class extends Vue {
     video: {
       url:
         "https://xuantong-upload-private.oss-cn-beijing.aliyuncs.com/videoPath/dbc23465d21913b6728ef4ebd600da64.mov?Expires=1600935726&OSSAccessKeyId=LTAI4FoTa7tgoQpv1j3SU8zZ&Signature=DaNpXPquohTU%2F4T6uhikZonFU5Y%3D",
-      pic: "https://oss-free.xuantong.cn/picturePath/cdb95ce45e19957a1a55284c710b911c.png",
+      pic:
+        "https://oss-free.xuantong.cn/picturePath/cdb95ce45e19957a1a55284c710b911c.png",
       // thumbnails: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
     },
   };

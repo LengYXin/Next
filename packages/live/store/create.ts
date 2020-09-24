@@ -29,13 +29,13 @@ const store = {
   // 语言
   $locale,
   // 菜单
-  $menu,
+  // $menu,
   // 全局
   $global,
   // // 首页
   // $storeHome: new ControllerHome(ajax),
   // // 课程
-  // $storeCourse: new ControllerCourse(ajax),
+  $storeCourse: new ControllerCourse(ajax),
   // // 文房
   // $storeStationery: new ControllerStationery(ajax),
   // // 视频
@@ -50,7 +50,7 @@ const store = {
   // 用户
   $storeUser: new ControllerUser(ajax),
   // 我的
-  $my: new ControllerMy(ajax)
+  // $my: new ControllerMy(ajax)
 };
 // 重置 AjaxBasics 配置
 onResetAjaxBasics(store.$storeUser);
@@ -111,7 +111,7 @@ declare module "vuex/types/index" {
     // /**
     //  * 课程控制器
     //  */
-    // readonly $storeCourse: ControllerCourse;
+    readonly $storeCourse: ControllerCourse;
     // /**
     //  * 文房
     //  * @type {ControllerStationery}
