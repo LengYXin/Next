@@ -2,6 +2,7 @@ import lodash from 'lodash';
 import en from './en';
 import zh from './zh';
 export * from './enumLocale';
+export * from './enumMessage';
 /**
  * 默认语音包
  */

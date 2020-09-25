@@ -3,16 +3,24 @@
     <xt-editor
       class="xt-editor-upload-hide"
       @submit="onSubmit"
-      :rules="{required:true,max:2000}"
+      :rules="{ required: true, max: 2000 }"
       buttonText="发布评论"
     ></xt-editor>
-    <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
+    <xt-comment
+      v-for="item in Pagination.dataSource"
+      :key="item.id"
+      :comment="getComment(item)"
+    >
       <template slot="actions">
-        <xt-action @click="onLikes(item)" :statistics="item.likeCount" :action="item.likeRecord" />
+        <xt-action
+          @click="onLikes(item)"
+          :statistics="item.likeCount"
+          :action="item.likeRecord"
+        />
         <xt-action @click="onReply(item)" title="回复" />
       </template>
       <xt-editor
-        @submit="onSubmit($event,item)"
+        @submit="onSubmit($event, item)"
         v-if="eqReply(item)"
         class="xt-editor-single"
         placeholder="回复xxx"
@@ -73,8 +81,9 @@ export default class PageView extends Vue {
     try {
       this.$InspectUser();
       this.Pagination.onLikes(data);
+      this.$message.success(this.$tc(this.$EnumMessage.like_success));
     } catch (error) {
-      this.$message.warning({ content: error, key: "onLikes" });
+      this.$message.warn({ content: this.$tc(error), key: error });
     }
   }
   /**

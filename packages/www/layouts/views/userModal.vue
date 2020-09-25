@@ -1,5 +1,6 @@
 <template>
   <span v-if="PageStore.loggedIn">
+    <!-- 已登录信息展示 -->
     <a-popover placement="bottomRight">
       <template slot="content">
         <div class="user-modal-warp">
@@ -11,7 +12,8 @@
                     :src="PageStore.UserInfo.headThumbnailUri"
                     :alt="PageStore.UserInfo.nickName"
                     :size="55"
-                /></a-col>
+                  />
+                </a-col>
                 <a-col>
                   <nuxt-link
                     :to="'/my/information'"
@@ -68,14 +70,8 @@
     >
       <div v-show="PageStore.visible">
         <signin v-if="isSignin" @toggle="onToggle" />
-        <register
-          v-else-if="title === locale.links_register"
-          @toggle="onToggle"
-        />
-        <retrieve
-          v-else-if="title === locale.links_retrieve"
-          @toggle="onToggle"
-        />
+        <register v-else-if="isRegister" @toggle="onToggle" />
+        <retrieve v-else-if="isRetrieve" @toggle="onToggle" />
       </div>
     </a-modal>
   </a-space>
@@ -101,6 +97,12 @@ export default class extends Vue {
       [this.locale.links_signin, "", undefined],
       this.title
     );
+  }
+  get isRegister() {
+    return lodash.eq(this.locale.links_register, this.title);
+  }
+  get isRetrieve() {
+    return lodash.eq(this.locale.links_retrieve, this.title);
   }
   get locale() {
     return this.$EnumLocaleLinks;

@@ -1,11 +1,11 @@
 /// <reference types="./video" />
 import { BindAll } from 'lodash-decorators';
-import { EnumApiCurrency, EnumApiVideo } from '../../api';
+import { EnumApiVideo } from '../../api';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
+import { EnumMessage } from '../../languages';
 import { Pagination } from '../basics/pagination';
 import { VideoCommentPagination } from './comment';
 import { VideoDetails } from './details';
-import { toJS } from 'mobx';
 
 @BindAll()
 export class ControllerVideo {
@@ -51,7 +51,7 @@ export class ControllerVideo {
     onLikes(data, list = true) {
         try {
             if (data.isLiked) {
-                throw '已点赞'
+                throw EnumMessage.like_error
             }
             const updater = (old) => {
                 old.likeCount++;

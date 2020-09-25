@@ -2,7 +2,7 @@ import { BindAll } from 'lodash-decorators';
 import { EnumApiVideo } from '../../api';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
 import { Pagination } from '../basics/pagination';
-import { toJS } from 'mobx';
+import { EnumMessage } from '../../languages';
 
 @BindAll()
 export class VideoCommentPagination extends Pagination<any>{
@@ -27,7 +27,7 @@ export class VideoCommentPagination extends Pagination<any>{
     onLikes(data) {
         try {
             if (data.likeRecord) {
-                throw '已点赞'
+                throw EnumMessage.like_error
             }
             this.onUpdate(data, (old) => {
                 old.likeCount++;

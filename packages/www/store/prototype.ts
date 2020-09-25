@@ -6,7 +6,7 @@
  * @desc [description]
  */
 // import * as EnumApi from '@xt/client/api';
-import { AjaxBasics, EnumLocaleDescriptions, EnumLocaleLinks, EnumApiCurrency, Regulars } from '@xt/client';
+import { AjaxBasics, EnumLocaleDescriptions, EnumLocaleLinks, EnumMessage, EnumApiCurrency, Regulars } from '@xt/client';
 import lodash from 'lodash';
 import moment from "moment";
 import { toJS } from 'mobx';
@@ -18,6 +18,7 @@ import images from './images';
 Vue.prototype.$ajax = ajax;
 Vue.prototype.$EnumApiCurrency = EnumApiCurrency;
 Vue.prototype.$EnumLocaleLinks = EnumLocaleLinks;
+Vue.prototype.$EnumMessage = EnumMessage;
 Vue.prototype.$EnumLocaleDescriptions = EnumLocaleDescriptions;
 Vue.prototype.$images = images;
 Vue.prototype.$regulars = Regulars;
@@ -69,6 +70,8 @@ declare module 'vue/types/vue' {
         readonly $EnumApiCurrency: typeof EnumApiCurrency;
         /** 链接枚举 */
         readonly $EnumLocaleLinks: typeof EnumLocaleLinks;
+        /** 消息枚举 */
+        readonly $EnumMessage: typeof EnumMessage;
         /** 说明枚举 */
         readonly $EnumLocaleDescriptions: typeof EnumLocaleDescriptions;
         /** 图片资源 */

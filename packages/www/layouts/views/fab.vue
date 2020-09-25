@@ -1,6 +1,6 @@
 <template>
   <div class="xt-fab">
-    <a-tooltip placement="left">
+    <!-- <a-tooltip placement="left">
       <template slot="title">
         <span>
           点击此按钮，可以查看您所报名的 《从书法之美到生活之美
@@ -14,7 +14,7 @@
         <div>教</div>
         <div>室</div>
       </a>
-    </a-tooltip>
+    </a-tooltip> -->
 
     <a-popover placement="left">
       <template slot="content">

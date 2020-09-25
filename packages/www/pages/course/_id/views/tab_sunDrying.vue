@@ -8,7 +8,11 @@
 <template>
   <xt-inspect inspect>
     <div class="xt-content-small xt-course-sunDrying">
-      <xt-editor @submit="onSubmit" :rules="{ required: true, max: 2000 }" buttonText="晒作业"></xt-editor>
+      <xt-editor
+        @submit="onSubmit"
+        :rules="{ required: true, max: 2000 }"
+        buttonText="晒作业"
+      ></xt-editor>
       <xt-comment
         v-for="item in Pagination.dataSource"
         :key="item.id"
@@ -48,7 +52,12 @@
         <template slot="overlay">
           <a-menu>
             <a-menu-item v-if="$eqUser(item.userId)">
-              <a-popconfirm title="确定删除作业?" ok-text="确定" cancel-text="取消" @confirm="onDelete(item)">
+              <a-popconfirm
+                title="确定删除作业?"
+                ok-text="确定"
+                cancel-text="取消"
+                @confirm="onDelete(item)"
+              >
                 <a href="javascript:;">删除</a>
               </a-popconfirm>
             </a-menu-item>
@@ -61,7 +70,10 @@
         </template>
         <!-- <xt-editor /> -->
       </xt-comment>
-      <xt-infinite-loading :identifier="Pagination.onlyKey" @loading="onLoading" />
+      <xt-infinite-loading
+        :identifier="Pagination.onlyKey"
+        @loading="onLoading"
+      />
       <!-- 晒作业详情 -->
       <HomeworkShow
         :momentId="reply.id"
@@ -71,7 +83,11 @@
       />
     </div>
     <!-- 没有登录显示内容 -->
-    <a-empty slot="not" :image="$images.logo" description="报名后，可以浏览晒作业栏哦~~" />
+    <a-empty
+      slot="not"
+      :image="$images.logo"
+      description="报名后，可以浏览晒作业栏哦~~"
+    />
   </xt-inspect>
 </template>
 <script lang="ts">
@@ -134,6 +150,7 @@ export default class PageView extends Vue {
       });
       event.onReset();
       this.Pagination.onReset();
+      this.$message.success(this.$tc(this.$EnumMessage.sundrying_success));
     } catch (error) {
       console.log("LENG: PageView -> onSubmit -> error", error);
       // this.$message.error(error);
@@ -155,7 +172,7 @@ export default class PageView extends Vue {
     try {
       await this.Pagination.onLikes(item);
     } catch (error) {
-      this.$message.warning({ content: error, key: "likes" });
+      this.$message.warning({ content: this.$tc(error), key: "likes" });
     }
   }
   created() {

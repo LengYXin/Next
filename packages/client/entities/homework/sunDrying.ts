@@ -2,8 +2,7 @@ import { BindAll } from 'lodash-decorators';
 import { EnumApiHomework } from '../../api';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
 import { Pagination } from '../basics/pagination';
-import { EntitiesBasics } from '../basics/entities';
-import { toJS } from 'mobx';
+import { EnumMessage } from '../../languages';
 /**
  * 晒作业
  * @export
@@ -53,7 +52,7 @@ export class ControllerHomeworkSunDrying extends Pagination<any> {
      */
     async onLikes(data) {
         if (data.likeRecord) {
-            throw '您已经点过赞了'
+            throw EnumMessage.like_error
         }
         this.onUpdate(data, (old) => {
             old.likeCount++;

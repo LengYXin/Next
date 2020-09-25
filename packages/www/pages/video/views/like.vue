@@ -26,8 +26,9 @@ export default class PageView extends Vue {
     try {
       this.$InspectUser();
       this.PageStore.onLikes(this.item, this.list);
+      this.$message.success(this.$tc(this.$EnumMessage.like_success));
     } catch (error) {
-      this.$message.warn({ content: error, key: error });
+      this.$message.warn({ content: this.$tc(error), key: error });
     }
   }
   mounted() {}
