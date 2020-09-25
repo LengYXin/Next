@@ -9,18 +9,30 @@
   <div class="xt-content xt-video">
     <xt-refresh-list :Pagination="Pagination" :body="body">
       <template #renderItem="item">
-        <nuxt-link :to="{name:'video-id',params:{id:item.id}}">
+        <nuxt-link :to="{ name: 'video-id', params: { id: item.id } }">
           <div class="xt-video-item">
             <h1 class="xt-video-title" v-text="item.title"></h1>
-            <div class="xt-video-des van-multi-ellipsis--l2" v-text="item.summary" v-show="item.summary"></div>
-            <time class="xt-video-time" v-dateFormat="item.publishTime" format="YYYY-MM-DD" />
+            <div
+              class="xt-video-des van-multi-ellipsis--l2"
+              v-text="item.summary"
+              v-show="item.summary"
+            ></div>
+            <time
+              class="xt-video-time"
+              v-dateFormat="item.publishTime"
+              format="YYYY-MM-DD"
+            />
             <div class="xt-video-cover">
-              <img v-lazy="item.videoCoverUrl" />
+              <van-image fit="cover" lazy-load :src="item.videoCoverUrl" />
               <div class="xt-flex-center">
                 <van-icon name="play-circle-o" />
               </div>
             </div>
-            <van-grid class="xt-video-grid" direction="horizontal" column-num="3">
+            <van-grid
+              class="xt-video-grid"
+              direction="horizontal"
+              column-num="3"
+            >
               <van-grid-item icon="friends-o" :text="String(item.playCount)" />
               <van-grid-item icon="chat-o" :text="String(item.commentCount)" />
               <VeLike :item="item" />

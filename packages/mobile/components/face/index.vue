@@ -40,7 +40,7 @@ Vue.prototype.formatFace = function (html: string) {
         html = lodash.replace(
           html,
           reg,
-          `<span class="van-image van-image--round xt-face"><img src="${face.icon}"></span>`
+          `<span class="van-image--round xt-face"><img src="${face.icon}"></span>`
         );
       }
     });
@@ -68,12 +68,14 @@ export default class extends Vue {
   height: 24px !important;
   margin: 0 3px !important;
 }
+.xt-face,
 p>img[src^='//img.t.sinajs.cn/'],
 p>img[src^='http://img.t.sinajs.cn/'],
 p>img[src^='https://img.t.sinajs.cn/']
 {
-  width: 24px !important;
-  height: 24px !important;
+  display: inline-block;
+  width: 18px !important;
+  height: 18px !important;
   margin: 0 2px !important;
   transform: translateY(3px);
 }

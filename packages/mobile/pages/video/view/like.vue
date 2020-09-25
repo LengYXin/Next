@@ -28,7 +28,7 @@ export default class PageView extends Vue {
       }
       this.PageStore.onLikes(this.item, this.list);
     } catch (error) {
-      this.$toast(error);
+      this.$toast(this.$tc(error));
     }
   }
   mounted() {}

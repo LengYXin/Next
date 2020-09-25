@@ -6,11 +6,26 @@
  * @desc 写字的事
  */
 <template>
-  <xt-refresh-list :Pagination="Pagination" :body="body">
-    <template #renderItem="item">
-      <img v-lazy="item.thumbUrl" />
-    </template>
-  </xt-refresh-list>
+  <div class="xt-content xt-about xt-padding-top-lg">
+    <xt-refresh-list :Pagination="Pagination" :body="body">
+      <template #renderItem="item">
+        <a target="_blank" :href="item.articleUrl">
+          <van-image fit="cover" lazy-load :src="item.thumbUrl" />
+          <h1 class="xt-text-black xt-title-h5 xt-margin-tb-md" v-text="item.articleTitle" />
+          <h2
+            class="xt-text-gray xt-margin-tb-md xt-font-size-base van-multi-ellipsis--l2"
+            v-text="item.articleIntroduction"
+          />
+          <time
+            class="xt-margin-tb-md xt-text-grey"
+            v-dateFormat="item.publishTime"
+            format="YYYY-MM-DD"
+          />
+          <van-divider />
+        </a>
+      </template>
+    </xt-refresh-list>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
