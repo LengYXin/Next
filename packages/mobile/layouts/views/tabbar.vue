@@ -23,7 +23,7 @@
         <van-tabbar-item icon="setting-o" replace to="/my">
           <span>我的</span>
           <template #icon="props">
-            <van-icon :name="props.active ? 'friends' : 'friends-o'" />
+            <van-icon :name="props.active ? 'manager' : 'manager-o'" />
           </template>
         </van-tabbar-item>
       </van-tabbar>
