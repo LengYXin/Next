@@ -172,7 +172,7 @@ export default class PageView extends Vue {
     try {
       await this.Pagination.onLikes(item);
     } catch (error) {
-      this.$message.warning({ content: this.$tc(error), key: "likes" });
+      this.$message.warning({ content: this.$tc(error), key: error });
     }
   }
   created() {
