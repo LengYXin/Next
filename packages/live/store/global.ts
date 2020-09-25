@@ -78,6 +78,14 @@ class XTGlobal {
     get production() {
         return this.DEPLOY_ENV === 'pro'
     }
+     /**
+     * 微信浏览器
+     * @readonly
+     * @memberof XTGlobal
+     */
+    get WechatBowser() {
+        return lodash.eq(this.userAgent.browser.name, Bowser.BROWSER_MAP.wechat)
+    }
     /**
      * 检查版本信息 
      */
