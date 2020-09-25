@@ -2,36 +2,34 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-14 19:26:54
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-25 13:28:26
- * @Description: 绑定手机号
+ * @LastEditTime: 2020-09-25 13:23:39
+ * @Description: 绑定邮箱
 -->
 <template>
   <a-form-model
-    ref="phoneFormRef"
-    :model="phoneForm"
+    ref="emailFormRef"
+    :model="emailForm"
     :rules="rules"
     v-bind="layout"
     @submit="onSubmit"
     :hideRequiredMark="true"
   >
-    <a-form-model-item label="已绑定手机号" v-if="!isEnterNewPhone">
-      <span class="xt-text-yellow" v-phone="PageStore.UserInfo.phoneNum"></span>
+    <a-form-model-item label="已绑定邮箱号" v-if="!isEnterNewEmail">
+      <span class="xt-text-yellow" v-text="PageStore.UserInfo.email"></span>
     </a-form-model-item>
 
-    <a-form-model-item ref="phoneRef" label="新手机号" prop="phone" v-else>
+    <a-form-model-item ref="emailRef" label="邮箱账号" prop="email" v-else>
       <a-input
         allowClear
         size="large"
-        :maxLength="11"
-        addon-before="+86"
-        v-model="phoneForm.phone"
-        placeholder="请输入新手机号"
+        v-model="emailForm.email"
+        placeholder="请输入邮箱"
       />
     </a-form-model-item>
 
     <a-form-model-item
       ref="confirmCodeRef"
-      label="短信验证码"
+      label="邮箱验证码"
       prop="confirmCode"
       :autoLink="false"
     >
@@ -42,7 +40,7 @@
             size="large"
             :maxLength="6"
             placeholder="请输入六位验证码"
-            v-model="phoneForm.confirmCode"
+            v-model="emailForm.confirmCode"
             @blur="confirmCodeRef.onFieldBlur()"
             @change="confirmCodeRef.onFieldChange()"
           />
@@ -54,7 +52,7 @@
             size="large"
             class="ant-btn-line-yellow xt-text-black"
             type="primary"
-            @click="onSendSms"
+            @click="onSendEmail"
             >获取验证码
           </a-button>
 
@@ -84,7 +82,7 @@
         class="ant-btn-yellow"
         type="primary"
         html-type="submit"
-        v-text="isEnterNewPhone ? '绑定' : '下一步'"
+        v-text="isEnterNewEmail ? '绑定' : '下一步'"
       />
     </a-form-model-item>
   </a-form-model>
@@ -102,18 +100,18 @@ export default class PageView extends Vue {
   get PageStore() {
     return this.$store.$storeUser;
   }
-  @Ref("phoneFormRef") phoneFormRef;
-  @Ref("phoneRef") phoneRef;
+  @Ref("emailFormRef") emailFormRef;
+  @Ref("emailRef") emailRef;
   @Ref("confirmCodeRef") confirmCodeRef;
 
-  phoneForm = {
-    phone: "",
+  emailForm = {
+    email: "",
     confirmCode: "",
   };
   rules = {
-    phone: [
+    email: [
       {
-        validator: this.validatePhone,
+        validator: this.validateEmail,
         trigger: "blur",
       },
     ],
@@ -132,18 +130,18 @@ export default class PageView extends Vue {
   };
   deadline = 60;
   isStartCountDown = false;
-  isEnterNewPhone = this.PageStore.UserInfo.phoneNum ? false : true;
+  isEnterNewEmail = this.PageStore.UserInfo.email ? false : true;
 
   /**
    * 手机号字段验证
    */
-  validatePhone(rule, value, callback) {
+  validateEmail(rule, value, callback) {
     if (value == "") {
-      callback(new Error("请输入手机号码"));
-    } else if (!this.$regulars.mobilePhone.test(value)) {
-      callback(new Error("请输入正确的手机号码"));
-    } else if (value == this.PageStore.UserInfo.phoneNum) {
-      callback(new Error("新手机号不能与原手机号相同"));
+      callback(new Error("请输入邮箱"));
+    } else if (!this.$regulars.email.test(value)) {
+      callback(new Error("请输入正确的邮箱号码"));
+    } else if (value == this.PageStore.UserInfo.email) {
+      callback(new Error("新邮箱不能与原邮箱相同"));
     } else {
       callback();
     }
@@ -154,23 +152,24 @@ export default class PageView extends Vue {
    */
   onSubmit(e) {
     e.preventDefault();
-    this.phoneFormRef.validate(async (valid) => {
+    this.emailFormRef.validate(async (valid) => {
       if (valid) {
-        if (this.isEnterNewPhone) {
-          let phone = this.phoneForm.phone;
+        if (this.isEnterNewEmail) {
+          let email = this.emailForm.email;
           await this.onCheckConfirmCode({
-            findWay: phone,
-            confirmCode: this.phoneForm.confirmCode,
+            findWay: email,
+            confirmCode: this.emailForm.confirmCode,
             type: 4,
           });
-          this.isEnterNewPhone = false;
+          this.isEnterNewEmail = false;
+          this.PageStore.onGetUserInfo();
           this.$message.success("绑定成功");
           this.$emit("reset");
         } else {
-          let phone = this.PageStore.UserInfo.phoneNum;
+          let email = this.PageStore.UserInfo.email;
           await this.onCheckConfirmCode({
-            findWay: phone,
-            confirmCode: this.phoneForm.confirmCode,
+            findWay: email,
+            confirmCode: this.emailForm.confirmCode,
             type: 4,
           });
         }
@@ -184,34 +183,31 @@ export default class PageView extends Vue {
   async onCheckConfirmCode(body) {
     try {
       await this.PageStore.onCheckConfirmCode(body);
-      this.phoneForm.confirmCode = "";
+      this.emailForm.confirmCode = "";
       this.toggleCountDown(false);
-      this.isEnterNewPhone = true;
+      this.isEnterNewEmail = true;
       this.$nextTick(() => {
-        this.phoneFormRef.addField(this.phoneRef);
+        this.emailFormRef.addField(this.emailRef);
       });
     } catch (error) {}
   }
 
   /**
-   * 发送验证码
+   * 发送邮箱验证码
    */
-  async onSendSms() {
-    // this.toggleCountDown(true);
-    // return;
-    let phone = this.PageStore.UserInfo.phoneNum;
-    if (this.isEnterNewPhone) {
-      // 验证新手机号成功后再发送
-      phone = this.phoneForm.phone;
-      this.phoneFormRef.validateField("phone", async (err) => {
+  async onSendEmail() {
+    let email = this.PageStore.UserInfo.email;
+    if (this.isEnterNewEmail) {
+      email = this.emailForm.email;
+      this.emailFormRef.validateField("email", async (err) => {
         if (!err) {
-          await this.PageStore.onSendSms(phone, 4);
+          await this.PageStore.onSendEmail(email, 4);
           this.toggleCountDown(true);
         }
       });
     } else {
       // 直接发送
-      await this.PageStore.onSendSms(phone, 4);
+      await this.PageStore.onSendEmail(email, 4);
       this.toggleCountDown(true);
     }
   }

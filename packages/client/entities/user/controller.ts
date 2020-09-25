@@ -150,7 +150,7 @@ export class ControllerUser extends Entities {
   }
 
   /**
-   * 发送验证码
+   * 发送短信验证码
    */
   async onSendSms(phone, type) {
     await this.$ajax.post(EnumApiUser.SendSms, {
@@ -160,20 +160,25 @@ export class ControllerUser extends Entities {
   }
 
   /**
+   * 发送邮箱验证码
+   */
+  async onSendEmail(email, type) {
+    await this.$ajax.post(EnumApiUser.SendEmail, {
+      emailList: [email],
+      sendType: type,
+    })
+  }
+
+  /**
    * 检测验证码是否正确
    */
   async onCheckConfirmCode(body: {
-    phone?
+    findWay?
     confirmCode?
     isExist?: false
     type?
   }) {
-    await this.$ajax.post(EnumApiUser.CheckConfirmCode, {
-      findWay: body.phone,
-      confirmCode: body.confirmCode,
-      isExist: body.isExist,
-      type: body.type,
-    })
+    await this.$ajax.post(EnumApiUser.CheckConfirmCode, body)
   }
 }
 export default ControllerUser

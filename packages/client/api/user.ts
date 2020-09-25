@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-12 14:38:30
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-17 19:48:49
+ * @LastEditTime: 2020-09-25 11:18:31
  * @Description:
  */
 /**
@@ -25,8 +25,10 @@ export enum EnumApiUser {
   UpdateUserInfo = "/user/updateuserinfo",
   /** 更新密码 */
   UpdatePassword = "/user/updatepassword",
-  /** 发送短信 */
+  /** 发送短信验证码 */
   SendSms = "/send/sendSms",
+  /** 发送邮箱验证码 */
+  SendEmail = "/send/sendEmail",
   /** 检测验证码是否正确 */
   CheckConfirmCode = "/user/checkConfirmCode",
 }
