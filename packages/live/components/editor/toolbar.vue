@@ -17,16 +17,15 @@
           <svg class="lyx-icon lyx-icon-bq" aria-hidden="true">
             <use xlink:href="#video-biaoqing" />
           </svg>
-          <!-- <a-icon class="lyx-editor-icon" type="smile" /> -->
-          <!-- <span class="lyx-editor-icon-text">表情</span> -->
         </span>
       </a-popover>
       <a-divider type="vertical"></a-divider>
-      <span class="lyx-editor-span">
+      <!-- <span class="lyx-editor-span">
         <svg class="lyx-icon lyx-icon-jushou" aria-hidden="true">
           <use xlink:href="#video-jushou" />
         </svg>
-      </span>
+      </span> -->
+      <slot name="toolbar"></slot>
       <!-- 图片 -->
       <!-- <a-popover placement="rightTop" trigger="click">
         <template slot="content">

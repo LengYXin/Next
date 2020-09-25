@@ -24,13 +24,13 @@
         class="lyx-editor-single"
         @submit="onSubmit"
       >
-        <template #toolbar>
+        <!-- <template #toolbar>
           <span class="lyx-editor-span" @click="onQuestion()">
             <svg class="lyx-icon lyx-icon-jushou" aria-hidden="true">
               <use xlink:href="#video-jushou" />
             </svg>
           </span>
-        </template>
+        </template> -->
       </lyx-editor>
     </a-col>
   </a-row>

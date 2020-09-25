@@ -11,8 +11,17 @@
       style="display:none;"
       @change="emitImageInfo($event)"
     />-->
-    <toolbar @submit="onSubmit" :rules="rules" :buttonText="buttonText" :quill="quill">
+    <toolbar
+      ref="toolbar"
+      @submit="onSubmit"
+      :rules="rules"
+      :buttonText="buttonText"
+      :quill="quill"
+    >
       <slot></slot>
+      <template slot="toolbar">
+        <slot name="toolbar"></slot>
+      </template>
       <template slot="submit">
         <slot name="submit"></slot>
       </template>
@@ -124,6 +133,17 @@ export default {
         // toolbar: this.editorToolbar.length
         //   ? this.editorToolbar
         //   : defaultToolbar,
+        keyboard: {
+          // 回车按键
+          bindings: {
+            Enter: {
+              key: 13,
+              handler: () => {
+                this.$refs.toolbar.onSubmitRules();
+              },
+            },
+          },
+        },
         toolbar: [],
         // 只能写文字
         clipboard: {
@@ -199,7 +219,7 @@ export default {
     },
     handleTextChange(delta, oldContents) {
       if (!this.quill) {
-        return
+        return;
       }
       let editorContent =
         this.quill.getHTML() === "<p><br></p>" ? "" : this.quill.getHTML();
@@ -256,9 +276,8 @@ export default {
 .ql-snow .ql-thin {
   stroke-width: 1px !important;
 }
-.quillWrapper{
+.quillWrapper {
   animation: antFadeIn 0.3s;
-
 }
 .quillWrapper .ql-snow.ql-toolbar {
   // padding-top: 8px;
@@ -379,7 +398,7 @@ button.ql-active svg {
   flex-flow: row wrap;
 }
 .quillWrapper .ql-editor.ql-blank::before {
-  color: rgba(0,0,0,0.3);
+  color: rgba(0, 0, 0, 0.3);
   font-style: normal;
 }
 </style>

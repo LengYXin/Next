@@ -6,17 +6,19 @@
  * @desc [description]
  */
 import { Affix, Tag, Empty, Avatar, BackTop, Badge, Breadcrumb, Button, Card, Radio, Checkbox, Col, Comment, ConfigProvider, Descriptions, Divider, Dropdown, FormModel, Icon, Input, Layout, List, Menu, message, Modal, notification, Pagination, Popconfirm, Popover, Result, Row, Skeleton, Spin, Statistic, Steps, Tabs, Timeline, Tooltip, Upload } from 'ant-design-vue';
+import "ant-design-vue/lib/base/style/index";
+import "ant-design-vue/lib/space/style/index";
 import Base from 'ant-design-vue/lib/base';
 import Space from 'ant-design-vue/lib/space';
 import Vue from 'vue';
 Vue.use(Base)
-// Vue.use(Space)
+Vue.use(Space)
 Vue.use(ConfigProvider)
 Vue.use(Tag)
 Vue.use(Badge)
-// Vue.use(FormModel)
+Vue.use(FormModel)
 // Vue.use(Affix)
-// Vue.use(Empty)
+Vue.use(Empty)
 Vue.use(Layout)
 // Vue.use(Menu)
 Vue.use(Tabs)
@@ -29,7 +31,7 @@ Vue.use(Spin)
 Vue.use(Divider)
 // Vue.use(Popconfirm)
 Vue.use(Avatar)
-// Vue.use(Input)
+Vue.use(Input)
 Vue.use(List)
 Vue.use(Dropdown)
 // Vue.use(Descriptions)
@@ -44,7 +46,7 @@ Vue.use(Tooltip)
 Vue.use(Popover)
 Vue.use(Result)
 // Vue.use(Steps)
-// Vue.use(Checkbox)
+Vue.use(Checkbox)
 // Vue.use(Radio)
 // Vue.use(Statistic)
 // Vue.use(Timeline)

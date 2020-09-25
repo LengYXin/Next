@@ -8,9 +8,12 @@ import { AjaxBasics } from "../../helpers/ajaxBasics";
 import { SocketMessageQueue } from "./queue";
 @BindAll()
 export class SocketMessage {
-    constructor(protected $ajax: AjaxBasics,protected $socketAjax: AjaxBasics) {
+    constructor(protected $ajax: AjaxBasics, protected $socketAjax: AjaxBasics) {
 
     }
+    imServer = '';
+    wsId = '';
+    chan = '';
     options = {
         connectUrl: `/ws/pre-connect/{chan}`,
         joinUrl: '/channels/join',
@@ -41,7 +44,10 @@ export class SocketMessage {
      * @param chan 
      */
     async onLink(chan) {
+        this.chan = chan;
         const res = await this.$socketAjax.post<any>(this.options.connectUrl, { chan });
+        this.wsId = res.wsId;
+        this.imServer = res.imServer;
         await this.$socketAjax.post(this.options.joinUrl, { ...res, chan })
         this.WebSocketSubject = webSocket({
             url: `${this.protocol}${res.imServer}`,
@@ -89,8 +95,8 @@ export class SocketMessage {
      */
     async onSendRichTxt(content: SocketMessage.MessageContent) {
         await this.$socketAjax.post<any>(this.options.sendUrl, {
-            senderId: "6a757a92-693b-419b-9063-aac86b2b0121",
-            chan: "123",
+            senderId: this.wsId,
+            chan: this.chan,
             msg: lodash.merge<SocketMessage.MessageContent, SocketMessage.MessageContent>({
                 type: MessageType.chan_msg,
                 content: { type: ContentType.richTxt }

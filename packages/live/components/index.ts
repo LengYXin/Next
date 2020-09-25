@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueVirtualScroller from 'vue-virtual-scroller';
 import action from "./comment/action.vue";
+import inspect from "./business/user/inspect.vue";
+import qrcode from "./qrcode/index.vue";
 import comment from "./comment/index.vue";
 // 自动高度
 import "./directives/autoHeight";
@@ -18,7 +20,8 @@ import infiniteloading from "./infiniteloading/index.vue";
 Vue.component('lyx-dplayer', () => import('./dplayer/index.vue'));
 // 富文本
 Vue.component('lyx-editor', () => import('./editor/index.vue'));
-
+// 检查登录
+Vue.component("lyx-inspect", inspect);
 // 滚动
 Vue.component('lyx-infinite-loading', infiniteloading);
 // 表情
@@ -27,5 +30,5 @@ Vue.component('lyx-face', face);
 Vue.component('lyx-comment', comment);
 // 评论操作
 Vue.component('lyx-action', action);
-
+Vue.component("lyx-qrcode", qrcode);
 Vue.use(VueVirtualScroller)

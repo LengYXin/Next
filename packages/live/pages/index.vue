@@ -6,16 +6,18 @@
  * @desc 视频
  */
 <template>
-  <div class="lyx-layout">
-    <a-row type="flex">
-      <a-col :lg="18">
-        <lyx-dplayer :options="dplayer" />
-      </a-col>
-      <a-col :lg="6">
-        <message />
-      </a-col>
-    </a-row>
-  </div>
+  <lyx-inspect inspect>
+    <div class="lyx-layout">
+      <a-row type="flex" class="lyx-layout-row">
+        <a-col :lg="18">
+          <lyx-dplayer ref="dplayer" :options="options" />
+        </a-col>
+        <a-col :lg="6">
+          <message />
+        </a-col>
+      </a-row>
+    </div>
+  </lyx-inspect>
 </template>
 <script lang="ts">
 import lodash from "lodash";
@@ -29,19 +31,51 @@ import message from "./views/message.vue";
 })
 export default class extends Vue {
   // RootStore = RootStore();
-  dplayer = {
+  get MessageQueue() {
+    return this.socketMessage.MessageQueue;
+  }
+  get socketMessage() {
+    return this.$store.$socketMessage;
+  }
+  get dplayer() {
+    return (this.$refs?.dplayer as any)?.dplayer;
+  }
+  options = {
     video: {
-      url:
-        "https://xuantong-upload-private.oss-cn-beijing.aliyuncs.com/videoPath/dbc23465d21913b6728ef4ebd600da64.mov?Expires=1600935726&OSSAccessKeyId=LTAI4FoTa7tgoQpv1j3SU8zZ&Signature=DaNpXPquohTU%2F4T6uhikZonFU5Y%3D",
-      pic:
-        "https://oss-free.xuantong.cn/picturePath/cdb95ce45e19957a1a55284c710b911c.png",
+      url: "https://pull.alienwow.cc/live/wuwh.flv",
+      // pic:
+      //   "https://oss-free.xuantong.cn/picturePath/cdb95ce45e19957a1a55284c710b911c.png",
       // thumbnails: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
     },
   };
   created() {
-    console.log("LENG: extends -> created -> this", this);
+    this.MessageQueue.SuccessSubject.subscribe((msg) => {
+      const dplayer = (this.$refs?.dplayer as any)?.dplayer;
+      if (dplayer) {
+        dplayer.danmaku.draw(
+          {
+            text: this["formatFace"](lodash.get(msg, "content.content")),
+            color: lodash.sample([
+              "#d0021b",
+              "#f5a623",
+              "#8b572a",
+              "#7ed321",
+              "#9013fe",
+              "#4a90e2",
+              "#50e3c2",
+            ]),
+            type: "right", // should be `top` `bottom` or `right`
+          }
+          // function () {
+          //   console.log("success");
+          // }
+        );
+      }
+    });
   }
-  mounted() {}
+  mounted() {
+    console.log("LENG: extends -> mounted -> this", this);
+  }
 
   updated() {}
   destroyed() {}
@@ -49,17 +83,11 @@ export default class extends Vue {
 </script>
 <style lang="less" scoped>
 .lyx-layout {
-  height: 100vh;
-  width: 100vw;
+  &-row {
+    height: 100vh;
+    width: 100vw;
+  }
+
   font-family: PingFangSC-Regular, PingFang SC;
-}
-</style>
-<style lang="less">
-.lyx-icon {
-  width: 2em;
-  height: 2em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
 }
 </style>

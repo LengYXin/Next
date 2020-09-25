@@ -14,6 +14,14 @@ export class SocketMessageQueue<T> {
      */
     @observable
     private _dataSource: Array<SocketMessage.MessageContent> = [];
+    /**
+     * 问题
+     * @private
+     * @type {Array<SocketMessage.MessageContent>}
+     * @memberof SocketMessageQueue
+     */
+    @observable
+    private problem: Array<SocketMessage.MessageContent> = [];
 
     @computed
     get dataSource(): Array<SocketMessage.MessageContent> {
@@ -26,7 +34,7 @@ export class SocketMessageQueue<T> {
     @action
     onPush(msg: SocketMessage.MessageContent) {
         this._dataSource.push(msg);
-        this.SuccessSubject.next()
+        this.SuccessSubject.next(msg)
     }
     /**
      * 解析消息

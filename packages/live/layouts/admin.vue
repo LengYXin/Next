@@ -2,7 +2,7 @@
   <a-config-provider v-bind="config">
     <a-layout class="xt-layout">
       <a-layout-header class="xt-layout-header">
-       
+        <userModal />
       </a-layout-header>
       <!-- 占位 -->
       <a-layout-header></a-layout-header>
@@ -27,10 +27,12 @@ import zh_CN from "ant-design-vue/lib/locale-provider/zh_CN";
 // import layoutFooter from "./views/footer.vue";
 // import breadcrumb from "./views/breadcrumb.vue";
 // import fab from "./views/fab.vue";
+import userModal from "./views/userModal.vue";
 @Component({
-  components: { 
+  components: {
+    userModal
     // fab, headerMenu, headerUser, layoutFooter, breadcrumb
-     },
+  },
 })
 export default class extends Vue {
   get config() {

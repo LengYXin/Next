@@ -1,6 +1,9 @@
 <template>
   <a-config-provider v-bind="config">
-    <Nuxt :keep-alive="keepAlive" :keepAliveProps="keepAliveProps" />
+    <div>
+      <userModal />
+      <Nuxt :keep-alive="keepAlive" :keepAliveProps="keepAliveProps" />
+    </div>
     <div slot="renderEmpty">
       <!-- <span>暂时没有哦~</span> -->
     </div>
@@ -11,13 +14,15 @@ import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import zh_CN from "ant-design-vue/lib/locale-provider/zh_CN";
 // import headerMenu from "./views/headerMenu.vue";
 // import headerUser from "./views/headerUser.vue";
+import userModal from "./views/userModal.vue";
 // import layoutFooter from "./views/footer.vue";
 // import breadcrumb from "./views/breadcrumb.vue";
 // import fab from "./views/fab.vue";
 @Component({
-  components: { 
+  components: {
+    userModal,
     // fab, headerMenu, headerUser, layoutFooter, breadcrumb
-     },
+  },
 })
 export default class extends Vue {
   get config() {

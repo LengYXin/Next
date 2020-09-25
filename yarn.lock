@@ -5843,7 +5843,7 @@ es6-object-assign@^1.1.0:
   resolved "https://registry.npm.taobao.org/es6-object-assign/download/es6-object-assign-1.1.0.tgz#c2c3582656247c39ea107cb1e6652b6f9f24523c"
   integrity sha1-wsNYJlYkfDnqEHyx5mUrb58kUjw=
 
-es6-promise@^4.0.3:
+es6-promise@^4.0.3, es6-promise@^4.2.5:
   version "4.2.8"
   resolved "https://registry.npm.taobao.org/es6-promise/download/es6-promise-4.2.8.tgz#4eb21594c972bc40553d276e510539143db53e0a"
   integrity sha1-TrIVlMlyvEBVPSduUQU5FD21Pgo=
@@ -6349,6 +6349,14 @@ flush-write-stream@^1.0.0:
   dependencies:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
+
+flv.js@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npm.taobao.org/flv.js/download/flv.js-1.5.0.tgz#fa59bed4391d70435cfa8740ac40ec0070ef98ae"
+  integrity sha1-+lm+1DkdcENc+odArEDsAHDvmK4=
+  dependencies:
+    es6-promise "^4.2.5"
+    webworkify "^1.5.0"
 
 follow-redirects@1.5.10:
   version "1.5.10"
@@ -13576,6 +13584,11 @@ webpackbar@^4.0.0:
     std-env "^2.2.1"
     text-table "^0.2.0"
     wrap-ansi "^6.0.0"
+
+webworkify@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npm.taobao.org/webworkify/download/webworkify-1.5.0.tgz#734ad87a774de6ebdd546e1d3e027da5b8f4a42c"
+  integrity sha1-c0rYendN5uvdVG4dPgJ9pbj0pCw=
 
 whatwg-encoding@^1.0.5:
   version "1.0.5"
