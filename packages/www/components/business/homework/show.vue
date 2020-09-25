@@ -24,7 +24,11 @@
               <span v-text="PageStore.dataSource.viewCount"></span> 位同学看过
             </a-col>
             <a-space size="middle">
-              <xt-action icon="message" title="评论" :statistics="PageStore.dataSource.commentCount" />
+              <xt-action
+                icon="message"
+                title="评论"
+                :statistics="PageStore.dataSource.commentCount"
+              />
               <xt-action
                 icon="heart"
                 title="喜欢"
@@ -38,7 +42,12 @@
         <template slot="overlay">
           <a-menu>
             <a-menu-item v-if="$eqUser(PageStore.dataSource.userId)">
-              <a-popconfirm title="确定删除作业?" ok-text="确定" cancel-text="取消" @confirm="onConfirm">
+              <a-popconfirm
+                title="确定删除作业?"
+                ok-text="确定"
+                cancel-text="取消"
+                @confirm="onConfirm"
+              >
                 <a href="javascript:;">删除</a>
               </a-popconfirm>
             </a-menu-item>
@@ -140,7 +149,7 @@ export default class extends Vue {
       await this.PageStore.onLikes(item);
       await this.$emit("like", item);
     } catch (error) {
-      this.$message.warning({ content: error, key: "likes" });
+      this.$message.warning({ content: this.$tc(error), key: "likes" });
     }
   }
   /**

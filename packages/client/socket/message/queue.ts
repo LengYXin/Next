@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-09-25 15:58:24
+ * @modify date 2020-09-25 15:58:24
+ * @desc [description]
+ */
 import { observable, computed, action } from "mobx";
 import { Subject } from "rxjs";
 import { map, delay, throttleTime } from "rxjs/operators";

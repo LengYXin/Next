@@ -1,5 +1,9 @@
 /**
- * 课程详情
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-09-25 15:58:14
+ * @modify date 2020-09-25 15:58:14
+ * @desc [description]
  */
 declare module SocketMessage {
     enum MessageType {

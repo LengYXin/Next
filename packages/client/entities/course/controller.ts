@@ -15,7 +15,6 @@ export class ControllerCourse {
    * @memberof ControllerCourse
    */
   Details = new CourseDetails(this.$ajax);
-  
   /**
    * 分页列表数据
    * @memberof ControllerCourse
@@ -30,32 +29,6 @@ export class ControllerCourse {
       "courseSingleResponseVos"
     ),
   });
-
-  /**
-   * 分页列表数据
-   * @memberof ControllerCourse
-   */
-  PaginationH5List = new Pagination(this.$ajax, {
-    url: EnumApiCourse.CourseList,
-    key: "index",
-    currentKey: "pageIndex",
-    onMapValues: this.onFactoryH5("courseFullResponseVos"),
-  });
-
-  /**
-   * 分页列表数据 H5
-   * @memberof ControllerCourse
-   */
-  PaginationWeApp = new Pagination(this.$ajax, {
-    url: EnumApiCourse.UsercourseList,
-    key: "courseFullId",
-    currentKey: "pageIndex",
-    infinite: true,
-    onMapValues: this.onFactory(
-      "userCourseFullResponseVos",
-      "userCourseSingleResponseVos"
-    ),
-  });
   /**
    * onMapSource 工厂
    */
@@ -67,20 +40,6 @@ export class ControllerCourse {
           dataSource = lodash.concat(dataSource, [item]);
         }
         dataSource = lodash.concat(dataSource, lodash.get(item, childrenKey));
-      });
-      return { dataSource, total: res.total };
-    };
-  }
-  /**
-   * h5课程列表数据转换
-   * @param dataSourceKey
-   */
-  onFactoryH5(dataSourceKey) {
-    return (res) => {
-      let dataSource = [];
-      lodash.map(lodash.get(res, dataSourceKey), (item, index) => {
-        item.index = "full-" + index;
-        dataSource = lodash.concat(dataSource, item);
       });
       return { dataSource, total: res.total };
     };

@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-09-25 16:01:26
+ * @modify date 2020-09-25 16:01:26
+ * @desc 课程地图页
+ */
 /// <reference types="./course" />
 import { BindAll } from "lodash-decorators";
 import lodash from "lodash";
@@ -5,9 +12,6 @@ import { EnumApiCourse } from "../../api";
 import { AjaxBasics } from "../../helpers/ajaxBasics";
 import { EntitiesBasics } from "../basics/entities";
 import { computed, toJS, observable, runInAction } from "mobx";
-/**
- * 课程详情
- */
 @BindAll()
 export class CourseMap extends EntitiesBasics<any> {
   constructor(protected $ajax: AjaxBasics) {
@@ -27,6 +31,11 @@ export class CourseMap extends EntitiesBasics<any> {
    * @memberof CourseMap
    */
   Details = new CourseMapDetails(this.$ajax)
+  /**
+   * 地图页列表 追加 前后课程
+   * @readonly
+   * @memberof CourseMap
+   */
   @computed
   get mapList() {
     if (this._dataSource?.courseMapList) {

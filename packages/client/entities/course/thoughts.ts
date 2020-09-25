@@ -1,9 +1,15 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-09-25 16:02:09
+ * @modify date 2020-09-25 16:02:09
+ * @desc 感想
+ */
 import { BindAll } from 'lodash-decorators';
-import lodash from 'lodash';
+import { observable, runInAction } from 'mobx';
 import { EnumApiCourse } from '../../api';
 import { AjaxBasics } from '../../helpers/ajaxBasics';
 import { Pagination, PaginationResponse } from '../basics/pagination';
-import { observable, runInAction } from 'mobx';
 
 @BindAll()
 export class CourseThoughts extends Pagination<any> {

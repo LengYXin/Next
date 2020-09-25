@@ -9,7 +9,11 @@
   <div>
     <a-divider class="xt-text-yellow">最新回复</a-divider>
     <!-- 评论列表 -->
-    <xt-comment v-for="item in dataSource" :key="item.id" :comment="getComment(item)">
+    <xt-comment
+      v-for="item in dataSource"
+      :key="item.id"
+      :comment="getComment(item)"
+    >
       <template slot="actions">
         <xt-action
           @click="onReply(item)"
@@ -28,7 +32,12 @@
       <template slot="overlay">
         <a-menu>
           <a-menu-item v-if="$eqUser(item.userId)">
-            <a-popconfirm title="确定删除作业?" ok-text="确定" cancel-text="取消" @confirm="onConfirm(item)">
+            <a-popconfirm
+              title="确定删除作业?"
+              ok-text="确定"
+              cancel-text="取消"
+              @confirm="onConfirm(item)"
+            >
               <a href="javascript:;">删除</a>
             </a-popconfirm>
           </a-menu-item>
@@ -107,7 +116,7 @@ export default class extends Vue {
     try {
       await this.PageStore.onLikesComment(item);
     } catch (error) {
-      this.$message.warning({ content: error, key: "likes" });
+      this.$message.warning({ content: this.$tc(error), key: "likes" });
     }
   }
   onConfirm(item) {

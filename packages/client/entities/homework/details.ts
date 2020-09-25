@@ -1,8 +1,16 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-09-25 16:03:01
+ * @modify date 2020-09-25 16:03:01
+ * @desc 晒作业详情
+ */
 import { BindAll } from "lodash-decorators"
 import lodash from "lodash"
 import { EnumApiHomework } from "../../api"
 import { AjaxBasics } from "../../helpers/ajaxBasics"
 import { EntitiesBasics } from "../basics/entities"
+import { EnumMessage } from '../../languages';
 /**
  * 作业详情
  */
@@ -28,7 +36,7 @@ export class HomeworkDetails extends EntitiesBasics<any> {
   async onDeleteComment(body: { momentCommentId?, momentId?}) {
     this.onUpdate((old) => {
       const dataSource = old.momentComments;
-      const result = lodash.remove(dataSource, ['id', body.momentCommentId]);
+      lodash.remove(dataSource, ['id', body.momentCommentId]);
       old.momentComments = dataSource;
       return old
     })
@@ -40,7 +48,7 @@ export class HomeworkDetails extends EntitiesBasics<any> {
    */
   async onLikes(data) {
     if (data.likeRecord) {
-      throw "您已经点过赞了"
+      throw EnumMessage.like_error
     }
     this.onUpdate((old) => {
       old.likeCount++
@@ -55,7 +63,7 @@ export class HomeworkDetails extends EntitiesBasics<any> {
    */
   async onLikesComment(data) {
     if (data.likeRecord) {
-      throw "您已经点过赞了"
+      throw EnumMessage.like_error
     }
     this.onUpdate((old) => {
       const dataSource = old.momentComments;

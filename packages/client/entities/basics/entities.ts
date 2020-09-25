@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-09-25 15:59:49
+ * @modify date 2020-09-25 15:59:49
+ * @desc [description]
+ */
 import lodash from 'lodash';
 import { BindAll, Bind } from 'lodash-decorators';
 import { action, computed, observable, toJS } from 'mobx';
