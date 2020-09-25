@@ -26,7 +26,7 @@ function onRender(el, { value = 9 }: any) {
     const top = getPropertyValue('padding-top', style);
     const bottom = getPropertyValue('padding-bottom', style);
     const height = getPropertyValue('height', style) - top - bottom;
-    const lineheight = getPropertyValue('line-height', style, 26);
+    const lineheight = getPropertyValue('line-height', style, 20);
     const maxHeight = lineheight * value;
     el.style.maxHeight = maxHeight + 'px';
     // console.log("LENG: onRender -> height", {

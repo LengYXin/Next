@@ -2,7 +2,10 @@
   <div class="xt-videoid">
     <xt-dplayer :options="options" @playing="onPlaying" />
     <div class="xt-content">
-      <h1 class="xt-title-h5 xt-margin-tb-lg" v-text="PageStore.dataSource.title"></h1>
+      <h1
+        class="xt-title-h5 xt-margin-tb-lg"
+        v-text="PageStore.dataSource.title"
+      ></h1>
       <div
         v-if="PageStore.dataSource.summary"
         v-text="PageStore.dataSource.summary"
@@ -18,9 +21,19 @@
           />
         </van-col>
         <van-col span="16">
-          <van-grid class="xt-videoid-grid" direction="horizontal" column-num="3">
-            <van-grid-item icon="friends-o" :text="String(PageStore.dataSource.playCount)" />
-            <van-grid-item icon="chat-o" :text="String(PageStore.dataSource.commentCount)" />
+          <van-grid
+            class="xt-videoid-grid"
+            direction="horizontal"
+            column-num="3"
+          >
+            <van-grid-item
+              icon="friends-o"
+              :text="String(PageStore.dataSource.playCount)"
+            />
+            <van-grid-item
+              icon="chat-o"
+              :text="String(PageStore.dataSource.commentCount)"
+            />
             <VeLike :item="PageStore.dataSource" :list="false" />
           </van-grid>
         </van-col>
@@ -54,6 +67,7 @@ export default class PageView extends Vue {
     return this.$AppCreateShareData({
       title: this.PageStore.dataSource.title,
       imgUrl: this.PageStore.dataSource.videoCoverUrl,
+      desc: this.PageStore.dataSource.summary,
     });
   }
   get id() {

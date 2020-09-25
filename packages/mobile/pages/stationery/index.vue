@@ -20,10 +20,23 @@
       <template #content>
         <xt-refresh-list :key="activeKey" :Pagination="Pagination" :body="body">
           <van-grid :border="false" column-num="2">
-            <van-grid-item v-for="item in Pagination.dataSource" :key="item.commodityId">
-              <van-image lazy-load :src="item.commodityCoverUrl" />
-              <div class="xt-stationery-name" v-text="item.commodityName"></div>
-              <div class="xt-stationery-money xt-text-yellow" v-money="item.commodityPrice"></div>
+            <van-grid-item
+              v-for="item in Pagination.dataSource"
+              :key="item.commodityId"
+            >
+              <a :href="item.commodityUrl" target="_blank">
+                <van-image lazy-load :src="item.commodityCoverUrl" fit="cover" />
+                <div class="xt-stationery-info">
+                  <div
+                    class="xt-stationery-name xt-text-gray van-multi-ellipsis--l2"
+                    v-text="item.commodityName"
+                  ></div>
+                  <div
+                    class="xt-stationery-money xt-text-yellow"
+                    v-money="item.commodityPrice"
+                  ></div>
+                </div>
+              </a>
             </van-grid-item>
           </van-grid>
         </xt-refresh-list>
@@ -94,6 +107,9 @@ export default class Page extends Vue {
   }
 }
 .xt-stationery {
+  &-info {
+    min-height: 60px;
+  }
   &-name {
     text-align: left;
     width: 100%;

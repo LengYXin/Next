@@ -14,10 +14,18 @@
       <span class="xt-comment-author" v-text="comment.author"></span>
     </template>
     <template #desc>
-      <div class="xt-comment-content" v-ellipsis v-html="formatFace(content)"></div>
+      <div
+        class="xt-comment-content"
+        v-ellipsis
+        v-html="formatFace(content)"
+      ></div>
     </template>
     <template #price>
-      <time class="xt-comment-time" v-dateFormat="comment.time" format="MM-DD HH:mm" />
+      <time
+        class="xt-comment-time"
+        v-dateFormat="comment.time"
+        format="MM-DD HH:mm"
+      />
     </template>
     <template #num>
       <slot />
@@ -114,9 +122,10 @@ export default class extends Vue {
   word-break: break-all;
   display: block;
   transition: all 0.5s;
+  line-height: 20px;
   p {
     margin: auto;
-    line-height: 26px;
+    line-height: 20px;
     // max-height: 26px;
   }
 }

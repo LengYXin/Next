@@ -8,7 +8,14 @@
 
 <template>
   <div>
-    <van-search placeholder="请输入搜索关键词" show-action autofocus shape="round" @search="onSearch" @cancel="onCancel" />
+    <van-search
+      ref="search"
+      placeholder="请输入搜索关键词"
+      show-action
+      shape="round"
+      @search="onSearch"
+      @cancel="onCancel"
+    />
     <van-tabs>
       <van-tab title="课程">内容 1</van-tab>
       <van-tab title="视频">内容 2</van-tab>
@@ -19,13 +26,6 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
-import {
-  ControllerAbout,
-  ControllerCourse,
-  ControllerHome,
-  ControllerStationery,
-  ControllerVideo,
-} from "@xt/client";
 import lodash from "lodash";
 import { Observer } from "mobx-vue";
 import { Context } from "@nuxt/types";
@@ -35,11 +35,18 @@ import { Context } from "@nuxt/types";
   components: {},
 })
 export default class PageView extends Vue {
-  storeCourse = new ControllerCourse(this.$ajax);
-  storeAbout = new ControllerAbout(this.$ajax);
-  storeStationery = new ControllerStationery(this.$ajax);
-  @Provide("VideoStore")
-  storeVideo = new ControllerVideo(this.$ajax);
+  get storeCourse() {
+    return this.$store.$storeCourse;
+  }
+  get storeAbout() {
+    return this.$store.$storeAbout;
+  }
+  get storeStationery() {
+    return this.$store.$storeStationery;
+  }
+  get storeVideo() {
+    return this.$store.$storeVideo;
+  }
   get Pagination() {
     switch (this.activeKey) {
       case "course":
@@ -56,9 +63,6 @@ export default class PageView extends Vue {
         break;
     }
   }
-  // get PageStore() {
-  //   return this.$store.$storeCourse;
-  // }
   tabPane = [
     { key: "course", title: "课程" },
     { key: "about", title: "文章" },
@@ -100,7 +104,13 @@ export default class PageView extends Vue {
     this.Pagination.onReset({ infinite: true });
   }
   mounted() {
-    console.log("LENG: PageView -> mounted -> this", this);
+    try {
+      const ele: HTMLInputElement = (this.$refs
+        .search as HTMLDivElement).querySelector(".van-field__control");
+      ele.focus();
+    } catch (error) {
+      console.log("LENG: PageView -> mounted -> error", error);
+    }
   }
   updated() {}
   destroyed() {}
