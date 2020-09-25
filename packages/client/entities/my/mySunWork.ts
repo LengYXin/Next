@@ -45,7 +45,7 @@ export class ControllerMySunWork extends Pagination<any> {
    */
   onLikes(data) {
     try {
-      if (data.isLiked) {
+      if (data.likeRecord) {
         throw "已点赞"
       }
       this.onUpdate(data, (old) => {
