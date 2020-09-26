@@ -24,18 +24,10 @@ import lodash from "lodash";
 export default class extends Vue {
   // 注册当前页面 name 为 key
   key = this.$route.name;
-  // 固定模式
-  @Prop({ default: false }) affix;
-  // 固定距离
-  @Prop({ default: 72 }) offsetTop;
-  // 对其方式
-  @Prop({ default: "center" }) align;
   // 默认选择
   @Prop({ default: 0 }) defaultActiveKey;
   // tabPane
   @Prop({ default: [], required: true }) tabPane;
-  // 主题
-  @Prop({ default: "" }) theme;
   // 联动路由
   @Prop({ default: true }) linkageRoute;
   // 选择
@@ -45,9 +37,9 @@ export default class extends Vue {
     // return this.$el.isConnected && this.key === this.$route.name;
     return this.key === this.$route.name;
   }
-  get themeClass() {
-    return `xt-tabs-${this.theme} xt-tabs-${this.align}`;
-  }
+  // get themeClass() {
+  //   return `xt-tabs-${this.theme} xt-tabs-${this.align}`;
+  // }
   // 更改
   async tabsChange(activeKey) {
     if (this.linkageRoute) {

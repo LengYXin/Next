@@ -29,7 +29,7 @@ module.exports = (env) => {
             //  <link rel="preload" href="/assets/lib.b6ba1f1.js" as="script">
             { rel: 'preload', href: `${path.join(env.base, env.publicPath)}mocks/home.json`, as: 'fetch' },
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-            { rel: 'stylesheet', href: '//at.alicdn.com/t/font_2037753_6zobxeuq2hh.css' }
+            // { rel: 'stylesheet', href: '//at.alicdn.com/t/font_2037753_6zobxeuq2hh.css' }
         ],
         script: [
             { src: 'https://res2.wx.qq.com/open/js/jweixin-1.6.0.js' },
