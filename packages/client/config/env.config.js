@@ -73,6 +73,7 @@ function getWXAppid(env = DEPLOY_ENV) {
     const config = {
         pro: 'wx86b9c08d1269ab6e',
         uat: 'wxe3c9b33fb107e610',
+        test:'wxe3c9b33fb107e610',
         dev: 'wx1f0f91b6c707018b'
     }
     return lodash.get(config, env, config.dev)
