@@ -166,12 +166,9 @@ export default class PageView extends Vue {
     try {
       await this.MyWork.onSunWork(item, false);
       await this.$emit("sun", this.dataSource);
-      this.$message.success({
-        content: "晒作业成功",
-        key: "sunHomeworkSuccess",
-      });
+      this.$message.success(this.$tc(this.$EnumMessage.sundrying_success));
     } catch (error) {
-      this.$message.warning({ content: error, key: "sunHomeworkErr" });
+      this.$message.warning({ content: this.$tc(error), key: error });
     }
   }
 
@@ -190,7 +187,7 @@ export default class PageView extends Vue {
       event.onReset();
       this.onLoading();
     } catch (error) {
-      this.$message.warning({ content: error, key: "onReply" });
+      this.$message.warning({ content: this.$tc(error), key: error });
     }
   }
   mounted() {}

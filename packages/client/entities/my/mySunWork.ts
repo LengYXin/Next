@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-06 18:15:02
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-10 17:31:55
+ * @LastEditTime: 2020-09-26 16:54:01
  * @Description: 我晒出的作业列表
  */
 
@@ -10,6 +10,7 @@ import { BindAll } from "lodash-decorators"
 import { EnumApiMy, EnumApiHomework } from "../../api"
 import { AjaxBasics } from "../../helpers/ajaxBasics"
 import { Pagination } from "../basics/pagination"
+import { EnumMessage } from "../../languages"
 import { EntitiesBasics } from "../basics/entities"
 import { toJS } from "mobx"
 /**
@@ -46,7 +47,7 @@ export class ControllerMySunWork extends Pagination<any> {
   onLikes(data) {
     try {
       if (data.likeRecord) {
-        throw "已点赞"
+        throw EnumMessage.like_error
       }
       this.onUpdate(data, (old) => {
         old.likeCount++

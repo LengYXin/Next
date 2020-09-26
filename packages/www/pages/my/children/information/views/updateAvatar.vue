@@ -41,7 +41,6 @@
                 ref="cropperRef"
                 v-bind="cropper"
                 @realTime="realTime"
-                @imgLoad="imgLoad"
               />
             </div>
             <div><a-icon type="sync" />重新选择</div>
@@ -172,17 +171,13 @@ export default class PageView extends Vue {
   beforeUpload(file) {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
-      this.$message.error("只能上传jpg/png格式图片！");
+      this.$message.success(this.$tc(this.$EnumMessage.upload_img_type_error));
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      this.$message.error("图片必须小于2M！");
+      this.$message.success(this.$tc(this.$EnumMessage.upload_img_size_error));
     }
     return isJpgOrPng && isLt2M;
-  }
-
-  imgLoad(e) {
-    console.log("PageView -> imgLoad -> e", e);
   }
 
   onUpdateAvatar() {

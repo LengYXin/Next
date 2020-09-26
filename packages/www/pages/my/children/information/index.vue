@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-25 15:14:50
+ * @LastEditTime: 2020-09-26 17:00:40
  * @Description: 个人信息
 -->
 
@@ -199,7 +199,7 @@ export default class PageView extends Vue {
       await this.PageStore.onUpdateNickName(this.nickName);
       this.inputVisible = false;
     } catch (error) {
-      this.$message.warning({ content: error, key: "onUpdateNickName" });
+      this.$message.warning({ content: this.$tc(error), key: error });
     }
   }
 
@@ -207,11 +207,10 @@ export default class PageView extends Vue {
     try {
       await this.PageStore.onUpdateUserInfo(this.userForm);
       await this.PageStore.onGetUserInfo();
-      this.$message.success({
-        content: "保存成功",
-        key: "onUpdateUserInfo",
-      });
-    } catch (error) {}
+      this.$message.success(this.$tc(this.$EnumMessage.save_success));
+    } catch (error) {
+      this.$message.warning({ content: this.$tc(error), key: error });
+    }
   }
 
   mounted() {}
