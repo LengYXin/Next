@@ -4,7 +4,7 @@ import lodash from "lodash";
 import Bowser from "./utils/bowser";
 import "./utils/es6-proxy-polyfill.js";
 import "./utils/registerHooks";
-import readyWx from './wx';
+
 // readyWx()
 // Bowser()
 console.group('Start')

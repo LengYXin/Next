@@ -8,6 +8,7 @@ console.log("LENG: env", env)
 const headconfig = head(env);
 // 添加 lib-flexible
 headconfig.script.push({ src: `${env.base}flexible.js` })
+// headconfig.script.push({ src: `https://www.sobot.com/chat/frame/v2/entrance.js?sysnum=f2c2e254039745dfb3413702ef22c324`, async: true, id: 'zhichiScript' })
 const proxy = {
   "/api": {
     target: env.target, // 代理地址
