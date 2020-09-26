@@ -12,6 +12,7 @@ import List from "./views/list.vue";
 import lodash from "lodash";
 @Observer
 @Component({
+  name: "PageVideo",
   // 每次进入页面都会调用
   fetch(ctx: Context) {
     // ctx.store.$storeVideo.Pagination.onReset().onLoading();

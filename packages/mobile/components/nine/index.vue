@@ -8,13 +8,17 @@
 <template>
   <!-- <div class="xt-flex-center"> v-viewer="options" -->
   <van-row class="xt-nine" v-if="length" :style="getNineStyle()">
-    <van-col :span="getSpan()" v-for="img in dataSource" :key="getThumb(img)">
+    <van-col
+      :span="getSpan()"
+      v-for="(img, index) in dataSource"
+      :key="getThumb(img)"
+      @click="ImagePreview(index)"
+    >
       <van-image
         class="xt-nine-img hvr-float-shadow"
         lazy-load
         fit="cover"
         :src="getThumb(img)"
-        :data-original="getOriginal(img)"
         :style="getStyle()"
       />
     </van-col>
@@ -105,6 +109,12 @@ export default class extends Vue {
   }
   toRem(px) {
     return px * 0.026666625 + "rem";
+  }
+  ImagePreview(startPosition) {
+    this.$ImagePreview({
+      images: lodash.map(this.dataSource, this.getOriginal.bind(this)),
+      startPosition,
+    });
   }
   created() {}
   mounted() {}
