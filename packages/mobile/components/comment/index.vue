@@ -11,7 +11,24 @@
       <van-image round :src="comment.avatar" />
     </template>
     <template #title>
-      <span class="xt-comment-author" v-text="comment.author"></span>
+      <slot name="title" v-bind="comment">
+        <span class="xt-comment-author" v-text="comment.author"></span>
+      </slot>
+      <!-- 右上角 按钮 -->
+      <div class="xt-comment-actions">
+        <slot name="actions" v-bind="comment"> </slot>
+        <!-- <div @click="onActionShow(true)">
+          <van-icon name="ellipsis" />
+        </div> -->
+        <!-- <van-action-sheet
+          v-model="actionShow"
+          :actions="actions"
+          @select="onSelect"
+          cancel-text="取消"
+          close-on-click-action
+          @cancel="onActionShow(false)"
+        /> -->
+      </div>
     </template>
     <template #desc>
       <div
@@ -19,19 +36,28 @@
         v-ellipsis
         v-html="formatFace(content)"
       ></div>
+      <xt-nine
+        :size="imgSize"
+        :dataSource="comment.imgs"
+        :viewerOptions="viewerOptions"
+        thumb="waterThumbUrl"
+        original="waterUrl"
+      />
     </template>
     <template #price>
-      <time
-        class="xt-comment-time"
-        v-dateFormat="comment.time"
-        format="MM-DD HH:mm"
-      />
+      <slot name="time" v-bind="comment">
+        <time
+          class="xt-comment-time"
+          v-dateFormat="comment.time"
+          format="MM-DD HH:mm"
+        />
+      </slot>
     </template>
     <template #num>
       <slot />
     </template>
     <template #footer>
-      <slot name="footer">
+      <slot name="footer" v-bind="comment">
         <van-divider />
       </slot>
     </template>
@@ -44,7 +70,7 @@ import lodash from "lodash";
   components: {},
 })
 export default class extends Vue {
-  @Prop({ default: 120 }) imgSize; // 图片大小
+  @Prop({ default: 80 }) imgSize; // 图片大小
   @Prop({ default: {} }) comment: {
     // 内容
     content: string;
@@ -93,6 +119,11 @@ export default class extends Vue {
 .xt-comment {
   background: transparent;
   padding: 0;
+  &-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
   &-author {
     font-size: 16px;
     color: @xt-grey-6;

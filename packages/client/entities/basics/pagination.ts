@@ -138,7 +138,7 @@ export class Pagination<T> {
      */
     @computed
     get finished() {
-        console.log("LENG: Pagination<T> -> getfinished -> this.isUndefined", this.isUndefined)
+        // console.log("LENG: Pagination<T> -> getfinished -> this.isUndefined", this.isUndefined)
         return this.isUndefined;
     }
     /**

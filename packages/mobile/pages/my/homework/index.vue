@@ -6,7 +6,19 @@
  * @desc 作业
  */
 <template>
-  <div class="xt-content xt-homework-share">作业分享</div>
+  <div class="xt-content xt-my-homework">
+    <xt-tabs
+      theme="yellow"
+      :tabPane="tabPane"
+      :defaultActiveKey="defaultActiveKey"
+      @tabsChange="tabsChange"
+    />
+    <xt-refresh-list :Pagination="Pagination" :body="body">
+      <template #renderItem="item">
+      <div v-text="item.homeworkTitle"></div>
+      </template>
+    </xt-refresh-list>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
@@ -22,12 +34,28 @@ import lodash from "lodash";
   components: {},
 })
 export default class PageView extends Vue {
+  head() {
+    return this.$AppCreateShareData({ title: "我的作业" });
+  }
   get PageStore() {
-    return this.$store.$storeStationery;
+    return this.$store.$my;
   }
-  created() {
-    this.$setBreadcrumb({ linksName: "作业分享" }, true);
+  get Pagination() {
+    return this.PageStore.MyWork;
   }
+  get body() {
+    return { typeKey: this.activeKey };
+  }
+  tabPane = [
+    { key: 1, title: "已评阅" },
+    { key: 0, title: "已提交" },
+  ];
+  defaultActiveKey = 1;
+  activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
+  tabsChange(activeKey) {
+    this.activeKey = activeKey;
+  }
+  created() {}
   updated() {}
   destroyed() {}
 }

@@ -5,7 +5,9 @@ import "./directives/dateFormat";
 import "./directives/ellipsis";
 import "./directives/money";
 import face from "./face/index.vue";
+import nine from "./nine/index.vue";
 import refresh from "./refresh/index.vue";
+import tabs from "./tabs/index.vue";
 import wechatBowser from './wechatBowser/index.vue';
 
 // 视频
@@ -22,3 +24,7 @@ Vue.component('xt-wechat-bowser', wechatBowser);
 Vue.component("xt-face", face);
 // 评论
 Vue.component("xt-comment", comment);
+// 标签页
+Vue.component("xt-tabs", tabs);
+// 九宫格
+Vue.component("xt-nine", nine);

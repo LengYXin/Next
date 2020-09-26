@@ -11,9 +11,9 @@
       <van-field
         v-model="username"
         name="username"
-        label="用户名"
-        placeholder="用户名"
-        :rules="[{ required: true, message: '请填写用户名' }]"
+        label="手机号"
+        placeholder="手机号"
+        :rules="[{ required: true, message: '请填写手机号' }]"
       />
       <van-field
         v-model="password"
@@ -74,7 +74,9 @@ export default class extends Vue {
     try {
       if (this.$store.$global.NODE_ENV === "development") {
         this.username = "16619998681";
+        // this.username = "16000000070";
         this.password = "leng147896325";
+        // this.password = "abcd1234";
       }
       this.$InspectUser(false);
       // 已登录 返回 上一页 或者返回首页

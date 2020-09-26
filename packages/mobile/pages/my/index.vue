@@ -41,7 +41,7 @@
       <van-cell
         title="我晒出的作业"
         is-link
-        :to="{ name: 'homework-sundrying' }"
+        :to="{ name: 'my-sundrying' }"
       />
       <van-cell title="我的订单" is-link :to="{ name: 'my-order' }" />
       <!-- 未登录 -->
