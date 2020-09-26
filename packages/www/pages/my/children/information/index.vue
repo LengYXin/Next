@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-24 16:36:27
+ * @LastEditTime: 2020-09-25 15:14:50
  * @Description: 个人信息
 -->
 
@@ -15,7 +15,9 @@
           :alt="PageStore.UserInfo.nickName"
           :size="95"
         />
-        <template #hover><span>修改头像</span></template>
+        <template #hover>
+          <UpdateAvatar />
+        </template>
       </xt-hover>
       <a-col :flex="1" class="xt-padding-left-lg">
         <div v-if="!inputVisible">
@@ -124,13 +126,15 @@ import { Component, Prop, Vue, Ref } from "vue-property-decorator";
 import { Context } from "@nuxt/types";
 import { Observer } from "mobx-vue";
 import { DatePicker } from "ant-design-vue";
-import Location from "./views/location.vue";
 import { dataSource_My } from "@xt/client";
+
+import Location from "./views/location.vue";
+import UpdateAvatar from "./views/updateAvatar.vue";
 
 @Observer
 @Component({
   scrollToTop: true,
-  components: { DatePicker, Location },
+  components: { DatePicker, Location, UpdateAvatar },
 })
 export default class PageView extends Vue {
   enumOptions = dataSource_My;
@@ -186,6 +190,7 @@ export default class PageView extends Vue {
    */
   async onBlur() {
     try {
+      if (this.nickName == this.PageStore.UserInfo.nickName) return;
       if (this.nickName.trim() == "") {
         this.nickName = this.PageStore.UserInfo.nickName;
         this.inputVisible = false;
@@ -288,9 +293,9 @@ export default class PageView extends Vue {
       }
     }
   }
-  &-save-warp {
-    // display: flex;
-    // justify-content: center;
-  }
+  // &-save-warp {
+  //   // display: flex;
+  //   // justify-content: center;
+  // }
 }
 </style>

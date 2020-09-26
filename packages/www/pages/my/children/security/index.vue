@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-25 13:41:52
+ * @LastEditTime: 2020-09-25 14:54:32
  * @Description: 安全设置
 -->
 
@@ -118,9 +118,9 @@ export default class PageView extends Vue {
   &-collapse {
     background-color: #ffffff;
   }
-  &-panel {
-    // border: none;
-    // background-color: transparent;
-  }
+  // &-panel {
+  //   // border: none;
+  //   // background-color: transparent;
+  // }
 }
 </style>
