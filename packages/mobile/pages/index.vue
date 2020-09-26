@@ -42,7 +42,7 @@ import { Observer } from "mobx-vue";
         const wechat = ctx.store.$wechat;
         await wechat.onGetAccessToken(code, state);
         if (wechat.AccessInfo.loginSuccess === false) {
-          ctx.redirect({ name: "my-bind" });
+          ctx.redirect({ name: "other-bind" });
         }
       } catch (error) {
         console.error("LENG: fetch -> error", error);

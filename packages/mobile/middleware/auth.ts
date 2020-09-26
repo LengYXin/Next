@@ -15,7 +15,7 @@ export default function (context: Context) {
         // context.store.$menu.initBreadcrumb(context.route);
         context.store.$storeUser.onToggleVisible(false);
         onLog(context)
-        // loggedIn(context)
+        loggedIn(context)
     } catch (error) {
         console.error("LENG: error", error)
     }
@@ -41,7 +41,10 @@ function onLog(context: Context) {
  * @param context 
  */
 function loggedIn(context: Context) {
-    if (lodash.startsWith(context.route.name, 'my')) {
+    if (['my', 'homework'].some(x => lodash.startsWith(context.route.name, x))) {
+        if (lodash.includes(['my'], context.route.name)) {
+            return
+        }
         if (!context.store.$storeUser.loggedIn) {
             // message.success({ content: '请登录' })
             return context.redirect('/')

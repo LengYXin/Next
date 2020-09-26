@@ -2,7 +2,7 @@
   <div class="xt-videoid-comment">
     <h1 class="xt-title-h5 xt-margin-bottom-lg">
       全部评论(
-      <span v-text="dataSource.length"></span>
+      <span v-text="dataSource&&dataSource.length"></span>
       )
     </h1>
     <!-- <xt-refresh-list :Pagination="Pagination" :body="body"> -->
