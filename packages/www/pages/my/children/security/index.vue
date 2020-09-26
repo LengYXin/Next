@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-25 13:41:52
+ * @LastEditTime: 2020-09-26 17:19:15
  * @Description: 安全设置
 -->
 
@@ -53,7 +53,7 @@
       <a-collapse-panel key="3" class="xt-my-security-panel">
         <template slot="header">
           <span>邮箱绑定</span>
-          <div class="xt-margin-left-xxl xt-text-bold xt-inline">
+          <div class="xt-margin-left-xxl xt-inline">
             <span
               v-phone="PageStore.UserInfo.email"
               v-if="PageStore.UserInfo.email"
@@ -118,9 +118,9 @@ export default class PageView extends Vue {
   &-collapse {
     background-color: #ffffff;
   }
-  &-panel {
-    // border: none;
-    // background-color: transparent;
-  }
+  // &-panel {
+  //   // border: none;
+  //   // background-color: transparent;
+  // }
 }
 </style>

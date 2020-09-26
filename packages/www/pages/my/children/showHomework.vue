@@ -2,13 +2,17 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-21 17:47:02
+ * @LastEditTime: 2020-09-26 16:55:04
  * @Description: 我晒出的作业
 -->
 
 <template>
   <div class="xt-content">
-    <xt-comment v-for="item in Pagination.dataSource" :key="item.id" :comment="getComment(item)">
+    <xt-comment
+      v-for="item in Pagination.dataSource"
+      :key="item.id"
+      :comment="getComment(item)"
+    >
       <div class="xt-font-size-base xt-font-family-FZLTHJW">
         <a-row type="flex" justify="space-between" algin="middle">
           <a-col class="xt-text-yellow">
@@ -36,14 +40,22 @@
       <template slot="overlay">
         <a-menu>
           <a-menu-item>
-            <a-popconfirm title="确定删除作业?" ok-text="确定" cancel-text="取消" @confirm="onDelete(item)">
+            <a-popconfirm
+              title="确定删除作业?"
+              ok-text="确定"
+              cancel-text="取消"
+              @confirm="onDelete(item)"
+            >
               <a href="javascript:;">删除</a>
             </a-popconfirm>
           </a-menu-item>
         </a-menu>
       </template>
     </xt-comment>
-    <xt-infinite-loading :identifier="Pagination.onlyKey" @loading="onLoading" />
+    <xt-infinite-loading
+      :identifier="Pagination.onlyKey"
+      @loading="onLoading"
+    />
     <!-- 作业详情 -->
     <HomeworkShow
       :momentId="reply.id"
@@ -114,7 +126,7 @@ export default class PageView extends Vue {
     try {
       await this.Pagination.onLikes(item);
     } catch (error) {
-      this.$message.warning({ content: error, key: "likes" });
+      this.$message.warning({ content: this.$tc(error), key: error });
     }
   }
 
@@ -125,8 +137,10 @@ export default class PageView extends Vue {
     try {
       await this.Pagination.onDelWork(item.id);
       this.onReply({});
-      this.$message.success({ content: "删除成功", key: "onDelete" });
-    } catch (error) {}
+      this.$message.success(this.$tc(this.$EnumMessage.delete_success));
+    } catch (error) {
+      this.$message.warning({ content: this.$tc(error), key: error });
+    }
   }
 
   mounted() {}

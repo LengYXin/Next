@@ -1,6 +1,6 @@
 import lodash from "lodash"
 import { BindAll } from "lodash-decorators"
-import { EnumApiUser } from "../../api"
+import { EnumApiCurrency, EnumApiUser } from "../../api"
 import { AjaxBasics } from "../../helpers/ajaxBasics"
 import { Pagination } from "../basics/pagination"
 import Entities from "./entities"
@@ -179,6 +179,19 @@ export class ControllerUser extends Entities {
     type?
   }) {
     await this.$ajax.post(EnumApiUser.CheckConfirmCode, body)
+  }
+
+  /**
+   * 修改头像
+   */
+  async onUpdateAvatar(body) {
+    // const res = await this.$ajax.post(EnumApiCurrency.UploadPicture, body, {
+    //   "Content-Type": "multipart/form-data",
+    //   cache: false,
+    //   processData: false,
+    //   contentType: false,
+    // })
+    // console.log("ControllerUser -> updateAvatar -> res", res)
   }
 }
 export default ControllerUser

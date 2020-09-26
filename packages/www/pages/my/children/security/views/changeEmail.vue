@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-14 19:26:54
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-25 13:23:39
+ * @LastEditTime: 2020-09-26 17:06:55
  * @Description: 绑定邮箱
 -->
 <template>
@@ -154,24 +154,28 @@ export default class PageView extends Vue {
     e.preventDefault();
     this.emailFormRef.validate(async (valid) => {
       if (valid) {
-        if (this.isEnterNewEmail) {
-          let email = this.emailForm.email;
-          await this.onCheckConfirmCode({
-            findWay: email,
-            confirmCode: this.emailForm.confirmCode,
-            type: 4,
-          });
-          this.isEnterNewEmail = false;
-          this.PageStore.onGetUserInfo();
-          this.$message.success("绑定成功");
-          this.$emit("reset");
-        } else {
-          let email = this.PageStore.UserInfo.email;
-          await this.onCheckConfirmCode({
-            findWay: email,
-            confirmCode: this.emailForm.confirmCode,
-            type: 4,
-          });
+        try {
+          if (this.isEnterNewEmail) {
+            let email = this.emailForm.email;
+            await this.onCheckConfirmCode({
+              findWay: email,
+              confirmCode: this.emailForm.confirmCode,
+              type: 4,
+            });
+            this.isEnterNewEmail = false;
+            this.PageStore.onGetUserInfo();
+            this.$message.success(this.$tc(this.$EnumMessage.bind_success));
+            this.$emit("reset");
+          } else {
+            let email = this.PageStore.UserInfo.email;
+            await this.onCheckConfirmCode({
+              findWay: email,
+              confirmCode: this.emailForm.confirmCode,
+              type: 4,
+            });
+          }
+        } catch (error) {
+          this.$message.warning({ content: this.$tc(error), key: error });
         }
       }
     });
@@ -189,7 +193,9 @@ export default class PageView extends Vue {
       this.$nextTick(() => {
         this.emailFormRef.addField(this.emailRef);
       });
-    } catch (error) {}
+    } catch (error) {
+      this.$message.warning({ content: this.$tc(error), key: error });
+    }
   }
 
   /**
@@ -201,14 +207,22 @@ export default class PageView extends Vue {
       email = this.emailForm.email;
       this.emailFormRef.validateField("email", async (err) => {
         if (!err) {
-          await this.PageStore.onSendEmail(email, 4);
-          this.toggleCountDown(true);
+          try {
+            await this.PageStore.onSendEmail(email, 4);
+            this.toggleCountDown(true);
+          } catch (error) {
+            this.$message.warning({ content: this.$tc(error), key: error });
+          }
         }
       });
     } else {
-      // 直接发送
-      await this.PageStore.onSendEmail(email, 4);
-      this.toggleCountDown(true);
+      try {
+        // 直接发送
+        await this.PageStore.onSendEmail(email, 4);
+        this.toggleCountDown(true);
+      } catch (error) {
+        this.$message.warning({ content: this.$tc(error), key: error });
+      }
     }
   }
 

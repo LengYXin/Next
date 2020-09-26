@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-14 19:26:54
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-25 13:28:26
+ * @LastEditTime: 2020-09-26 17:09:07
  * @Description: 绑定手机号
 -->
 <template>
@@ -156,23 +156,27 @@ export default class PageView extends Vue {
     e.preventDefault();
     this.phoneFormRef.validate(async (valid) => {
       if (valid) {
-        if (this.isEnterNewPhone) {
-          let phone = this.phoneForm.phone;
-          await this.onCheckConfirmCode({
-            findWay: phone,
-            confirmCode: this.phoneForm.confirmCode,
-            type: 4,
-          });
-          this.isEnterNewPhone = false;
-          this.$message.success("绑定成功");
-          this.$emit("reset");
-        } else {
-          let phone = this.PageStore.UserInfo.phoneNum;
-          await this.onCheckConfirmCode({
-            findWay: phone,
-            confirmCode: this.phoneForm.confirmCode,
-            type: 4,
-          });
+        try {
+          if (this.isEnterNewPhone) {
+            let phone = this.phoneForm.phone;
+            await this.onCheckConfirmCode({
+              findWay: phone,
+              confirmCode: this.phoneForm.confirmCode,
+              type: 4,
+            });
+            this.isEnterNewPhone = false;
+            this.$message.success(this.$tc(this.$EnumMessage.bind_success));
+            this.$emit("reset");
+          } else {
+            let phone = this.PageStore.UserInfo.phoneNum;
+            await this.onCheckConfirmCode({
+              findWay: phone,
+              confirmCode: this.phoneForm.confirmCode,
+              type: 4,
+            });
+          }
+        } catch (error) {
+          this.$message.warning({ content: this.$tc(error), key: error });
         }
       }
     });
@@ -190,7 +194,9 @@ export default class PageView extends Vue {
       this.$nextTick(() => {
         this.phoneFormRef.addField(this.phoneRef);
       });
-    } catch (error) {}
+    } catch (error) {
+      this.$message.warning({ content: this.$tc(error), key: error });
+    }
   }
 
   /**
@@ -205,14 +211,22 @@ export default class PageView extends Vue {
       phone = this.phoneForm.phone;
       this.phoneFormRef.validateField("phone", async (err) => {
         if (!err) {
-          await this.PageStore.onSendSms(phone, 4);
-          this.toggleCountDown(true);
+          try {
+            await this.PageStore.onSendSms(phone, 4);
+            this.toggleCountDown(true);
+          } catch (error) {
+            this.$message.warning({ content: this.$tc(error), key: error });
+          }
         }
       });
     } else {
-      // 直接发送
-      await this.PageStore.onSendSms(phone, 4);
-      this.toggleCountDown(true);
+      try {
+        // 直接发送
+        await this.PageStore.onSendSms(phone, 4);
+        this.toggleCountDown(true);
+      } catch (error) {
+        this.$message.warning({ content: this.$tc(error), key: error });
+      }
     }
   }
 

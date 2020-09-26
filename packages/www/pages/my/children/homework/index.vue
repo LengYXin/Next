@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-03 10:33:03
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-21 17:47:32
+ * @LastEditTime: 2020-09-26 16:58:31
  * @Description: 我的作业
 -->
 
@@ -148,12 +148,9 @@ export default class PageView extends Vue {
   async onSunWork(item) {
     try {
       await this.Pagination.onSunWork(item);
-      this.$message.success({
-        content: "晒作业成功",
-        key: "sunHomeworkSuccess",
-      });
+      this.$message.success(this.$tc(this.$EnumMessage.sundrying_success));
     } catch (error) {
-      this.$message.warning({ content: error, key: "sunHomeworkErr" });
+      this.$message.warning({ content: this.$tc(error), key: error });
     }
   }
 
@@ -163,8 +160,10 @@ export default class PageView extends Vue {
   async onDelWork(item) {
     try {
       await this.Pagination.onDelWork(item.homeworkFinishId);
-      this.$message.success({ content: "删除成功", key: "delHomework" });
-    } catch (error) {}
+      this.$message.success(this.$tc(this.$EnumMessage.delete_success));
+    } catch (error) {
+      this.$message.warning({ content: this.$tc(error), key: error });
+    }
   }
   mounted() {}
   updated() {}
