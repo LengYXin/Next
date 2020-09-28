@@ -1,3 +1,10 @@
+/**
+ * @author 冷 (https://github.com/LengYXin)
+ * @email lengyingxin8966@gmail.com
+ * @create date 2020-09-28 16:58:43
+ * @modify date 2020-09-28 16:58:43
+ * @desc 缝合 脚本
+ */
 const program = require('commander');
 const lodash = require('lodash');
 const path = require('path');
