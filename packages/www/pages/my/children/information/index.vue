@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-08-06 20:52:17
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-26 17:00:40
+ * @LastEditTime: 2020-09-28 18:02:30
  * @Description: 个人信息
 -->
 
@@ -190,7 +190,10 @@ export default class PageView extends Vue {
    */
   async onBlur() {
     try {
-      if (this.nickName == this.PageStore.UserInfo.nickName) return;
+      if (this.nickName == this.PageStore.UserInfo.nickName) {
+        this.inputVisible = false;
+        return;
+      }
       if (this.nickName.trim() == "") {
         this.nickName = this.PageStore.UserInfo.nickName;
         this.inputVisible = false;
