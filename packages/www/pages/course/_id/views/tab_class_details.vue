@@ -96,6 +96,7 @@
                           type="yellow"
                           class="xt-font-size-base"
                           v-text="getSubmitText(item.homeworkSubmit,'button')"
+                          @click="onToHomework(item)"
                         >交作业</a-button>
                       </a-col>
                     </a-row>
@@ -199,6 +200,9 @@ export default class PageView extends Vue {
         return { "0": "交作业", "1": "查看", "2": "查看" }[homeworkSubmit];
         break;
     }
+  }
+  onToHomework(item){
+    this.$router.push({name:'homework-id',params:{id:item.homeworkAssignId}})
   }
   created() {}
   mounted() {}
