@@ -31,6 +31,7 @@ import { Context } from "@nuxt/types";
 import List from "./views/list.vue";
 @Observer
 @Component({
+  name: "PageCourse",
   // 每次进入页面都会调用
   // fetch(ctx: Context) {
   //   ctx.store.$storeCourse.Pagination.onReset().onLoading({

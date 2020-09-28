@@ -90,7 +90,7 @@ export default class extends Vue {
   queryUpdate(to, from, next) {
     if (this.linkageRoute && this.isConnected) {
       const { active } = this.$route.query;
-      if (!lodash.eq(active, this.activeKey)) {
+      if (!lodash.eq(String(active), String(this.activeKey))) {
         if (lodash.isNil(active)) {
           this.activeKey = this.defaultActiveKey;
         } else {

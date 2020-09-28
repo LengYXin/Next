@@ -33,7 +33,7 @@ export default class Page extends Vue {
     return this.$EnumLocaleLinks;
   }
   toSignin(active) {
-    const router = { name: "my-signin", query: { active } };
+    const router = { name: "other-signin", query: { active } };
     if (active === "wx") {
       if (!this.$store.$global.WechatBowser) {
         return this.$toast("请您在微信客户端内操作");

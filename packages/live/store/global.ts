@@ -25,6 +25,11 @@ class XTGlobal {
      */
     logger = lodash.get(window, '__xt__env.logger', process.env.logger);
     /**
+     * domain 域名 根目录
+     * @memberof XTGlobal
+     */
+    base = lodash.get(window, '__xt__env.base', process.env.base);
+    /**
      * domain 域名
      * @memberof XTGlobal
      */

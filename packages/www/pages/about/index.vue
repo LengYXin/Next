@@ -28,6 +28,7 @@ import List from "./views/list.vue";
 import lodash from "lodash";
 @Observer
 @Component({
+  name: "PageAbout",
   // 每次进入页面都会调用
   async fetch(ctx: Context) {
     ctx.store.$storeAbout.onGetTypelist();

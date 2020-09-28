@@ -43,6 +43,7 @@ import List from "./views/list.vue";
 import lodash from "lodash";
 @Observer
 @Component({
+  name: "PageStationery",
   // 每次进入页面都会调用
   async fetch(ctx: Context) {
     ctx.store.$storeStationery.onGetTypelist();
