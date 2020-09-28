@@ -16,32 +16,45 @@
         scope.__xt__env = ({ env });
         // 全局数据
         scope.__xt__global = ({ global });
-        scope.addEventListener('resize', debounce(onResize, 300))
+        scope.addEventListener('resize', debounce(onResize, 300));
         onResize();
-        /** 跳转 */
+        /**
+         * resize 事件
+         * @param {*} event 
+         */
         function onResize(event) {
             var innerWidth = scope.innerWidth;
             var innerHeight = scope.innerHeight;
-            var proportion = innerWidth / innerHeight;
+            var proportion = innerWidth / innerHeight;//比例
             var location = scope.location;
-            var origin = location.origin;
             var href = location.href;
-            var base = scope.__xt__env.base;
-            if (base) {
-                if (innerWidth <= 576 || proportion <= 0.563) {
-                    if (href.indexOf('/mobile') != -1) {
-                        return
-                    }
-                    location.replace(origin + '/mobile')
-                } else {
-                    if (base === '/') {
-                        return
-                    }
-                    location.replace(origin)
-                }
+            var mobile = innerWidth <= 576 || proportion <= 0.563;//满足手机端要求
+            var index = href.indexOf('/mobile');
+            if (mobile && index === -1) {
+                onReplace('/mobile')
+            } else if (index !== -1) {
+                onReplace('')
             }
         }
-        /** 节流 */
+        /**
+         * 重定向
+         * @param {*} url 
+         */
+        function onReplace(url) {
+            var location = scope.location;
+            var origin = location.origin + url + '?t=' + Date.now();
+            console.warn("LENG: onReplace -> origin", origin)
+            // 本地环境 不跳转 404
+            if (!scope.__xt__env.DEPLOY_ENV) {
+                return
+            }
+            location.replace(origin)
+        }
+        /**
+         * 防抖
+         * @param {*} fn 
+         * @param {*} wait 
+         */
         function debounce(fn, wait) {
             var timer = null;
             return function () {
