@@ -40,7 +40,7 @@
                 slot="cover"
                 alt="coursePicture"
                 class="xt-class-full-img"
-                :class="{ 'xt-class-full-img-inactive': single.purchased }"
+                :class="{ 'xt-class-full-img-inactive': !single.purchased }"
                 v-lazy="single.coursePictureUri"
               />
               <a-card-meta>
