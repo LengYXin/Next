@@ -8,7 +8,7 @@
 <template>
   <div class="lyx-header">
     <a-row class="lyx-header-row">
-      <a-col class="lyx-header-avatar" :span="4">
+      <a-col class="lyx-header-avatar" :span="4" @click="toText">
         <a-avatar :size="52" :src="$images.avatar" />
       </a-col>
       <a-col class="lyx-header-title" :span="20">
@@ -41,7 +41,9 @@ export default class extends Vue {
   get PageStore() {
     return this.$store.$storeLive;
   }
-  
+  toText() {
+    this.$router.push({ name: "admin", query: this.$route.query });
+  }
   updated() {}
   destroyed() {}
 }
@@ -58,7 +60,7 @@ export default class extends Vue {
   &-avatar {
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
   }
   &-tag {
     background: #f05a5a;

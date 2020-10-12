@@ -42,15 +42,9 @@ export default class extends Vue {
     return this.$route.query.id as string;
   }
   get liveUrl() {
-    return window.location.origin + `/live?id=${this.id}`;
-  }
-  async onLoading(courseClassHourId) {
-    if (courseClassHourId) {
-      this.PageStore.onLoading({ courseClassHourId });
-    }
+    return this.PageStore.dataSource.url//window.location.origin + `/live?id=${this.id}`;
   }
   mounted() {
-    this.onLoading(this.id);
   }
   created() {}
   updated() {}
@@ -97,6 +91,7 @@ export default class extends Vue {
     line-height: 25px;
     text-align: justify;
     position: relative;
+    word-break: break-all;
     > div {
       background: #f4f5f8;
       padding: 20px;
