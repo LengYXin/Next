@@ -8,7 +8,7 @@
 <template>
   <a-row class="xt-editor-toolbar" type="flex" :gutter="4">
     <!-- <div ref="popover"></div> -->
-    <a-col class>
+    <a-col class="xt-flex xt-align-center">
       <!-- 表情 -->
       <a-popover placement="bottom" trigger="click">
         <template slot="content">
@@ -21,7 +21,11 @@
       </a-popover>
       <a-divider type="vertical"></a-divider>
       <!-- 图片 -->
-      <a-popover placement="bottom" trigger="click" overlayClassName="xt-editor-upload-popover">
+      <a-popover
+        placement="bottom"
+        trigger="click"
+        overlayClassName="xt-editor-upload-popover"
+      >
         <template slot="content">
           <div class="xt-editor-upload">
             <a-upload
@@ -39,20 +43,26 @@
         <span class="xt-editor-span xt-editor-upload-span">
           <a-icon class="xt-editor-icon" type="picture" />
           <span class="xt-editor-icon-text">
-            图片 (
-            <span v-text="fileList.length"></span>/
-            <span v-text="maxFile"></span>)
+            <span>图片 (</span><span v-text="fileList.length"></span>/<span
+              v-text="maxFile"
+            ></span
+            >)
           </span>
         </span>
       </a-popover>
     </a-col>
-    <a-col flex="1" class="xt-editor-btns">
+    <a-col flex="1" class="xt-editor-btn-warp">
       <!-- 默认插槽位置 -->
       <slot v-bind:quill="quill"></slot>
-      <a-divider type="vertical"></a-divider>
+      <!-- <a-divider type="vertical"></a-divider> -->
       <!-- 按钮插槽 -->
       <slot name="submit" v-bind:quill="quill">
-        <a-button type="yellow" v-text="buttonText" @click="onSubmitRules"></a-button>
+        <a-button
+          class="xt-editor-btn"
+          type="yellow"
+          v-text="buttonText"
+          @click="onSubmitRules"
+        ></a-button>
       </slot>
     </a-col>
   </a-row>
@@ -252,23 +262,32 @@ export default class extends Vue {
   }
 }
 .xt-editor-toolbar {
-  padding-top: 16px;
+  padding-top: 12px;
   .xt-editor-span {
-    display: inline-block;
+    font-size: 12px;
+    // display: inline-block;
     cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
   }
   .xt-editor-icon {
     color: @xt-yellow-6;
   }
   .xt-editor-icon-text {
+    margin-left: 4px;
     display: inline-block;
-    transform: translateY(-25%);
+    // transform: translateY(-25%);
   }
   .ant-divider {
     background: transparent;
   }
-  .xt-editor-btns {
+  .xt-editor-btn-warp {
     text-align: right;
   }
+  // .xt-editor-btn {
+  //   min-width: 90px;
+  // }
 }
 </style>

@@ -163,3 +163,29 @@
     border-color: @xt-yellow-6;
   }
 }
+
+@checkbox: ant-checkbox;
+.ant-checkbox-yellow {
+  color: @xt-yellow-6;
+  &:hover .ant-checkbox-inner,
+  .@{checkbox}:hover .ant-checkbox-inner,
+  .@{checkbox}-input:hover + .ant-checkbox-inner {
+    border-color: @xt-yellow-6!important;
+  }
+  .@{checkbox} {
+    & + span {
+      padding-right: 0;
+    }
+    &-checked {
+      .ant-checkbox-inner {
+        color: @xt-white-6;
+        border-color: @xt-yellow-6;
+        background-color: @xt-yellow-6;
+      }
+      &::after {
+        color: @xt-white-6;
+        border: 1px solid @xt-yellow-6!important;
+      }
+    }
+  }
+}
