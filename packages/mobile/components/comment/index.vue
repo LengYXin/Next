@@ -17,17 +17,6 @@
       <!-- 右上角 按钮 -->
       <div class="xt-comment-actions">
         <slot name="actions" v-bind="comment"> </slot>
-        <!-- <div @click="onActionShow(true)">
-          <van-icon name="ellipsis" />
-        </div> -->
-        <!-- <van-action-sheet
-          v-model="actionShow"
-          :actions="actions"
-          @select="onSelect"
-          cancel-text="取消"
-          close-on-click-action
-          @cancel="onActionShow(false)"
-        /> -->
       </div>
     </template>
     <template #desc>
@@ -71,6 +60,7 @@ import lodash from "lodash";
 })
 export default class extends Vue {
   @Prop({ default: 80 }) imgSize; // 图片大小
+  @Prop({ default: false }) bottom; // 内容放底部
   @Prop({ default: {} }) comment: {
     // 内容
     content: string;
@@ -94,6 +84,9 @@ export default class extends Vue {
   };
   get datetime() {
     return this.comment.time;
+  }
+  get isBottom(){
+    return lodash.includes(["", "true", true], this.bottom);
   }
   get content() {
     let content = this.comment.content;

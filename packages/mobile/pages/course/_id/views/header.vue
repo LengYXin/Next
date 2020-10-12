@@ -1,6 +1,26 @@
 <template>
-  <div class="xt-content xt-cid-header">
-    
+  <div class="xt-cid-header">
+    <van-image lazy-load :src="PageStore.dataSource.coursePictureUri" />
+    <div class="xt-content">
+      <h1 class="xt-title-h6 xt-flex-center">
+        <div class="xt-cid-header-tag">直播课</div>
+        <span v-text="dataSource.courseName"></span>
+      </h1>
+      <h2 class="xt-title-h6">
+        <span v-text="dataSource.courseSubtitle"></span>
+      </h2>
+      <div class="xt-flex-center" v-if="!dataSource.purchased">
+        <strong
+          class="xt-text-green xt-font-size-xl"
+          v-money="dataSource.courseFullPrice"
+        ></strong>
+        <span class="xt-cid-header-text"
+          >共{{ dataSource.classHourCount }}课</span
+        >
+        <span class="xt-cid-header-text" v-text="dataSource.statusName"></span>
+      </div>
+      <van-divider />
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -8,7 +28,7 @@ import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
 import { Observer } from "mobx-vue";
 @Observer
 @Component({
-  components: {  },
+  components: {},
 })
 export default class PageView extends Vue {
   get PageStore() {
@@ -36,14 +56,15 @@ export default class PageView extends Vue {
 <style lang="less" scoped>
 .xt-cid-header {
   &-tag {
-    width: 66px;
-    height: 28px;
-    line-height: 26px;
+    width: 48px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 3px;
     text-align: center;
     color: white;
     background: @xt-yellow-6;
     font-weight: 400px;
-    font-size: 16px;
+    font-size: 12px;
     border: none;
   }
   &-text {

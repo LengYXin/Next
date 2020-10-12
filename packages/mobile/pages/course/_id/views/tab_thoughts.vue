@@ -12,7 +12,7 @@
       <template v-else> </template>
       <xt-refresh-list :Pagination="Pagination" :body="body">
         <template #renderItem="item">
-          <xt-comment :comment="getComment(item)"> </xt-comment>
+          <xt-comment bottom :comment="getComment(item)"> </xt-comment>
         </template>
       </xt-refresh-list>
     </div>
@@ -82,8 +82,6 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" >
 .xt-course-thoughts {
-  .xt-ellipsis .xt-ellipsis-btn {
-    background: #f8f3ee !important;
-  }
+ 
 }
 </style>

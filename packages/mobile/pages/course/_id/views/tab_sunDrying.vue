@@ -10,7 +10,7 @@
     <div class="xt-content">
       <xt-refresh-list :Pagination="Pagination" :body="body">
         <template #renderItem="item">
-          <xt-comment :comment="getComment(item)">
+          <xt-comment bottom :comment="getComment(item)">
             <van-row class="xt-videoid-comment-btn" type="flex">
               <van-col span="10">
                 <van-cell icon="chat-o" @click.prevent.stop="onReply(item)" />
@@ -109,8 +109,6 @@ export default class PageView extends Vue {
 </script>
 <style lang="less" >
 .xt-course-sunDrying {
-  .xt-ellipsis .xt-ellipsis-btn {
-    background: #f8f3ee !important;
-  }
+ 
 }
 </style>

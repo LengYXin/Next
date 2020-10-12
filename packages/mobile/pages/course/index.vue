@@ -6,20 +6,22 @@
  * @desc [description]
  */
 <template>
-  <van-pull-refresh :value="Pagination.loading" @refresh="onRefresh">
-    <van-list
-      :value="Pagination.loading"
-      :finished="Pagination.finished"
-      finished-text="没有更多了"
-      @load="onLoading"
-    >
-      <div v-for="(item,index) in Pagination.dataSource" :key="index">
-        <nuxt-link :to="`/course/${item.courseId}`">
-          <img v-lazy="item.coursePictureUri" />
-        </nuxt-link>
-      </div>
-    </van-list>
-  </van-pull-refresh>
+  <div class="xt-content">
+    <van-pull-refresh :value="Pagination.loading" @refresh="onRefresh">
+      <van-list
+        :value="Pagination.loading"
+        :finished="Pagination.finished"
+        finished-text="没有更多了"
+        @load="onLoading"
+      >
+        <div v-for="(item, index) in Pagination.dataSource" :key="index">
+          <nuxt-link :to="`/course/${item.courseId}`">
+            <img v-lazy="item.coursePictureUri" />
+          </nuxt-link>
+        </div>
+      </van-list>
+    </van-pull-refresh>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Provide, Inject } from "vue-property-decorator";
@@ -48,9 +50,7 @@ export default class Page extends Vue {
   created() {
     // this.onLoading();
   }
-  mounted() {
-    
-  }
+  mounted() {}
   updated() {}
   destroyed() {}
 }
