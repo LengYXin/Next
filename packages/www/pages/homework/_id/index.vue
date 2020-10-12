@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-28 18:35:28
  * @LastEditors: Erlin
- * @LastEditTime: 2020-10-12 14:20:44
+ * @LastEditTime: 2020-10-12 18:56:09
  * @Description: 交作业
 -->
 <template>
@@ -18,10 +18,12 @@
       <a-col class="xt-homework-id-submit-warp" :span="11">
         <div class="xt-flex xt-justify-between">
           <div class="xt-font-size-lg">交作业</div>
-          <div class="xt-text-yellow">
-            <a-icon type="double-right" :rotate="180" />
-            返回去上课
-          </div>
+          <a href="javascript:history.back(-1)">
+            <div class="xt-text-yellow">
+              <a-icon type="double-right" :rotate="180" />
+              返回去上课
+            </div>
+          </a>
         </div>
         <div class="xt-margin-top-lg xt-margin-bottom-sm">
           说说你的作业感想吧（2000字以内）
@@ -38,21 +40,24 @@
         </xt-editor>
 
         <!-- <a-empty :image="$images.logo" description="等待你的作业哦" /> -->
-        <div class="xt-margin-top-lg">
-          <div class="xt-text-grey">你已提交过:</div>
-          <List
-            :loading="Pagination.loading"
-            :dataSource="Pagination.dataSource"
-            :rowKey="Pagination.key"
-            @sun="sun"
-            @del="del"
-            @reply="onReply"
-          />
-          <xt-infinite-loading
-            :identifier="Pagination.onlyKey"
-            @loading="onLoading"
-          />
-        </div>
+
+        <a-spin :spinning="Pagination.loading">
+          <div class="xt-margin-top-lg">
+            <div class="xt-text-grey">你已提交过:</div>
+            <List
+              :dataSource="Pagination.dataSource"
+              :rowKey="Pagination.key"
+              @sun="sun"
+              @del="del"
+              @reply="onReply"
+            />
+            <xt-infinite-loading
+              :identifier="Pagination.onlyKey"
+              @loading="onLoading"
+            />
+          </div>
+          <!-- <a-empty  :image="$images.logo" description="等待你的作业哦" /> -->
+        </a-spin>
       </a-col>
     </a-row>
   </div>
@@ -93,7 +98,9 @@ export default class PageView extends Vue {
   }
   created() {}
   updated() {}
-  destroyed() {}
+  destroyed() {
+    this.Pagination.onReset();
+  }
   /**
    * 提交作业
    */
@@ -110,6 +117,7 @@ export default class PageView extends Vue {
       picList: event.fileResult,
     });
     event.onReset();
+    this.Pagination.onReset();
   }
   /**
    * 回复
