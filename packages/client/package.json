@@ -11,8 +11,8 @@
     "tsc": "tsc"
   },
   "devDependencies": {
-    "jest": "^26.4.2",
-    "ts-jest": "^26.3.0"
+    "jest": "^26.5.3",
+    "ts-jest": "^26.4.1"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.ts",

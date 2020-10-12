@@ -25,30 +25,35 @@ export default class extends Vue {
   mounted() {
     // console.log(lodash.cloneDeep(this.options));
     try {
+      const video = {
+        defaultQuality: 1,
+        // url:
+        //   "https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4",
+        // pic: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
+        // thumbnails:
+        //   "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
+        type: "customFlv",
+        customType: {
+          customFlv: function (video, player) {
+            const flvPlayer = flvjs.createPlayer({
+              type: "flv",
+              url: video.src,
+            });
+            flvPlayer.attachMediaElement(video);
+            flvPlayer.load();
+          },
+        },
+      };
+      if (!lodash.includes(lodash.get(this.options, "video.url"), "flv")) {
+        lodash.unset(video, "type");
+        lodash.unset(video, "customType");
+      }
       const config = lodash.merge(
         {
           container: this.$refs.dplayer,
           screenshot: true,
           autoplay: true,
-          video: {
-            defaultQuality: 1,
-            // url:
-            //   "https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4",
-            // pic: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
-            // thumbnails:
-            //   "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
-            type: "customFlv",
-            customType: {
-              customFlv: function (video, player) {
-                const flvPlayer = flvjs.createPlayer({
-                  type: "flv",
-                  url: video.src,
-                });
-                flvPlayer.attachMediaElement(video);
-                flvPlayer.load();
-              },
-            },
-          },
+          video,
           // subtitle: {
           //   url: "https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt",
           // },

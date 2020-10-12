@@ -24,6 +24,9 @@ import lodash from "lodash";
 import { Component, Prop, Vue, Provide, Emit } from "vue-property-decorator";
 import message from "./views/message.vue";
 @Component({
+  fetch({ query, store }) {
+    return store.$storeLive.onLoading({ courseClassHourId: query.id });
+  },
   validate({ query }) {
     return /^\d+$/.test(query.id as string);
   },
@@ -40,9 +43,12 @@ export default class extends Vue {
   get dplayer() {
     return (this.$refs?.dplayer as any)?.dplayer;
   }
+  get PageStore() {
+    return this.$store.$storeLive;
+  }
   options = {
     video: {
-      url: "https://pull.alienwow.cc/live/wuwh.flv",
+      url: this.PageStore.dataSource.url, //lodash.replace(this.PageStore.dataSource.url,'http','https'), //"https://pull.alienwow.cc/live/wuwh.flv",
       // pic:
       //   "https://oss-free.xuantong.cn/picturePath/cdb95ce45e19957a1a55284c710b911c.png",
       // thumbnails: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",

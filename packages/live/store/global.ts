@@ -39,6 +39,7 @@ class XTGlobal {
      * @memberof XTGlobal
      */
     target = lodash.get(window, '__xt__env.target', process.env.target);
+    targetLive = 'https://live-api.xuantong.cn';
     /**
      * socket 地址
      * @memberof XTGlobal

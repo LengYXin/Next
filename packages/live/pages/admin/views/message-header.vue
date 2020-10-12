@@ -12,20 +12,20 @@
         <a-avatar :size="52" :src="$images.avatar" />
       </a-col>
       <a-col class="lyx-header-title" :span="20">
-        <h1 v-text="Details.dataSource.classhourName">
+        <h1 v-text="PageStore.dataSource.classhourName">
           第15课《玄密塔碑》楷书进阶~
         </h1>
         <div class="lyx-header-time">
           <a-tag class="lyx-header-tag">直播</a-tag>
           <time
-            v-dateFormat="Details.dataSource.courseStartTime"
+            v-dateFormat="PageStore.dataSource.courseStartTime"
             format="YYYY.MM.DD HH:mm:ss"
           />
         </div>
       </a-col>
     </a-row>
     <div class="lyx-header-des">
-      简介：<span v-text="Details.dataSource.classhourIntroduction"></span>
+      简介：<span v-text="PageStore.dataSource.classhourIntroduction"></span>
     </div>
   </div>
 </template>
@@ -38,18 +38,15 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class extends Vue {
-  get Details() {
-    return this.PageStore.Details;
-  }
   get PageStore() {
-    return this.$store.$storeCourse.Details.Map;
+    return this.$store.$storeLive;
   }
   get id() {
     return this.$route.query.id as string;
   }
-  async onLoading(classhourId) {
-    if (classhourId) {
-      this.Details.onLoading({ classhourId });
+  async onLoading(courseClassHourId) {
+    if (courseClassHourId) {
+      this.PageStore.onLoading({ courseClassHourId });
     }
   }
   mounted() {
