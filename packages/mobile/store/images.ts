@@ -1,4 +1,5 @@
+import $global from "./global";
 export default {
-    title: '/images/title.png',
-    logo: '/images/logo.png',
+    title: `${$global.base}images/title.png`,
+    logo: `${$global.base}images/logo.png`,
 }

@@ -30,10 +30,14 @@
             var href = location.href;
             var mobile = innerWidth <= 576 || proportion <= 0.563;//满足手机端要求
             var index = href.indexOf('/mobile');
-            if (mobile && index === -1) {
-                onReplace('/mobile')
-            } else if (index !== -1) {
-                onReplace('')
+            if (mobile) {
+                if (index === -1) {
+                    onReplace('/mobile')
+                }
+            } else {
+                if (index !== -1) {
+                    onReplace('')
+                }
             }
         }
         /**

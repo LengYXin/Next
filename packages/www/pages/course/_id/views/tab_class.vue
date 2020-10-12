@@ -44,6 +44,7 @@
                     </template>
                     <img @click="onVisible(item)" :src="item.copyBookUri" />
                   </a-popover>
+                  <!-- 笔山列表 -->
                   <ul class="xt-course-class-bs">
                     <li v-for="bs in getTask(item)" :key="bs.homeworkTaskId">
                       <a-popover
