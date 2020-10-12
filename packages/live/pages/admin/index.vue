@@ -41,17 +41,23 @@ import Vmanage from "./views/manage.vue";
 import message from "./views/message.vue";
 @Component({
   layout: "admin",
+  fetch({ query, store }) {
+    return store.$storeLive.onLoading({ courseClassHourId: query.id });
+  },
   validate({ query }) {
     return /^\d+$/.test(query.id as string);
   },
   components: { Vinfo, Vmanage, message },
 })
 export default class extends Vue {
+  get PageStore() {
+    return this.$store.$storeLive;
+  }
   dplayer = {
     video: {
-      url: "https://pull.alienwow.cc/live/wuwh.flv",
-      pic:
-        "https://oss-free.xuantong.cn/picturePath/cdb95ce45e19957a1a55284c710b911c.png",
+      url: this.PageStore.dataSource.url,
+      // pic:
+      //   "https://oss-free.xuantong.cn/picturePath/cdb95ce45e19957a1a55284c710b911c.png",
       // thumbnails: "https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png",
     },
   };

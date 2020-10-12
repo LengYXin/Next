@@ -18,7 +18,7 @@ export interface BasicsOptions {
     /** 请求方式 */
     method?: string;
     /** 请求结果过滤 */
-    onMapValues?: BasicsOnMapValues;
+    onMapValues?: BasicsOnMapValues | string;
 }
 // @BindAll()
 export class EntitiesBasics<T> {

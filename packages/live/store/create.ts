@@ -16,6 +16,7 @@ import {
   ControllerOrder,
   ControllerHomework,
   ControllerMy,
+  ControllerLive,
   SocketMessage,
   AjaxBasics
 } from "@xt/client";
@@ -32,10 +33,9 @@ const store = {
   $menu,
   // 全局
   $global,
-  // // 首页
-  // $storeHome: new ControllerHome(ajax),
+  $storeLive: new ControllerLive(new AjaxBasics({ target: $global.targetLive })),
   // // 课程
-  $storeCourse: new ControllerCourse(ajax),
+  // $storeCourse: new ControllerCourse(ajax),
   // // 文房
   // $storeStationery: new ControllerStationery(ajax),
   // // 视频
@@ -104,14 +104,7 @@ declare module "vuex/types/index" {
     //  * 本地语音全局状态
     //  */
     readonly $locale: typeof $locale;
-    // /**
-    //  * 首页状态控制器
-    //  */
-    // readonly $storeHome: ControllerHome;
-    // /**
-    //  * 课程控制器
-    //  */
-    readonly $storeCourse: ControllerCourse;
+    readonly $storeLive: ControllerLive;
     // /**
     //  * 文房
     //  * @type {ControllerStationery}

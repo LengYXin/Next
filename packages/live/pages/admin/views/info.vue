@@ -7,18 +7,18 @@
  */
 <template>
   <div class="lyx-admininfo">
-    <h1 class="lyx-admininfo-title" v-text="Details.dataSource.classhourName">
+    <h1 class="lyx-admininfo-title" v-text="PageStore.dataSource.classhourName">
       第15课《玄密塔碑》楷书进阶~
     </h1>
     <div class="lyx-admininfo-time">
       <a-tag class="lyx-admininfo-tag">直播</a-tag>
       <time
-        v-dateFormat="Details.dataSource.courseStartTime"
+        v-dateFormat="PageStore.dataSource.courseStartTime"
         format="YYYY.MM.DD HH:mm:ss"
       />
     </div>
     <div class="lyx-admininfo-des">
-      简介：<span v-text="Details.dataSource.classhourIntroduction"></span>
+      简介：<span v-text="PageStore.dataSource.classhourIntroduction"></span>
     </div>
     <div class="lyx-admininfo-live">
       <h1>推流地址</h1>
@@ -35,11 +35,8 @@ import { Observer } from "mobx-vue";
   components: {},
 })
 export default class extends Vue {
-  get Details() {
-    return this.PageStore.Details;
-  }
   get PageStore() {
-    return this.$store.$storeCourse.Details.Map;
+    return this.$store.$storeLive;
   }
   get id() {
     return this.$route.query.id as string;
@@ -47,9 +44,9 @@ export default class extends Vue {
   get liveUrl() {
     return window.location.origin + `/live?id=${this.id}`;
   }
-  async onLoading(classhourId) {
-    if (classhourId) {
-      this.Details.onLoading({ classhourId });
+  async onLoading(courseClassHourId) {
+    if (courseClassHourId) {
+      this.PageStore.onLoading({ courseClassHourId });
     }
   }
   mounted() {
