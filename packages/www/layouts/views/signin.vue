@@ -31,7 +31,7 @@
         <a-form-model-item>
           <a-row type="flex">
             <a-col>
-              <a-checkbox class="xt-signin-auto-login"
+              <a-checkbox class="ant-checkout-yellow"
                 >30天内自动登录</a-checkbox
               >
             </a-col>
@@ -135,27 +135,6 @@ export default class extends Vue {
 .xt-signin {
   min-height: 480px;
   background-color: rgba(14, 5, 10, 0.05);
-  .xt-signin-auto-login {
-    color: @xt-yellow-6;
-    &:hover .ant-checkbox-inner,
-    .@{checkbox}:hover .ant-checkbox-inner,
-    .@{checkbox}-input:hover + .ant-checkbox-inner {
-      border-color: @xt-yellow-6;
-    }
-    .@{checkbox} {
-      &-checked {
-        .ant-checkbox-inner {
-          color: @xt-white-6;
-          background-color: @xt-yellow-6;
-        }
-        &::after {
-          color: @xt-white-6;
-          border-color: @xt-yellow-6!important;
-        }
-      }
-    }
-  }
-
   &-logo {
     max-width: 100%;
   }

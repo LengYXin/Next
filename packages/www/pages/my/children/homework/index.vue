@@ -2,7 +2,7 @@
  * @Author: Erlin
  * @CreateTime: 2020-09-03 10:33:03
  * @LastEditors: Erlin
- * @LastEditTime: 2020-09-26 16:58:31
+ * @LastEditTime: 2020-10-09 15:15:05
  * @Description: 我的作业
 -->
 
@@ -20,76 +20,13 @@
         <span v-t="tab.title"></span>
       </span>
     </xt-tabs>
-
-    <a-list
-      class="xt-content"
-      item-layout="vertical"
-      :data-source="Pagination.dataSource"
-    >
-      <a-list-item slot="renderItem" slot-scope="item">
-        <h3 v-text="item.classhourName + item.homeworkTitle"></h3>
-        <a-row type="flex" justify="space-around" align="middle">
-          <a-col :span="20">
-            来自
-            <nuxt-link :to="`/course/${item.courseId}`">
-              《<span v-text="item.courseName"></span>》
-            </nuxt-link></a-col
-          >
-          <a-col :span="4" class="xt-text-align-right">
-            <a-button
-              type="primary"
-              v-if="item.suned == 0"
-              class="ant-btn-yellow ant-button-round"
-              @click="onSunWork(item)"
-            >
-              晒作业
-            </a-button>
-            <a-button
-              type="primary"
-              v-else
-              class="ant-btn-line-yellow ant-button-round"
-              >已晒过</a-button
-            >
-          </a-col>
-        </a-row>
-        <div v-html="formatFace(item.content)"></div>
-        <xt-nine
-          size="120"
-          thumb="waterThumbUrl"
-          :dataSource="item.picList || []"
-        />
-        <div v-if="getPicLength(item.picList) > 0" class="xt-font-size-sm">
-          共<span v-text="getPicLength(item.picList)"></span>张
-        </div>
-        <a-row type="flex" justify="space-around" align="middle">
-          <a-col :span="14">
-            <time
-              v-dateFormat="item.createTime"
-              format="YYYY-MM-DD HH:mm"
-              fromNow
-            />
-          </a-col>
-          <a-col
-            :span="10"
-            class="xt-text-align-right"
-            v-if="item.reviewed == 1"
-          >
-            <span v-text="item.reviewUserName"></span>助教已评阅作业
-            <Reply @sun="onSunWork" :dataSource="item" />
-          </a-col>
-          <a-col :span="10" class="xt-text-align-right" v-else>
-            <a-popconfirm
-              title="作业确定删除吗？"
-              ok-text="确认"
-              cancel-text="取消"
-              @confirm="onDelWork(item)"
-            >
-              <a-button type="link" icon="delete">删除作业</a-button>
-            </a-popconfirm>
-          </a-col>
-        </a-row>
-      </a-list-item>
-    </a-list>
+    <List
+      :loading="Pagination.loading"
+      :dataSource="Pagination.dataSource"
+      :rowKey="Pagination.key"
+      @sun="onSunWork"
+      @del="onDelWork"
+    />
 
     <xt-infinite-loading
       :identifier="Pagination.onlyKey"
@@ -103,12 +40,12 @@ import { Modal } from "ant-design-vue";
 import { Observer } from "mobx-vue";
 import lodash from "lodash";
 import { Context } from "@nuxt/types";
-import Reply from "./views/reply.vue";
+import List from "./views/list.vue";
 
 @Observer
 @Component({
   scrollToTop: true,
-  components: { Reply },
+  components: { List },
 })
 export default class PageView extends Vue {
   get PageStore() {
@@ -126,22 +63,13 @@ export default class PageView extends Vue {
   activeKey = lodash.get(this.$route.query, "active", this.defaultActiveKey);
   visible = true;
 
-  // 获取图片个数
-  getPicLength(item) {
-    if (lodash.isEmpty(item)) return 0;
-    return item.length;
-  }
-
   tabsChange(activeKey) {
     this.Pagination.onReset();
     this.activeKey = activeKey;
-    // 不需要手动执行
-    // this.onLoading();
   }
   onLoading(event?) {
     this.Pagination.onLoading({ typeKey: this.activeKey }, {}, event);
   }
-
   /**
    * 晒作业
    */

@@ -37,6 +37,30 @@ export enum EnumApiHomework {
   /**
    * 晒作业详情
    */
-  Momentdetail = "/moment/momentdetail"
+  Momentdetail = "/moment/momentdetail",
 
+  /**
+   * 交作业详情
+   */
+  HomeworkDetail = "/homework/detail",
+  /**
+   * 已提交交作业列表
+   */
+  HomeworkList = "/userhomework/pastlist",
+  /**
+   * 交作业
+   */
+  HomeworkAdd = "/userhomework/add",
+  /**
+   * 晒出我的作业
+   */
+  HomeworkSun = "/userhomework/sunbyhomeworkId",
+  /**
+   * 删除我的作业
+   */
+  HomeworkDelete = "/userhomework/delete",
+  /**
+   * 我的作业回复
+   */
+  HomeworkReply = "/userhomework/reply",
 }
