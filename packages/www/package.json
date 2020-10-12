@@ -21,7 +21,7 @@
     "@nuxt/typescript-runtime": "~2.0.0",
     "@nuxtjs/proxy": "^2.0.1",
     "@nuxtjs/style-resources": "^1.0.0",
-    "jest": "^26.4.2",
+    "jest": "^26.5.3",
     "cross-env": "^7.0.2"
   }
 }

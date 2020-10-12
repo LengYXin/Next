@@ -32,7 +32,7 @@ module.exports = env => {
             lodash.update(config, 'resolve.alias', alias => {
                 return lodash.merge({
                     // 'swiper': require.resolve('swiper'),
-                    "mobx-vue": path.resolve(path.dirname(process.cwd()), 'mobx-vue/src/index.ts'),
+                    // "mobx-vue": path.resolve(path.dirname(process.cwd()), 'mobx-vue/src/index.ts'),
                 }, alias)
             });
             // i18n 单文件组件 https://kazupon.github.io/vue-i18n/zh/guide/sfc.html#%E5%AE%89%E8%A3%85-vue-i18n-loader
