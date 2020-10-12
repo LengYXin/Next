@@ -11,7 +11,7 @@
       v-for="item in tabPane"
       :key="item.key"
       :name="String(item.key)"
-      :title="item.title"
+      :title="$t(item.title)"
     ></van-tab>
   </van-tabs>
 </template>
