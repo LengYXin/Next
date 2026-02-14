@@ -5044,6 +5044,13 @@ acorn-walk@^7.1.1:
   resolved "https://registry.npm.taobao.org/acorn-walk/download/acorn-walk-7.2.0.tgz?cache=0&sync_timestamp=1592373506498&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Facorn-walk%2Fdownload%2Facorn-walk-7.2.0.tgz#0de889a601203909b0fbe07b8938dc21d2e967bc"
   integrity sha1-DeiJpgEgOQmw++B7iTjcIdLpZ7w=
 
+acorn-walk@^8.3.4:
+  version "8.3.4"
+  resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-8.3.4.tgz#794dd169c3977edf4ba4ea47583587c5866236b7"
+  integrity sha512-ueEepnujpqee2o5aIYnvHU6C0A42MNdsIDeqy5BydrkuC5R1ZuUFnm27EeFJGoEHJQgn3uleRvmTXaJgfXbt4g==
+  dependencies:
+    acorn "^8.11.0"
+
 acorn@^5.5.3:
   version "5.7.4"
   resolved "https://registry.npm.taobao.org/acorn/download/acorn-5.7.4.tgz?cache=0&sync_timestamp=1591869438756&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Facorn%2Fdownload%2Facorn-5.7.4.tgz#3e8d8a9947d0599a1796d10225d7432f4a4acf5e"
@@ -5058,6 +5065,11 @@ acorn@^7.1.0, acorn@^7.1.1, acorn@^7.2.0, acorn@^7.3.1:
   version "7.3.1"
   resolved "https://registry.npm.taobao.org/acorn/download/acorn-7.3.1.tgz?cache=0&sync_timestamp=1591869438756&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Facorn%2Fdownload%2Facorn-7.3.1.tgz#85010754db53c3fbaf3b9ea3e083aa5c5d147ffd"
   integrity sha1-hQEHVNtTw/uvO56j4IOqXF0Uf/0=
+
+acorn@^8.11.0, acorn@^8.14.1:
+  version "8.15.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.15.0.tgz#a360898bc415edaac46c8241f6383975b930b816"
+  integrity sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==
 
 add-dom-event-listener@^1.0.2:
   version "1.1.0"
@@ -22215,9 +22227,12 @@ vm-browserify@^1.0.1:
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
 
 vm2@^3.8.4:
-  version "3.9.2"
-  resolved "https://registry.npm.taobao.org/vm2/download/vm2-3.9.2.tgz#a4085d2d88a808a1b3c06d5478c2db3222a9cc30"
-  integrity sha1-pAhdLYioCKGzwG1UeMLbMiKpzDA=
+  version "3.10.3"
+  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.10.3.tgz#451e5d6e74bc4ec9c95d3a4b378bb9e174a682fa"
+  integrity sha512-zJyUr2FPAj/jmnaHNPNX494wDvPzl3pnmmvxAqVJESQTd5wAju6n8nXiFVfCZXlCTRamR6N3lCJOdv6dM559mQ==
+  dependencies:
+    acorn "^8.14.1"
+    acorn-walk "^8.3.4"
 
 vue-awesome-swiper@^4.1.1:
   version "4.1.1"
